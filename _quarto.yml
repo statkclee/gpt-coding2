@@ -1,0 +1,125 @@
+project:
+  type: book
+  output-dir: docs
+  # output-dir: pdfs
+  preview:
+    port: 7771
+    browser: false
+  resources:
+    - "data/*.mp3"
+  render:
+    - "*.qmd"
+    - "!*.Rmd"
+    - "!to_do.qmd"
+
+lang: ko-KR
+
+book:
+  title: "챗GPT 코딩"
+  reader-mode: true
+  subtitle: "챗GPT의 힘을 데이터 사이언스 코딩에 담다"
+
+  page-footer:
+    left: |
+      챗GPT 쿼토 책은 소프트웨어 카펜트리 ***** 번역한 것이 포함되어 있습니다.
+    right: |
+      순수하게 <a href="https://quarto.org/">쿼토(Quarto)</a>로 제작되었습니다.
+
+  cover-image: images/book_cover.jpg
+  favicon: images/logo.png
+  site-url: https://r2bit.com/gpt-coding/
+  repo-url: https://github.com/bit2r/gpt-coding/
+  repo-branch: main
+  repo-actions: [edit, issue]
+
+  google-analytics: "UA-229551680-1"
+  author:
+    - name: "이광춘"
+      affiliations: "공익법인 한국 R 사용자회"
+  date: last-modified
+  date-format: "YYYY년 MM월 DD일"
+  chapters:
+    # - acknowledgments.qmd
+    - index.qmd
+
+    - part: "들어가며"
+      chapters:
+        # - 00-why.qmd
+        - 01-intro.qmd
+
+    # - part: "프로그래밍"
+    #   chapters:
+    #     - 02-var.qmd
+    #     - 03-cont.qmd
+    #     - 04-func.qmd
+    #     - 05-loop.qmd
+    # 
+    # - part: "자료구조"
+    #   chapters:
+    #     - 06-string.qmd
+    #     - 07-file.qmd
+    #     - 08-list.qmd
+    #     - 09-dictionaries.qmd
+    #     - 10-tuples.qmd
+    #     - A-dataframe.qmd
+    # 
+    # - part: "분야별 도구"
+    #   chapters:
+    #     - tool-regex.qmd
+    #     - tool-api.qmd
+    #     - tool-database.qmd
+    #     - tool-make.qmd
+
+    - references.qmd     # O
+
+format:
+  html:
+    mermaid:
+      theme: neutral # https://quarto.org/docs/authoring/diagrams.html#mermaid-theming 
+    theme: 
+      - cosmo
+      - r2bit.scss      
+    number-depth: 3
+    number-sections: true
+    colorlinks: true
+    # cite-method: biblatex
+    code-overflow: wrap
+    code-link: true
+
+    author-meta: "이광춘"
+    include-in-header: "plausible.html"
+    callout-appearance: simple
+    
+    # 마크다운 표 캡션 위치
+    tbl-cap-location: bottom
+
+filters:
+   - lightbox
+   - fontawesome
+   - include-code-files
+   - fancy-text   
+lightbox: auto
+
+code-annotations: hover
+
+bibliography: references.bib
+link-citations: false
+
+engine: knitr
+
+knitr:
+  opts_chunk:
+    message: false
+    warning: false
+    collapse: true
+    code-overflow: code-overflow
+    comment: "#>"
+    R.options:
+      knitr.graphics.auto_pdf: true
+editor_options:
+  chunk_output_type: console
+
+editor: 
+  markdown: 
+    wrap: 72
+    
