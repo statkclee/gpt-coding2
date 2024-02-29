@@ -973,4 +973,43 @@ height <- 12.0
 
 정답을 확인하기 위해서 R 인터프리터를 사용하세요.
 
-4.  사용자로부터 섭씨 온도를 입력받아 화씨온도로 변환하고, 변환된 온도를 출력하는 프로그램을 작성하세요.
+4.  사용자로부터 섭씨(celsius) 온도를 입력받아 화씨(fahrenheit) 온도로 변환하고, 변환된 온도를 출력하는 프로그램을 작성하세요.
+
+$$\texttt{fahrenheit} = \frac{9}{5} \times \texttt{celsius}  + 32
+$$
+
+:::{.panel-tabset}
+### R
+
+```{webr-r}
+#| label: r-celsius-to-fahrenheit
+
+# input_temp = readline(prompt="섭씨 온도를 입력하세요: ")
+
+celsius <- as.numeric(input_temp)
+
+# 섭씨 온도를 화씨 온도로 변환
+fahrenheit <- celsius * ____ + ____
+
+# 변환된 화씨 온도 출력
+cat("화씨 온도는", fahrenheit, "도 입니다.\n")
+```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: py-celsius-to-fahrenheit
+
+# input_temp = input("섭씨 온도를 입력하세요: ")
+
+celsius = float(input_temp)
+
+# 섭씨를 화씨로 변환
+fahrenheit = celsius * ____ + ____
+
+# 화씨 온도를 출력
+print(f"화씨 온도는 {fahrenheit}도 입니다.")
+```
+
+:::
+
