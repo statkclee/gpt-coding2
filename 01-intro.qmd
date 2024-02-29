@@ -1,4 +1,10 @@
 
+```{r}
+#| include: false
+
+source("_common.R")
+```
+
 # 프로그래밍 학습 이유 {#r-intro}
 
 컴퓨터 프로그램을 만드는 행위(프로그래밍)는 매우 창의적이며 향후 뿌린 것 이상으로 얻을 것이 많다. 
@@ -195,31 +201,67 @@ R과 대화를 시작하기 전에,
 R 소프트웨어를 컴퓨터에 설치하고 
 R을 컴퓨터에서 어떻게 실행하는지를 학습해야 한다. 
 이번 장에서 다루기에는 너무 구체적이고 자세한 사항이기 때문에 
-[http://statkclee.github.io/data-science/](http://statkclee.github.io/data-science/)을 참조하는 것을 권한다. 
+챗GPT 쿼토 [저작환경 설정](https://r2bit.com/gpt-quarto/setup.html)을 참조하는 것을 권한다. 
 윈도우와 리눅스, 매킨토쉬 시스템 상에서 설치하고 실행하는 방법을 자세한 설치절차와 함께 화면을 캡쳐하여 다양한 환경에서 설명해 놨다.
 설치가 마무리되고 터미널이나 윈도우 명령어 실행창에서 R을 타이핑 하게 되면, 
-R 인터프리터가 인터랙티브 모드로 실행을 시작하고 다음과 같은 것이 화면에 뿌려진다.
+R 인터프리터가 인터랙티브 모드로 실행을 시작하고 다음과 같은 것이 화면에 뿌려진다. 
+개념과 컴퓨터와 의사소통하는 방식은 표현방법과 구문이 다를 뿐 파이썬도 동일하다.
 
-``` {r r-intro-start, eval = FALSE}
-R version 4.2.0 (2022-04-22 ucrt) -- "Vigorous Calisthenics"
-Copyright (C) 2022 The R Foundation for Statistical Computing
-Platform: x86_64-w64-mingw32/x64 (64-bit)
+:::{.panel-tabset}
+### R
 
-R is free software and comes with ABSOLUTELY NO WARRANTY.
-You are welcome to redistribute it under certain conditions.
-Type 'license()' or 'licence()' for distribution details.
-
-R is a collaborative project with many contributors.
-Type 'contributors()' for more information and
-'citation()' on how to cite R or R packages in publications.
-
-Type 'demo()' for some demos, 'help()' for on-line help, or
-'help.start()' for an HTML browser interface to help.
-Type 'q()' to quit R.
-
->
+```{=html}
+<div style="border: solid #333 1px; padding: 5px;">
+  <pre id="loading"><code>Loading webR, please wait...</code></pre>
+  <pre id="container" style="max-height: 400px"><code id="out"></code></pre>
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="prompt">></span>
+    <input spellcheck="false" autocomplete="off" id="input" type="text">
+    <button type="button" class="btn btn-secondary" onclick="globalThis.sendInput()" id="run">Run</button>
+  </div>
+</div>
+<script type="module">
+  import { Console } from 'https://webr.r-wasm.org/v0.2.2/webr.mjs';
+  const webRConsole = new Console({
+    stdout: line => document.getElementById('out').append(line + '\n'),
+    stderr: line => document.getElementById('out').append(line + '\n'),
+    prompt: p => {
+      const pre = document.getElementById('container');
+      pre.scrollTop = pre.scrollHeight; 
+      document.getElementById('prompt').innerText = p;
+    }
+  });
+  webRConsole.run();
+  webRConsole.webR.init().then(() => document.getElementById('loading').remove());
+  
+  let input = document.getElementById('input');
+  globalThis.sendInput = () => {
+    webRConsole.stdin(input.value);
+    document.getElementById('out').append(
+      document.getElementById('prompt').innerText + ' ' + input.value + '\n'
+    );
+    input.value = "";
+  }
+  input.addEventListener(
+    "keydown",
+    (evt) => {if(evt.keyCode === 13) globalThis.sendInput()}
+  );
+</script>
 ```
 
+### 파이썬
+
+```{python}
+#| label: py-intro-start
+#| eval: false
+
+Python 3.11.8 (tags/v3.11.8:db85d51, Feb  6 2024, 22:03:32) [MSC v.1937 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+```
+
+
+:::
 
 R 인터프리터는 `>` 프롬프트를 통해서 여러분에게 요청사항("다음에 R이 무엇을 실행하기를 원합니까?")을 접수받는 방식을 취한다. 
 이제 R은 여러분과 대화를 나눌 준비가 되었다. 
@@ -228,7 +270,9 @@ R 인터프리터는 `>` 프롬프트를 통해서 여러분에게 요청사항(
 예를 들어, 여러분이 가장 간단한 R 언어 단어나 문장 조차도 알 수가 없다고 가정하자. 
 우주 비행사가 저 멀리 떨어진 행성에 착륙해서 행성의 거주민과 대화를 시도할 때 사용하는 간단한 말을 사용해 보자.
 
-``` {r r-intro-verbose, eval=FALSE}
+``` {r}
+#| label: r-intro-hello-world-again
+#| eval: false
 > I come in peace, please take me to your leader
 Error: unexpected symbol in "I come"
 > 
@@ -240,18 +284,47 @@ Error: unexpected symbol in "I come"
 
 운 좋게도 기나긴 우주 여행 중 이 책의 복사본을 가지고 와서 다음과 같이 빠르게 타이핑한다고 생각하자.
 
-``` {r r-intro-hello-world-again}
-print("헬로 월드!")
+:::{.panel-tabset}
+### R
+
+```{webr-r}
+#| label: r-intro-hello-world-again
+print("헬로 R!")
 ```
+
+### 파이썬
+
+```{pyodide-python}
+print("헬로 파이썬!")
+```
+
+:::
 
 훨씬 좋아보인다. 이제 좀더 커뮤니케이션을 이어갈 수 있을 것으로 보인다.
 
-``` {r r-intro-conversation, eval=FALSE}
+:::{.panel-tabset}
+### R
+
+```{webr-r}
+#| label: r-intro-conversation
+print('당신은 하늘에서 오는 전설적인 신이 분명합니다')
+print('오랫동안 당신을 기다려왔습니다')
+print('전설에 따르면 겨자를 곁들였을 때 아주 맛있을 거라고 해요')
+print('다른 언급이 없다면, 오늘 밤 잔치를 벌일 것입니다')
+```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: py-intro-conversation
 print('You must be the legendary god that comes from the sky')
 print('We have been waiting for you for a long time')
 print('Our legend says you will be very tasty with mustard')
-print('We will have a feast tonight unless you say) #'
+print('We will have a feast tonight unless you say')
 ```
+
+:::
+
 
 이번 대화는 잠시 동안 잘 진행되다가 여러분이 R 언어로 말하는데 정말 사소한 실수를 저질러 R이 다시 창을 여러분에게 겨눈다.
 
@@ -278,7 +351,8 @@ quit("yes")
 R에 "안녕히 계세요"를 말하는 올바른 방식은 인터렉티브 > 프롬프트에서 `quit()` 혹은 `q()`를 입력하는 것이다.
 
 
-## 전문용어: 인터프리터와 컴파일러 {#r-intro-interpreter}
+:::{.callout-tip}
+### 전문용어: 인터프리터와 컴파일러 {#interpreter}
 
 R은 상대적으로 직접 사람이 읽고 쓸 수도 있고, 컴퓨터도 읽고 처리할 수 있도록 고안된 **하이 레벨(High-level), 고수준** 언어이다. 
 다른 하이 레벨 언어에는 자바, C++, PHP, 루비, 베이직, 펄, 자바스크립트 등 다수가 포함되어 있다. 
@@ -320,12 +394,14 @@ R 코드의 일부는 나중에 사용될 것이니 R에게 기억하도록 명�
 적당한 이름을 골라서 값을 기억시키고, 나중에 그 이름을 호출하여 값을 사용한다. 
 이러한 목적으로 저장된 값을 참조하는 목적으로 사용되는 표식(label)을 **변수(variable)**라고 한다.
 
-``` {r r-intro-variable}
+```{webr-r}
+#| label: r-intro-variable
 x <- 6
 x
-
+#> [1] 6
 y <-  x * 7
 y
+#> [1] 42
 ```
 
 
@@ -382,6 +458,7 @@ R 인터프리터 실제 소스 코드를 보려면,
 지금까지 살펴본 것은 R 프로그래머가 되기 위해서 정말 알 필요가 있는 것 이상이다.
 하지만, 때때로 처음에 이런 귀찮은 질문에 바로 답하는 것이 나중에 보상을 충분히 하고도 남는다.
 
+:::
 
 ## 프로그램 작성하기 {#r-intro-write-program}
 
@@ -443,43 +520,49 @@ and the tent fell down on the clown and the car
 저자가 직접 작성했고, 시험까지 했다. 
 바로 사용을 할 수 있도록 준비했기 때문에 여러분의 수고도 덜 수 있다.
 
-``` {r r-intro-count-words, eval=TRUE}
-# 0. 환경설정 ------
-library(tidyverse)
+:::{.panel-tabset}
+### R
+
+```{webr-r}
+#| label: r-intro-count-words
 library(stringr)
 
-text_dat <- readLines("data/ch01-text.txt")
-split_word <- str_split(text_dat, " ") %>% .[[1]]
-
-uniq_word <- unique(split_word)
-
-res_v <- vector("integer", length(uniq_word))
-
-for(i in seq_along(uniq_word)) {
-  for(j in seq_along(split_word)) {
-    if(uniq_word[i] == split_word[j]) {
-      res_v[i] <- res_v[i] + 1
-    }
-  }
-}
-
-bind_cols("word" = uniq_word, "freq"=res_v) %>% arrange(desc(freq))
-
-# 검증 -----
-
-text_v <- "the clown ran after the car and the car ran into the tent and the tent fell down on the clown and the car"
-split_word <- str_split(text_v, " ") %>% unlist
-table(split_word) %>% sort(decreasing=TRUE)
+text_v <- paste("the clown ran after the car and the car ran into",
+                "the tent and the tent fell down on the clown and the car")
+split_word <- str_split(text_v, " ") %>% unlist()
+table(split_word) |> sort(decreasing=TRUE) |> head(1)
 ```
+
+### 파이썬
+
+```{pyodide-python}
+text = 'the clown ran after the car and the car ran into the tent and the tent fell down on the clown and the car'
+
+words = text.split()
+counts = dict()
+
+for word in words:
+  counts[word] = counts.get(word,0) + 1
+
+bigcount = None
+bigword = None
+
+for word,count in counts.items():
+  if bigcount is None or count > bigcount:
+    bigword = word
+    bigcount = count
+
+print(bigword, bigcount)
+```
+
+:::
 
 
 상기 프로그램을 사용하려고 R을 공부할 필요도 없다. 
-10장에 걸쳐서 멋진 R 프로그램을 만드는 방법을 배우게 될 것이다. 
+앞으로 여러장에 걸쳐서 멋진 R 프로그램을 만드는 방법을 배우게 될 것이다. 
 지금 여러분은 단순 사용자로서 단순히 상기 프로그램을 사용하게 되면, 
 프로그램의 영리함과 동시에 얼마나 많은 수작업 노력을 줄일 수 있는지 감탄할 것이다.
-단순하게 코드를 타이핑해서 `words.R` 파일로 저장하고 실행을 하거나, <https://github.com/statkclee/r4inf/>에서 소스 코드를 다운받아 실행하면 된다.
-
-
+단순하게 코드를 타이핑해서 `words.R` 파일로 저장하고 실행을 하거나, <https://github.com/bit2r/gpt-coding/>에서 소스 코드를 다운받아 실행하면 된다.
 
 R 언어가 어떻게 여러분(사용자)과 저자(프로그래머)사이에서 중개자 역할을 훌륭히 수행하고 있는지를 보여주는 좋은 사례다.
 컴퓨터에 R을 설치한 누구나 사용할 수 있는 공통의 언어로 유용한 명령 순서(즉, 프로그램)를 우리가 주고받을 수 있는 방식이 R 방식이다.
@@ -614,8 +697,7 @@ R을 빨리 배울 수 있도록 다음 몇장에 걸쳐서 모든 정보를 제
 - **소스 코드(source code)**: 하이레벨 언어로 기술된 프로그램
 
 
-## 연습문제 {#r-intro-exercise}
-
+## 연습문제 {.unnumbered}
 
 1. 컴퓨터 보조기억장치 기능은 무엇입니까?
     1. 프로그램의 모든 연산과 로직을 실행한다.
@@ -639,10 +721,11 @@ R을 빨리 배울 수 있도록 다음 몇장에 걸쳐서 모든 정보를 제
 1. 구문오류("Syntax Error")는 어떻게 고칩니까?
 1. 다음 코드에서 잘못된 점을 설명하세요.
 
-``` {r r-intro-ex-debug, eval=FALSE}
+``` {r}
+#| label: r-intro-ex-debug
+#| eval: false
 primt("헬로 월드!")
 Error in primt("헬로 월드!") : could not find function "primt"
- 
 ```
 
 9. 다음 프로그램에서 출력되는 것은 무엇입니까?
@@ -651,8 +734,9 @@ Error in primt("헬로 월드!") : could not find function "primt"
     1. x + 1
     1. 오류, 왜냐하면 x <- x + 1 은 수학적으로 불가능하다.
 
-``` {r r-intro-ex-variable, eval=FALSE}
-x <- 43
+```{webr-r}
+#| label: r-intro-ex-variable
+x <- 76
 x <- x + 1
 x
 ```

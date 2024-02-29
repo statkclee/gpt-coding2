@@ -14,6 +14,7 @@ project:
 
 lang: ko-KR
 
+# ---------------------------------- #
 book:
   title: "챗GPT 코딩"
   reader-mode: true
@@ -38,6 +39,8 @@ book:
       affiliations: "공익법인 한국 R 사용자회"
   date: last-modified
   date-format: "YYYY년 MM월 DD일"
+  
+# ---------------------------------- #  
   chapters:
     # - acknowledgments.qmd
     - index.qmd
@@ -69,9 +72,15 @@ book:
     #     - tool-api.qmd
     #     - tool-database.qmd
     #     - tool-make.qmd
+    #
+    # - part: "Git/GitHub"
+    #   chapters:
+    #     - git.qmd
+    #     - github.qmd
 
     - references.qmd     # O
 
+# ---------------------------------- #
 format:
   html:
     mermaid:
@@ -93,18 +102,32 @@ format:
     # 마크다운 표 캡션 위치
     tbl-cap-location: bottom
 
+# ---------------------------------- #
 filters:
-   - lightbox
-   - fontawesome
-   - include-code-files
-   - fancy-text   
+  - lightbox
+  - fontawesome
+  - include-code-files
+  - fancy-text
+  - webr
+  - pyodide
 lightbox: auto
+
+webr:
+  packages:
+  - "stringr"
 
 code-annotations: hover
 
 bibliography: references.bib
 link-citations: false
 
+# ---------------------------------- #
+glossary:
+  path: glossary.yml
+  popup: click
+  show: true
+
+# ---------------------------------- #
 engine: knitr
 
 knitr:
