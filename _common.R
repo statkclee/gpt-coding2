@@ -11,7 +11,7 @@ library(JuliaCall)
 
 # 1. Julia ----------------------------------------------------------------
 
-julia_setup(JULIA_HOME="C:/Users/statkclee/AppData/Local/Programs/Julia-1.10.1/bin")
+# julia_setup(JULIA_HOME="C:/Users/statkclee/AppData/Local/Programs/Julia-1.10.1/bin")
 
 # 2. fonts ----------------------------------------------------------------
 

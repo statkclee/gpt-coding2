@@ -45,14 +45,14 @@ book:
     # - acknowledgments.qmd
     - index.qmd
 
-    - part: "들어가며"
-      chapters:
-        # - 00-why.qmd
-        - 01-intro.qmd
-
-    # - part: "프로그래밍"
+    # - part: "들어가며"
     #   chapters:
-    #     - 02-var.qmd
+    #     # - 00-why.qmd
+    #     - 01-intro.qmd
+
+    - part: "프로그래밍"
+      chapters:
+        - 02-var.qmd
     #     - 03-cont.qmd
     #     - 04-func.qmd
     #     - 05-loop.qmd
