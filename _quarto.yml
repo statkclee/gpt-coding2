@@ -57,9 +57,9 @@ book:
         - 04-func.qmd
         - 05-loop.qmd
 
-    # - part: "자료구조"
-    #   chapters:
-    #     - 06-string.qmd
+    - part: "자료구조"
+      chapters:
+        - 06-string.qmd
     #     - 07-file.qmd
     #     - 08-list.qmd
     #     - 09-dictionaries.qmd

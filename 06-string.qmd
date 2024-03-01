@@ -1,29 +1,39 @@
 
----
-output: html_document
-editor_options: 
-  chunk_output_type: console
----
+```{r}
+#| include: false
 
-```{r setup, echo = FALSE, message = FALSE}
 source("_common.R")
 ```
 
-# (PART\*) 자료구조 {#r-data-type .unnumbered}
 
 # 문자열 {#r-string}
 
-## 문자열은 순열이다. {#r-string-sequence}
+## 문자열은 시퀀스다. {#r-string-sequence}
 
-문자열은 여러 문자들의 순열(sequence)이다. 
+문자열은 여러 문자들의 시퀀스(sequence)다. 
 꺾쇠 연산자로 한번에 하나씩 문자에 접근한다.
 
-``` {r r-string-seq}
+:::{.panel-tabset}
+### R
+
+```{webr-r}
+#| label: r-string-seq
 fruit <- 'banana'
 fruit_letter <- strsplit(fruit, "")
 
 letter <- fruit_letter[[1]][1]
 ```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: r-string-seq
+fruit = 'banana'
+letter = fruit[1]
+```
+
+:::
+
 
 두 번째 문장은 변수 `fruit_letter`에서 1번 위치 문자를 추출하여 변수 `letter`에 대입한다.
 꺾쇠 표현식을 인덱스(index)라고 부른다. 
@@ -32,6 +42,10 @@ letter <- fruit_letter[[1]][1]
 하지만, 여러분이 기대한 것은 출력됨이 확인된다.
 
 ``` {r r-string-seq-output}
+fruit <- 'banana'
+fruit_letter <- strsplit(fruit, "")
+
+letter <- fruit_letter[[1]][1]
 letter
 ```
 
@@ -40,8 +54,7 @@ letter
 첫 글자 오프셋은 0 이다.
 
 [^index-offset]: 컴퓨터에서 어떤 주소로부터 간격을 두고 떨어진 주소와의 거리. 
-기억 장치가 페이지 혹은 세그먼트 단위로 나누어져 있을 때 하나의 시작 주소로부터 오프셋만큼 떨어진 위치를 나타내는 것이다. 
-출처: 네이버 지식백과 - 오프셋 [offset] (IT용어사전, 한국정보통신기술협회) 
+기억 장치가 페이지 혹은 세그먼트 단위로 나누어져 있을 때 하나의 시작 주소로부터 오프셋만큼 떨어진 위치를 나타내는 것이다. 네이버 지식백과(IT용어사전, 한국정보통신기술협회)
 
 하지만, R은 사람 친화적이기 때문에 b가 'banana'의 첫번째 문자가 되고 a가 두번째, n이 세번째 문자가 된다.
 
@@ -430,24 +443,24 @@ R의 경우 정상 실행되지만 원하는 바는 아니다.
 ## 용어정의 {#r-string-terminology}
 
 
-**계수기(counter)**: 무언가를 계수하기 위해서 사용되는 변수로 일반적으로 0 으로 초기화하고 나서 증가한다.
-**빈 문자열(empty string)**: 두 인용부호로 표현되고, 어떤 문자도 없고 길이가 0 인 문자열.
-**서식 연산자(format operator)**: 서식 문자열과 튜플을 받아, 서식 문자열에 지정된 서식으로 튜플 요소를 포함하는 문자열을 생성하는 연산자, .
-**서식 순서(format sequence)**: d처럼 어떤 값의 서식으로 표현되어야 하는지를 명세하는 "서식 문자열" 문자 순서. 
-**서식 문자열(format string)**: 서식 순서를 포함하는 서식 연산자와 함께 사용되는 문자열.
-**플래그(flag)**: 조건이 참인지를 표기하기 위해 사용하는 불 변수(boolean variable)
-**호출(invocation)**: 메쏘드를 호출하는 명령문.
-**불변(immutable)**: 순서의 항목에 대입할 수 없는 특성.
-**인덱스(index)**: 문자열의 문자처럼 순서(sequence)에 항목을 선택하기 위해 사용되는 정수 값.
-**항목(item)**: 순서에 있는 값의 하나.
-**메쏘드(method)**: 객체와 연관되어 점 표기법을 사용하여 호출되는 함수.
-**객체(object)**: 변수가 참조하는 무엇. 지금은 "객체"와 "값"을 구별없이 사용한다.
-**검색(search)**: 찾고자 하는 것을 찾았을 때 멈추는 운행법 패턴.
-**순서(sequence)**: 정돈된 집합. 즉, 정수 인텍스로 각각의 값이 확인되는 값의 집합.
-**슬라이스(slice)**: 인텍스 범위로 지정되는 문자열 부분.
-**운행법(traverse)**: 순서(sequence)의 항목을 반복적으로 훑기, 각각에 대해서는 동일한 연산을 수행.
+- **계수기(counter)**: 무언가를 계수하기 위해서 사용되는 변수로 일반적으로 0 으로 초기화하고 나서 증가한다.
+- **빈 문자열(empty string)**: 두 인용부호로 표현되고, 어떤 문자도 없고 길이가 0 인 문자열.
+- **서식 연산자(format operator)**: 서식 문자열과 튜플을 받아, 서식 문자열에 지정된 서식으로 튜플 요소를 포함하는 문자열을 생성하는 연산자, .
+- **서식 순서(format sequence)**: d처럼 어떤 값의 서식으로 표현되어야 하는지를 명세하는 "서식 문자열" 문자 순서. 
+- **서식 문자열(format string)**: 서식 순서를 포함하는 서식 연산자와 함께 사용되는 문자열.
+- **플래그(flag)**: 조건이 참인지를 표기하기 위해 사용하는 불 변수(boolean variable)
+- **호출(invocation)**: 메쏘드를 호출하는 명령문.
+- **불변(immutable)**: 순서의 항목에 대입할 수 없는 특성.
+- **인덱스(index)**: 문자열의 문자처럼 순서(sequence)에 항목을 선택하기 위해 사용되는 정수 값.
+- **항목(item)**: 순서에 있는 값의 하나.
+- **메쏘드(method)**: 객체와 연관되어 점 표기법을 사용하여 호출되는 함수.
+- **객체(object)**: 변수가 참조하는 무엇. 지금은 "객체"와 "값"을 구별없이 사용한다.
+- **검색(search)**: 찾고자 하는 것을 찾았을 때 멈추는 운행법 패턴.
+- **순서(sequence)**: 정돈된 집합. 즉, 정수 인텍스로 각각의 값이 확인되는 값의 집합.
+- **슬라이스(slice)**: 인텍스 범위로 지정되는 문자열 부분.
+- **운행법(traverse)**: 순서(sequence)의 항목을 반복적으로 훑기, 각각에 대해서는 동일한 연산을 수행.
 
-## 연습문제 {#r-string-ex}
+## 연습문제 {.unnumbered #r-string-ex}
 
 1. 다음 문자열에서 숫자를 뽑아내는 R 코드로 작성하세요.
 
