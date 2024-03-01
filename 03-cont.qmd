@@ -81,7 +81,7 @@ R에서 대입연산자로 `<-`을 사용하지만, `=` 으로 사용해도 프�
 
 ## 논리 연산자 {#r-cont-logical-operator}
 
-세개 **논리 연산자(logical operators)**: `&`, `||`, `!` 이 있다. 
+세개 **논리 연산자(logical operators): `&`, `||`, `!` 이 있다. 
 논리 연산자 의미는 수식기호 의미와 유사하다. 
 영어로 표현하면 `&`은 `and`, `||`은 `or`, `!`은 `not`이 된다. 예를 들어,
 
@@ -382,7 +382,7 @@ else:
 두 번째 분기는 자체가 두 개의 분기를 가지고 있는 또 다른 `if`문을 담고 있다.
 자체로 둘다 조건문이지만, 두 분기 모두 간단한 문장이다.
 
-![중첩 조건문](images/cond-if-nested.png){width = 100%}
+![중첩 조건문](images/cond-if-nested.png){#fig-nested-if-stmt}
 
 
 
@@ -658,8 +658,7 @@ x >= 2 and (x/y) > 2 and y != 0
 ## 디버깅 {#r-cont-debugging}
 
 
-오류가 발생했을 때, 파이썬 화면에 출력되는 역추적(traceback)에는 상당한 정보가 담겨있다. 하지만,특히 스택에 많은 프레임이 있는 경우 엄청나게 보여 엄두가 나지 않을 수도 있다. 대체로 가장 유용한 정보는 다음과 같은 것이 있다.
-
+오류가 발생했을 때, 화면에 출력되는 역추적(traceback)에는 상당한 정보가 담겨있다. 하지만,특히 스택에 많은 프레임이 있는 경우 엄청나게 보여 엄두가 나지 않을 수도 있다. 대체로 가장 유용한 정보는 다음과 같은 것이 있다.
 
 - 어떤 종류의 오류인가.
 - 어디서 발생했는가.
@@ -668,59 +667,85 @@ x >= 2 and (x/y) > 2 and y != 0
 
 대체로 오류 메시지는 문제가 어디에서 발견되었는지를 지칭하지만, 실제 오류는 코드 앞에 종종 선행하는 줄에 있을 수 있다.
 
-동일한 문제가 실행 오류에도 있다. 데시벨(decibels)로 신호 대비 잡음비를 계산한다고 가정하자. 공식은 $SNR_{db} = 10 \log_{10} (P_{signal} / P_{noise})$ 이다. 
+동일한 문제가 실행 오류에도 있다. 데시벨(decibels)로 신호 대비 잡음비를 계산한다고 가정하자. 공식은 $\text{SNR}_{db} = 10 \log_{10} (P_{signal} / P_{noise})$ 이다. 
 R에서 아래와 같이 작성할 수 있다.
 
-``` {r r-var-debug, eval=FALSE}
+:::{.panel-tabset}
+### R
+
+```{webr-r}
+#| label: r-var-debug
 signal_power <- 9
-noise_power <- 10
+noise_power <- -10
+
 ratio <- signal_power / noise_power
+
 decibels <- 10 * log10(ratio)
-print(decibels)
+cat("데시벨(db):", decibels)
 ```
 
+### 파이썬
 
-`signal_power` 와 `noise_power` 를 부동 소수점값으로 표현되어 R코드에는 문제가 없지만, 파이썬 2로 실행하게 되면 다음과 같은 오류가 나온다.
+```{pyodide-python}
+#| label: py-var-debug
+import math
+
+# 초기 값 설정
+signal_power = 9
+noise_power = -10
+
+# signal-to-noise 비율 계산
+ratio = signal_power / noise_power
+
+# 데시벨 계산
+decibels = 10 * math.log10(ratio)
+
+print("데시벨(db):", decibels)
+```
+
+:::
+
+`signal_power` 와 `noise_power` 를 부동 소수점값으로 표현되어 R코드에는 `NaN`를 출력하며 문제가 없지만, 파이썬으로 실행하게 되면 다음과 같은 오류가 나온다.
 
 ``` {r r-var-python-debug, eval=FALSE}
 Traceback (most recent call last):
-File "snr.py", line 5, in ?
-decibels = 10 * math.log10(ratio)
-OverflowError: math range error
+  File "C:/Users/tidyverse/AppData/Local/Programs/Python/Python311/book.py", line 11, in <module>
+    decibels = 10 * math.log10(ratio)
+ValueError: math domain error
 ```
 
-오류 메지지가 5번째 줄에 있다고 지칭하지만, 잘못된 것은 없다. 실제 오류를
-발견하기위해서,출력값이0인ratio값을print문을사용해서출력하는것이
-도움이 된다. 문제는 4번째 줄에 있는데, 왜냐하면 두 정수를 나눌 때 내림 나눗
-셈을 했기 때문입니다.
+오류 메지지가 7번째 줄에 있다고 지칭하지만, 잘못된 것은 없다. 실제 오류를
+발견하기 위해서, 출력값이 음수인 `ratio`값을 `print`문을 사용해서 출력하는 것이
+도움이 된다. 문제는 5번째 줄에 있는데, 왜냐하면 `noise_power`가 음수로 설정되어 있어 `signal_power / noise_power` 계산 자체는 문제가 없어 보이지만, 결과적으로 `ratio`는 음수가 된다. 따라서 `math.log10(ratio)` 호출 시 `ValueError`가 발생하는데 로그 함수는 음수에 대해 정의되지 않기 때문이다. 따라서 오류 메시지는 `math.log10` 함수 호출에서 발생하는 것처럼 보이지만, 실제 원인은 `noise_power`에 부적절한 값 설정에 있기 때문에 발생한다.
 
 대체로, 오류 메시지는 문제가 어디에서 발견되었는지를 알려주지만, 
 종종 문제의 원인이 어디에서 발생했는지는 알려주지 않는다.
 
-
 ## 용어 정의 {#r-cont-terminology}
 
 
-- 몸통 부문(body)**: 복합 문장 내부에 일련의 문장문
-- 부울 표현식(boolean expression)**: 참(TRUE) 혹은 거짓(FALSE)의 값을 가지는 표현식
-- 분기(branch)**: 조건문에서 대안 문장의 한 흐름
-- 연쇄 조건문(chained conditional)**: 일련의 대안 분기가 있는 조건문
-- 비교 연산자(comparison operator)**: 피연산자를 ==, !=, >, <, >=, <=로 비교하는 연산자
-- 조건문(conditional statement)**: 조건에 따라 명령의 흐름을 제어하는 명령문
-- 조건(condition)**: 조건문에서 어느 분기를 실행할지 결정하는 불 표현식
-- 복합문(compound statement)**: 머리부문(head)과 몸통부문(body)으로 구성된 문장. 머리부문은 콜론(:)으로 끝나며, 몸통부문은 머리부문을 기준으로 들여쓰기로 구별된다.
-- 가디언 패턴(guardian pattern)**: 단락(short circuit) 행동을 잘 이용하도록 논리 표현식을 구성하는 것
-- 논리 연산자(logical operator)**: 불 표현식을 결합하는 연산자 중의 하나 (and, or, not)
-- 중첩 조건문(nested conditional)**: 하나의 조건문이 다른 조건문 분기에 나타나는 조건문.
-- 역추적(traceback)**: 예외 사항이 발생했을 때 실행되고, 출력되는 함수 리스트
-- 단락(short circuit)**: 나머지 표현식 평가를 할 필요없이 최종 결과를 알기 때문에, 파이썬이 논리 표현식 평가를 진행하는 중간에 평가를 멈출 때.
+- 몸통 부문(body): 복합 문장 내부에 일련의 문장문
+- 부울 표현식(boolean expression): 참(TRUE) 혹은 거짓(FALSE)의 값을 가지는 표현식
+- 분기(branch): 조건문에서 대안 문장의 한 흐름
+- 연쇄 조건문(chained conditional): 일련의 대안 분기가 있는 조건문
+- 비교 연산자(comparison operator): 피연산자를 ==, !=, >, <, >=, <=로 비교하는 연산자
+- 조건문(conditional statement): 조건에 따라 명령의 흐름을 제어하는 명령문
+- 조건(condition): 조건문에서 어느 분기를 실행할지 결정하는 불 표현식
+- 복합문(compound statement): 머리부문(head)과 몸통부문(body)으로 구성된 문장. 머리부문은 콜론(:)으로 끝나며, 몸통부문은 머리부문을 기준으로 들여쓰기로 구별된다.
+- 가디언 패턴(guardian pattern): 단락(short circuit) 행동을 잘 이용하도록 논리 표현식을 구성하는 것
+- 논리 연산자(logical operator): 불 표현식을 결합하는 연산자 중의 하나 (and, or, not)
+- 중첩 조건문(nested conditional): 하나의 조건문이 다른 조건문 분기에 나타나는 조건문.
+- 역추적(traceback): 예외 사항이 발생했을 때 실행되고, 출력되는 함수 리스트
+- 단락(short circuit): 나머지 표현식 평가를 할 필요없이 최종 결과를 알기 때문에, 파이썬이 논리 표현식 평가를 진행하는 중간에 평가를 멈출 때.
 
 
 ## 연습문제 {.unnumbered #r-cont-ex}
 
 1. 40시간 이상 일할 경우 시급을 1.5배 더 종업원에게 지급하는 봉급계산 프로그램을 다시 작성하세요.
 
-``` {r r-cont-ex01, eval=FALSE}
+``` {r}
+#| label: r-cont-ex01
+#| eval: false
 시간을 입력하시오: 35.51
 시급을 입력하시오: 7530
 알바비: 263550
@@ -728,9 +753,11 @@ OverflowError: math range error
 
 2. `tryCatch`를 사용하여 봉급계산 프로그램을 다시 작성하세요.
 숫자가 아닌 입력값을 잘 처리해서 숫자 아닌 입력값이 들어왔을 때 메시지를 출력하고 정상적으로 프로그램을 종료하도록 합니다.
-다음이 프로그램 출력 결과를 보여줍니다.
+프로그램 출력 결과는 다음과 같습니다.
 
-``` {r r-cont-ex02, eval=FALSE}
+``` {r}
+#| label: r-cont-ex02
+#| eval: false
 시간을 입력하시오: 35.51
 시급을 입력하시오: 칠만원
 오류, 다시 숫자를 입력하세요
@@ -744,7 +771,9 @@ OverflowError: math range error
 만약 점수가 범위 밖이면 오류를 출력합니다. 
 만약 점수가 0.0과 1.0 사이라면, 다음의 테이블에 따라 등급을 출력합니다.
 
-``` {r r-cont-ex03, eval=FALSE}
+``` {r}
+#| label: r-cont-ex03
+#| eval: false
 점수    등급
 >= 0.9   A
 >= 0.8   B

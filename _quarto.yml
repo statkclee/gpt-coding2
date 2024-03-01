@@ -54,7 +54,7 @@ book:
       chapters:
         - 02-var.qmd
         - 03-cont.qmd
-    #     - 04-func.qmd
+        - 04-func.qmd
     #     - 05-loop.qmd
     # 
     # - part: "자료구조"
