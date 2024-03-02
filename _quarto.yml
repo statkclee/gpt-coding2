@@ -61,7 +61,7 @@ book:
 
       chapters:
         - 06-string.qmd
-    #     - 07-file.qmd
+        - 07-file.qmd
     #     - 08-list.qmd
     #     - 09-dictionaries.qmd
     #     - 10-tuples.qmd
@@ -116,6 +116,13 @@ lightbox: auto
 webr:
   packages:
   - "stringr"
+  - "readr"
+  
+
+pyodide:
+  packages:
+  - "urllib"
+
 
 code-annotations: hover
 
