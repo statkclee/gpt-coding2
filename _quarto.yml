@@ -58,6 +58,7 @@ book:
         - 05-loop.qmd
 
     - part: "자료구조"
+
       chapters:
         - 06-string.qmd
     #     - 07-file.qmd
