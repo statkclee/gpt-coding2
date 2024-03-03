@@ -1,11 +1,7 @@
 
----
-output: html_document
-editor_options: 
-  chunk_output_type: console
----
+```{r}
+#| include: false
 
-```{r setup, echo = FALSE, message = FALSE}
 source("_common.R")
 ```
 
@@ -13,7 +9,7 @@ source("_common.R")
 
 **명칭을 갖는 리스트(named list)**는 딕셔너리로 더 잘 알려져 있고,
 **딕셔너리(dictionary)**는 리스트 같지만 좀더 일반적이다. 리스트에서
-위치(인텍스)는 정수이지만, 딕셔너리에서는 인덱스는 임의 자료형(type)이
+위치(인텍스)가 정수이지만, 딕셔너리에서 인덱스는 임의 자료형(type)이
 될 수 있다.
 
 딕셔너리를 인덱스 집합(**키(keys)**라고 부름)에서 값(value) 집합으로

@@ -11,7 +11,34 @@ source("_common.R")
 \index{latex@\LaTeX}
 \index{}
 
-# --------------------------------------
+# 칼럼 2개 --------------------------------------
+
+::::: {.columns}
+
+::: {.column width="47.5%"}
+### R {.unnumbered}
+```{r}
+#| eval: false
+
+```
+
+:::
+
+::: {.column width="5%"}
+
+:::
+
+::: {.column width="47.5%"}
+### 파이썬 {.unnumbered}
+```{python}
+#| eval: false
+
+```
+
+:::
+:::::
+
+# WEBR --------------------------------------
 
 :::{.panel-tabset}
 ### R
