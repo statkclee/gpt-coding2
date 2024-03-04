@@ -63,7 +63,7 @@ book:
         - 06-string.qmd
         - 07-file.qmd
         - 08-list.qmd
-    #     - 09-dictionaries.qmd
+        - 09-dictionaries.qmd
     #     - 10-tuples.qmd
     #     - A-dataframe.qmd
     # 
