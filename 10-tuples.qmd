@@ -1,11 +1,7 @@
 
----
-output: html_document
-editor_options: 
-  chunk_output_type: console
----
+```{r}
+#| include: false
 
-```{r setup, echo = FALSE, message = FALSE}
 source("_common.R")
 ```
 

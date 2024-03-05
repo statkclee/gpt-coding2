@@ -65,7 +65,7 @@ book:
         - 08-list.qmd
         - 09-dictionaries.qmd
     #     - 10-tuples.qmd
-    #     - A-dataframe.qmd
+        - A-dataframe.qmd
     # 
     # - part: "분야별 도구"
     #   chapters:
@@ -117,6 +117,7 @@ webr:
   packages:
   - "stringr"
   - "readr"
+  - "purrr"
   
 
 pyodide:
