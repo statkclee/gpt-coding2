@@ -22,7 +22,7 @@ book:
 
   page-footer:
     left: |
-      챗GPT 쿼토 책은 소프트웨어 카펜트리 ***** 번역한 것이 포함되어 있습니다.
+      챗GPT 쿼토 책은 소프트웨어 카펜트리 "Git 버전제어"를 번역한 것이 포함되어 있습니다.
     right: |
       순수하게 <a href="https://quarto.org/">쿼토(Quarto)</a>로 제작되었습니다.
 
@@ -58,7 +58,6 @@ book:
         - 05-loop.qmd
 
     - part: "자료구조"
-
       chapters:
         - 06-string.qmd
         - 07-file.qmd
@@ -66,7 +65,23 @@ book:
         - 09-dictionaries.qmd
     #     - 10-tuples.qmd
         - A-dataframe.qmd
-    # 
+
+    - part: "버전제어와 협업"
+      chapters:
+        - git-basics.qmd
+        - git-setup.qmd
+        - git-create.qmd
+        - git-change.qmd
+        - git-history.qmd
+        - git-ignore.qmd
+        - git-github.qmd
+        - git-collab.qmd
+        - git-conflict.qmd
+        - git-open.qmd
+        - git-licensing.qmd
+        - git-hosting.qmd
+        # - git-korean.qmd
+        
     # - part: "분야별 도구"
     #   chapters:
     #     - tool-regex.qmd
@@ -74,12 +89,8 @@ book:
     #     - tool-database.qmd
     #     - tool-make.qmd
     #
-    # - part: "Git/GitHub"
-    #   chapters:
-    #     - git.qmd
-    #     - github.qmd
 
-    - references.qmd     # O
+    - references.qmd     # 
 
 # ---------------------------------- #
 format:
