@@ -1,0 +1,10 @@
+
+```{r}
+#| include: false
+
+source("_common.R")
+```
+
+
+# 챗GPT {#r-automation}
+

@@ -80,14 +80,16 @@ book:
         - git-open.qmd
         - git-licensing.qmd
         - git-hosting.qmd
-        # - git-korean.qmd
+        - git-korean.qmd
         
-    # - part: "분야별 도구"
-    #   chapters:
-    #     - tool-regex.qmd
-    #     - tool-api.qmd
+    - part: "분야별 도구"
+      chapters:
+        - tool-regex.qmd
+        - tool-network.qmd
+        - tool-web.qmd
     #     - tool-database.qmd
-    #     - tool-make.qmd
+        - tool-make.qmd
+        - tool-gpt.qmd
     #
 
     - references.qmd     # 
