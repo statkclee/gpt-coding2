@@ -28,7 +28,7 @@ JSON(JavaScript Object Notation, [www.json.org](www.json.org))을
 XML(eXtensible Markup Language)은 HTML과 매우 유사하지만, XML이 좀더
 HTML보다 구조화되었다. 여기 XML 문서 샘플이 있다.
 
-``` xml
+``` {xml}
 <person>
   <name>Chuck</name>
   <phone type="intl">
@@ -50,36 +50,63 @@ fig-align="center" width="843"}
 다음은 XML을 파싱하고 XML에서 데이터 요소를 추출하는 간단한
 응용프로그램이다.
 
-```{r xml-parsing, eval = FALSE}
+:::{.panel-tabset}
+### R 
+
+```{webr-r}
+#| label: r-xml-parsing
 library(xml2)
 
 data <- '
 <person>
-  <name>Chuck</name>
-  <phone type="intl">
-     +1 734 303 4456
-   </phone>
-   <email hide="yes"/>
+<name>Chuck</name>
+<phone type="intl">
++1 734 303 4456
+</phone>
+<email hide="yes"/>
 </person>'
 
-tree <- read_xml(data)
+doc <- read_xml(data)
 
-person_name <- xml_find_all(tree, ".//name") %>% 
-  xml_text()
+name <- xml_find_first(doc, ".//name") |> xml_text()
+email_attr <- xml_find_first(doc, ".//email") |> xml_attr("hide")
 
-person_email <- xml_find_all(tree, ".//email") %>% 
-  xml_attr('hide')
-
-cat("Name: ", person_name, "\n",
-    "Attr: ", person_email, "\n")
+message("Name:", name)
+#> Name: Chuck
+message("Attr:", email_attr)
+#> Attr: yes
 ```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: py-xml-parsing 
+import xml.etree.ElementTree as ET
+
+data = '''
+<person>
+<name>Chuck</name>
+<phone type="intl">
++1 734 303 4456
+</phone>
+<email hide="yes"/>
+</person>'''
+
+tree = ET.fromstring(data)
+print('Name:', tree.find('name').text)
+print('Attr:', tree.find('email').get('hide'))
+#> Name: Chuck
+#> Attr: yes
+```
+
+:::
+
 
 `xml2` 패키지 `read_xml()` 함수를 사용하여 XML 문자열 표현을 XML 노드
 '나무(tree)'로 변환한다. XML이 나무구조로 되었을 때, XML에서 데이터
 일부분을 추출하기 위해서 호출하는 함수가 있다.
 
-`xml_find_all()` 함수는 XML 나무를 훑어서 특정한 태그와 매칭되는
-**노드(node)**를 검색한다. 각 노드는 텍스트, 속성(즉, hide 같은), 그리고
+`xml_find_first()` 함수는 XML 나무를 훑어서 XPath 표현을 사용하여 특정한 태그와 매칭되는 **노드(node)**를 검색한다. 각 노드는 텍스트, 속성(즉, hide 같은), 그리고
 "자식(child)" 노드로 구성된다. 각 노드는 노드 나무의 최상단이 될 수
 있다.
 
@@ -97,41 +124,84 @@ Attr:  yes
 종종 XML이 다중 노드를 가지고 있어서 모든 노드를 처리하는 루프를 작성할
 필요가 있다. 다음 프로그램에서 모든 `user` 노드를 루프로 반복한다.
 
-```{r xml-nodes}
+:::{.panel-tabset}
+### R 
+
+```{webr-r}
+#| label: r-xml-nodes
 library(xml2)
 
-input <- '
-    <stuff>
-        <users>
-            <user x="2">
-                <id>001</id>
-                <name>Chuck</name>
-            </user>
-            <user x="7">
-                <id>009</id>
-                <name>Brent</name>
-            </user>
-        </users>
-    </stuff>'
+# XML 데이터 정의
+xml_data <- '
+<stuff>
+    <users>
+        <user x="2">
+            <id>001</id>
+            <name>Chuck</name>
+        </user>
+        <user x="7">
+            <id>009</id>
+            <name>Brent</name>
+        </user>
+    </users>
+</stuff>'
 
-stuff <- read_xml(input)
+# XML 데이터 파싱
+parsed_xml <- read_xml(xml_data)
 
-lst <- xml_find_all(stuff, "//users/user")
+# 'user' 노드 찾기
+users <- xml_find_all(parsed_xml, ".//user")
 
-cat("User count:", length(lst), "\n")
+# 사용자 수 출력
+message('User count:', length(users))
 
-for(i in 1:length(lst)) {
-  
-  lst_name <- xml_find_all(lst[[i]], ".//name") %>% xml_text()
-  lst_id <- xml_find_all(lst[[i]], ".//id") %>% xml_text()
-  lst_attr <- xml_attr(lst[[i]], "x")
-  
-  cat("Name: ", lst_name, "\n")
-  cat("Id: ", lst_id, "\n")
-  cat("Attribute: ", lst_attr, "\n")
+# 각 사용자의 이름, 아이디, 속성 출력
+for (user in users) {
+  message('Name:', xml_text(xml_find_first(user, ".//name")))
+  message('Id:', xml_text(xml_find_first(user, ".//id")))
+  message('Attribute:', xml_attr(user, "x"))
 }
-
 ```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: py-xml-nodes
+import xml.etree.ElementTree as ET
+
+input_xml = '''
+<stuff>
+    <users>
+        <user x="2">
+            <id>001</id>
+            <name>Chuck</name>
+        </user>
+        <user x="7">
+            <id>009</id>
+            <name>Brent</name>
+        </user>
+    </users>
+</stuff>'''
+
+stuff = ET.fromstring(input_xml)
+lst = stuff.findall('users/user')
+print('User count:', len(lst))
+for item in lst:
+    print('Name', item.find('name').text)
+    print('Id', item.find('id').text)
+    print('Attribute', item.get('x'))
+
+#> User count: 2
+#> Name Chuck
+#> Id 001
+#> Attribute 2
+#> Name Brent
+#> Id 009
+#> Attribute 7
+```
+
+:::
+
 
 `xml_find_all()` 함수는는 R 리스트의 하위 나무를 가져온다. 리스트는 XML
 나무에서 `user` 구조를 표현한다. 그리고 나서, `for` 루프를 작성해서 각
@@ -139,6 +209,7 @@ for(i in 1:length(lst)) {
 속성도 가져와서 출력한다.
 
 ``` bash
+User count: 2 
 Name:  Chuck 
 Id:  001 
 Attribute:  2 
@@ -156,7 +227,7 @@ JSON(JavaScript Object Notation) 형식은 자바스크립트 언어에서 사�
 
 상기 간단한 XML에 대략 상응하는 JSON으로 작성한 것이 다음에 있다.
 
-``` json
+```{json}
 {
   "name" : "Chuck",
   "phone" : {
@@ -194,23 +265,67 @@ JSON은 조금 덜 정교해서 사전에 미리 리스트를 가져오고, 리�
 사용자이고, 각 사용자가 키-값 페어 집합임을 알고 있어야 한다. JSON은
 좀더 간략(장점)하고 하지만 좀더 덜 서술적(단점)이다.
 
-```{r jsonlite}
+:::{.panel-tabset}
+### R 
+
+```{webr-r}
+#| label: r-jsonlite
 library(jsonlite)
 
 input <- '
-  [
-    { "id" : "001",
-      "x" : "2",
-      "name" : "Chuck"
-    } ,
-    { "id" : "009",
-      "x" : "7",
-      "name" : "Chuck"
-    } 
-  ]'
+[
+  { "id" : "001",
+    "x" : "2",
+    "name" : "Chuck"
+  } ,
+  { "id" : "009",
+    "x" : "7",
+    "name" : "Chuck"
+  } 
+]'
 
-input_df <- jsonlite::fromJSON(input)
+info <- fromJSON(input)
+
+message('User count:', nrow(info))
+
+for (i in seq_len(nrow(info))) {
+    item <- info[i, ]
+    message('Name:', item$name)
+    message('Id:', item$id)
+    message('Attribute:', item$x)
+}
+
 ```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: py-jsonlite
+import json
+
+input = '''
+[
+  { "id" : "001",
+    "x" : "2",
+    "name" : "Chuck"
+  } ,
+  { "id" : "009",
+    "x" : "7",
+    "name" : "Chuck"
+  }
+]'''
+
+info = json.loads(input)
+print('User count:', len(info))
+
+for item in info:
+    print('Name', item['name'])
+    print('Id', item['id'])
+    print('Attribute', item['x'])
+```
+
+:::
+
 
 JSON과 XML에서 데이터를 추출하는 코드를 비교하면, `jsonlite` 패키지
 `fromJSON()` 함수는 JSON 파일을 즉시 정형 데이터프레임을 변환시킨다.
@@ -218,8 +333,15 @@ JSON과 XML에서 데이터를 추출하는 코드를 비교하면, `jsonlite` �
 프로그램 출력은 정확하게 상기 XML 버젼과 동일한 정보를 데이터프레임으로
 표현하고 있어 후속 작업에 훨씬 유연하게 대응할 수 있다.
 
-```{r jsonlite-ouptut}
-input_df
+```{bash}
+#| eval: false
+User count: 2
+Name Chuck
+Id 001
+Attribute 2
+Name Brent
+Id 009
+Attribute 7
 ```
 
 일반적으로 웹서비스에 대해서 XML에서 JSON으로 옮겨가는 산업 경향이
@@ -230,7 +352,7 @@ input_df
 들어, 대부분의 워드 프로세서는 JSON보다는 XML을 사용하여 내부적으로
 문서를 저장한다.
 
-## API(응용 프로그램 인터페이스) {#ws-api}
+## API {#ws-api}
 
 이제 HTTP를 사용하여 응용프로그램간에 데이터를 교환할 수 있게 되었다.
 또한, XML 혹은 JSON을 사용하여 응용프로그램간에도 복잡한 데이터를 주고
@@ -284,7 +406,7 @@ width="467"}
 자유형식 입력 박스에 위치정보를 입력하는 설문 데이터가 있다면, 구글
 API를 사용하여 데이터를 깔끔하게 정리하는데는 유용하다.
 
-\*구글 지오코딩 API 같은 무료 API를 사용할 때, 자원 사용에 대한 지침을
+구글 지오코딩 API 같은 무료 API를 사용할 때, 자원 사용에 대한 지침을
 준수해야 한다. 너무나 많은 사람이 서비스를 남용하게 되면, 구글은 무료
 서비스를 중단하거나, 상당부분 줄일 수 있다. (When you are using a free
 API like Google's geocoding API, you need to be respectful in your use
@@ -298,16 +420,18 @@ drop or significantly curtail its free service.)
 &address=Ann+Arbor%2C+MI](http://maps.googleapis.com/maps/api/geocode/json?sensor=false%20&address=Ann+Arbor%2C+MI)
 
 웹프라우저에 붙여넣기 전에, URL만 뽑아냈고 URL에서 모든 공백을
-제거했는지 확인하세요.
+제거했는지 확인한다. 그리고, 브라우저에 붙여넣기 한다.
 
 다음은 간단한 응용 프로그램이다. 사용자가 검색 문자열을 입력하고 구글
-지오코딩 API를 호출하여 반환된 JSON에서 정보를 추출한다.
-
+지오코딩 API를 호출하여 반환된 JSON에서 정보를 추출한다. 
 구글 지리정보 API는 상용으로 전환되었기에 다음카카오 지도 API를 대체하여
 동일한 개발작업을 수행한다.
 
-```{r daum-kakao-code, eval = FALSE}
-library(tidyverse)
+:::{.panel-tabset}
+### R 
+
+```{webr-r}
+#| label: r-daum-kakao-code
 library(httr)
 library(jsonlite)
 
@@ -319,19 +443,66 @@ kpmg_addr <- '서울특별시 강남구 역삼동 737'
 # HTTP 요청을 실행합니다. 
 kpmg_res <- GET(url = 'https://dapi.kakao.com/v2/local/search/address.json',
                 query = list(query = kpmg_addr),
-                add_headers(Authorization = paste0("KakaoAK ", DAUM_MAP_API_KEY)))
+                add_headers(Authorization = paste0("KakaoAK ", Sys.getenv("KAKAO_MAP_API_KEY"))))
 
 # KPMG 지리정보 데이터프레임
-kpmg_list <- kpmg_res %>% 
-  content(as = 'text') %>% 
+kpmg_list <- kpmg_res |> 
+  content(as = 'text') |> 
   fromJSON()
 
 ## 도로명주소
-kpmg_list$documents$road_address %>% 
-  select(주소 = address_name, 경도 = x, 위도=y)
+kpmg_list$documents$road_address |> 
+  select(주소 = address_name, 경도 = x, 위도 = y)
+#>                       주소             경도             위도
+#> 1 서울 강남구 테헤란로 152 127.036508620542 37.5000242405515
 ```
 
-```{r KPMG-lonlat, eval = FALSE}
+### 파이썬
+
+```{pyodide-python}
+#| label: py-daum-kakao-code
+import os
+import requests
+from dotenv import load_dotenv
+import json
+
+# Load environment variables from a .env file
+load_dotenv()
+
+# Define the address
+kpmg_addr = '서울특별시 강남구 역삼동 737'
+
+# Define the request headers with the API key
+headers = {
+    'Authorization': f'KakaoAK {os.getenv("KAKAO_MAP_API_KEY")}'
+}
+
+# Execute the HTTP request
+response = requests.get(
+    'https://dapi.kakao.com/v2/local/search/address.json',
+    headers=headers,
+    params={'query': kpmg_addr}
+)
+
+# Parse the JSON response
+kpmg_data = response.json()
+
+# Extract and print the road address information
+for document in kpmg_data.get('documents', []):
+    road_address = document.get('road_address', {})
+    print('주소:', road_address.get('address_name'))
+    print('경도:', road_address.get('x'))
+    print('위도:', road_address.get('y'))
+    
+#> 주소: 서울 강남구 테헤란로 152
+#> 경도: 127.036508620542
+#> 위도: 37.5000242405515    
+```
+
+:::
+
+```{bash}
+#| eval: false
                       주소             경도             위도
 1 서울 강남구 테헤란로 152 127.036508620542 37.5000242405515
 ```
@@ -348,45 +519,85 @@ JSON 데이터를 가져오면, **jsonlite** 패키지로 파싱하고 전송받
 `Rscript` 프로그램 실행을 위해서 사용자 입력과 API키 외부 유출 방지를
 위한 조치를 취한 후에 일반화를 위해 코드를 일부 수정한다.
 
-```{r geo-json-example, eval=FALSE}
+:::{.panel-tabset}
+### R 
 
-library(tidyverse)
+```{webr-r}
+#| label: r-daum-kakao-api-input
 library(httr)
 library(jsonlite)
 
-# 주소를 지정합니다.
+# api_address.R 
+cat("주소를 입력하세요 - ")
+address <- readLines(file("stdin", encoding = "utf-8"), 1) 
 
-typeline <- function(msg = "주소를 입력하세요 - ") {
-  if (interactive() ) {
-    url <- readline(msg)
-  } else {
-    cat(msg);
-    url <- readLines("stdin",n=1);
-  }
-  return(url)
-}
-
-address <- typeline() # '서울특별시 강남구 역삼동 737'
+# address <- "서울특별시 강남구 역삼동 737"
 
 # HTTP 요청을 실행합니다.
-address_res <- GET(url = 'https://dapi.kakao.com/v2/local/search/address.json',
-                query = list(query = address),
-                add_headers(Authorization = paste0("KakaoAK ", Sys.getenv("DAUM_MAP_API_KEY"))) )
+address_res <-
+  GET(url = 'https://dapi.kakao.com/v2/local/search/address.json',
+      query = list(query = address),
+      add_headers(Authorization = paste0("KakaoAK ",
+                                        Sys.getenv("KAKAO_MAP_API_KEY"))) )
 
 # 지리정보 데이터프레임 변환
-address_list <- address_res %>%
-  content(as = 'text') %>%
+address_list <- address_res |>
+  content(as = 'text') |>
   fromJSON()
 
 ## 도로명주소
-address_list$documents$road_address %>%
+address_list$documents$road_address |>
   select(주소 = address_name, 경도 = x, 위도=y)
 ```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: py-daum-kakao-api-input
+import requests
+import os
+from dotenv import load_dotenv
+import json
+
+load_dotenv()
+
+api_key = os.getenv('KAKAO_MAP_API_KEY')
+
+url = 'https://dapi.kakao.com/v2/local/search/address.json'
+
+while True:
+    address = input('주소 입력: ')
+    if len(address) < 1:
+        break
+
+    headers = {
+        'Authorization': f'KakaoAK {api_key}'
+    }
+
+    response = requests.get(url, 
+                            headers=headers, 
+                            params={'query': address})
+
+    if response.status_code == 200:
+        js = response.json()
+        # print(json.dumps(js, indent=4))
+    else:
+        print("Failed to retrieve data:", response.status_code)
+
+    lat = js["documents"][0]["address"]["x"]
+    lng = js["documents"][0]["address"]["y"]
+    print('lat', lat, 'lng', lng)  
+
+#> 주소 입력: 서울특별시 강남구 역삼동 737
+#> lat 127.036628730251 lng 37.4998101243238
+```
+
+:::
 
 프로그램 출력결과는 다음과 같다.
 
 ``` bash
-$ Rscript script/geocoding.R 
+$ Rscript code/api_address.R 
 
 주소를 입력하세요 - '서울특별시 강남구 역삼동 737'
                       주소             경도             위도

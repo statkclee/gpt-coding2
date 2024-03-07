@@ -82,7 +82,7 @@ book:
         - git-hosting.qmd
         - git-korean.qmd
         
-    - part: "분야별 도구"
+    - part: "분야별 코딩"
       chapters:
         - tool-regex.qmd
         - tool-network.qmd
