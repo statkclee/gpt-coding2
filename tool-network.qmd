@@ -1,9 +1,3 @@
----
-editor: 
-  markdown: 
-    wrap: 72
----
-
 ```{r}
 #| include: false
 
@@ -12,9 +6,8 @@ source("_common.R")
 
 # 네트워크 프로그램 {#network}
 
-지금까지 책의 많은 예제는 파일을 읽고 파일의 정보를 찾는데 집중했지만,
-다양한 많은 정보의 원천이 인터넷에 있다.
-
+지금까지 책의 많은 예제는 파일을 읽고 파일 속 정보를 찾는데 집중했지만,
+다양한 많은 정보의 원천이 인터넷에 있다. 
 이번 장에서는 웹브라우져로 가장하고 HTTP 프로토콜(HyperText Transport
 Protocol,HTTP)을 사용하여 웹페이지를 검색할 것이다. 웹페이지 데이터를
 읽고 파싱할 것이다.
@@ -68,6 +61,14 @@ HTTP)은 실제로 매우 단순하다. 파이썬에는 `소켓 (sockets)`이라
 전송한다. 웹서버는 문서에 대한 헤더 정보와 빈 라인 그리고 문서 본문으로
 응답한다.
 
+::: callout-warning
+### 웹브라우저 실행금지 사유
+
+`webr` `pyodide`는 웹 브라우저 샌드박스 환경에서 R, 파이썬을 실행하며, 
+브라우저 보안 제한으로 인해 일반 R, 파이썬 환경에서와 같은 네트워크 소켓에 대한 직접적인 접근이 불가능하다. 접근을 허용하는 것이 중대한 보안 위험을 초래할 수 있기 때문에 웨브라우저에서 실행이 되지 않게 되어 있어 오류가 나는 것이 정상이다.
+:::
+
+
 ## 가장 간단한 웹 브라우져 {#network-web-browser}
 
 아마도 HTTP 프로토콜이 어떻게 작동하는지 알아보는 가장 간단한 방법은
@@ -75,7 +76,30 @@ HTTP)은 실제로 매우 단순하다. 파이썬에는 `소켓 (sockets)`이라
 프로토콜 규칙에 따라 문서를 요청하고 서버가 다시 보내주는 결과를
 보여주는 것이다.
 
-```{python socket-example, eval = FALSE}
+:::{.panel-tabset}
+### R 
+
+```{webr-r}
+#| label: r-socket-example
+con <- socketConnection(host = "data.pr4e.org", port = 80, blocking = TRUE, open = "r+b", timeout = 60)
+
+cmd <- "GET http://data.pr4e.org/romeo.txt HTTP/1.0\r\n\r\n"
+
+writeLines(cmd, con)
+
+flush(con)
+
+while(length(line <- readLines(con, warn = FALSE, n = 1)) > 0) {
+  cat(line, sep = "\n")
+}
+
+close(con)
+```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: py-socket-example
 import socket
 
 mysock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -91,6 +115,8 @@ while True:
 
 mysock.close()
 ```
+
+:::
 
 처음에 프로그램은 [www.py4e.com](www.py4e.com) 서버에 80 포트로
 연결한다. "웹 브라우져" 역할로 작성된 프로그램이 하기 때문에 HTTP
@@ -149,7 +175,20 @@ Who is already sick and pale with grief
 누적하고, 다음과 같이 헤더를 잘라내고 나서 파일에 이미지 데이터를
 저장한다.
 
-```{python socket-images, eval = FALSE}
+:::{.panel-tabset}
+### R 
+
+```{webr-r}
+#| label: r-socket-images
+download.file("http://data.pr4e.org/cover3.jpg", 
+              destfile = "data/cover3.jpg",
+              mode = "wb")
+```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: py-socket-images
 import socket
 import time
 
@@ -171,19 +210,20 @@ while True:
 
 mysock.close()
 
-# Look for the end of the header (2 CRLF)
+# 헤더 종료지점 탐색 (2 CRLF)
 pos = picture.find(b"\r\n\r\n")
 print('Header length', pos)
 print(picture[:pos].decode())
 
-# Skip past the header and save the picture data
+# 헤더를 건너뛰고 사진 데이터 저장
 picture = picture[pos+4:]
-fhand = open("stuff.jpg", "wb")
+fhand = open("images/stuff.jpg", "wb")
 fhand.write(picture)
 fhand.close()
-
-# Code: http://www.py4e.com/code3/urljpeg.py
 ```
+
+:::
+
 
 프로그램을 실행하면, 다음과 같은 출력을 생성한다.
 
@@ -273,57 +313,88 @@ Content-Type: image/jpeg
 
 수작업으로 소켓 라이브러리를 사용하여 HTTP로 데이터를 주고 받을 수
 있지만, `httr` 패키지를 사용하여 R에서 동일한 작업을 수행하는 좀더
-간편한 방식이 있다.
-
-`httr`을 사용하여 파일처럼 웹페이지를 다룰 수가 있다. 단순하게 어느
-웹페이지를 가져올 것인지만 지정하면 `httr` 라이브러리가 모든 HTTP
-프로토콜과 헤더 관련 사항을 처리해 준다.
-
-웹에서 `romeo.txt` 파일을 읽도록 `urllib`를 사용하여 작성한 상응 코드는
-다음과 같다.
-
-```{r httr-package, eval = FALSE}
-library(httr)
-
-fhand <- httr::GET('http://www.py4inf.com/code/romeo.txt')
-
-httr::content(fhand, encoding = "UTF-8")
-```
+간편한 방식이 있다. `httr`을 사용하여 파일처럼 웹페이지를 다룰 수가 있다. 
+단순하게 어느 웹페이지를 가져올 것인지만 지정하면 `httr` 라이브러리가 모든 HTTP
+프로토콜과 헤더 관련 사항을 처리해 준다. 
 
 `GET()` 함수를 사용하여 웹페이지를 열게 되면, 파일처럼 다룰 수 있고
-`content()` 함수를 사용해서 데이터를 읽을 수 있다.
-
+`content()` 함수를 사용해서 데이터를 읽을 수 있다. 
 프로그램을 실행하면, 파일 내용 출력결과만을 볼 수 있다. 헤더정보는
 여전히 전송되었지만, `GET()` 함수가 헤더를 받아 내부적으로 처리하고,
 사용자에게는 단지 데이터만 반환한다.
+파이썬으로 웹에서 `romeo.txt` 파일을 읽도록 `urllib`를 사용하여 
+동일한 기능을 구현할 수 있다.
 
-```{r httr-package-output-text, echo = FALSE}
+:::{.panel-tabset}
+### R 
+
+```{webr-r}
+#| label: r-httr-package
 library(httr)
 
-fhand <- httr::GET('http://www.py4inf.com/code/romeo.txt')
+url <- 'http://www.py4inf.com/code/romeo.txt'
 
-httr::content(fhand, encoding = "UTF-8")
+response <- GET(url)
+content <- content(response, "text", encoding = "UTF-8")
+lines <- strsplit(content, split = "\n")[[1]]
+lines
 ```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: py-httr-package
+import urllib.request
+
+fhand = urllib.request.urlopen('http://www.py4inf.com/code/romeo.txt')
+for line in fhand:
+    print(line.decode().strip())
+```
+
+:::
 
 예제로, `romeo.txt` 데이터를 가져와서 파일의 각 단어 빈도를 계산하는
 프로그램을 다음과 같이 작성할 수 있다. 웹페이지를 로컬 텍스트로 변환시킨
 후에 공백과 `\n` 으로 텍스트를 잘게 쪼개고, 단어 빈도수를 `table()`로
-계산한 후 데이터 문법 `dplyr`을 사용해서 최빈 단어를 상위 3개 뽑는다.
+계산한 후 단어 빈도수를 확인한다.
 
-```{r httr-package-output, echo = FALSE}
-library(tidyverse)
+:::{.panel-tabset}
+### R 
+
+```{webr-r}
+#| label: r-httr-package-output
 library(httr)
 
-fhand <- httr::GET('http://www.py4inf.com/code/romeo.txt')
+url <- "http://www.py4inf.com/code/romeo.txt"
 
-romeo_txt <- httr::content(fhand, encoding = "UTF-8")
+response <- GET(url)
+content <- content(response, "text", , encoding = "UTF-8")
 
-stringr::str_split(romeo_txt, pattern = " |\n") %>% .[[1]] %>% 
-  table() %>% 
-  as_tibble() %>% 
-  set_names(c("단어", "빈도수")) %>% 
-  slice_max(n = 3, order_by = 빈도수)
+counts <- strsplit(content, "\\s+") |> 
+  unlist() |> 
+  table()
+
+print(counts)
 ```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: py-httr-package-output
+import urllib.request
+
+counts = dict()
+fhand = urllib.request.urlopen('http://www.py4inf.com/code/romeo.txt')
+
+for line in fhand:
+    words = line.decode().strip().split()
+    for word in words:
+        counts[word] = counts.get(word, 0) + 1
+
+print(counts)
+```
+
+:::
 
 다시 한번, 웹페이지를 열게 되면, 로컬 파일처럼 웹페이지를 읽을 수 있다.
 
@@ -374,72 +445,52 @@ href="http://.+?"
 추출하고자 하는 문자열이 매칭된 문자열의 어느 부분인지를 표기하기 위해서
 정규 표현식에 괄호를 추가하여 다음과 같이 프로그램을 작성한다.
 
-```{r httr-extract-urls, eval = FALSE}
-library(tidyverse)
-library(httr)
+:::{.panel-tabset}
+### R 
 
-url <- readline(prompt = "Enter - ")
+```{webr-r}
+#| label: r-httr-extract-urls
+library(stringr)
 
-html <- httr::GET(url)  
-    
-url_link <- str_extract_all(html, pattern = 'href="(http://.*?)"')  
+cat("웹사이트 입력 - ")
+url <- readLines(file("stdin"), 1)
 
-print(url_link)
+html <- readLines(url, warn = FALSE)
+html <- paste(html, collapse = "\n")
+
+links <- str_extract_all(html, 'href="http://[^"]*"')[[1]]
+links <- str_replace_all(links, 'href="', '')
+
+print(links)
 ```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: py-httr-extract-urls
+import urllib.request
+import re
+
+url = input('웹사이트 입력 - ')
+html = urllib.request.urlopen(url).read().decode()
+links = re.findall('href="(http://.*?)"', html)
+for link in links:
+    print(link)
+```
+
+:::
 
 `str_extract_all` 정규 표현식 함수는 정규 표현식과 매칭되는 모든 문자열
-리스트를 추출하여 큰 따옴표 사이에 링크 텍스트만을 반환한다.
-
-쉘에서 `Rscript.exe` 프로그램으로 실행하기 위해 다음과 같이 사용자
-입력을 받는 부분을 다음과 같이 수정한다.
-
-```{r webscraping-interactive, eval = FALSE}
-# urlregex.R 프로그램 코드
-
-library(httr)
-
-typeline <- function(msg = "Enter - ") {
-  if (interactive() ) {
-    url <- readline(msg)
-  } else {
-    cat(msg);
-    url <- readLines("stdin",n=1);
-  }
-  return(url)
-}
-
-url <- typeline()
-
-html <- httr::GET(url)
-
-url_link <- stringr::str_extract_all(html, pattern = 'href="(http://.*?)"')
-
-print(url_link)
-```
-
+리스트를 추출하여 큰 따옴표 사이에 링크 텍스트만을 반환한다. 
 프로그램을 실행하면, 다음 출력을 얻게된다.
 
 ``` bash
-$ Rscript.exe ./script/urlregex.R
-During startup - Warning message:
-Setting LC_CTYPE=ko_KR.UTF-8@cjknarrow failed
-Enter - http://www.dr-chuck.com/page1.htm
-No encoding supplied: defaulting to UTF-8.
-Warning message:
-In stri_extract_all_regex(string, pattern, simplify = simplify,  :
-  argument is not an atomic vector; coercing
-[[1]]
+$ Rscript.exe ./code/extract_link.R
+웹사이트 입력 - http://www.dr-chuck.com/page1.htm
 [1] "href=\"http://www.dr-chuck.com/page2.htm\""
 
-$ Rscript.exe ./script/urlregex.R
-During startup - Warning message:
-Setting LC_CTYPE=ko_KR.UTF-8@cjknarrow failed
-Enter - http://www.py4inf.com/book.htm
-No encoding supplied: defaulting to UTF-8.
-Warning message:
-In stri_extract_all_regex(string, pattern, simplify = simplify,  :
-  argument is not an atomic vector; coercing
-[[1]]
+$ Rscript.exe ./code/extract_link.R
+웹사이트 입력 - http://www.py4inf.com/book.htm
  [1] "href=\"http://amzn.to/1KkULF3\""
  [2] "href=\"http://www.py4e.com/book\""
  [3] "href=\"http://amzn.to/1KkULF3\""
@@ -482,68 +533,56 @@ HTML 페이지에 내성이 있어서 사용자가 필요로하는 데이터를 
 `httr` 패키지를 사용하여 페이지를 읽어들이고, `rvest`를 사용해서 앵커
 태그 (`a`)로부터 `href` 속성을 추출한다.
 
-```{r httr-rvest-combo, eval = FALSE}
+:::{.panel-tabset}
+### R 
+
+```{webr-r}
+#| label: r-httr-rvest-combo
 library(httr)
+library(xml2)
 library(rvest)
 
-html <- httr::GET('http://www.dr-chuck.com/page1.htm')
-webpage <- rvest::read_html(html)
 
-a_href <- webpage %>% 
-  html_elements("a") %>% 
+cat("웹사이트 입력 - ")
+url <- readLines(file("stdin"), 1)
+
+html_content <- read_html(GET(url))
+
+hrefs <- html_nodes(html_content, "a") |> 
   html_attr("href")
 
-print(a_href)
+print(hrefs)
 ```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: py-httr-rvest-combo
+import urllib.request
+from bs4 import BeautifulSoup
+
+url = input('웹사이트 입력 - ')
+html = urllib.request.urlopen(url).read()
+soup = BeautifulSoup(html, 'html.parser')
+
+tags = soup('a')
+for tag in tags:
+    print(tag.get('href', None))
+```
+
+:::
 
 프로그램이 웹 주소를 입력받고, 웹페이지를 열고, 데이터를 읽어서
 BeautifulSoup 파서에 전달하고, 그리고 나서 모든 앵커 태그를 불러와서 각
-태그별로 `href` 속성을 출력한다.
-
-쉘에서 `Rscript.exe` 프로그램으로 실행하기 위해 다음과 같이 사용자
-입력을 받는 부분을 다음과 같이 수정한다.
-
-```{r webscraping-interactive-urllinks, eval = FALSE}
-## urllinks.R 스크립트
-
-library(httr)
-library(rvest)
-
-typeline <- function(msg = "Enter - ") {
-  if (interactive() ) {
-    url <- readline(msg)
-  } else {
-    cat(msg);
-    url <- readLines("stdin",n=1);
-  }
-  return(url)
-}
-
-url <- typeline()
-
-html <- httr::GET(url)
-webpage <- rvest::read_html(html)
-
-a_href <- webpage %>%
-  html_elements("a") %>%
-  html_attr("href")
-
-print(a_href)
-```
-
-프로그램을 실행하면, 아래와 같다.
+태그별로 `href` 속성을 출력한다. 프로그램을 실행하면, 아래와 같다.
 
 ``` bash
-$ Rscript.exe ./script/urllinks.R
-During startup - Warning message:
-Setting LC_CTYPE=ko_KR.UTF-8@cjknarrow failed
-Enter - http://www.dr-chuck.com/page1.htm
+$ Rscript.exe ./code/extract_link_rvest.R
+웹사이트 입력 - http://www.dr-chuck.com/page1.htm
 [1] "http://www.dr-chuck.com/page2.htm"
 
-$ Rscript.exe ./script/urllinks.R
-During startup - Warning message:
-Setting LC_CTYPE=ko_KR.UTF-8@cjknarrow failed
-Enter - http://www.py4inf.com/book.htm
+$ Rscript.exe ./code/extract_link_rvest.R
+웹사이트 입력 - http://www.py4inf.com/book.htm
  [1] "http://amzn.to/1KkULF3"
  [2] "http://www.py4e.com/book"
  [3] "http://amzn.to/1KkULF3"
@@ -571,50 +610,81 @@ Enter - http://www.py4inf.com/book.htm
 [25] "http://allendowney.com/"
 ```
 
-\`rvest\`\`을 사용하여 다음과 같이 각 태그별로 다양한 부분을 뽑아낼 수
+`rvest`을 사용하여 다음과 같이 각 태그별로 다양한 부분을 뽑아낼 수
 있다.
 
-```{r rvest-extract-tags, eval = FALSE}
+:::{.panel-tabset}
+### R 
+
+```{webr-r}
+#| label: r-rvest-extract-tags
 library(httr)
 library(rvest)
 
-typeline <- function(msg = "Enter - ") {
-  if (interactive() ) {
-    url <- readline(msg)
-  } else {
-    cat(msg);
-    url <- readLines("stdin",n=1);
-  }
-  return(url)
+cat("웹사이트 입력 - ")
+url <- readLines(file("stdin"), 1)
+
+response <- GET(url)
+html_content <- content(response, "text", encoding = "UTF-8")
+
+html <- read_html(html_content)
+tags <- html_nodes(html, "a")
+
+for (tag in tags) {
+  # Tag
+  cat("TAG:", toString(xml2::xml_find_first(tag, xpath = ".")), "\n")
+  
+  # URL
+  url <- html_attr(tag, "href")
+  cat("URL:", url, "\n")
+  
+  # Content
+  content <- html_text(tag)
+  cat("Content:", content, "\n")
+  
+  # Attributes
+  attrs <- html_attrs(tag)
+  cat("Attrs:", paste(names(attrs), attrs, sep=": ", collapse=", "), "\n\n")
 }
-
-url <- typeline()
-
-html <- httr::GET(url)
-webpage <- rvest::read_html(html)
-
-a_href <- webpage %>%
-  html_elements("a") %>%
-  html_attr("href")
-
-a_text <- webpage %>%
-  html_elements("a") %>% 
-  html_text() %>% 
-  stringr::str_remove("\n")
-
-cat("URL: ", a_href, "\n")
-cat("Content:", a_text)
 ```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: py-rvest-extract-tags
+import urllib.request
+from bs4 import BeautifulSoup
+
+url = input('Enter - ')
+html = urllib.request.urlopen(url).read()
+soup = BeautifulSoup(html, 'html.parser')
+
+tags = soup('a')
+for tag in tags:
+  
+    print('TAG:', tag)
+    print('URL:', tag.get('href', None))
+    content = tag.contents[0] if tag.contents else "None"
+    print('Content:', content)
+    print('Attrs:', tag.attrs)
+```
+
+:::
 
 상기 프로그램은 다음을 출력합니다.
 
 ``` bash
-$ Rscript.exe ./script/urllinks2.R
-During startup - Warning message:
-Setting LC_CTYPE=ko_KR.UTF-8@cjknarrow failed
-Enter - http://www.dr-chuck.com/page1.htm
-URL:  http://www.dr-chuck.com/page2.htm
-Content: Second Page
+$ Rscript.exe ./code/extract_link_tag.R
+웹사이트 입력 - http://www.dr-chuck.com/page1.htm
+경고메시지(들):
+for (name in names(public_methods)) lockBinding(name, public_bind_env)에서:
+  사용되지 않는 커넥션 3 (stdin)를 닫습니다
+TAG: <a href="http://www.dr-chuck.com/page2.htm">
+Second Page</a>
+URL: http://www.dr-chuck.com/page2.htm
+Content:
+Second Page
+Attrs: href: http://www.dr-chuck.com/page2.htm
 ```
 
 HTML을 파싱하는데 `rvest`가 가진 강력한 기능을 예제로 보여줬다. 좀더
@@ -632,24 +702,104 @@ HTML을 파싱하는데 `rvest`가 가진 강력한 기능을 예제로 보여�
 `destfile` 에는 로컬파일에 저장할 파일명을 적어준다. 중요한 것은
 텍스트가 아니라 바이너리 이미지라 `mode = "wb"`를 지정한다.
 
-```{r download-files, eval = FALSE}
-download.file(url = "http://www.py4inf.com/cover.jpg", 
-              destfile = "images/py4inf_cover.jpeg", mode="wb")
+:::{.panel-tabset}
+### R 
+
+```{webr-r}
+#| label: r-download-files
+url <- "https://www.dr-chuck.com/py4inf/cover.jpg"
+destination_file <- "cover.jpg"
+
+download.file(url, destfile = destination_file, mode = "wb")
 ```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: py-download-files
+import urllib.request
+
+url = 'http://www.py4inf.com/cover.jpg'
+
+img = urllib.request.urlopen(url).read()
+with open('cover.jpg', 'wb') as fhand:
+    fhand.write(img)
+```
+
+:::
+
 
 작성된 프로그램은 네트워크로 모든 데이터를 한번에 읽어서 컴퓨터
 `cover.jpg` 파일을 다운로드 받아 로컬 디스크에 지정한 디렉토리
-파일명으로 데이터를 쓴다. 이 방식은 파일 크기가 사용자 컴퓨터의 메모리
-크기보다 작다면 정상적으로 작동한다.
+파일명으로 데이터를 쓴다. 이 방식은 파일 크기가 사용자 컴퓨터의 메모리 크기보다 작다면 정상적으로 작동한다.
 
 ![바이너리 파일 다운로드](images/py4inf_cover.jpeg){#fig-network-binary
 fig-align="center" width="213"}
+
+하지만, 오디오 혹은 비디오 파일 대용량이면, 상기 프로그램은 멈추거나 사용
+자 컴퓨터 메모리가 부족할 때 극단적으로 느려질 수 있다. 메모리 부족을 회피
+하기 위해서, 데이터를 블럭 혹은 버퍼로 가져와서, 다음 블럭을 가져오기 전에
+디스크에 각각의 블럭을 쓴다. 이런 방식으로 사용자가 가진 모든 메모리를 사
+용하지 않고 어떠한 크기 파일도 읽어올 수 있다.
+
+[Fannie Mae and Freddie Mac](https://www.fhfa.gov/)는 주택금융공사에 상응하는 기관으로 
+주택 구매자에게 저리의 장기 고정금리 주택담보대출을 제공하고 
+주택 모기지를 재융자하는 역할을 통해 주택 금융 시장의 안정을 도모하고 
+국민의 주거 안정에 기여한다. [웹사이트](https://www.fhfa.gov/DataTools/Downloads)에 공공데이터로 인터넷에 공개된 주택담보대출 나름 크기가 큰 데이터를 가져온다.
+  
+
+:::{.panel-tabset}
+### R 
+
+```{webr-r}
+#| label: r-download-big-file
+library(httr)
+
+url <- 'https://www.fhfa.gov/DataTools/Downloads/Documents/Enterprise-PUDB/National-File-A/2022_SFNationalFileA2022.zip'
+resp <- GET(url, write_disk("2022_SFNationalFileA2022.zip", overwrite = TRUE))
+
+# Check if the request was successful and report the size
+if (status_code(resp) == 200) {
+  file_info <- file.info("2022_SFNationalFileA2022.zip")
+  size <- file_info$size
+  message(size, "문자 복사완료!")
+} else {
+  message("파일 다운로드 실패!")
+}
+#> 20232194문자 복사완료!
+```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: py-download-big-file
+import urllib.request
+
+url = 'https://www.fhfa.gov/DataTools/Downloads/Documents/Enterprise-PUDB/National-File-A/2022_SFNationalFileA2022.zip'
+zip_file = urllib.request.urlopen(url)
+fhand = open('2022_SFNationalFileA2022.zip', 'wb')  # Open in binary write mode
+size = 0
+
+while True:
+    info = zip_file.read(100000)
+    if len(info) < 1:
+        break
+    size += len(info)
+    fhand.write(info)
+
+fhand.close()
+print(size, '문자 복사완료!')
+#> 20232194문자 복사완료!
+```
+
+:::
+
 
 UNIX 혹은 매킨토시 컴퓨터를 가지고 있다면, 다음과 같이 상기 동작을
 수행하는 명령어가 운영체제 자체에 내장되어 있다.
 
 ``` bash
-curl -O http://www.py4inf.com/cover.jpg
+curl -O https://www.dr-chuck.com/py4inf/cover.jpg
 ```
 
 ## 용어정의 {#network-terminology}

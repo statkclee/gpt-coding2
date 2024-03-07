@@ -131,6 +131,9 @@ webr:
   - "stringr"
   - "readr"
   - "purrr"
+  - "httr"
+  - "curl"
+  - "rvest"
   
 
 pyodide:
