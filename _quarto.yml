@@ -134,6 +134,7 @@ webr:
   - "httr"
   - "curl"
   - "rvest"
+  - "fs"
   
 
 pyodide:

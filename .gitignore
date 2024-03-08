@@ -7,3 +7,5 @@
 
 /.luarc.json
 .env
+
+data/bbc
