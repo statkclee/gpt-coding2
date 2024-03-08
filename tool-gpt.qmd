@@ -8,3 +8,41 @@ source("_common.R")
 
 # 챗GPT {#r-automation}
 
+
+```{webr-r}
+#| label: r-plot-hist
+
+hist(rnorm(100))
+```
+
+
+
+```{pyodide-python}
+#| label: py-plot-matplotlib
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Generate 100 random numbers from a normal distribution
+data = np.random.normal(size=100)
+
+# Plot a histogram
+plt.hist(data, bins='auto')  # 'bins' can be adjusted for more or less detail
+plt.title('Histogram of Randomly Generated Numbers')
+plt.show()
+```
+
+```{webr-r}
+#| label: ggplot-plot-hist
+library(ggplot2)
+
+# Generate 100 random numbers from a normal distribution
+data <- data.frame(numbers = rnorm(100))
+
+# Create a histogram
+ggplot(data, aes(x = numbers)) +
+  geom_histogram(bins = 30, fill = "blue", color = "black") +
+  ggtitle("Histogram of Randomly Generated Numbers")
+
+
+```
+

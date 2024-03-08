@@ -89,6 +89,7 @@ book:
         - tool-web.qmd
         - tool-database.qmd
         - tool-make.qmd
+        - tool-viz.qmd
         - tool-gpt.qmd
     #
 
@@ -135,6 +136,7 @@ webr:
   - "curl"
   - "rvest"
   - "fs"
+  - "ggplot2"
   
 
 pyodide:

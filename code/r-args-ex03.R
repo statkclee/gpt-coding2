@@ -16,8 +16,8 @@ if(action == "--min") {
   cat("국가명:", country_name, " 최소: ", gdp_min, "\n")  
 }else if(action == "--mean") {
   gdp_mean <- mean(gdp_df$gdp)
-  cat("국가명:", country_name, " 최소: ", gdp_mean, "\n")  
+  cat("국가명:", country_name, " 평균: ", gdp_mean, "\n")  
 }else if (action=="--max"){
   gdp_max <- max(gdp_df$gdp)
-  cat("국가명:", country_name, " 최소: ", gdp_max, "\n")  
+  cat("국가명:", country_name, " 최대: ", gdp_max, "\n")  
 }
