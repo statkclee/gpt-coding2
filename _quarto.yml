@@ -87,7 +87,7 @@ book:
         - tool-regex.qmd
         - tool-network.qmd
         - tool-web.qmd
-    #     - tool-database.qmd
+        - tool-database.qmd
         - tool-make.qmd
         - tool-gpt.qmd
     #
