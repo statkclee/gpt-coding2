@@ -137,6 +137,7 @@ webr:
   - "rvest"
   - "fs"
   - "ggplot2"
+  - "palmerpenguins"
   
 
 pyodide:

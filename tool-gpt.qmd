@@ -292,12 +292,9 @@ OpenAI GPT-3.5 모델이 GPT-4 모형과 비교하여 성능이 떨어지는 것
 
 ```{webr-r}
 #| label: ggplot-plot-hist
-download.file(url = "https://gist.githubusercontent.com/slopp/ce3b90b9168f2f921784de84fa445651/raw/4ecf3041f0ed4913e7c230758733948bc561f434/penguins.csv",
-              destfile = "penguins.csv")
+penguins <- palmerpenguins::penguins
 
-penguins <- readr::read_csv("penguins.csv")
-
-penguins %>% 
+penguins |> 
   ggplot(aes(x = bill_length_mm, y = bill_depth_mm)) +
     geom_point(size = 3, alpha = 0.8) +
     labs(title = "펭귄종을 누락한 상태 부리 길이와 깊이",
@@ -317,7 +314,7 @@ penguins %>%
 
 ```{webr-r}
 #| label: palmer-penguins-paradox
-penguins %>% 
+penguins |>
   ggplot(aes(x = bill_length_mm, y = bill_depth_mm, 
              color = species, group = ______)) +
   geom_point(size = 3, alpha = 0.8) +
