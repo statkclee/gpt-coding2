@@ -18,7 +18,7 @@ lang: ko-KR
 book:
   title: "챗GPT 코딩"
   reader-mode: true
-  subtitle: "챗GPT의 힘을 데이터 사이언스 코딩에 담다"
+  subtitle: "인공지능(LLM)과 친구(Git/GitHub)와 함께 하는 프로그래밍"
 
   page-footer:
     left: |
