@@ -355,12 +355,20 @@ plot_grid(p111, p112)
 
 - 동료 개발자나 협업하시는 분: `.qmd` 파일
 - 직장상사
-    - PDF 파일: `quarto`, `pandoc`
+    - PDF 파일: {{< latex >}}, `pandoc`, `quarto` 
     - 파워포인트 슬라이스덱: `reveal.js` 기반 `quarto`
-    - 대쉬보드: `flexdashboard`
+    - 대쉬보드: `flexdashboard`를 지나 `quarto`
 - 일반 공개
     - 웹사이트: `distill`을 지나 `quarto`
     - 블로그: `blogdown`을 지나 `quarto`
-    - 책: `bookdown`을 지나 `quarto`
+    - 책: `bookdown`을 지나 `quarto` 
+- 프로그래밍
+    - 과학기술: 줄리아(julia)
+    - 웹 데이터 시각화: `observable JS`, `plotly`, `leaflet` 등
+    - 데이터 과학: R
+    - 기계학습과 딥러닝: 파이썬
+    - 데이터베이스: SQL
+    - 자동화: 유닉스 쉘
+    - 버전제어와 협업: `git`, `github`, `gitlab`, `bitbucket` 등
 
 ![이해당사자 쿼토 커뮤니케이션](images/nightingale_communication.jpg){#fig-quarto-communication}
