@@ -102,8 +102,8 @@ format:
     mermaid:
       theme: neutral # https://quarto.org/docs/authoring/diagrams.html#mermaid-theming 
     theme: 
-      - cosmo
-      - r2bit.scss      
+      light: [cosmo, r2bit.scss]
+      # dark: [yeti, r2bit.scss]
     number-depth: 3
     number-sections: true
     colorlinks: true
