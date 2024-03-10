@@ -75,12 +75,13 @@ book:
         - git-history.qmd
         - git-ignore.qmd
         - git-github.qmd
-        - git-collab.qmd
+        # - git-collab.qmd
         - git-conflict.qmd
         - git-open.qmd
-        - git-licensing.qmd
-        - git-hosting.qmd
-        - git-korean.qmd
+        - git-ide.qmd
+        # - git-licensing.qmd
+        # - git-hosting.qmd
+        # - git-korean.qmd
         
     - part: "분야별 코딩"
       chapters:
