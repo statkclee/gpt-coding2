@@ -111,8 +111,15 @@ for line in fhand:
 print(counts)
 ```
 
+# 파일병 변경 ----------
 
+for file in *.qmd; do
+  mv "$file" "${file%qmd}Rmd";
+done
 
+# 프롬프트 --------------
 
+너는 "챗GPT 코딩" 책 집필을 도와주는 교정전문가로 활동해줘. 
 
+첨부된 파일 맞춤범 검사와 함께 문장이 매끄럽게 작성되도록 윤문해줘.
 

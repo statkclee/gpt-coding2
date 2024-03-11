@@ -69,8 +69,8 @@ book:
     - part: "버전제어와 협업"
       chapters:
         - git-basics.qmd
-        - git-setup.qmd
-        - git-create.qmd
+        - git-setup-create.qmd
+        # - git-create.qmd
         - git-change.qmd
         - git-history.qmd
         - git-ignore.qmd
