@@ -45,19 +45,16 @@ book:
     # - acknowledgments.qmd
     - index.qmd
 
-    - part: "들어가며"
+    - part: "**1부** 프로그래밍"
       chapters:
         # - 00-why.qmd
-        - 01-intro.qmd
-
-    - part: "프로그래밍"
-      chapters:
+        - 01-intro.qmd          # A\
         - 02-var.qmd
         - 03-cont.qmd
         - 04-func.qmd
         - 05-loop.qmd
 
-    - part: "자료구조"
+    - part: "**2부** 자료구조"
       chapters:
         - 06-string.qmd
         - 07-file.qmd
@@ -83,7 +80,7 @@ book:
         # - git-hosting.qmd
         # - git-korean.qmd
         
-    - part: "분야별 코딩"
+    - part: "**4부** 분야별 코딩"
       chapters:
         - tool-regex.qmd
         - tool-network.qmd

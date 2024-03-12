@@ -1,11 +1,9 @@
-# 공개 과학과 호스팅 {#git-open}
+# 공개 과학과 협업 {#git-open}
 
 ::: callout-warning
 
-"공개(open)"의 반대는 "폐쇄(closed)"가 아니라 "망가짐(broken)"이다.
-
-The opposite of "open" isn't "closed". The opposite of "open" is "broken".
-
+"공개(open)"의 반대는 "폐쇄(closed)"가 아니라 "망가짐(broken)"이다.<br>
+The opposite of "open" isn't "closed". The opposite of "open" is "broken".<br>
 -- John Wilbanks
 :::
 
