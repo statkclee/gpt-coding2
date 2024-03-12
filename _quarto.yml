@@ -66,7 +66,7 @@ book:
     #     - 10-tuples.qmd
         - A-dataframe.qmd
 
-    - part: "버전제어와 협업"
+    - part: "**3부** 버전제어와 협업"
       chapters:
         - git-basics.qmd        # A\
         - git-setup-create.qmd  # A\
@@ -74,11 +74,11 @@ book:
         - git-change.qmd        # A\
         - git-history.qmd       # A\
         - git-ignore.qmd        # A\
-        - git-github.qmd
+        - git-github.qmd        # A\
         # - git-collab.qmd
-        - git-conflict.qmd
-        - git-open.qmd
-        - git-ide.qmd
+        - git-open.qmd         # A\
+        - git-conflict.qmd     # A\
+        - git-ide.qmd          # A\
         # - git-licensing.qmd
         # - git-hosting.qmd
         # - git-korean.qmd
