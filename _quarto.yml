@@ -73,7 +73,7 @@ book:
         # - git-create.qmd      # A\
         - git-change.qmd        # A\
         - git-history.qmd       # A\
-        - git-ignore.qmd
+        - git-ignore.qmd        # A\
         - git-github.qmd
         # - git-collab.qmd
         - git-conflict.qmd
