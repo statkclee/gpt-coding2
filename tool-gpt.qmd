@@ -333,10 +333,10 @@ penguins |>
 
 ## 프로젝트 {.unnumbered}
 
-@r-nightingale 장 나이팅게일 데이터를 이용하여 크림전쟁 사망자수를 위생조치를 
-취함으로써 줄인 시각화를 생성하시오. @r-nightingale 장 R 코드를 OpenAI 챗GPT,
+[-@sec-nightingale] 장 나이팅게일 데이터를 이용하여 크림전쟁 사망자수를 위생조치를 
+취함으로써 줄인 시각화를 생성하시오. [-@sec-nightingale] 장 R 코드를 OpenAI 챗GPT,
 구글 제미나이, 앤스로픽 클로드를 이용하여 파이썬 코드를 생성하고 
 파이썬 코드를 실행하여 정상 동작여부, 코드 품질, 시각화 결과물을 
-@r-nightingale 장 R 코드를 이용하여 생성한 결과물과 비교하시오.교
+[-@sec-nightingale] 장 R 코드를 이용하여 생성한 결과물과 비교하시오.
 
 

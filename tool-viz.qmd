@@ -6,7 +6,7 @@ source("_common.R")
 ```
 
 
-# 시각화 {#r-nightingale}
+# 시각화 {#sec-nightingale}
 
 코딩에서 데이터 시각화로 전환은 단순한 기술적 변화를 넘어서, 
 복잡한 데이터셋을 시각적으로 해석하고 전달하는 새로운 차원으로의 도약을 의미하기도 한다. 
@@ -339,7 +339,7 @@ plot_grid(p111, p112)
 
 데이터를 기반으로 뭔가 유용한 것을 창출한 후에 이를 알리기 위해 커뮤니케이션 단계를 거치게 된다. 가장 흔히 사용하는 방식은 엑셀, 워드, 파워포인트와 같은 MS 오피스 제품을 활용하는 방식이다. 과거 SAS, SPSS, 미니탭 등 외산 통계 팩키지로 데이터를 분석하고 유용한 모형 등을 찾아낸 후에 이를 커뮤니케이션하기 위해 MS 오피스 제품을 통해 커뮤니케이션을 하기도 했다. 하지만, 각각은 별개의 시스템으로 분리되어 있어 일일이 사람손이 가는 번거러움이 많았다. 이를 해결하기 하는 방법은 하나의 도구 혹은 언어로 모든 작업을 처리하는 것이다. [^meghan]
 
-[^meghan] : [Meghan Hall (June 15, 2021), "Extending R Markdown", RStudio: R in Sports Analytics, ](https://meghan.rbind.io/slides/rstudio/hall_rstudio_2021)
+[^meghan]: [Meghan Hall (June 15, 2021), "Extending R Markdown", RStudio: R in Sports Analytics, ](https://meghan.rbind.io/slides/rstudio/hall_rstudio_2021)
 
 우선 엑셀은 `tidyverse` 로 대체가 되고, 워드는 R 마크다운을 거쳐 쿼토(Quarto), 파워포인트도 R 마크다운(`xaringan` 등)에서 진화한 `reveal.js` 기반 쿼토 슬라이드가 빠르게 자리를 잡아가고 있다.
 
