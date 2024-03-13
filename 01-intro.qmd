@@ -514,8 +514,6 @@ and the tent fell down on the clown and the car
 
 ```{webr-r}
 #| label: r-intro-count-words
-library(stringr)
-
 text_v <- paste("the clown ran after the car and the car ran into",
                 "the tent and the tent fell down on the clown and the car")
 split_word <- str_split(text_v, " ") %>% unlist()

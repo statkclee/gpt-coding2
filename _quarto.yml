@@ -49,15 +49,15 @@ book:
       chapters:
         # - 00-why.qmd
         - 01-intro.qmd          # A\
-        - 02-var.qmd
-        - 03-cont.qmd
-        - 04-func.qmd
-        - 05-loop.qmd
+        - 02-var.qmd            # A\
+        - 03-cont.qmd           # A\
+        - 04-func.qmd           # A\
+        - 05-loop.qmd           # A\
 
     - part: "**2부** 자료구조"
       chapters:
-        - 06-string.qmd
-        - 07-file.qmd
+        - 06-string.qmd         # A\
+        - 07-file.qmd           # A\
         - 08-list.qmd
         - 09-dictionaries.qmd
     #     - 10-tuples.qmd
