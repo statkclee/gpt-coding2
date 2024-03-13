@@ -86,7 +86,7 @@ book:
         - tool-network.qmd    # A\
         - tool-web.qmd        # A\
         - tool-database.qmd
-        - tool-make.qmd
+        - tool-make.qmd       # A\
         - tool-viz.qmd
         - tool-gpt.qmd
     #
