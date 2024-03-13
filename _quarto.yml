@@ -82,9 +82,9 @@ book:
         
     - part: "**4부** 분야별 코딩"
       chapters:
-        - tool-regex.qmd
-        - tool-network.qmd
-        - tool-web.qmd
+        - tool-regex.qmd      # A\
+        - tool-network.qmd    # A\
+        - tool-web.qmd        # A\
         - tool-database.qmd
         - tool-make.qmd
         - tool-viz.qmd
