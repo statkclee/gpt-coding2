@@ -58,8 +58,8 @@ book:
       chapters:
         - 06-string.qmd         # A\
         - 07-file.qmd           # A\
-        - 08-list.qmd
-        - 09-dictionaries.qmd
+        - 08-list.qmd           # A\
+        - 09-dictionaries.qmd   # A\
     #     - 10-tuples.qmd
         - A-dataframe.qmd
 
