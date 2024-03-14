@@ -99,7 +99,8 @@ source("_common.R")
 
 ### 디지털 데이터
 
-[rladies/spain_nightingale](https://github.com/rladies/spain_nightingale) GitHub 저장소에서 엑셀 형태로 된 데이터를 가져와서 전처리할 수 있다.
+스페인 R-ladies GitHub 저장소 [rladies/spain_nightingale](https://github.com/rladies/spain_nightingale)에서 엑셀 형태로 된 데이터를 가져와서 전처리 작업을 진행한다.
+ 
 
 ```{r}
 library(tidyverse)
