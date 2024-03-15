@@ -1,7 +1,7 @@
 project:
   type: book
-  output-dir: docs
-  # output-dir: pdfs
+  # output-dir: docs
+  output-dir: pdfs
   preview:
     port: 7771
     browser: false
@@ -18,7 +18,7 @@ lang: ko-KR
 book:
   title: "챗GPT 코딩"
   reader-mode: true
-  subtitle: "인공지능(LLM)과 친구(Git/GitHub)와 함께 하는 프로그래밍"
+  subtitle: "인공지능(LLM)과 동료(Git/GitHub)와 함께 하는 프로그래밍"
 
   page-footer:
     left: |
@@ -45,50 +45,43 @@ book:
     # - acknowledgments.qmd
     - index.qmd
 
-    - part: "**1부** 프로그래밍"
-      chapters:
-        # - 00-why.qmd
-        - 01-intro.qmd          # A\
-        - 02-var.qmd            # A\
-        - 03-cont.qmd           # A\
-        - 04-func.qmd           # A\
-        - 05-loop.qmd           # A\
+    # - part: "**1부** 프로그래밍" # OK
+    #   chapters:
+    #     - 01-intro.qmd          # A\ + idx
+    #     - 02-var.qmd            # A\ + idx
+    #     - 03-cont.qmd           # A\ + idx
+    #     - 04-func.qmd           # A\ + idx
+    #     - 05-loop.qmd           # A\ + idx
 
     - part: "**2부** 자료구조"
       chapters:
-        - 06-string.qmd         # A\
-        - 07-file.qmd           # A\
-        - 08-list.qmd           # A\
-        - 09-dictionaries.qmd   # A\
-    #     - 10-tuples.qmd
-        - A-dataframe.qmd
+        - 06-string.qmd         # A\ + idx
+        - 07-file.qmd           # A\ + idx
+        # - 08-list.qmd           # A\ + idx
+        # - 09-dictionaries.qmd   # A\ + idx
+        # - A-dataframe.qmd       # A\ + idx
 
-    - part: "**3부** 버전제어와 협업"
-      chapters:
-        - git-basics.qmd        # A\
-        - git-setup-create.qmd  # A\
-        # - git-create.qmd      # A\
-        - git-change.qmd        # A\
-        - git-history.qmd       # A\
-        - git-ignore.qmd        # A\
-        - git-github.qmd        # A\
-        # - git-collab.qmd
-        - git-open.qmd         # A\
-        - git-conflict.qmd     # A\
-        - git-ide.qmd          # A\
-        # - git-licensing.qmd
-        # - git-hosting.qmd
-        # - git-korean.qmd
-        
-    - part: "**4부** 분야별 코딩"
-      chapters:
-        - tool-regex.qmd      # A\
-        - tool-network.qmd    # A\
-        - tool-web.qmd        # A\
-        - tool-database.qmd
-        - tool-make.qmd       # A\
-        - tool-viz.qmd
-        - tool-gpt.qmd
+    # - part: "**3부** 버전제어와 협업" # OK
+    #   chapters:
+    #     - git-basics.qmd        # A\ + idx
+    #     - git-setup-create.qmd  # A\ + idx
+    #     - git-change.qmd        # A\ + idx
+    #     - git-history.qmd       # A\ + idx
+    #     - git-ignore.qmd        # A\ + idx
+    #     - git-github.qmd        # A\ + idx +layout
+    #     - git-open.qmd         # A\ + idx
+    #     - git-conflict.qmd     # A\ + idx +layout
+    #     - git-ide.qmd          # A\ + idx +layout
+    # 
+    # - part: "**4부** 분야별 코딩" # OK
+    #   chapters:
+    #     - tool-regex.qmd      # A\ + idx + layout
+    #     - tool-network.qmd    # A\ + idx + layout
+    #     - tool-web.qmd        # A\ + idx + layout
+    #     - tool-database.qmd   # A\ + idx + layout
+    #     - tool-make.qmd       # A\ + idx + layout
+    #     - tool-viz.qmd        # A\ + idx + layout
+    #     - tool-gpt.qmd
     #
 
     - references.qmd     # 
@@ -163,6 +156,7 @@ knitr:
     warning: false
     collapse: true
     code-overflow: code-overflow
+    fig-crop: false
     comment: "#>"
     R.options:
       knitr.graphics.auto_pdf: true

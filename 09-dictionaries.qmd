@@ -6,6 +6,14 @@ source("_common.R")
 ```
 
 # 딕셔너리 {#named-list}
+\index{딕셔너리}
+\index{자료형!딕셔너리}
+\index{키}
+\index{키-값 페어}
+\index{인덱스}
+\index{명칭을 갖는 리스트}
+
+## 명칭을 갖는 리스트 {#r-named-list}
 
 **명칭을 갖는 리스트(named list)**는 딕셔너리로 더 잘 알려져 있고, 
 **딕셔너리(dictionary)**는 리스트와 유사하지만 좀 더 일반적이다. 
@@ -43,6 +51,7 @@ print(eng2kr)
 상기 코드는 키(명칭) `'one'`에서 값 `'하나'`를 매핑하는 항목을 생성한다. 명칭을 갖는 리스트를 다시 출력하면, 키-값 페어(key-value pair)를 볼 수 있다.
 
 :::{.panel-tabset}
+
 ### R
 
 ```{webr-r}
@@ -135,6 +144,8 @@ print(eng2kr['two'])
 
 `'two'` 키는 항상 값 `'둘'`에 상응되어서 명칭을 갖는 리스트 항목 순서는 문제가 되지 않는다. 만약 키가 리스트에 존재하지 않으면, `NULL` 값을 반환한다. 
 `length()` 함수를 리스트에 사용하여 키-값 페어(key-value pair) 항목 개수를 파악할 수 있다.
+\index{length 함수}
+\index{함수!length}
 
 :::{.panel-tabset}
 ### R
@@ -162,6 +173,9 @@ print(len(eng2kr))
 
 `%in%` 연산자는 명칭을 갖는 리스트에 키(Key, 명칭)가 있는지 알려준다. `%in%` 연산자는 각 항목마다 키(명칭)가 있는지 참/거짓으로 알려주기 때문에 
 `any()`와 결합해서 사용하게 되면 리스트에 키가 있는지 없는지만 확인할 때 요긴하다.
+\index{소속!딕셔너리}
+\index{%in% 연산자}
+\index{연산자!%in%}
 
 :::{.panel-tabset}
 ### R
@@ -248,6 +262,7 @@ print(results)
 `names()` 함수와 값을 확인할 경우 그냥 `%in%` 연산자와 조합하여 사용할 수 있다.
 
 ## 계수기로 리스트 사용하기 {#named-list-wordlist}
+\index{계수기}
 
 문자열이 주어진 상태에서, 각 문자가 얼마나 나타나는지를 센다고 가정한다. 몇 가지 방법이 아래에 있다.
 
@@ -260,6 +275,7 @@ print(results)
 상기 3개 옵션은 동일한 연산을 수행하지만, 각각은 다른 방식으로 연산을 구현한다.
 
 **구현(implementation)**은 연산(computation)을 수행하는 방법이다. 어떤 구현 방법이 다른 것보다 낫다. 다음에 명칭을 갖는 리스트로 구현한 코드가 있다.
+\index{구현}
 
 :::{.panel-tabset}
 ### R
@@ -305,6 +321,9 @@ print(d)
 
 계수기(counter) 혹은 빈도에 대한 통계 용어인 **히스토그램(histogram)**을
 효과적으로 산출할 수 있다.
+\index{히스토그램}
+\index{빈도}
+\index{운행법}
 
 `for` 루프는 문자열을 훑는다. 매번 루프를 반복할 때마다 리스트에 문자 `c`가 없다면, 
 키 `c`와 초기값 1을 가진 새로운 항목을 생성한다. 
@@ -632,6 +651,7 @@ for key in lst:
 `for` 루프로 정렬된 키/값 페어(key/value pair)를 확인할 수 있다.
 
 ## 고급 텍스트 파싱{#named-list-advanced}
+\index{로미오와 쥴리엣}
 
 `romeo.txt` 파일을 사용한 상기 예제에서, 수작업으로 모든 구두점을
 제거해서 가능한 단순하게 만들었다. 실제 텍스트는 아래 보여지는 것처럼
@@ -751,6 +771,7 @@ $ Rscript.exe code/romeo_parsing.R
 R 프로그래밍을 통해 정확히 찾고자 하는 것을 찾았으나 R **튜플(tuples)**(다양한 자료형을 갖는 리스트)에 대해서 학습할 필요성을 느끼게 한다. 
 
 ## 디버깅 {#r-dicionaries-debugging}
+\index{디버깅}
 
 점점 더 큰 데이터로 작업함에 따라, 
 수작업으로 데이터를 확인하거나 출력을 통해서 디버깅을 하는 것이 어려울 수 있다. 
@@ -780,26 +801,41 @@ R 프로그래밍을 통해 정확히 찾고자 하는 것을 찾았으나 R **�
     "완전히 비상식적인" 결과를 탐지하기 때문에 "건전성 검사(sanity check)"라고 부른다.
 
     또 다른 검사법은 두 가지 다른 연산의 결과를 비교해서 일치하는지 살펴보는 것이다. "일치성 검사(consistency check)"라고 부른다.
+\index{건전성 검사}
+\index{일치성 검사}
 
 4. **고급 출력: Pretty print the output**
 
    디버깅 출력결과를 서식화하는 것은 오류 발견을 용이하게 한다.
 
 다시 한번 강조하면, 발판(scaffolding)을 만드는데 들인 시간이 디버깅에 소비되는 시간을 줄일 수 있다.
+\index{발판}
 
 ## 용어 정의 {#r-dictionaries-terminology}
 
 - **명칭있는 리스트/딕셔너리(dictionary)**: 키(key)에서 해당 값으로 매핑(mapping)
+\index{딕셔너리}
+\index{명칭있는 리스트}
 - **해시테이블(hashtable)**: 파이썬 딕셔너리를 구현하기 위해 사용된 알고리즘
+\index{해시테이블}
 - **해시 함수(hash function)**: 키에 대한 위치를 계산하기 위해서 해시테이블에서 사용되는 함수
+\index{해시 함수}
 - **히스토그램(histogram)**: 계수기(counter) 집합.
+\index{히스토그램}  
 - **구현(implementation)**: 연산(computation)을 수행하는 방법
+\index{구현}
 - **항목(item)**: 키-값 페어(key-value pair)에 대한 또 다른 이름.
+\index{항목}
 - **키(key)**: 키-값 페어(key-value pair)의 첫 번째 부분으로 딕셔너리에 나타나는 객체.
+\index{키}
 - **키-값 페어(key-value pair)**: 키에서 값으로 매핑 표현.
+\index{키-값 페어}
 - **룩업(lookup)**: 키를 가지고 해당 값을 찾는 딕셔너리 연산.
+\index{룩업}
 - **중첩 루프(nested loops)**: 루프 "내부"에 하나 혹은 그 이상의 루프가 있음. 외곽 루프가 1회 실행될 때, 내부 루프는 전체 반복을 완료함.
+\index{중첩 루프}
 - **값(value)**:키-값 페어(key-value pair)의 두 번째 부분으로 딕셔너리에 나타나는 객체. 앞에서 사용한 단어 "값(value)"보다 더 구체적이다.
+\index{값}
 
 ## 연습문제{.unnumbered #r-dictionaries-ex}
 

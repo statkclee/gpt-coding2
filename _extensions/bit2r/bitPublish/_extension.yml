@@ -8,6 +8,7 @@ contributes:
       theme: cosmo
       css: "_extensions/bit2r/bitPublish/style.css"
     pdf:
+      dev: cairo_pdf    
       documentclass: book
       geometry:                            # 4x6 배판 도서를 위한 설정
         # 이하 재단선이 없는 조판 ----------------------------------------------     
@@ -38,14 +39,27 @@ contributes:
       fig-cap-location: bottom
       tbl-cap-location: bottom
       toc-title: "목차"
+      toc: true      
+      toc-depth: 2      
+      number-sections: true
+      number-depth: 2
       crossref:
         fig-title: "그림"
         tbl-title: "표"
       include-in-header:
         - text: |
+            %% line spacing - one line ----------------
+            %% https://stackoverflow.com/questions/71024114/avoid-double-spacing-in-rmarkdown-pdf-within-chunk
+            %% https://stackoverflow.com/questions/73439371/quarto-pdf-output-code-block-line-spacing
+            \usepackage{setspace}\onehalfspacing
+            \usepackage{etoolbox}
+            \AtBeginEnvironment{Shaded}{\singlespace}
+            %% \usepackage{setspace}
+            %% \onehalfspacing
+            %% \linespread{1}
+            %% 이하 bitPubublish --------------
             \usepackage{fancyhdr}
             \pagestyle{fancy}
-
             %% 폰트 사이즈 정의
             \newcommand{\changesize}{%
               \fontsize{8}{10}\selectfont
@@ -76,8 +90,8 @@ contributes:
             \makeatother
 
             \fancyhf{}
-            \fancyhead[EL]{\changesize \numberfont --- bitPublish를 이용하여}
-            \fancyhead[OR]{\changesize \numberfont 한글 책 조판하기 ---}
+            \fancyhead[EL]{\changesize \numberfont 인공지능(LLM)과 동료(Git/GitHub)와 함께 하는 프로그래밍}
+            \fancyhead[OR]{\changesize \numberfont 챗GPT 코딩}
             \fancyfoot[EL]{{\pagefont\thepage}{\hskip4mm}{\changesize \leftmark}}
             \fancyfoot[OR]{{\changesize \rightmark}{\hskip4mm}{\pagefont\thepage}}
 
@@ -96,3 +110,6 @@ contributes:
       urlcolor: highlight
       keep-tex: false
       keep-md: false
+      knitr:
+        opts_chunk:
+          dev: "cairo_pdf"      

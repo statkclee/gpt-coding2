@@ -1,4 +1,5 @@
 # 변경사항 추적 {#git-change}
+\index{변경사항 추적}
 
 먼저 디렉토리 위치가 맞는지 확인하자. `planets` 디렉토리에 위치해야 한다.
 
@@ -52,6 +53,8 @@ Cold and dry, but everything is my favorite color
 
 다시 한번 프로젝트의 상태를 확인하고자 하면, 
 Git이 새로운 파일이 인지되었다고 알려준다:
+\index{git!status}
+\index{상태 확인}
 
 ```bash
 $ git status
@@ -69,6 +72,8 @@ nothing added to commit but untracked files present (use "git add" to track)
 
 "untracked files" 메시지가 의미하는 것은 Git이 추적하고 있지 않는 파일 하나가 디렉토리에 있다는 것이다. 
 `git add`를 사용해서 Git에게 추적관리하라고 알려준다:
+\index{git!add}
+\index{추가}
 
 ```bash
 $ git add mars.txt
@@ -93,6 +98,8 @@ Changes to be committed:
 이제 Git은 `mars.txt` 파일을 추적할 것이라는 것을 알고 있지만, 
 커밋으로 아직 저장소에는 어떤 변경사항도 기록되지 않았다. 
 이를 위해서 명령어 하나 더 실행할 필요가 있다:
+\index{커밋}
+
 
 ```bash
 $ git commit -m "Start notes on Mars as a base"
@@ -144,7 +151,8 @@ Date:   Thu Aug 22 09:51:46 2013 -0400
 ```
 
 `git log`는 시간 역순으로 저장소의 모든 변경사항을 나열한다.
-각 수정사항 목록은 전체 커밋 식별자(앞서 `git commit` 명령어로 출력한 짧은 문자와 동일하게 시작), 
+각 수정사항 목록은 전체 커밋 식별자(앞서 `git commit` 명령어로 출력한 짧은 문자와 동일하게 시작), \index{git!log}
+
 수정한 사람, 
 언제 생성되었는지, 
 커밋을 생성할 때 Git에 남긴 로그 메시지가 포함된다. 
@@ -276,7 +284,8 @@ Git이 `git commit -a` 혹은 `git commit --all` 명령어 사용을 재촉한�
 ![Git 준비(Staging) 영역](images/git/git-staging-area.svg){#fig-git-staging-area}
 
 파일 변경사항을 편집기에서 준비 영역으로, 그리고 장기 저장소로 옮기는 것을 살펴보자. 
-먼저, 파일에 행 하나를 더 추가한다:
+먼저, 파일에 행 하나를 더 추가한다.
+\index{준비영역}
 
 ``` bash
 $ nano mars.txt
@@ -436,6 +445,7 @@ $ git log --oneline --graph --all --decorate
 ### 디렉토리
 
 Git에서 디렉토리에 관해서 알아두면 좋을 두 가지 사실.
+\index{디렉토리}
 
 1. Git은 그 자체로 디렉토리를 추적하지 않고, 디렉토리에 담긴 파일만 추적한다.
 믿지 못하겠다면, 직접 다음과 같이 시도해 본다:
@@ -486,6 +496,7 @@ $ git commit -m "Add some initial thoughts on spaceships"
 
 ::::: callout-tip
 ### 커밋 메시지 고르기
+\index{커밋!메시지}
 
 다음 중 어떤 커밋 메시지가 `mars.txt` 파일의 마지막 커밋으로 가장 적절할까요?
 
@@ -642,8 +653,8 @@ $ git diff me.txt
 
 :::::
 
-:::::
-callout-tip
+
+::::: callout-tip
 ### 저자(Author)와 커미터(Committer)
 
 매번 커밋을 할 때마다, Git은 이름을 두 번 저장한다.

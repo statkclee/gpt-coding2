@@ -50,14 +50,14 @@ source("_common.R")
 # WEBR --------------------------------------
 
 :::{.panel-tabset}
-### R 
+### R {.unnumbered}
 
 ```{webr-r}
 #| label: 
 
 ```
 
-### 파이썬
+### 파이썬 {.unnumbered}
 
 ```{pyodide-python}
 #| label: 

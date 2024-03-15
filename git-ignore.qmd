@@ -3,7 +3,7 @@
 만약 Git이 추적하기를 원하지 않는 파일이 있다면 어떻게 해야 할까요?
 편집기에서 자동 생성되는 백업 파일이나 자료 분석 중에 생성되는 임시 파일들이 좋은 예가 될 수 있다.
 몇 개의 더미(dummy) 파일을 생성해 보자.
-
+\index{추적 제외}
 
 ```bash
 $ mkdir results
@@ -31,6 +31,7 @@ nothing added to commit but untracked files present (use "git add" to track)
 그래서 Git에게 이런 중요하지 않은 파일들은 무시하라고 알려준다.
 
 프로젝트의 루트 디렉터리에 `.gitignore`라는 파일을 생성하고 무시할 파일들을 명시함으로써 해당 작업을 수행할 수 있다.
+\index{.gitignore}
 
 ``` bash
 $ nano .gitignore
@@ -143,6 +144,7 @@ results/plots
 
 `final.data` 파일만 제외하고 모든 `.data` 파일을 추적하지 않으려면 어떻게 하면 될까?
 힌트: `!` (느낌표 연산자)가 수행하는 작업을 알아본다.
+\index{연산자!느낌표 (부정)}
 
 ::: {.callout-caution collapse="true"}
 ### 해답

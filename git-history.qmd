@@ -1,4 +1,5 @@
 # 이력 탐색 {#git-history}
+\index{버전 관리!이력}
 
 앞선 학습에서 살펴봤듯이, 식별자로 커밋을 조회할 수 있다. 
 `HEAD` 식별자를 사용해서 작업 디렉터리의 *가장 최근 커밋*을 조회할 수 있다.
@@ -35,6 +36,8 @@ index b36abfd..0848c8d 100644
 `HEAD`만 빼면, 앞서 살펴본 것과 동일하다. 
 이러한 접근법의 정말 좋은 점은 이전 커밋을 조회할 수 있다는 점이다.  
 `~1`("~"은 "틸드(tilde)", 발음기호 [**til**-d*uh*])을 추가해서 `HEAD` 이전 첫 번째 커밋을 조회할 수 있다.
+\index{git!HEAD}
+\index{git!diff}
 
 ```bash
 $ git diff HEAD~1 mars.txt
@@ -59,6 +62,7 @@ index df0654a..b36abfd 100644
 
 `git show`를 사용해서도 커밋 메시지뿐만 아니라 이전 커밋과 변경사항을 보여준다.  
 `git diff`는 작업 디렉터리와 커밋 사이 *차이나는 부분*을 보여준다. 
+\index{git!show}
 
 ```bash
 $ git show HEAD~2 mars.txt
@@ -138,6 +142,7 @@ We will need to manufacture our own oxygen
 
 이제 `git status`를 통해서 파일이 변경되었다고 하지만,  
 변경사항은 아직 준비영역(Staging area)에 옮겨지지 않은 것으로 확인된다:
+\index{git!status}
 
 ```bash
 $ git status
@@ -166,6 +171,7 @@ But the Mummy will appreciate the lack of humidity
 이름에서 유추할 수 있듯이, `git checkout` 명령어는 파일의 옛 버전을 확인하고 가져온다. 즉, 되살린다.  
 이 경우 `HEAD`에 기록된 가장 최근에 저장된 파일 버전을 되살린다.  
 더 오래된 버전을 되살리고자 한다면, 대신에 커밋 식별자를 사용한다:
+\index{git!checkout}
 
 ```bash
 $ git checkout f22b25e mars.txt
@@ -305,6 +311,7 @@ HEAD is now at f22b25e Start notes on Mars as a base
 모든 구성원이 제대로 된 변경사항을 가지고 작업을 계속하길 원한다. 
 `git revert [잘못된 커밋 ID]` 명령어는 정훈이가 이전에 잘못 커밋했던 
 작업에 대해 실행 취소하는 커밋을 새로 생성시킨다.
+\index{git!revert}
 
 따라서, `git revert`는 `git checkout [커밋 ID]`와 다른데 
 이유는 `checkout`이 그룹 저장소에 커밋되지 않는 로컬 변경사항에  
@@ -389,6 +396,7 @@ Venus is beautiful and full of love.
 `git diff HEAD~3 mars.txt` 명령어를 고려해 보자. 
 이 명령어를 실행하게 되면 실행 결과로 예상하는 바를 말해보자.
 명령어를 실행하게 되면 어떤 일이 발생하는가? 그리고 이유는 무엇인가?
+\index{git!diff}
  
 또 다른 명령어 `git diff [ID] mars.txt`를 시도해 보자.  
 여기서, [ID]를 가장 최근 커밋 식별자로 치환한다. 
@@ -424,6 +432,7 @@ Changes to be committed:
 
 이 상태에서 `git checkout -- mars.txt` 명령어를 사용하면 오류는 발생하지 않지만, 파일도 복원되지 않는다. 
 Git은 파일을 `unstage`하기 위해 먼저 `git reset`을 사용해야 한다고 친절하게 알려준다.
+\index{git!reset}
 
 ``` bash
 $ git reset HEAD mars.txt
