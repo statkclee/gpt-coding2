@@ -50,6 +50,10 @@ print(eng2kr)
 `list()`는 빈 리스트임을 나타낸다. 리스트에 신규 요소를 추가하기 위해서 `list()` 함수 내부에 `'명칭'='값'`과 같이 명칭과 값을 지정한다. 
 상기 코드는 키(명칭) `'one'`에서 값 `'하나'`를 매핑하는 항목을 생성한다. 명칭을 갖는 리스트를 다시 출력하면, 키-값 페어(key-value pair)를 볼 수 있다.
 
+다수 키-값을 갖는 명칭을 갖는 리스트를 제작할 경우
+순차적으로 작성하고 `list()`로 감싼다.예를 들어, 세개 항목을 가진 
+명칭을 갖는 리스트를 생성할 수 있다. `eng2kr`을 출력하면 다음과 같다.
+
 :::{.panel-tabset}
 
 ### R
@@ -60,29 +64,7 @@ eng2kr <- list('one' = '하나')
 eng2kr
 #> $one
 #> [1] "하나"
-```
 
-### 파이썬
-
-```{pyodide-python}
-#| label: py-named-list-one
-eng2kr['one'] = '하나'
-print(eng2kr)
-#> {'one': '하나'}
-```
-
-:::
-
-
-다수 키-값을 갖는 명칭을 갖는 리스트를 제작할 경우
-순차적으로 작성하고 `list()`로 감싼다.예를 들어, 세개 항목을 가진 
-명칭을 갖는 리스트를 생성할 수 있다. `eng2kr`을 출력하면 다음과 같다.
-
-:::{.panel-tabset}
-### R
-
-```{webr-r}
-#| label: r-named-list-many
 eng2kr <- list('one' = '하나',
                'two' = '둘',
                'three' = '셋')
@@ -100,13 +82,18 @@ eng2kr
 ### 파이썬
 
 ```{pyodide-python}
-#| label: py-named-list-many
+#| label: py-named-list-one
+eng2kr['one'] = '하나'
+print(eng2kr)
+#> {'one': '하나'}
 eng2kr = {'one': '하나', 'two': '둘', 'three': '셋'}
 print(eng2kr)
 #> {'one': '하나', 'two': '둘', 'three': '셋'}
 ```
 
 :::
+
+
 
 ::: {.callout-warning}
 ### 파이썬 딕셔너리

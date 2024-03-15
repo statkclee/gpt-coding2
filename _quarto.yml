@@ -1,7 +1,7 @@
 project:
   type: book
-  # output-dir: docs
-  output-dir: pdfs
+  output-dir: docs
+  # output-dir: pdfs
   preview:
     port: 7771
     browser: false
@@ -45,44 +45,43 @@ book:
     # - acknowledgments.qmd
     - index.qmd
 
-    # - part: "**1부** 프로그래밍" # OK
-    #   chapters:
-    #     - 01-intro.qmd          # A\ + idx
-    #     - 02-var.qmd            # A\ + idx
-    #     - 03-cont.qmd           # A\ + idx
-    #     - 04-func.qmd           # A\ + idx
-    #     - 05-loop.qmd           # A\ + idx
+    - part: "**1부** 프로그래밍" # OK
+      chapters:
+        - 01-intro.qmd          # A\ + idx
+        - 02-var.qmd            # A\ + idx
+        - 03-cont.qmd           # A\ + idx
+        - 04-func.qmd           # A\ + idx
+        - 05-loop.qmd           # A\ + idx
 
     - part: "**2부** 자료구조"
       chapters:
         - 06-string.qmd         # A\ + idx
         - 07-file.qmd           # A\ + idx
-        # - 08-list.qmd           # A\ + idx
-        # - 09-dictionaries.qmd   # A\ + idx
-        # - A-dataframe.qmd       # A\ + idx
+        - 08-list.qmd           # A\ + idx
+        - 09-dictionaries.qmd   # A\ + idx You can't use `macro parameter character #'
+        - A-dataframe.qmd       # A\ + idx
 
-    # - part: "**3부** 버전제어와 협업" # OK
-    #   chapters:
-    #     - git-basics.qmd        # A\ + idx
-    #     - git-setup-create.qmd  # A\ + idx
-    #     - git-change.qmd        # A\ + idx
-    #     - git-history.qmd       # A\ + idx
-    #     - git-ignore.qmd        # A\ + idx
-    #     - git-github.qmd        # A\ + idx +layout
-    #     - git-open.qmd         # A\ + idx
-    #     - git-conflict.qmd     # A\ + idx +layout
-    #     - git-ide.qmd          # A\ + idx +layout
-    # 
-    # - part: "**4부** 분야별 코딩" # OK
-    #   chapters:
-    #     - tool-regex.qmd      # A\ + idx + layout
-    #     - tool-network.qmd    # A\ + idx + layout
-    #     - tool-web.qmd        # A\ + idx + layout
-    #     - tool-database.qmd   # A\ + idx + layout
-    #     - tool-make.qmd       # A\ + idx + layout
-    #     - tool-viz.qmd        # A\ + idx + layout
-    #     - tool-gpt.qmd
-    #
+    - part: "**3부** 버전제어와 협업" # OK
+      chapters:
+        - git-basics.qmd        # A\ + idx
+        - git-setup-create.qmd  # A\ + idx
+        - git-change.qmd        # A\ + idx
+        - git-history.qmd       # A\ + idx
+        - git-ignore.qmd        # A\ + idx
+        - git-github.qmd        # A\ + idx +layout
+        - git-open.qmd         # A\ + idx
+        - git-conflict.qmd     # A\ + idx +layout
+        - git-ide.qmd          # A\ + idx +layout
+
+    - part: "**4부** 분야별 코딩" # OK
+      chapters:
+        - tool-regex.qmd      # A\ + idx + layout
+        - tool-network.qmd    # A\ + idx + layout
+        - tool-web.qmd        # A\ + idx + layout
+        - tool-database.qmd   # A\ + idx + layout
+        - tool-make.qmd       # A\ + idx + layout
+        - tool-viz.qmd        # A\ + idx + layout
+        - tool-gpt.qmd
 
     - references.qmd     # 
 
