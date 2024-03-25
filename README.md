@@ -24,9 +24,9 @@ PDF 파일은 한글 글꼴 및 한글 책 특성을 반영하기 위해서
 
 챗GPT 쿼토 책은 교보문고에서 POD 종이책과 전자책으로 구매가 가능합니다.
 
-📘 교보 POD 종이책: 공개 예정
+📘 교보 POD 종이책: [https://bit.ly/4a8v1JS](https://bit.ly/4a8v1JS)
 
-📗 교보 전자책: 공개 예정
+📗 교보 전자책: [https://bit.ly/4auasHU](https://bit.ly/4auasHU) 
 
 🌐 웹사이트: [https://bit.ly/48V8u1T](https://bit.ly/48V8u1T)
 
