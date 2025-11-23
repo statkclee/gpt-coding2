@@ -26,6 +26,11 @@ jobs:
         with:
           python-version: '3.11' # 책의 Python 버전에 맞게 설정
 
+      - name: Install System Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libcurl4-openssl-dev libcairo2-dev libfontconfig1-dev libfreetype6-dev libharfbuzz-dev libfribidi-dev libgit2-dev gsfonts
+
       - name: Install R Dependencies
         run: |
           install.packages('renv')
