@@ -1,0 +1,49 @@
+name: Publish Book
+
+on:
+  push:
+    branches:
+      - main
+      - revised-edition
+
+jobs:
+  publish-book:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: '4.2.3' # 책의 R 버전에 맞게 설정
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11' # 책의 Python 버전에 맞게 설정
+
+      - name: Install R Dependencies
+        run: |
+          install.packages('renv')
+          renv::restore()
+        shell: Rscript {0}
+      
+      - name: Install Python Dependencies
+        run: pip install -r requirements.txt
+
+      - name: Render Book
+        run: quarto render
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+          # main 브랜치일 경우 루트에, revised-edition 브랜치일 경우 /revised/ 에 배포
+          destination_dir: ${{ github.ref == 'refs/heads/main' && '.' || 'revised' }}
+          # 다른 브랜치의 배포 내용을 덮어쓰지 않도록 설정
+          keep_files: true
