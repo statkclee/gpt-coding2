@@ -10,3 +10,5 @@
 
 data/bbc
 publishing/
+
+**/*.quarto_ipynb
