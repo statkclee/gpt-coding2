@@ -64,9 +64,9 @@ end
 -- shortcode that provides a nicely formatted 'MiKTeX' string
 function miktex()
   if quarto.doc.is_format("pdf") then
-    return pandoc.RawBlock('tex', '\\textbf{MiK{\\TeX}}')
+    return pandoc.RawBlock('tex', '{MiK\\TeX}')
   elseif quarto.doc.is_format("html") then
-    return pandoc.RawBlock('html', '<span style="font-weight: bold;">MiK<span style="letter-spacing:-2px;">T</span><sub style="font-size: inherit; letter-spacing:-1px;">E</sub>X</span>')
+    return pandoc.RawBlock('html', '<span style="font-family: \'Palatino\', \'Book Antiqua\', Georgia, serif;">MiK<span style="letter-spacing:-2px;">T</span><sub style="font-size: inherit; letter-spacing:-1px;">E</sub>X</span>')
   else
     return pandoc.Str('MiKTeX')
   end
@@ -77,7 +77,7 @@ function texlive()
   if quarto.doc.is_format("pdf") then
     return pandoc.RawBlock('tex', '{\\TeX} Live')
   elseif quarto.doc.is_format("html") then
-    return pandoc.RawBlock('html', '<span style="letter-spacing:-2px;">T</span><sub style="font-size: inherit; letter-spacing:-1px;">E</sub>X Live')
+    return pandoc.RawBlock('html', '<span style="font-family: \'Palatino\', \'Book Antiqua\', Georgia, serif;"><span style="letter-spacing:-2px;">T</span><sub style="font-size: inherit; letter-spacing:-1px;">E</sub>X Live</span>')
   else
     return pandoc.Str('TeX Live')
   end
@@ -86,9 +86,9 @@ end
 -- shortcode that provides a nicely formatted 'TinyTeX' string
 function tinytex()
   if quarto.doc.is_format("pdf") then
-    return pandoc.RawBlock('tex', '\\textbf{Tiny{\\TeX}}')
+    return pandoc.RawBlock('tex', 'Tiny{\\TeX}')
   elseif quarto.doc.is_format("html") then
-    return pandoc.RawBlock('html', '<span style="font-weight: bold;">Tiny<span style="letter-spacing:-2px;">T</span><sub style="font-size: inherit; letter-spacing:-1px;">E</sub>X</span>')
+    return pandoc.RawBlock('html', '<span style="font-family: \'Palatino\', \'Book Antiqua\', Georgia, serif;">Tiny<span style="letter-spacing:-2px;">T</span><sub style="font-size: inherit; letter-spacing:-1px;">E</sub>X</span>')
   else
     return pandoc.Str('TinyTeX')
   end
