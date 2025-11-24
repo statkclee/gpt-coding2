@@ -242,7 +242,7 @@ ga('send', {
   <ul class="collapse">
   <li><a href="#유사점" id="toc-유사점" class="nav-link" data-scroll-target="#유사점"><span class="header-section-number">4.4.1</span> 유사점</a></li>
   <li><a href="#차이점" id="toc-차이점" class="nav-link" data-scroll-target="#차이점"><span class="header-section-number">4.4.2</span> 차이점</a></li>
-  <li><a href="#언제-무엇을-사용하나" id="toc-언제-무엇을-사용하나" class="nav-link" data-scroll-target="#언제-무엇을-사용하나"><span class="header-section-number">4.4.3</span> 언제 무엇을 사용하나?</a></li>
+  <li><a href="#sec-setup-when-to-use" id="toc-sec-setup-when-to-use" class="nav-link" data-scroll-target="#sec-setup-when-to-use"><span class="header-section-number">4.4.3</span> 언제 무엇을 사용하나?</a></li>
   </ul></li>
   <li><a href="#sec-setup-languages" id="toc-sec-setup-languages" class="nav-link" data-scroll-target="#sec-setup-languages"><span class="header-section-number">4.5</span> 프로그래밍 언어 설치</a>
   <ul class="collapse">
@@ -430,14 +430,22 @@ ga('send', {
 </tbody>
 </table>
 </section>
-<section id="언제-무엇을-사용하나" class="level3" data-number="4.4.3">
-<h3 data-number="4.4.3" class="anchored" data-anchor-id="언제-무엇을-사용하나"><span class="header-section-number">4.4.3</span> 언제 무엇을 사용하나?</h3>
-<ul>
-<li><strong>uv 사용</strong>: 순수 Python 프로젝트를 로컬에서 개발할 때. 빠르고 간편하게 가상 환경을 만들고 패키지를 설치한다.</li>
-<li><strong>Docker 사용</strong>: R과 Python을 함께 사용하거나, 시스템 라이브러리 (예: GDAL, FFmpeg) 의존성이 있거나, 개발 환경을 프로덕션과 완전히 동일하게 맞춰야 할 때.</li>
-<li><strong>둘 다 사용</strong>: Docker 컨테이너 안에서 uv를 사용해 Python 패키지를 관리하는 것도 가능하다. Docker로 큰 틀의 환경을 구축하고, uv로 Python 패키지를 빠르게 관리하는 조합이다.</li>
-</ul>
-<p><strong>결론</strong>: 단순 Python 프로젝트는 uv로 시작하고, 복잡도가 증가하면 Docker를 고려한다.</p>
+<section id="sec-setup-when-to-use" class="level3" data-number="4.4.3">
+<h3 data-number="4.4.3" class="anchored" data-anchor-id="sec-setup-when-to-use"><span class="header-section-number">4.4.3</span> 언제 무엇을 사용하나?</h3>
+<p><strong>uv로 충분한 경우</strong>:</p>
+<p>순수 Python 패키지만 사용하는 프로젝트는 uv로 완벽히 재현 가능하다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 예: 웹 개발, 데이터 분석 기본</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>pandas, requests, fastapi, pydantic, numpy, scikit<span class="op">-</span>learn</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>이런 패키지는 시스템 라이브러리 의존성이 없거나 최소화되어, uv가 Python 버전과 패키지만 관리해도 어떤 시스템에서든 동일하게 작동한다.</p>
+<p><strong>Docker가 필요한 경우</strong>:</p>
+<p>시스템 라이브러리 의존성이 있는 패키지는 Docker 권장이다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 예: 컴퓨터 비전, 데이터베이스, 지리정보</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>opencv<span class="op">-</span>python     <span class="co"># C++ 라이브러리 (OpenCV)</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>psycopg2          <span class="co"># PostgreSQL 라이브러리</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>GDAL              <span class="co"># 지리정보 시스템 라이브러리</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>이런 패키지는 OS의 시스템 라이브러리가 필요하므로, Docker로 OS부터 완전히 격리하는 것이 안전하다.</p>
+<p><strong>둘 다 사용</strong>: Docker 컨테이너 안에서 uv를 사용해 Python 패키지를 관리하는 것도 가능하다. Docker로 시스템 라이브러리 환경을 구축하고, uv로 Python 패키지를 빠르게 관리하는 조합이다.</p>
+<p><strong>결론</strong>: 순수 Python 프로젝트는 uv로 시작하고, 시스템 의존성이 생기면 Docker를 고려한다.</p>
 <hr>
 </section>
 </section>
