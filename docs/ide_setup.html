@@ -231,7 +231,7 @@ ga('send', {
     <h2 id="toc-title">목차</h2>
    
   <ul>
-  <li><a href="#필수-선행-도구-git-설치" id="toc-필수-선행-도구-git-설치" class="nav-link active" data-scroll-target="#필수-선행-도구-git-설치"><span class="header-section-number">4.1</span> 필수 선행 도구: Git 설치</a>
+  <li><a href="#sec-setup-git" id="toc-sec-setup-git" class="nav-link active" data-scroll-target="#sec-setup-git"><span class="header-section-number">4.1</span> Git 설치</a>
   <ul class="collapse">
   <li><a href="#git-설치" id="toc-git-설치" class="nav-link" data-scroll-target="#git-설치"><span class="header-section-number">4.1.1</span> 1. Git 설치</a></li>
   <li><a href="#최초-설정" id="toc-최초-설정" class="nav-link" data-scroll-target="#최초-설정"><span class="header-section-number">4.1.2</span> 2. 최초 설정</a></li>
@@ -261,7 +261,7 @@ ga('send', {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ide.html"><strong>5부</strong> 통합 개발 환경</a></li><li class="breadcrumb-item"><a href="./ide_setup.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">개발 환경 구축</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">개발 환경 구축</span></h1>
+<h1 class="title"><span id="sec-setup-intro" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">개발 환경 구축</span></span></h1>
 </div>
 
 
@@ -278,9 +278,20 @@ ga('send', {
 </header>
 
 
-<p>AI로 데이터 과학 문제를 해결하기 위한 첫걸음은 강력한 프로그래밍 언어와 안정적인 개발 환경 구축이다. 본 장에서는 필수적인 버전 관리 도구 <strong>Git</strong>과 재현 가능한 환경을 위한 <strong>Docker</strong>, 워크플로우 자동화를 위한 <strong>Make</strong>를 시작으로, 데이터 과학의 양대 산맥인 <strong>R</strong>과 <strong>Python</strong>을 설치하고, 마지막으로 이들을 통합해 사용할 <strong>Positron IDE</strong> 설정 전 과정을 안내한다.</p>
-<section id="필수-선행-도구-git-설치" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="필수-선행-도구-git-설치"><span class="header-section-number">4.1</span> 필수 선행 도구: Git 설치</h2>
+<p>AI로 데이터 과학 문제를 해결하기 위한 첫걸음은 강력한 프로그래밍 언어와 안정적인 개발 환경 구축이다. 본 장에서는 필수적인 버전 관리 도구 <strong>Git</strong>과 재현 가능한 환경을 위한 <strong>Docker</strong>, 워크플로우 자동화를 위한 <strong>Make</strong>를 시작으로, 데이터 과학의 양대 산맥인 <strong>R</strong>과 <strong>Python</strong>을 설치하고, 마지막으로 이들을 통합해 사용할 <strong>포지트론 IDE</strong> 설정 전 과정을 안내한다.</p>
+<div id="fig-setup-workflow" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-setup-workflow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ide-setup-workflow.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-setup-workflow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;4.1: 데이터 과학 개발 환경 구축 순서
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-setup-workflow" class="quarto-xref">그림&nbsp;<span>4.1</span></a> 는 데이터 과학 개발 환경 구축의 전체 단계를 보여준다. Git, Docker, Make 같은 필수 도구를 먼저 설치하고, R과 Python을 설치한 후, 마지막으로 포지트론 IDE를 설치한다.</p>
+<section id="sec-setup-git" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="sec-setup-git"><span class="header-section-number">4.1</span> Git 설치</h2>
 <p>본격적인 개발 환경 구축에 앞서, 가장 중요한 버전 관리 시스템 Git을 먼저 설치한다. Git은 코드 변경 이력을 추적하고, 여러 개발자가 협업하게 하며, AI 모델 개발 시 다양한 실험을 관리하는 필수 도구다.</p>
 <section id="git-설치" class="level3" data-number="4.1.1">
 <h3 data-number="4.1.1" class="anchored" data-anchor-id="git-설치"><span class="header-section-number">4.1.1</span> 1. Git 설치</h3>
