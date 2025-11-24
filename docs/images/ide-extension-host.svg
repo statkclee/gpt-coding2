@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <style>
+      .title { font-family: 'Palatino', 'Georgia', serif; font-size: 18px; fill: #333; font-weight: bold; }
+      .label { font-family: 'Palatino', 'Georgia', serif; font-size: 14px; fill: #333; }
+      .small-label { font-family: 'Palatino', 'Georgia', serif; font-size: 12px; fill: #666; }
+      .box { fill: none; stroke: #333; stroke-width: 2; }
+      .dashed-box { fill: none; stroke: #999; stroke-width: 1.5; stroke-dasharray: 5,5; }
+      .arrow { fill: none; stroke: #666; stroke-width: 1.5; }
+      .process-label { font-size: 11px; fill: #999; font-style: italic; }
+    </style>
+  </defs>
+
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" class="title">Extension Host: 확장 프로그램 격리 아키텍처</text>
+
+  <!-- Main Process Box -->
+  <rect x="50" y="80" width="300" height="350" class="box" />
+  <text x="200" y="110" text-anchor="middle" class="label" font-weight="bold">메인 프로세스</text>
+  <text x="200" y="130" text-anchor="middle" class="process-label">(Main Process)</text>
+
+  <!-- UI Components in Main Process -->
+  <rect x="80" y="150" width="240" height="60" fill="#f5f5f5" stroke="#999" stroke-width="1" />
+  <text x="200" y="175" text-anchor="middle" class="small-label">사용자 인터페이스 (UI)</text>
+  <text x="200" y="195" text-anchor="middle" class="small-label" fill="#999">메뉴, 사이드바, 에디터</text>
+
+  <rect x="80" y="230" width="240" height="60" fill="#f5f5f5" stroke="#999" stroke-width="1" />
+  <text x="200" y="255" text-anchor="middle" class="small-label">핵심 편집 기능</text>
+  <text x="200" y="275" text-anchor="middle" class="small-label" fill="#999">텍스트 편집, 파일 관리</text>
+
+  <rect x="80" y="310" width="240" height="60" fill="#f5f5f5" stroke="#999" stroke-width="1" />
+  <text x="200" y="335" text-anchor="middle" class="small-label">Git 통합</text>
+  <text x="200" y="355" text-anchor="middle" class="small-label" fill="#999">버전 관리</text>
+
+  <!-- Stability Icon -->
+  <circle cx="200" cy="400" r="8" fill="none" stroke="#4a4" stroke-width="2" />
+  <path d="M 195 400 L 198 403 L 205 393" fill="none" stroke="#4a4" stroke-width="2" />
+  <text x="200" y="420" text-anchor="middle" class="small-label" fill="#4a4">안정적 실행</text>
+
+  <!-- Extension Host Process Box -->
+  <rect x="450" y="80" width="300" height="350" class="box" />
+  <text x="600" y="110" text-anchor="middle" class="label" font-weight="bold">Extension Host</text>
+  <text x="600" y="130" text-anchor="middle" class="process-label">(별도 프로세스)</text>
+
+  <!-- Extensions in Extension Host -->
+  <rect x="480" y="150" width="240" height="50" fill="#e5e5e5" stroke="#999" stroke-width="1" />
+  <text x="600" y="180" text-anchor="middle" class="small-label">확장 프로그램 A</text>
+
+  <rect x="480" y="215" width="240" height="50" fill="#e5e5e5" stroke="#999" stroke-width="1" />
+  <text x="600" y="245" text-anchor="middle" class="small-label">확장 프로그램 B</text>
+
+  <rect x="480" y="280" width="240" height="50" fill="#e5e5e5" stroke="#999" stroke-width="1" />
+  <text x="600" y="310" text-anchor="middle" class="small-label">확장 프로그램 C</text>
+
+  <!-- Crash indicator -->
+  <text x="520" y="355" class="small-label" fill="#c44">❌ 오류 발생</text>
+  <path d="M 520 360 L 680 360" stroke="#c44" stroke-width="1.5" stroke-dasharray="3,3" />
+
+  <!-- Isolation benefit -->
+  <text x="600" y="395" text-anchor="middle" class="small-label" fill="#c44">확장 오류 시</text>
+  <text x="600" y="415" text-anchor="middle" class="small-label" fill="#666">→ 메인 프로세스는 영향 없음</text>
+
+  <!-- Communication Arrow -->
+  <path d="M 350 200 L 450 200" fill="none" stroke="#666" stroke-width="2" />
+  <path d="M 440 195 L 450 200 L 440 205" fill="#666" />
+
+  <path d="M 450 250 L 350 250" fill="none" stroke="#666" stroke-width="2" />
+  <path d="M 360 245 L 350 250 L 360 255" fill="#666" />
+
+  <text x="400" y="225" text-anchor="middle" class="small-label">IPC 통신</text>
+
+  <!-- Bottom explanation -->
+  <text x="400" y="465" text-anchor="middle" class="label" font-style="italic">VS Code의 안정성 비결: 프로세스 격리</text>
+  <text x="400" y="490" text-anchor="middle" class="small-label" fill="#999">
+    Atom은 단일 프로세스로 인해 확장 오류 시 전체 에디터가 멈췄음
+  </text>
+</svg>

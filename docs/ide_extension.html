@@ -250,6 +250,17 @@ ga('send', {
 <ul>
 <li><strong>목적</strong>: 이 구조의 가장 큰 목적은 <strong>안정성</strong>입니다. 만약 특정 확장 프로그램이 과도한 메모리를 사용하거나 오류를 일으켜 멈추더라도, IDE의 메인 프로세스(UI, 텍스트 편집 등)는 전혀 영향을 받지 않습니다. 사용자는 문제의 확장 프로그램을 비활성화하거나 재시작할 수 있으며, 작업하던 내용은 안전하게 보존됩니다.</li>
 </ul>
+<div id="fig-extension-host" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-extension-host-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ide-extension-host.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-extension-host-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;3.1: Extension Host: 확장 프로그램 격리 아키텍처
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-extension-host" class="quarto-xref">그림&nbsp;<span>3.1</span></a> 는 VS Code가 메인 프로세스와 Extension Host를 분리하여 안정성을 확보하는 방식을 보여줍니다. 확장 프로그램이 오류를 일으켜도 메인 프로세스는 안전하게 작동합니다.</p>
 </section>
 <section id="언어-기능-분리-language-server-protocol-lsp" class="level3" data-number="3.2.2">
 <h3 data-number="3.2.2" class="anchored" data-anchor-id="언어-기능-분리-language-server-protocol-lsp"><span class="header-section-number">3.2.2</span> 2. 언어 기능 분리: Language Server Protocol (LSP)</h3>
@@ -259,6 +270,17 @@ ga('send', {
 <li><strong>아키텍처</strong>: LSP는 언어 관련 기능(코드 분석, 자동 완성, 오류 검출 등)을 <strong>‘언어 서버’</strong> 라는 독립적인 프로세스로 분리합니다. IDE(클라이언트)는 표준화된 JSON-RPC 메시지를 통해 언어 서버와 통신하며 필요한 정보를 주고받습니다.</li>
 <li><strong>효과</strong>: 이제 C++ 언어 개발자는 ‘C++ 언어 서버’ 하나만 만들면 됩니다. 그러면 LSP를 지원하는 모든 IDE(VS Code, 이클립스, 주피터 등)는 별도의 노력 없이 C++ 언어의 모든 지능형 기능을 사용할 수 있게 됩니다. 이는 개발 부담을 m + n으로 획기적으로 줄였고, 새로운 언어가 빠르게 다양한 IDE에 채택될 수 있는 길을 열었습니다.</li>
 </ul>
+<div id="fig-lsp-arch" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-lsp-arch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ide-lsp-architecture.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lsp-arch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;3.2: 언어 서버 프로토콜 (LSP): m × n 문제의 해결
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-lsp-arch" class="quarto-xref">그림&nbsp;<span>3.2</span></a> 는 LSP가 어떻게 m × n 문제를 m + n으로 해결했는지 보여줍니다. 과거에는 각 언어와 IDE마다 별도의 통합 작업이 필요했지만, LSP를 통해 언어 서버 하나만 만들면 모든 LSP 지원 IDE에서 사용할 수 있게 되었습니다.</p>
 </section>
 <section id="기능-기여-모델-manifest와-contribution-points" class="level3" data-number="3.2.3">
 <h3 data-number="3.2.3" class="anchored" data-anchor-id="기능-기여-모델-manifest와-contribution-points"><span class="header-section-number">3.2.3</span> 3. 기능 기여 모델: Manifest와 Contribution Points</h3>

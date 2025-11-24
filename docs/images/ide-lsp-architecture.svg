@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 550">
+  <defs>
+    <style>
+      .title { font-family: 'Palatino', 'Georgia', serif; font-size: 18px; fill: #333; font-weight: bold; }
+      .subtitle { font-family: 'Palatino', 'Georgia', serif; font-size: 14px; fill: #666; font-style: italic; }
+      .label { font-family: 'Palatino', 'Georgia', serif; font-size: 14px; fill: #333; }
+      .small-label { font-family: 'Palatino', 'Georgia', serif; font-size: 12px; fill: #666; }
+      .box { fill: none; stroke: #333; stroke-width: 2; }
+      .light-box { fill: #f5f5f5; stroke: #999; stroke-width: 1; }
+      .arrow { fill: none; stroke: #666; stroke-width: 1.5; marker-end: url(#arrowhead); }
+      .bidirectional { stroke-dasharray: none; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" class="title">언어 서버 프로토콜 (LSP): m × n 문제의 해결</text>
+  <text x="400" y="55" text-anchor="middle" class="subtitle">과거 (m × n) → 현재 (m + n)</text>
+
+  <!-- Old way section -->
+  <text x="150" y="90" text-anchor="middle" class="label" font-weight="bold">과거: 언어별 × IDE별 구현</text>
+
+  <rect x="50" y="110" width="200" height="120" fill="#f9f9f9" stroke="#ccc" stroke-width="1" stroke-dasharray="5,5" />
+  <text x="150" y="135" text-anchor="middle" class="small-label">VS Code용 Python 지원</text>
+  <text x="150" y="155" text-anchor="middle" class="small-label">VS Code용 Java 지원</text>
+  <text x="150" y="175" text-anchor="middle" class="small-label">Sublime용 Python 지원</text>
+  <text x="150" y="195" text-anchor="middle" class="small-label">Sublime용 Java 지원</text>
+  <text x="150" y="215" text-anchor="middle" class="small-label" fill="#c44">... (m × n 개의 구현)</text>
+
+  <!-- New way section -->
+  <text x="550" y="90" text-anchor="middle" class="label" font-weight="bold">현재: LSP 표준화</text>
+
+  <!-- IDE Clients -->
+  <text x="420" y="125" text-anchor="middle" class="small-label" font-weight="bold">클라이언트 (IDE)</text>
+  <rect x="340" y="140" width="80" height="35" class="light-box" />
+  <text x="380" y="162" text-anchor="middle" class="small-label">VS Code</text>
+
+  <rect x="430" y="140" width="80" height="35" class="light-box" />
+  <text x="470" y="162" text-anchor="middle" class="small-label">이클립스</text>
+
+  <rect x="520" y="140" width="80" height="35" class="light-box" />
+  <text x="560" y="162" text-anchor="middle" class="small-label">주피터</text>
+
+  <!-- LSP Protocol -->
+  <rect x="340" y="200" width="260" height="50" fill="#e5e5e5" stroke="#333" stroke-width="2" />
+  <text x="470" y="220" text-anchor="middle" class="label" font-weight="bold">LSP (JSON-RPC)</text>
+  <text x="470" y="238" text-anchor="middle" class="small-label" fill="#666">표준화된 통신 프로토콜</text>
+
+  <!-- Language Servers -->
+  <text x="470" y="280" text-anchor="middle" class="small-label" font-weight="bold">서버 (언어별)</text>
+  <rect x="340" y="295" width="80" height="35" class="light-box" />
+  <text x="380" y="317" text-anchor="middle" class="small-label">Python 서버</text>
+
+  <rect x="430" y="295" width="80" height="35" class="light-box" />
+  <text x="470" y="317" text-anchor="middle" class="small-label">Java 서버</text>
+
+  <rect x="520" y="295" width="80" height="35" class="light-box" />
+  <text x="560" y="317" text-anchor="middle" class="small-label">C++ 서버</text>
+
+  <!-- Arrows showing communication -->
+  <path d="M 380 175 L 380 200" class="arrow" />
+  <path d="M 470 175 L 470 200" class="arrow" />
+  <path d="M 560 175 L 560 200" class="arrow" />
+
+  <path d="M 380 250 L 380 295" class="arrow" />
+  <path d="M 470 250 L 470 295" class="arrow" />
+  <path d="M 560 250 L 560 295" class="arrow" />
+
+  <!-- Example messages -->
+  <rect x="50" y="380" width="700" height="140" fill="#fafafa" stroke="#ccc" stroke-width="1" />
+  <text x="400" y="405" text-anchor="middle" class="label" font-weight="bold">LSP 메시지 예시</text>
+
+  <text x="70" y="435" class="small-label">→ textDocument/completion</text>
+  <text x="90" y="455" class="small-label" fill="#666" font-style="italic">  IDE: "사용자가 'df.'을 입력했어요, 자동완성 목록 주세요"</text>
+
+  <text x="70" y="480" class="small-label">← response</text>
+  <text x="90" y="500" class="small-label" fill="#666" font-style="italic">  서버: "['head()', 'tail()', 'describe()' ...] 이 목록을 보여주세요"</text>
+
+  <!-- Bottom explanation -->
+  <text x="400" y="540" text-anchor="middle" class="small-label" fill="#999">
+    개발 부담: m × n → m + n (언어 개발자 m명 + IDE 개발자 n명)
+  </text>
+</svg>
