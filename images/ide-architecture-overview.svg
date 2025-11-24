@@ -1,146 +1,150 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650">
   <defs>
     <style>
-      .title { font-family: 'Palatino', 'Georgia', serif; font-size: 18px; fill: #333; font-weight: bold; }
-      .section-title { font-family: 'Palatino', 'Georgia', serif; font-size: 14px; fill: #333; font-weight: bold; }
-      .label { font-family: 'Palatino', 'Georgia', serif; font-size: 13px; fill: #333; }
-      .small-label { font-family: 'Palatino', 'Georgia', serif; font-size: 11px; fill: #666; }
-      .box { fill: none; stroke: #333; stroke-width: 2; }
-      .light-box { fill: #f5f5f5; stroke: #999; stroke-width: 1.5; }
-      .lighter-box { fill: #fafafa; stroke: #ccc; stroke-width: 1; }
-      .arrow { fill: none; stroke: #666; stroke-width: 1.5; marker-end: url(#arrowhead); }
-      .bidirectional { fill: none; stroke: #666; stroke-width: 1.5; }
-      .dashed { stroke-dasharray: 5,3; }
+      /* Tufte Style Principles: Grayscale, Serif font, clean lines, high data-ink ratio */
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .title { font-size: 20px; font-weight: bold; }
+      .h2 { font-size: 15px; font-weight: bold; fill: #444; }
+      .label { font-size: 13px; font-weight: 600; }
+      .detail { font-size: 11px; fill: #666; }
+      
+      /* Subtle zoning instead of heavy boxes */
+      .zone-bg { fill: #f9f9f9; stroke: #e0e0e0; stroke-width: 0.5; }
+      .sub-module { fill: #fff; stroke: #ccc; stroke-width: 0.5; }
+      
+      /* Clean, thin connection lines */
+      .connector { fill: none; stroke: #777; stroke-width: 0.8; marker-end: url(#arrowhead); }
+      .connector-bidir { fill: none; stroke: #777; stroke-width: 0.8; marker-start: url(#arrowhead-start); marker-end: url(#arrowhead); }
+      .connector-dashed { stroke-dasharray: 4,3; stroke: #999; }
+      .protocol-line { stroke: #555; stroke-width: 1.0; }
     </style>
-    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-      <polygon points="0 0, 10 3, 0 6" fill="#666" />
+    
+    <marker id="arrowhead" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M 0 0 L 6 3 L 0 6" fill="none" stroke="#777" stroke-width="0.8"/>
+    </marker>
+    <marker id="arrowhead-start" markerWidth="6" markerHeight="6" refX="1" refY="3" orient="auto">
+      <path d="M 6 0 L 0 3 L 6 6" fill="none" stroke="#777" stroke-width="0.8"/>
     </marker>
   </defs>
 
-  <!-- Title -->
-  <text x="450" y="30" text-anchor="middle" class="title">데이터 과학 IDE 아키텍처 (VS Code 기반)</text>
+  <!-- White background -->
+  <rect x="0" y="0" width="900" height="650" fill="#ffffff"/>
 
-  <!-- Client Layer -->
-  <rect x="50" y="60" width="800" height="150" class="box" />
-  <text x="450" y="85" text-anchor="middle" class="section-title">클라이언트 레이어 (UI / Electron)</text>
+  <text x="450" y="35" text-anchor="middle" class="tufte-text title">VS Code 데이터 과학 IDE 아키텍처 (OSS 기반)</text>
+  <text x="450" y="55" text-anchor="middle" class="tufte-text detail">Tufte Grayscale Style Concept Map</text>
 
-  <rect x="80" y="100" width="180" height="90" class="light-box" />
-  <text x="170" y="125" text-anchor="middle" class="label">편집기 (Editor)</text>
-  <text x="170" y="145" text-anchor="middle" class="small-label">코드 편집</text>
-  <text x="170" y="160" text-anchor="middle" class="small-label">구문 강조</text>
-  <text x="170" y="175" text-anchor="middle" class="small-label">자동 완성</text>
+  <rect x="50" y="80" width="800" height="120" rx="4" class="zone-bg" />
+  <text x="70" y="100" class="tufte-text h2">1. 클라이언트 레이어 (UI Process / Electron)</text>
+  <text x="350" y="100" class="tufte-text detail">사용자 상호작용 및 렌더링 담당 (가벼운 처리)</text>
 
-  <rect x="290" y="100" width="180" height="90" class="light-box" />
-  <text x="380" y="125" text-anchor="middle" class="label">뷰어 (Viewer)</text>
-  <text x="380" y="145" text-anchor="middle" class="small-label">플롯 / 그래프</text>
-  <text x="380" y="160" text-anchor="middle" class="small-label">데이터프레임</text>
-  <text x="380" y="175" text-anchor="middle" class="small-label">변수 탐색기</text>
+  <g transform="translate(70, 120)">
+    <rect width="160" height="60" class="sub-module"/>
+    <text x="80" y="20" text-anchor="middle" class="tufte-text label">편집기 (Editor)</text>
+    <text x="80" y="40" text-anchor="middle" class="tufte-text detail">코드 작성, 구문 강조</text>
+  </g>
+  
+  <g transform="translate(250, 120)">
+    <rect width="160" height="60" class="sub-module"/>
+    <text x="80" y="20" text-anchor="middle" class="tufte-text label">노트북 뷰어</text>
+    <text x="80" y="40" text-anchor="middle" class="tufte-text detail">셀 출력, 그래프 렌더링</text>
+  </g>
 
-  <rect x="500" y="100" width="180" height="90" class="light-box" />
-  <text x="590" y="125" text-anchor="middle" class="label">터미널</text>
-  <text x="590" y="145" text-anchor="middle" class="small-label">명령줄 인터페이스</text>
-  <text x="590" y="160" text-anchor="middle" class="small-label">쉘 통합</text>
-  <text x="590" y="175" text-anchor="middle" class="small-label">작업 실행</text>
+  <g transform="translate(430, 120)">
+    <rect width="160" height="60" class="sub-module"/>
+    <text x="80" y="20" text-anchor="middle" class="tufte-text label">통합 터미널</text>
+    <text x="80" y="40" text-anchor="middle" class="tufte-text detail">쉘 명령 실행</text>
+  </g>
 
-  <rect x="710" y="100" width="110" height="90" class="light-box" />
-  <text x="765" y="125" text-anchor="middle" class="label">사이드바</text>
-  <text x="765" y="145" text-anchor="middle" class="small-label">파일 탐색</text>
-  <text x="765" y="160" text-anchor="middle" class="small-label">Git 뷰</text>
-  <text x="765" y="175" text-anchor="middle" class="small-label">확장 관리</text>
+  <g transform="translate(610, 120)">
+    <rect width="160" height="60" class="sub-module"/>
+    <text x="80" y="20" text-anchor="middle" class="tufte-text label">사이드바 패널</text>
+    <text x="80" y="40" text-anchor="middle" class="tufte-text detail">파일 탐색기, Git 뷰</text>
+  </g>
 
-  <!-- Extension Host & Language Servers -->
-  <rect x="50" y="250" width="380" height="180" class="box" />
-  <text x="240" y="275" text-anchor="middle" class="section-title">Extension Host (별도 프로세스)</text>
+  <rect x="50" y="240" width="380" height="180" rx="4" class="zone-bg" />
+  <text x="70" y="265" class="tufte-text h2">2. Extension Host (별도 프로세스)</text>
+  <text x="70" y="285" class="tufte-text detail">로직의 중심. UI 차단 없이 무거운 작업 처리.</text>
 
-  <rect x="80" y="290" width="150" height="70" class="lighter-box" />
-  <text x="155" y="315" text-anchor="middle" class="label">확장 프로그램</text>
-  <text x="155" y="335" text-anchor="middle" class="small-label">Python Extension</text>
-  <text x="155" y="350" text-anchor="middle" class="small-label">R Extension</text>
+  <g transform="translate(70, 305)">
+    <rect width="150" height="80" class="sub-module"/>
+    <text x="75" y="20" text-anchor="middle" class="tufte-text label">DS 확장 프로그램</text>
+    <text x="75" y="40" text-anchor="middle" class="tufte-text detail">Python Extension</text>
+    <text x="75" y="55" text-anchor="middle" class="tufte-text detail">Jupyter Extension</text>
+  </g>
 
-  <rect x="260" y="290" width="150" height="70" class="lighter-box" />
-  <text x="335" y="315" text-anchor="middle" class="label">언어 서버 (LSP)</text>
-  <text x="335" y="335" text-anchor="middle" class="small-label">Pylance (Python)</text>
-  <text x="335" y="350" text-anchor="middle" class="small-label">R Language Server</text>
+  <g transform="translate(240, 305)">
+    <rect width="150" height="80" class="sub-module"/>
+    <text x="75" y="20" text-anchor="middle" class="tufte-text label">언어 서버 (LSP)</text>
+    <text x="75" y="40" text-anchor="middle" class="tufte-text detail">Pylance (IntelliSense)</text>
+    <text x="75" y="55" text-anchor="middle" class="tufte-text detail">R Language Server</text>
+  </g>
+  
+  <text x="240" y="410" text-anchor="middle" class="tufte-text detail font-italic" style="font-style: italic;">디버거, 린터, 포매터 실행 관리</text>
 
-  <rect x="80" y="380" width="330" height="35" fill="#e5e5e5" stroke="#999" stroke-width="1" />
-  <text x="245" y="402" text-anchor="middle" class="small-label">디버그 어댑터, 포매터, 린터...</text>
 
-  <!-- Kernel Layer -->
-  <rect x="470" y="250" width="380" height="180" class="box" />
-  <text x="660" y="275" text-anchor="middle" class="section-title">커널 레이어 (별도 프로세스)</text>
+  <rect x="470" y="240" width="380" height="180" rx="4" class="zone-bg" />
+  <text x="490" y="265" class="tufte-text h2">3. 커널 레이어 (실행 엔진)</text>
+  <text x="490" y="285" class="tufte-text detail">실제 코드 실행 및 메모리 상태 관리.</text>
 
-  <rect x="500" y="290" width="150" height="70" class="lighter-box" />
-  <text x="575" y="315" text-anchor="middle" class="label">Python 커널</text>
-  <text x="575" y="335" text-anchor="middle" class="small-label">IPython</text>
-  <text x="575" y="350" text-anchor="middle" class="small-label">실행 엔진</text>
+  <g transform="translate(490, 305)">
+    <rect width="150" height="80" class="sub-module"/>
+    <text x="75" y="25" text-anchor="middle" class="tufte-text label">Python 커널 (IPython)</text>
+    <text x="75" y="50" text-anchor="middle" class="tufte-text detail">pandas, numpy 실행</text>
+  </g>
 
-  <rect x="680" y="290" width="150" height="70" class="lighter-box" />
-  <text x="755" y="315" text-anchor="middle" class="label">R 커널</text>
-  <text x="755" y="335" text-anchor="middle" class="small-label">IRkernel</text>
-  <text x="755" y="350" text-anchor="middle" class="small-label">실행 엔진</text>
+  <g transform="translate(660, 305)">
+    <rect width="150" height="80" class="sub-module"/>
+    <text x="75" y="25" text-anchor="middle" class="tufte-text label">기타 커널 (R, Julia)</text>
+    <text x="75" y="50" text-anchor="middle" class="tufte-text detail">해당 언어 런타임</text>
+  </g>
 
-  <rect x="500" y="380" width="330" height="35" fill="#e5e5e5" stroke="#999" stroke-width="1" />
-  <text x="665" y="402" text-anchor="middle" class="small-label">Jupyter 메시징 프로토콜 (ZMQ)</text>
+  <rect x="560" y="400" width="200" height="20" fill="#eee" stroke="none"/>
+  <text x="660" y="414" text-anchor="middle" class="tufte-text detail" style="font-weight: 600;">Jupyter Protocol (ZeroMQ)</text>
 
-  <!-- Storage & External -->
-  <rect x="50" y="470" width="380" height="180" class="box" />
-  <text x="240" y="495" text-anchor="middle" class="section-title">스토리지 & 파일 시스템</text>
 
-  <rect x="80" y="510" width="150" height="55" class="lighter-box" />
-  <text x="155" y="535" text-anchor="middle" class="label">로컬 파일</text>
-  <text x="155" y="555" text-anchor="middle" class="small-label">.py, .R, .ipynb</text>
+  <rect x="50" y="460" width="800" height="120" rx="4" class="zone-bg" />
+  <text x="70" y="485" class="tufte-text h2">4. 인프라 및 데이터 계층</text>
 
-  <rect x="260" y="510" width="150" height="55" class="lighter-box" />
-  <text x="335" y="535" text-anchor="middle" class="label">데이터 소스</text>
-  <text x="335" y="555" text-anchor="middle" class="small-label">CSV, DB, API</text>
+  <g transform="translate(70, 505)">
+    <rect width="180" height="50" class="sub-module"/>
+    <text x="90" y="20" text-anchor="middle" class="tufte-text label">로컬 파일 시스템</text>
+    <text x="90" y="38" text-anchor="middle" class="tufte-text detail">.ipynb, .py, csv 파일</text>
+  </g>
 
-  <rect x="80" y="585" width="330" height="50" class="lighter-box" />
-  <text x="245" y="610" text-anchor="middle" class="label">Git 저장소</text>
-  <text x="245" y="627" text-anchor="middle" class="small-label">버전 관리 및 협업</text>
+  <g transform="translate(270, 505)">
+    <rect width="180" height="50" class="sub-module"/>
+    <text x="90" y="20" text-anchor="middle" class="tufte-text label">버전 관리 (Git)</text>
+    <text x="90" y="38" text-anchor="middle" class="tufte-text detail">소스 코드 변경 추적</text>
+  </g>
 
-  <!-- External Services -->
-  <rect x="470" y="470" width="380" height="180" class="box" />
-  <text x="660" y="495" text-anchor="middle" class="section-title">외부 서비스 연동</text>
+  <g transform="translate(500, 505)">
+    <rect width="160" height="50" class="sub-module"/>
+    <text x="80" y="20" text-anchor="middle" class="tufte-text label">원격 데이터/DB</text>
+    <text x="80" y="38" text-anchor="middle" class="tufte-text detail">S3, SQL, APIs</text>
+  </g>
+  
+   <g transform="translate(680, 505)">
+    <rect width="160" height="50" class="sub-module"/>
+    <text x="80" y="20" text-anchor="middle" class="tufte-text label">원격 컴퓨팅</text>
+    <text x="80" y="38" text-anchor="middle" class="tufte-text detail">SSH, Containers, WSL</text>
+  </g>
 
-  <rect x="500" y="510" width="150" height="55" class="lighter-box" />
-  <text x="575" y="535" text-anchor="middle" class="label">클라우드 스토리지</text>
-  <text x="575" y="555" text-anchor="middle" class="small-label">S3, GCS, Azure</text>
 
-  <rect x="680" y="510" width="150" height="55" class="lighter-box" />
-  <text x="755" y="535" text-anchor="middle" class="label">MLOps 도구</text>
-  <text x="755" y="555" text-anchor="middle" class="small-label">MLflow, W&B</text>
+  <path d="M 240 180 L 240 235" class="connector-bidir" />
+  <text x="245" y="215" class="tufte-text detail">IPC (JSON-RPC)</text>
+  
+  <path d="M 430 345 L 490 345" class="connector-bidir protocol-line" />
+  <path d="M 430 330 L 660 330" class="connector-bidir protocol-line" />
 
-  <rect x="500" y="585" width="330" height="50" class="lighter-box" />
-  <text x="665" y="610" text-anchor="middle" class="label">컴퓨팅 클러스터</text>
-  <text x="665" y="627" text-anchor="middle" class="small-label">원격 실행 환경 (옵션)</text>
 
-  <!-- Arrows -->
-  <!-- Client to Extension Host -->
-  <path d="M 170 210 L 170 250" class="arrow" />
-  <path d="M 380 210 L 335 250" class="arrow" />
+  <path d="M 510 180 L 510 455" class="connector-dashed" />
+  
+  <path d="M 690 180 L 690 230 M 690 420 L 690 455" class="connector-dashed" />
 
-  <!-- Client to Kernel -->
-  <path d="M 590 210 L 575 250" class="arrow" />
-  <path d="M 380 210 L 575 250" class="arrow" />
 
-  <!-- Extension Host to Kernel -->
-  <path d="M 430 340 L 470 340" class="bidirectional" />
-  <path d="M 460 335 L 470 340 L 460 345" fill="#666" />
-  <path d="M 440 335 L 430 340 L 440 345" fill="#666" />
-  <text x="450" y="330" text-anchor="middle" class="small-label">IPC</text>
+  <path d="M 565 385 L 565 425 L 200 425 L 200 500" class="connector" /> <path d="M 590 385 L 590 440 L 580 440 L 580 500" class="connector" /> <path d="M 360 385 L 360 500" class="connector" />
 
-  <!-- Kernel to Storage -->
-  <path d="M 575 430 L 335 470" class="arrow" />
-  <path d="M 575 430 L 155 470" class="arrow" />
+  <path d="M 850 330 L 870 330 L 870 530 L 840 530" class="connector-dashed" />
+  <text x="875" y="430" text-anchor="middle" transform="rotate(90, 875, 430)" class="tufte-text detail">원격 실행 컨텍스트 연결</text>
 
-  <!-- Extension Host to Git -->
-  <path d="M 240 430 L 240 470" class="arrow" />
-
-  <!-- Kernel to External -->
-  <path d="M 665 430 L 665 470" class="arrow" />
-
-  <!-- Bottom note -->
-  <text x="450" y="680" text-anchor="middle" class="small-label" fill="#999">
-    VS Code 기반 IDE (Positron, Cursor 등)의 일반적인 아키텍처 구조
-  </text>
 </svg>
