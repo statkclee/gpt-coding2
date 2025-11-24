@@ -1,103 +1,58 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 550">
-  <defs>
-    <style>
-      /* Tufte Style: Grayscale */
-      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #111; }
-      .title { font-size: 22px; font-weight: bold; }
-      .subtitle { font-size: 14px; fill: #555; }
-      .category { font-size: 16px; font-weight: bold; text-decoration: underline; }
-      .item-title { font-size: 14px; font-weight: bold; }
-      .item-desc { font-size: 12px; fill: #444; }
-      .tag { font-size: 10px; fill: #666; font-family: monospace; }
-      
-      /* Shapes */
-      .box-group { fill: #fafafa; stroke: #ccc; stroke-width: 1; }
-      .box-item { fill: #fff; stroke: #999; stroke-width: 1; }
-      .box-highlight { fill: #eee; stroke: #333; stroke-width: 1.5; } /* 강조용 */
-    </style>
-  </defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400">
+  <defs>
+    <style>
+      /* Tufte Style: Strictly Grayscale, Serif, Minimal */
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #111; }
+      .title { font-size: 18px; font-weight: bold; }
+      .label { font-size: 15px; font-weight: bold; }
+      .detail { font-size: 13px; fill: #444; }
+      .note { font-size: 11px; fill: #666; font-style: italic; }
 
-  <rect x="0" y="0" width="900" height="550" fill="#ffffff"/>
+      /* Font Samples - 실제 폰트로 렌더링 */
+      .font-d2coding { font-family: 'D2Coding', 'D2Coding ligature', monospace; }
+      .font-pretendard { font-family: 'Pretendard', -apple-system, sans-serif; }
 
-    <text x="450" y="40" text-anchor="middle" class="tufte-text title">개발자 폰트 생태계 확장판</text>
-  <text x="450" y="65" text-anchor="middle" class="tufte-text subtitle">코딩(Monospace) vs UI(Interface) vs 문서(Docs)</text>
+      /* Boxes */
+      .box { fill: #fff; stroke: #888; stroke-width: 1.5; }
+      .box-emphasis { fill: #f5f5f5; stroke: #666; stroke-width: 2; }
+    </style>
+  </defs>
 
-  <rect x="30" y="90" width="260" height="430" rx="4" class="box-group"/>
-  <text x="160" y="120" text-anchor="middle" class="tufte-text category">1. 코딩 &amp; 터미널</text>
-  <text x="160" y="140" text-anchor="middle" class="tufte-text item-desc">고정폭, 가독성, 합자(Ligatures)</text>
+  <rect x="0" y="0" width="900" height="400" fill="#ffffff"/>
 
-  <rect x="50" y="160" width="220" height="60" rx="2" class="box-highlight"/>
-  <text x="65" y="180" class="tufte-text item-title">JetBrains Mono</text>
-  <text x="65" y="200" class="tufte-text item-desc">IntelliJ 기본, 높은 x-height</text>
-  <text x="260" y="180" text-anchor="end" class="tufte-text tag">&lt;/&gt;</text>
+  <!-- Title -->
+  <text x="450" y="35" text-anchor="middle" class="tufte-text title">개발 환경 글꼴 선택 가이드</text>
 
-  <rect x="50" y="230" width="220" height="60" rx="2" class="box-item"/>
-  <text x="65" y="250" class="tufte-text item-title">Fira Code</text>
-  <text x="65" y="270" class="tufte-text item-desc">개발자용 합자(Ligatures)의 원조</text>
-  <text x="260" y="250" text-anchor="end" class="tufte-text tag">!=→</text>
+  <!-- Left: D2코딩 -->
+  <rect x="50" y="80" width="380" height="280" rx="4" class="box-emphasis"/>
+  <text x="240" y="110" text-anchor="middle" class="tufte-text label font-d2coding" style="font-size: 16px;">D2코딩</text>
+  <text x="240" y="130" text-anchor="middle" class="tufte-text detail">코딩 전용 고정폭 글꼴 (Monospace)</text>
 
-  <rect x="50" y="300" width="220" height="60" rx="2" class="box-highlight"/>
-  <text x="65" y="320" class="tufte-text item-title">D2Coding</text>
-  <text x="65" y="340" class="tufte-text item-desc">한글 가독성 최강, 코딩 국룰</text>
-  <text x="260" y="320" text-anchor="end" class="tufte-text tag">KR</text>
+  <text x="70" y="165" class="tufte-text detail">특징:</text>
+  <text x="70" y="185" class="tufte-text note">• 고정폭 (monospace) - 코드 정렬 정확</text>
+  <text x="70" y="205" class="tufte-text note">• 한글 + 영문 자연스러운 조화</text>
+  <text x="70" y="225" class="tufte-text note">• 1, l, I 명확히 구분</text>
+  <text x="70" y="245" class="tufte-text note">• 0, O 명확히 구분</text>
 
-  <rect x="50" y="370" width="220" height="60" rx="2" class="box-item"/>
-  <text x="65" y="390" class="tufte-text item-title">Cascadia Code</text>
-  <text x="65" y="410" class="tufte-text item-desc">MS 터미널 기본, 윈도우 최적</text>
-  <text x="260" y="390" text-anchor="end" class="tufte-text tag">MS</text>
+  <text x="70" y="275" class="tufte-text detail">용도:</text>
+  <text x="70" y="295" class="tufte-text note">• IDE/에디터 (VS Code, Positron)</text>
+  <text x="70" y="315" class="tufte-text note">• 터미널, 콘솔</text>
+  <text x="70" y="335" class="tufte-text note">• 코드 리뷰, 문서 코드 블록</text>
 
-  <rect x="50" y="440" width="220" height="60" rx="2" class="box-item"/>
-  <text x="65" y="460" class="tufte-text item-title">Hack / Meslo</text>
-  <text x="65" y="480" class="tufte-text item-desc">오픈소스, Powerline 아이콘 최적</text>
+  <!-- Right: 프리텐다드 -->
+  <rect x="470" y="80" width="380" height="280" rx="4" class="box-emphasis"/>
+  <text x="660" y="110" text-anchor="middle" class="tufte-text label font-pretendard" style="font-size: 16px;">프리텐다드</text>
+  <text x="660" y="130" text-anchor="middle" class="tufte-text detail">웹 타이포그래피 가변 글꼴 (Variable)</text>
 
+  <text x="490" y="165" class="tufte-text detail">특징:</text>
+  <text x="490" y="185" class="tufte-text note">• 가변 폰트 - Weight 100~900</text>
+  <text x="490" y="205" class="tufte-text note">• 하나의 파일로 모든 굵기</text>
+  <text x="490" y="225" class="tufte-text note">• 웹 최적화 (WOFF2, 로딩 빠름)</text>
+  <text x="490" y="245" class="tufte-text note">• 한글 + 영문 + 일본어</text>
 
-  <rect x="320" y="90" width="260" height="430" rx="4" class="box-group"/>
-  <text x="450" y="120" text-anchor="middle" class="tufte-text category">2. 웹/앱 UI 디자인</text>
-  <text x="450" y="140" text-anchor="middle" class="tufte-text item-desc">가변폭, 시스템 조화, 다국어</text>
-
-  <rect x="340" y="160" width="220" height="60" rx="2" class="box-highlight"/>
-  <text x="355" y="180" class="tufte-text item-title">Pretendard</text>
-  <text x="355" y="200" class="tufte-text item-desc">Inter 기반, 한국 웹 표준 등극</text>
-  <text x="550" y="180" text-anchor="end" class="tufte-text tag">Web</text>
-
-  <rect x="340" y="230" width="220" height="60" rx="2" class="box-item"/>
-  <text x="355" y="250" class="tufte-text item-title">Inter</text>
-  <text x="355" y="270" class="tufte-text item-desc">글로벌 표준, 가장 깔끔한 영문</text>
-  <text x="550" y="250" text-anchor="end" class="tufte-text tag">En</text>
-
-  <rect x="340" y="300" width="220" height="60" rx="2" class="box-item"/>
-  <text x="355" y="320" class="tufte-text item-title">Spoqa Han Sans</text>
-  <text x="355" y="340" class="tufte-text item-desc">숫자가 예쁜 UI 폰트 (토스,타다)</text>
-  <text x="550" y="320" text-anchor="end" class="tufte-text tag">App</text>
-
-  <rect x="340" y="370" width="220" height="60" rx="2" class="box-item"/>
-  <text x="355" y="390" class="tufte-text item-title">Roboto / Noto Sans</text>
-  <text x="355" y="410" class="tufte-text item-desc">구글 머티리얼, 안드로이드 표준</text>
-  <text x="550" y="390" text-anchor="end" class="tufte-text tag">Google</text>
-
-
-  <rect x="610" y="90" width="260" height="430" rx="4" class="box-group"/>
-  <text x="740" y="120" text-anchor="middle" class="tufte-text category">3. 문서 &amp; 블로그</text>
-  <text x="740" y="140" text-anchor="middle" class="tufte-text item-desc">장문 가독성, 브랜딩</text>
-
-  <rect x="630" y="160" width="220" height="60" rx="2" class="box-item"/>
-  <text x="645" y="180" class="tufte-text item-title">Wanted Sans</text>
-  <text x="645" y="200" class="tufte-text item-desc">원티드 제작, 요즘 뜨는 기업 폰트</text>
-  <text x="840" y="180" text-anchor="end" class="tufte-text tag">Trend</text>
-
-  <rect x="630" y="230" width="220" height="60" rx="2" class="box-item"/>
-  <text x="645" y="250" class="tufte-text item-title">Maru Buri (마루부리)</text>
-  <text x="645" y="270" class="tufte-text item-desc">네이버 제작, 화면용 명조체</text>
-  <text x="840" y="250" text-anchor="end" class="tufte-text tag">Serif</text>
-
-  <rect x="630" y="300" width="220" height="60" rx="2" class="box-item"/>
-  <text x="645" y="320" class="tufte-text item-title">IBM Plex Sans KR</text>
-  <text x="645" y="340" class="tufte-text item-desc">기계적인 미학, 기술 블로그용</text>
-  <text x="840" y="320" text-anchor="end" class="tufte-text tag">Tech</text>
-
-  <rect x="630" y="370" width="220" height="60" rx="2" class="box-item"/>
-  <text x="645" y="390" class="tufte-text item-title">Nanum Square Neo</text>
-  <text x="645" y="410" class="tufte-text item-desc">반듯하고 현대적인 제목용 폰트</text>
-  <text x="840" y="390" text-anchor="end" class="tufte-text tag">Title</text>
+  <text x="490" y="275" class="tufte-text detail">용도:</text>
+  <text x="490" y="295" class="tufte-text note">• 쿼토 HTML 문서, GitHub Pages</text>
+  <text x="490" y="315" class="tufte-text note">• 블로그, 웹 출판</text>
+  <text x="490" y="335" class="tufte-text note">• UI/UX, 본문 텍스트</text>
 
 </svg>
