@@ -1,0 +1,1146 @@
+
+```{r}
+#| include: false
+
+source("_common.R")
+```
+
+
+# 함수 {#r-func}
+
+## 함수 호출 {#r-func-call}
+\index{함수 호출}
+
+프로그래밍 문맥에서, **함수(function)**는 명명된 명령어의 집합으로 특정 연산을 수행한다. 함수를 정의할 때는 함수명과 수행할 명령어들을 명기한다.
+나중에, 함수를 이름으로 "호출(call)"한다.
+이미 **함수 호출(function call)**의 예제를 살펴보았다.
+
+```{r r-func-call}
+typeof(32)
+```
+
+함수명은 `typeof()`이다. 
+괄호 안의 표현식을 **함수의 인자(argument)**라고 한다. 
+인자는 함수 입력으로 함수 내부로 전달되는 값이나 변수다. 
+앞선 `typeof()` 함수에 대한 결과는 인자의 자료형(type)이다.
+
+통상 함수가 인자를 "받아" 결과를 "반환"한다. 
+결과를 **결과값(return value)**이라고 부른다.
+\index{괄호!인자 입력}
+\index{인자}
+\index{반환값}
+
+## 내장(Built-in) 함수 {#r-func-builtin}
+
+함수를 정의할 필요없이 사용할 수 있는 내장함수가 R에는 많다.
+공통 문제를 해결할 수 있는 함수를 R을 창시자(Ross Ihaka, Robert Gentleman)가 작성해서 누구나 사용할 수 있도록 R에 포함했다.
+
+`max`와 `min` 함수는 벡터 최소값과 최대값을 각각 계산해서 출력한다.
+
+:::{.panel-tabset}
+### R
+
+```{webr-r}
+#| label: r-func-min-max
+max(c(1,2,3,4,5))
+#> 5
+min(c(1,2,3,4,5))
+#> 1
+```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: py-func-min-max
+min('Hello world')
+#> ' '
+max('Hello world')
+#> 'w'
+```
+
+:::
+
+
+
+`max` 함수는 벡터의 "가장 큰 값", 상기 예제에서는 "5"를, 
+min 함수는 "가장 작은 값", 상기 예제에서는 "1"을 출력한다.
+
+매우 자주 사용되는 또 다른 내장 함수는 얼마나 많은 항목이 있는지 출력하는 `length()` 함수가 있다.
+만약 `length()` 함수의 인수가 벡터이면 벡터에 있는 원소 갯수를 반환한다.
+
+:::{.panel-tabset}
+### R
+
+```{webr-r}
+#| label: r-func-length
+length(c(1,2,3,4,5))
+```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: py-func-length
+len('Hello world')
+#> 11
+len('헬로 월드')
+#> 5
+```
+
+:::
+
+
+함수가 벡터에만 국한된 것이 아니라, 뒷장에서 보듯이 다양한 자료형에 사용된다.
+내장 함수 이름은 사전에 점유된 예약어로 취급해야 한다. 예를 들어 "max"를 변수명으로 사용하지 말아야 한다.
+
+## 자료형 변환 함수 {#r-func-type}
+\index{변환!자료형}
+\index{자료형 변환}
+
+A라는 자료형(type)에서 B라는 자료형(type)으로 값을 변환하는 내장 함수가 R에는 있다.
+`as.integer()` 함수는 임의의 값을 입력받아 변환이 가능하면 정수형으로 변환하고, 그렇지 않으면 오류가 발생한다.
+\index{integer 함수}
+\index{함수!as.integer}
+
+:::{.panel-tabset}
+### R
+
+```{webr-r}
+#| label: r-func-integer
+as.integer("32")
+#> [1] 32
+as.integer("Hello")
+#> [1] NA
+#> Warning message:
+#> NAs introduced by coercion 
+```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: r-func-integer
+int("32")
+#> 32
+int("Hello")
+#> ValueError: invalid literal for int() with base 10: 'Hello'
+```
+
+:::
+
+
+`as.integer()`는 부동 소수점 값을 정수로 변환할 수 있지만 소수점 이하를 절사한다.
+
+:::{.panel-tabset}
+### R
+
+```{webr-r}
+#| label: r-func-integer-conversion
+as.integer("3.99999")
+#> [1] 3
+as.integer("-2.3")  
+#> [1] -2
+```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: py-func-integer-conversion
+int(float("3.99999"))
+#> 3
+int(float("-2.3"))
+#> -2
+```
+
+:::
+
+`as.numeric()`은 정수와 문자열을 부동 소수점으로 변환한다.
+\index{numeric 함수}
+\index{함수!as.numeric}
+
+:::{.panel-tabset}
+### R
+
+```{webr-r}
+#| label: r-func-float
+as.numeric(32)
+#> [1] 32
+```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: py-func-float
+float(32)
+#> 32.0
+
+float('3.14159')
+#> 3.14159
+```
+
+:::
+
+
+`as.character()`은 인자를 문자열로 변환한다.
+\index{character 함수}
+\index{함수!as.character}
+
+:::{.panel-tabset}
+### R
+
+```{webr-r}
+#| label: r-func-character
+as.character(32)
+#> [1] "32"
+
+as.character(3.14159)
+#> [1] "3.14159"
+```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: py-func-character
+str(32)
+#> '32'
+
+str(3.14159)
+#> '3.14159'
+
+```
+
+:::
+
+
+파이썬을 비롯한 다른 언어에서 다뤄지지 않는 자료형이 범주형 **요인(factor)**이다. 
+범주형 자료구조를 표현하는 일반적인 자료형으로 데이터 분석 및 모형 개발에 빈번하게 사용된다.
+`as.factor()`은 인자를 요인형으로 변환한다. 
+파이썬에서 범주형 데이터를 다루기 위해서는 `pandas` 패키지를 설치하고 
+`Categorical()` 클래스를 사용해야 한다.
+
+:::{.panel-tabset}
+### R
+
+```{webr-r}
+#| label: r-func-factor
+as.factor(c("남자", "여자"))
+#> [1] 남자 여자
+```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: py-func-factor
+import pandas as pd
+
+gender = pd.Categorical( ['남자', '여자'])
+print(gender)
+#> ['남자', '여자']
+#> Categories (2, object): ['남자', '여자']
+```
+
+:::
+
+
+
+## 난수 {#r-func-random-number}
+\index{난수}
+\index{숫자, 랜덤}
+\index{결정론적}
+\index{의사 난수}
+
+동일한 입력을 받을 때, 대부분의 컴퓨터는 매번 동일한 출력값을 생성하기 때문에 **결정론적(deterministic)**이라고 한다.
+결정론이 대체로 좋은 것이다. 왜냐하면, 동일한 결과를 얻는데 동일한 계산을 기대하기 때문이다. 
+하지만, 어떤 응용프로그램에 대해서 컴퓨터가 예측 불가능하길 바란다. 
+게임이 좋은 예가 되고, 더 많은 예는 얼마든지 있다.
+
+진실되게 프로그램을 비결정론적으로 만드는 것이 쉽지 않은 것으로 밝혀졌지만, 
+적어도 비결정론적인 것처럼 보이게 하는 방법은 있다. 
+**의사 난수(pseudorandom numbers)**를 생성하는 알고리즘을 사용하는 것이 방법 중 하나이다. 
+의사 난수는 이미 결정된 연산에 의해 생성된다는 점에서 진정한 의미의 난수는 아니지만, 
+이렇게 생성된 숫자만 보아서는 진정한 난수와 구별하는 것은 불가능에 가깝다.
+
+
+R은 데이터분석을 위해 태어난 언어라고 할 만큼 기본 내장함수로 다양한 난수 생성기를 갖추고 있다.
+물론 난수 생성기로 생성되는 숫자는 의사난수다. 이하 의사 난수 대신 "랜덤(random)"으로 간략히 부르기로 한다.
+
+`runif()` 함수는 0.0과 1.0 사이의 부동 소수점 난수를 반환한다. `runif()` 함수 내부에 `min`, `max` 인자를 지정하여 난수 최소, 최대값의 범위를 설정할 수 있다.
+매번 `runif()` 함수를 호출할 때마다, 이미 생성된 아주 긴 난수열에서 하나씩 뽑아 쓴다. 
+사례로 다음 반복문을 실행하자.
+\index{랜덤 내장함수}
+\index{내장함수!runif}
+
+:::{.panel-tabset}
+### R
+
+```{webr-r}
+#| label: r-func-random-number
+for(i in 1:10) {
+  cat(runif(1),"\n")
+}
+#> 0.3444183 
+#> 0.2856258 
+#> 0.4014798 
+#> 0.3888541 
+#> 0.4413798 
+#> 0.3312618 
+#> 0.8431148 
+#> 0.652076 
+#> 0.1545398 
+#> 0.02016021 
+```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: py-func-random-number
+import random
+
+for i in range(10):
+    x = random.random()
+    print(x)
+#> 0.8318304547821792
+#> 0.8234794434789235
+#> 0.28471866580983374
+#> 0.5866078785919248
+#> 0.6164709529949297
+#> 0.4074058984558365
+#> 0.205662425716703
+#> 0.2787639352073248
+#> 0.9022161090408308
+#> 0.54993934257844    
+```
+
+:::
+
+
+
+상기 프로그램은 0.0에서 1.0 구간에서 10개 난수 리스트를 생성한다.
+
+:::{.callout-warning}
+### 연습문제 
+
+여러분의 컴퓨터에 프로그램을 실행해서, 어떤 난수가 생성되는지 살펴보세요.
+한 번 이상 프로그램을 실행하여 보고, 어떤 난수가 생성되는지 다시 살펴보세요.
+
+:::
+
+
+`runif()` 함수는 난수를 다루는 많은 함수 중 하나이다.
+`sample()` 함수는 정수 난수 범위와 난수 개수를 매개 변수로 입력받아 
+최저값(low)과 최고값(high) 사이(최저값과 최고값 모두 포함)의 정수를 반환한다. 정당으로 구성된 모집단에서 정당을 하나 뽑는 방법도 유사하다.
+\index{sample 함수}
+\index{함수!sample}
+
+`sample(1:10, 5)` 실행문은 1 ~ 10 사이 정수 10개 중에서 난수로 5개를 추출한다는 뜻이다.
+
+무작위로 특정 벡터에서 요소를 하나 뽑아내기 위해, `sample()`을 동일하게 사용한다.
+
+:::{.panel-tabset}
+### R
+
+```{webr-r}
+#| label: r-func-integer-random
+sample(1:10, 5)
+#> [1] 6 4 9 2 1
+
+sample(c("민주당", "국민의힘", "녹색정의당"), 1)
+#> [1] "민주당"
+```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: py-func-integer-random
+import random
+
+random.randint(1, 10)
+#> 6
+
+parties = ["민주당", "국민의힘", "녹색정의당"]
+random.choice(parties)
+#> '녹색정의당'
+```
+
+:::
+
+
+또한 `runif()` 모듈을 활용하여 정규분포, 지수분포, 감마분포 및 기타 연속형 분포에서 난수를 생성하는 함수도 제공된다.
+
+
+## 수학 함수 {#r-func-math}
+\index{수학 함수}
+\index{함수, 수학}
+\index{패키지}
+\index{패키지 객체}
+
+R은 가장 친숙한 수학 함수를 제공하는 수학 모듈이 있다.
+기본 수학 모듈이 내장 함수로 기본 설치되어 있어서 별도 설치와 호출 작업은 필요 없다. **점 표기법(dot notation)**이라고 불리는 표기법을 사용해서, 
+여러 함수 중에서 특정 함수에 접근하기 위해 모듈/객체 이름과 함수 이름을 명시해서 파이썬에서 활용하기도 하지만, R에서는 필요 없다.
+\index{점 표기법}
+
+R과파이썬 언어는 서로 다른 설계 철학과 기능을 지니고 있다. 
+파이썬에서 `math.sqrt()`는 `math` 모듈 내 `sqrt` 함수를 호출하는 방식으로 객체 지향적 특성과 모듈 시스템 특성을 그대로 반영한다.
+
+반면에, R에서는 함수가 기본적으로 전역 네임스페이스에 위치하거나, 라이브러리를 로드할 때 해당 라이브러리의 모든 함수가 전역 네임스페이스에 적재된다. 
+예를 들어, `ggplot2` 패키지 함수들은 패키지를 로드한 후에 바로 함수 이름만으로 호출할 수 있다. 
+경우에 따라서는 파이썬 점 표기법과 유사하게 `패키지명::함수명`과 같은 방식으로 특정 패키지 함수만 골라 사용하는 경우도 흔하다. 
+예를 들어, `filter()` 함수를 명기하기 위해 `dplyr::filter()`와 같이 사용한다.
+
+신호 대 잡음비의 로그 밑을 10(`log10()`)으로 계산한 후 라디안 사인값을 찾는 코드를 살펴보자. 
+변수의 이름이 힌트를 주는데, `sin()`과 다른 삼각함수(`cos()`, `tan()` 등)는 라디안을 인자로 받는다.
+도(degree)에서 라디안(radian)으로 변환하기 위해서는 360으로 나누고 $2\pi$를 곱한다.
+\index{로그 함수}
+\index{함수!로그}
+\index{사인 함수}
+\index{호도법}
+\index{삼각 함수}
+\index{함수, 삼각법}
+
+
+:::{.panel-tabset}
+### R
+
+```{webr-r}
+#| label: r-func-radian-conversion
+signal_power <- 9
+noise_power <- 10
+ratio <- signal_power / noise_power
+decibels <- 10 * log10(ratio)
+
+radians <- 0.7
+height <- sin(radians)
+
+degrees <- 45
+radians <- degrees / 360.0 * 2 * pi
+sin(radians)
+```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: py-func-radian-conversion
+import math
+
+signal_power = 9
+noise_power = 10
+ratio = signal_power / noise_power
+decibels = 10 * math.log10(ratio)
+
+radians = 0.7
+height = math.sin(radians)
+
+degrees = 45
+radians = degrees / 360.0 * 2 * math.pi
+sin_value = math.sin(radians)
+print(sin_value)
+#> 0.7071067811865476
+```
+
+:::
+
+`pi` 표현식은 수학 모듈에서 `pi` 변수를 얻는데, $\pi$ 값과 비교하여 15자리 수까지 정확하고 근사적으로 수렴한다.
+\index{원주율}
+
+삼각함수를 배웠다면, 앞선 연산 결과를 2에 루트를 씌우고 2로 나누어 비교 검증한다.
+\index{sqrt 함수}
+\index{함수!sqrt}
+
+:::{.panel-tabset}
+### R
+
+```{webr-r}
+#| label: r-func-sqrt
+sqrt(2) / 2
+#> [1] 0.7071068
+```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: py-func-sqrt
+math.sqrt(2) / 2.0
+#> 0.7071067811865476
+```
+
+:::
+
+
+## 신규 함수 추가 {#r-func-new-function}
+\index{함수}
+\index{함수 정의}
+\index{정의!함수}
+
+지금까지 R 설치 시 함께 설치되는 함수만 사용했지만 새로운 함수를 추가하는 것도 가능하다.
+**함수 정의(function definition)**는 신규 함수명과 함수가 호출될 때 실행될 일련의 문장을 명세한다.
+신규로 함수를 정의하면, 프로그램 실행 중에 반복해서 함수를 재사용할 수 있다. 다음에 예제가 있다.
+
+:::{.panel-tabset}
+### R
+
+```{webr-r}
+#| label: r-func-new-func
+print_lyrics <- function() {
+  print("나는 나무꾼이고, 괜찮아요.")
+  print("나는 밤새도록 자고, 하루 종일 일해요.")
+}
+```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: py-func-new-func
+def print_lyrics():
+    print("나는 나무꾼이고, 괜찮아요.")
+    print("나는 밤새도록 자고, 하루 종일 일해요.")
+```
+
+:::
+
+
+`function`은 "이것이 함수 정의다"를 표시하는 예약어이다. 
+함수 이름은 `print_lyrics()`이다.
+함수 이름을 명명하는 규칙은 변수명과 동일하다. 
+문자, 숫자, 그리고 몇몇 문장 부호는 사용할 수 있지만, 첫 문자가 숫자는 될 수 없다. 
+함수 이름으로 예약어를 사용할 수 없고, 함수 이름과 동일한 변수명은 피해야 한다.
+\index{function 예약어}
+\index{예약어!function}
+\index{인자}
+
+함수명 뒤 빈 괄호는 이 함수가 어떠한 인자도 갖지 않는다는 것을 나타낸다.
+나중에, 입력값으로 인자를 가지는 함수를 작성해 볼 것이다.
+\index{괄호!빈 (empty)}
+\index{머리 부분}
+\index{몸통 부분}
+\index{들여쓰기}
+\index{콜론}
+
+함수 정의의 첫 번째 줄을 머리 부문(헤더, header), 나머지 부문을 몸통 부문(바디, body)라고 부른다.
+머리 부문은 `()`으로 끝나고, 몸통 부문은 괄호로 감싸야 한다.
+몸통 부문에는 제약 없이 문장을 작성할 수 있다.
+
+`print()` 문의 문자열은 이중 인용부호로 감싼다. 
+단일 인용부호나, 이중 인용부호나 차이는 없다.
+대부분의 경우 이중 인용부호를 사용하고, 이중 인용부호가 문자열에 나타나는 경우, 단일 인용부호를 사용하여 이중 인용부호가 출력되게 감싼다.
+
+
+만약 함수 정의를 인터랙티브 모드에서 타이핑을 하면, 
+함수 정의가 끝나지 않았다는 것을 의미로 더하기 부호(`+`)가 출력된다.
+
+함수 정의를 끝내기 위해서 빈 줄을 입력한다. (스크립트에서는 반드시 필요한 것은 아니다.) 
+함수를 정의하게 되면 동일한 이름의 변수도 생성된다.
+
+:::{.panel-tabset}
+### R
+
+```{webr-r}
+#| label: r-func-class-print
+print_lyrics()
+#> [1] "나는 나무꾼이고, 괜찮아요."
+#> [1] "나는 밤새도록 자고, 하루 종일 일해요."
+class(print_lyrics)
+#> [1] "function"
+```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: py-func-class-print
+print_lyrics()
+#> 나는 나무꾼이고, 괜찮아요.
+#> 나는 밤새도록 자고, 하루 종일 일해요.
+type(print_lyrics)
+#> <class 'function'>
+```
+
+:::
+
+
+`print_lyrics()` 값은 'function' 형을 가지는 **함수 객체(function object)**다. 
+
+신규 함수를 호출하는 구문은 내장 함수의 경우와 동일하다.
+
+```{r r-func-run}
+#| eval: false
+print_lyrics()
+```
+
+함수를 정의하면, 또 다른 함수 내부에서 사용이 가능하다.
+예를 들어, 이전 후렴구를 반복하기 위해 `repeat_lyrics()` 함수를 작성할 수 있다. 그리고 나서, `repeat_lyrics()` 함수를 호출한다.
+\index{함수 객체}
+\index{객체!함수}
+
+:::{.panel-tabset}
+### R
+
+```{webr-r}
+#| label: r-func-repeat-func}
+repeat_lyrics <- function() {
+  print_lyrics()
+  print_lyrics()
+}
+
+repeat_lyrics()
+```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: py-func-repeat-func}
+def repeat_lyrics():
+    print_lyrics()
+    print_lyrics()
+
+repeat_lyrics()
+```
+
+:::
+
+하지만, 그렇다고 실제 노래가 불려지는 것은 아니다.
+
+## 함수 정의와 사용법 {#r-func-how-to-use}
+\index{함수 정의}
+
+앞 절의 코드 조각을 모아서 작성한 전체 프로그램은 다음과 같다.
+
+:::{.panel-tabset}
+### R
+
+```{webr-r}
+#| label: r-func-program
+print_lyrics <- function() {
+  print("나는 나무꾼이고, 괜찮아요.")
+  print("나는 밤새도록 자고, 하루 종일 일해요.")
+}
+
+repeat_lyrics <- function() {
+  print_lyrics()
+  print_lyrics()
+}
+
+repeat_lyrics()
+```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: py-func-program
+def print_lyrics():
+    print("나는 나무꾼이고, 괜찮아요.")
+    print("나는 밤새도록 자고, 하루 종일 일해요.")
+    
+def repeat_lyrics():
+    print_lyrics()
+    print_lyrics()
+    
+repeat_lyrics()
+
+```
+
+:::
+
+
+상기 프로그램에는 두 개의 함수(`print_lyrics()`, `repeat_lyrics()`)가 있다.
+함수 정의는 다른 문장처럼 수행되지만, 함수 객체를 생성한다는 점에서 차이가 있다.
+함수 내부 문장은 함수가 호출되기 전까지 수행되지 않고, 함수 정의는 출력값도 생성하지 않는다.
+\index{함수 정의 전 사용}
+
+예상하듯이, 함수를 실행하기 전에 함수를 생성해야 한다. 
+다시 말해서, 처음으로 호출되기 전에 함수 정의가 실행되어야 한다.
+
+
+:::{.callout-warning}
+### 연습문제
+
+상기 프로그램의 마지막 줄을 최상단으로 옮겨서 함수 정의 전에 호출되도록 프로그램을 고쳐보세요.
+프로그램을 실행해서 오류 메시지를 확인하세요.
+:::
+
+:::{.callout-warning}
+### 연습문제
+
+함수 호출을 맨 마지막으로 옮기고, `repeat_lyrics` 함수 정의 뒤에 `print_lyrics` 함수를 옮기세요.
+프로그램을 실행하게 되면 무슨 일이 발생하나요?
+:::
+
+## 실행 흐름 {#r-func-control}
+\index{실행 흐름}
+
+처음으로 함수가 사용되기 전에 정의되었는지를 확인하기 위해서는 
+명령문 실행 순서를 파악해야 하는데 이를 **실행 흐름(flow of execution)**이라고 한다.
+
+프로그램 실행은 항상 프로그램 첫 문장부터 시작한다. 
+명령문은 한 번에 하나씩 위에서 아래로 실행된다.
+
+함수 정의(definitions)가 프로그램 실행 순서를 바꾸지는 않는다. 
+하지만, 함수 내부의 문장은 함수가 호출될 때까지 실행이 되지 않는다는 것을 기억하자.
+
+함수 호출은 프로그램 실행 흐름을 우회하는 것과 같다. 
+다음 문장으로 가기 전에, 실행 흐름은 함수 몸통 부문을 실행하고는 건너뛰기를 시작한 지점으로 다시 돌아온다.
+
+함수가 또 다른 함수를 호출한다는 것을 기억할 때까지는 매우 간단하게 들린다.
+함수 중간에서 프로그램이 또 다른 함수의 문장을 수행할지도 모른다. 
+하지만, 새로운 함수를 실행하는 중간에 프로그램이 또 다른 함수를 실행할지도 모른다!
+
+다행스럽게도, 파이썬은 프로그램 실행 위치를 정확히 추적한다. 
+그래서, 함수가 실행을 완료할 때마다, 프로그램을 함수를 호출해서 떠난 지점으로 정확히 되돌려 놓는다. 
+프로그램이 마지막에 도달했을 때, 프로그램은 종료한다.
+
+이렇게 복잡한 이야기의 교훈은 무엇일까? 
+프로그램을 읽을 때, 위에서부터 아래로 읽을 필요는 없다. 
+때때로, 실행 흐름을 따르는 것이 좀 더 이치에 맞는다.
+
+
+## 매개 변수와 인수 {#r-func-parameter-argument}
+\index{매개 변수}
+\index{함수 매개 변수}
+\index{인자}
+\index{함수 인자}
+
+지금까지 살펴본 몇몇 내장 함수는 **인자(argument)**를 요구한다
+. 
+예를 들어, `sin()` 함수를 호출할 때, 숫자를 인자로 넘겨야 한다.
+어떤 함수는 2개 이상의 인수를 받는다. `log()`는 숫자와 밑 2개의 인자가 필요하다. 
+
+인자는 함수 내부에서 **매개 변수(parameters)**로 불리는 변수로 대입된다.
+하나의 인자를 받는 **사용자 정의 함수(user-defined function)**의 예제가 있다.
+\index{괄호!매개변수 입력}
+
+:::{.panel-tabset}
+### R
+
+```{webr-r}
+#| label: r-func-argument
+print_twice <- function(bruce){
+  cat(bruce, "\n")
+  cat(bruce, "\n")
+}
+```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: py-func-argument}
+def print_twice(bruce):
+    print(bruce)
+    print(bruce)
+```
+
+:::
+
+
+사용자 정의 함수는 인자를 받아 매개변수 `bruce`에 대입한다. 
+함수가 호출될 때, 매개변수의 값(무엇이든 관계없이)을 두 번 출력한다.
+
+사용자 정의 함수는 출력 가능한 임의의 값에 작동한다.
+
+:::{.panel-tabset}
+### R
+
+```{webr-r}
+#| label: r-func-argument-run
+print_twice('Spam')
+#> Spam 
+#> Spam 
+print_twice(17)
+#> 17
+#> 17
+print_twice(math.pi)
+#> 3.141593 
+#> 3.141593 
+```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: py-func-argument-run
+print_twice('Spam')
+#> Spam 
+#> Spam 
+print_twice(17)
+#> 17
+#> 17
+print_twice(math.pi)
+#> 3.141593 
+#> 3.141593 
+```
+
+:::
+
+
+내장 함수에 적용되는 동일한 구성 규칙이 사용자 정의 함수에도 적용되어서, `print_twice()` 함수 인자로 표현식 어떤 종류도 가능하다. 
+\index{구성}
+
+:::{.panel-tabset}
+### R
+
+```{webr-r}
+#| label: r-func-argument-run-ex
+print_twice(rep("spam",2))
+#> spam spam 
+#> spam spam 
+print_twice(cos(pi))
+#> -1 
+#> -1 
+```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: py-func-argument-run-ex
+print_twice("spam"*4)
+#> spam spam 
+#> spam spam 
+print_twice(math.cos(math.pi))
+#> -1.0
+#> -1.0
+```
+
+:::
+
+함수가 호출되기 전에 인자에 대한 평가는 완료되어, 
+예제에서 `rep("spam",2)`과 `cos(pi)`은 단지 1회만 평가된다.
+\index{인자}
+
+변수도 인자로 사용이 가능하다.
+
+:::{.panel-tabset}
+### R
+
+```{webr-r}
+#| label: r-func-argument-variable
+half_chicken <- "요기, 닭 반마리요"
+print_twice(half_chicken)
+#> 요기, 닭 반마리요 
+#> 요기, 닭 반마리요 
+```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: py-func-argument-variable
+half_chicken = "요기, 닭 반마리요"
+print_twice(half_chicken)
+#> 요기, 닭 반마리요 
+#> 요기, 닭 반마리요 
+```
+
+:::
+
+
+전달되는 변수명(`half_chicken`)은 매개 변수명(`bruce`)과 아무런 연관이 없다. 어떠한 값이 전달되든 호출하는 쪽과는 별개이다.
+여기 `print_twice()` 함수에서는 어떤 값이든 `bruce`로 칭해지면 된다.
+
+## 결과값 반환 (없는) 함수 {#r-func-void}
+\index{결과값 반환 함수}
+\index{결과값 반환 없는 함수}
+\index{함수, 결과값 반환 있음}
+\index{함수, 결과값 반환 없음} 
+
+수학 함수와 같은 몇몇 함수는 결과를 만들어 낸다. 
+좀 더 좋은 이름이 없어서, 결과를 만들어 내는 함수를 **결과값을 반환하는 함수(fruitful functions)**라고 명명한다.
+`print_twice()`와 같이 액션을 수행하지만, 결과를 만들어 내지 않는 함수를 **반환 값이 없는 함수(void functions)**라고 부른다.
+
+결과값을 반환하는 함수를 호출할 때는 결과값을 가지고 뭔가를 하려고 한다. 
+예를 들어, 결과값을 변수에 대입하거나, 표현식의 일부로 사용할 수 있다.
+
+:::{.panel-tabset}
+### R
+
+```{webr-r}
+#| label: r-func-fruitful
+x <- cos(radians)
+golden <- (sqrt(5) + 1) / 2
+```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: py-func-fruitful
+x = math.cos(radians)
+golden = (math.sqrt(5) + 1) / 2
+```
+
+:::
+
+인터랙티브 모드에서 함수를 호출할 때, R은 결과를 화면에 출력한다.
+\index{인터랙티브 모드}
+\index{스크립트 모드}
+
+:::{.panel-tabset}
+### R
+
+```{webr-r}
+#| label: r-func-interactive
+sqrt(5)
+```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: py-func-interactive
+import math
+math.sqrt(5)
+```
+
+:::
+
+
+하지만, 스크립트에서 결과 있는 함수를 호출하고 변수에 결과값을 저장하지 않으면 반환되는 결과값은 안개 속에 사라져간다!
+
+이 스크립트는 5의 제곱근을 계산하지만, 변수에 결과값을 저장하거나, 화면에 출력하지 않아서 그다지 유용하지는 않다.
+
+반환 값이 없는 함수(void functions)는 화면에 출력하거나 무엇인가 다른 효과를 가지지만, 반환값이 없다.
+빈 함수를 사용하여 결과에 변수를 대입하면, `NULL`로 불리는 특별한 값을 얻게 된다.
+\index{NULL 특별값}
+\index{특별값!NULL}
+
+:::{.panel-tabset}
+### R
+
+```{webr-r}
+#| label: r-func-null
+result <- print_twice('Bing')
+#> Bing
+#> Bing
+
+print(result)
+#> NULL
+```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: py-func-null
+result = print_twice('Bing')
+#> NameError: name 'result' is not defined
+
+def print_twice(bruce):
+    return bruce + '\n' + bruce
+
+result = print_twice('Bing')
+print(result)
+#> Bing
+#> Bing
+```
+
+:::
+
+`NULL` 값은 자신만의 특별한 값을 가지며, 문자열 'NULL'과는 같지 않다. 
+
+함수에서 결과를 반환하기 위해서, 함수 내부에 `return()` 문을 사용한다.
+예를 들어, 두 숫자를 더해서 결과를 반환하는 `addtwo()`라는 간단한 함수를 작성할 수 있다. 
+
+:::{.panel-tabset}
+### R
+
+```{webr-r}
+#| label: r-func-return-addtwo
+addtwo <- function(a, b){
+  added <- a + b
+  return(added)
+}
+
+x <- addtwo(3, 5)
+x
+#> 8
+```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: py-func-return-addtwo
+def addtwo(a, b):
+    added = a + b
+    return added
+
+x = addtwo(3, 5)
+print(x)
+#> 8
+```
+
+:::
+
+
+상기 스크립트가 실행될 때 `cat()` 출력문은 "8"을 출력한다. 
+왜냐하면, 3과 5를 인수로 받는 `addtwo()` 함수가 호출되기 때문이다.
+함수 내부에 매개 변수 a, b는 각각 3, 5이다.
+`addtwo()` 함수는 두 숫자 덧셈을 수행하고 `added`라는 로컬 변수에 저장하고, `return()` 문을 사용해서 덧셈 결과를 반환하고, x라는 변수에 대입해서 출력한다.
+
+R에서 명시적으로 `return`을 통해 밝히지 않더라도 함수에서 최종적으로 담고 있는 객체가 자동 반환되지만, `return`을 통해 명시적으로 하는 것이 추후 디버깅 등의 목적으로 더 유용하다.
+
+
+## 함수 사용 이유? {#r-func-why}
+\index{함수, 사용 이유}
+
+프로그램을 여러 함수로 나누는 데 들이는 노력이 가치 있는지 항상 명확하지는 않다. 그러나 다음과 같은 몇 가지 이유는 존재한다.
+
+- 문장을 그룹으로 만들어 새로운 함수로 명명하는 것이 프로그램을 읽고, 이해하고, 디버그하기 좋게 한다. 
+- 함수는 반복 코드를 제거해서 프로그램을 작고 콤팩트하게 만든다. 나중에 프로그램에 수정사항이 생기면, 단지 한 곳에서만 수정을 하면 된다.
+- 긴 프로그램을 함수로 나누어 작성하는 것은 작은 부분에서 버그를 수정할 수 있게 하고, 이를 조합해서 전체적으로 동작하는 프로그램을 만들 수 있다.
+- 잘 설계된 함수는 종종 많은 프로그램에서 유용하게 사용된다. 잘 설계된 프로그램을 작성하고 디버그를 해서 오류가 없이 만들게 되면, 나중에 재사용도 용이하다.
+
+책의 나머지 부분에서 이 개념을 설명하는 함수 정의를 종종 사용한다. 
+"리스트에서 가장 작은 값을 찾아내는 것"과 같이 아이디어를 적절하게 추상화하여 함수를 작성하는 것이 함수를 만들고 사용하는 기술의 일부가 된다. 
+나중에, 리스트에서 가장 작은 값을 찾아내는 코드를 보여줄 것이다. 리스트를 인수로 받아 가장 작은 값을 반환하는 `min()` 함수를 작성해서 여러분에게 보여드릴 것이다.
+
+
+## 디버깅 {#r-func-debug}
+\index{디버깅}
+
+텍스트 편집기로 스크립트를 작성한다면 공백과 탭으로 몇 번씩 문제에 봉착했을 것이다. 
+이런 문제를 피하는 가장 최선의 방식은 절대 탭을 사용하지 말고 공백(스페이스)를 사용하는 것이다. 
+R을 인식하는 대부분의 텍스트 편집기는 디폴트로 이런 기능을 지원하지만, 몇몇 텍스트 편집기는 이런 기능을 지원하지 않아 탭과 공백 문제를 야기한다.
+\index{공백}
+
+탭과 공백은 통상 눈에 보이지 않기 때문에 디버그를 어렵게 한다. 
+자동으로 들여쓰기를 해주는 편집기를 프로그램 작성 시 사용한다.
+
+프로그램을 실행하기 전에 저장하는 것을 잊지 마세요. 
+몇몇 개발 환경은 자동저장 기능을 지원하지만 그렇지 않는 것도 있다.
+이런 이유 때문에 텍스트 편집기에서 작성한 개발 프로그램과 실행 운영하고 있는 프로그램이 같지 않을 수도 있다.
+
+동일하고 잘못된 프로그램을 반복적으로 실행한다면, 디버깅은 오래 걸릴 수 있다.
+
+작성하고 있는 코드와 실행하는 코드가 일치하는지 반드시 확인하자. 
+확신을 하지 못한다면, 프로그램의 첫 줄에 `print('hello')`을 넣어서 실행해 보자.
+hello를 보지 못한다면, 작성하고 있는 프로그램과 실행하고 있는 프로그램은 다른 것이다.
+
+
+## 용어 정의 {#r-func-terminology}
+
+- **알고리즘(algorithm)**: 특정 범주의 문제를 해결하는 일반적인 프로세스
+\index{알고리즘}
+- **인자(argument)**: 함수가 호출될 때 함수에 제공되는 값. 이 값은 함수 내부에 상응하는 매개 변수에 대입된다.
+\index{인자}
+- **몸통 부문(body)**: 함수 정의 내부에일련의 문장
+\index{몸통 부문}
+- **구성(composition)**: 좀 더 큰 표현식의 일부분으로 표현식을 사용하거나, 좀 더 큰 문장의 일부로서의 문장
+\index{구성}
+- **결정론적(deterministic)**: 동일한 입력값이 주어지고 실행될 때마다 동일한 행동을 하는 프로그램에 관련된 것.
+\index{결정론적}
+- **점 표기법(dot notation)**: 점과 함수명으로 모듈명을 명세함으로써 다른 모듈의 함수를 호출하는 구문.
+\index{점 표기법}
+- **실행 흐름(flow of execution)**: 프로그램 실행 동안 명령문이 실행되는 순서.
+\index{실행 흐름}
+- **결과값 반환 함수(fruitful function)**: 반환값을 가지는 함수.
+\index{결과값 반환 함수}
+- **함수(function)**: 유용한 연산을 수행하는 이름을 가진 일련의 명령문. 함수는 인수를 가질 수도 갖지 않을 수도 있고, 결과값을 생성할 수도 생성하지 않을 수도 있다.
+\index{함수}
+- **함수 호출(function call)**: 함수를 실행하는 명령문. 함수 이름과 인자 리스트로 구성된다.
+\index{함수 호출}
+- **함수 정의(function definition)**: 신규 함수를 정의하는 명령문으로 이름, 매개변수, 실행 명령문을 명세한다.
+\index{함수 정의}
+- **함수 객체(function object)**: 함수 정의로 생성되는 값. 함수명은 함수 객체를 참조하는 변수이다.
+\index{함수 객체}
+- **머리 부문(header)**: 함수 정의의 첫 번째 줄
+\index{머리 부문}
+- **가져오기 문(import statement)**: 모듈 파일을 읽어 모듈 객체를 생성하는 명령문
+\index{가져오기 문}
+- **모듈 객체(module object)**: import문에 의해서 생성된 모듈에 정의된 코드와 데이터에 접근할 수 있는 값
+\index{모듈 객체}  
+- **매개 변수(parameter)**: 인자로 전달된 값을 참조하기 위해 함수 내부에 사용되는 이름
+\index{매개 변수}
+- **의사 난수(pseudorandom)**: 난수처럼 보이는 일련의 숫자와 관련되어 있지만, 결정론적 프로그램에 의해 생성된다.
+\index{의사 난수}
+- **반환 값(return value)**: 함수의 결과. 함수 호출이 표현식으로 사용된다면, 반환값은 표현식의 값이 된다. 
+\index{반환 값}
+- **결과값 반환 없는 함수(void function)**: 반환값을 갖지 않는 함수
+\index{결과값 반환 없는 함수}
+
+## 연습문제 {.unnumbered #r-func-ex}
+
+
+1. R "function" 키워드의 목적은 무엇인가?
+    1. "다음의 코드는 정말 좋다"라는 의미를 가진 속어
+    1. 함수 정의를 표현한다.
+    1. 다음의 들여쓰기 코드 부문은 나중을 위해 저장되어야 된다는 것을 표시한다.
+    1. 2와 3 모두 사실
+    1. 위 모두 거짓
+
+
+2. 다음 R 프로그램은 무엇을 출력할까?
+
+:::{.panel-tabset}
+### R
+
+```{webr-r}
+#| label: r-func-ex2
+fred <- function(){
+  print("Zap")
+}
+
+jane <- function(){
+  print("ABC")
+}
+
+jane()
+fred()
+jane()
+```
+
+### 파이썬
+
+```{pyodide-python}
+#| label: py-func-ex2
+def fred():
+    print("Zap")
+
+def jane():
+    print("ABC")
+
+jane()
+fred()
+jane()
+```
+
+:::
+
+a) Zap ABC jane fred jane    
+b) Zap ABC Zap    
+c) ABC Zap jane    
+d) ABC Zap ABC    
+e) Zap Zap Zap    
+
+
+3. 프로그램 작성 시 (`hours`와 `rate`)를 매개 변수로 갖는 함수 `computepay()`를 생성하여,
+초과근무에 대해서는 50% 초과 근무수당을 지급하는 봉급 계산 프로그램을 다시 작성하라.
+
+``` {r r-func-ex03, eval=FALSE}
+시간을 입력하시오: 45
+시급을 입력하시오: 10
+시급: 475
+```
+
+
+4. 매개 변수로 점수를 받아 문자열로 등급을 반환하는 `computegrade()` 함수를 사용하여
+앞장의 등급 프로그램을 다시 작성하라.
+
+``` {r r-cont-ex04, eval=FALSE}
+점수    등급
+>= 0.9   A
+>= 0.8   B
+>= 0.7   C
+>= 0.6   D
+< 0.6    F
+
+점수를 입력하시오: 0.95
+A
+
+점수를 입력하시오: 만점
+올바른 점수가 아닙니다.
+
+점수를 입력하시오: 10.0
+올바른 점수가 아닙니다.
+
+점수를 입력하시오: 0.75
+C
+
+점수를 입력하시오: 0.5
+F
+```
+
+
+반복적으로 프로그램을 실행해서 다양한 다른 입력값을 테스트해 보라.
+
+
+
+

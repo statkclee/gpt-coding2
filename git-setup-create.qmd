@@ -1,0 +1,363 @@
+
+# Git 설정과 저장소 {#git-setup}
+\index{git!설정}
+
+처음 Git을 새로운 컴퓨터에서 사용할 때는 몇 가지 설정이 필요하다. 
+다음은 Git을 시작할 때 필수적으로 설정해야 하는 몇 가지 사례다.
+
+
+*   이름과 전자우편 주소
+*   선호하는 텍스트 편집기 선정
+*   전역(즉, 모든 프로젝트)으로 설정을 할지 여부
+
+명령 줄에서 Git 명령어는 다음과 같이 작성된다. 
+`git verb options`. 여기서 `verb`는 실제로 수행하고자 하는 명령어이고, 
+`options`는 `verb`에 필요할 수 있는 추가 선택 사항 정보가 된다.
+다음은 드라큘라(Dracula)가 새로 구입한 노트북에서 환경을 설정하는 방법이다.
+
+```bash
+$ git config --global user.name "Vlad Dracula"
+$ git config --global user.email "vlad@tran.sylvan.ia"
+```
+
+드라큘라(Dracula) 대신에 본인의 이름과 이메일 주소를 사용한다. 
+사용자명과 이메일 주소는 후속 Git 활동과 연관된다.
+이것이 의미하는 바는 [GitHub](https://github.com/), [BitBucket](https://bitbucket.org/), 
+[GitLab](https://gitlab.com/) 등 Git 호스팅 서버에 푸시하는 모든 변경 사항에 사용자명과 이메일 주소가 포함됨을 의미한다.
+\index{GitHub}
+\index{BitBucket}
+\index{GitLab}
+
+::: callout-tip
+### 줄 바꿈(Line Endings)
+
+키보드로 <kbd>Return</kbd>을 누르면 컴퓨터는 줄 바꿈을 나타내는 문자로 인코딩한다.
+(개행 또는 줄 바꿈을 뜻하는 영어 "newline" 혹은 "line breaks"를 들어봤을 수도 있다.)
+Git은 파일을 비교할 때 이 문자를 사용하기 때문에, 서로 다른 운영체제를 사용하는 컴퓨터에서 파일을 편집하면 예기치 않은 문제가 발생할 수 있다. 
+이 문제는 이번 학습 범위를 넘어서는 내용이지만, [GitHub 페이지](https://help.github.com/articles/dealing-with-line-endings/)에서 더 자세한 정보를 얻을 수 있다.
+
+Git에서 줄 바꿈을 인식하고 인코딩하는 방식을 변경하려면 `git config`에서 `core.autocrlf` 명령을 사용한다. 
+권장되는 설정은 다음과 같다:
+\index{줄바꿈}
+:::
+
+::::: {.columns}
+
+::: {.column width="47.5%"}
+### 맥OS와 리눅스 {.unnumbered}
+
+```bash
+$ git config --global core.autocrlf input
+```
+
+:::
+
+::: {.column width="5%"}
+
+:::
+
+::: {.column width="47.5%"}
+### 윈도우 {.unnumbered}
+
+```bash
+$ git config --global core.autocrlf true
+```
+
+:::
+:::::
+
+이번 학습에서는 [GitHub](https://github.com/)을 사용하는데, 여기에 사용되는 이메일 주소는 GitHub 계정 설정 시 사용한 것과 동일해야 한다.
+만약 개인정보가 걱정된다면 [GitHub의 이메일 주소 비공개 지침][git-privacy]을 참조하자.
+GitHub에서 비공개 이메일 주소를 선택했다면 `user.email`에도 동일한 주소를 사용해야 한다. 
+즉, GitHub 설정의 `username`을 `username@users.noreply.github.com`으로 바꾼다.
+나중에 `git config` 명령어로 이메일 주소를 변경할 수 있다. 
+
+드라큘라도 선호하는 텍스트 편집기를 설정해야 하는데, 다음 표를 참조하면 된다.
+\index{편집기}
+
+| 편집기             | 설정 명령어                             |
+|:-------------------|:-------------------------------------------------|
+| Atom               | `$ git config --global core.editor "atom --wait"`|
+| nano               | `$ git config --global core.editor "nano -w"`    |
+| BBEdit (맥, 명령줄 도구 포함) | `$ git config --global core.editor "bbedit -w"`    |
+| Sublime Text (Mac) | `$ git config --global core.editor "/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl -n -w"` |
+| Sublime Text (윈도우, 32비트 설치) | `$ git config --global core.editor "'c:/program files (x86)/sublime text 3/sublime_text.exe' -w"` |
+| Sublime Text (윈도우, 64비트 설치) | `$ git config --global core.editor "'c:/program files/sublime text 3/sublime_text.exe' -w"` |
+| Notepad++ (윈도우, 32비트 설치)    | `$ git config --global core.editor "'c:/program files (x86)/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin"`|
+| Notepad++ (윈도우, 64비트 설치)    | `$ git config --global core.editor "'c:/program files/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin"`|
+| Kate (Linux)       | `$ git config --global core.editor "kate"`       |
+| Gedit (Linux)      | `$ git config --global core.editor "gedit --wait --new-window"`   |
+| Scratch (Linux)    | `$ git config --global core.editor "scratch-text-editor"`  |
+| Emacs              | `$ git config --global core.editor "emacs"`   |
+| Vim                | `$ git config --global core.editor "vim"`   |
+| VS Code            | `$ git config --global core.editor "code --wait"` |
+
+필요할 때마다 Git에서 사용할 텍스트 편집기 설정을 변경할 수 있다.
+
+::: callout-tip
+### Vim 종료하기 
+
+많은 프로그램에서 Vim이 기본 편집기로 설정되어 있다.
+Vim을 처음 사용하는 경우 변경 사항을 저장하지 않고 세션을 종료하려면
+<kbd>Esc</kbd>를 누른 후 `:q!`를 입력하고 <kbd>Return</kbd>을 누른다.
+변경 사항을 저장하고 종료하려면 <kbd>Esc</kbd>를 누른 후 `:wq`를 입력하고 <kbd>Return</kbd>을 누른다.
+\index{vim}
+
+:::
+
+
+앞서 실행한 상기 명령어는 한번만 실행하면 된다. 
+`--global` 플래그는 Git으로 하여금 해당 컴퓨터에 본인 계정의
+모든 프로젝트에 환경설정한 것을 사용하도록 한다.
+
+본인이 설정한 환경설정 내용은 언제라도 다음 명령어를 입력하여 확인할 수 있다.
+
+```bash
+$ git config --list
+```
+
+원하는 대로 설정을 변경할 수 있다. 
+편집기를 바꾸거나 이메일 주소를 업데이트할 때도
+동일한 명령어를 사용하면 된다.
+
+::: callout-tip
+### 프록시(Proxy) 
+
+일부 네트워크에서는 [프록시](https://en.wikipedia.org/wiki/Proxy_server)를 사용해야 한다.
+이 경우 Git에 프록시 정보를 설정해야 한다.
+\index{프록시}
+
+```bash
+$ git config --global http.proxy proxy-url
+$ git config --global https.proxy proxy-url
+```
+
+프록시를 비활성화하려면 다음 명령어를 사용한다.
+
+```bash
+$ git config --global --unset http.proxy
+$ git config --global --unset https.proxy
+```
+
+:::
+
+
+::: callout-tip
+### Git 도움말과 매뉴얼
+
+`git` 명령어를 잊어버린 경우 `-h` 옵션으로 명령어 목록을 볼 수 있고, 
+`--help`로 Git 매뉴얼을 이용할 수 있다는 점을 기억하자.
+\index{git!도움말}
+\index{git!매뉴얼}
+
+```bash
+$ git config -h
+$ git config --help
+```
+
+:::
+
+[git-privacy]: https://help.github.com/articles/keeping-your-email-address-private/
+
+
+## Git 추가 설정 {#git-korean}
+
+### 로컬 PC와 SSH 키 연결 {#local-PC-ssh-keys}
+\index{SSH}
+
+[GitHub](https://github.com/)에 저장소(repository)를 만들고 여러 PC에서 작업할 경우, 
+GitHub 인증 작업을 거치는 것이 여러모로 편리하다. 
+그 중 하나는 공개 키(public key)를 GitHub에 등록하여 작업하는 방식이다.
+
+1. 윈도우 사용자는 먼저 [Git for Windows](https://gitforwindows.org/)를 다운로드하여 설치한다.
+1. `ssh-keygen` 명령어로 공개 키와 비밀 키를 생성한다. 
+1. 생성된 공개 키를 [GitHub](https://github.com/) 계정에 등록한다.
+
+### SSH 공개 키/비밀 키 생성 {#local-PC-ssh-keys-generate}
+
+SSH 공개 키와 비밀 키를 생성하고 GitHub에 등록하는 과정은 다음과 같다.
+먼저 `ssh-keygen` 명령어에 매개변수와 GitHub 이메일 주소를 지정한다. [^github-ssh]
+
+[^github-ssh]: [nickjoIT (2017), "GitHub SSH 키 생성 및 등록하여 사용하기"](https://nickjoit.tistory.com/94)
+
+```bash
+$ ssh-keygen -t rsa -C "your_email@example.com" 
+```
+
+`ssh-keygen`으로 생성된 키를 GitHub에 등록한다.
+
+- 우측 상단 [Settings] &rarr; [SSH and GPG keys] &rarr; [New SSH key]
+
+[New SSH key]를 클릭하면 Title과 Key 입력란이 나타난다. 
+Title에는 식별 가능한 이름을 지정하고, 앞서 생성한 `id_rsa.pub` 내용을 Key에 복사하여 붙여넣는다.
+
+```bash
+$ cat ~/.ssh/id_rsa.pub
+
+ssh-rsa AAAxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxYxY9 email_address@mail.com
+```
+
+### 첫 커밋(commit) {#local-PC-ssh-keys-commit}
+
+인증을 완료하고 저장소에서 처음 파일을 커밋할 때 `git add`, `git commit -m` 명령어를 연속해서 실행하면 
+커밋 작성자 정보를 등록하라는 메시지가 나타난다. 
+`git config`로 이메일과 사용자명을 설정하면 정상적으로 커밋할 수 있다.
+
+```bash
+$ git config --global user.email "you@example.com"
+$ git config --global user.name "Your Name"
+```
+
+
+### 비밀번호 없이 푸시하기  {#local-PC-ssh-keys-push}
+
+다음 단계로 비밀번호 없이 커밋된 내용을 GitHub에 전달하는 방법은 자격인증(credential) 캐싱을 통한 간단한 방법이 있다. 물론 처음에는 사용자명과 비번을 입력하는 과정을 필수적으로 거치게 된다.[^github-without-password]
+
+[^github-without-password]: [Stackoverflow, "How do I avoid the specification of the username and password at every git push?"](https://stackoverflow.com/questions/8588768/how-do-i-avoid-the-specification-of-the-username-and-password-at-every-git-push)
+
+```bash
+$ git config credential.helper store
+$ git push https://github.com/repo.git
+
+Username for 'https://github.com': <USERNAME>
+Password for 'https://USERNAME@github.com': <PASSWORD> 
+```
+
+보안을 강화하기 위해 캐시 시간 제한을 7200초(2시간)로 설정할 수 있다.
+
+```bash
+$ git config --global credential.helper 'cache --timeout 7200'
+```
+
+
+## 저장소 생성 {#git-create}
+\index{저장소}
+
+Git 환경설정이 완료되면, Git를 사용할 수 있다. 
+행성 착륙선을 화성에 보낼 수 있는지 조사를 하고 있는 늑대인간과 드라큘라 이야기를 계속해서 진행해 보자.
+
+![Git 동기 부여 사례](images/git/motivatingexample.png){#fig-git-motivation}
+
+먼저 바탕화면(`Desktop`)에 작업할 디렉토리를 생성하고, 생성한 디렉토리로 이동하자:
+
+```bash
+$ cd ~/Desktop
+$ mkdir planets
+$ cd planets
+```
+
+그리고 나서, `planets`을 **저장소(repository)**로 만든다. 
+저장소는 Git이 파일에 대한 버전 정보를 저장하는 장소다.
+
+```bash
+$ git init
+```
+
+
+`git init` 명령어가 서브디렉토리(subdirectory)와 파일을 담고 있는 저장소를 생성하는데 주목한다.
+`planets` 저장소 내부에 중첩된 별도 저장소를 생성할 필요는 없다.
+또한, `planets` 디렉토리를 생성하고 저장소로 초기화하는 것은 완전히 서로 다른 과정이다.
+
+`ls`를 사용해서 디렉토리 내용을 살펴보면, 변한 것이 아무것도 없는 것처럼 보인다:
+
+```bash  
+$ ls
+```
+
+
+하지만, 모든 것을 보여주는 `-a` 플래그를 추가하면, 
+Git은 `planets` 디렉토리 내부에 `.git` 로 불리는 숨겨진 디렉토리를 생성한 것을 볼 수 있다:
+
+
+```bash
+$ ls -a
+
+.	..	.git
+```
+
+Git은 `.git`이라는 특별한 하위 디렉토리에 프로젝트에 대한 정보를 저장한다. 
+여기에는 프로젝트 디렉토리 내부에 위치한 모든 파일과 서브 디렉토리가 포함된다.
+만약 `.git`를 삭제하면, 프로젝트 이력을 모두 잃어버리게 된다.
+
+모든 것이 제대로 설정되었는지를 확인하려면,
+Git에게 다음과 같이 프로젝트 상태를 확인 명령어를 던진다:
+
+``` bash
+$ git status
+
+# On branch master
+#
+# Initial commit
+#
+nothing to commit (create/copy files and use "git add" to track)
+```
+
+다른 `git` 버전을 사용할 경우, 출력 결과물이 다소 다를 수 있다.
+
+::: callout-warning
+### Git 저장소를 생성할 장소
+
+(이미 생성한 프로젝트) 행성에 대한 정보를 추적하면서, 드라큘라는 달에 관한 정보도 추적하고자 한다. 
+`planets` 프로젝트와 관련된 새로운 프로젝트 `moons`를 시작한다. 
+늑대인간의 걱정에도 불구하고, Git 저장소 내부에 또 다른 Git 저장소를 생성하려고 다음 순서로 명령어를 입력해 나간다.
+
+```bash
+$ cd ~/Desktop   # 바탕화면 디렉토리로 되돌아 간다.
+$ cd planets     # planets 디렉토리로 들어간다.
+$ ls -a          # planets 디렉토리에 .git 서브 디렉토리가 있는지 확인한다.
+$ mkdir moons    # planets/moons 서브 디렉토릴르 생성한다.
+$ cd moons       # moons 서브 디렉토리로 이동한다.
+$ git init       # Git 저장소를 moons 하위디렉토리에 생성한다.
+$ ls -a          # 새로운 Git 저장소가 .git 하위 디렉토리에 있는지 확인한다.
+```
+
+`moons` 서브 디렉토리에 저장된 파일을 추적하기 위해
+`moons` 디렉토리 안에서 `git init` 명령을 실행해야 할까?
+
+::: {.callout-note collapse="true"}
+### 해답
+
+아니다. `moons` 서브 디렉토리에 Git 저장소를 만들 필요는 없다.
+왜냐하면, `planets` 저장소가 이미 모든 파일, 서브 디렉토리, `planets` 디렉토리
+아래 서브 디렉토리 파일 모두를 추적하기 때문이다.
+따라서, 달에 관한 모든 정보를 추정하는데, 드랴큘라는 `planets` 디렉토리 아래
+`moons` 서브 디렉토리를 추가하는 것으로 충분하다.
+
+추가적으로, 만약 Git 저장소가 중첩(nested)되면, Git 저장소는 서로 방해할 수 있다.
+바깥 저장소가 내부 저장소 버전관리를 하게 된다.
+따라서, 별도 디렉토리에 서로 다른 신규 Git 저장소를 생성하는게 최선이다.
+
+디렉토리에 저장소가 서로 충돌하지 않도록 하려면, `git status` 출력물을 점검하면 된다.
+만약, 다음과 같은 출력물이 생성되게 되면 신규 저장소를 생성하는 것이 권장된다:
+```
+$ git status
+
+fatal: Not a git repository (or any of the parent directories): .git
+```
+:::
+
+:::
+
+::: callout-caution
+### `git init` 실수 올바르게 고치기
+
+늑대인간은 드라큘라에게 중첩된 저장소가 중복되어 불필요할 뿐만 아니라 향후 혼란을 야기할 수 있다고 설명했다. 드라큘라는 중첩된 저장소를 제거하고자 한다. 
+
+`moons` 서브 디렉터리에서 마지막으로 실행한 `git init` 명령어를 어떻게 취소할 수 있을까?
+
+::: {.callout-note collapse="true"}
+### 해답 -- 주의해서 사용할 것!
+
+이러한 사소한 실수를 되돌리려면, 드라큘라는 `planets` 디렉토리에서 다음 명령어를 실행하여 
+`.git` 디렉토리를 제거하기만 하면 된다:
+
+```
+$ rm -rf moons/.git
+```
+
+하지만, 주의할 것! 디렉토리를 잘못 입력하게 되면, 보관해야 하는 프로젝트 정보를 담고 있는 
+Git 이력 전체가 삭제될 수 있다. 따라서,  `pwd` 명령어를 사용해서 현재 작업 디렉토리를 항상 확인한다.
+:::
+
+:::
+

@@ -1,0 +1,301 @@
+# 추적 대상에서 제외 {#git-ignore}
+
+만약 Git이 추적하기를 원하지 않는 파일이 있다면 어떻게 해야 할까요?
+편집기에서 자동 생성되는 백업 파일이나 자료 분석 중에 생성되는 임시 파일들이 좋은 예가 될 수 있다.
+몇 개의 더미(dummy) 파일을 생성해 보자.
+\index{추적 제외}
+
+```bash
+$ mkdir results
+$ touch a.dat b.dat c.dat results/a.out results/b.out
+```
+
+그러면 Git은 다음과 같이 보여줍니다:
+
+``` bash
+$ git status
+
+On branch master
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	a.dat
+	b.dat
+	c.dat
+	results/
+nothing added to commit but untracked files present (use "git add" to track)
+```
+
+버전 관리 아래 이런 파일들을 두는 것은 디스크 공간 낭비다. 
+더 나쁜 것은, 이런 파일들을 모두 관리 목록에 넣으면 실제로 중요한 변경 사항을 관리하는 데 집중하기 어렵다는 점이다. 
+그래서 Git에게 이런 중요하지 않은 파일들은 무시하라고 알려준다.
+
+프로젝트의 루트 디렉터리에 `.gitignore`라는 파일을 생성하고 무시할 파일들을 명시함으로써 해당 작업을 수행할 수 있다.
+\index{.gitignore}
+
+``` bash
+$ nano .gitignore
+$ cat .gitignore
+
+*.dat
+results/
+```
+
+위의 패턴은 `.dat` 확장자를 가진 모든 파일과 `results` 디렉터리에 있는 모든 것을 무시하라는 의미다.
+(하지만 이들 중 일부 파일이 이미 추적되고 있다면, Git은 계속해서 추적할 것이다.)
+
+`.gitignore` 파일을 생성하자마자, `git status` 출력 결과는 훨씬 깔끔해졌다.
+
+
+``` bash
+$ git status
+
+On branch master
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	.gitignore
+nothing added to commit but untracked files present (use "git add" to track)
+```
+
+이제 Git이 알아차리는 유일한 것은 새로 생성된 `.gitignore` 파일뿐이다.
+이 파일들을 추적하여 관리하지 않아도 된다고 생각할 수 있지만,
+저장소를 공유하는 다른 모든 사람들도 우리가 추적하지 않는 것과 동일한 파일들을 무시하기를 원할 것이다.
+그러므로 `.gitignore`를 추가하고 커밋한다.
+
+
+``` bash
+$ git add .gitignore
+$ git commit -m "Ignore data files and the results folder."
+$ git status
+
+# On branch master
+nothing to commit, working directory clean
+```
+
+보너스로, `.gitignore`는 실수로 추적하고 싶지 않은 파일이 저장소에 추가되는 것을 방지하는 데 도움이 된다.
+
+``` bash
+$ git add a.dat
+
+The following paths are ignored by one of your .gitignore files:
+a.dat
+Use -f if you really want to add them.
+```
+
+만약 `.gitignore` 설정에도 불구하고 파일을 추가하려면,
+`git add -f`를 사용하여 강제로 Git에 파일을 추가할 수 있다.
+예를 들어, `git add -f a.dat`와 같이 사용한다.
+추적되지 않는 파일의 상태를 항상 보려면 다음 명령어를 사용하면 된다.
+
+``` bash
+$ git status --ignored
+
+On branch master
+Ignored files:
+ (use "git add -f <file>..." to include in what will be committed)
+
+        a.dat
+        b.dat
+        c.dat
+        results/
+
+nothing to commit, working directory clean
+```
+
+::: callout-tip
+### 중첩된 파일 추적하지 않기
+
+디렉터리 구조가 다음과 같다고 가정해 보자.
+
+``` bash
+results/data
+results/plots
+```
+
+`results/plots`만 추적하지 않고, 
+`results/data` 디렉터리는 추적하려면 어떻게 해야 할까? 
+
+::: {.callout-caution collapse="true"}
+### 해답
+
+대부분의 프로그래밍 이슈와 마찬가지로, 
+이 문제를 해결하는 몇 가지 방법이 있다. 
+`results/plots` 디렉터리의 내용만 추적하지 않기로 한다면,
+`.gitignore` 파일에서 `/plots/` 폴더만 추적하지 않도록 다음과 같이 수정하면 된다.
+
+`results/plots/`
+
+반대로 `/results/` 디렉터리의 모든 것을 추적하지 않되, 
+`results/data`만 예외로 추적하고 싶다면,  
+`.gitignore` 파일에 `results/`를 추가하고 
+`results/data/`에 대해서는 예외 처리를 해주면 된다.
+다음 도전 과제에서 이러한 유형의 해법을 다루게 될 것이다.
+ 
+종종 `**` 패턴이 사용하기 편리한데, 이는 다수의 디렉터리와 매칭될 수 있기 때문이다.
+예를 들어, `**/results/plots/*`은 루트 디렉터리 아래 어디에 있든 `results/plots` 디렉터리를 추적하지 않는다.
+
+:::
+
+:::
+
+::: callout-tip
+### 특정 파일만 포함시키기 
+
+`final.data` 파일만 제외하고 모든 `.data` 파일을 추적하지 않으려면 어떻게 하면 될까?
+힌트: `!` (느낌표 연산자)가 수행하는 작업을 알아본다.
+\index{연산자!느낌표 (부정)}
+
+::: {.callout-caution collapse="true"}
+### 해답
+
+`.gitignore` 파일에 다음 두 줄을 추가한다:
+
+```
+*.data           # 모든 data 파일을 추적하지 않는다.
+!final.data      # final.data 파일은 예외로 추적한다. 
+```
+
+느낌표 연산자는 앞서 제외된 항목을 다시 포함시키는 역할을 한다.
+
+:::
+
+:::
+
+::::: callout-tip
+### 중첩된 파일 무시하기: 변형
+
+앞선 중첩 파일 연습과 유사하지만, 
+약간 다른 디렉터리 구조를 가진 디렉터리 구조가 있다고 하자.
+
+``` bash
+results/data
+results/images
+results/plots
+results/analysis
+```    
+
+`results/data`는 제외하고 
+`results` 폴더의 모든 내용을 무시하려면 어떻게 해야 할까?
+
+힌트: 이전에 `!` 연산자로 예외를 만든 방법에 대해 조금 생각해 보자.
+
+::: {.callout-caution collapse="true"}
+### 해답
+
+`results/`의 내용은 무시하되 `results/data/`의 내용은 무시하지 않으려면, `.gitignore`에서 `results` 폴더의 내용을 무시하되 `results/data` 하위 폴더의 내용에 대해서는 예외를 만들면 된다. 이 경우 `.gitignore` 파일은 다음과 같이 작성하면 된다.
+
+``` bash
+results/*               # results 폴더의 모든 내용을 무시한다
+!results/data/          # results/data/의 내용은 무시하지 않는다
+```    
+:::
+
+:::::
+    
+
+
+::: callout-tip
+### 디렉터리의 모든 파일 추적하지 않기
+
+디렉터리 구조가 다음과 같다고 가정해 본다.
+
+``` bash
+results/data/position/gps/a.data
+results/data/position/gps/b.data
+results/data/position/gps/c.data
+results/data/position/gps/info.txt
+results/plots
+```
+
+`results/data/position/gps` 디렉터리의 모든 `.data` 파일을 추적하지 않도록
+`.gitignore` 파일에 규칙을 작성한다면, 가장 간결한 규칙은 무엇일까? 
+단, `info.txt` 파일은 추적되어야 한다.
+
+::: {.callout-caution collapse="true"}
+### 해답
+
+`results/data/position/gps/*.data` 규칙은 
+`results/data/position/gps` 디렉터리에서 `.data`로 끝나는 모든 파일과 매칭된다.
+`results/data/position/gps/info.txt` 파일은 확장자가 다르기 때문에 계속 추적될 것다.  
+
+:::
+
+:::
+
+::: callout-tip
+### 특정 디렉토리의 모든 파일 추적하지 않기
+
+저장소의 여러 하위 디렉터리에 많은 `.csv` 파일이 있다고 가정해 본다. 
+예를 들어 다음과 같은 파일 디렉토리 구조를 가질 수 있다.
+
+``` bash
+results/a.csv
+data/experiment_1/b.csv 
+data/experiment_2/c.csv
+data/experiment_2/variation_1/d.csv
+```    
+
+해당 폴더의 이름을 명시적으로 나열하지 않고, 
+모든 `.csv` 파일을 무시하려면 어떻게 해야 할까?
+
+::: {.callout-caution collapse="true"}
+### 해답
+
+`.gitignore` 파일에 다음과 같이 작성한다.
+
+``` bash
+**/*.csv
+```
+
+이렇게 하면 디렉토리 트리에서의 위치에 상관없이 모든 `.csv` 파일이 무시된다. 느낌표 연산자를 사용하여 특정 파일은 예외로 여전히 포함시킬 수도 있다.
+
+:::
+
+:::
+
+
+::: callout-tip
+### 적용 규칙 순서 
+
+`.gitignore` 파일에 다음 내용이 포함되어 있다고 가정해 본다.
+
+``` bash
+*.csv
+!*.csv
+```
+
+어떤 결과가 나올까?
+
+::: {.callout-caution collapse="true"}
+### 해답
+
+`!` 연산자는 이전에 정의된 제외 패턴을 부정한다.
+따라서 `.gitignore` 파일에서 `!*.csv` 규칙은 앞서 제외했던 모든 `.csv` 파일을 다시 포함시킨다.
+결과적으로 어떤 파일도 제외되지 않고, 모든 `.csv` 파일이 추적 대상이 된다.
+
+:::
+
+:::
+
+::: callout-tip
+### 로그 파일 
+
+여러분이 작성한 스크립트가 `log_01`, `log_02`, `log_03`과 같은 형식의 중간 로그 파일을 다수 생성한다고 가정해 본다.
+로그 파일들은 보관하고 싶지만, `git`으로 추적하고 싶지는 않은 경우가 있다.
+
+1. `log_01`, `log_02` 등의 형식을 가진 모든 파일을 추적에서 제외하는 `.gitignore` 규칙을 **하나** 작성한다.
+2. `log_01` 형식의 더미 파일을 생성하여 "제외 패턴"을 테스트한다.
+3. 결국 `log_01` 파일이 매우 중요하다는 것을 알게 되어, `.gitignore` 파일은 변경하지 않고 해당 파일만 추적 대상에 포함시킨다.
+4. `.gitignore`를 통해 추적을 제외하고 싶은, 디렉터리에 있을 수 있는 다른 유형의 파일에는 어떤 것이 있을지 옆 사람과 의논해 보자.
+
+::: {.callout-caution collapse="true"}
+### 해답
+
+1. `log_*` 혹은 `log*` 규칙을 `.gitignore` 파일에 추가한다.
+2. `git add -f log_01` 명령어를 사용하여 `log_01` 파일만 강제로 추적한다.
+
+:::
+
+:::
+

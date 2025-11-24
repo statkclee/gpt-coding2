@@ -1,0 +1,201 @@
+project:
+  type: book
+  # output-dir: docs  # HTML 출력용
+  output-dir: pdfs    # Typst/PDF 출력용
+  preview:
+    port: 7771
+    browser: false
+  resources:
+    - "data/*.mp3"
+  render:
+    - "*.qmd"
+    - "!*.Rmd"
+    - "!to_do.qmd"
+
+lang: ko-KR
+
+# ---------------------------------- #
+book:
+  title: "챗GPT 코딩"
+  reader-mode: true
+  subtitle: "인공지능(LLM)과 동료(Git/GitHub)와 함께 하는 프로그래밍"
+
+  page-footer:
+    left: |
+      챗GPT 쿼토 책은 소프트웨어 카펜트리 "Git 버전제어"를 번역한 것이 포함되어 있습니다.
+    right: |
+      순수하게 <a href="https://quarto.org/">쿼토(Quarto)</a>로 제작되었습니다.
+
+  cover-image: images/book_cover.jpg
+  favicon: images/logo.png
+  site-url: https://r2bit.com/gpt-coding/
+  repo-url: https://github.com/bit2r/gpt-coding/
+  repo-branch: main
+  repo-actions: [edit, issue]
+
+  google-analytics: "UA-229551680-1"
+  author:
+    - name: "이광춘(Openai)"
+      affiliations: "공익법인 한국 R 사용자회"
+  date: last-modified
+  date-format: "YYYY년 MM월 DD일"
+  
+# ---------------------------------- #  
+  chapters:
+    # - acknowledgments.qmd
+    - index.qmd
+
+    # - part: "**1부** 프로그래밍" # OK
+    #   chapters:
+    #     - 01-intro.qmd          # A\ + idx
+    #     - 02-var.qmd            # A\ + idx
+    #     - 03-cont.qmd           # A\ + idx
+    #     - 04-func.qmd           # A\ + idx
+    #     - 05-loop.qmd           # A\ + idx
+
+    # - part: "**2부** 자료구조"
+    #   chapters:
+    #     - 06-string.qmd         # A\ + idx
+    #     - 07-file.qmd           # A\ + idx
+    #     - 08-list.qmd           # A\ + idx
+    #     - 09-dictionaries.qmd   # A\ + idx You can't use `macro parameter character #'
+    #     - A-dataframe.qmd       # A\ + idx
+
+    # - part: "**3부** 버전제어와 협업" # OK
+    #   chapters:
+    #     - git-basics.qmd        # A\ + + idx
+    #     - git-setup-create.qmd  # A\ + idx
+    #     - git-change.qmd        # A\ + idx
+    #     - git-history.qmd       # A\ + idx
+    #     - git-ignore.qmd        # A\ + idx
+    #     - git-github.qmd        # A\ + idx +layout
+    #     - git-open.qmd         # A\ + idx
+    #     - git-conflict.qmd     # A\ + idx +layout
+    #     - git-ide.qmd          # A\ + idx +layout
+
+    # - part: "**4부** 분야별 코딩" # OK
+    #   chapters:
+    #     - tool-regex.qmd      # A\ + idx + layout
+    #     - tool-network.qmd    # A\ + idx + layout
+    #     - tool-web.qmd        # A\ + idx + layout
+    #     - tool-database.qmd   # A\ + idx + layout
+    #     - tool-make.qmd       # A\ + idx + layout
+    #     - tool-viz.qmd        # A\ + idx + layout
+    #     - tool-gpt.qmd
+
+    - part: "**5부** 통합 개발 환경"
+      chapters:
+        - ide.qmd
+        - ide_positron.qmd
+        - ide_extension.qmd
+        - ide_setup.qmd
+        # - shortcode.qmd  # SVG 이미지로 인해 PDF 렌더링 오류
+
+    - references.qmd 
+
+
+
+# ---------------------------------- #
+format:
+  html:
+    mermaid:
+      theme: neutral # https://quarto.org/docs/authoring/diagrams.html#mermaid-theming
+    theme:
+      light: [cosmo, r2bit.scss]
+      # dark: [yeti, r2bit.scss]
+    number-depth: 3
+    number-sections: true
+    colorlinks: true
+    # cite-method: biblatex
+    code-overflow: wrap
+    code-link: true
+  
+    author-meta: "이광춘(Openai)"
+    include-in-header: "plausible.html"
+    callout-appearance: simple
+  
+    # 마크다운 표 캡션 위치
+    tbl-cap-location: bottom
+
+  # pdf:
+  #   documentclass: book
+  #   number-depth: 3
+  #   number-sections: true
+  #   colorlinks: true
+  #   code-overflow: wrap
+
+  #   # 한글 폰트 설정
+  #   mainfont: "Noto Sans KR"
+  #   monofont: "D2Coding ligature"
+
+  #   # 마크다운 표 캡션 위치
+  #   tbl-cap-location: bottom
+
+  #   # 여백 설정
+  #   geometry:
+  #     - margin=2.5cm
+
+  #   # 한글 지원 (kotex가 자동으로 폰트 처리)
+  #   include-in-header:
+  #     text: |
+  #       \usepackage{kotex}
+  #       \usepackage{metalogo}  % \LuaTeX 등의 로고 명령 제공
+
+
+# ---------------------------------- #
+filters:
+  - fontawesome
+  - include-code-files
+  - fancy-text
+  # HTML 전용 필터들 (Typst 사용시 비활성화)
+  # - webr
+  # - pyodide
+
+# webr:
+#   packages:
+#   - "stringr"
+#   - "readr"
+#   - "purrr"
+#   - "httr"
+#   - "curl"
+#   - "rvest"
+#   - "fs"
+#   - "ggplot2"
+#   - "palmerpenguins"
+#
+#
+# pyodide:
+#   packages:
+#   - "urllib"
+
+
+code-annotations: hover
+
+bibliography: references.bib
+link-citations: false
+
+# ---------------------------------- #
+glossary:
+  path: glossary.yml
+  popup: click
+  show: true
+
+# ---------------------------------- #
+engine: knitr
+
+knitr:
+  opts_chunk:
+    message: false
+    warning: false
+    collapse: true
+    code-overflow: code-overflow
+    fig-crop: false
+    comment: "#>"
+    R.options:
+      knitr.graphics.auto_pdf: true
+editor_options:
+  chunk_output_type: console
+
+editor: 
+  markdown: 
+    wrap: 72

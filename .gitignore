@@ -1,0 +1,14 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+/.quarto/
+
+/.luarc.json
+.env
+
+data/bbc
+publishing/
+
+**/*.quarto_ipynb

@@ -1,0 +1,70 @@
+---
+title: "숏코드 테스트"
+author: "이광춘(Openai)"
+date: "2025년 11월 23일"
+format: html
+---
+
+이 챕터는 `fancy-text` Quarto 확장 프로그램에 추가된 숏코드 기능을 테스트하기 위한 페이지입니다.
+
+## {{< luatex >}} 숏코드 테스트
+
+새롭게 추가된 `luatex` 숏코드를 테스트합니다.
+
+코드: `{{< luatex >}}` 
+
+결과: {{< luatex >}}
+
+## {{< hangul >}} 숏코드 테스트 (SVG)
+
+새롭게 추가된 `hangul` 숏코드를 테스트합니다.
+
+코드: `{{< hangul >}}` 
+
+결과: {{< hangul >}}
+
+## {{< minjoo >}} 숏코드 테스트 (SVG)
+
+새롭게 추가된 `minjoo` 숏코드를 테스트합니다.
+
+코드: `{{< minjoo >}}`
+
+결과: {{< minjoo >}}
+
+## {{< people_power >}} 숏코드 테스트 (SVG)
+
+새롭게 추가된 `people_power` 숏코드를 테스트합니다. 
+
+코드: `{{< people_power >}}`
+
+결과: {{< people_power >}}
+
+## {{< nation >}} 숏코드 테스트 (SVG)
+
+새롭게 추가된 `nation` 숏코드를 테스트합니다.
+
+코드: `{{< nation >}}` 
+
+결과: {{< nation >}}
+
+## {{< revolution >}} 숏코드 테스트 (SVG)
+
+새롭게 추가된 `revolution` 숏코드를 테스트합니다.
+
+코드: `{{< revolution >}}`
+
+결과: {{< revolution >}}
+
+## 기존 숏코드 테스트 (참고)  
+
+기존 `latex` 숏코드도 잘 작동하는지 확인합니다. 
+
+코드: `{{< latex >}}`
+
+결과: {{< latex >}}
+
+기존 `bibtex` 숏코드도 잘 작동하는지 확인합니다.
+
+코드: `{{< bibtex >}}`
+
+결과: {{< bibtex >}}

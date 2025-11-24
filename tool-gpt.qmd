@@ -1,0 +1,355 @@
+---
+editor: 
+  markdown: 
+    wrap: sentence
+---
+
+```{r}
+#| include: false
+
+source("_common.R")
+```
+
+# 챗GPT 코딩
+
+1950년대부터 본격적으로 컴퓨터가 도입되면서 CLI를 필두로 다양한 사용자 인터페이스(User Interface)가 적용되었다.
+스티브 잡스의 애플사는 매킨토시 GUI에 이어 아이폰 모바일 인터페이스를 일반화시켰다면, 최근 챗GPT는 언어 사용자 인터페이스(LUI)를 통해 각 분야에 혁신을 예고하고 있다.
+챗GPT[@vaswani2017attention] 데이터 과학도 사용자 관점에서 보자.
+기존 R, 파이썬, SQL, 엑셀 등 데이터 과학 구문을 머리속에 암기하고 있거나 구글이나 네이버를 통해 중요 키워드를 통해 문제를 해결해야 했었다.
+하지만, 이제 챗GPT가 자연어를 이해하기 때문에 데이터 전처리, 통계 작업, 데이터 분석, 시각화, 모형개발 등 데이터 과학 전반에 변화는 필연적이다.\index{User Inferface!CLI}\index{User Inferface!GUI}\index{User Inferface!WUI}\index{User Inferface!MUI} \index{User Inferface!LUI}\index{사용자 인터페이스} [@wickham2023r; @wickham2019welcome; @gozalo2023chatgpt]
+
+```{mermaid}
+%%| label: fig-ui-evolution
+%%| fig-cap: 사용자 인터페이스 진화
+
+flowchart TB
+    
+    subgraph A["사용자 인터페이스"]
+    direction LR
+        CLI["CLI 1950~<br>Command Line Interface<br> GUI 1970~<br> Graphic User Inferface"]     --> WIMI
+        WIMI["Web Interface <br> 1994~ <br> Mobile Interface <br> 2007~"] --> NUI["LUI 2023~<br> Language <br> User Interface"]
+    end
+
+classDef default fill:#f9f7f7,stroke:#333,stroke-width:2px;
+classDef A font-size:16px;
+
+```
+
+챗GPT[@wu2023brief]는 인터넷에서 방대한 양의 데이터를 학습하여 이를 정말 잘 압축한 하나의 저장소로 이해할 수 있다.
+따라서, 압축을 풀게 되면 정확히 원본을 복원할 수 있는 부분도 있지만, 그렇지 못한 부분도 당연히 있게 된다.
+챗GPT를 "웹의 흐릿한 JPEG"[@chiang2023chatgpt]으로 비유하고 있다.
+JPEG 기술 자체는 손실 압축기술로 무손실 압축기술로 대표적인 PNG와 대비된다.
+흐릿한 이미지가 선명하지 않거나 정확하지 않은 것처럼 챗GPT도 항상 완벽한 답변을 제공하거나 모든 질문을 제대로 이해하는 것은 아니다.
+하지만 사용자와의 대화를 기반으로 끊임없이 학습하고 개선하고 있다.
+더 많은 사람들이 챗GPT를 사용할수록 사람의 언어를 더 잘 이해하고 반응할 수 있게 개발된 기술이다.
+\index{jpeg}\index{png}\index{무손실 압축}\index{손실 압축}\index{챗GPT}\index{언어모델}
+
+## 코딩 패러다임
+
+\index{코딩 패러다임} \index{LLM} \index{IDE} \index{소프트웨어 공학} \index{소프트웨어 아키텍처} \index{디자인 패턴} \index{기계학습} \index{프롬프트 기반 코딩}
+
+코딩 세계는 끊임없이 진화한다.
+전통적인 코딩 방식에서 시작하여 기계학습 코딩, 최근 챗GPT와 같은 대규모 언어모델(LLM)을 활용한 프롬프트 기반 코딩에 이르기까지, 새로운 패러다임이 계속해서 등장하고 있다.
+
+전통적인 코딩은 프로그래머가 직접 모든 코드를 작성하고 논리를 구축하는 방식으로 개발자 전문성과 경험에 크게 의존하며, 코드 품질과 효율성은 프로그래머의 역량에 달려 있다.
+하지만 이러한 접근법은 시간이 많이 소요되고 반복적인 작업이 많아 생산성이 낮아 통합개발환경(IDE), 소프트웨어 공학, 소프트웨어 아키텍처, 디자인 패턴 등의 방법론과 도구가 발전하며 개선되어 왔고 현재 주류를 형성하고 있다.
+
+기계학습 코딩은 데이터와 알고리즘을 활용하여 컴퓨터 스스로 코드를 생성하고 최적화할 수 있게 하는 방식으로 전통적인 코딩 방식으로 풀 수 없는 복잡한 문제를 해결할 수 있다.
+기계학습 코딩 방식은 대규모 데이터셋과 복잡한 알고리즘을 필요로 하지만, 일단 학습이 완료되면 개발자가 작성한 코드보다 월등한 성능을 보인다.
+다만 기계학습 모형의 성능은 데이터의 질과 양, 알고리즘의 복잡성, 컴퓨팅 자원에 따라 크게 좌우된다.
+
+최근 챗GPT와 같은 대규모 언어모델을 활용한 프롬프트 기반 코딩이 주목받고 있다.
+자연어 프롬프트를 입력하면 언어모델이 이해하고 관련 코드를 생성한다는 점에서 일종의 생성형 모형으로 볼 수 있다.
+프롬프트 기반 코딩은 전통적인 코딩 방식과 기계학습 코딩의 장점을 결합했다.
+프로그래머는 자연어로 의도를 표현할 수 있고, LLM은 의도를 파악하여 코드로 변환해주어 생산성과 효율성을 높일 수 있어 매우 유용하다.
+
+![코딩 패러다임 변화](images/coding_paradigms.jpg){#fig-coding-paradigms fig-align="center" width="400"}
+
+## 프롬프트 공학
+
+\index{프롬프트 공학} \index{Prompt Engineering}
+
+**프롬프트 공학(Prompt Engineering)**은 챗GPT와 같은 AI 언어 모형으로부터 구체적이고 정확하며 관련성 있는 응답을 도출하기 위해 프롬프트(Prompt, 지시명령어)를 설계하고 개선하는 과정이다.
+프롬프트의 품질이 GPT 모형 출력결과에 큰 영향을 미칠 수 있기 때문에 이 작업은 매우 중요하다.
+프롬프트 엔지니어링의 목표는 사용자와 AI 모델 사이의 커뮤니케이션을 최적화하여 AI 시스템의 유용성과 효율성을 향상시키는 것이다.
+
+프롬프트 엔지니어링은 반복적인 작업과정으로 AI의 응답에 따라 프롬프트를 조정하고 개선해야 할 수도 있다는 점을 항상 염두에 두고, 다음 프롬프트 구성요소를 프롬프트에 녹여 제작할 경우 AI 언어 모델이 목표에 부합하는 정확하고 관련성 있는 구체적인 답변을 효과적으로 생성할 수 있다.
+
+프롬프트 공학을 코딩에 적용할 때의 장점은 자연어로 의도를 표현할 수 있어 코딩 입문자도 쉽게 접근할 수 있고, 수많은 프로그래밍 언어에 대한 장벽이 크게 낮아진 것을 들 수 있다.
+또한 기존 코드를 수정하거나 새로운 코드를 작성할 때 생산성을 높일 수 있고, 언어모델이 제공하는 광범위한 지식을 활용할 수 있어 코드의 품질이 향상되었다.
+하지만, 프롬프트를 잘 설계하기 위해서는 프롬프트 공학에 대한 지식과 경험이 필요하기 때문에 프롬프트 공학에 대한 깊은 이해가 필요하고, 언어모델 출력 결과가 완벽하지 않기 때문에 필연적으로 전문 개발자의 검토와 수정이 필요하며 저작권을 비롯한 보안 및 윤리 문제를 풀어야 하는 숙제가 남아있다.
+
+프롬프트 공학을 코딩에 적용하는 절차는 전통적인 코딩 절차와 별반 다르지 않다.
+첫째로 목표를 설정하고, 작성하려는 코드의 정확한 기능과 요구사항을 명시하여 코드가 어떤 입력을 받고, 어떤 출력을 내야 하는지 파악한다.
+둘째로 목표를 자연어 프롬프트에 담아낸다.
+가능한 상세하고 구체적인 프롬프트를 작성하고 사례, 제약조건 등도 포함한다.
+셋째로 프롬프트를 대규모 언어모델에 입력한다.
+언어모형이 프롬프트를 이해하고 관련 코드를 생성하는 본 작업을 진행하고 필요한 경우 추가 프롬프트를 언어모형에 피드백을 제공한다.
+넷째로 생성된 코드를 주의 깊게 검토하고 오류, 비효율성, 스타일 이슈 등을 반영하여 코드품질을 향상시킨다.
+다섯째로 다양한 입력 값으로 코드를 실행하고 출력을 검증하며 발견된 오류는 디버깅하여 수정한다.
+마지막으로 테스트 결과를 바탕으로 프롬프트를 개선할 점을 파악하고, 프롬프트를 수정하여 새로운 코드를 생성한 후 결과를 비교하는 과정을 반복한다.
+
+![챗GPT 코딩 작업흐름](images/gpt_coding_workflow.jpg){#fig-gpt-coding-workflow}
+
+챗GPT 코딩 구성요소는 프롬프트와 언어모형으로 구성되어 있다고 보면 된다.
+자연어 프롬프트를 통해 생성하고자 하는 코드의 목적과 요구사항을 명시하여 언어모형에 전달하면 언어모형은 프롬프트를 이해하고 관련 코드를 생성한다.
+몇년전 영어가 가장 뜨거운 프로그래밍 언어라는 주장이 허언은 아닌 것이다.
+
+{{< tweet user=karpathy id=1617979122625712128 >}}
+
+## 챗GUI 인터페이스
+
+\index{챗GUI 인터페이스} \index{클로드} \index{앤트로픽}
+
+OpenAI 챗GPT, 구글 Gemini, 앤트로픽 클로드 등을 사용하여 코드를 생성시킬 수 있다.
+챗GPT를 비롯한 대규모 언어모형은 API도 제공하고 있어서 챗 인터페이스가 불편한 경우 API를 통해 개발하고 있는 프로그램에 직접 적용할 수도 있다.
+먼저 최근 인기를 얻고 있는 챗GPT 대항마로 떠오르고 있는 앤트로픽 [클로드(claude)](https://claude.ai/chat/)를 통해 코드를 생성하는 방법을 알아보자.
+
+::: panel-tabset
+### 프롬프트
+
+초등학교 5학년을 대상으로 프로그래밍을 처음 시작하려 합니다.
+정말 읽기 쉽고 코딩에 흥미를 가질 수 있는 R 코드를 작성해줘
+
+![앤트로픽 클로드 챗 인터페이스](images/gpt-claude.jpg){#fig-gpt-claude fig-align="center" width="350"}
+
+### 출력결과
+
+초등학생을 대상으로 R 프로그래밍을 가르치려면 단계적이고 재미있는 접근이 필요합니다.
+여기 간단한 예제 코드를 제공하겠습니다:
+
+``` r
+# 안녕하세요! R은 재미있는 프로그래밍 언어예요.
+# 이번 시간에는 숫자와 문자를 다뤄볼 거예요.
+
+# 숫자 계산하기
+숫자1 <- 5
+숫자2 <- 3
+합계 <- 숫자1 + 숫자2
+print(합계) # 8이 출력됩니다.
+
+# 문자 다루기
+이름 <- "철수"
+print(paste("안녕하세요,", 이름, "님!")) # "안녕하세요, 철수 님!"이 출력됩니다.
+
+# 조건문 사용하기
+나이 <- 10
+if (나이 >= 20) {
+  print("어른이군요!")
+} else {
+  print("아직 어려운 친구예요.")
+} # "아직 어려운 친구예요."가 출력됩니다.
+
+# 반복문 사용하기
+for (숫자 in 1:5) { # 1부터 5까지 반복합니다.
+  print(paste(숫자, "번째 반복입니다."))
+}
+
+# 벡터(여러 개의 값을 한번에 다루기)
+과일 <- c("사과", "바나나", "딸기")
+print(과일) # "사과" "바나나" "딸기"가 출력됩니다.
+```
+
+이 코드에서는 다음과 같은 개념들을 다룹니다:
+
+-   변수 할당과 연산
+-   문자열 다루기
+-   조건문 (if-else)
+-   반복문 (for 루프)
+-   벡터 (여러 값을 한번에 저장)
+
+각 개념마다 친숙한 예시를 사용하여 학생들이 이해하기 쉽도록 하였습니다.
+또한 print() 함수를 활용하여 결과를 바로 확인할 수 있게 하였습니다.
+
+이 코드를 바탕으로 학생들과 함께 살펴보며 R 프로그래밍의 기초를 익힐 수 있을 것입니다.
+궁금한 점이 더 있다면 언제든 물어보세요!
+:::
+
+## 프로그래밍
+
+\index{API} \index{OpenAI} \index{gpt-3.5-turbo} \index{파이썬}
+
+GUI 챗팅 인터페이스를 사용하면 직관적으로 R 코드를 생성할 수 있지만, 자동화를 할 수 없다는 문제와 함께 재사용도 매번 복사하여 붙여넣기를 해야한다는 문제가 있다.
+대신 프로그래밍을 통해 R 혹은 파이썬 코드 생성작업을 자동화하고 재사용할 수 있도록 한걸음 더 들어가 보자.
+
+자연어로 시각화하는 프로그램 작성을 본격적으로 들어가기 전에 기본적인 설정을 다음과 같이 한다.
+다양한 언어로 OpenAI API를 활용하는 것이 가능하지만 지면관계상 파이썬으로 OpenAI GPT 모델을 사용해 사용자 질문에 자동으로 답하는 스크립트를 작성한다.
+헬로월드("Hello World!")를 통해 기본 설정이 정상동작하는지 확인한다.
+\index{프로그래밍}\index{프로그래밍!OpenAI}\index{프로그래밍!OpenAI!gpt-3-turbo}
+
+```{python}
+#| eval: false
+import os
+from openai import OpenAI
+from dotenv import load_dotenv
+
+load_dotenv()
+
+client = OpenAI(
+    api_key=os.getenv('OPENAI_API_KEY'),
+)
+
+chat_completion = client.chat.completions.create(
+    messages=[
+        {
+            "role": "user",
+            "content": "R 언어가 뭔지 간략하게 설명해줘",
+        }
+    ],
+    model="gpt-3.5-turbo",
+)
+
+print(chat_completion.choices[0].message.content)
+```
+
+1.  **모듈 가져오기**:
+    -   `os`는 운영 체제와 상호작용하고, 환경 변수에 접근하는 데 사용된다.
+    -   `openai`는 OpenAI의 파이썬 클라이언트 라이브러리로, GPT 모델을 사용하는 데 필요하다.
+    -   `dotenv`는 `.env` 파일에서 환경 변수를 로드하는 데 사용된다.
+2.  **환경 변수 로드**:
+    -   `load_dotenv()`는 프로젝트 루트의 `.env` 파일로부터 환경 변수를 로드한다. `.env` 파일에 저장된 `OPENAI_API_KEY` 환경변수를 가져온다.
+3.  **OpenAI 클라이언트 초기화**:
+    -   `OpenAI`를 사용해 API 클라이언트를 생성한다.
+    -   `api_key=os.getenv('OPENAI_API_KEY')`는 환경 변수에서 `OPENAI_API_KEY`를 가져와 클라이언트를 인증한다.
+4.  **채팅 완성 생성**:
+    -   `client.chat.completions.create`는 OpenAI의 채팅 완성 API를 사용해 채팅 대화를 생성한다.
+    -   `messages`는 사용자의 입력 메시지를 담고 있다. 이 경우 "R 언어가 뭔지 간략하게 설명해줘"라는 질문이 포함되어 있다.
+    -   `model="gpt-3.5-turbo"`는 사용할 GPT 모델을 지정한다.
+5.  **결과 출력**:
+    -   `print(chat_completion.choices[0].message.content)`는 생성된 채팅 대화에서 첫 번째 선택 항목의 메시지 내용을 출력한다. 이는 GPT 모델이 생성한 답변을 보여준다.
+
+``` bash
+R 언어는 통계 분석 및 데이터 시각화를 위한 프로그래밍 언어로, 특히 데이터 분석 및 머신러닝 분야에서 널리 사용됩니다. R은 무료로 사용할 수 있고 다양한 통계 및 그래픽 라이브러리를 제공하여 데이터 분석가들이 데이터를 쉽게 다룰 수 있도록 도와줍니다. R 언어는 벡터화된 연산을 통해 효율적으로 대용량 데이터를 다룰 수 있는 장점을 가지고 있습니다.
+```
+
+OpenAI GPT-3.5 모델이 정상적으로 응답하는 것을 확인한 후, 다음 단계로 진행한다.
+챗GPT 인터페이스로 작성된 프롬프트를 바탕으로, `"""` 안에 빈도수를 계산할 `romeo.txt` 파일 본문과 자연어로 텍스트에서 빈도수가 높은 단어를 화면에 출력하는 R 코드를 만들도록 하면, API 프로그래밍으로 만들어진 파이썬 스크립트에 적용된 인증 과정을 거친 후 R 코드를 생성하게 된다.
+
+```{python}
+#| eval: false
+import os
+from openai import OpenAI
+from dotenv import load_dotenv
+
+load_dotenv()
+
+client = OpenAI(
+    api_key=os.getenv('OPENAI_API_KEY'),
+)
+
+code_message = """
+You are an expert in R language. 
+The following text have been provided to you. 
+Please convert my query into an appropriate r codes.
+
+But soft what light through yonder window breaks
+It is the east and Juliet is the sun
+Arise fair sun and kill the envious moon
+Who is already sick and pale with grief
+
+
+Let's write an r program to count the most frequent words on the screen.
+"""
+
+chat_completion = client.chat.completions.create(
+    messages=[
+        {
+            "role": "user",
+            "content": code_message,
+        }
+    ],
+    model="gpt-3.5-turbo",
+)
+
+print(chat_completion.choices[0].message.content)
+```
+
+출력결과가 상당히 만족스럽다.
+영어로 되어있지만 주석과 함께 R 코드가 잘 생성된 것을 확인할 수 있다.
+생성된 결과물 중 R 코드에 대한 부분만 추출하여 실제 실행시켜도 오류 없이 정상 실행됨이 확인된다.
+
+```{r}
+# Create a vector of the provided text
+text <- c("But soft what light through yonder window breaks",
+          "It is the east and Juliet is the sun",
+          "Arise fair sun and kill the envious moon",
+          "Who is already sick and pale with grief")
+
+# Convert the text to lowercase
+text <- tolower(text)
+
+# Flatten the text into a single string
+text <- paste(text, collapse = " ")
+
+# Split the text into individual words
+words <- strsplit(text, "\\W+")
+
+# Convert the list of words into a single vector
+words <- unlist(words)
+
+# Count the frequency of each word
+word_counts <- table(words)
+
+# Sort the words by frequency
+word_counts <- sort(word_counts, decreasing = TRUE)
+
+# Print the 5 most frequent words
+head(word_counts, 5)
+```
+
+OpenAI GPT-3.5 LLM 모형은 범용 언어모형이지만, 제시된 텍스트에서 가장 빈도수가 많은 단어를 추출하는 작업을 수행하는 R 코드를 생성했다.
+생성된 R 코드는 주어진 텍스트를 소문자로 변환하고, 단어로 분리한 후, 각 단어 빈도수를 계산하여 가장 빈도수가 높은 단어 5개를 출력하는 코드를 제시했다.
+
+OpenAI GPT-3.5 모델이 GPT-4 모형과 비교하여 성능이 떨어지는 것으로 알려져 있지만, 단순한 텍스트 처리와 빈도수 계산에 대한 R 코드를 생성하는 데는 충분히 사용할 수 있을 것으로 보인다.
+
+## 심슨의 역설
+
+\index{심슨의 역설}
+
+심슨의 역설(Simpson’s Paradox)은 데이터를 취합할 때 의미 있는 변수를 생략하면 변수 간에 관찰되는 추세가 역전되는 데이터 현상이다.
+부리의 길이와 깊이는 전체적으로 음의 상관관계를 보이지만, 종을 포함하면 이러한 추세가 반전되어 종 내에서는 부리 길이와 부리 깊이 사이에 양의 상관관계가 뚜렷하게 나타난다.
+
+```{webr-r}
+#| label: ggplot-plot-hist
+penguins <- palmerpenguins::penguins
+
+penguins |> 
+  ggplot(aes(x = bill_length_mm, y = bill_depth_mm)) +
+    geom_point(size = 3, alpha = 0.8) +
+    labs(title = "펭귄종을 누락한 상태 부리 길이와 깊이",
+         subtitle = "남극 파머 연구소",
+         x = "부리 길이 (mm)",
+         y = "부리 깊이 (mm)") +
+    theme(plot.title.position = "plot",
+          plot.caption = element_text(hjust = 0, face= "italic"),
+          plot.caption.position = "plot") +
+    geom_smooth(method = "lm", se = FALSE, color = "gray50") 
+```
+
+다음 코드에서 `group` 인수를 `species`로 설정하게 되면, 기존 부리 길이와 깊이 관계가 음의 상관에서 양의 상관관계로 변화함을 확인하게 되어 패러독스가 발생함을 확인할 수 있다.
+
+```{webr-r}
+#| label: palmer-penguins-paradox
+penguins |>
+  ggplot(aes(x = bill_length_mm, y = bill_depth_mm, 
+             color = species, group = ______)) +
+  geom_point(size = 3, alpha = 0.8) +
+  scale_color_manual(values = c("darkorange","purple","cyan4")) +
+  labs(title = "펭귄종을 포함한 상태 부리 길이와 깊이",
+       subtitle = "남극 파머 연구소",
+       x = "부리 길이 (mm)",
+       y = "부리 깊이 (mm)") +
+  theme(plot.title.position = "plot",
+        plot.caption = element_text(hjust = 0, face= "italic"),
+        plot.caption.position = "plot",
+        legend.position = "top") +
+  geom_smooth(method = "lm", se = FALSE) 
+
+```
+
+## 프로젝트 {.unnumbered}
+
+\index{프로젝트}
+
+[-@sec-nightingale] 장 나이팅게일 데이터를 이용하여 크림전쟁 사망자수를 위생조치를 취함으로써 줄인 시각화를 생성한다.
+[-@sec-nightingale] 장 R 코드를 OpenAI 챗GPT, 구글 제미나이, 앤스로픽 클로드를 이용하여 파이썬 코드를 생성하고 파이썬 코드를 실행하여 정상 동작여부, 코드 품질, 시각화 결과물을 [-@sec-nightingale] 장 R 코드를 이용하여 생성한 결과물과 비교한다.
