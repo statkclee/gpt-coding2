@@ -87,10 +87,6 @@ ga('send', {
 });
 </script>
 <script defer="" data-domain="r2bit.com/gpt-coding" src="https://plausible.io/js/script.js"></script>
-<meta name="mermaid-theme" content="neutral">
-<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -237,90 +233,17 @@ ga('send', {
 
 <p>소프트웨어 개발의 세계는 끊임없이 진화하는 도구의 생태계와 같습니다. 그 중심에는 개발자의 생산성을 극대화하는 <strong>통합 개발 환경(IDE)</strong>이 있습니다. IDE는 단순한 코드 편집기를 넘어, 컴파일, 디버깅, 버전 관리 등 개발에 필요한 모든 과정을 하나의 창에서 해결할 수 있도록 돕는 강력한 작업 공간입니다.</p>
 <p>하지만 모든 개발자에게 완벽한 단 하나의 IDE는 없습니다. 프로젝트의 종류, 주로 사용하는 언어, 그리고 개인의 개발 스타일에 따라 최적의 도구는 달라집니다. 이 글에서는 IDE의 역사부터 최신 AI 트렌드까지의 여정을 따라가며, 여러분 자신에게 맞는 최적의 IDE를 선택하고 구성하는 데 필요한 지식과 통찰을 제공하고자 합니다.</p>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">graph TD
-    %% 스타일 정의 %%
-    classDef client fill:#e1f5fe,stroke:#0288d1,stroke-width:2px,color:black;
-    classDef server fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:black;
-    classDef kernel fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:black;
-    classDef storage fill:#efebe9,stroke:#5d4037,stroke-width:2px,color:black;
-    classDef external fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px;
-
-    %% 1. 클라이언트 사이드 %%
-    subgraph Client_Side ["클라이언트 사이드"]
-        Browser["웹 브라우저/데스크탑 앱&lt;br/&gt;(UI 렌더링)"]
-        Editor["코드 편집기/노트북&lt;br/&gt;(사용자 입력)"]
-        OutputView["결과 뷰어&lt;br/&gt;(그래프, 표 출력)"]
-    end
-
-    %% 연결: 클라이언트 &lt;-&gt; 서버 %%
-    Browser &lt;==&gt;|"WebSockets / HTTP&lt;br/&gt;(실시간 통신)"| ServerGateway
-
-    %% 2. 서버 사이드 %%
-    subgraph Server_Side ["서버 사이드"]
-        ServerGateway["IDE 서버/게이트웨이&lt;br/&gt;(요청 처리, 인증)"]
-        SessionMgr["세션 관리자&lt;br/&gt;(커널 할당 및 상태 관리)"]
-        TerminalService["터미널 서비스"]
-    end
-
-    ServerGateway --&gt; SessionMgr
-    ServerGateway --&gt; TerminalService
-
-    %% 연결: 서버 &lt;-&gt; 커널 %%
-    SessionMgr &lt;==&gt;|"ZeroMQ / gRPC&lt;br/&gt;(코드 실행 요청)"| PyKernel
-    SessionMgr &lt;==&gt;|"ZeroMQ / gRPC&lt;br/&gt;(코드 실행 요청)"| RKernel
-
-    %% 3. 커널 계층 %%
-    subgraph Kernel_Layer ["컴퓨팅 엔진 (커널 계층)"]
-        PyKernel["Python 커널&lt;br/&gt;(메모리 내 변수 상태)"]
-        RKernel["R 커널&lt;br/&gt;(세션 상태)"]
-        SparkCtx["Spark 컨텍스트&lt;br/&gt;(분산 처리 요청)"]
-    end
-
-    %% 4. 스토리지 및 데이터 %%
-    subgraph Storage_Layer ["스토리지 및 데이터 계층"]
-        FileSystem["파일 시스템&lt;br/&gt;(.ipynb, .py)"]
-        DB["데이터베이스&lt;br/&gt;(SQL, NoSQL)"]
-        CloudStore["클라우드 스토리지&lt;br/&gt;(S3, GCS, Blob)"]
-    end
-
-    %% 연결: 커널 &lt;-&gt; 스토리지 %%
-    PyKernel --&gt;|"데이터 로드/저장"| FileSystem
-    RKernel --&gt;|"데이터 로드/저장"| FileSystem
-    PyKernel --&gt;|"쿼리 실행"| DB
-    RKernel --&gt;|"쿼리 실행"| DB
-    PyKernel --&gt;|"데이터 접근"| CloudStore
-    RKernel --&gt;|"데이터 접근"| CloudStore
-    ServerGateway --&gt;|"파일 탐색"| FileSystem
-
-    %% 5. 외부 통합 %%
-    subgraph External_Integrations ["외부 생태계 연동"]
-        Git["Git/버전 관리"]
-        MLOps["MLOps 도구&lt;br/&gt;(MLflow, W&amp;B)"]
-        Cluster["컴퓨팅 클러스터&lt;br/&gt;(Kubernetes)"]
-    end
-
-    %% 연결: 외부 통합 %%
-    FileSystem &lt;--&gt; Git
-    PyKernel --&gt;|"모델 로깅"| MLOps
-    PyKernel -.-&gt;|"작업 제출"| Cluster
-
-    %% 클래스 적용 %%
-    class Browser,Editor,OutputView client;
-    class ServerGateway,SessionMgr,TerminalService server;
-    class PyKernel,RKernel,SparkCtx kernel;
-    class FileSystem,DB,CloudStore storage;
-    class Git,MLOps,Cluster external;
-</pre>
+<div id="fig-ide-architecture" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ide-architecture-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ide-architecture-overview.svg" class="img-fluid figure-img">
 </div>
-<p></p></figure><p></p>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ide-architecture-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;1.1: 데이터 과학 IDE 아키텍처 (VS Code 기반)
+</figcaption>
+</figure>
 </div>
-</div>
-</div>
+<p><a href="#fig-ide-architecture" class="quarto-xref">그림&nbsp;<span>1.1</span></a> 는 VS Code를 기반으로 한 현대 데이터 과학 IDE(Positron, Cursor 등)의 일반적인 아키텍처를 보여줍니다. 클라이언트 레이어(UI), Extension Host(확장 프로그램 실행), 커널 레이어(코드 실행), 그리고 외부 서비스와의 연동이 명확히 분리되어 있습니다.</p>
 <section id="ide의-탄생과-발전" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="ide의-탄생과-발전"><span class="header-section-number">1.1</span> IDE의 탄생과 발전</h2>
 <p>IDE의 역사는 ’어떻게 하면 개발을 더 편하고 효율적으로 할 수 있을까?’라는 고민의 역사와 같습니다.</p>
@@ -389,11 +312,11 @@ ga('send', {
 <img src="images/ide-kernel-architecture.svg" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-kernel-arch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-그림&nbsp;1.1: 커널 아키텍처: 프론트엔드와 실행 엔진의 분리
+그림&nbsp;1.2: 커널 아키텍처: 프론트엔드와 실행 엔진의 분리
 </figcaption>
 </figure>
 </div>
-<p><a href="#fig-kernel-arch" class="quarto-xref">그림&nbsp;<span>1.1</span></a> 는 IDE의 프론트엔드(사용자 인터페이스)와 커널(언어 실행 엔진)이 어떻게 분리되어 있으며, ZeroMQ와 Jupyter 메시징 프로토콜을 통해 서로 통신하는지를 보여줍니다. 이러한 분리 덕분에 하나의 IDE가 여러 프로그래밍 언어를 지원할 수 있습니다.</p>
+<p><a href="#fig-kernel-arch" class="quarto-xref">그림&nbsp;<span>1.2</span></a> 는 IDE의 프론트엔드(사용자 인터페이스)와 커널(언어 실행 엔진)이 어떻게 분리되어 있으며, ZeroMQ와 Jupyter 메시징 프로토콜을 통해 서로 통신하는지를 보여줍니다. 이러한 분리 덕분에 하나의 IDE가 여러 프로그래밍 언어를 지원할 수 있습니다.</p>
 </section>
 <section id="ai-에이전트-개발을-위한-환경" class="level3" data-number="1.3.3">
 <h3 data-number="1.3.3" class="anchored" data-anchor-id="ai-에이전트-개발을-위한-환경"><span class="header-section-number">1.3.3</span> AI 에이전트 개발을 위한 환경</h3>

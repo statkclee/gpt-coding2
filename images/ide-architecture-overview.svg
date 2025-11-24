@@ -1,0 +1,146 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700">
+  <defs>
+    <style>
+      .title { font-family: 'Palatino', 'Georgia', serif; font-size: 18px; fill: #333; font-weight: bold; }
+      .section-title { font-family: 'Palatino', 'Georgia', serif; font-size: 14px; fill: #333; font-weight: bold; }
+      .label { font-family: 'Palatino', 'Georgia', serif; font-size: 13px; fill: #333; }
+      .small-label { font-family: 'Palatino', 'Georgia', serif; font-size: 11px; fill: #666; }
+      .box { fill: none; stroke: #333; stroke-width: 2; }
+      .light-box { fill: #f5f5f5; stroke: #999; stroke-width: 1.5; }
+      .lighter-box { fill: #fafafa; stroke: #ccc; stroke-width: 1; }
+      .arrow { fill: none; stroke: #666; stroke-width: 1.5; marker-end: url(#arrowhead); }
+      .bidirectional { fill: none; stroke: #666; stroke-width: 1.5; }
+      .dashed { stroke-dasharray: 5,3; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="450" y="30" text-anchor="middle" class="title">데이터 과학 IDE 아키텍처 (VS Code 기반)</text>
+
+  <!-- Client Layer -->
+  <rect x="50" y="60" width="800" height="150" class="box" />
+  <text x="450" y="85" text-anchor="middle" class="section-title">클라이언트 레이어 (UI / Electron)</text>
+
+  <rect x="80" y="100" width="180" height="90" class="light-box" />
+  <text x="170" y="125" text-anchor="middle" class="label">편집기 (Editor)</text>
+  <text x="170" y="145" text-anchor="middle" class="small-label">코드 편집</text>
+  <text x="170" y="160" text-anchor="middle" class="small-label">구문 강조</text>
+  <text x="170" y="175" text-anchor="middle" class="small-label">자동 완성</text>
+
+  <rect x="290" y="100" width="180" height="90" class="light-box" />
+  <text x="380" y="125" text-anchor="middle" class="label">뷰어 (Viewer)</text>
+  <text x="380" y="145" text-anchor="middle" class="small-label">플롯 / 그래프</text>
+  <text x="380" y="160" text-anchor="middle" class="small-label">데이터프레임</text>
+  <text x="380" y="175" text-anchor="middle" class="small-label">변수 탐색기</text>
+
+  <rect x="500" y="100" width="180" height="90" class="light-box" />
+  <text x="590" y="125" text-anchor="middle" class="label">터미널</text>
+  <text x="590" y="145" text-anchor="middle" class="small-label">명령줄 인터페이스</text>
+  <text x="590" y="160" text-anchor="middle" class="small-label">쉘 통합</text>
+  <text x="590" y="175" text-anchor="middle" class="small-label">작업 실행</text>
+
+  <rect x="710" y="100" width="110" height="90" class="light-box" />
+  <text x="765" y="125" text-anchor="middle" class="label">사이드바</text>
+  <text x="765" y="145" text-anchor="middle" class="small-label">파일 탐색</text>
+  <text x="765" y="160" text-anchor="middle" class="small-label">Git 뷰</text>
+  <text x="765" y="175" text-anchor="middle" class="small-label">확장 관리</text>
+
+  <!-- Extension Host & Language Servers -->
+  <rect x="50" y="250" width="380" height="180" class="box" />
+  <text x="240" y="275" text-anchor="middle" class="section-title">Extension Host (별도 프로세스)</text>
+
+  <rect x="80" y="290" width="150" height="70" class="lighter-box" />
+  <text x="155" y="315" text-anchor="middle" class="label">확장 프로그램</text>
+  <text x="155" y="335" text-anchor="middle" class="small-label">Python Extension</text>
+  <text x="155" y="350" text-anchor="middle" class="small-label">R Extension</text>
+
+  <rect x="260" y="290" width="150" height="70" class="lighter-box" />
+  <text x="335" y="315" text-anchor="middle" class="label">언어 서버 (LSP)</text>
+  <text x="335" y="335" text-anchor="middle" class="small-label">Pylance (Python)</text>
+  <text x="335" y="350" text-anchor="middle" class="small-label">R Language Server</text>
+
+  <rect x="80" y="380" width="330" height="35" fill="#e5e5e5" stroke="#999" stroke-width="1" />
+  <text x="245" y="402" text-anchor="middle" class="small-label">디버그 어댑터, 포매터, 린터...</text>
+
+  <!-- Kernel Layer -->
+  <rect x="470" y="250" width="380" height="180" class="box" />
+  <text x="660" y="275" text-anchor="middle" class="section-title">커널 레이어 (별도 프로세스)</text>
+
+  <rect x="500" y="290" width="150" height="70" class="lighter-box" />
+  <text x="575" y="315" text-anchor="middle" class="label">Python 커널</text>
+  <text x="575" y="335" text-anchor="middle" class="small-label">IPython</text>
+  <text x="575" y="350" text-anchor="middle" class="small-label">실행 엔진</text>
+
+  <rect x="680" y="290" width="150" height="70" class="lighter-box" />
+  <text x="755" y="315" text-anchor="middle" class="label">R 커널</text>
+  <text x="755" y="335" text-anchor="middle" class="small-label">IRkernel</text>
+  <text x="755" y="350" text-anchor="middle" class="small-label">실행 엔진</text>
+
+  <rect x="500" y="380" width="330" height="35" fill="#e5e5e5" stroke="#999" stroke-width="1" />
+  <text x="665" y="402" text-anchor="middle" class="small-label">Jupyter 메시징 프로토콜 (ZMQ)</text>
+
+  <!-- Storage & External -->
+  <rect x="50" y="470" width="380" height="180" class="box" />
+  <text x="240" y="495" text-anchor="middle" class="section-title">스토리지 & 파일 시스템</text>
+
+  <rect x="80" y="510" width="150" height="55" class="lighter-box" />
+  <text x="155" y="535" text-anchor="middle" class="label">로컬 파일</text>
+  <text x="155" y="555" text-anchor="middle" class="small-label">.py, .R, .ipynb</text>
+
+  <rect x="260" y="510" width="150" height="55" class="lighter-box" />
+  <text x="335" y="535" text-anchor="middle" class="label">데이터 소스</text>
+  <text x="335" y="555" text-anchor="middle" class="small-label">CSV, DB, API</text>
+
+  <rect x="80" y="585" width="330" height="50" class="lighter-box" />
+  <text x="245" y="610" text-anchor="middle" class="label">Git 저장소</text>
+  <text x="245" y="627" text-anchor="middle" class="small-label">버전 관리 및 협업</text>
+
+  <!-- External Services -->
+  <rect x="470" y="470" width="380" height="180" class="box" />
+  <text x="660" y="495" text-anchor="middle" class="section-title">외부 서비스 연동</text>
+
+  <rect x="500" y="510" width="150" height="55" class="lighter-box" />
+  <text x="575" y="535" text-anchor="middle" class="label">클라우드 스토리지</text>
+  <text x="575" y="555" text-anchor="middle" class="small-label">S3, GCS, Azure</text>
+
+  <rect x="680" y="510" width="150" height="55" class="lighter-box" />
+  <text x="755" y="535" text-anchor="middle" class="label">MLOps 도구</text>
+  <text x="755" y="555" text-anchor="middle" class="small-label">MLflow, W&B</text>
+
+  <rect x="500" y="585" width="330" height="50" class="lighter-box" />
+  <text x="665" y="610" text-anchor="middle" class="label">컴퓨팅 클러스터</text>
+  <text x="665" y="627" text-anchor="middle" class="small-label">원격 실행 환경 (옵션)</text>
+
+  <!-- Arrows -->
+  <!-- Client to Extension Host -->
+  <path d="M 170 210 L 170 250" class="arrow" />
+  <path d="M 380 210 L 335 250" class="arrow" />
+
+  <!-- Client to Kernel -->
+  <path d="M 590 210 L 575 250" class="arrow" />
+  <path d="M 380 210 L 575 250" class="arrow" />
+
+  <!-- Extension Host to Kernel -->
+  <path d="M 430 340 L 470 340" class="bidirectional" />
+  <path d="M 460 335 L 470 340 L 460 345" fill="#666" />
+  <path d="M 440 335 L 430 340 L 440 345" fill="#666" />
+  <text x="450" y="330" text-anchor="middle" class="small-label">IPC</text>
+
+  <!-- Kernel to Storage -->
+  <path d="M 575 430 L 335 470" class="arrow" />
+  <path d="M 575 430 L 155 470" class="arrow" />
+
+  <!-- Extension Host to Git -->
+  <path d="M 240 430 L 240 470" class="arrow" />
+
+  <!-- Kernel to External -->
+  <path d="M 665 430 L 665 470" class="arrow" />
+
+  <!-- Bottom note -->
+  <text x="450" y="680" text-anchor="middle" class="small-label" fill="#999">
+    VS Code 기반 IDE (Positron, Cursor 등)의 일반적인 아키텍처 구조
+  </text>
+</svg>
