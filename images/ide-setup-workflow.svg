@@ -79,7 +79,7 @@
   <text x="460" y="515" text-anchor="middle" class="tufte-text label">Python 설치</text>
   <text x="460" y="535" text-anchor="middle" class="tufte-text detail">python.org에서 다운로드</text>
   <text x="460" y="555" text-anchor="middle" class="tufte-text detail">환경 관리: uv</text>
-  <text x="460" y="570" text-anchor="middle" class="tufte-text note">uv venv && uv pip install</text>
+  <text x="460" y="570" text-anchor="middle" class="tufte-text note">uv venv, uv pip install</text>
 
   <!-- Arrows converging -->
   <path d="M 240 580 L 240 620 L 350 640" class="arrow"/>
@@ -91,7 +91,7 @@
 
   <rect x="200" y="640" width="300" height="70" rx="4" class="box-emphasis"/>
   <text x="350" y="665" text-anchor="middle" class="tufte-text label">Positron IDE 설치</text>
-  <text x="350" y="685" text-anchor="middle" class="tufte-text detail">R & Python 통합 개발 환경</text>
+  <text x="350" y="685" text-anchor="middle" class="tufte-text detail">R, Python 통합 개발 환경</text>
   <text x="350" y="700" text-anchor="middle" class="tufte-text note">posit.co/products/positron/</text>
 
   <!-- Optional Steps (Right side) -->
