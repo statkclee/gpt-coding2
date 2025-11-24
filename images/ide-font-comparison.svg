@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400">
+  <defs>
+    <style>
+      /* Tufte Style: Strictly Grayscale, Serif, Minimal */
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #111; }
+      .title { font-size: 18px; font-weight: bold; }
+      .label { font-size: 15px; font-weight: bold; }
+      .detail { font-size: 13px; fill: #444; }
+      .note { font-size: 12px; fill: #666; font-style: italic; }
+
+      /* Boxes */
+      .box { fill: #fff; stroke: #888; stroke-width: 1.5; }
+      .box-emphasis { fill: #f5f5f5; stroke: #666; stroke-width: 2; }
+      .divider { stroke: #ccc; stroke-width: 1; stroke-dasharray: 4,3; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="900" height="400" fill="#ffffff"/>
+
+  <!-- Left: D2Coding -->
+  <rect x="50" y="80" width="380" height="280" rx="4" class="box-emphasis"/>
+  <text x="240" y="110" text-anchor="middle" class="tufte-text label">D2Coding</text>
+  <text x="240" y="130" text-anchor="middle" class="tufte-text detail">코딩 전용 고정폭 글꼴</text>
+
+  <text x="70" y="170" class="tufte-text detail">✓ 고정폭 (monospace)</text>
+  <text x="70" y="195" class="tufte-text detail">✓ 코드 정렬 정확</text>
+  <text x="70" y="220" class="tufte-text detail">✓ IDE/에디터 최적화</text>
+  <text x="70" y="245" class="tufte-text detail">✓ 한글+영문 조화</text>
+
+  <text x="70" y="285" class="tufte-text note">용도: 코드 작성, 터미널</text>
+  <text x="70" y="305" class="tufte-text note">파일: TTF (고정 weight)</text>
+  <text x="70" y="325" class="tufte-text note">특징: 가독성, 구분성</text>
+
+  <!-- Right: Pretendard -->
+  <rect x="470" y="80" width="380" height="280" rx="4" class="box-emphasis"/>
+  <text x="660" y="110" text-anchor="middle" class="tufte-text label">프리텐다드 (Pretendard)</text>
+  <text x="660" y="130" text-anchor="middle" class="tufte-text detail">웹 타이포그래피 가변 글꼴</text>
+
+  <text x="490" y="170" class="tufte-text detail">✓ 가변 폰트 (Variable Font)</text>
+  <text x="490" y="195" class="tufte-text detail">✓ Weight 100~900</text>
+  <text x="490" y="220" class="tufte-text detail">✓ 웹 최적화 (WOFF2)</text>
+  <text x="490" y="245" class="tufte-text detail">✓ 한글+영문+일본어</text>
+
+  <text x="490" y="285" class="tufte-text note">용도: 웹 문서, 출판</text>
+  <text x="490" y="305" class="tufte-text note">파일: WOFF2 (가변 weight)</text>
+  <text x="490" y="325" class="tufte-text note">특징: 유연성, 일관성</text>
+
+  <!-- Divider -->
+  <line x1="450" y1="100" x2="450" y2="350" class="divider"/>
+
+  <!-- Top Title -->
+  <text x="450" y="35" text-anchor="middle" class="tufte-text title">개발 환경 글꼴 선택 가이드</text>
+
+</svg>

@@ -289,7 +289,9 @@ tinytex::install_tinytex()
 
 가독성 높은 코딩 글꼴은 개발자의 눈의 피로를 줄여주고 코드의 오타나 버그를 쉽게 발견할 수 있도록 돕는 중요한 도구다. 특히 한글과 영문, 특수문자가 혼합된 환경에서는 코딩 전용 글꼴의 역할이 더욱 중요하다.
 
-이 섹션에서는 대표적인 한글 코딩 글꼴인 **D2Coding**을 설치하고, 이를 Positron/VS Code에 적용하는 방법을 안내한다.
+![개발 환경 글꼴 선택 가이드](images/ide-font-comparison.svg){#fig-font-comparison}
+
+@fig-font-comparison 은 D2Coding과 프리텐다드의 특징과 용도를 비교한다. D2Coding은 코드 작성에, 프리텐다드는 웹 문서 출판에 최적화되어 있다.
 
 ### D2Coding 폰트 설치 {#sec-setup-font-install}
 
