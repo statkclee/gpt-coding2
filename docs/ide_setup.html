@@ -356,6 +356,17 @@ ga('send', {
 <section id="sec-setup-isolation-comparison" class="level2" data-number="4.4">
 <h2 data-number="4.4" class="anchored" data-anchor-id="sec-setup-isolation-comparison"><span class="header-section-number">4.4</span> 환경 격리 도구 비교: uv vs Docker</h2>
 <p>Python 개발 환경 격리 도구인 uv와 Docker는 모두 ‘재현 가능한 환경’ 구축을 목표로 하지만, 접근 방식과 범위가 다르다.</p>
+<div id="fig-isolation-levels" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-isolation-levels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ide-isolation-levels.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-isolation-levels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;4.2: 환경 격리 수준 비교: uv vs Docker
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-isolation-levels" class="quarto-xref">그림&nbsp;<span>4.2</span></a> 는 uv와 Docker의 가상화 계층 구조를 보여준다. uv는 Python 패키지 수준만 격리하는 반면, Docker는 OS부터 모든 시스템 의존성까지 완전히 격리한다.</p>
 <section id="유사점" class="level3" data-number="4.4.1">
 <h3 data-number="4.4.1" class="anchored" data-anchor-id="유사점"><span class="header-section-number">4.4.1</span> 유사점</h3>
 <p>두 도구 모두 다음 목표를 공유한다:</p>

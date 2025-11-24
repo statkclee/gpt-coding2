@@ -61,6 +61,10 @@ AI/머신러닝 프로젝트는 복잡한 라이브러리, 시스템 의존성, 
 
 Python 개발 환경 격리 도구인 \index{uv}uv와 \index{Docker}Docker는 모두 '재현 가능한 환경' 구축을 목표로 하지만, 접근 방식과 범위가 다르다.
 
+![환경 격리 수준 비교: uv vs Docker](images/ide-isolation-levels.svg){#fig-isolation-levels}
+
+@fig-isolation-levels 는 uv와 Docker의 가상화 계층 구조를 보여준다. uv는 Python 패키지 수준만 격리하는 반면, Docker는 OS부터 모든 시스템 의존성까지 완전히 격리한다.
+
 ### 유사점
 
 두 도구 모두 다음 목표를 공유한다:
