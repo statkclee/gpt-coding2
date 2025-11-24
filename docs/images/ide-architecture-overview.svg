@@ -1,14 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 70 900 630">
   <defs>
     <style>
       /* Tufte Style: Grayscale, Serif font, minimal decoration */
       .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
       .title { font-size: 20px; font-weight: bold; }
       .subtitle { font-size: 13px; fill: #666; }
-      .h2 { font-size: 15px; font-weight: bold; fill: #444; }
-      .label { font-size: 13px; font-weight: 600; }
+      .h2 { font-size: 16px; font-weight: bold; fill: #444; }
+      .label { font-size: 14px; font-weight: 600; }
       .detail { font-size: 11px; fill: #666; }
-      .note { font-size: 10px; fill: #888; font-style: italic; }
+      .note { font-size: 12px; fill: #888; font-style: italic; }
       .zone-bg { fill: #fafafa; stroke: #d0d0d0; stroke-width: 1; }
       .sub-module { fill: #fff; stroke: #999; stroke-width: 1; }
       .flow-line { fill: none; stroke: #666; stroke-width: 1.5; marker-end: url(#arrow); }
@@ -25,13 +25,13 @@
 
   <rect x="0" y="0" width="900" height="700" fill="#ffffff"/>
 
-  <text x="450" y="40" text-anchor="middle" class="tufte-text title">데이터 과학 IDE 아키텍처</text>
-  <text x="450" y="60" text-anchor="middle" class="tufte-text subtitle">VS Code 기반 (Positron, Cursor 등)</text>
+  <!-- <text x="450" y="40" text-anchor="middle" class="tufte-text title">데이터 과학 IDE 아키텍처</text>
+  <text x="450" y="60" text-anchor="middle" class="tufte-text subtitle">VS Code 기반 (Positron, Cursor 등)</text> -->
 
   <!-- Layer 1: Client UI -->
   <rect x="50" y="90" width="800" height="120" rx="4" class="zone-bg" />
   <text x="70" y="115" class="tufte-text h2">1. 클라이언트 UI 계층</text>
-  <text x="70" y="133" class="tufte-text note">Electron 프로세스 — 사용자 인터페이스</text>
+  <text x="70" y="133" class="tufte-text note">일렉트론(Electron) 프로세스 — 사용자 인터페이스</text>
 
   <rect x="100" y="145" width="180" height="50" class="sub-module"/>
   <text x="190" y="165" text-anchor="middle" class="tufte-text label">코드 편집기</text>
@@ -59,7 +59,7 @@
   <text x="70" y="293" class="tufte-text note">별도 프로세스 — 확장 프로그램 격리 실행</text>
 
   <rect x="80" y="305" width="170" height="60" class="sub-module"/>
-  <text x="165" y="325" text-anchor="middle" class="tufte-text label">Python Extension</text>
+  <text x="165" y="325" text-anchor="middle" class="tufte-text label">파이썬 Extension</text>
   <text x="165" y="340" text-anchor="middle" class="tufte-text detail">커널 관리</text>
   <text x="165" y="355" text-anchor="middle" class="tufte-text detail">디버거, 포매터</text>
 
@@ -70,7 +70,7 @@
 
   <!-- Connection: Extension Host to Kernel -->
   <path d="M 350 380 L 550 430" class="flow-bidir" />
-  <text x="430" y="410" class="tufte-text note">Jupyter 프로토콜 (ZMQ)</text>
+  <text x="470" y="410" class="tufte-text note">주피터 프로토콜 (ZMQ)</text>
 
   <!-- Layer 3: Kernel -->
   <rect x="470" y="430" width="380" height="130" rx="4" class="zone-bg" />
@@ -78,7 +78,7 @@
   <text x="490" y="473" class="tufte-text note">별도 프로세스 — 코드 실행 및 메모리 상태 관리</text>
 
   <rect x="500" y="485" width="160" height="60" class="sub-module"/>
-  <text x="580" y="505" text-anchor="middle" class="tufte-text label">Python 커널</text>
+  <text x="580" y="505" text-anchor="middle" class="tufte-text label">파이썬 커널</text>
   <text x="580" y="520" text-anchor="middle" class="tufte-text detail">IPython</text>
   <text x="580" y="535" text-anchor="middle" class="tufte-text detail">변수, 연산</text>
 
