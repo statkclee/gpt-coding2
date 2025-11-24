@@ -41,7 +41,7 @@
 
   <!-- Column 1: 코딩 & 터미널 -->
   <rect x="30" y="80" width="260" height="440" rx="4" class="box-group"/>
-  <text x="160" y="105" text-anchor="middle" class="tufte-text category">1. 코딩 & 터미널</text>
+  <text x="160" y="105" text-anchor="middle" class="tufte-text category">1. 코딩 &amp; 터미널</text>
   <text x="160" y="122" text-anchor="middle" class="tufte-text item-desc">고정폭, 가독성, 합자</text>
 
   <rect x="50" y="140" width="220" height="55" rx="2" class="box-highlight"/>
@@ -54,7 +54,7 @@
 
   <rect x="50" y="270" width="220" height="55" rx="2" class="box-highlight"/>
   <text x="65" y="292" class="tufte-text font-d2coding">D2코딩</text>
-  <text x="65" y="310" class="tufte-text item-desc">한글 가독성 최강 ⭐</text>
+  <text x="65" y="310" class="tufte-text item-desc">한글 가독성 최강 ★</text>
 
   <rect x="50" y="335" width="220" height="55" rx="2" class="box-item"/>
   <text x="65" y="357" class="tufte-text font-cascadia">Cascadia Code</text>
@@ -71,7 +71,7 @@
 
   <rect x="340" y="140" width="220" height="55" rx="2" class="box-highlight"/>
   <text x="355" y="162" class="tufte-text font-pretendard">프리텐다드</text>
-  <text x="355" y="180" class="tufte-text item-desc">한국 웹 표준 ⭐</text>
+  <text x="355" y="180" class="tufte-text item-desc">한국 웹 표준 ★</text>
 
   <rect x="340" y="205" width="220" height="55" rx="2" class="box-item"/>
   <text x="355" y="227" class="tufte-text font-inter">Inter</text>
@@ -87,7 +87,7 @@
 
   <!-- Column 3: 문서 & 블로그 -->
   <rect x="610" y="80" width="260" height="440" rx="4" class="box-group"/>
-  <text x="740" y="105" text-anchor="middle" class="tufte-text category">3. 문서 & 블로그</text>
+  <text x="740" y="105" text-anchor="middle" class="tufte-text category">3. 문서 &amp; 블로그</text>
   <text x="740" y="122" text-anchor="middle" class="tufte-text item-desc">장문 가독성, 브랜딩</text>
 
   <rect x="630" y="140" width="220" height="55" rx="2" class="box-item"/>
