@@ -8,7 +8,7 @@
 
 <meta name="author" content="이광춘(Openai)">
 
-<title>2&nbsp; Positron: 차세대 데이터 과학 IDE – 챗GPT 코딩</title>
+<title>2&nbsp; 포지트론 – 챗GPT 코딩</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -100,7 +100,7 @@ ga('send', {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ide.html"><strong>5부</strong> 통합 개발 환경</a></li><li class="breadcrumb-item"><a href="./ide_positron.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Positron: 차세대 데이터 과학 IDE</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ide.html"><strong>5부</strong> 통합 개발 환경</a></li><li class="breadcrumb-item"><a href="./ide_positron.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">포지트론</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="검색" onclick="window.quartoOpenSearch();">
@@ -157,13 +157,13 @@ ga('send', {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ide_positron.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Positron: 차세대 데이터 과학 IDE</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">포지트론</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ide_extension.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">IDE 확장 프로그램 아키텍처</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">IDE 확장 프로그램</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -196,19 +196,19 @@ ga('send', {
     <h2 id="toc-title">목차</h2>
    
   <ul>
-  <li><a href="#positron-철학-rstudio와-vs-code-장점-결합" id="toc-positron-철학-rstudio와-vs-code-장점-결합" class="nav-link active" data-scroll-target="#positron-철학-rstudio와-vs-code-장점-결합"><span class="header-section-number">2.1</span> Positron 철학: RStudio와 VS Code 장점 결합</a></li>
-  <li><a href="#ai-시대-positron이-데이터-과학을-바꾸는-방식" id="toc-ai-시대-positron이-데이터-과학을-바꾸는-방식" class="nav-link" data-scroll-target="#ai-시대-positron이-데이터-과학을-바꾸는-방식"><span class="header-section-number">2.2</span> AI 시대, Positron이 데이터 과학을 바꾸는 방식</a></li>
-  <li><a href="#rstudio-vs-code와-비교-언제-positron을-선택하나" id="toc-rstudio-vs-code와-비교-언제-positron을-선택하나" class="nav-link" data-scroll-target="#rstudio-vs-code와-비교-언제-positron을-선택하나"><span class="header-section-number">2.3</span> RStudio, VS Code와 비교: 언제 Positron을 선택하나?</a></li>
-  <li><a href="#결론-ai와-함께하는-데이터-과학-미래" id="toc-결론-ai와-함께하는-데이터-과학-미래" class="nav-link" data-scroll-target="#결론-ai와-함께하는-데이터-과학-미래"><span class="header-section-number">2.4</span> 결론: AI와 함께하는 데이터 과학 미래</a></li>
+  <li><a href="#sec-positron-philosophy" id="toc-sec-positron-philosophy" class="nav-link active" data-scroll-target="#sec-positron-philosophy"><span class="header-section-number">2.1</span> Positron 철학</a></li>
+  <li><a href="#sec-positron-ai" id="toc-sec-positron-ai" class="nav-link" data-scroll-target="#sec-positron-ai"><span class="header-section-number">2.2</span> AI 시대 Positron</a></li>
+  <li><a href="#sec-positron-comparison" id="toc-sec-positron-comparison" class="nav-link" data-scroll-target="#sec-positron-comparison"><span class="header-section-number">2.3</span> IDE 비교와 선택</a></li>
+  <li><a href="#sec-positron-conclusion" id="toc-sec-positron-conclusion" class="nav-link" data-scroll-target="#sec-positron-conclusion"><span class="header-section-number">2.4</span> 결론</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/ide_positron.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ide.html"><strong>5부</strong> 통합 개발 환경</a></li><li class="breadcrumb-item"><a href="./ide_positron.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Positron: 차세대 데이터 과학 IDE</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ide.html"><strong>5부</strong> 통합 개발 환경</a></li><li class="breadcrumb-item"><a href="./ide_positron.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">포지트론</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Positron: 차세대 데이터 과학 IDE</span></h1>
+<h1 class="title"><span id="sec-positron-intro" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">포지트론</span></span></h1>
 </div>
 
 
@@ -226,9 +226,9 @@ ga('send', {
 
 
 <p>데이터 과학 세계는 빠르게 변화하고 있으며, 이제 R과 Python 두 강력한 언어를 함께 사용하는 것이 표준이 되었다. R은 통계 분석과 시각화에 독보적 강점을 가지며, Python은 머신러닝, 범용 프로그래밍, 시스템 통합에 널리 쓰인다. 하지만 오랫동안 데이터 과학자들은 두 언어를 동시에 편안하게 사용할 완벽한 통합 개발 환경(IDE)을 찾기 어려웠다. R 사용자에게는 RStudio가, Python 사용자에게는 다양한 선택지가 있었지만, 두 세계를 자연스럽게 넘나들기에는 항상 아쉬움이 남았다.</p>
-<p>이런 문제의식에서 출발한 것이 Posit(과거 RStudio)사가 개발한 차세대 데이터 과학 IDE <strong>Positron</strong>이다. Positron은 “하나의 팀, 두 개의 언어” 현실을 받아들이고, R과 Python을 모두 일급 시민(first-class citizen)으로 대우하는 현대 ‘다국어(polyglot)’ 개발 환경을 지향한다.</p>
-<section id="positron-철학-rstudio와-vs-code-장점-결합" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="positron-철학-rstudio와-vs-code-장점-결합"><span class="header-section-number">2.1</span> Positron 철학: RStudio와 VS Code 장점 결합</h2>
+<p>이런 문제의식에서 출발한 것이 Posit(과거 RStudio)사가 개발한 차세대 데이터 과학 IDE <strong>포지트론(Positron)</strong>이다. 포지트론은 “하나의 팀, 두 개의 언어” 현실을 받아들이고, R과 Python을 모두 일급 시민(first-class citizen)으로 대우하는 현대 ‘다국어(polyglot)’ 개발 환경을 지향한다.</p>
+<section id="sec-positron-philosophy" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="sec-positron-philosophy"><span class="header-section-number">2.1</span> Positron 철학</h2>
 <p>Positron 핵심 철학은 RStudio의 <strong>데이터 과학 전문성</strong>과 Visual Studio Code(VS Code)의 <strong>현대적 개발 경험</strong> 결합이다. Positron은 VS Code 오픈소스 버전인 ‘Code OSS’ 기반으로 구축되었다. VS Code의 빠르고 유연한 인터페이스, 방대한 확장 기능 생태계, 강력한 코드 편집 기능을 가져오면서, RStudio가 수십 년간 쌓은 데이터 과학 워크플로우 이해를 녹여냈다.</p>
 <div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -250,8 +250,8 @@ ga('send', {
 </div>
 </div>
 </section>
-<section id="ai-시대-positron이-데이터-과학을-바꾸는-방식" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="ai-시대-positron이-데이터-과학을-바꾸는-방식"><span class="header-section-number">2.2</span> AI 시대, Positron이 데이터 과학을 바꾸는 방식</h2>
+<section id="sec-positron-ai" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="sec-positron-ai"><span class="header-section-number">2.2</span> AI 시대 Positron</h2>
 <p>Positron 가장 큰 혁신은 단순 다국어 지원을 넘어, <strong>AI 기능을 데이터 과학 워크플로우에 깊이 통합</strong>한 점이다. Positron AI 어시스턴트는 일반 코딩 도우미와 달리, 현재 실행 중인 R/Python 세션 내부 상태(메모리 데이터, 변수, 플롯 등)를 직접 파악하고 상호작용한다. 데이터 과학자에게 다음 새로운 경험을 제공한다.</p>
 <ol type="1">
 <li><strong>탐색적 데이터 분석(EDA) 가속화</strong>: AI에게 “penguins 데이터셋에서 종(species)별로 몸무게(body_mass_g) 분포를 박스플롯으로 그려줘” 같이 자연어로 요청할 수 있다. Positron AI는 현재 메모리에 있는 <code>penguins</code> 데이터프레임 구조를 이해하고, 즉시 <code>ggplot2</code>나 <code>matplotlib</code> 코드를 생성해 실행 결과를 플롯 창에 보여준다. 데이터 탐색 초기 단계를 매우 빠르게 단축한다.</li>
@@ -259,8 +259,8 @@ ga('send', {
 <li><strong>코드와 결과에 대한 지능적 해석</strong>: “방금 실행한 선형 회귀 모델의 R-squared 값은 무엇을 의미하지?” 또는 “복잡한 <code>purrr</code> 코드를 단계별로 설명해줘” 같이, AI가 코드뿐 아니라 통계 모델 결과나 분석 과정에 대한 깊이 있는 해석을 제공한다. 데이터 과학자가 더 나은 통찰(insight)을 얻도록 돕는 지능형 파트너 역할을 한다.</li>
 </ol>
 </section>
-<section id="rstudio-vs-code와-비교-언제-positron을-선택하나" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="rstudio-vs-code와-비교-언제-positron을-선택하나"><span class="header-section-number">2.3</span> RStudio, VS Code와 비교: 언제 Positron을 선택하나?</h2>
+<section id="sec-positron-comparison" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="sec-positron-comparison"><span class="header-section-number">2.3</span> IDE 비교와 선택</h2>
 <table class="table">
 <colgroup>
 <col style="width: 25%">
@@ -315,8 +315,8 @@ ga('send', {
 <li><strong>R과 Python을 함께 사용하며 최신 AI 기능을 적극 활용</strong>: <strong>Positron</strong>은 두 언어를 매끄럽게 오가며 AI 지원을 받을 수 있는 현재 가장 진보적 환경이다.</li>
 </ul>
 </section>
-<section id="결론-ai와-함께하는-데이터-과학-미래" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="결론-ai와-함께하는-데이터-과학-미래"><span class="header-section-number">2.4</span> 결론: AI와 함께하는 데이터 과학 미래</h2>
+<section id="sec-positron-conclusion" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="sec-positron-conclusion"><span class="header-section-number">2.4</span> 결론</h2>
 <p>Positron은 아직 베타 버전이며 RStudio 일부 기능(예: R Markdown 프로파일링, 간편한 앱 배포)이 아직 구현되지 않았다는 한계가 있다. 하지만 R과 Python이 공존하는 현대 데이터 과학 흐름을 가장 잘 반영하고, AI를 개발 워크플로우 핵심으로 가져왔다는 점에서 미래가 기대된다.</p>
 <p>Positron은 단순히 새로운 도구가 아니라, Posit 팀이 그리는 ‘미래 데이터 과학 작업 환경’ 청사진이다. AI와 함께 더 빠르고 깊이 있게 데이터 문제를 해결하고 싶은 데이터 과학자라면, Positron은 여정을 함께할 흥미로운 파트너다.</p>
 
@@ -770,8 +770,8 @@ ga('send', {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./ide_extension.html" class="pagination-link" aria-label="IDE 확장 프로그램 아키텍처">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">IDE 확장 프로그램 아키텍처</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./ide_extension.html" class="pagination-link" aria-label="IDE 확장 프로그램">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">IDE 확장 프로그램</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

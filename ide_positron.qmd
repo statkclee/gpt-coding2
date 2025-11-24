@@ -1,10 +1,10 @@
-# Positron: 차세대 데이터 과학 IDE
+# 포지트론 {#sec-positron-intro}
 
-데이터 과학 세계는 빠르게 변화하고 있으며, 이제 R과 Python 두 강력한 언어를 함께 사용하는 것이 표준이 되었다. R은 통계 분석과 시각화에 독보적 강점을 가지며, Python은 머신러닝, 범용 프로그래밍, 시스템 통합에 널리 쓰인다. 하지만 오랫동안 데이터 과학자들은 두 언어를 동시에 편안하게 사용할 완벽한 통합 개발 환경(IDE)을 찾기 어려웠다. R 사용자에게는 RStudio가, Python 사용자에게는 다양한 선택지가 있었지만, 두 세계를 자연스럽게 넘나들기에는 항상 아쉬움이 남았다.
+데이터 과학 세계는 빠르게 변화하고 있으며, 이제 R과 Python 두 강력한 언어를 함께 사용하는 것이 표준이 되었다. R은 통계 분석과 시각화에 독보적 강점을 가지며, Python은 머신러닝, 범용 프로그래밍, 시스템 통합에 널리 쓰인다. 하지만 오랫동안 데이터 과학자들은 두 언어를 동시에 편안하게 사용할 완벽한 통합 개발 환경(IDE)을 찾기 어려웠다. R 사용자에게는 \index{RStudio}RStudio가, Python 사용자에게는 다양한 선택지가 있었지만, 두 세계를 자연스럽게 넘나들기에는 항상 아쉬움이 남았다.
 
-이런 문제의식에서 출발한 것이 Posit(과거 RStudio)사가 개발한 차세대 데이터 과학 IDE **Positron**이다. Positron은 "하나의 팀, 두 개의 언어" 현실을 받아들이고, R과 Python을 모두 일급 시민(first-class citizen)으로 대우하는 현대 '다국어(polyglot)' 개발 환경을 지향한다.
+이런 문제의식에서 출발한 것이 \index{Posit}Posit(과거 RStudio)사가 개발한 차세대 데이터 과학 IDE **\index{Positron}포지트론(Positron)**이다. 포지트론은 "하나의 팀, 두 개의 언어" 현실을 받아들이고, R과 Python을 모두 일급 시민(first-class citizen)으로 대우하는 현대 '\index{다국어 IDE}다국어(polyglot)' 개발 환경을 지향한다.
 
-## Positron 철학: RStudio와 VS Code 장점 결합
+## Positron 철학 {#sec-positron-philosophy}
 
 Positron 핵심 철학은 RStudio의 **데이터 과학 전문성**과 Visual Studio Code(VS Code)의 **현대적 개발 경험** 결합이다. Positron은 VS Code 오픈소스 버전인 'Code OSS' 기반으로 구축되었다. VS Code의 빠르고 유연한 인터페이스, 방대한 확장 기능 생태계, 강력한 코드 편집 기능을 가져오면서, RStudio가 수십 년간 쌓은 데이터 과학 워크플로우 이해를 녹여냈다.
 
@@ -21,7 +21,7 @@ Positron 개발은 RStudio 대체가 아니다. 두 IDE는 서로 다른 목표�
 Positron은 'R 전용' RStudio 성공적 틀을 넘어, 'R과 Python 모두'를 필요로 하는 현대 데이터 과학 새로운 요구에 부응하기 위한 Posit 전략적 확장이다.
 :::
 
-## AI 시대, Positron이 데이터 과학을 바꾸는 방식
+## AI 시대 Positron {#sec-positron-ai}
 
 Positron 가장 큰 혁신은 단순 다국어 지원을 넘어, **AI 기능을 데이터 과학 워크플로우에 깊이 통합**한 점이다. Positron AI 어시스턴트는 일반 코딩 도우미와 달리, 현재 실행 중인 R/Python 세션 내부 상태(메모리 데이터, 변수, 플롯 등)를 직접 파악하고 상호작용한다. 데이터 과학자에게 다음 새로운 경험을 제공한다.
 
@@ -29,7 +29,7 @@ Positron 가장 큰 혁신은 단순 다국어 지원을 넘어, **AI 기능을 
 2.  **복잡한 데이터 전처리 코드 자동화**: "결측치가 있는 행을 제거하고, 'bill_length_mm'와 'bill_depth_mm' 열만 선택해줘" 같은 데이터 전처리(data wrangling) 작업을 AI가 `dplyr`이나 `pandas` 코드로 즉시 변환한다. 개발자는 세부 문법을 기억하는 데 에너지를 쏟지 않고, 데이터 분석의 큰 그림과 로직에 집중한다.
 3.  **코드와 결과에 대한 지능적 해석**: "방금 실행한 선형 회귀 모델의 R-squared 값은 무엇을 의미하지?" 또는 "복잡한 `purrr` 코드를 단계별로 설명해줘" 같이, AI가 코드뿐 아니라 통계 모델 결과나 분석 과정에 대한 깊이 있는 해석을 제공한다. 데이터 과학자가 더 나은 통찰(insight)을 얻도록 돕는 지능형 파트너 역할을 한다.
 
-## RStudio, VS Code와 비교: 언제 Positron을 선택하나?
+## IDE 비교와 선택 {#sec-positron-comparison}
 
 | 특성 | RStudio | VS Code | Positron |
 | :--- | :--- | :--- | :--- |
@@ -43,7 +43,7 @@ Positron 가장 큰 혁신은 단순 다국어 지원을 넘어, **AI 기능을 
 *   **웹 개발 등 범용 프로그래밍이 주 목적**: 수많은 확장 기능을 갖춘 **VS Code**가 최고 유연성을 제공한다.
 *   **R과 Python을 함께 사용하며 최신 AI 기능을 적극 활용**: **Positron**은 두 언어를 매끄럽게 오가며 AI 지원을 받을 수 있는 현재 가장 진보적 환경이다.
 
-## 결론: AI와 함께하는 데이터 과학 미래
+## 결론 {#sec-positron-conclusion}
 
 Positron은 아직 베타 버전이며 RStudio 일부 기능(예: R Markdown 프로파일링, 간편한 앱 배포)이 아직 구현되지 않았다는 한계가 있다. 하지만 R과 Python이 공존하는 현대 데이터 과학 흐름을 가장 잘 반영하고, AI를 개발 워크플로우 핵심으로 가져왔다는 점에서 미래가 기대된다.
 
