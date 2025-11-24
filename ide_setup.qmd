@@ -291,17 +291,17 @@ tinytex::install_tinytex()
 
 ![개발 환경 글꼴 선택 가이드](images/ide-font-comparison.svg){#fig-font-comparison}
 
-@fig-font-comparison 은 D2Coding과 프리텐다드의 특징과 용도를 비교한다. D2Coding은 코드 작성에, 프리텐다드는 웹 문서 출판에 최적화되어 있다.
+@fig-font-comparison 은 D2코딩과 프리텐다드의 특징과 용도를 비교한다. D2코딩은 코드 작성에, 프리텐다드는 웹 문서 출판에 최적화되어 있다.
 
-### D2Coding 폰트 설치 {#sec-setup-font-install}
+### D2코딩 폰트 설치 {#sec-setup-font-install}
 
-[D2Coding GitHub 릴리즈 페이지](https://github.com/naver/d2codingfont/releases/latest)에 접속해 `D2Coding-VerX.X.X-20180524.zip`과 같은 최신 버전의 zip 파일을 다운로드한다. 다운로드한 zip 파일의 압축을 풀고 `D2Coding` 폴더 안에 있는 `D2Coding-VerX.X.X.ttf` 파일을 실행한다.
+[D2코딩 GitHub 릴리즈 페이지](https://github.com/naver/d2codingfont/releases/latest)에 접속해 `D2Coding-VerX.X.X-20180524.zip`과 같은 최신 버전의 zip 파일을 다운로드한다. 다운로드한 zip 파일의 압축을 풀고 `D2Coding` 폴더 안에 있는 `D2Coding-VerX.X.X.ttf` 파일을 실행한다.
 
 **윈도우**에서는 폰트 미리보기 창이 열리면 상단의 **'설치'** 버튼을 클릭한다. **맥OS**에서는 폰트 파일을 더블 클릭해 서체 관리자(Font Book)를 열고 **'서체 설치'** 버튼을 클릭한다.
 
-#### IDE에 D2Coding 폰트 적용 {#sec-setup-font-apply}
+#### IDE에 D2코딩 폰트 적용 {#sec-setup-font-apply}
 
-이제 시스템에 설치된 D2Coding 폰트를 IDE의 편집기 글꼴로 지정한다.
+이제 시스템에 설치된 D2코딩 폰트를 IDE의 편집기 글꼴로 지정한다.
 
 Positron 또는 VS Code를 연다. 단축키 `Cmd + ,` (맥OS) 또는 `Ctrl + ,` (윈도우)를 누르거나, 메뉴에서 `File > Preferences > Settings`로 이동해 설정 창을 연다. 설정 창 상단의 검색 바에 `font family`라고 입력한다.
 
@@ -311,7 +311,7 @@ Positron 또는 VS Code를 연다. 단축키 `Cmd + ,` (맥OS) 또는 `Ctrl + ,`
 'D2Coding', "Apple SD Gothic Neo", "Malgun Gothic", "Nanum Gothic", monospace
 ```
 
-이렇게 맨 앞에 추가하면 IDE는 코드를 표시할 때 D2Coding 폰트를 최우선으로 사용하게 된다. 설정을 마친 후 코드 편집기로 돌아가면 글꼴이 즉시 D2Coding으로 변경된 것을 확인할 수 있다.
+이렇게 맨 앞에 추가하면 IDE는 코드를 표시할 때 D2코딩 폰트를 최우선으로 사용하게 된다. 설정을 마친 후 코드 편집기로 돌아가면 글꼴이 즉시 D2코딩으로 변경된 것을 확인할 수 있다.
 
 ### 프리텐다드: 웹 타이포그래피 가변 글꼴 {#sec-setup-font-pretendard}
 
