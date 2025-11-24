@@ -472,9 +472,12 @@ ga('send', {
 <section id="sec-setup-r-renv" class="level4">
 <h4 class="anchored" data-anchor-id="sec-setup-r-renv">R 환경 관리: renv</h4>
 <p>프로젝트마다 사용하는 R 패키지 버전이 다르면 충돌이 발생할 수 있다. <code>renv</code>는 프로젝트별로 독립된 패키지 라이브러리를 만들어 의존성 문제를 해결하는 도구다.</p>
+<p><strong>중요한 제한사항</strong>: <code>renv</code>는 <strong>R 패키지만 격리</strong>한다. R 인터프리터(언어 실행기) 자체는 시스템에 설치된 것을 공유해 사용한다. <code>renv.lock</code> 파일에 “R 버전 4.3.0”이라고 기록은 하지만, 해당 R 버전이 시스템에 없으면 설치해주지 않고 경고만 표시한다. R 버전까지 완전히 격리하려면 <code>rig</code> (R Installation Manager) 같은 별도 도구와 함께 사용해야 한다.</p>
+<p>이는 Python <code>uv</code>와의 큰 차이다. <code>uv</code>는 <code>uv python install 3.11</code> 명령으로 Python 인터프리터 자체를 다운로드하고 관리하지만, <code>renv</code>는 그런 기능이 없다.</p>
+<p><strong>설치 및 사용</strong>:</p>
 <ul>
-<li><strong>설치</strong>: R 콘솔에서 <code>install.packages("renv")</code>를 실행합니다.</li>
-<li><strong>사용법</strong>: RStudio나 Positron에서 새로운 프로젝트를 시작할 때, <code>renv</code> 사용 옵션을 체크하면 해당 프로젝트 폴더 내에 <code>renv</code> 관련 파일들이 생성됩니다. 이후 <code>renv::snapshot()</code> 명령어로 현재 프로젝트에서 사용하는 패키지 목록과 버전을 기록하고, <code>renv::restore()</code> 명령어로 다른 환경에서 이 목록을 그대로 복원할 수 있습니다.</li>
+<li><strong>설치</strong>: R 콘솔에서 <code>install.packages("renv")</code>를 실행한다.</li>
+<li><strong>사용법</strong>: RStudio나 Positron에서 새로운 프로젝트를 시작할 때 <code>renv</code> 사용 옵션을 체크하면 프로젝트 폴더에 <code>renv</code> 관련 파일이 생성된다. <code>renv::snapshot()</code>으로 패키지 목록과 버전을 기록하고, <code>renv::restore()</code>로 다른 환경에서 복원한다.</li>
 </ul>
 </section>
 </section>
