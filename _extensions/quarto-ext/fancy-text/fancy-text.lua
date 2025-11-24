@@ -64,11 +64,11 @@ end
 -- shortcode that provides a nicely formatted 'MiKTeX' string
 function miktex()
   if quarto.doc.is_format("pdf") then
-    return pandoc.RawBlock('tex', '{MiK\\TeX}')
+    return pandoc.RawBlock('tex', '\\textbf{MiK{\\TeX}}')
   elseif quarto.doc.is_format("html") then
-    return pandoc.RawBlock('html', 'MiK<span style="letter-spacing:-2px;">T</span><sub style="font-size: inherit; letter-spacing:-1px;">E</sub>X')
+    return pandoc.RawBlock('html', '<span style="font-weight: bold;">MiK<span style="letter-spacing:-2px;">T</span><sub style="font-size: inherit; letter-spacing:-1px;">E</sub>X</span>')
   else
-    return pandoc.Span('MiKTeX')
+    return pandoc.Str('MiKTeX')
   end
 end
 
