@@ -86,9 +86,9 @@ end
 -- shortcode that provides a nicely formatted 'TinyTeX' string
 function tinytex()
   if quarto.doc.is_format("pdf") then
-    return pandoc.RawBlock('tex', 'Tiny{\\TeX}')
+    return pandoc.RawBlock('tex', '\\textbf{Tiny{\\TeX}}')
   elseif quarto.doc.is_format("html") then
-    return pandoc.RawBlock('html', 'Tiny<span style="letter-spacing:-2px;">T</span><sub style="font-size: inherit; letter-spacing:-1px;">E</sub>X')
+    return pandoc.RawBlock('html', '<span style="font-weight: bold;">Tiny<span style="letter-spacing:-2px;">T</span><sub style="font-size: inherit; letter-spacing:-1px;">E</sub>X</span>')
   else
     return pandoc.Str('TinyTeX')
   end
