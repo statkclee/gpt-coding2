@@ -4,7 +4,7 @@
   이 확장 프로그램은 다양한 특수 텍스트와 정당 로고를 렌더링하는 숏코드를 제공합니다.
 
   포함된 숏코드:
-  - 조판 시스템: latex, tex, bibtex, luatex
+  - 조판 시스템: latex, tex, bibtex, luatex, miktex, texlive, tinytex
   - 한글: han, han_svg
   - 특수 문자: ldots, vdots, ddots, pct, R2
   - 정당 로고: minjoo, people_power, nation, revolution
@@ -58,6 +58,39 @@ function luatex()
     return pandoc.RawBlock('html', '<span style="font-variant: small-caps;">Lua</span><span style="letter-spacing:-2px;">T</span><sub style="font-size: inherit; letter-spacing:-1px;">E</sub>X')
   else
     return pandoc.Span('LuaTeX')
+  end
+end
+
+-- shortcode that provides a nicely formatted 'MiKTeX' string
+function miktex()
+  if quarto.doc.is_format("pdf") then
+    return pandoc.RawBlock('tex', '{MiK\\TeX}')
+  elseif quarto.doc.is_format("html") then
+    return pandoc.RawBlock('html', 'MiK<span style="letter-spacing:-2px;">T</span><sub style="font-size: inherit; letter-spacing:-1px;">E</sub>X')
+  else
+    return pandoc.Span('MiKTeX')
+  end
+end
+
+-- shortcode that provides a nicely formatted 'TeX Live' string
+function texlive()
+  if quarto.doc.is_format("pdf") then
+    return pandoc.RawBlock('tex', '{\\TeX} Live')
+  elseif quarto.doc.is_format("html") then
+    return pandoc.RawBlock('html', '<span style="letter-spacing:-2px;">T</span><sub style="font-size: inherit; letter-spacing:-1px;">E</sub>X Live')
+  else
+    return pandoc.Str('TeX Live')
+  end
+end
+
+-- shortcode that provides a nicely formatted 'TinyTeX' string
+function tinytex()
+  if quarto.doc.is_format("pdf") then
+    return pandoc.RawBlock('tex', 'Tiny{\\TeX}')
+  elseif quarto.doc.is_format("html") then
+    return pandoc.RawBlock('html', 'Tiny<span style="letter-spacing:-2px;">T</span><sub style="font-size: inherit; letter-spacing:-1px;">E</sub>X')
+  else
+    return pandoc.Str('TinyTeX')
   end
 end
 
