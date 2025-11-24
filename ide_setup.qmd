@@ -149,6 +149,17 @@ GDAL              # 지리정보 시스템 라이브러리
 *   **설치**: R 콘솔에서 `install.packages("renv")`를 실행한다.
 *   **사용법**: RStudio나 Positron에서 새로운 프로젝트를 시작할 때 `renv` 사용 옵션을 체크하면 프로젝트 폴더에 `renv` 관련 파일이 생성된다. `renv::snapshot()`으로 패키지 목록과 버전을 기록하고, `renv::restore()`로 다른 환경에서 복원한다.
 
+**rig + renv 조합으로 완전한 격리**:
+
+R 버전까지 완전히 격리하려면 \index{rig}`rig` (R Installation Manager)와 `renv`를 함께 사용한다.
+
+*   **rig 설치**: [rig GitHub](https://github.com/r-lib/rig)에서 운영체제에 맞는 설치 프로그램을 다운로드한다.
+*   **특정 R 버전 설치**: `rig add 4.3.0` 명령으로 원하는 R 버전을 설치한다.
+*   **프로젝트별 R 버전 지정**: `rig default 4.3.0` 또는 `.Rprofile` 파일로 프로젝트별 R 버전을 고정한다.
+*   **renv와 결합**: 이후 `renv`로 패키지를 관리하면, Python `uv`처럼 런타임(R 인터프리터)과 패키지 모두 프로젝트별로 격리할 수 있다.
+
+![uv vs rig + renv: 런타임 격리 방식 비교](images/ide-isolation-r-python.svg){#fig-isolation-r-python}
+
 ### Python 설치 및 환경 관리
 
 #### Python 설치 {#sec-setup-python-install}

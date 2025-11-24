@@ -47,26 +47,27 @@
   <text x="225" y="280" text-anchor="middle" class="tufte-text detail highlight-text">(uv가 설치/관리)</text>
   <text x="225" y="295" text-anchor="middle" class="tufte-text note">시스템과 완전 분리</text>
 
-  <!-- Right: R renv -->
-  <text x="675" y="70" text-anchor="middle" class="tufte-text label">R renv (<tspan class="highlight-text">패키지 라이브러리</tspan> 격리)</text>
+  <!-- Right: rig + renv -->
+  <text x="675" y="70" text-anchor="middle" class="tufte-text label">rig + renv (<tspan class="highlight-text">R 런타임</tspan> + 패키지 격리)</text>
 
   <rect x="525" y="390" width="300" height="50" rx="0" class="layer-shared"/>
   <text x="675" y="415" text-anchor="middle" class="tufte-text detail">호스트 운영체제 (OS)</text>
 
-  <rect x="545" y="310" width="260" height="60" rx="0" class="layer-shared"/>
-  <text x="675" y="335" text-anchor="middle" class="tufte-text label">시스템 R 인터프리터</text>
-  <text x="675" y="355" text-anchor="middle" class="tufte-text detail">(공유 / renv 관리 안함)</text>
+  <rect x="585" y="345" width="180" height="25" rx="0" class="layer" style="stroke-dasharray: 2,2;"/>
+  <text x="675" y="362" text-anchor="middle" class="tufte-text note">rig 도구</text>
+  <path d="M 675 345 L 675 325" fill="none" stroke="#888" stroke-width="1" marker-end="url(#arrow-up-sm)"/>
 
-  <path d="M 675 310 L 675 295" fill="none" stroke="#888" stroke-width="1" marker-end="url(#arrow-up-sm)"/>
-  <text x="730" y="300" text-anchor="middle" class="tufte-text note">연결</text>
+  <rect x="545" y="130" width="260" height="190" rx="0" class="layer-isolated"/>
+  <text x="675" y="155" text-anchor="middle" class="tufte-text label">rig + renv 프로젝트</text>
 
-  <rect x="565" y="130" width="220" height="150" rx="0" class="layer-isolated"/>
-  <text x="675" y="155" text-anchor="middle" class="tufte-text label">renv 프로젝트 폴더</text>
+  <rect x="585" y="180" width="180" height="40" rx="0" class="layer-emphatic"/>
+  <text x="675" y="198" text-anchor="middle" class="tufte-text detail">R 패키지 라이브러리</text>
+  <text x="675" y="213" text-anchor="middle" class="tufte-text detail">(renv/library)</text>
 
-  <rect x="585" y="180" width="180" height="80" rx="0" class="layer-emphatic"/>
-  <text x="675" y="210" text-anchor="middle" class="tufte-text detail">R 패키지 라이브러리</text>
-  <text x="675" y="230" text-anchor="middle" class="tufte-text detail">(renv/library)</text>
-  <text x="675" y="250" text-anchor="middle" class="tufte-text note">패키지 스냅샷</text>
+  <rect x="565" y="240" width="220" height="60" rx="0" class="highlight"/>
+  <text x="675" y="260" text-anchor="middle" class="tufte-text label highlight-text">R 인터프리터</text>
+  <text x="675" y="280" text-anchor="middle" class="tufte-text detail highlight-text">(rig가 설치/관리)</text>
+  <text x="675" y="295" text-anchor="middle" class="tufte-text note">프로젝트별 R 버전</text>
 
   <!-- Stack arrow -->
   <path d="M 40 410 L 40 150" fill="none" stroke="#888" stroke-width="1" marker-end="url(#arrow-up)"/>
@@ -82,12 +83,12 @@
   </defs>
 
   <!-- Comparison line -->
-  <line x1="335" y1="270" x2="545" y2="340" class="highlight-line"/>
+  <line x1="335" y1="270" x2="565" y2="270" class="highlight-line"/>
   <circle cx="335" cy="270" r="3" fill="#000"/>
-  <circle cx="545" cy="340" r="3" fill="#000"/>
+  <circle cx="565" cy="270" r="3" fill="#000"/>
 
-  <text x="450" y="295" text-anchor="middle" class="tufte-text label highlight-text">런타임 관리 차이</text>
-  <text x="450" y="315" text-anchor="middle" class="tufte-text detail" style="fill:#000;">uv: 프로젝트에 포함</text>
-  <text x="450" y="330" text-anchor="middle" class="tufte-text detail" style="fill:#000;">renv: 시스템 R 공유</text>
+  <text x="450" y="260" text-anchor="middle" class="tufte-text label highlight-text">런타임 격리 (공통점)</text>
+  <text x="450" y="280" text-anchor="middle" class="tufte-text detail" style="fill:#000;">프로젝트별 독립 런타임</text>
+  <text x="450" y="295" text-anchor="middle" class="tufte-text detail" style="fill:#000;">uv ≈ rig + renv</text>
 
 </svg>
