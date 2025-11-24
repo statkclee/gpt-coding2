@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 550">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 60 900 480">
   <defs>
     <style>
       /* Tufte Style: Strictly Grayscale, Serif, Minimal */
@@ -25,6 +25,7 @@
       .font-maru { font-family: 'Maru Buri', serif; font-size: 13px; font-weight: 600; }
       .font-ibm { font-family: 'IBM Plex Sans KR', sans-serif; font-size: 13px; font-weight: 600; }
       .font-nanum { font-family: 'Nanum Square Neo', sans-serif; font-size: 13px; font-weight: 600; }
+      .font-noto-serif { font-family: 'Noto Serif CJK KR', 'Noto Serif KR', serif; font-size: 13px; font-weight: 600; }
 
       /* Boxes - Tufte Grayscale */
       .box-group { fill: #fafafa; stroke: #999; stroke-width: 1; }
@@ -81,9 +82,9 @@
   <text x="355" y="292" class="tufte-text font-spoqa">Spoqa Han Sans</text>
   <text x="355" y="310" class="tufte-text item-desc">숫자 예쁨 (토스)</text>
 
-  <rect x="340" y="335" width="220" height="55" rx="2" class="box-item"/>
-  <text x="355" y="357" class="tufte-text font-roboto">Roboto / Noto Sans</text>
-  <text x="355" y="375" class="tufte-text item-desc">Google 머티리얼</text>
+  <rect x="340" y="335" width="220" height="55" rx="2" class="box-highlight"/>
+  <text x="355" y="357" class="tufte-text font-roboto">Noto Sans CJK</text>
+  <text x="355" y="375" class="tufte-text item-desc">No Tofu - 800+ 언어 ★</text>
 
   <!-- Column 3: 문서 & 블로그 -->
   <rect x="610" y="80" width="260" height="440" rx="4" class="box-group"/>
@@ -105,5 +106,19 @@
   <rect x="630" y="335" width="220" height="55" rx="2" class="box-item"/>
   <text x="645" y="357" class="tufte-text font-nanum">Nanum Square Neo</text>
   <text x="645" y="375" class="tufte-text item-desc">제목용 폰트</text>
+
+  <rect x="630" y="400" width="220" height="55" rx="2" class="box-highlight"/>
+  <text x="645" y="422" class="tufte-text font-noto-serif">Noto 패밀리</text>
+  <text x="645" y="440" class="tufte-text item-desc">Sans·Serif·Mono 전방위 ★</text>
+
+  <!-- Noto 프로젝트 설명 -->
+  <g transform="translate(0, -50)">
+    <text x="390" y="525" text-anchor="middle" class="tufte-text item-desc" style="font-style: italic;">
+      ★ Noto = "No more Tofu"
+    </text>
+    <text x="450" y="545" text-anchor="middle" class="tufte-text item-desc" style="font-style: italic;">
+      (□ 깨짐 없이 모든 언어 지원하는 구글 프로젝트)
+    </text>
+  </g>
 
 </svg>

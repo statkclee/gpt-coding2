@@ -40,6 +40,14 @@
 
 ---
 
+## 개발 환경
+
+| 영어 | 한글 | 첫 등장 표기 | 비고 |
+|------|------|--------------|------|
+| Positron | 포지트론 | 포지트론(Positron) | R/Python 통합 IDE |
+
+---
+
 ## 글꼴
 
 | 영어 | 한글 | 첫 등장 표기 | 비고 |
@@ -49,10 +57,18 @@
 
 ---
 
+## 워크플로우 자동화
+
+| 영어 | 한글 | 첫 등장 표기 | 비고 |
+|------|------|--------------|------|
+| Snakemake | 스네이크메이크 | 스네이크메이크(Snakemake) | Python 워크플로우 도구 |
+
+---
+
 ## 원어 유지 (한글화 안함)
 
 ### 브랜드명
-- Git, GitHub, VS Code, RStudio, Positron, Xcode, Chocolatey
+- Git, GitHub, VS Code, RStudio, Xcode, Chocolatey
 
 ### 약어
 - IDE, AI, CI/CD, PDF, HTML, SQL, CSV, OS, CLI, API, JSON, YAML
@@ -60,6 +76,7 @@
 ### 기술 용어/패키지명
 - pip, venv, make, pandas, numpy, scikit-learn, TensorFlow, PyTorch
 - ggplot2, dplyr, tinytex, gt, renv, rig, uv
+- targets, Task, tarchetypes
 - CRAN
 
 ---
@@ -80,6 +97,15 @@
 ---
 
 ## 업데이트 이력
+
+- 2025-11-24: 워크플로우 자동화 도구 추가 (17개 용어)
+  - Snakemake를 "스네이크메이크"로 번역
+  - targets, Task는 원어 유지
+  - 워크플로우 자동화 섹션 신설
+
+- 2025-11-24: 포지트론 추가 및 분류 개선 (16개 용어)
+  - Positron을 "포지트론"으로 번역, 개발 환경 섹션 신설
+  - 원어 유지 목록에서 Positron 제거
 
 - 2025-11-24: 초기 생성 (15개 용어)
   - 운영체제: 도커, 파이썬, 윈도우, 맥OS, 리눅스, 우분투, 데비안
