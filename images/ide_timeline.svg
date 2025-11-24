@@ -1,0 +1,1035 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3200 1400">
+
+  <defs>
+
+    <!-- Background gradient -->
+
+    <linearGradient id="backgroundGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+
+      <stop offset="0%" style="stop-color:#FAFAFA;stop-opacity:1" />
+
+      <stop offset="50%" style="stop-color:#F5F6FA;stop-opacity:1" />
+
+      <stop offset="100%" style="stop-color:#EEF1F8;stop-opacity:1" />
+
+    </linearGradient>
+
+
+
+    <!-- Main timeline gradient -->
+
+    <linearGradient id="timelineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+
+      <stop offset="0%" style="stop-color:#654321;stop-opacity:1" />
+
+      <stop offset="25%" style="stop-color:#FF6B35;stop-opacity:1" />
+
+      <stop offset="50%" style="stop-color:#4A90E2;stop-opacity:1" />
+
+      <stop offset="75%" style="stop-color:#7B68EE;stop-opacity:1" />
+
+      <stop offset="100%" style="stop-color:#FF1493;stop-opacity:1" />
+
+    </linearGradient>
+
+
+
+    <!-- Era-specific gradients -->
+
+    <linearGradient id="early" x1="0%" y1="0%" x2="0%" y2="100%">
+
+      <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
+
+      <stop offset="100%" style="stop-color:#654321;stop-opacity:1" />
+
+    </linearGradient>
+
+
+
+    <linearGradient id="desktop" x1="0%" y1="0%" x2="0%" y2="100%">
+
+      <stop offset="0%" style="stop-color:#FF8C42;stop-opacity:1" />
+
+      <stop offset="100%" style="stop-color:#FF6B35;stop-opacity:1" />
+
+    </linearGradient>
+
+
+
+    <linearGradient id="modern" x1="0%" y1="0%" x2="0%" y2="100%">
+
+      <stop offset="0%" style="stop-color:#6BB6FF;stop-opacity:1" />
+
+      <stop offset="100%" style="stop-color:#4A90E2;stop-opacity:1" />
+
+    </linearGradient>
+
+
+
+    <linearGradient id="cloud" x1="0%" y1="0%" x2="0%" y2="100%">
+
+      <stop offset="0%" style="stop-color:#9370DB;stop-opacity:1" />
+
+      <stop offset="100%" style="stop-color:#7B68EE;stop-opacity:1" />
+
+    </linearGradient>
+
+
+
+    <linearGradient id="ai" x1="0%" y1="0%" x2="0%" y2="100%">
+
+      <stop offset="0%" style="stop-color:#FF69B4;stop-opacity:1" />
+
+      <stop offset="100%" style="stop-color:#FF1493;stop-opacity:1" />
+
+    </linearGradient>
+
+
+
+    <!-- Drop shadow filter -->
+
+    <filter id="cardShadow" x="-20%" y="-20%" width="140%" height="140%">
+
+      <feDropShadow dx="3" dy="6" stdDeviation="4" flood-color="#000000" flood-opacity="0.12"/>
+
+    </filter>
+
+
+
+    <!-- Text shadow -->
+
+    <filter id="textShadow" x="-20%" y="-20%" width="140%" height="140%">
+
+      <feDropShadow dx="1" dy="2" stdDeviation="1" flood-color="#000000" flood-opacity="0.3"/>
+
+    </filter>
+
+
+
+    <style>
+
+      .main-title {
+
+        font-family: Georgia, serif;
+
+        font-size: 42px;
+
+        font-weight: bold;
+
+        fill: #2C3E50;
+
+      }
+
+
+
+      .subtitle {
+
+        font-family: Arial, sans-serif;
+
+        font-size: 22px;
+
+        fill: #7F8C8D;
+
+      }
+
+
+
+      .field-title {
+
+        font-family: Arial, sans-serif;
+
+        font-size: 28px;
+
+        font-weight: bold;
+
+        fill: #ffffff;
+
+      }
+
+
+
+      .field-subtitle {
+
+        font-family: Arial, sans-serif;
+
+        font-size: 22px;
+
+        fill: #F8F9FA;
+
+      }
+
+
+
+      .case-title {
+
+        font-family: Arial, sans-serif;
+
+        font-size: 24px;
+
+        font-weight: bold;
+
+      }
+
+
+
+      .case-desc {
+
+        font-family: Arial, sans-serif;
+
+        font-size: 20px;
+
+        fill: #2C3E50;
+
+      }
+
+
+
+      .case-impact {
+
+        font-family: Arial, sans-serif;
+
+        font-size: 20px;
+
+        font-weight: bold;
+
+        fill: #27AE60;
+
+      }
+
+
+
+      .case-data {
+
+        font-family: Arial, sans-serif;
+
+        font-size: 19px;
+
+        fill: #E74C3C;
+
+        font-weight: bold;
+
+      }
+
+
+
+      .year-label {
+
+        font-family: Arial, sans-serif;
+
+        font-size: 20px;
+
+        font-weight: bold;
+
+        fill: #34495E;
+
+      }
+
+    </style>
+
+  </defs>
+
+
+
+  <!-- Background -->
+
+  <rect width="3200" height="1400" fill="url(#backgroundGradient)"/>
+
+
+
+  <!-- Title Section -->
+
+  <text x="1600" y="50" text-anchor="middle" class="main-title" filter="url(#textShadow)">
+
+    IDE History: 60 Years of Integrated Development Environment Evolution
+
+  </text>
+
+  <text x="1600" y="80" text-anchor="middle" class="subtitle">
+
+    From Punched Cards to AI Pair Programming: The Complete Timeline (1964-2025)
+
+  </text>
+
+
+
+  <!-- Main Timeline -->
+
+  <rect x="150" y="695" width="2900" height="10" fill="url(#timelineGradient)" rx="5" filter="url(#cardShadow)"/>
+
+
+
+  <!-- Timeline markers -->
+
+  <circle cx="250" cy="700" r="8" fill="url(#early)" filter="url(#cardShadow)"/>
+
+  <circle cx="500" cy="700" r="8" fill="url(#early)" filter="url(#cardShadow)"/>
+
+  <circle cx="750" cy="700" r="8" fill="url(#desktop)" filter="url(#cardShadow)"/>
+
+  <circle cx="1000" cy="700" r="8" fill="url(#desktop)" filter="url(#cardShadow)"/>
+
+  <circle cx="1300" cy="700" r="8" fill="url(#modern)" filter="url(#cardShadow)"/>
+
+  <circle cx="1600" cy="700" r="8" fill="url(#modern)" filter="url(#cardShadow)"/>
+
+  <circle cx="1900" cy="700" r="8" fill="url(#modern)" filter="url(#cardShadow)"/>
+
+  <circle cx="2200" cy="700" r="8" fill="url(#modern)" filter="url(#cardShadow)"/>
+
+  <circle cx="2500" cy="700" r="8" fill="url(#cloud)" filter="url(#cardShadow)"/>
+
+  <circle cx="2800" cy="700" r="8" fill="url(#ai)" filter="url(#cardShadow)"/>
+
+
+
+  <!-- Year labels -->
+
+  <text x="250" y="725" text-anchor="middle" class="year-label">1964</text>
+
+  <text x="500" y="725" text-anchor="middle" class="year-label">1983</text>
+
+  <text x="750" y="725" text-anchor="middle" class="year-label">1991</text>
+
+  <text x="1000" y="725" text-anchor="middle" class="year-label">1997</text>
+
+  <text x="1300" y="725" text-anchor="middle" class="year-label">2001</text>
+
+  <text x="1600" y="725" text-anchor="middle" class="year-label">2001</text>
+
+  <text x="1900" y="725" text-anchor="middle" class="year-label">2008</text>
+
+  <text x="2200" y="725" text-anchor="middle" class="year-label">2015</text>
+
+  <text x="2500" y="725" text-anchor="middle" class="year-label">2020</text>
+
+  <text x="2800" y="725" text-anchor="middle" class="year-label">2022</text>
+
+
+
+  <!-- 1. Dartmouth BASIC (1964) - First IDE-like Environment -->
+
+  <g transform="translate(250, 180)">
+
+    <rect x="-160" y="0" width="320" height="480" fill="white" stroke="url(#early)" stroke-width="3" rx="12" filter="url(#cardShadow)"/>
+
+
+
+    <!-- Header -->
+
+    <rect x="-160" y="0" width="320" height="60" fill="url(#early)" rx="12"/>
+
+    <text class="field-title" x="0" y="25" text-anchor="middle">🖥️ Early IDEs</text>
+
+    <text class="field-subtitle" x="0" y="45" text-anchor="middle">Early IDEs</text>
+
+
+
+    <!-- Content -->
+
+    <text class="case-title" x="0" y="90" text-anchor="middle" fill="#654321">Dartmouth BASIC</text>
+
+    <text class="case-desc" x="0" y="115" text-anchor="middle">(1964)</text>
+
+
+
+    <text class="case-desc" x="0" y="150" text-anchor="middle">🎯 Early interactive environment</text>
+
+    <text class="case-desc" x="0" y="175" text-anchor="middle">📟 DTSS time-sharing system</text>
+
+
+
+    <text class="case-impact" x="0" y="205" text-anchor="middle">Impact: Interactive interpreter system</text>
+
+    <text class="case-impact" x="0" y="230" text-anchor="middle">Interactive programming environment</text>
+
+
+
+    <text class="case-data" x="0" y="260" text-anchor="middle">💡 Time-sharing breakthrough</text>
+
+    <text class="case-data" x="0" y="285" text-anchor="middle">📊 Terminal-based interface</text>
+
+
+
+    <text class="case-title" x="0" y="325" text-anchor="middle" fill="#654321">Interactive Computing</text>
+
+    <text class="case-desc" x="0" y="350" text-anchor="middle">(1960s Evolution)</text>
+
+
+
+    <text class="case-desc" x="0" y="380" text-anchor="middle">🗺️ Time-sharing systems</text>
+
+    <text class="case-desc" x="0" y="405" text-anchor="middle">⏳ Real-time interaction</text>
+
+
+
+    <text class="case-impact" x="0" y="435" text-anchor="middle">Impact: Foundation for IDE development</text>
+
+    <text class="case-data" x="0" y="460" text-anchor="middle">🔄 Interactive programming born</text>
+
+
+
+    <!-- Connection line -->
+
+    <line x1="0" y1="480" x2="0" y2="510" stroke="#654321" stroke-width="3"/>
+
+  </g>
+
+
+
+  <!-- 2. Turbo Pascal (1983) - First True IDE -->
+
+  <g transform="translate(500, 750)">
+
+    <rect x="-160" y="0" width="320" height="480" fill="white" stroke="url(#early)" stroke-width="3" rx="12" filter="url(#cardShadow)"/>
+
+
+
+    <!-- Header -->
+
+    <rect x="-160" y="0" width="320" height="60" fill="url(#early)" rx="12"/>
+
+    <text class="field-title" x="0" y="25" text-anchor="middle">🚀 Commercial IDE</text>
+
+    <text class="field-subtitle" x="0" y="45" text-anchor="middle">Popular Commercial IDE</text>
+
+
+
+    <!-- Content -->
+
+    <text class="case-title" x="0" y="90" text-anchor="middle" fill="#654321">Turbo Pascal</text>
+
+    <text class="case-desc" x="0" y="115" text-anchor="middle">(1983)</text>
+
+
+
+    <text class="case-desc" x="0" y="150" text-anchor="middle">⚡ Ultra-fast compilation</text>
+
+    <text class="case-desc" x="0" y="175" text-anchor="middle">📝 Integrated editor</text>
+
+
+
+    <text class="case-impact" x="0" y="205" text-anchor="middle">Impact: Popularized IDE concept</text>
+
+    <text class="case-impact" x="0" y="230" text-anchor="middle">Development productivity innovation</text>
+
+
+
+    <text class="case-data" x="0" y="260" text-anchor="middle">💰 $49.99 price</text>
+
+    <text class="case-data" x="0" y="285" text-anchor="middle">👨‍💻 Developed by Anders Hejlsberg</text>
+
+
+
+    <text class="case-title" x="0" y="325" text-anchor="middle" fill="#654321">Borland Legacy</text>
+
+    <text class="case-desc" x="0" y="350" text-anchor="middle">(1983-1995)</text>
+
+
+
+    <text class="case-desc" x="0" y="380" text-anchor="middle">🏢 Borland product suite</text>
+
+    <text class="case-desc" x="0" y="405" text-anchor="middle">📈 RAM-based compilation</text>
+
+
+
+    <text class="case-impact" x="0" y="435" text-anchor="middle">Impact: Built on UCSD Pascal legacy</text>
+
+    <text class="case-data" x="0" y="460" text-anchor="middle">🎯 Advanced integrated tools</text>
+
+
+
+    <!-- Connection line -->
+
+    <line x1="0" y1="0" x2="0" y2="-40" stroke="#654321" stroke-width="3"/>
+
+  </g>
+
+
+
+  <!-- 3. Visual Basic (1991) - Visual Programming -->
+
+  <g transform="translate(750, 180)">
+
+    <rect x="-160" y="0" width="320" height="480" fill="white" stroke="url(#desktop)" stroke-width="3" rx="12" filter="url(#cardShadow)"/>
+
+
+
+    <!-- Header -->
+
+    <rect x="-160" y="0" width="320" height="60" fill="url(#desktop)" rx="12"/>
+
+    <text class="field-title" x="0" y="25" text-anchor="middle">🎨 Visual IDE</text>
+
+    <text class="field-subtitle" x="0" y="45" text-anchor="middle">Visual Programming</text>
+
+
+
+    <!-- Content -->
+
+    <text class="case-title" x="0" y="90" text-anchor="middle" fill="#FF6B35">Visual Basic</text>
+
+    <text class="case-desc" x="0" y="115" text-anchor="middle">(1991)</text>
+
+
+
+    <text class="case-desc" x="0" y="150" text-anchor="middle">🖱️ Drag and drop</text>
+
+    <text class="case-desc" x="0" y="175" text-anchor="middle">🎛️ Visual form designer</text>
+
+
+
+    <text class="case-impact" x="0" y="205" text-anchor="middle">Impact: RAD revolution</text>
+
+    <text class="case-impact" x="0" y="230" text-anchor="middle">GUI programming popularization</text>
+
+
+
+    <text class="case-data" x="0" y="260" text-anchor="middle">🏆 Windows visual development pioneer</text>
+
+    <text class="case-data" x="0" y="285" text-anchor="middle">📊 Windows 3.0 based</text>
+
+
+
+    <text class="case-title" x="0" y="325" text-anchor="middle" fill="#FF6B35">Delphi</text>
+
+    <text class="case-desc" x="0" y="350" text-anchor="middle">(1995)</text>
+
+
+
+    <text class="case-desc" x="0" y="380" text-anchor="middle">🔧 Object Pascal</text>
+
+    <text class="case-desc" x="0" y="405" text-anchor="middle">⚡ Native compilation</text>
+
+
+
+    <text class="case-impact" x="0" y="435" text-anchor="middle">Impact: Visual + Performance</text>
+
+    <text class="case-data" x="0" y="460" text-anchor="middle">🎯 Advanced RAD development</text>
+
+
+
+    <!-- Connection line -->
+
+    <line x1="0" y1="480" x2="0" y2="510" stroke="#FF6B35" stroke-width="3"/>
+
+  </g>
+
+
+
+  <!-- 4. Visual Studio (1997) - Enterprise IDE -->
+
+  <g transform="translate(1000, 750)">
+
+    <rect x="-160" y="0" width="320" height="480" fill="white" stroke="url(#desktop)" stroke-width="3" rx="12" filter="url(#cardShadow)"/>
+
+
+
+    <!-- Header -->
+
+    <rect x="-160" y="0" width="320" height="60" fill="url(#desktop)" rx="12"/>
+
+    <text class="field-title" x="0" y="25" text-anchor="middle">🏢 Enterprise</text>
+
+    <text class="field-subtitle" x="0" y="45" text-anchor="middle">Enterprise IDE</text>
+
+
+
+    <!-- Content -->
+
+    <text class="case-title" x="0" y="90" text-anchor="middle" fill="#FF6B35">Visual Studio</text>
+
+    <text class="case-desc" x="0" y="115" text-anchor="middle">(1997)</text>
+
+
+
+    <text class="case-desc" x="0" y="150" text-anchor="middle">🔧 Multi-language support</text>
+
+    <text class="case-desc" x="0" y="175" text-anchor="middle">🐛 Integrated debugger</text>
+
+
+
+    <text class="case-impact" x="0" y="205" text-anchor="middle">Impact: Enterprise development</text>
+
+    <text class="case-impact" x="0" y="230" text-anchor="middle">Microsoft ecosystem integration</text>
+
+
+
+    <text class="case-data" x="0" y="260" text-anchor="middle">📦 Visual Studio 6.0</text>
+
+    <text class="case-data" x="0" y="285" text-anchor="middle">🌐 COM/ActiveX integration</text>
+
+
+
+    <text class="case-title" x="0" y="325" text-anchor="middle" fill="#FF6B35">IntelliSense</text>
+
+    <text class="case-desc" x="0" y="350" text-anchor="middle">(1997)</text>
+
+
+
+    <text class="case-desc" x="0" y="380" text-anchor="middle">🧠 Code auto-completion</text>
+
+    <text class="case-desc" x="0" y="405" text-anchor="middle">💡 Real-time error checking</text>
+
+
+
+    <text class="case-impact" x="0" y="435" text-anchor="middle">Impact: Developer productivity</text>
+
+    <text class="case-data" x="0" y="460" text-anchor="middle">🎯 IDE standard features</text>
+
+
+
+    <!-- Connection line -->
+
+    <line x1="0" y1="0" x2="0" y2="-40" stroke="#FF6B35" stroke-width="3"/>
+
+  </g>
+
+
+
+  <!-- 5. Eclipse (2001) - Open Source IDE -->
+
+  <g transform="translate(1300, 180)">
+
+    <rect x="-160" y="0" width="320" height="480" fill="white" stroke="url(#modern)" stroke-width="3" rx="12" filter="url(#cardShadow)"/>
+
+
+
+    <!-- Header -->
+
+    <rect x="-160" y="0" width="320" height="60" fill="url(#modern)" rx="12"/>
+
+    <text class="field-title" x="0" y="25" text-anchor="middle">🌐 Open Source</text>
+
+    <text class="field-subtitle" x="0" y="45" text-anchor="middle">Open Source Era</text>
+
+
+
+    <!-- Content -->
+
+    <text class="case-title" x="0" y="90" text-anchor="middle" fill="#4A90E2">Eclipse</text>
+
+    <text class="case-desc" x="0" y="115" text-anchor="middle">(2001)</text>
+
+
+
+    <text class="case-desc" x="0" y="150" text-anchor="middle">🔌 Plugin architecture</text>
+
+    <text class="case-desc" x="0" y="175" text-anchor="middle">🌍 Cross-platform</text>
+
+
+
+    <text class="case-impact" x="0" y="205" text-anchor="middle">Impact: Java development standard</text>
+
+    <text class="case-impact" x="0" y="230" text-anchor="middle">Open source IDE revolution</text>
+
+
+
+    <text class="case-data" x="0" y="260" text-anchor="middle">💰 IBM $40M investment</text>
+
+    <text class="case-data" x="0" y="285" text-anchor="middle">📈 #1 Java IDE until 2016</text>
+
+
+
+    <text class="case-title" x="0" y="325" text-anchor="middle" fill="#4A90E2">NetBeans</text>
+
+    <text class="case-desc" x="0" y="350" text-anchor="middle">(1996/2000)</text>
+
+
+
+    <text class="case-desc" x="0" y="380" text-anchor="middle">☕ Sun Microsystems</text>
+
+    <text class="case-desc" x="0" y="405" text-anchor="middle">🔧 Java native</text>
+
+
+
+    <text class="case-impact" x="0" y="435" text-anchor="middle">Impact: Java toolchain</text>
+
+    <text class="case-data" x="0" y="460" text-anchor="middle">🌟 Moved to Apache Foundation</text>
+
+
+
+    <!-- Connection line -->
+
+    <line x1="0" y1="480" x2="0" y2="510" stroke="#4A90E2" stroke-width="3"/>
+
+  </g>
+
+
+
+  <!-- 6. IntelliJ IDEA (2001) - Smart IDE -->
+
+  <g transform="translate(1600, 750)">
+
+    <rect x="-160" y="0" width="320" height="480" fill="white" stroke="url(#modern)" stroke-width="3" rx="12" filter="url(#cardShadow)"/>
+
+
+
+    <!-- Header -->
+
+    <rect x="-160" y="0" width="320" height="60" fill="url(#modern)" rx="12"/>
+
+    <text class="field-title" x="0" y="25" text-anchor="middle">🧠 Smart IDE</text>
+
+    <text class="field-subtitle" x="0" y="45" text-anchor="middle">Smart Code Analysis</text>
+
+
+
+    <!-- Content -->
+
+    <text class="case-title" x="0" y="90" text-anchor="middle" fill="#4A90E2">IntelliJ IDEA</text>
+
+    <text class="case-desc" x="0" y="115" text-anchor="middle">(2001)</text>
+
+
+
+    <text class="case-desc" x="0" y="150" text-anchor="middle">🔍 Advanced code analysis</text>
+
+    <text class="case-desc" x="0" y="175" text-anchor="middle">♻️ Refactoring tools</text>
+
+
+
+    <text class="case-impact" x="0" y="205" text-anchor="middle">Impact: Intelligent coding</text>
+
+    <text class="case-impact" x="0" y="230" text-anchor="middle">IDE quality innovation</text>
+
+
+
+    <text class="case-data" x="0" y="260" text-anchor="middle">🚀 JetBrains product</text>
+
+    <text class="case-data" x="0" y="285" text-anchor="middle">📊 Gained significant market share</text>
+
+
+
+    <text class="case-title" x="0" y="325" text-anchor="middle" fill="#4A90E2">Code Intelligence</text>
+
+    <text class="case-desc" x="0" y="350" text-anchor="middle">(2001+)</text>
+
+
+
+    <text class="case-desc" x="0" y="380" text-anchor="middle">🧭 Code navigation</text>
+
+    <text class="case-desc" x="0" y="405" text-anchor="middle">⚡ Instant feedback</text>
+
+
+
+    <text class="case-impact" x="0" y="435" text-anchor="middle">Impact: Developer experience</text>
+
+    <text class="case-data" x="0" y="460" text-anchor="middle">🎯 Kotlin language development</text>
+
+
+
+    <!-- Connection line -->
+
+    <line x1="0" y1="0" x2="0" y2="-40" stroke="#4A90E2" stroke-width="3"/>
+
+  </g>
+
+
+
+  <!-- 7. Sublime Text (2008) - Performance Focus -->
+
+  <g transform="translate(1900, 180)">
+
+    <rect x="-160" y="0" width="320" height="480" fill="white" stroke="url(#modern)" stroke-width="3" rx="12" filter="url(#cardShadow)"/>
+
+
+
+    <!-- Header -->
+
+    <rect x="-160" y="0" width="320" height="60" fill="url(#modern)" rx="12"/>
+
+    <text class="field-title" x="0" y="25" text-anchor="middle">⚡ High Performance</text>
+
+    <text class="field-subtitle" x="0" y="45" text-anchor="middle">Performance First</text>
+
+
+
+    <!-- Content -->
+
+    <text class="case-title" x="0" y="90" text-anchor="middle" fill="#4A90E2">Sublime Text</text>
+
+    <text class="case-desc" x="0" y="115" text-anchor="middle">(2008)</text>
+
+
+
+    <text class="case-desc" x="0" y="150" text-anchor="middle">🚀 Ultra-fast performance</text>
+
+    <text class="case-desc" x="0" y="175" text-anchor="middle">🎨 Elegant UI</text>
+
+
+
+    <text class="case-impact" x="0" y="205" text-anchor="middle">Impact: Lightweight editor revival</text>
+
+    <text class="case-impact" x="0" y="230" text-anchor="middle">Popular among Mac developers</text>
+
+
+
+    <text class="case-data" x="0" y="260" text-anchor="middle">🏆 Widely adopted by developers</text>
+
+    <text class="case-data" x="0" y="285" text-anchor="middle">💨 Minimal resource usage</text>
+
+
+
+    <text class="case-title" x="0" y="325" text-anchor="middle" fill="#4A90E2">Multiple Cursors</text>
+
+    <text class="case-desc" x="0" y="350" text-anchor="middle">(2008+)</text>
+
+
+
+    <text class="case-desc" x="0" y="380" text-anchor="middle">✏️ Multiple selection</text>
+
+    <text class="case-desc" x="0" y="405" text-anchor="middle">🔄 Batch editing</text>
+
+
+
+    <text class="case-impact" x="0" y="435" text-anchor="middle">Impact: Editing innovation</text>
+
+    <text class="case-data" x="0" y="460" text-anchor="middle">🎯 Modern editor standard</text>
+
+
+
+    <!-- Connection line -->
+
+    <line x1="0" y1="480" x2="0" y2="510" stroke="#4A90E2" stroke-width="3"/>
+
+  </g>
+
+
+
+  <!-- 8. Visual Studio Code (2015) - Electron Revolution -->
+
+  <g transform="translate(2200, 750)">
+
+    <rect x="-160" y="0" width="320" height="480" fill="white" stroke="url(#modern)" stroke-width="3" rx="12" filter="url(#cardShadow)"/>
+
+
+
+    <!-- Header -->
+
+    <rect x="-160" y="0" width="320" height="60" fill="url(#modern)" rx="12"/>
+
+    <text class="field-title" x="0" y="25" text-anchor="middle">🔌 Extension Ecosystem</text>
+
+    <text class="field-subtitle" x="0" y="45" text-anchor="middle">Extension Ecosystem</text>
+
+
+
+    <!-- Content -->
+
+    <text class="case-title" x="0" y="90" text-anchor="middle" fill="#4A90E2">Visual Studio Code</text>
+
+    <text class="case-desc" x="0" y="115" text-anchor="middle">(2015)</text>
+
+
+
+    <text class="case-desc" x="0" y="150" text-anchor="middle">🌐 Electron-based</text>
+
+    <text class="case-desc" x="0" y="175" text-anchor="middle">📦 Rich extensions</text>
+
+
+
+    <text class="case-impact" x="0" y="205" text-anchor="middle">Impact: Editor market dominance</text>
+
+    <text class="case-impact" x="0" y="230" text-anchor="middle">Developer productivity innovation</text>
+
+
+
+    <text class="case-data" x="0" y="260" text-anchor="middle">🏆 Currently most popular</text>
+
+    <text class="case-data" x="0" y="285" text-anchor="middle">📊 Over 30,000 extensions</text>
+
+
+
+    <text class="case-title" x="0" y="325" text-anchor="middle" fill="#4A90E2">Monaco Editor</text>
+
+    <text class="case-desc" x="0" y="350" text-anchor="middle">(2013)</text>
+
+
+
+    <text class="case-desc" x="0" y="380" text-anchor="middle">🌐 Web-based editor</text>
+
+    <text class="case-desc" x="0" y="405" text-anchor="middle">⚡ TypeScript engine</text>
+
+
+
+    <text class="case-impact" x="0" y="435" text-anchor="middle">Impact: Cloud IDE foundation</text>
+
+    <text class="case-data" x="0" y="460" text-anchor="middle">🎯 Atom performance improvement</text>
+
+
+
+    <!-- Connection line -->
+
+    <line x1="0" y1="0" x2="0" y2="-40" stroke="#4A90E2" stroke-width="3"/>
+
+  </g>
+
+
+
+  <!-- 9. GitHub Codespaces (2020) - Cloud IDEs -->
+
+  <g transform="translate(2500, 180)">
+
+    <rect x="-160" y="0" width="320" height="480" fill="white" stroke="url(#cloud)" stroke-width="3" rx="12" filter="url(#cardShadow)"/>
+
+
+
+    <!-- Header -->
+
+    <rect x="-160" y="0" width="320" height="60" fill="url(#cloud)" rx="12"/>
+
+    <text class="field-title" x="0" y="25" text-anchor="middle">☁️ Cloud IDE</text>
+
+    <text class="field-subtitle" x="0" y="45" text-anchor="middle">Cloud Development</text>
+
+
+
+    <!-- Content -->
+
+    <text class="case-title" x="0" y="90" text-anchor="middle" fill="#7B68EE">GitHub Codespaces</text>
+
+    <text class="case-desc" x="0" y="115" text-anchor="middle">(2020)</text>
+
+
+
+    <text class="case-desc" x="0" y="150" text-anchor="middle">🌐 Browser-based</text>
+
+    <text class="case-desc" x="0" y="175" text-anchor="middle">🔧 Instant environment setup</text>
+
+
+
+    <text class="case-impact" x="0" y="205" text-anchor="middle">Impact: Development environment revolution</text>
+
+    <text class="case-impact" x="0" y="230" text-anchor="middle">Development without installation</text>
+
+
+
+    <text class="case-data" x="0" y="260" text-anchor="middle">💻 VS Code-based</text>
+
+    <text class="case-data" x="0" y="285" text-anchor="middle">🐳 Container environment</text>
+
+
+
+    <text class="case-title" x="0" y="325" text-anchor="middle" fill="#7B68EE">Replit</text>
+
+    <text class="case-desc" x="0" y="350" text-anchor="middle">(2016)</text>
+
+
+
+    <text class="case-desc" x="0" y="380" text-anchor="middle">🎓 Educational platform</text>
+
+    <text class="case-desc" x="0" y="405" text-anchor="middle">🤝 Real-time collaboration</text>
+
+
+
+    <text class="case-impact" x="0" y="435" text-anchor="middle">Impact: Accessibility improvement</text>
+
+    <text class="case-data" x="0" y="460" text-anchor="middle">📚 Coding education popularization</text>
+
+
+
+    <!-- Connection line -->
+
+    <line x1="0" y1="480" x2="0" y2="510" stroke="#7B68EE" stroke-width="3"/>
+
+  </g>
+
+
+
+  <!-- 10. AI-Powered IDEs (2022+) - Intelligence Era -->
+
+  <g transform="translate(2800, 750)">
+
+    <rect x="-160" y="0" width="320" height="480" fill="white" stroke="url(#ai)" stroke-width="3" rx="12" filter="url(#cardShadow)"/>
+
+
+
+    <!-- Header -->
+
+    <rect x="-160" y="0" width="320" height="60" fill="url(#ai)" rx="12"/>
+
+    <text class="field-title" x="0" y="25" text-anchor="middle">🤖 AI IDE</text>
+
+    <text class="field-subtitle" x="0" y="45" text-anchor="middle">AI-Powered Development</text>
+
+
+
+    <!-- Content -->
+
+    <text class="case-title" x="0" y="90" text-anchor="middle" fill="#FF1493">GitHub Copilot</text>
+
+    <text class="case-desc" x="0" y="115" text-anchor="middle">(2021)</text>
+
+
+
+    <text class="case-desc" x="0" y="150" text-anchor="middle">🧠 AI code generation</text>
+
+    <text class="case-desc" x="0" y="175" text-anchor="middle">💬 Natural language programming</text>
+
+
+
+    <text class="case-impact" x="0" y="205" text-anchor="middle">Impact: Programming paradigm</text>
+
+    <text class="case-impact" x="0" y="230" text-anchor="middle">Development speed innovation</text>
+
+
+
+    <text class="case-data" x="0" y="260" text-anchor="middle">🎯 OpenAI Codex-based</text>
+
+    <text class="case-data" x="0" y="285" text-anchor="middle">📊 1.3M+ paid users (2024)</text>
+
+
+
+    <text class="case-title" x="0" y="325" text-anchor="middle" fill="#FF1493">Claude Code</text>
+
+    <text class="case-desc" x="0" y="350" text-anchor="middle">(2025)</text>
+
+
+
+    <text class="case-desc" x="0" y="380" text-anchor="middle">🎯 AI coding assistant CLI</text>
+
+    <text class="case-desc" x="0" y="405" text-anchor="middle">🛠️ Terminal-based development</text>
+
+
+
+    <text class="case-impact" x="0" y="435" text-anchor="middle">Impact: Agentic coding collaboration</text>
+
+    <text class="case-data" x="0" y="460" text-anchor="middle">🚀 Research preview to general availability</text>
+
+
+
+    <!-- Connection line -->
+
+    <line x1="0" y1="0" x2="0" y2="-40" stroke="#FF1493" stroke-width="3"/>
+
+  </g>
+
+
+
+  <!-- Bottom summary -->
+
+  <rect x="150" y="1300" width="2900" height="80" fill="white" stroke="#2C3E50" stroke-width="3" rx="12" filter="url(#cardShadow)"/>
+
+  <text x="1600" y="1330" text-anchor="middle" class="case-title" fill="#2C3E50">
+
+    IDE Evolution: 60 Years of Development Tool Innovation — From Punched Cards to AI Pair Programming
+
+  </text>
+
+  <text x="1600" y="1355" text-anchor="middle" class="case-desc">
+
+    How IDEs transformed from simple editors to intelligent development partners that reshape human-computer interaction
+
+  </text>
+
+  <text x="1600" y="1375" text-anchor="middle" class="case-impact">
+
+    "The evolution of how we write code is the evolution of human-computer interaction" — The future is collaborative intelligence
+
+  </text>
+
+
+
+</svg>

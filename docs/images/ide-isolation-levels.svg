@@ -1,13 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 550">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 70 900 390">
   <defs>
     <style>
       /* Tufte Style: Strictly Grayscale, Serif, Minimal */
       .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #111; }
       .title { font-size: 22px; font-weight: bold; }
       .subtitle { font-size: 14px; fill: #555; }
-      .label { font-size: 14px; font-weight: bold; }
-      .detail { font-size: 12px; fill: #444; }
-      .note { font-size: 11px; fill: #666; font-style: italic; }
+      .label { font-size: 15px; font-weight: bold; }
+      .detail { font-size: 13px; fill: #444; }
+      .note { font-size: 12px; fill: #666; font-style: italic; }
 
       /* Highlight Styles (Grayscale) */
       /* 강조: 진한 테두리와 약간 더 어두운 배경 */
@@ -25,10 +25,10 @@
 
     <rect x="0" y="0" width="900" height="550" fill="#ffffff"/>
 
-    <text x="450" y="40" text-anchor="middle" class="tufte-text title">환경 격리 수준 비교: uv vs Docker</text>
-  <text x="450" y="65" text-anchor="middle" class="tufte-text subtitle">가상화 계층 구조와 Python 관리 범위</text>
+  <!-- <text x="450" y="40" text-anchor="middle" class="tufte-text title">환경 격리 수준 비교: uv vs Docker</text>
+  <text x="450" y="65" text-anchor="middle" class="tufte-text subtitle">가상화 계층 구조와 Python 관리 범위</text> -->
 
-    <text x="225" y="100" text-anchor="middle" class="tufte-text label">uv (패키지 + <tspan class="highlight-text">Python 버전</tspan> 격리)</text>
+    <text x="225" y="100" text-anchor="middle" class="tufte-text label">uv (패키지 + <tspan class="highlight-text">파이썬 버전</tspan> 격리)</text>
 
     <rect x="75" y="390" width="300" height="50" rx="0" class="layer-shared"/>
   <text x="225" y="415" text-anchor="middle" class="tufte-text detail">호스트 운영체제 (OS)</text>
@@ -40,14 +40,14 @@
     <rect x="95" y="130" width="260" height="190" rx="0" class="layer-isolated"/>
   <text x="225" y="155" text-anchor="middle" class="tufte-text label">가상 환경 (.venv)</text>
 
-    <rect x="135" y="180" width="180" height="40" rx="0" class="layer-emphatic"/>
-  <text x="225" y="198" text-anchor="middle" class="tufte-text detail">Python 패키지</text>
+  <rect x="135" y="180" width="180" height="40" rx="0" class="layer-emphatic"/>
+  <text x="225" y="198" text-anchor="middle" class="tufte-text detail">파이썬 패키지</text>
   <text x="225" y="213" text-anchor="middle" class="tufte-text detail">(Lib)</text>
 
     <rect x="115" y="240" width="220" height="60" rx="0" class="highlight"/>
-  <text x="225" y="260" text-anchor="middle" class="tufte-text label highlight-text">Python 인터프리터</text>
+  <text x="225" y="260" text-anchor="middle" class="tufte-text label highlight-text">파이썬 인터프리터</text>
   <text x="225" y="280" text-anchor="middle" class="tufte-text detail highlight-text">(uv가 설치 및 관리)</text>
-  <text x="225" y="295" text-anchor="middle" class="tufte-text note">시스템 Python과 분리됨</text>
+  <text x="225" y="295" text-anchor="middle" class="tufte-text note">시스템 파이썬과 분리됨</text>
 
     <text x="675" y="100" text-anchor="middle" class="tufte-text label">Docker (OS 수준 격리)</text>
 
@@ -82,13 +82,13 @@
   </defs>
 
   <line x1="335" y1="270" x2="565" y2="270" class="highlight-line"/>
-  <text x="450" y="265" text-anchor="middle" class="tufte-text label highlight-text">Python 버전 관리 (공통점)</text>
-  <text x="450" y="285" text-anchor="middle" class="tufte-text detail" style="fill:#000;">둘 다 프로젝트별로</text>
-  <text x="450" y="300" text-anchor="middle" class="tufte-text detail" style="fill:#000;">독립적인 Python 사용 가능</text>
+  <text x="455" y="265" text-anchor="middle" class="tufte-text label highlight-text">파이썬 버전 관리 (공통점)</text>
+  <text x="455" y="285" text-anchor="middle" class="tufte-text detail" style="fill:#000;">둘 다 프로젝트별로</text>
+  <text x="455" y="300" text-anchor="middle" class="tufte-text detail" style="fill:#000;">독립적인 파이썬 사용 가능</text>
 
-    <rect x="100" y="470" width="700" height="65" fill="#fdfdfd" stroke="#ccc" stroke-width="1" rx="0"/>
+  <!-- <rect x="100" y="470" width="700" height="65" fill="#fdfdfd" stroke="#ccc" stroke-width="1" rx="0"/>
   <line x1="100" y1="470" x2="100" y2="535" stroke="#000" stroke-width="4"/>
   <text x="450" y="495" text-anchor="middle" class="tufte-text label">선택 기준 (Summary)</text>
   <text x="450" y="515" text-anchor="middle" class="tufte-text detail"><tspan font-weight="bold">uv:</tspan> 가벼움 + Python 버전/패키지 완전 관리 (시스템 의존성 최소화)</text>
-  <text x="450" y="530" text-anchor="middle" class="tufte-text detail"><tspan font-weight="bold">Docker:</tspan> 무거움 + OS/시스템 라이브러리/DB 등 전체 환경 격리</text>
+  <text x="450" y="530" text-anchor="middle" class="tufte-text detail"><tspan font-weight="bold">Docker:</tspan> 무거움 + OS/시스템 라이브러리/DB 등 전체 환경 격리</text> -->
 </svg>

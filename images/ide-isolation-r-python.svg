@@ -1,12 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 70 900 390">
   <defs>
     <style>
       /* Tufte Style: Strictly Grayscale, Serif, Minimal */
       .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #111; }
       .title { font-size: 22px; font-weight: bold; }
       .subtitle { font-size: 14px; fill: #555; }
-      .label { font-size: 15px; font-weight: bold; }
-      .detail { font-size: 13px; fill: #444; }
+      .label { font-size: 16px; font-weight: bold; }
+      .detail { font-size: 14px; fill: #444; }
       .note { font-size: 12px; fill: #666; font-style: italic; }
 
       /* Highlight Styles (Grayscale) */
@@ -26,7 +26,7 @@
   <rect x="0" y="0" width="900" height="500" fill="#ffffff"/>
 
   <!-- Left: uv -->
-  <text x="225" y="70" text-anchor="middle" class="tufte-text label">uv (패키지 + <tspan class="highlight-text">파이썬 런타임</tspan> 격리)</text>
+  <text x="225" y="100" text-anchor="middle" class="tufte-text label">uv (<tspan class="highlight-text">파이썬 런타임</tspan> + 패키지 격리)</text>
 
   <rect x="75" y="390" width="300" height="50" rx="0" class="layer-shared"/>
   <text x="225" y="415" text-anchor="middle" class="tufte-text detail">호스트 운영체제 (OS)</text>
@@ -48,7 +48,7 @@
   <text x="225" y="295" text-anchor="middle" class="tufte-text note">시스템과 완전 분리</text>
 
   <!-- Right: rig + renv -->
-  <text x="675" y="70" text-anchor="middle" class="tufte-text label">rig + renv (<tspan class="highlight-text">R 런타임</tspan> + 패키지 격리)</text>
+  <text x="675" y="100" text-anchor="middle" class="tufte-text label">rig + renv (<tspan class="highlight-text">R 런타임</tspan> + 패키지 격리)</text>
 
   <rect x="525" y="390" width="300" height="50" rx="0" class="layer-shared"/>
   <text x="675" y="415" text-anchor="middle" class="tufte-text detail">호스트 운영체제 (OS)</text>
@@ -87,8 +87,10 @@
   <circle cx="335" cy="270" r="3" fill="#000"/>
   <circle cx="565" cy="270" r="3" fill="#000"/>
 
-  <text x="450" y="260" text-anchor="middle" class="tufte-text label highlight-text">런타임 격리 (공통점)</text>
-  <text x="450" y="280" text-anchor="middle" class="tufte-text detail" style="fill:#000;">프로젝트별 독립 런타임</text>
-  <text x="450" y="295" text-anchor="middle" class="tufte-text detail" style="fill:#000;">uv ≈ rig + renv</text>
+  <g transform="translate(0, 5)">
+    <text x="450" y="260" text-anchor="middle" class="tufte-text label highlight-text">런타임 격리 (공통점)</text>
+    <text x="450" y="280" text-anchor="middle" class="tufte-text detail" style="fill:#000;">프로젝트별 독립 런타임</text>
+    <text x="450" y="295" text-anchor="middle" class="tufte-text detail" style="fill:#000;">uv ≈ rig + renv</text>
+  </g>
 
 </svg>

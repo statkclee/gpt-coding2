@@ -89,7 +89,6 @@ book:
         - ide_positron.qmd
         - ide_extension.qmd
         - ide_setup.qmd
-        - shortcode.qmd
 
     - references.qmd 
 
@@ -101,8 +100,7 @@ format:
     mermaid:
       theme: neutral # https://quarto.org/docs/authoring/diagrams.html#mermaid-theming
     theme:
-      light: [cosmo, r2bit.scss]
-      # dark: [yeti, r2bit.scss]
+      light: [cosmo, assets/r2bit.scss]
     number-depth: 3
     number-sections: true
     colorlinks: true
@@ -111,7 +109,6 @@ format:
     code-link: true
   
     author-meta: "이광춘(Openai)"
-    include-in-header: "plausible.html"
     callout-appearance: simple
   
     # 마크다운 표 캡션 위치
@@ -170,7 +167,8 @@ pyodide:
 
 code-annotations: hover
 
-bibliography: references.bib
+bibliography: assets/references.bib
+csl: assets/apa-single-spaced.csl
 link-citations: false
 
 # ---------------------------------- #

@@ -1,14 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 800">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 70 900 670">
   <defs>
     <style>
       /* Tufte Style: Grayscale, Serif font, minimal decoration */
       .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
       .title { font-size: 20px; font-weight: bold; }
-      .subtitle { font-size: 13px; fill: #666; }
-      .section-title { font-size: 15px; font-weight: bold; fill: #444; }
-      .label { font-size: 13px; font-weight: 600; }
-      .detail { font-size: 11px; fill: #666; }
-      .note { font-size: 10px; fill: #888; font-style: italic; }
+      .subtitle { font-size: 15px; fill: #666; }
+      .section-title { font-size: 17px; font-weight: bold; fill: #444; }
+      .label { font-size: 15px; font-weight: 600; }
+      .detail { font-size: 13px; fill: #666; }
+      .note { font-size: 11px; fill: #888; font-style: italic; }
 
       .box { fill: #fff; stroke: #999; stroke-width: 1.5; }
       .box-emphasis { fill: #f5f5f5; stroke: #666; stroke-width: 2; }
@@ -25,8 +25,8 @@
   <rect x="0" y="0" width="900" height="800" fill="#ffffff"/>
 
   <!-- Title -->
-  <text x="450" y="35" text-anchor="middle" class="tufte-text title">데이터 과학 개발 환경 구축 순서</text>
-  <text x="450" y="55" text-anchor="middle" class="tufte-text subtitle">Git → Docker → Make → R/Python → Positron IDE</text>
+  <!-- <text x="450" y="35" text-anchor="middle" class="tufte-text title">데이터 과학 개발 환경 구축 순서</text>
+  <text x="450" y="55" text-anchor="middle" class="tufte-text subtitle">Git → Docker → Make → R/Python → Positron IDE</text> -->
 
   <!-- Step 1: Git -->
   <circle cx="100" cy="110" r="18" class="step-number"/>
@@ -76,7 +76,7 @@
 
   <!-- Python Branch -->
   <rect x="360" y="490" width="200" height="90" rx="4" class="box-emphasis"/>
-  <text x="460" y="515" text-anchor="middle" class="tufte-text label">Python 설치</text>
+  <text x="460" y="515" text-anchor="middle" class="tufte-text label">파이썬 설치</text>
   <text x="460" y="535" text-anchor="middle" class="tufte-text detail">python.org에서 다운로드</text>
   <text x="460" y="555" text-anchor="middle" class="tufte-text detail">환경 관리: uv</text>
   <text x="460" y="570" text-anchor="middle" class="tufte-text note">uv venv, uv pip install</text>
@@ -95,10 +95,10 @@
   <text x="350" y="700" text-anchor="middle" class="tufte-text note">posit.co/products/positron/</text>
 
   <!-- Optional Steps (Right side) -->
-  <text x="650" y="110" class="tufte-text section-title">선택 도구</text>
+  <text x="620" y="110" class="tufte-text section-title">문학적 프로그래밍 도구</text>
 
   <rect x="580" y="130" width="240" height="60" rx="4" class="box"/>
-  <text x="700" y="155" text-anchor="middle" class="tufte-text label">Quarto 설정</text>
+  <text x="700" y="155" text-anchor="middle" class="tufte-text label">쿼토 설정</text>
   <text x="700" y="175" text-anchor="middle" class="tufte-text detail">Pandoc, TinyTeX</text>
 
   <rect x="580" y="210" width="240" height="60" rx="4" class="box"/>
@@ -109,7 +109,11 @@
   <path d="M 500 675 L 580 240" stroke="#ccc" stroke-width="1" stroke-dasharray="4,3" fill="none"/>
 
   <!-- Bottom Summary -->
-  <rect x="100" y="740" width="700" height="50" fill="#fafafa" stroke="#d0d0d0" stroke-width="1" rx="4"/>
-  <text x="450" y="762" text-anchor="middle" class="tufte-text label">완료 후 확인</text>
-  <text x="450" y="780" text-anchor="middle" class="tufte-text detail">git --version, docker --version, make --version, R --version, python --version</text>
+  <g transform="translate(250, -100)">
+    <rect x="300" y="740" width="300" height="70" fill="#fafafa" stroke="#d0d0d0" stroke-width="1" rx="4"/>
+    <text x="450" y="762" text-anchor="middle" class="tufte-text label">완료 후 확인</text>
+    <text x="450" y="780" text-anchor="middle" class="tufte-text detail">git --version, docker --version, make --version</text>
+    <text x="450" y="800" text-anchor="middle" class="tufte-text detail">R --version, python --version, pandoc --version </text>
+  </g>
+
 </svg>
