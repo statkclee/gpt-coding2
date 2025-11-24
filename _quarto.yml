@@ -1,7 +1,7 @@
 project:
   type: book
-  # output-dir: docs  # HTML 출력용
-  output-dir: pdfs    # Typst/PDF 출력용
+  output-dir: docs  # HTML 출력용
+  # output-dir: pdfs    # Typst/PDF 출력용
   preview:
     port: 7771
     browser: false
@@ -89,7 +89,7 @@ book:
         - ide_positron.qmd
         - ide_extension.qmd
         - ide_setup.qmd
-        # - shortcode.qmd  # SVG 이미지로 인해 PDF 렌더링 오류
+        - shortcode.qmd
 
     - references.qmd 
 
@@ -147,26 +147,25 @@ filters:
   - fontawesome
   - include-code-files
   - fancy-text
-  # HTML 전용 필터들 (Typst 사용시 비활성화)
-  # - webr
-  # - pyodide
+  - webr
+  - pyodide
 
-# webr:
-#   packages:
-#   - "stringr"
-#   - "readr"
-#   - "purrr"
-#   - "httr"
-#   - "curl"
-#   - "rvest"
-#   - "fs"
-#   - "ggplot2"
-#   - "palmerpenguins"
-#
-#
-# pyodide:
-#   packages:
-#   - "urllib"
+webr:
+  packages:
+  - "stringr"
+  - "readr"
+  - "purrr"
+  - "httr"
+  - "curl"
+  - "rvest"
+  - "fs"
+  - "ggplot2"
+  - "palmerpenguins"
+
+
+pyodide:
+  packages:
+  - "urllib"
 
 
 code-annotations: hover
