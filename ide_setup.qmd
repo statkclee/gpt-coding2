@@ -311,21 +311,21 @@ Positron 또는 VS Code를 연다. 단축키 `Cmd + ,` (맥OS) 또는 `Ctrl + ,`
 
 이렇게 맨 앞에 추가하면 IDE는 코드를 표시할 때 D2Coding 폰트를 최우선으로 사용하게 된다. 설정을 마친 후 코드 편집기로 돌아가면 글꼴이 즉시 D2Coding으로 변경된 것을 확인할 수 있다.
 
-### Pretendard: 웹 타이포그래피 가변 글꼴 {#sec-setup-font-pretendard}
+### 프리텐다드: 웹 타이포그래피 가변 글꼴 {#sec-setup-font-pretendard}
 
-**Pretendard**는 현대 웹 환경을 위한 가변 글꼴(Variable Font)이다. 하나의 파일로 다양한 두께(weight)를 제공하며, 한글, 영문, 일본어를 모두 지원한다. 특히 웹 페이지나 문서에서 시스템 기본 폰트보다 훨씬 뛰어난 가독성을 제공한다.
+**프리텐다드(Pretendard)**는 현대 웹 환경을 위한 가변 글꼴(Variable Font)이다. 하나의 파일로 다양한 두께(weight)를 제공하며, 한글, 영문, 일본어를 모두 지원한다. 특히 웹 페이지나 문서에서 시스템 기본 폰트보다 훨씬 뛰어난 가독성을 제공한다.
 
-#### Pretendard 특징
+#### 프리텐다드 특징
 
-**가변 폰트 기술**: Pretendard는 Thin(100)부터 Black(900)까지 9가지 weight를 하나의 파일에 담았다. 웹 페이지 로딩 속도를 높이면서도 다양한 디자인 표현이 가능하다.
+**가변 폰트 기술**: 프리텐다드는 Thin(100)부터 Black(900)까지 9가지 weight를 하나의 파일에 담았다. 웹 페이지 로딩 속도를 높이면서도 다양한 디자인 표현이 가능하다.
 
 **크로스 플랫폼 최적화**: 윈도우, 맥OS, 리눅스 모두에서 일관된 렌더링을 제공한다. 시스템 폰트의 한계(맥OS의 Apple SD Gothic Neo, 윈도우의 맑은 고딕 등)를 넘어 전문적인 타이포그래피를 구현한다.
 
-**웹 문서 필수 폰트**: 쿼토로 생성한 HTML 문서, GitHub Pages, 블로그 등 웹 출판 시 Pretendard는 거의 필수다. 시스템 폰트에 의존하지 않고 모든 사용자에게 동일한 가독성을 보장한다.
+**웹 문서 필수 폰트**: 쿼토로 생성한 HTML 문서, GitHub Pages, 블로그 등 웹 출판 시 프리텐다드는 거의 필수다. 시스템 폰트에 의존하지 않고 모든 사용자에게 동일한 가독성을 보장한다.
 
-#### Pretendard 설치
+#### 프리텐다드 설치
 
-[Pretendard GitHub 릴리즈](https://github.com/orioncactus/pretendard/releases/latest)에 접속해 최신 버전을 다운로드한다. `Pretendard-X.X.X.zip` 파일의 압축을 풀고 필요한 형식의 폰트를 설치한다.
+[프리텐다드 GitHub 릴리즈](https://github.com/orioncactus/pretendard/releases/latest)에 접속해 최신 버전을 다운로드한다. `Pretendard-X.X.X.zip` 파일의 압축을 풀고 필요한 형식의 폰트를 설치한다.
 
 **시스템 설치**: `public/static` 폴더의 OTF 또는 TTF 파일을 시스템에 설치하면 IDE와 데스크톱 애플리케이션에서 사용할 수 있다.
 
@@ -343,7 +343,7 @@ body {
 }
 ```
 
-Pretendard를 사용하면 모든 플랫폼에서 일관되고 전문적인 한글 타이포그래피를 구현할 수 있다.
+프리텐다드를 사용하면 모든 플랫폼에서 일관되고 전문적인 한글 타이포그래피를 구현할 수 있다.
 
 ## 개발 환경 검증 {#sec-setup-verify}
 
