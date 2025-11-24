@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 70 900 390">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500">
   <defs>
     <style>
       /* Tufte Style: Strictly Grayscale, Serif, Minimal */
@@ -22,7 +22,7 @@
       .layer-dotted { fill: none; stroke: #999; stroke-width: 1; stroke-dasharray: 3,3; }
     </style>
   </defs>
-
+ 
     <rect x="0" y="0" width="900" height="550" fill="#ffffff"/>
 
         <text x="225" y="100" text-anchor="middle" class="tufte-text label">uv (패키지 + <tspan class="highlight-text">파이썬 런타임</tspan> 격리)</text>
