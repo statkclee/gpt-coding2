@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 800">
+  <defs>
+    <style>
+      /* Tufte Style: Grayscale, Serif font, minimal decoration */
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .title { font-size: 20px; font-weight: bold; }
+      .subtitle { font-size: 13px; fill: #666; }
+      .section-title { font-size: 15px; font-weight: bold; fill: #444; }
+      .label { font-size: 13px; font-weight: 600; }
+      .detail { font-size: 11px; fill: #666; }
+      .note { font-size: 10px; fill: #888; font-style: italic; }
+
+      .box { fill: #fff; stroke: #999; stroke-width: 1.5; }
+      .box-emphasis { fill: #f5f5f5; stroke: #666; stroke-width: 2; }
+      .arrow { fill: none; stroke: #666; stroke-width: 1.5; marker-end: url(#arrow); }
+      .step-number { fill: #e5e5e5; stroke: #999; stroke-width: 1; }
+    </style>
+
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M 0 0 L 8 4 L 0 8 z" fill="#666" />
+    </marker>
+  </defs>
+
+  <!-- White background -->
+  <rect x="0" y="0" width="900" height="800" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="450" y="35" text-anchor="middle" class="tufte-text title">데이터 과학 개발 환경 구축 순서</text>
+  <text x="450" y="55" text-anchor="middle" class="tufte-text subtitle">Git → Docker → Make → R/Python → Positron IDE</text>
+
+  <!-- Step 1: Git -->
+  <circle cx="100" cy="110" r="18" class="step-number"/>
+  <text x="100" y="117" text-anchor="middle" class="tufte-text label">1</text>
+
+  <rect x="140" y="90" width="220" height="70" rx="4" class="box-emphasis"/>
+  <text x="250" y="115" text-anchor="middle" class="tufte-text label">Git 설치</text>
+  <text x="250" y="135" text-anchor="middle" class="tufte-text detail">버전 관리 시스템</text>
+  <text x="250" y="150" text-anchor="middle" class="tufte-text note">macOS: xcode-select --install</text>
+
+  <path d="M 250 160 L 250 200" class="arrow"/>
+
+  <!-- Step 2: Docker -->
+  <circle cx="100" cy="240" r="18" class="step-number"/>
+  <text x="100" y="247" text-anchor="middle" class="tufte-text label">2</text>
+
+  <rect x="140" y="220" width="220" height="70" rx="4" class="box"/>
+  <text x="250" y="245" text-anchor="middle" class="tufte-text label">Docker 설치</text>
+  <text x="250" y="265" text-anchor="middle" class="tufte-text detail">컨테이너 환경</text>
+  <text x="250" y="280" text-anchor="middle" class="tufte-text note">재현 가능한 환경 구축</text>
+
+  <path d="M 250 290 L 250 330" class="arrow"/>
+
+  <!-- Step 3: Make -->
+  <circle cx="100" cy="370" r="18" class="step-number"/>
+  <text x="100" y="377" text-anchor="middle" class="tufte-text label">3</text>
+
+  <rect x="140" y="350" width="220" height="70" rx="4" class="box"/>
+  <text x="250" y="375" text-anchor="middle" class="tufte-text label">Make 설치</text>
+  <text x="250" y="395" text-anchor="middle" class="tufte-text detail">워크플로우 자동화</text>
+  <text x="250" y="410" text-anchor="middle" class="tufte-text note">macOS: Xcode Tools 포함</text>
+
+  <path d="M 250 420 L 250 460" class="arrow"/>
+
+  <!-- Step 4: R & Python (Parallel) -->
+  <circle cx="100" cy="500" r="18" class="step-number"/>
+  <text x="100" y="507" text-anchor="middle" class="tufte-text label">4</text>
+
+  <text x="250" y="475" text-anchor="middle" class="tufte-text section-title">프로그래밍 언어 설치</text>
+
+  <!-- R Branch -->
+  <rect x="140" y="490" width="200" height="90" rx="4" class="box-emphasis"/>
+  <text x="240" y="515" text-anchor="middle" class="tufte-text label">R 설치</text>
+  <text x="240" y="535" text-anchor="middle" class="tufte-text detail">CRAN에서 다운로드</text>
+  <text x="240" y="555" text-anchor="middle" class="tufte-text detail">환경 관리: renv</text>
+  <text x="240" y="570" text-anchor="middle" class="tufte-text note">renv::snapshot()</text>
+
+  <!-- Python Branch -->
+  <rect x="360" y="490" width="200" height="90" rx="4" class="box-emphasis"/>
+  <text x="460" y="515" text-anchor="middle" class="tufte-text label">Python 설치</text>
+  <text x="460" y="535" text-anchor="middle" class="tufte-text detail">python.org에서 다운로드</text>
+  <text x="460" y="555" text-anchor="middle" class="tufte-text detail">환경 관리: uv</text>
+  <text x="460" y="570" text-anchor="middle" class="tufte-text note">uv venv && uv pip install</text>
+
+  <!-- Arrows converging -->
+  <path d="M 240 580 L 240 620 L 350 640" class="arrow"/>
+  <path d="M 460 580 L 460 620 L 350 640" class="arrow"/>
+
+  <!-- Step 5: Positron -->
+  <circle cx="100" cy="660" r="18" class="step-number"/>
+  <text x="100" y="667" text-anchor="middle" class="tufte-text label">5</text>
+
+  <rect x="200" y="640" width="300" height="70" rx="4" class="box-emphasis"/>
+  <text x="350" y="665" text-anchor="middle" class="tufte-text label">Positron IDE 설치</text>
+  <text x="350" y="685" text-anchor="middle" class="tufte-text detail">R & Python 통합 개발 환경</text>
+  <text x="350" y="700" text-anchor="middle" class="tufte-text note">posit.co/products/positron/</text>
+
+  <!-- Optional Steps (Right side) -->
+  <text x="650" y="110" class="tufte-text section-title">선택 도구</text>
+
+  <rect x="580" y="130" width="240" height="60" rx="4" class="box"/>
+  <text x="700" y="155" text-anchor="middle" class="tufte-text label">Quarto 설정</text>
+  <text x="700" y="175" text-anchor="middle" class="tufte-text detail">Pandoc, TinyTeX</text>
+
+  <rect x="580" y="210" width="240" height="60" rx="4" class="box"/>
+  <text x="700" y="235" text-anchor="middle" class="tufte-text label">코딩 글꼴</text>
+  <text x="700" y="255" text-anchor="middle" class="tufte-text detail">D2Coding 설치</text>
+
+  <!-- Connection from Positron to Optional -->
+  <path d="M 500 675 L 580 240" stroke="#ccc" stroke-width="1" stroke-dasharray="4,3" fill="none"/>
+
+  <!-- Bottom Summary -->
+  <rect x="100" y="740" width="700" height="50" fill="#fafafa" stroke="#d0d0d0" stroke-width="1" rx="4"/>
+  <text x="450" y="762" text-anchor="middle" class="tufte-text label">완료 후 확인</text>
+  <text x="450" y="780" text-anchor="middle" class="tufte-text detail">git --version, docker --version, make --version, R --version, python --version</text>
+</svg>
