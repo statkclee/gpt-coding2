@@ -68,59 +68,126 @@ VS Code는 확장 프로그램이 기여할 수 있는 '슬롯'을 미리 정의
 
 포지트론이 데이터 과학 IDE로서 진정한 힘을 발휘하려면 핵심 확장 프로그램들을 설치해야 한다. 포지트론은 VS Code 기반이므로 VS Code 확장 생태계를 그대로 활용하면서, 데이터 과학에 특화된 확장들을 추가로 제공한다.
 
+::: callout-note
+## Positron vs VS Code: 내장 기능 차이
+
+Positron IDE는 **R (Ark Kernel), Python, Jupyter 기능이 이미 내장**되어 있다. VS Code 사용자는 이 확장들을 별도로 설치해야 하지만, Positron 사용자는 설치 없이도 즉시 사용할 수 있다. 아래 목록에서 "* Positron 내장" 표시가 있는 확장은 Positron에서 이미 제공되므로, **VS Code에서만 추가 설치가 필요**하다.
+:::
+
 ![포지트론 데이터 과학 확장 프로그램 생태계](images/positron-extensions.svg){#fig-positron-extensions}
 
-@fig-positron-extensions 는 포지트론에서 실제로 사용하는 구체적인 확장 프로그램들을 보여준다. Quarto(문서), Rainbow CSV(데이터), lintr/styler(코드 품질), GitHub Copilot(AI), Data Wrangler(변환) 같은 실전 도구들이 데이터 과학 워크플로우를 완성한다.
+@fig-positron-extensions 는 포지트론에서 실제로 사용하는 15종 핵심 확장 프로그램을 3개 그룹으로 보여준다. **1) 엔진 & 앱 개발**: R, Python, Shiny Publisher, Quarto, Thunder Client로 Shiny/Streamlit 앱 개발과 배포를 지원한다. **2) 인터랙티브 데이터 분석**: SandDance, Data Wrangler, SQLTools, Geo Data Viewer, Rainbow CSV로 다양한 데이터 탐색과 변환을 수행한다. **3) AI, 협업 & 운영**: Jupyter, GitHub Copilot, Live Share, Remote-SSH, Docker로 노트북, AI 코딩, 원격 협업, 컨테이너화를 통합한다.
+
+### 언어 지원: R & Python {#sec-positron-language}
+
+\index{R Extension}**R** (Positron 내장, VS Code: `REditorSupport.r`)는 R 언어 지원의 핵심이다. Positron은 자체 개발한 **Ark Kernel**로 R을 실행하며, VS Code보다 훨씬 빠르고 안정적이다. R 언어 서버(LSP)를 통해 코드 자동완성, 함수 시그니처 도움말, 정의로 이동 기능을 제공한다. R 콘솔에서 `install.packages(c("lintr", "styler"))`로 린터와 포맷터를 설치하면, 코드 스타일 문제를 실시간으로 감지하고 tidyverse 스타일로 자동 정리한다.
+
+\index{Python Extension}**Python** (Positron 내장, VS Code: `ms-python.python`)은 파이썬 개발 환경을 완성한다. Pylance 언어 서버로 빠른 타입 체크와 자동완성을 지원하고, `venv`, `conda` 환경을 자동 감지한다. 파이썬 디버거는 중단점, 변수 검사, 단계별 실행을 제공한다.
+
+### 앱 배포: Shiny Publisher {#sec-positron-shiny}
+
+\index{Shiny Publisher}**Shiny & Publisher** (`posit.publisher`)는 Shiny 앱과 Streamlit 앱을 Posit Connect 또는 shinyapps.io에 원클릭으로 배포한다. 로컬에서 개발한 인터랙티브 대시보드를 프로덕션 환경에 즉시 올리고, 팀원들과 공유하며, 버전 관리와 롤백을 지원한다.
+
+설치는 "Posit Publisher"를 검색해 설치한다. Shiny 앱 디렉토리에서 `Cmd+Shift+P` → "Publish Content"를 실행하면 배포 대상(Connect, shinyapps.io)을 선택하고, 계정 인증 후 자동으로 배포된다. 배포 히스토리를 추적하고 이전 버전으로 롤백할 수 있다.
+
+### API 테스트: Thunder Client {#sec-positron-thunder}
+
+\index{Thunder Client}**Thunder Client** (`rangav.vscode-thunder-client`)는 Postman처럼 API 엔드포인트를 테스트하는 도구다. R \index{Plumber}Plumber나 Python \index{FastAPI}FastAPI로 만든 모델 API를 IDE 내에서 바로 테스트한다. GET/POST 요청을 보내고, JSON 응답을 확인하며, 환경 변수를 관리한다.
+
+설치는 "Thunder Client"를 검색해 설치한다. 좌측 사이드바에 번개 아이콘이 생기며, 클릭하면 REST 클라이언트가 열린다. "New Request" → URL 입력 → Send로 API를 테스트한다. 요청을 컬렉션으로 저장해 재사용한다.
 
 ### 문서 작성: Quarto {#sec-positron-quarto}
 
-\index{Quarto Extension}**Quarto Extension**은 재현가능한 데이터 분석 보고서 작성의 핵심이다. `.qmd` 파일에서 R과 파이썬 코드 청크를 실행하고, 결과를 즉시 미리보기로 확인한다. `Render` 버튼 클릭으로 HTML, PDF, Word, 슬라이드로 변환한다. 실시간 미리보기는 수정 사항을 즉시 반영하며, 코드, 텍스트, 시각화, 표를 하나의 문서로 엮어 논문, 기술 보고서, 블로그 포스트를 작성한다.
+\index{Quarto Extension}**Quarto** (`quarto.quarto`)는 재현가능한 데이터 분석 보고서 작성의 핵심이다. `.qmd` 파일에서 R과 파이썬 코드 청크를 실행하고, 결과를 즉시 미리보기로 확인한다. `Render` 버튼 클릭으로 HTML, PDF, Word, 슬라이드로 변환한다. 실시간 미리보기는 수정 사항을 즉시 반영하며, 코드, 텍스트, 시각화, 표를 하나의 문서로 엮어 논문, 기술 보고서, 블로그 포스트를 작성한다.
 
 설치는 확장 마켓플레이스에서 "Quarto"를 검색해 설치한다. `.qmd` 파일을 열면 자동으로 활성화되며, `Cmd+Shift+K` (macOS) 또는 `Ctrl+Shift+K` (Windows/Linux)로 렌더링한다. YAML 헤더에서 출력 형식(`format: html`, `format: pdf`)을 지정하고, R/파이썬 코드 청크는 ` ```{r} ` 또는 ` ```{python} `로 시작한다.
 
+### 시각적 탐색: SandDance {#sec-positron-sanddance}
+
+\index{SandDance}**SandDance** (`msrvida.vscode-sanddance`)는 마이크로소프트 리서치가 개발한 혁신적인 3D/2D 데이터 시각화 도구다. 코드 없이 데이터를 드래그 앤 드롭으로 탐색하며, 산점도, 바차트, 밀도 플롯을 실시간으로 전환해 데이터 패턴을 발견한다. 수십만 행 데이터도 WebGL로 부드럽게 렌더링한다.
+
+설치는 "SandDance"를 검색해 설치한다. CSV나 JSON 파일을 우클릭 → "View in SandDance"를 선택하면 인터랙티브 시각화 창이 열린다. 축을 변경하고, 색상을 매핑하며, 필터를 적용해 탐색적 데이터 분석(EDA)을 몇 초 만에 수행한다.
+
+### 데이터베이스: SQLTools {#sec-positron-sqltools}
+
+\index{SQLTools}**SQLTools** (`mtxr.sqltools`)는 PostgreSQL, MySQL, SQLite 등 다양한 데이터베이스에 연결해 쿼리를 실행하고 결과를 시각화한다. IDE 내에서 데이터베이스 탐색, 테이블 스키마 확인, SQL 자동완성, 쿼리 히스토리 관리를 수행한다.
+
+설치는 "SQLTools"를 검색해 설치한다. 좌측 사이드바에 데이터베이스 아이콘이 생기며, "Add New Connection"으로 DB 연결 정보를 입력한다. SQL 파일을 열고 `Cmd+E Cmd+E`로 쿼리를 실행하면 결과가 테이블로 표시된다.
+
+### 지도 시각화: Geo Data Viewer {#sec-positron-geo}
+
+\index{Geo Data Viewer}**Geo Data Viewer** (`randomfractals.geo-data-viewer`)는 GeoJSON, Shapefile, KML 같은 지리 데이터를 즉시 지도로 시각화한다. 공간 데이터 분석 프로젝트에서 지도를 코드 없이 확인하고, 레이어를 토글하며, 속성을 검사한다.
+
+설치는 "Geo Data Viewer"를 검색해 설치한다. `.geojson` 파일을 열면 자동으로 지도가 표시되며, 줌/팬으로 탐색한다. 속성 테이블을 클릭해 각 지형지물의 메타데이터를 확인한다.
+
 ### 데이터 탐색: Rainbow CSV {#sec-positron-rainbow-csv}
 
-\index{Rainbow CSV}**Rainbow CSV**는 CSV 파일을 다루는 필수 도구다. CSV 파일을 열면 각 열을 다른 색으로 표시해 가독성을 높인다. SQL 쿼리로 CSV를 탐색하고(`SELECT * FROM this WHERE age > 30`), 열 정렬, 필터링, 통계 요약을 제공한다. 큰 CSV 파일(수백만 행)도 가상화 기술로 빠르게 열린다.
+\index{Rainbow CSV}**Rainbow CSV** (`mechatroner.rainbow-csv`)는 CSV 파일을 다루는 필수 도구다. CSV 파일을 열면 각 열을 다른 색으로 표시해 가독성을 높인다. SQL 쿼리로 CSV를 탐색하고(`SELECT * FROM this WHERE age > 30`), 열 정렬, 필터링, 통계 요약을 제공한다. 큰 CSV 파일(수백만 행)도 가상화 기술로 빠르게 열린다.
 
 설치는 "Rainbow CSV"를 검색해 설치한다. CSV 파일을 열면 자동으로 각 열에 색상이 적용된다. 열 구분자(쉼표, 탭, 파이프 등)를 자동 감지하며, `Cmd+Shift+P` → "Rainbow CSV: Query"로 SQL 쿼리 모드를 연다. `SELECT name, age FROM this WHERE age > 25 ORDER BY age DESC` 같은 쿼리로 데이터를 탐색하고, 결과를 새 창에 표시한다.
 
-### 코드 품질: lintr & styler {#sec-positron-code-quality}
-
-\index{lintr}**lintr**는 R 코드 스타일과 잠재적 오류를 실시간으로 감지한다. 변수 이름 규칙 위반, 불필요한 공백, 사용하지 않는 변수, 비효율적 코드 패턴을 밑줄로 표시한다. `lintr` 패키지를 R에 설치하면 자동으로 작동하며, `.lintr` 설정 파일로 규칙을 커스터마이징한다.
-
-\index{styler}**styler**는 R 코드를 자동으로 포맷팅한다. 들여쓰기, 공백, 줄바꿈을 tidyverse 스타일 가이드에 맞춰 정리한다. 코드 블록을 선택하고 `Cmd+Shift+P` → "Format Document"를 실행하면 `styler::style_text()`가 자동으로 코드를 정리한다. 저장 시 자동 포맷팅 옵션도 설정 가능하다.
-
-설치는 R 콘솔에서 `install.packages(c("lintr", "styler"))`를 실행한다. 포지트론은 이 패키지들을 자동으로 감지해 통합한다. `.lintr` 파일 예시:
-```r
-linters: with_defaults(
-  line_length_linter(120),
-  object_name_linter = NULL
-)
-```
-
 ### AI 코딩: GitHub Copilot {#sec-positron-copilot}
 
-\index{GitHub Copilot}**GitHub Copilot**은 포지트론에서도 그대로 작동한다. 주석이나 함수 이름을 입력하면 전체 함수 구현을 제안하고, `Tab` 키로 수락한다. 데이터 과학 코드에 특화되어 `ggplot2`, `dplyr`, `pandas`, `scikit-learn` 패턴을 잘 이해한다. "결측치 제거하고 표준화"처럼 자연어 주석을 입력하면 즉시 코드를 생성한다.
+\index{GitHub Copilot}**GitHub Copilot** (`GitHub.copilot`)은 포지트론에서도 그대로 작동한다. 주석이나 함수 이름을 입력하면 전체 함수 구현을 제안하고, `Tab` 키로 수락한다. 데이터 과학 코드에 특화되어 `ggplot2`, `dplyr`, `pandas`, `scikit-learn` 패턴을 잘 이해한다. "결측치 제거하고 표준화"처럼 자연어 주석을 입력하면 즉시 코드를 생성한다.
 
 설치는 GitHub 계정으로 로그인하고 Copilot 구독이 필요하다. 확장 마켓플레이스에서 "GitHub Copilot"을 설치하고, GitHub 계정으로 인증한다. 회색 텍스트로 표시되는 제안을 `Tab`으로 수락하고, `Esc`로 거부한다. `Alt+]`로 다음 제안을, `Alt+[`로 이전 제안을 확인한다.
 
 ### 데이터 변환: Data Wrangler {#sec-positron-data-wrangler}
 
-\index{Data Wrangler}**Data Wrangler**는 데이터 탐색과 변환을 시각적으로 수행하는 마이크로소프트 확장이다. 변수 탐색기에서 데이터프레임을 클릭하고 "Open in Data Wrangler"를 선택하면 그래픽 인터페이스가 열린다. 필터링, 정렬, 그룹화, 피벗 작업을 드래그 앤 드롭으로 수행하고, 모든 작업은 자동으로 R 또는 파이썬 코드로 변환된다.
+\index{Data Wrangler}**Data Wrangler** (`ms-toolsai.datawrangler`)는 데이터 탐색과 변환을 시각적으로 수행하는 마이크로소프트 확장이다. 변수 탐색기에서 데이터프레임을 클릭하고 "Open in Data Wrangler"를 선택하면 그래픽 인터페이스가 열린다. 필터링, 정렬, 그룹화, 피벗 작업을 드래그 앤 드롭으로 수행하고, 모든 작업은 자동으로 R 또는 파이썬 코드로 변환된다.
 
 설치는 "Data Wrangler"를 검색해 설치한다. 복잡한 전처리 파이프라인을 GUI로 만들고, "Export Code" 버튼으로 `dplyr`이나 `pandas` 코드를 생성한다. 코드를 복사해 스크립트에 붙여넣으면 재현 가능한 전처리 워크플로우가 완성된다.
+
+### 노트북: Jupyter {#sec-positron-jupyter}
+
+\index{Jupyter Extension}**Jupyter** (Positron 내장, VS Code: `ms-toolsai.jupyter`)는 `.ipynb` 노트북 파일을 네이티브로 실행한다. 코드 셀, 마크다운 셀, 출력 결과를 하나의 문서로 통합하며, 변수 탐색기와 연동해 노트북 실행 중 생성된 변수를 실시간으로 확인한다. Jupyter 커널(IPython, IRkernel)을 자동 감지하고 전환한다.
+
+Positron은 Jupyter를 내장하므로 별도 설치가 필요 없다. VS Code 사용자는 "Jupyter"를 검색해 설치한다. `.ipynb` 파일을 열면 자동으로 활성화되며, `Shift+Enter`로 셀을 실행한다. 상단 커널 선택 드롭다운에서 Python/R 커널을 전환하고, 노트북 결과를 HTML/PDF로 내보낼 수 있다.
+
+### 실시간 협업: Live Share {#sec-positron-liveshare}
+
+\index{Live Share}**Live Share** (`ms-vsliveshare.vsliveshare`)는 실시간 동시 편집을 가능하게 한다. Google Docs처럼 여러 개발자가 동일 코드를 동시에 편집하고, 디버깅 세션을 공유하며, 터미널까지 함께 사용한다. 원격 페어 프로그래밍과 코드 리뷰에 혁명을 일으킨 도구다.
+
+설치는 "Live Share"를 검색해 설치한다. `Cmd+Shift+P` → "Live Share: Start Collaboration Session"으로 세션을 시작하고, 공유 링크를 팀원에게 전송한다. 팀원이 링크로 접속하면 실시간으로 코드를 함께 편집하고, 커서 위치와 선택 영역이 실시간으로 동기화된다.
+
+### 원격 개발: Remote-SSH {#sec-positron-remote-ssh}
+
+\index{Remote-SSH}**Remote - SSH** (`ms-vscode-remote.remote-ssh`)는 고성능 GPU 서버에 SSH로 연결해 원격 개발 환경을 로컬처럼 사용한다. 딥러닝 모델 훈련처럼 고사양 컴퓨팅이 필요한 작업을 원격 서버에서 수행하면서도, IDE는 로컬 컴퓨터에서 부드럽게 작동한다.
+
+설치는 "Remote - SSH"를 검색해 설치한다. `Cmd+Shift+P` → "Remote-SSH: Connect to Host"로 서버 정보를 입력한다. 연결되면 좌측 하단에 "SSH: 서버명"이 표시되며, 모든 파일 탐색, 편집, 터미널 명령이 원격 서버에서 실행된다.
+
+### 컨테이너화: Docker {#sec-positron-docker}
+
+\index{Docker Extension}**Docker** (`ms-azuretools.vscode-docker`)는 분석 환경을 컨테이너로 패키징해 재현성을 보장한다. `Dockerfile`로 R/Python 패키지, 시스템 라이브러리를 정의하면, 어디서나 동일한 환경을 재현할 수 있다. 컨테이너 빌드, 실행, 디버깅을 IDE 내에서 수행한다.
+
+설치는 "Docker"를 검색해 설치한다. `Dockerfile`을 우클릭 → "Build Image"로 이미지를 빌드하고, 좌측 사이드바 Docker 아이콘에서 컨테이너를 관리한다. 컨테이너 내부 터미널을 열어 환경을 테스트하고, Docker Compose로 다중 컨테이너를 오케스트레이션한다.
 
 ### 확장 설치 및 관리 {#sec-positron-extension-install}
 
 포지트론에서 확장을 설치하는 방법은 간단하다. 좌측 사이드바에서 확장 아이콘(네모 4개)을 클릭하고, 검색창에 확장 이름을 입력한다. "Install" 버튼을 누르면 자동으로 다운로드되고 활성화된다.
 
-**데이터 과학자를 위한 필수 확장 설치 순서:**
+**데이터 과학자를 위한 필수 확장 15종 (그룹별 설치 권장):**
 
-1. **Quarto** - 재현가능한 문서 작성 (첫 번째 설치 권장)
-2. **Rainbow CSV** - CSV 파일 탐색
-3. **lintr & styler** - R 콘솔에서 `install.packages(c("lintr", "styler"))` 실행
-4. **GitHub Copilot** - AI 코딩 도우미 (유료 구독 필요)
-5. **Data Wrangler** - 시각적 데이터 변환
+**1) 엔진 & 앱 개발:**
+1. **R** (`REditorSupport.r`) - R 언어 지원, Shiny 실행
+2. **Python** (`ms-python.python`) - Python 언어, Streamlit 지원
+3. **Shiny Publisher** (`posit.publisher`) - 앱 배포 (Connect/ShinyApps)
+4. **Quarto** (`quarto.quarto`) - 재현가능한 문서, 대시보드
+5. **Thunder Client** (`rangav.vscode-thunder-client`) - API 테스트
+
+**2) 인터랙티브 데이터 분석:**
+6. **SandDance** (`msrvida.vscode-sanddance`) - 3D/2D 시각화
+7. **Data Wrangler** (`ms-toolsai.datawrangler`) - GUI 데이터 변환
+8. **SQLTools** (`mtxr.sqltools`) - DB 연결 & 쿼리
+9. **Geo Data Viewer** (`randomfractals.geo-data-viewer`) - 지도 시각화
+10. **Rainbow CSV** (`mechatroner.rainbow-csv`) - CSV 탐색
+
+**3) AI, 협업 & 운영:**
+11. **Jupyter** (`ms-toolsai.jupyter`) - 노트북 실행
+12. **GitHub Copilot** (`GitHub.copilot`) - AI 코딩 (유료)
+13. **Live Share** (`ms-vsliveshare.vsliveshare`) - 실시간 협업
+14. **Remote-SSH** (`ms-vscode-remote.remote-ssh`) - 원격 GPU 서버
+15. **Docker** (`ms-azuretools.vscode-docker`) - 컨테이너화
 
 확장 충돌이나 성능 문제가 발생하면 `Cmd+Shift+P` → "Extensions: Disable All Installed Extensions"으로 모든 확장을 비활성화한 후, 하나씩 다시 활성화하며 문제를 찾는다. 확장 개수가 너무 많으면 IDE 시작 속도가 느려질 수 있으므로, 실제 사용하는 확장만 활성화하고 나머지는 비활성화한다.
 
@@ -129,3 +196,21 @@ linters: with_defaults(
 현대 IDE 확장 프로그램 아키텍처는 **'분리와 표준화'** 두 가지 핵심 원칙에 기반한다. Extension Host로 각 확장 프로그램을 **분리**해 안정성을 확보하고, LSP라는 **표준화된** 프로토콜로 언어 기능을 재사용 가능하게 만든다.
 
 영리한 아키텍처 덕분에 VS Code 같은 현대 IDE는 수많은 언어와 도구를 지원하는 거대한 생태계를 구축하면서도, 가볍고 안정적인 성능을 유지한다. IDE가 더 이상 하나의 회사가 만드는 단일 제품이 아니라, 전 세계 개발자 커뮤니티가 함께 만들어가는 '플랫폼'이 되었다.
+
+::: {.content-visible when-format="pdf"}
+\faLightbulb\ 생각해볼 점
+:::
+
+::: {.content-visible when-format="html"}
+💡 생각해볼 점
+:::
+
+확장 프로그램 생태계가 IDE의 핵심 경쟁력이 된 시대다. Positron을 선택했다면 R과 Python이 이미 내장되어 있으므로, **Shiny Publisher, Quarto, SandDance**부터 설치해 즉시 인터랙티브 앱과 문서를 만들어보자. VS Code를 사용한다면 **R, Python, Jupyter**를 먼저 설치하고 언어 기반을 구축한 뒤 나머지 확장을 추가한다.
+
+15개 확장을 한 번에 설치하기보다는, 프로젝트 성격에 따라 선택적으로 설치한다. Shiny 대시보드 개발 프로젝트라면 Shiny Publisher와 Thunder Client를, 공간 데이터 분석이라면 Geo Data Viewer와 SQLTools를, 원격 GPU 서버에서 딥러닝을 훈련한다면 Remote-SSH와 Docker를 먼저 설치한다. 필요할 때마다 하나씩 추가하며 자신만의 최적 환경을 구축하는 것이 가장 효율적이다.
+
+협업 프로젝트에서는 Live Share로 실시간 페어 프로그래밍을 시도해보자. 주니어 개발자가 막힌 부분을 시니어가 원격으로 함께 디버깅하거나, 코드 리뷰를 화면 공유 없이 IDE 내에서 직접 수행하는 경험은 협업 방식을 근본적으로 바꾼다.
+
+확장 생태계는 계속 진화한다. 2025년 현재 15개 필수 확장이 데이터 과학 워크플로우를 완성하지만, 1년 후에는 새로운 AI 도구, 시각화 확장, 협업 플랫폼이 등장할 것이다. 중요한 것은 "어떤 확장이 있는지" 지속적으로 탐색하고, "내 워크플로우에 필요한지" 빠르게 판단하는 능력이다. 확장 마켓플레이스에서 "data science", "visualization", "collaboration" 키워드로 정기적으로 검색하며 새로운 도구를 발견하자.
+
+다음 장에서는 이론을 넘어 실제로 포지트론 개발 환경을 구축한다. 운영체제별 설치, R/Python 인터프리터 설정, 필수 확장 15종 설치, 키보드 단축키 암기까지 완전한 작업 환경을 처음부터 끝까지 구성한다.
