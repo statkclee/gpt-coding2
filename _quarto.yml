@@ -16,7 +16,7 @@ lang: ko-KR
 
 # ---------------------------------- #
 book:
-  title: "챗GPT 코딩"
+  title: "챗GPT 코딩2"
   reader-mode: true
   subtitle: "인공지능(LLM)과 동료(Git/GitHub)와 함께 하는 프로그래밍"
 

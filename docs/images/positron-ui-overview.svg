@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 30 1000 640">
+  <defs>
+    <style>
+      .tufte-text {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+        font-size: 14px;
+      }
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+        font-size: 16px;
+        font-weight: bold;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #666;
+        font-size: 12px;
+      }
+      .tufte-box {
+        fill: none;
+        stroke: #333;
+        stroke-width: 2;
+      }
+      .tufte-box-light {
+        fill: #f5f5f5;
+        stroke: #666;
+        stroke-width: 1;
+      }
+      .tufte-line {
+        stroke: #666;
+        stroke-width: 1;
+        fill: none;
+      }
+      .tufte-bg {
+        fill: #ffffff;
+      }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="1000" height="700" class="tufte-bg"/>
+
+  <!-- Title -->
+  <!-- <text x="500" y="25" class="tufte-title" text-anchor="middle" font-size="18">Positron IDE 화면 구성: R과 Python 동시 지원</text> -->
+
+  <!-- Main Window Border -->
+  <rect x="20" y="40" width="960" height="620" class="tufte-box"/>
+
+  <!-- Title Bar -->
+  <rect x="20" y="40" width="960" height="40" fill="#e5e5e5" stroke="#333" stroke-width="2"/>
+  <text x="480" y="65" class="tufte-title" text-anchor="middle">포지트론 - R/파이썬 통합 IDE</text>
+
+  <!-- Left Panel: File Explorer -->
+  <rect x="20" y="80" width="200" height="520" class="tufte-box-light"/>
+  <text x="120" y="105" class="tufte-title" text-anchor="middle">파일 탐색기</text>
+  <line x1="20" y1="115" x2="220" y2="115" class="tufte-line"/>
+
+  <!-- File tree -->
+  <text x="30" y="135" class="tufte-small">📁 my-project/</text>
+  <text x="45" y="155" class="tufte-small">📄 analysis.R</text>
+  <text x="45" y="175" class="tufte-small">📄 model.py</text>
+  <text x="45" y="195" class="tufte-small">📁 data/</text>
+  <text x="60" y="215" class="tufte-small">📄 penguins.csv</text>
+  <text x="45" y="235" class="tufte-small">📁 scripts/</text>
+
+  <!-- Center Panel: Code Editor -->
+  <rect x="230" y="80" width="480" height="370" class="tufte-box-light"/>
+  <text x="470" y="105" class="tufte-title" text-anchor="middle">코드 편집기</text>
+  <line x1="230" y1="115" x2="710" y2="115" class="tufte-line"/>
+
+  <!-- Code snippet -->
+  <text x="240" y="140" class="tufte-small" font-family="monospace">1  library(ggplot2)</text>
+  <text x="240" y="160" class="tufte-small" font-family="monospace">2  library(dplyr)</text>
+  <text x="240" y="180" class="tufte-small" font-family="monospace">3  </text>
+  <text x="240" y="200" class="tufte-small" font-family="monospace">4  penguins %&gt;%</text>
+  <text x="240" y="220" class="tufte-small" font-family="monospace">5    ggplot(aes(x = species, y = body_mass_g)) +</text>
+  <text x="240" y="240" class="tufte-small" font-family="monospace">6    geom_boxplot()</text>
+  <rect x="240" y="250" width="460" height="190" fill="#f9f9f9" stroke="#ccc" stroke-width="1"/>
+  <text x="470" y="275" class="tufte-small" text-anchor="middle" fill="#999">AI 자동완성 제안 (Tab으로 수락)</text>
+  <text x="250" y="300" class="tufte-small" font-family="monospace" fill="#999">7    labs(title = "Species vs Body Mass",</text>
+  <text x="250" y="320" class="tufte-small" font-family="monospace" fill="#999">8         x = "Species", y = "Body Mass (g)")</text>
+
+  <!-- Right Panel: Variables & Plots -->
+  <rect x="720" y="80" width="260" height="520" class="tufte-box-light"/>
+
+  <!-- Variables Explorer -->
+  <text x="850" y="105" class="tufte-title" text-anchor="middle">변수 탐색기</text>
+  <line x1="720" y1="115" x2="980" y2="115" class="tufte-line"/>
+  <text x="730" y="135" class="tufte-small" font-weight="bold">Name</text>
+  <text x="850" y="135" class="tufte-small" font-weight="bold">Type</text>
+  <text x="920" y="135" class="tufte-small" font-weight="bold">Size</text>
+  <line x1="720" y1="145" x2="980" y2="145" class="tufte-line"/>
+  <text x="730" y="165" class="tufte-small" font-family="monospace">penguins</text>
+  <text x="850" y="165" class="tufte-small">data.frame</text>
+  <text x="920" y="165" class="tufte-small">344 × 8</text>
+  <text x="730" y="185" class="tufte-small" font-family="monospace">df</text>
+  <text x="850" y="185" class="tufte-small">data.frame</text>
+  <text x="920" y="185" class="tufte-small">150 × 5</text>
+  <text x="730" y="205" class="tufte-small" font-family="monospace">model</text>
+  <text x="850" y="205" class="tufte-small">lm</text>
+  <text x="920" y="205" class="tufte-small">-</text>
+
+  <!-- Plots Panel -->
+  <line x1="720" y1="230" x2="980" y2="230" class="tufte-line"/>
+  <text x="850" y="255" class="tufte-title" text-anchor="middle">플롯 창</text>
+  <line x1="720" y1="265" x2="980" y2="265" class="tufte-line"/>
+  <rect x="730" y="280" width="240" height="150" fill="#ffffff" stroke="#999" stroke-width="1"/>
+  <text x="850" y="300" class="tufte-small" text-anchor="middle" fill="#999">📊 막대그래프</text>
+  <text x="850" y="320" class="tufte-small" text-anchor="middle" fill="#999">Species vs Body Mass</text>
+  <rect x="760" y="360" width="50" height="60" fill="#e0e0e0" stroke="#666" stroke-width="1"/>
+  <rect x="820" y="340" width="50" height="80" fill="#d0d0d0" stroke="#666" stroke-width="1"/>
+  <rect x="880" y="350" width="50" height="70" fill="#c0c0c0" stroke="#666" stroke-width="1"/>
+
+  <!-- Bottom Panel: Console -->
+  <rect x="230" y="460" width="480" height="140" class="tufte-box-light"/>
+  <rect x="230" y="460" width="480" height="30" fill="#e5e5e5" stroke="#666" stroke-width="1"/>
+  <text x="250" y="480" class="tufte-text" font-weight="bold">R Console</text>
+  <text x="350" y="480" class="tufte-small">▼</text>
+  <text x="380" y="480" class="tufte-small" fill="#999">(Python, Julia...로 전환 가능)</text>
+  <line x1="230" y1="490" x2="710" y2="490" class="tufte-line"/>
+  <text x="240" y="515" class="tufte-small" font-family="monospace">&gt; summary(penguins)</text>
+  <text x="240" y="535" class="tufte-small" font-family="monospace">  species     island    bill_length_mm</text>
+  <text x="240" y="555" class="tufte-small" font-family="monospace">  Adelie :152  Biscoe:168  Min.   :32.10</text>
+  <text x="240" y="575" class="tufte-small" font-family="monospace">  Chinstrap:68 Dream :124  Median :44.45</text>
+
+  <!-- Status Bar -->
+  <rect x="20" y="600" width="960" height="30" fill="#e5e5e5" stroke="#333" stroke-width="2"/>
+  <text x="30" y="620" class="tufte-small">🔵 main</text>
+  <text x="170" y="620" class="tufte-small">R 4.5.1</text>
+  <text x="250" y="620" class="tufte-small">✓ 0 errors</text>
+  <text x="920" y="620" class="tufte-small" text-anchor="end">UTF-8</text>
+
+  <!-- Annotations -->
+  <text x="120" y="620" class="tufte-small" fill="#999" text-anchor="middle">← Git 브랜치</text>
+  <text x="775" y="255" class="tufte-small" fill="#999" text-anchor="middle">실시간 시각화 →</text>
+  <text x="660" y="170" class="tufte-small" fill="#999" text-anchor="middle">변수 실시간 모니터링 →</text>
+
+</svg>

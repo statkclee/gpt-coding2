@@ -44,7 +44,23 @@
 
 | 영어 | 한글 | 첫 등장 표기 | 비고 |
 |------|------|--------------|------|
+| Atom | 아톰 | 아톰(Atom) | 텍스트 에디터 (2022 중단) |
+| Electron | 일렉트론 | 일렉트론(Electron) | 크로스 플랫폼 프레임워크 |
 | Positron | 포지트론 | 포지트론(Positron) | R/Python 통합 IDE |
+
+---
+
+## AI 도구
+
+| 영어 | 한글 | 첫 등장 표기 | 비고 |
+|------|------|--------------|------|
+| ChatGPT | 챗GPT | 챗GPT(ChatGPT) | AI 대화형 도구 |
+| Claude Code | 클로드 코드 | 클로드 코드(Claude Code) | AI 자율 에이전트 |
+| Claude Sonnet | 클로드 소넷 | 클로드 소넷(Claude Sonnet) | AI 언어 모델 |
+| Cursor | 커서 | 커서(Cursor) | AI 네이티브 IDE |
+| Gemini | 제미나이 | 제미나이(Gemini) | AI 언어 모델 |
+| Google Antigravity | 구글 앤티그래비티 | 구글 앤티그래비티(Google Antigravity) | 에이전트 우선 플랫폼 |
+| Windsurf | 윈드서프 | 윈드서프(Windsurf) | AI 네이티브 IDE |
 
 ---
 
@@ -62,6 +78,24 @@
 | 영어 | 한글 | 첫 등장 표기 | 비고 |
 |------|------|--------------|------|
 | Snakemake | 스네이크메이크 | 스네이크메이크(Snakemake) | Python 워크플로우 도구 |
+
+---
+
+## 회사 및 조직
+
+| 영어 | 한글 | 첫 등장 표기 | 비고 |
+|------|------|--------------|------|
+| Borland | 볼란드 | 볼란드(Borland) | Turbo Pascal 개발사 |
+| JetBrains | 젯브레인즈 | 젯브레인즈(JetBrains) | IntelliJ IDEA 개발사 |
+| Posit | 포짓 | 포짓(Posit) | RStudio 개발사 (과거 RStudio) |
+
+---
+
+## 인명
+
+| 영어 | 한글 | 첫 등장 표기 | 비고 |
+|------|------|--------------|------|
+| Anders Hejlsberg | 앤더스 헤일스버그 | 앤더스 헤일스버그(Anders Hejlsberg) | Turbo Pascal, C# 개발자 |
 
 ---
 
@@ -97,6 +131,19 @@
 ---
 
 ## 업데이트 이력
+
+- 2025-11-25: AI 도구, 회사명, 개발 환경 추가 (30개 용어)
+  - 챗GPT(ChatGPT), 커서(Cursor), 윈드서프(Windsurf) 추가
+  - 클로드 코드(Claude Code), 클로드 소넷(Claude Sonnet) 추가
+  - 구글 앤티그래비티(Google Antigravity), 제미나이(Gemini) 추가
+  - 포짓(Posit) 회사명 추가
+  - 아톰(Atom), 일렉트론(Electron) 개발 환경 추가
+  - AI 도구 섹션 신설
+
+- 2025-11-24: 회사명 및 인명 추가 (20개 용어)
+  - 볼란드(Borland), 젯브레인즈(JetBrains) 회사명 추가
+  - 앤더스 헤일스버그(Anders Hejlsberg) 인명 추가
+  - 회사 및 조직, 인명 섹션 신설
 
 - 2025-11-24: 워크플로우 자동화 도구 추가 (17개 용어)
   - Snakemake를 "스네이크메이크"로 번역

@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 30 1400 520">
+  <defs>
+    <style>
+      /* Tufte Style: Grayscale */
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #111; }
+      .title { font-size: 26px; font-weight: bold; }
+      .subtitle { font-size: 20px; fill: #555; }
+      .stage-title { font-size: 18px; font-weight: bold; fill: #111; }
+      .stage-year { font-size: 16px; fill: #666; }
+      .desc { font-size: 15px; fill: #444; }
+      .limitation { font-size: 14px; fill: #888; font-style: bold; }
+
+      /* Shapes */
+      .card { fill: #fff; stroke: #333; stroke-width: 2; }
+      .card-header { fill: #f0f0f0; stroke: none; }
+      .arrow { stroke: #666; stroke-width: 3; marker-end: url(#arrowhead); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666"/>
+    </marker>
+  </defs>
+
+  <rect width="1400" height="600" fill="#ffffff"/>
+
+  <!-- <text x="700" y="35" text-anchor="middle" class="tufte-text title">AI 코딩의 진화: 챗 인터페이스에서 IDE 통합까지</text>
+  <text x="700" y="58" text-anchor="middle" class="tufte-text subtitle">컨텍스트 전환 최소화 → 플로우 상태 유지 (2022-2025)</text> -->
+
+  <!-- Stage 1: Separate Chat (2022-2023) -->
+  <g transform="translate(50, 100)">
+    <rect x="0" y="0" width="280" height="420" class="card" rx="8"/>
+    <rect x="0" y="0" width="280" height="50" class="card-header" rx="8"/>
+    <text x="140" y="32" text-anchor="middle" class="tufte-text stage-title">1단계: 별도 챗</text>
+
+    <text x="140" y="80" text-anchor="middle" class="tufte-text stage-year">2022-2023</text>
+    <text x="140" y="110" text-anchor="middle" class="desc" style="font-weight:bold;">챗GPT 웹사이트</text>
+
+    <text x="20" y="150" class="desc">IDE에서 코드 작성</text>
+    <text x="20" y="175" class="desc">→ 브라우저 전환</text>
+    <text x="20" y="200" class="desc">→ ChatGPT에 질문</text>
+    <text x="20" y="225" class="desc">→ 답변 복사</text>
+    <text x="20" y="250" class="desc">→ IDE로 돌아와 붙여넣기</text>
+
+    <rect x="10" y="280" width="260" height="120" fill="#fafafa" stroke="#999" stroke-width="1" rx="4"/>
+    <text x="140" y="300" text-anchor="middle" class="limitation" style="font-weight:bold;">한계</text>
+    <text x="20" y="325" class="limitation">• 컨텍스트 전환 빈번</text>
+    <text x="20" y="348" class="limitation">• 코드 컨텍스트 수동 복사</text>
+    <text x="20" y="371" class="limitation">• 플로우 상태 깨짐</text>
+    <text x="20" y="394" class="limitation">• 생산성 저하</text>
+  </g>
+
+  <line x1="340" y1="310" x2="380" y2="310" class="arrow"/>
+
+  <!-- Stage 2: IDE Extension (2023) -->
+  <g transform="translate(390, 100)">
+    <rect x="0" y="0" width="280" height="420" class="card" rx="8"/>
+    <rect x="0" y="0" width="280" height="50" class="card-header" rx="8"/>
+    <text x="140" y="32" text-anchor="middle" class="tufte-text stage-title">2단계: IDE 확장</text>
+
+    <text x="140" y="80" text-anchor="middle" class="tufte-text stage-year">2023</text>
+    <text x="140" y="110" text-anchor="middle" class="desc" style="font-weight:bold;">GitHub Copilot</text>
+
+    <text x="20" y="150" class="desc">IDE 내 AI 자동완성</text>
+    <text x="20" y="175" class="desc">→ 코드 문맥 자동 인식</text>
+    <text x="20" y="200" class="desc">→ Tab으로 제안 수락</text>
+    <text x="20" y="225" class="desc">→ IDE 벗어나지 않음</text>
+
+    <rect x="10" y="280" width="260" height="120" fill="#fafafa" stroke="#999" stroke-width="1" rx="4"/>
+    <text x="140" y="300" text-anchor="middle" class="limitation" style="font-weight:bold;">한계</text>
+    <text x="20" y="325" class="limitation">• 자동완성만 지원</text>
+    <text x="20" y="348" class="limitation">• 대화형 설명 불가</text>
+    <text x="20" y="371" class="limitation">• 복잡한 요청 어려움</text>
+  </g>
+
+  <line x1="680" y1="310" x2="720" y2="310" class="arrow"/>
+
+  <!-- Stage 3: Deep Integration (2024) -->
+  <g transform="translate(730, 100)">
+    <rect x="0" y="0" width="280" height="420" class="card" rx="8"/>
+    <rect x="0" y="0" width="280" height="50" class="card-header" rx="8"/>
+    <text x="140" y="32" text-anchor="middle" class="tufte-text stage-title">3단계: 깊은 통합</text>
+
+    <text x="140" y="80" text-anchor="middle" class="tufte-text stage-year">2024</text>
+    <text x="140" y="110" text-anchor="middle" class="desc" style="font-weight:bold;">Cursor, Windsurf</text>
+
+    <text x="20" y="150" class="desc">Cmd+K로 인라인 편집</text>
+    <text x="20" y="175" class="desc">→ 자연어로 의도 설명</text>
+    <text x="20" y="200" class="desc">→ AI가 코드 직접 수정</text>
+    <text x="20" y="225" class="desc">→ 대화하며 개선</text>
+
+    <rect x="10" y="280" width="260" height="120" fill="#fafafa" stroke="#999" stroke-width="1" rx="4"/>
+    <text x="140" y="300" text-anchor="middle" class="limitation" style="font-weight:bold;">한계</text>
+    <text x="20" y="325" class="limitation">• IDE 내부로 제한</text>
+    <text x="20" y="348" class="limitation">• 파일 단위 작업</text>
+    <text x="20" y="371" class="limitation">• 자율성 제한적</text>
+  </g>
+
+  <line x1="1020" y1="310" x2="1060" y2="310" class="arrow"/>
+
+  <!-- Stage 4: Agent Integration (2024-2025) -->
+  <g transform="translate(1070, 100)">
+    <rect x="0" y="0" width="280" height="420" class="card" rx="8"/>
+    <rect x="0" y="0" width="280" height="50" class="card-header" rx="8"/>
+    <text x="140" y="32" text-anchor="middle" class="tufte-text stage-title">4단계: 에이전트</text>
+
+    <text x="140" y="75" text-anchor="middle" class="tufte-text stage-year">2024-2025</text>
+    <text x="140" y="100" text-anchor="middle" class="desc" style="font-weight:bold;">Claude Code, Google Antigravity</text>
+
+    <text x="20" y="135" class="desc">CLI/IDE로 작업 요청</text>
+    <text x="20" y="158" class="desc">→ 프로젝트 전체 이해</text>
+    <text x="20" y="181" class="desc">→ 다중 파일 자율 편집</text>
+    <text x="20" y="204" class="desc">→ Artifacts 생성 &amp; 검증</text>
+    <text x="20" y="227" class="desc">→ Git 커밋 자동화</text>
+
+    <rect x="10" y="260" width="260" height="140" fill="#f0f0f0" stroke="#666" stroke-width="2" rx="4"/>
+    <text x="140" y="280" text-anchor="middle" class="desc" style="font-weight:bold;">장점</text>
+    <text x="20" y="305" class="desc">✓ Agent Manager (미션 컨트롤)</text>
+    <text x="20" y="328" class="desc">✓ 비동기 자율 작업</text>
+    <text x="20" y="351" class="desc">✓ 플로우 완전 유지</text>
+    <text x="20" y="374" class="desc">✓ 10-100x 생산성</text>
+  </g>
+
+  <!-- Bottom Summary -->
+  <text x="700" y="70" text-anchor="middle" class="tufte-text subtitle" style="font-style:bold;">
+    진화 핵심: 컨텍스트 전환 최소화 → AI가 개발자 작업흐름으로 내재화
+  </text>
+
+</svg>

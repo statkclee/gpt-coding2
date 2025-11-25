@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900">
+  <defs>
+    <style>
+      /* Tufte Style: Grayscale, Serif for Text, Monospace for Code */
+      .tufte-serif { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #111; }
+      .title { font-size: 28px; font-weight: normal; letter-spacing: -0.5px; }
+      .subtitle { font-size: 16px; fill: #555; font-style: italic; }
+      .label { font-size: 14px; font-weight: bold; fill: #222; }
+      .desc { font-size: 13px; fill: #444; }
+      .note { font-size: 12px; fill: #666; font-style: italic; }
+
+      /* Code  UI Typography */
+      .code { font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace; font-size: 13px; fill: #333; }
+      .code-ghost { fill: #999; font-style: italic; } /* AI Suggestion */
+      .kbd { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: bold; fill: #000; }
+
+      /* Shapes */
+      .window-bg { fill: #fff; stroke: #fff; stroke-width: 2; rx: 6; }
+      .panel-border { fill: none; stroke: #ddd; stroke-width: 1; }
+      .highlight-box { fill: #f9f9f9; stroke: #999; stroke-width: 1; stroke-dasharray: 4,2; rx: 4; }
+      .ai-box { fill: #f4f4f4; stroke: #666; stroke-width: 1.5; rx: 4; }
+      .kbd-key { fill: #fff; stroke: #333; stroke-width: 1; rx: 3; }
+      .cursor { fill: #fff; }
+
+      /* Connector Lines */
+      .line-guide { stroke: #666; stroke-width: 1; marker-end: url(#arrow); }
+    </style>
+    <marker id="arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M 0 0 L 6 3 L 0 6 z" fill="#666"/>
+    </marker>
+  </defs>
+
+    <rect width="1200" height="900" fill="#ffffff"/>
+
+    <text x="600" y="50" text-anchor="middle" class="tufte-serif title">Modern OSS Development Environment</text>
+  <text x="600" y="80" text-anchor="middle" class="tufte-serif subtitle">VS Code + AI: The Keyboard-Centric "Flow" State</text>
+
+    <rect x="100" y="110" width="1000" height="650" class="window-bg"/>
+
+    <rect x="100" y="110" width="50" height="650" fill="#eee" stroke="none" style="clip-path: inset(0 0 0 0 round 6 0 0 6)"/>
+  <circle cx="125" cy="140" r="8" fill="none" stroke="#666" stroke-width="2"/>   
+  <circle cx="125" cy="180" r="8" fill="none" stroke="#666" stroke-width="2"/>   
+  <circle cx="125" cy="220" r="8" fill="none" stroke="#666" stroke-width="2"/>   
+  <circle cx="125" cy="260" r="8" fill="none" stroke="#666" stroke-width="2"/>   
+  <text x="125" y="310" text-anchor="middle" style="font-size:16px;">🤖</text>     
+  <rect x="150" y="110" width="200" height="650" fill="#fafafa" class="panel-border"/>
+  <text x="165" y="140" class="label">EXPLORER</text>
+  <text x="165" y="170" class="code">📂 project-root</text>
+  <text x="175" y="195" class="code">📂 src</text>
+  <text x="185" y="220" class="code" style="font-weight:bold;">📄 app.py</text>
+  <text x="185" y="245" class="code">📄 utils.py</text>
+  <text x="175" y="270" class="code">📂 tests</text>
+  <text x="175" y="295" class="code">📄 requirements.txt</text>
+
+    <rect x="350" y="110" width="750" height="500" fill="#fff" class="panel-border"/>
+  
+    <rect x="350" y="110" width="750" height="35" fill="#f4f4f4" class="panel-border"/>
+  <text x="370" y="132" class="code">app.py ×</text>
+
+    <g transform="translate(370, 170)">
+        <text x="0" y="0" class="code"><tspan fill="#888">1</tspan>  import pandas as pd</text>
+    <text x="0" y="25" class="code"><tspan fill="#888">2</tspan>  from sklearn.model_selection import train_test_split</text>
+    <text x="0" y="50" class="code"><tspan fill="#888">3</tspan>  </text>
+    <text x="0" y="75" class="code"><tspan fill="#888">4</tspan>  def load_and_process_data(filepath):</text>
+    <text x="0" y="100" class="code"><tspan fill="#888">5</tspan>      <tspan fill="#555"># Load CSV data</tspan></text>
+    <text x="0" y="125" class="code"><tspan fill="#888">6</tspan>      df = pd.read_csv(filepath)</text>
+    <text x="0" y="150" class="code"><tspan fill="#888">7</tspan>      </text>
+
+        <text x="0" y="175" class="code"><tspan fill="#888">8</tspan>      <tspan fill="#555"># Clean missing values</tspan></text>
+    <text x="0" y="200" class="code"><tspan fill="#888">9</tspan>      df = df.dropna()</text>
+    <rect x="140" y="188" width="2" height="14" class="cursor"/>
+    <text x="145" y="200" class="code code-ghost">.reset_index(drop=True)</text>         <g transform="translate(50, 230)">
+      <rect x="0" y="0" width="400" height="80" class="ai-box"/>
+      <text x="15" y="25" class="code" style="font-weight:bold;">✨ AI Edit (Cmd+I)</text>
+      <text x="15" y="50" class="tufte-serif" style="font-size:14px;">"Add error handling for file not found"</text>
+      <rect x="340" y="50" width="50" height="20" fill="#ddd" rx="2"/>
+      <text x="352" y="64" class="kbd">Enter</text>
+    </g>
+  </g>
+
+    <rect x="350" y="610" width="750" height="150" fill="#fff" stroke="#ddd" stroke-width="1"/>
+  <rect x="350" y="610" width="750" height="30" fill="#fafafa" stroke="none"/>
+  <text x="370" y="630" class="label" style="font-size:12px;">TERMINAL</text>
+  <text x="450" y="630" class="label" style="fill:#999; font-size:12px;">DEBUG CONSOLE</text>
+  
+  <text x="370" y="660" class="code">$ python app.py</text>
+  <text x="370" y="685" class="code" style="fill:#444;">[INFO] Data loaded successfully. Rows: 1500</text>
+  <text x="370" y="710" class="code" style="fill:#444;">[INFO] Training model...</text>
+
+    <rect x="100" y="735" width="1000" height="25" fill="#333" stroke="none" style="clip-path: inset(0 0 0 0 round 0 0 6 6)"/>
+  <text x="120" y="752" class="code" style="fill:#fff; font-size:11px;">main*</text>
+  <text x="180" y="752" class="code" style="fill:#fff; font-size:11px;">0 errors</text>
+  <text x="950" y="752" class="code" style="fill:#fff; font-size:11px;">Python 3.10</text>
+  <text x="850" y="752" class="code" style="fill:#fff; font-size:11px;">GitHub Copilot ⚡</text>
+
+
+      <g transform="translate(850, 250)">
+    <text x="0" y="0" class="label">AI Autocomplete (Copilot)</text>
+    <text x="0" y="20" class="desc">Reads context, suggests logic.</text>
+    <rect x="0" y="30" width="40" height="20" class="kbd-key"/>
+    <text x="20" y="44" text-anchor="middle" class="kbd">Tab</text>
+    <text x="50" y="44" class="desc">to accept</text>
+    <line x1="-30" y1="50" x2="-100" y2="50" class="line-guide"/>
+  </g>
+
+    <g transform="translate(850, 420)">
+    <text x="0" y="0" class="label">Natural Language Coding</text>
+    <text x="0" y="20" class="desc">Describe intent, get code.</text>
+    <rect x="0" y="30" width="55" height="20" class="kbd-key"/>
+    <text x="27" y="44" text-anchor="middle" class="kbd">Cmd+I</text>
+    <line x1="-30" y1="10" x2="-60" y2="10" class="line-guide"/>
+  </g>
+
+    <g transform="translate(550, 50)">
+    <rect x="-20" y="-10" width="300" height="40" fill="#fff" stroke="#999" stroke-width="1" rx="20"/>
+    <text x="130" y="15" text-anchor="middle" class="desc">Command Palette: <tspan style="font-weight:bold;">Cmd+Shift+P</tspan></text>
+    <text x="130" y="25" text-anchor="middle" class="note" style="font-size:10px;">(Access 2,000+ commands without mouse)</text>
+    <line x1="130" y1="30" x2="130" y2="110" class="line-guide" stroke-dasharray="2,2"/>
+  </g>
+
+    <g transform="translate(1120, 650)">
+    <text x="0" y="0" text-anchor="end" class="label">Integrated Terminal</text>
+    <rect x="-60" y="10" width="60" height="20" class="kbd-key"/>
+    <text x="-30" y="24" text-anchor="middle" class="kbd">Ctrl + `</text>
+    <line x1="-70" y1="20" x2="-100" y2="20" class="line-guide"/>
+  </g>
+
+
+    <g transform="translate(100, 800)">
+    <line x1="0" y1="0" x2="1000" y2="0" stroke="#ddd" stroke-width="1"/>
+    
+    <g transform="translate(50, 30)">
+        <text x="0" y="0" class="label" style="fill:#666;">기존 워크플로우</text>
+        <text x="0" y="25" class="desc">1. 브라우저로 전환</text>
+        <text x="0" y="45" class="desc">2. StackOverflow 검색</text>
+        <text x="0" y="65" class="desc">3. 복사/붙여넣기 &amp; 디버그</text>
+    </g>
+
+    <path d="M 350 50 L 400 50" stroke="#999" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <g transform="translate(450, 30)">
+        <text x="0" y="0" class="label">현대 AI 네이티브 워크플로우</text>
+        <text x="0" y="25" class="desc">1. <tspan style="font-weight:bold;">Cmd+I</tspan> "이 에러 설명해줘"</text>
+        <text x="0" y="45" class="desc">2. <tspan style="font-weight:bold;">Tab</tspan> 으로 보일러플레이트 완성</tspan></text>
+        <text x="0" y="65" class="desc">3. 플로우 유지, IDE 벗어나지 않음</text>
+    </g>
+  </g>
+
+</svg>
