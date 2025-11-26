@@ -1,0 +1,236 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 70 900 470">
+  <defs>
+    <style>
+      .tufte-text {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+        font-size: 13px;
+      }
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+        font-size: 16px;
+        font-weight: bold;
+      }
+      .tufte-subtitle {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #666;
+        font-size: 12px;
+        font-style: italic;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #666;
+        font-size: 11px;
+      }
+      .tufte-code {
+        font-family: 'Monaco', 'Courier New', monospace;
+        fill: #333;
+        font-size: 11px;
+      }
+      .era-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+        font-size: 14px;
+        font-weight: bold;
+      }
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #666;
+        font-size: 12px;
+        font-style: italic;
+      }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="900" height="540" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="450" y="30" class="tufte-title" text-anchor="middle">파일 조직 원칙의 진화: 수작업에서 AI 협업까지</text>
+  <text x="450" y="50" class="tufte-subtitle" text-anchor="middle">연구 컴펜디엄의 업무 분장 변화</text>
+
+  <!-- Timeline arrow -->
+  <line x1="50" y1="85" x2="850" y2="85" stroke="#666" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="870" y="90" class="tufte-small">시간</text>
+
+  <!-- Era 1: Human-only (1990s-2010s) -->
+  <rect x="30" y="100" width="270" height="400" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="5"/>
+  <text x="165" y="125" class="era-title" text-anchor="middle">1단계: 수작업 시대</text>
+  <text x="165" y="145" class="tufte-subtitle" text-anchor="middle">1990s ~ 2010s</text>
+
+  <!-- Human icon (simplified) -->
+  <circle cx="165" cy="180" r="15" fill="none" stroke="#666" stroke-width="2"/>
+  <line x1="165" y1="195" x2="165" y2="230" stroke="#666" stroke-width="2"/>
+  <line x1="145" y1="210" x2="185" y2="210" stroke="#666" stroke-width="2"/>
+  <line x1="165" y1="230" x2="150" y2="260" stroke="#666" stroke-width="2"/>
+  <line x1="165" y1="230" x2="180" y2="260" stroke="#666" stroke-width="2"/>
+
+  <text x="165" y="285" class="tufte-text" text-anchor="middle" font-weight="bold">연구자 100%</text>
+
+  <!-- Tasks for Era 1 -->
+  <rect x="50" y="300" width="230" height="25" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="165" y="317" class="tufte-small" text-anchor="middle">코드 작성 및 디버깅</text>
+
+  <rect x="50" y="330" width="230" height="25" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="165" y="347" class="tufte-small" text-anchor="middle">문서화 및 주석</text>
+
+  <rect x="50" y="360" width="230" height="25" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="165" y="377" class="tufte-small" text-anchor="middle">폴더 구조 설계</text>
+
+  <rect x="50" y="390" width="230" height="25" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="165" y="407" class="tufte-small" text-anchor="middle">데이터 전처리</text>
+
+  <rect x="50" y="420" width="230" height="25" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="165" y="437" class="tufte-small" text-anchor="middle">환경 명세 (수동)</text>
+
+  <rect x="50" y="450" width="230" height="25" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="165" y="467" class="tufte-small" text-anchor="middle">재현성 검증 (희망사항)</text>
+
+  <!-- Arrow to Era 2 -->
+  <path d="M 300 300 L 320 300" stroke="#666" stroke-width="1" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Era 2: Automation (2010s-2020s) -->
+  <rect x="320" y="100" width="270" height="400" fill="#f0f0f0" stroke="#999" stroke-width="1" rx="5"/>
+  <text x="455" y="125" class="era-title" text-anchor="middle">2단계: 자동화 시대</text>
+  <text x="455" y="145" class="tufte-subtitle" text-anchor="middle">2010s ~ 2020s</text>
+
+  <!-- Human + Machine icons -->
+  <g transform="translate(-30, 0)">
+    <circle cx="455" cy="180" r="12" fill="none" stroke="#666" stroke-width="2"/>
+    <line x1="455" y1="192" x2="455" y2="220" stroke="#666" stroke-width="2"/>
+    <line x1="440" y1="205" x2="470" y2="205" stroke="#666" stroke-width="2"/>
+    <line x1="455" y1="220" x2="443" y2="245" stroke="#666" stroke-width="2"/>
+    <line x1="455" y1="220" x2="467" y2="245" stroke="#666" stroke-width="2"/>
+  </g>
+
+  <!-- Terminal icon for automation -->
+  <g transform="translate(30, 0)">
+    <!-- Terminal window frame -->
+    <rect x="433" y="175" width="44" height="35" fill="none" stroke="#666" stroke-width="2" rx="3"/>
+    <!-- Title bar -->
+    <line x1="433" y1="185" x2="477" y2="185" stroke="#666" stroke-width="1"/>
+    <!-- Window controls (3 dots) -->
+    <circle cx="439" cy="180" r="2" fill="#666"/>
+    <circle cx="446" cy="180" r="2" fill="#666"/>
+    <circle cx="453" cy="180" r="2" fill="#666"/>
+    <!-- Command prompt -->
+    <text x="438" y="200" font-family="Monaco, monospace" font-size="10" fill="#666">$ _</text>
+  </g>
+
+  <text x="455" y="275" class="tufte-text" text-anchor="middle" font-weight="bold">연구자 + 스크립트</text>
+
+  <!-- Tasks for Era 2 - split -->
+  <rect x="340" y="300" width="110" height="25" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="395" y="317" class="tufte-small" text-anchor="middle">코드 작성</text>
+
+  <rect x="460" y="300" width="110" height="25" fill="#ccc" stroke="#666" stroke-width="1" rx="3"/>
+  <text x="515" y="317" class="tufte-small" text-anchor="middle">Make 실행</text>
+
+  <rect x="340" y="330" width="110" height="25" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="395" y="347" class="tufte-small" text-anchor="middle">문서화</text>
+
+  <rect x="460" y="330" width="110" height="25" fill="#ccc" stroke="#666" stroke-width="1" rx="3"/>
+  <text x="515" y="347" class="tufte-small" text-anchor="middle">CI/CD 빌드</text>
+
+  <rect x="340" y="360" width="110" height="25" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="395" y="377" class="tufte-small" text-anchor="middle">설계 결정</text>
+
+  <rect x="460" y="360" width="110" height="25" fill="#ccc" stroke="#666" stroke-width="1" rx="3"/>
+  <text x="515" y="377" class="tufte-small" text-anchor="middle">renv/Docker</text>
+
+  <rect x="340" y="390" width="110" height="25" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="395" y="407" class="tufte-small" text-anchor="middle">분석 로직</text>
+
+  <rect x="460" y="390" width="110" height="25" fill="#ccc" stroke="#666" stroke-width="1" rx="3"/>
+  <text x="515" y="407" class="tufte-small" text-anchor="middle">자동 테스트</text>
+
+  <rect x="340" y="420" width="230" height="25" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="455" y="437" class="tufte-small" text-anchor="middle">품질 관리 (연구자 책임)</text>
+
+  <rect x="340" y="450" width="230" height="25" fill="#ccc" stroke="#666" stroke-width="1" rx="3"/>
+  <text x="455" y="467" class="tufte-small" text-anchor="middle">재현성 검증 (자동화)</text>
+
+  <!-- Arrow to Era 3 -->
+  <path d="M 590 300 L 610 300" stroke="#666" stroke-width="1" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Era 3: AI Collaboration (2020s~) -->
+  <rect x="610" y="100" width="270" height="400" fill="#e8e8e8" stroke="#333" stroke-width="2" rx="5"/>
+  <text x="745" y="125" class="era-title" text-anchor="middle">3단계: AI 협업 시대</text>
+  <text x="745" y="145" class="tufte-subtitle" text-anchor="middle">2020s ~ 현재</text>
+
+  <!-- Human + AI icons -->
+  <g transform="translate(-50, 0)">
+    <circle cx="745" cy="180" r="12" fill="none" stroke="#666" stroke-width="2"/>
+    <line x1="745" y1="192" x2="745" y2="220" stroke="#666" stroke-width="2"/>
+    <line x1="730" y1="205" x2="760" y2="205" stroke="#666" stroke-width="2"/>
+    <line x1="745" y1="220" x2="733" y2="245" stroke="#666" stroke-width="2"/>
+    <line x1="745" y1="220" x2="757" y2="245" stroke="#666" stroke-width="2"/>
+  </g>
+
+  <!-- Robot icon for AI -->
+  <g transform="translate(50, 0)">
+    <!-- Robot head -->
+    <rect x="730" y="175" width="30" height="28" fill="none" stroke="#333" stroke-width="2" rx="4"/>
+    <!-- Antenna -->
+    <line x1="745" y1="175" x2="745" y2="165" stroke="#333" stroke-width="2"/>
+    <circle cx="745" cy="162" r="4" fill="#333"/>
+    <!-- Eyes -->
+    <rect x="736" y="183" width="6" height="6" fill="#333" rx="1"/>
+    <rect x="748" y="183" width="6" height="6" fill="#333" rx="1"/>
+    <!-- Mouth -->
+    <line x1="738" y1="196" x2="752" y2="196" stroke="#333" stroke-width="2"/>
+    <!-- Body hint -->
+    <rect x="735" y="206" width="20" height="12" fill="none" stroke="#333" stroke-width="2" rx="2"/>
+  </g>
+
+  <text x="745" y="275" class="tufte-text" text-anchor="middle" font-weight="bold">연구자 + AI 에이전트</text>
+
+  <!-- Tasks for Era 3 - new distribution -->
+  <rect x="630" y="300" width="80" height="25" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="670" y="317" class="tufte-small" text-anchor="middle">의사결정</text>
+
+  <rect x="720" y="300" width="140" height="25" fill="#ddd" stroke="#333" stroke-width="1" rx="3"/>
+  <text x="790" y="317" class="tufte-small" text-anchor="middle">코드 생성/리뷰</text>
+
+  <rect x="630" y="330" width="80" height="25" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="670" y="347" class="tufte-small" text-anchor="middle">검증/승인</text>
+
+  <rect x="720" y="330" width="140" height="25" fill="#ddd" stroke="#333" stroke-width="1" rx="3"/>
+  <text x="790" y="347" class="tufte-small" text-anchor="middle">문서-코드 동기화</text>
+
+  <rect x="630" y="360" width="80" height="25" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="670" y="377" class="tufte-small" text-anchor="middle">연구 설계</text>
+
+  <rect x="720" y="360" width="140" height="25" fill="#ddd" stroke="#333" stroke-width="1" rx="3"/>
+  <text x="790" y="377" class="tufte-small" text-anchor="middle">구조 자동 생성</text>
+
+  <rect x="630" y="390" width="80" height="25" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="670" y="407" class="tufte-small" text-anchor="middle">인과 추론</text>
+
+  <rect x="720" y="390" width="140" height="25" fill="#ddd" stroke="#333" stroke-width="1" rx="3"/>
+  <text x="790" y="407" class="tufte-small" text-anchor="middle">패턴 인식/전처리</text>
+
+  <rect x="630" y="420" width="230" height="25" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="745" y="437" class="tufte-small" text-anchor="middle">품질 관리 (협업)</text>
+
+  <rect x="630" y="450" width="230" height="25" fill="#ddd" stroke="#333" stroke-width="1" rx="3"/>
+  <text x="745" y="467" class="tufte-small" text-anchor="middle">출처 추적 자동화</text>
+
+  <!-- Legend -->
+  <g transform="translate(0, 20)">
+    <rect x="50" y="490" width="15" height="15" fill="#e8e8e8" stroke="#999" stroke-width="1"/>
+    <text x="70" y="502" class="tufte-small">연구자 담당</text>
+
+    <rect x="170" y="490" width="15" height="15" fill="#ccc" stroke="#666" stroke-width="1"/>
+    <text x="190" y="502" class="tufte-small">스크립트/자동화</text>
+
+    <rect x="310" y="490" width="15" height="15" fill="#ddd" stroke="#333" stroke-width="1"/>
+    <text x="330" y="502" class="tufte-small">AI 에이전트 지원</text>
+  </g>
+
+
+</svg>

@@ -10,7 +10,6 @@ project:
   render:
     - "*.qmd"
     - "!*.Rmd"
-    - "!to_do.qmd"
 
 lang: ko-KR
 
@@ -44,51 +43,43 @@ book:
   chapters:
     - index.qmd
 
-    - part: "**6부** 도커"
+    - part: "**1부** 프로그래밍" # OK
       chapters:
-        - docker_concept.qmd
+        - 01-intro.qmd          # A\ + idx
+        - 02-var.qmd            # A\ + idx
+        - 03-cont.qmd           # A\ + idx
+        - 04-func.qmd           # A\ + idx
+        - 05-loop.qmd           # A\ + idx
 
-    # - part: "**4부** 분야별 코딩"
-    #   chapters:
-    #     - tool-make.qmd       # Make 장
+    - part: "**2부** 자료구조"
+      chapters:
+        - 06-string.qmd         # A\ + idx
+        - 07-file.qmd           # A\ + idx
+        - 08-list.qmd           # A\ + idx
+        - 09-dictionaries.qmd   # A\ + idx You can't use `macro parameter character #'
+        - A-dataframe.qmd       # A\ + idx
 
-    # - part: "**1부** 프로그래밍" # OK
-    #   chapters:
-    #     - 01-intro.qmd          # A\ + idx
-    #     - 02-var.qmd            # A\ + idx
-    #     - 03-cont.qmd           # A\ + idx
-    #     - 04-func.qmd           # A\ + idx
-    #     - 05-loop.qmd           # A\ + idx
+    - part: "**3부** 버전제어와 협업" # OK
+      chapters:
+        - git-basics.qmd        # A\ + + idx
+        - git-setup-create.qmd  # A\ + idx
+        - git-change.qmd        # A\ + idx
+        - git-history.qmd       # A\ + idx
+        - git-ignore.qmd        # A\ + idx
+        - git-github.qmd        # A\ + idx +layout
+        - git-open.qmd         # A\ + idx
+        - git-conflict.qmd     # A\ + idx +layout
+        - git-ide.qmd          # A\ + idx +layout
 
-    # - part: "**2부** 자료구조"
-    #   chapters:
-    #     - 06-string.qmd         # A\ + idx
-    #     - 07-file.qmd           # A\ + idx
-    #     - 08-list.qmd           # A\ + idx
-    #     - 09-dictionaries.qmd   # A\ + idx You can't use `macro parameter character #'
-    #     - A-dataframe.qmd       # A\ + idx
-
-    # - part: "**3부** 버전제어와 협업" # OK
-    #   chapters:
-    #     - git-basics.qmd        # A\ + + idx
-    #     - git-setup-create.qmd  # A\ + idx
-    #     - git-change.qmd        # A\ + idx
-    #     - git-history.qmd       # A\ + idx
-    #     - git-ignore.qmd        # A\ + idx
-    #     - git-github.qmd        # A\ + idx +layout
-    #     - git-open.qmd         # A\ + idx
-    #     - git-conflict.qmd     # A\ + idx +layout
-    #     - git-ide.qmd          # A\ + idx +layout
-
-    # - part: "**4부** 분야별 코딩" # OK
-    #   chapters:
-    #     - tool-regex.qmd      # A\ + idx + layout
-    #     - tool-network.qmd    # A\ + idx + layout
-    #     - tool-web.qmd        # A\ + idx + layout
-    #     - tool-database.qmd   # A\ + idx + layout
-    #     - tool-make.qmd       # A\ + idx + layout
-    #     - tool-viz.qmd        # A\ + idx + layout
-    #     - tool-gpt.qmd
+    - part: "**4부** 분야별 코딩" # OK
+      chapters:
+        - tool-regex.qmd      # A\ + idx + layout
+        - tool-network.qmd    # A\ + idx + layout
+        - tool-web.qmd        # A\ + idx + layout
+        - tool-database.qmd   # A\ + idx + layout
+        # - tool-make.qmd       # A\ + idx + layout
+        - tool-viz.qmd        # A\ + idx + layout
+        - tool-gpt.qmd
 
     - part: "**5부** 통합 개발 환경"
       chapters:
@@ -96,6 +87,12 @@ book:
         - ide_positron.qmd
         - ide_extension.qmd
         - ide_setup.qmd
+
+    - part: "**6부** 자동화, 도커, 재현성"
+      chapters:
+        - docker_concept.qmd
+        - make_concept.qmd
+        - compendium.qmd
 
     - references.qmd 
 
@@ -175,8 +172,11 @@ pyodide:
 code-annotations: hover
 
 bibliography: assets/references.bib
-csl: assets/apa-single-spaced.csl
-link-citations: false
+csl: https://www.zotero.org/styles/ieee
+link-citations: true
+# cite-method: citeproc 추가 이유: Quarto book에서 IEEE 번호 스타일 사용 시
+# 챕터별 인용 번호와 통합 참고문헌 번호가 불일치하는 문제 해결
+cite-method: citeproc
 
 # ---------------------------------- #
 glossary:

@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 450">
+  <defs>
+    <style>
+      .tufte-text {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+        font-size: 14px;
+      }
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+        font-size: 16px;
+        font-weight: bold;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #666;
+        font-size: 11px;
+      }
+      .tufte-code {
+        font-family: 'Monaco', 'Courier New', monospace;
+        fill: #333;
+        font-size: 11px;
+      }
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #555;
+        font-size: 12px;
+        font-style: italic;
+      }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="850" height="450" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="425" y="35" class="tufte-title" text-anchor="middle">rrtools 워크플로우: 한 줄 명령으로 컴펜디엄 생성</text>
+
+  <!-- Step 1: Command -->
+  <rect x="40" y="70" width="280" height="60" fill="#e8e8e8" stroke="#333" stroke-width="2" rx="5"/>
+  <text x="180" y="95" class="tufte-code" text-anchor="middle">rrtools::use_compendium()</text>
+  <text x="180" y="115" class="tufte-small" text-anchor="middle">프로젝트 생성 명령</text>
+
+  <!-- Arrow -->
+  <path d="M 330 100 L 380 100" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Generated Structure -->
+  <rect x="400" y="60" width="410" height="200" fill="#f9f9f9" stroke="#999" stroke-width="1" rx="5"/>
+  <text x="605" y="85" class="tufte-text" text-anchor="middle" font-weight="bold">자동 생성 구조</text>
+
+  <!-- Project root -->
+  <rect x="420" y="100" width="180" height="25" fill="#ddd" stroke="#666" stroke-width="1" rx="2"/>
+  <text x="435" y="117" class="tufte-code">myresearch/</text>
+
+  <!-- Files -->
+  <rect x="440" y="130" width="160" height="22" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="2"/>
+  <text x="455" y="145" class="tufte-code">DESCRIPTION</text>
+  <text x="620" y="145" class="tufte-small">메타데이터</text>
+
+  <rect x="440" y="155" width="160" height="22" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="2"/>
+  <text x="455" y="170" class="tufte-code">README.md</text>
+  <text x="620" y="170" class="tufte-small">설명 문서</text>
+
+  <rect x="440" y="180" width="160" height="22" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="2"/>
+  <text x="455" y="195" class="tufte-code">.Rproj</text>
+  <text x="620" y="195" class="tufte-small">RStudio 프로젝트</text>
+
+  <rect x="440" y="205" width="160" height="22" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="2"/>
+  <text x="455" y="220" class="tufte-code">.gitignore</text>
+  <text x="620" y="220" class="tufte-small">Git 제외 목록</text>
+
+  <rect x="440" y="230" width="160" height="22" fill="#e8e8e8" stroke="#666" stroke-width="1" rx="2"/>
+  <text x="455" y="245" class="tufte-code">R/</text>
+  <text x="620" y="245" class="tufte-small">함수 디렉토리</text>
+
+  <!-- Additional Commands -->
+  <text x="180" y="160" class="tufte-text" text-anchor="middle" font-weight="bold">추가 설정 명령</text>
+
+  <rect x="40" y="175" width="280" height="25" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="2"/>
+  <text x="55" y="192" class="tufte-code">rrtools::use_analysis()</text>
+
+  <rect x="40" y="205" width="280" height="25" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="2"/>
+  <text x="55" y="222" class="tufte-code">usethis::use_mit_license()</text>
+
+  <rect x="40" y="235" width="280" height="25" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="2"/>
+  <text x="55" y="252" class="tufte-code">renv::init()</text>
+
+  <rect x="40" y="265" width="280" height="25" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="2"/>
+  <text x="55" y="282" class="tufte-code">rrtools::use_dockerfile()</text>
+
+  <rect x="40" y="295" width="280" height="25" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="2"/>
+  <text x="55" y="312" class="tufte-code">rrtools::use_github()</text>
+
+  <!-- Analysis folder structure -->
+  <rect x="400" y="280" width="410" height="150" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="5"/>
+  <text x="605" y="305" class="tufte-text" text-anchor="middle" font-weight="bold">analysis/ 폴더 구조</text>
+
+  <rect x="420" y="320" width="170" height="22" fill="#e8e8e8" stroke="#666" stroke-width="1" rx="2"/>
+  <text x="435" y="335" class="tufte-code">analysis/paper/</text>
+  <text x="610" y="335" class="tufte-small">Quarto 논문</text>
+
+  <rect x="420" y="345" width="170" height="22" fill="#e8e8e8" stroke="#666" stroke-width="1" rx="2"/>
+  <text x="435" y="360" class="tufte-code">analysis/figures/</text>
+  <text x="610" y="360" class="tufte-small">생성된 그래프</text>
+
+  <rect x="420" y="370" width="170" height="22" fill="#e8e8e8" stroke="#666" stroke-width="1" rx="2"/>
+  <text x="435" y="385" class="tufte-code">analysis/data/raw/</text>
+  <text x="610" y="385" class="tufte-small">원본 데이터</text>
+
+  <rect x="420" y="395" width="170" height="22" fill="#e8e8e8" stroke="#666" stroke-width="1" rx="2"/>
+  <text x="435" y="410" class="tufte-code">analysis/data/derived/</text>
+  <text x="610" y="410" class="tufte-small">전처리 데이터</text>
+
+  <!-- Bottom note -->
+  <text x="180" y="360" class="tufte-label" text-anchor="middle">각 명령이 필요한</text>
+  <text x="180" y="378" class="tufte-label" text-anchor="middle">구성요소를 자동 추가</text>
+
+  <!-- GitHub Actions note -->
+  <rect x="40" y="400" width="280" height="35" fill="#ddd" stroke="#333" stroke-width="2" rx="3"/>
+  <text x="180" y="422" class="tufte-code" text-anchor="middle">GitHub Actions: 자동 빌드 + 테스트</text>
+
+</svg>

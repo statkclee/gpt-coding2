@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" xml:lang="ko-KR"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="이광춘(Openai)">
+
+<title>31&nbsp; Make: 자동화 – 챗GPT 코딩2</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./compendium.html" rel="next">
+<link href="./docker_concept.html" rel="prev">
+<link href="./images/logo.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-d58a991db70fa947aaf03a466910673c.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-51eba2ad75c50bd4dffcd83a6d692c13.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "일치 없음",
+    "search-matching-documents-text": "일치된 문서",
+    "search-copy-link-title": "검색 링크 복사",
+    "search-hide-matches-text": "추가 검색 결과 숨기기",
+    "search-more-match-text": "추가 검색결과",
+    "search-more-matches-text": "추가 검색결과",
+    "search-clear-button-title": "제거",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "취소",
+    "search-submit-button-title": "검색",
+    "search-label": "검색"
+  }
+}</script>
+
+<script type="text/javascript">
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-229551680-1', 'auto');
+
+ga('send', {
+  hitType: 'pageview',
+  'anonymizeIp': true,
+});
+</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./docker_concept.html"><strong>6부</strong> 자동화, 도커, 재현성</a></li><li class="breadcrumb-item"><a href="./make_concept.html"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Make: 자동화</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="검색" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">챗GPT 코딩2</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/bit2r/gpt-coding/" title="소스 코드" class="quarto-navigation-tool px-1" aria-label="소스 코드"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="리더 모드 전환">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="검색"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">서문</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>1부</strong> 프로그래밍</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">프로그래밍 학습 이유</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-var.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">변수, 표현식, 문장</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-cont.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">조건부 실행</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-func.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">함수</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-loop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">반복</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>2부</strong> 자료구조</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-string.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">문자열</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-file.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">파일</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-list.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">리스트</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-dictionaries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">딕셔너리</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./A-dataframe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">데이터프레임</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>3부</strong> 버전제어와 협업</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">자동화된 버전 관리</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-setup-create.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Git 설정과 저장소</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-change.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">변경사항 추적</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-history.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">이력 탐색</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-ignore.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">추적 대상에서 제외</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-github.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">GitHub 원격 작업</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-open.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">공개 과학과 협업</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-conflict.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">충돌</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-ide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">통합개발환경</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>4부</strong> 분야별 코딩</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-regex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">정규 표현식</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-network.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-web.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">웹서비스 사용하기</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-database.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">데이터베이스와 SQL</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">시각화</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-gpt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">챗GPT 코딩</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>5부</strong> 통합 개발 환경</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">IDE 선택과 발전</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ide_positron.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">포지트론</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ide_extension.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">IDE 확장 프로그램</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ide_setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">개발 환경 구축</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>6부</strong> 자동화, 도커, 재현성</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./docker_concept.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">도커: 재현 환경</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./make_concept.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Make: 자동화</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./compendium.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">연구 컴펜디엄</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">참고문헌</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">목차</h2>
+   
+  <ul>
+  <li><a href="#sec-make-shell-limits" id="toc-sec-make-shell-limits" class="nav-link active" data-scroll-target="#sec-make-shell-limits"><span class="header-section-number">31.1</span> 셸 스크립트의 한계</a></li>
+  <li><a href="#sec-make-structure" id="toc-sec-make-structure" class="nav-link" data-scroll-target="#sec-make-structure"><span class="header-section-number">31.2</span> Makefile 기본 구조</a></li>
+  <li><a href="#sec-make-timestamp" id="toc-sec-make-timestamp" class="nav-link" data-scroll-target="#sec-make-timestamp"><span class="header-section-number">31.3</span> 타임스탬프 기반 빌드</a></li>
+  <li><a href="#sec-make-chain" id="toc-sec-make-chain" class="nav-link" data-scroll-target="#sec-make-chain"><span class="header-section-number">31.4</span> 의존성 체인</a></li>
+  <li><a href="#sec-make-auto-vars" id="toc-sec-make-auto-vars" class="nav-link" data-scroll-target="#sec-make-auto-vars"><span class="header-section-number">31.5</span> 자동 변수</a></li>
+  <li><a href="#sec-make-patterns" id="toc-sec-make-patterns" class="nav-link" data-scroll-target="#sec-make-patterns"><span class="header-section-number">31.6</span> 패턴 규칙</a></li>
+  <li><a href="#sec-make-variables" id="toc-sec-make-variables" class="nav-link" data-scroll-target="#sec-make-variables"><span class="header-section-number">31.7</span> 변수와 설정 분리</a></li>
+  <li><a href="#sec-make-phony" id="toc-sec-make-phony" class="nav-link" data-scroll-target="#sec-make-phony"><span class="header-section-number">31.8</span> Phony 타겟</a></li>
+  <li><a href="#sec-make-workflow" id="toc-sec-make-workflow" class="nav-link" data-scroll-target="#sec-make-workflow"><span class="header-section-number">31.9</span> 데이터 과학 워크플로우 예시</a></li>
+  <li><a href="#sec-make-alternatives" id="toc-sec-make-alternatives" class="nav-link" data-scroll-target="#sec-make-alternatives"><span class="header-section-number">31.10</span> Make vs 현대 도구들</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/make_concept.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./docker_concept.html"><strong>6부</strong> 자동화, 도커, 재현성</a></li><li class="breadcrumb-item"><a href="./make_concept.html"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Make: 자동화</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-make-intro" class="quarto-section-identifier"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Make: 자동화</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>연구팀 김 박사는 논문 마감을 앞두고 있었다. 지도교수가 “그래프 폰트를 12pt에서 14pt로 바꿔주세요”라고 요청했다. 단순한 수정이었다. 시각화 스크립트를 고치고, 그래프 5개를 다시 생성하고, 결과 테이블을 업데이트하고, 최종 PDF를 렌더링해야 했다. 김 박사는 터미널에 명령어를 하나씩 입력했다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> plot_figure1.py</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> plot_figure2.py</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> plot_figure3.py</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> plot_figure4.py</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> plot_figure5.py</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> generate_table.py</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render paper.qmd</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>30분 후, 지도교수가 다시 메일을 보냈다. “아, 그리고 색상도 컬러에서 흑백으로 바꿔주세요.” 김 박사는 같은 명령어를 다시 입력했다. 이번에는 <code>plot_figure3.py</code>를 빼먹었다. 최종 PDF에 컬러 그래프가 섞여 있었다. 심사위원 지적으로 논문이 반려되었다.</p>
+<p>이것이 <strong>수동 워크플로우의 함정</strong>이다. 데이터 분석 파이프라인은 여러 단계로 구성된다. 원시 데이터를 처리하고, 통계를 계산하고, 그래프를 그리고, 보고서를 생성한다. 각 단계는 이전 단계의 출력에 의존한다. 수동으로 관리하면 실수가 생기고, 어떤 파일을 다시 만들어야 하는지 기억해야 하며, 전체 파이프라인을 처음부터 다시 실행하느라 시간을 낭비한다.</p>
+<p><strong>Make</strong>는 이 문제를 1977년부터 해결해왔다. 파일 간 의존성을 명시적으로 기록하고, 변경된 파일만 자동으로 다시 빌드한다. 시각화 스크립트를 수정하면 그래프만 다시 생성하고, 원시 데이터가 바뀌면 전체 파이프라인이 자동으로 재실행된다. 50년이 지난 지금도 Make는 재현가능한 연구의 핵심 도구다.</p>
+<section id="sec-make-shell-limits" class="level2" data-number="31.1">
+<h2 data-number="31.1" class="anchored" data-anchor-id="sec-make-shell-limits"><span class="header-section-number">31.1</span> 셸 스크립트의 한계</h2>
+<p>가장 먼저 떠오르는 해결책은 셸 스크립트다. 모든 명령어를 파일에 저장하고 <code>bash run_pipeline.sh</code> 한 줄로 실행한다. 파이프라인을 문서화하고, 타이핑 실수를 방지하며, 재현성을 높인다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># run_pipeline.sh - 분석 파이프라인</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> preprocess.py data/raw.csv data/clean.csv</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> analyze.py data/clean.csv results/stats.csv</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> visualize.py results/stats.csv figures/plot.png</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render report.qmd</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>하지만 셸 스크립트에는 치명적인 한계가 있다. <strong>항상 처음부터 끝까지 전부 실행된다.</strong> 시각화 스크립트만 수정했는데 전처리부터 다시 돌려야 한다. 대용량 데이터 처리에 1시간이 걸린다면? 그래프 색상 하나 바꾸는 데 1시간을 기다려야 한다.</p>
+<p>주석 처리로 해결할 수 있다고 생각할 수 있다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 이미 실행했으므로 주석 처리</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># python preprocess.py data/raw.csv data/clean.csv</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># python analyze.py data/clean.csv results/stats.csv</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> visualize.py results/stats.csv figures/plot.png</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render report.qmd</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>이 방법은 오류의 온상이다. 어떤 줄을 주석 처리했는지 기억해야 하고, 원시 데이터가 바뀌면 주석을 다시 풀어야 한다. 복잡한 파이프라인에서 의존성을 머릿속으로 추적하다 보면 결국 실수가 생긴다. 김 박사처럼 중간 단계를 빼먹거나, 불필요한 단계를 다시 실행하거나, 잘못된 순서로 실행하게 된다.</p>
+<p>Make는 이 문제를 우아하게 해결한다. 파일 간 <strong>의존성(dependency)</strong>을 명시적으로 선언하고, <strong>타임스탬프</strong>를 비교해 변경된 파일만 다시 빌드한다. “무엇이 무엇에 의존하는가”를 코드로 기록하면, Make가 “무엇을 다시 만들어야 하는가”를 자동으로 판단한다.</p>
+</section>
+<section id="sec-make-structure" class="level2" data-number="31.2">
+<h2 data-number="31.2" class="anchored" data-anchor-id="sec-make-structure"><span class="header-section-number">31.2</span> Makefile 기본 구조</h2>
+<p>Make는 <strong>Makefile</strong>이라는 파일에서 명령을 읽는다. Makefile은 <strong>규칙(rule)</strong>들로 구성된다. 각 규칙은 타겟, 의존성, 액션 세 부분으로 이루어진다.</p>
+<pre class="make"><code># 기본 규칙 구조
+타겟: 의존성1 의존성2
+    액션 (TAB으로 들여쓰기)</code></pre>
+<div id="fig-make-rule" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-make-rule-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/make-rule-structure.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-make-rule-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;31.1: Makefile 규칙 구조
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-make-rule" class="quarto-xref">그림&nbsp;<span>31.1</span></a> 은 Makefile 규칙의 세 구성 요소를 보여준다. <strong>타겟(target)</strong>은 만들어질 파일이다. <strong>의존성(dependency)</strong>은 타겟을 만드는 데 필요한 파일들이다. <strong>액션(action)</strong>은 의존성에서 타겟을 만드는 명령어다. 액션은 반드시 <strong>TAB 문자</strong>로 들여써야 한다. 스페이스 8개가 아니라 TAB 키 한 번이다. 1977년의 유산이지만, 지금도 지켜야 하는 규칙이다.</p>
+<p>실제 예시를 보자. 텍스트 파일에서 단어 빈도를 계산하는 파이프라인이다.</p>
+<pre class="make"><code># 단어 빈도 계산
+results.dat : books/novel.txt
+    python countwords.py books/novel.txt results.dat</code></pre>
+<p>이 규칙의 의미는 명확하다. <code>results.dat</code> 파일을 만들려면 <code>books/novel.txt</code> 파일이 필요하고, <code>python countwords.py</code> 명령으로 생성한다. Make를 실행하면 다음과 같이 동작한다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> make results.dat</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> countwords.py books/novel.txt results.dat</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>이제 같은 명령을 다시 실행해보자.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> make results.dat</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">make:</span> <span class="st">'results.dat'</span> is up to date.</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Make는 <code>results.dat</code>와 <code>books/novel.txt</code>의 타임스탬프를 비교한다. 타겟이 의존성보다 최신이면 아무것도 하지 않는다. 이것이 <strong>증분 빌드(incremental build)</strong>다.</p>
+</section>
+<section id="sec-make-timestamp" class="level2" data-number="31.3">
+<h2 data-number="31.3" class="anchored" data-anchor-id="sec-make-timestamp"><span class="header-section-number">31.3</span> 타임스탬프 기반 빌드</h2>
+<p>Make의 핵심 원리는 단순하다. 타겟 파일이 존재하지 않거나, 의존성 파일 중 하나라도 타겟보다 최신이면 액션을 실행한다. 파일의 “최신 여부”는 파일시스템 타임스탬프로 판단한다.</p>
+<div id="fig-make-timestamp" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-make-timestamp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/make-timestamp.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-make-timestamp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;31.2: Make 타임스탬프 비교
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-make-timestamp" class="quarto-xref">그림&nbsp;<span>31.2</span></a> 는 Make가 빌드 여부를 결정하는 과정을 보여준다. 왼쪽은 타겟이 의존성보다 최신인 경우로, Make는 “이미 최신”이라고 판단하고 액션을 건너뛴다. 오른쪽은 의존성이 타겟보다 최신인 경우로, 타겟을 다시 빌드한다.</p>
+<p><code>touch</code> 명령으로 파일 타임스탬프를 갱신해 이 동작을 확인할 수 있다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 의존성 파일의 타임스탬프 갱신 (내용은 그대로)</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> touch books/novel.txt</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 이제 Make가 다시 빌드</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> make results.dat</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> countwords.py books/novel.txt results.dat</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>파일 내용이 바뀌지 않았더라도 타임스탬프가 갱신되면 Make는 다시 빌드한다. Make는 파일 내용을 비교하지 않고 오직 타임스탬프만 본다. 이 방식은 단순하지만 효과적이다. Git처럼 내용 해시를 계산하는 빌드 도구도 있지만, 대부분의 경우 타임스탬프 비교로 충분하다.</p>
+</section>
+<section id="sec-make-chain" class="level2" data-number="31.4">
+<h2 data-number="31.4" class="anchored" data-anchor-id="sec-make-chain"><span class="header-section-number">31.4</span> 의존성 체인</h2>
+<p>실제 데이터 분석 파이프라인은 여러 단계로 구성된다. 원시 데이터에서 정제 데이터를 만들고, 정제 데이터에서 통계를 계산하고, 통계에서 그래프를 그린다. 각 단계의 출력이 다음 단계의 입력이 된다.</p>
+<pre class="make"><code># 다단계 파이프라인
+clean.csv : raw.csv preprocess.py
+    python preprocess.py raw.csv clean.csv
+
+stats.csv : clean.csv analyze.py
+    python analyze.py clean.csv stats.csv
+
+figure.png : stats.csv visualize.py
+    python visualize.py stats.csv figure.png</code></pre>
+<div id="fig-make-chain" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-make-chain-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/make-dependency-chain.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-make-chain-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;31.3: Make 의존성 체인
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-make-chain" class="quarto-xref">그림&nbsp;<span>31.3</span></a> 은 파일 간 의존성이 체인을 형성하는 모습을 보여준다. <code>figure.png</code>를 만들려면 <code>stats.csv</code>가 필요하고, <code>stats.csv</code>를 만들려면 <code>clean.csv</code>가 필요하다. Make는 이 의존성 그래프를 분석해 필요한 파일만 순서대로 빌드한다.</p>
+<p>Make의 강력함은 <strong>의존성의 전이성(transitivity)</strong>에 있다. <code>raw.csv</code>를 수정하면 어떻게 될까?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> touch raw.csv</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> make figure.png</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> preprocess.py raw.csv clean.csv</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> analyze.py clean.csv stats.csv</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> visualize.py stats.csv figure.png</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Make는 <code>raw.csv</code> → <code>clean.csv</code> → <code>stats.csv</code> → <code>figure.png</code> 순으로 전체 체인을 자동 재빌드한다. 반면 <code>visualize.py</code>만 수정하면?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> touch visualize.py</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> make figure.png</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> visualize.py stats.csv figure.png</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>clean.csv</code>와 <code>stats.csv</code>는 건드리지 않고 <code>figure.png</code>만 다시 생성한다. 데이터 처리에 1시간이 걸려도 시각화 스크립트 수정은 몇 초면 반영된다.</p>
+</section>
+<section id="sec-make-auto-vars" class="level2" data-number="31.5">
+<h2 data-number="31.5" class="anchored" data-anchor-id="sec-make-auto-vars"><span class="header-section-number">31.5</span> 자동 변수</h2>
+<p>Makefile에 중복이 많으면 유지보수가 어렵다. 파일명을 바꿀 때마다 여러 곳을 수정해야 한다. Make는 <strong>자동 변수(automatic variable)</strong>로 이 문제를 해결한다.</p>
+<pre class="make"><code># 중복이 많은 버전
+results.dat : books/novel.txt
+    python countwords.py books/novel.txt results.dat
+
+# 자동 변수 사용
+results.dat : books/novel.txt
+    python countwords.py $&lt; $@</code></pre>
+<p>세 가지 자동 변수를 기억하자.</p>
+<ul>
+<li><code>$@</code>: 현재 규칙의 타겟</li>
+<li><code>$&lt;</code>: 첫 번째 의존성</li>
+<li><code>$^</code>: 모든 의존성</li>
+</ul>
+<pre class="make"><code># 여러 의존성이 있는 경우
+report.pdf : chapter1.md chapter2.md chapter3.md style.css
+    pandoc $^ -o $@
+# $^ = chapter1.md chapter2.md chapter3.md style.css
+# $@ = report.pdf</code></pre>
+<p>자동 변수는 <strong>패턴 규칙(pattern rule)</strong>과 함께 사용할 때 진가를 발휘한다.</p>
+</section>
+<section id="sec-make-patterns" class="level2" data-number="31.6">
+<h2 data-number="31.6" class="anchored" data-anchor-id="sec-make-patterns"><span class="header-section-number">31.6</span> 패턴 규칙</h2>
+<p>여러 파일에 같은 처리를 적용해야 할 때, 규칙을 일일이 작성하면 지루하다.</p>
+<pre class="make"><code># 반복적인 규칙
+isles.dat : books/isles.txt countwords.py
+    python countwords.py books/isles.txt isles.dat
+
+abyss.dat : books/abyss.txt countwords.py
+    python countwords.py books/abyss.txt abyss.dat
+
+last.dat : books/last.txt countwords.py
+    python countwords.py books/last.txt last.dat</code></pre>
+<p><strong>패턴 규칙</strong>은 <code>%</code> 와일드카드로 이 중복을 제거한다.</p>
+<pre class="make"><code># 패턴 규칙
+%.dat : books/%.txt countwords.py
+    python countwords.py $&lt; $@</code></pre>
+<p><code>%</code>는 어떤 문자열과도 매칭된다. <code>isles.dat</code>을 만들 때 <code>%</code>는 <code>isles</code>와 매칭되고, 의존성에서도 같은 값으로 치환된다. 하나의 규칙으로 <code>isles.dat</code>, <code>abyss.dat</code>, <code>last.dat</code> 등 모든 <code>.dat</code> 파일을 생성할 수 있다.</p>
+</section>
+<section id="sec-make-variables" class="level2" data-number="31.7">
+<h2 data-number="31.7" class="anchored" data-anchor-id="sec-make-variables"><span class="header-section-number">31.7</span> 변수와 설정 분리</h2>
+<p>스크립트 이름이나 실행 옵션이 Makefile 곳곳에 흩어져 있으면 변경이 어렵다. <strong>변수</strong>를 사용해 설정을 한 곳에 모은다.</p>
+<pre class="make"><code># 변수 정의
+PYTHON = python3
+COUNT_SCRIPT = countwords.py
+ANALYZE_SCRIPT = testzipf.py
+
+# 변수 사용 - $(변수명)
+%.dat : books/%.txt $(COUNT_SCRIPT)
+    $(PYTHON) $&lt; $@
+
+results.txt : isles.dat abyss.dat $(ANALYZE_SCRIPT)
+    $(PYTHON) $(ANALYZE_SCRIPT) $^ &gt; $@</code></pre>
+<p>설정을 별도 파일로 분리하면 더 깔끔하다.</p>
+<pre class="make"><code># config.mk
+PYTHON = python3
+COUNT_SCRIPT = countwords.py
+DATA_DIR = data
+OUTPUT_DIR = results</code></pre>
+<pre class="make"><code># Makefile
+include config.mk
+
+%.dat : $(DATA_DIR)/%.txt $(COUNT_SCRIPT)
+    $(PYTHON) $(COUNT_SCRIPT) $&lt; $@</code></pre>
+<p>환경에 따라 <code>config.mk</code>만 바꾸면 된다. 로컬에서는 <code>PYTHON = python3</code>, 서버에서는 <code>PYTHON = /opt/python/3.11/bin/python</code>처럼 설정할 수 있다.</p>
+</section>
+<section id="sec-make-phony" class="level2" data-number="31.8">
+<h2 data-number="31.8" class="anchored" data-anchor-id="sec-make-phony"><span class="header-section-number">31.8</span> Phony 타겟</h2>
+<p>지금까지 타겟은 모두 실제 파일이었다. 하지만 “모든 출력 삭제”나 “전체 빌드” 같은 작업도 Make로 자동화하고 싶다. 이때 사용하는 것이 <strong>phony 타겟</strong>이다.</p>
+<pre class="make"><code># 실제 파일을 만들지 않는 타겟
+.PHONY : clean all
+
+clean :
+    rm -f *.dat results.txt
+
+all : isles.dat abyss.dat last.dat results.txt</code></pre>
+<p><code>.PHONY</code>로 선언된 타겟은 파일이 아니라 “명령의 이름”이다. <code>make clean</code>을 실행하면 <code>clean</code>이라는 파일이 있든 없든 항상 액션을 실행한다. <code>.PHONY</code>를 선언하지 않으면, <code>clean</code>이라는 파일이나 디렉토리가 있을 때 Make가 “이미 최신”이라고 판단해 아무것도 하지 않는다.</p>
+<p>관례적으로 사용되는 phony 타겟들이 있다.</p>
+<ul>
+<li><code>all</code>: 기본 타겟, Makefile의 첫 번째 규칙으로 배치</li>
+<li><code>clean</code>: 생성된 파일 삭제</li>
+<li><code>install</code>: 빌드 결과물 설치</li>
+<li><code>test</code>: 테스트 실행</li>
+</ul>
+<pre class="make"><code>.PHONY : all clean test
+
+# 'make'만 실행하면 all이 기본 타겟
+all : results.txt figures/plot.png
+
+clean :
+    rm -f *.dat results.txt
+    rm -f figures/*.png
+
+test :
+    python -m pytest tests/</code></pre>
+</section>
+<section id="sec-make-workflow" class="level2" data-number="31.9">
+<h2 data-number="31.9" class="anchored" data-anchor-id="sec-make-workflow"><span class="header-section-number">31.9</span> 데이터 과학 워크플로우 예시</h2>
+<p>지금까지 배운 개념을 종합해 실제 데이터 분석 파이프라인을 구성해보자. Zipf의 법칙을 검증하는 프로젝트다. 여러 책의 단어 빈도를 계산하고, 결과를 시각화하고, 최종 보고서를 생성한다.</p>
+<pre class="make"><code># config.mk
+PYTHON = python
+BOOKS = isles abyss last sierra
+
+# 스크립트
+COUNT_SCRIPT = countwords.py
+PLOT_SCRIPT = plotcounts.py
+ZIPF_SCRIPT = testzipf.py</code></pre>
+<pre class="make"><code># Makefile
+include config.mk
+
+# 파일 목록 자동 생성
+DAT_FILES = $(patsubst %, %.dat, $(BOOKS))
+PNG_FILES = $(patsubst %, figures/%.png, $(BOOKS))
+
+.PHONY : all clean
+
+# 기본 타겟
+all : results.txt $(PNG_FILES)
+
+# 패턴 규칙: 단어 빈도 계산
+%.dat : books/%.txt $(COUNT_SCRIPT)
+    $(PYTHON) $(COUNT_SCRIPT) $&lt; $@
+
+# 패턴 규칙: 그래프 생성
+figures/%.png : %.dat $(PLOT_SCRIPT)
+    $(PYTHON) $(PLOT_SCRIPT) $&lt; $@
+
+# 결과 테이블 생성
+results.txt : $(ZIPF_SCRIPT) $(DAT_FILES)
+    $(PYTHON) $^ &gt; $@
+
+# 정리
+clean :
+    rm -f *.dat results.txt
+    rm -f figures/*.png</code></pre>
+<div id="fig-make-workflow" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-make-workflow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/make-workflow.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-make-workflow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;31.4: 데이터 과학 Make 워크플로우
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-make-workflow" class="quarto-xref">그림&nbsp;<span>31.4</span></a> 는 완성된 파이프라인의 의존성 그래프다. 원시 텍스트에서 최종 결과물까지의 모든 단계가 명시적으로 기록되어 있다. 새로운 책을 추가하려면 <code>config.mk</code>의 <code>BOOKS</code> 변수에 이름만 추가하면 된다. <code>make all</code> 한 줄로 전체 분석이 재현된다.</p>
+</section>
+<section id="sec-make-alternatives" class="level2" data-number="31.10">
+<h2 data-number="31.10" class="anchored" data-anchor-id="sec-make-alternatives"><span class="header-section-number">31.10</span> Make vs 현대 도구들</h2>
+<p>Make는 1977년에 만들어졌다. 거의 50년이 지난 지금, 왜 아직도 Make를 사용하는가? 더 현대적인 도구들이 있지 않은가?</p>
+<p><strong>Snakemake</strong>는 Python 기반 워크플로우 도구로, Python 문법으로 규칙을 작성한다. 클러스터 제출, 클라우드 실행, 컨테이너 통합을 지원한다. 바이오인포매틱스 분야에서 특히 인기 있다. <strong>targets</strong>는 R 전용 워크플로우 도구로, R 객체 수준에서 의존성을 추적한다. R 사용자에게 가장 자연스러운 선택이다. <strong>DVC</strong>는 Git처럼 데이터와 모델 버전을 관리하면서 파이프라인도 정의할 수 있다. 머신러닝 프로젝트에 적합하다.</p>
+<p>Make를 선택해야 하는 상황이 있다. <strong>언어에 구애받지 않는</strong> 파이프라인이 필요할 때다. Python과 R과 셸 스크립트가 섞인 프로젝트에서 Make는 중립적인 조율자 역할을 한다. <strong>레거시 시스템</strong>과 통합해야 할 때도 Make가 유리하다. C/Fortran으로 작성된 고성능 컴퓨팅 코드는 대부분 Make로 빌드한다. <strong>단순함</strong>이 필요할 때 Make의 가치가 드러난다. 의존성 파일 몇 개에 규칙 몇 줄이면 충분한데 Snakemake나 DVC를 도입하는 것은 과잉이다.</p>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">노트</span>데이터 과학 워크플로우 도구 선택
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<table class="table">
+<thead>
+<tr class="header">
+<th>상황</th>
+<th>권장 도구</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>간단한 파이프라인, 다국어 혼용</td>
+<td><strong>Make</strong></td>
+</tr>
+<tr class="even">
+<td>R 중심 분석, 함수 수준 캐싱</td>
+<td>targets (R)</td>
+</tr>
+<tr class="odd">
+<td>Python 중심, 클러스터/클라우드</td>
+<td>Snakemake</td>
+</tr>
+<tr class="even">
+<td>ML 모델 버전 관리 필요</td>
+<td>DVC</td>
+</tr>
+<tr class="odd">
+<td>복잡한 DAG, 재시도/에러 처리</td>
+<td>Airflow, Prefect</td>
+</tr>
+</tbody>
+</table>
+<p>Make는 “가장 작은 도구로 문제를 해결”하는 유닉스 철학을 따른다. 복잡한 요구사항이 없다면 Make로 시작하고, 필요할 때 전환해도 늦지 않다.</p>
+</div>
+</div>
+<p>💡 생각해볼 점</p>
+<p>Make의 핵심은 <strong>의존성의 명시적 선언</strong>이다. 어떤 파일이 어떤 파일에서 만들어지는지 Makefile에 기록하면, Make가 변경 사항을 추적하고 필요한 부분만 다시 빌드한다. 셸 스크립트처럼 “무엇을 실행하는가”만 기록하는 것이 아니라, “무엇이 무엇에 의존하는가”를 기록한다. 이 작은 차이가 재현성과 효율성의 큰 차이를 만든다.</p>
+<p>규칙의 구조는 단순하다. <code>타겟: 의존성</code> 다음 줄에 TAB으로 들여쓴 액션. 자동 변수(<code>$@</code>, <code>$&lt;</code>, <code>$^</code>)로 중복을 줄이고, 패턴 규칙(<code>%</code>)으로 여러 파일에 같은 처리를 적용한다. 변수로 설정을 분리하고, phony 타겟으로 <code>clean</code>이나 <code>all</code> 같은 유틸리티 명령을 정의한다.</p>
+<p>Make는 50년 가까이 살아남았다. C 컴파일러부터 데이터 분석 파이프라인까지, 의존성 기반 워크플로우가 필요한 곳에서 여전히 유효하다. 학습 곡선이 가파르지 않고, 대부분의 유닉스 시스템에 기본 설치되어 있으며, 언어와 도구에 중립적이다. 더 현대적인 대안이 있더라도, Make는 “충분히 좋은” 선택이다. 다음 장에서는 Make를 직접 실습하며, 실제 데이터 분석 프로젝트에 적용하는 방법을 다룬다.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "복사완료!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "복사완료!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/r2bit\.com\/gpt-coding\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./docker_concept.html" class="pagination-link" aria-label="도커: 재현 환경">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">도커: 재현 환경</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./compendium.html" class="pagination-link" aria-label="연구 컴펜디엄">
+        <span class="nav-page-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">연구 컴펜디엄</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>챗GPT 쿼토 책은 소프트웨어 카펜트리 “Git 버전제어”를 번역한 것이 포함되어 있습니다.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/make_concept.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>순수하게 <a href="https://quarto.org/">쿼토(Quarto)</a>로 제작되었습니다.</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

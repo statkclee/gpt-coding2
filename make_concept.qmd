@@ -1,0 +1,367 @@
+# Make: 자동화 {#sec-make-intro}
+
+연구팀 김 박사는 논문 마감을 앞두고 있었다. 지도교수가 "그래프 폰트를 12pt에서 14pt로 바꿔주세요"라고 요청했다. 단순한 수정이었다. 시각화 스크립트를 고치고, 그래프 5개를 다시 생성하고, 결과 테이블을 업데이트하고, 최종 PDF를 렌더링해야 했다. 김 박사는 터미널에 명령어를 하나씩 입력했다.
+
+```bash
+python plot_figure1.py
+python plot_figure2.py
+python plot_figure3.py
+python plot_figure4.py
+python plot_figure5.py
+python generate_table.py
+quarto render paper.qmd
+```
+
+30분 후, 지도교수가 다시 메일을 보냈다. "아, 그리고 색상도 컬러에서 흑백으로 바꿔주세요." 김 박사는 같은 명령어를 다시 입력했다. 이번에는 `plot_figure3.py`를 빼먹었다. 최종 PDF에 컬러 그래프가 섞여 있었다. 심사위원 지적으로 논문이 반려되었다.
+
+이것이 \index{워크플로우 자동화}**수동 워크플로우의 함정**이다. 데이터 분석 파이프라인은 여러 단계로 구성된다. 원시 데이터를 처리하고, 통계를 계산하고, 그래프를 그리고, 보고서를 생성한다. 각 단계는 이전 단계의 출력에 의존한다. 수동으로 관리하면 실수가 생기고, 어떤 파일을 다시 만들어야 하는지 기억해야 하며, 전체 파이프라인을 처음부터 다시 실행하느라 시간을 낭비한다.
+
+**\index{Make}Make**는 이 문제를 1977년부터 해결해왔다. 파일 간 의존성을 명시적으로 기록하고, 변경된 파일만 자동으로 다시 빌드한다. 시각화 스크립트를 수정하면 그래프만 다시 생성하고, 원시 데이터가 바뀌면 전체 파이프라인이 자동으로 재실행된다. 50년이 지난 지금도 Make는 재현가능한 연구의 핵심 도구다.
+
+## 셸 스크립트의 한계 {#sec-make-shell-limits}
+
+가장 먼저 떠오르는 해결책은 \index{셸 스크립트}셸 스크립트다. 모든 명령어를 파일에 저장하고 `bash run_pipeline.sh` 한 줄로 실행한다. 파이프라인을 문서화하고, 타이핑 실수를 방지하며, 재현성을 높인다.
+
+```bash
+#!/bin/bash
+# run_pipeline.sh - 분석 파이프라인
+
+python preprocess.py data/raw.csv data/clean.csv
+python analyze.py data/clean.csv results/stats.csv
+python visualize.py results/stats.csv figures/plot.png
+quarto render report.qmd
+```
+
+하지만 셸 스크립트에는 치명적인 한계가 있다. **항상 처음부터 끝까지 전부 실행된다.** 시각화 스크립트만 수정했는데 전처리부터 다시 돌려야 한다. 대용량 데이터 처리에 1시간이 걸린다면? 그래프 색상 하나 바꾸는 데 1시간을 기다려야 한다.
+
+주석 처리로 해결할 수 있다고 생각할 수 있다.
+
+```bash
+#!/bin/bash
+# 이미 실행했으므로 주석 처리
+# python preprocess.py data/raw.csv data/clean.csv
+# python analyze.py data/clean.csv results/stats.csv
+
+python visualize.py results/stats.csv figures/plot.png
+quarto render report.qmd
+```
+
+이 방법은 오류의 온상이다. 어떤 줄을 주석 처리했는지 기억해야 하고, 원시 데이터가 바뀌면 주석을 다시 풀어야 한다. 복잡한 파이프라인에서 의존성을 머릿속으로 추적하다 보면 결국 실수가 생긴다. 김 박사처럼 중간 단계를 빼먹거나, 불필요한 단계를 다시 실행하거나, 잘못된 순서로 실행하게 된다.
+
+Make는 이 문제를 우아하게 해결한다. 파일 간 **의존성(dependency)**을 명시적으로 선언하고, **타임스탬프**를 비교해 변경된 파일만 다시 빌드한다. "무엇이 무엇에 의존하는가"를 코드로 기록하면, Make가 "무엇을 다시 만들어야 하는가"를 자동으로 판단한다.
+
+## Makefile 기본 구조 {#sec-make-structure}
+
+Make는 \index{Makefile}**Makefile**이라는 파일에서 명령을 읽는다. Makefile은 \index{Make 규칙}**규칙(rule)**들로 구성된다. 각 규칙은 타겟, 의존성, 액션 세 부분으로 이루어진다.
+
+```make
+# 기본 규칙 구조
+타겟: 의존성1 의존성2
+	액션 (TAB으로 들여쓰기)
+```
+
+![Makefile 규칙 구조](images/make-rule-structure.svg){#fig-make-rule}
+
+@fig-make-rule 은 Makefile 규칙의 세 구성 요소를 보여준다. \index{타겟}**타겟(target)**은 만들어질 파일이다. \index{의존성}**의존성(dependency)**은 타겟을 만드는 데 필요한 파일들이다. \index{액션}**액션(action)**은 의존성에서 타겟을 만드는 명령어다. 액션은 반드시 **TAB 문자**로 들여써야 한다. 스페이스 8개가 아니라 TAB 키 한 번이다. 1977년의 유산이지만, 지금도 지켜야 하는 규칙이다.
+
+실제 예시를 보자. 텍스트 파일에서 단어 빈도를 계산하는 파이프라인이다.
+
+```make
+# 단어 빈도 계산
+results.dat : books/novel.txt
+	python countwords.py books/novel.txt results.dat
+```
+
+이 규칙의 의미는 명확하다. `results.dat` 파일을 만들려면 `books/novel.txt` 파일이 필요하고, `python countwords.py` 명령으로 생성한다. Make를 실행하면 다음과 같이 동작한다.
+
+```bash
+$ make results.dat
+python countwords.py books/novel.txt results.dat
+```
+
+이제 같은 명령을 다시 실행해보자.
+
+```bash
+$ make results.dat
+make: 'results.dat' is up to date.
+```
+
+Make는 `results.dat`와 `books/novel.txt`의 타임스탬프를 비교한다. 타겟이 의존성보다 최신이면 아무것도 하지 않는다. 이것이 \index{증분 빌드}**증분 빌드(incremental build)**다.
+
+## 타임스탬프 기반 빌드 {#sec-make-timestamp}
+
+Make의 핵심 원리는 단순하다. 타겟 파일이 존재하지 않거나, 의존성 파일 중 하나라도 타겟보다 최신이면 액션을 실행한다. 파일의 "최신 여부"는 파일시스템 타임스탬프로 판단한다.
+
+![Make 타임스탬프 비교](images/make-timestamp.svg){#fig-make-timestamp}
+
+@fig-make-timestamp 는 Make가 빌드 여부를 결정하는 과정을 보여준다. 왼쪽은 타겟이 의존성보다 최신인 경우로, Make는 "이미 최신"이라고 판단하고 액션을 건너뛴다. 오른쪽은 의존성이 타겟보다 최신인 경우로, 타겟을 다시 빌드한다.
+
+`touch` 명령으로 파일 타임스탬프를 갱신해 이 동작을 확인할 수 있다.
+
+```bash
+# 의존성 파일의 타임스탬프 갱신 (내용은 그대로)
+$ touch books/novel.txt
+
+# 이제 Make가 다시 빌드
+$ make results.dat
+python countwords.py books/novel.txt results.dat
+```
+
+파일 내용이 바뀌지 않았더라도 타임스탬프가 갱신되면 Make는 다시 빌드한다. Make는 파일 내용을 비교하지 않고 오직 타임스탬프만 본다. 이 방식은 단순하지만 효과적이다. Git처럼 내용 해시를 계산하는 빌드 도구도 있지만, 대부분의 경우 타임스탬프 비교로 충분하다.
+
+## 의존성 체인 {#sec-make-chain}
+
+실제 데이터 분석 파이프라인은 여러 단계로 구성된다. 원시 데이터에서 정제 데이터를 만들고, 정제 데이터에서 통계를 계산하고, 통계에서 그래프를 그린다. 각 단계의 출력이 다음 단계의 입력이 된다.
+
+```make
+# 다단계 파이프라인
+clean.csv : raw.csv preprocess.py
+	python preprocess.py raw.csv clean.csv
+
+stats.csv : clean.csv analyze.py
+	python analyze.py clean.csv stats.csv
+
+figure.png : stats.csv visualize.py
+	python visualize.py stats.csv figure.png
+```
+
+![Make 의존성 체인](images/make-dependency-chain.svg){#fig-make-chain}
+
+@fig-make-chain 은 파일 간 의존성이 체인을 형성하는 모습을 보여준다. `figure.png`를 만들려면 `stats.csv`가 필요하고, `stats.csv`를 만들려면 `clean.csv`가 필요하다. Make는 이 의존성 그래프를 분석해 필요한 파일만 순서대로 빌드한다.
+
+Make의 강력함은 **의존성의 전이성(transitivity)**에 있다. `raw.csv`를 수정하면 어떻게 될까?
+
+```bash
+$ touch raw.csv
+$ make figure.png
+python preprocess.py raw.csv clean.csv
+python analyze.py clean.csv stats.csv
+python visualize.py stats.csv figure.png
+```
+
+Make는 `raw.csv` → `clean.csv` → `stats.csv` → `figure.png` 순으로 전체 체인을 자동 재빌드한다. 반면 `visualize.py`만 수정하면?
+
+```bash
+$ touch visualize.py
+$ make figure.png
+python visualize.py stats.csv figure.png
+```
+
+`clean.csv`와 `stats.csv`는 건드리지 않고 `figure.png`만 다시 생성한다. 데이터 처리에 1시간이 걸려도 시각화 스크립트 수정은 몇 초면 반영된다.
+
+## 자동 변수 {#sec-make-auto-vars}
+
+Makefile에 중복이 많으면 유지보수가 어렵다. 파일명을 바꿀 때마다 여러 곳을 수정해야 한다. Make는 \index{자동 변수}**자동 변수(automatic variable)**로 이 문제를 해결한다.
+
+```make
+# 중복이 많은 버전
+results.dat : books/novel.txt
+	python countwords.py books/novel.txt results.dat
+
+# 자동 변수 사용
+results.dat : books/novel.txt
+	python countwords.py $< $@
+```
+
+세 가지 자동 변수를 기억하자.
+
+- `$@`: 현재 규칙의 타겟
+- `$<`: 첫 번째 의존성
+- `$^`: 모든 의존성
+
+```make
+# 여러 의존성이 있는 경우
+report.pdf : chapter1.md chapter2.md chapter3.md style.css
+	pandoc $^ -o $@
+# $^ = chapter1.md chapter2.md chapter3.md style.css
+# $@ = report.pdf
+```
+
+자동 변수는 \index{패턴 규칙}**패턴 규칙(pattern rule)**과 함께 사용할 때 진가를 발휘한다.
+
+## 패턴 규칙 {#sec-make-patterns}
+
+여러 파일에 같은 처리를 적용해야 할 때, 규칙을 일일이 작성하면 지루하다.
+
+```make
+# 반복적인 규칙
+isles.dat : books/isles.txt countwords.py
+	python countwords.py books/isles.txt isles.dat
+
+abyss.dat : books/abyss.txt countwords.py
+	python countwords.py books/abyss.txt abyss.dat
+
+last.dat : books/last.txt countwords.py
+	python countwords.py books/last.txt last.dat
+```
+
+\index{패턴 규칙}**패턴 규칙**은 `%` 와일드카드로 이 중복을 제거한다.
+
+```make
+# 패턴 규칙
+%.dat : books/%.txt countwords.py
+	python countwords.py $< $@
+```
+
+`%`는 어떤 문자열과도 매칭된다. `isles.dat`을 만들 때 `%`는 `isles`와 매칭되고, 의존성에서도 같은 값으로 치환된다. 하나의 규칙으로 `isles.dat`, `abyss.dat`, `last.dat` 등 모든 `.dat` 파일을 생성할 수 있다.
+
+## 변수와 설정 분리 {#sec-make-variables}
+
+스크립트 이름이나 실행 옵션이 Makefile 곳곳에 흩어져 있으면 변경이 어렵다. \index{Make 변수}**변수**를 사용해 설정을 한 곳에 모은다.
+
+```make
+# 변수 정의
+PYTHON = python3
+COUNT_SCRIPT = countwords.py
+ANALYZE_SCRIPT = testzipf.py
+
+# 변수 사용 - $(변수명)
+%.dat : books/%.txt $(COUNT_SCRIPT)
+	$(PYTHON) $< $@
+
+results.txt : isles.dat abyss.dat $(ANALYZE_SCRIPT)
+	$(PYTHON) $(ANALYZE_SCRIPT) $^ > $@
+```
+
+설정을 별도 파일로 분리하면 더 깔끔하다.
+
+```make
+# config.mk
+PYTHON = python3
+COUNT_SCRIPT = countwords.py
+DATA_DIR = data
+OUTPUT_DIR = results
+```
+
+```make
+# Makefile
+include config.mk
+
+%.dat : $(DATA_DIR)/%.txt $(COUNT_SCRIPT)
+	$(PYTHON) $(COUNT_SCRIPT) $< $@
+```
+
+환경에 따라 `config.mk`만 바꾸면 된다. 로컬에서는 `PYTHON = python3`, 서버에서는 `PYTHON = /opt/python/3.11/bin/python`처럼 설정할 수 있다.
+
+## Phony 타겟 {#sec-make-phony}
+
+지금까지 타겟은 모두 실제 파일이었다. 하지만 "모든 출력 삭제"나 "전체 빌드" 같은 작업도 Make로 자동화하고 싶다. 이때 사용하는 것이 \index{Phony 타겟}**phony 타겟**이다.
+
+```make
+# 실제 파일을 만들지 않는 타겟
+.PHONY : clean all
+
+clean :
+	rm -f *.dat results.txt
+
+all : isles.dat abyss.dat last.dat results.txt
+```
+
+`.PHONY`로 선언된 타겟은 파일이 아니라 "명령의 이름"이다. `make clean`을 실행하면 `clean`이라는 파일이 있든 없든 항상 액션을 실행한다. `.PHONY`를 선언하지 않으면, `clean`이라는 파일이나 디렉토리가 있을 때 Make가 "이미 최신"이라고 판단해 아무것도 하지 않는다.
+
+관례적으로 사용되는 phony 타겟들이 있다.
+
+- `all`: 기본 타겟, Makefile의 첫 번째 규칙으로 배치
+- `clean`: 생성된 파일 삭제
+- `install`: 빌드 결과물 설치
+- `test`: 테스트 실행
+
+```make
+.PHONY : all clean test
+
+# 'make'만 실행하면 all이 기본 타겟
+all : results.txt figures/plot.png
+
+clean :
+	rm -f *.dat results.txt
+	rm -f figures/*.png
+
+test :
+	python -m pytest tests/
+```
+
+## 데이터 과학 워크플로우 예시 {#sec-make-workflow}
+
+지금까지 배운 개념을 종합해 실제 데이터 분석 파이프라인을 구성해보자. Zipf의 법칙을 검증하는 프로젝트다. 여러 책의 단어 빈도를 계산하고, 결과를 시각화하고, 최종 보고서를 생성한다.
+
+```make
+# config.mk
+PYTHON = python
+BOOKS = isles abyss last sierra
+
+# 스크립트
+COUNT_SCRIPT = countwords.py
+PLOT_SCRIPT = plotcounts.py
+ZIPF_SCRIPT = testzipf.py
+```
+
+```make
+# Makefile
+include config.mk
+
+# 파일 목록 자동 생성
+DAT_FILES = $(patsubst %, %.dat, $(BOOKS))
+PNG_FILES = $(patsubst %, figures/%.png, $(BOOKS))
+
+.PHONY : all clean
+
+# 기본 타겟
+all : results.txt $(PNG_FILES)
+
+# 패턴 규칙: 단어 빈도 계산
+%.dat : books/%.txt $(COUNT_SCRIPT)
+	$(PYTHON) $(COUNT_SCRIPT) $< $@
+
+# 패턴 규칙: 그래프 생성
+figures/%.png : %.dat $(PLOT_SCRIPT)
+	$(PYTHON) $(PLOT_SCRIPT) $< $@
+
+# 결과 테이블 생성
+results.txt : $(ZIPF_SCRIPT) $(DAT_FILES)
+	$(PYTHON) $^ > $@
+
+# 정리
+clean :
+	rm -f *.dat results.txt
+	rm -f figures/*.png
+```
+
+![데이터 과학 Make 워크플로우](images/make-workflow.svg){#fig-make-workflow}
+
+@fig-make-workflow 는 완성된 파이프라인의 의존성 그래프다. 원시 텍스트에서 최종 결과물까지의 모든 단계가 명시적으로 기록되어 있다. 새로운 책을 추가하려면 `config.mk`의 `BOOKS` 변수에 이름만 추가하면 된다. `make all` 한 줄로 전체 분석이 재현된다.
+
+## Make vs 현대 도구들 {#sec-make-alternatives}
+
+Make는 1977년에 만들어졌다. 거의 50년이 지난 지금, 왜 아직도 Make를 사용하는가? 더 현대적인 도구들이 있지 않은가?
+
+\index{스네이크메이크}**Snakemake**는 Python 기반 워크플로우 도구로, Python 문법으로 규칙을 작성한다. 클러스터 제출, 클라우드 실행, 컨테이너 통합을 지원한다. 바이오인포매틱스 분야에서 특히 인기 있다. \index{타겟}**targets**는 R 전용 워크플로우 도구로, R 객체 수준에서 의존성을 추적한다. R 사용자에게 가장 자연스러운 선택이다. \index{dvc}**DVC**는 Git처럼 데이터와 모델 버전을 관리하면서 파이프라인도 정의할 수 있다. 머신러닝 프로젝트에 적합하다.
+
+Make를 선택해야 하는 상황이 있다. **언어에 구애받지 않는** 파이프라인이 필요할 때다. Python과 R과 셸 스크립트가 섞인 프로젝트에서 Make는 중립적인 조율자 역할을 한다. **레거시 시스템**과 통합해야 할 때도 Make가 유리하다. C/Fortran으로 작성된 고성능 컴퓨팅 코드는 대부분 Make로 빌드한다. **단순함**이 필요할 때 Make의 가치가 드러난다. 의존성 파일 몇 개에 규칙 몇 줄이면 충분한데 Snakemake나 DVC를 도입하는 것은 과잉이다.
+
+::: {.callout-note}
+## 데이터 과학 워크플로우 도구 선택
+
+| 상황 | 권장 도구 |
+|------|----------|
+| 간단한 파이프라인, 다국어 혼용 | **Make** |
+| R 중심 분석, 함수 수준 캐싱 | targets (R) |
+| Python 중심, 클러스터/클라우드 | Snakemake |
+| ML 모델 버전 관리 필요 | DVC |
+| 복잡한 DAG, 재시도/에러 처리 | Airflow, Prefect |
+
+Make는 "가장 작은 도구로 문제를 해결"하는 유닉스 철학을 따른다. 복잡한 요구사항이 없다면 Make로 시작하고, 필요할 때 전환해도 늦지 않다.
+:::
+
+::: {.content-visible when-format="pdf"}
+\faLightbulb\ 생각해볼 점
+:::
+
+::: {.content-visible when-format="html"}
+💡 생각해볼 점
+:::
+
+Make의 핵심은 **의존성의 명시적 선언**이다. 어떤 파일이 어떤 파일에서 만들어지는지 Makefile에 기록하면, Make가 변경 사항을 추적하고 필요한 부분만 다시 빌드한다. 셸 스크립트처럼 "무엇을 실행하는가"만 기록하는 것이 아니라, "무엇이 무엇에 의존하는가"를 기록한다. 이 작은 차이가 재현성과 효율성의 큰 차이를 만든다.
+
+규칙의 구조는 단순하다. `타겟: 의존성` 다음 줄에 TAB으로 들여쓴 액션. 자동 변수(`$@`, `$<`, `$^`)로 중복을 줄이고, 패턴 규칙(`%`)으로 여러 파일에 같은 처리를 적용한다. 변수로 설정을 분리하고, phony 타겟으로 `clean`이나 `all` 같은 유틸리티 명령을 정의한다.
+
+Make는 50년 가까이 살아남았다. C 컴파일러부터 데이터 분석 파이프라인까지, 의존성 기반 워크플로우가 필요한 곳에서 여전히 유효하다. 학습 곡선이 가파르지 않고, 대부분의 유닉스 시스템에 기본 설치되어 있으며, 언어와 도구에 중립적이다. 더 현대적인 대안이 있더라도, Make는 "충분히 좋은" 선택이다. 다음 장에서는 Make를 직접 실습하며, 실제 데이터 분석 프로젝트에 적용하는 방법을 다룬다.

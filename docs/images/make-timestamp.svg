@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 20 900 320">
+  <defs>
+    <style>
+      .tufte-text {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+        font-size: 14px;
+      }
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+        font-size: 16px;
+        font-weight: bold;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #666;
+        font-size: 12px;
+      }
+      .tufte-code {
+        font-family: 'Monaco', 'Courier New', monospace;
+        fill: #333;
+        font-size: 12px;
+      }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="900" height="340" fill="#ffffff"/>
+
+  <!-- Left: Up to date case -->
+  <rect x="40" y="40" width="380" height="260" fill="#f9f9f9" stroke="#999" stroke-width="1.5" rx="5"/>
+  <text x="230" y="70" class="tufte-title" text-anchor="middle">타겟이 최신인 경우</text>
+  <text x="230" y="90" class="tufte-small" text-anchor="middle" fill="#999">"이미 최신" - 빌드 건너뜀</text>
+
+  <!-- Timeline -->
+  <line x1="80" y1="240" x2="380" y2="240" stroke="#ccc" stroke-width="2"/>
+  <text x="80" y="260" class="tufte-small">과거</text>
+  <text x="360" y="260" class="tufte-small">현재</text>
+
+  <!-- Dependency (older) -->
+  <rect x="100" y="130" width="120" height="50" fill="#e8e8e8" stroke="#666" stroke-width="1.5" rx="3"/>
+  <text x="160" y="155" class="tufte-code" text-anchor="middle">novel.txt</text>
+  <text x="160" y="172" class="tufte-small" text-anchor="middle">10:00 AM</text>
+  <line x1="160" y1="180" x2="160" y2="240" stroke="#666" stroke-width="1" stroke-dasharray="3,3"/>
+  <circle cx="160" cy="240" r="5" fill="#666"/>
+
+  <!-- Target (newer) -->
+  <rect x="260" y="130" width="120" height="50" fill="#ddd" stroke="#333" stroke-width="2" rx="3"/>
+  <text x="320" y="155" class="tufte-code" text-anchor="middle">results.dat</text>
+  <text x="320" y="172" class="tufte-small" text-anchor="middle">11:00 AM</text>
+  <line x1="320" y1="180" x2="320" y2="240" stroke="#333" stroke-width="1" stroke-dasharray="3,3"/>
+  <circle cx="320" cy="240" r="5" fill="#333"/>
+
+  <!-- Result -->
+  <rect x="120" y="275" width="200" height="25" fill="#e5e5e5" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="220" y="293" class="tufte-small" text-anchor="middle">make: 'results.dat' is up to date</text>
+
+  <!-- Right: Needs rebuild case -->
+  <rect x="480" y="40" width="380" height="260" fill="#fafafa" stroke="#999" stroke-width="1.5" rx="5"/>
+  <text x="670" y="70" class="tufte-title" text-anchor="middle">의존성이 최신인 경우</text>
+  <text x="670" y="90" class="tufte-small" text-anchor="middle" fill="#999">타겟 재빌드 필요</text>
+
+  <!-- Timeline -->
+  <line x1="520" y1="240" x2="820" y2="240" stroke="#ccc" stroke-width="2"/>
+  <text x="520" y="260" class="tufte-small">과거</text>
+  <text x="800" y="260" class="tufte-small">현재</text>
+
+  <!-- Target (older) -->
+  <rect x="540" y="130" width="120" height="50" fill="#ddd" stroke="#333" stroke-width="1.5" rx="3"/>
+  <text x="600" y="155" class="tufte-code" text-anchor="middle">results.dat</text>
+  <text x="600" y="172" class="tufte-small" text-anchor="middle">10:00 AM</text>
+  <line x1="600" y1="180" x2="600" y2="240" stroke="#333" stroke-width="1" stroke-dasharray="3,3"/>
+  <circle cx="600" cy="240" r="5" fill="#333"/>
+
+  <!-- Dependency (newer) -->
+  <rect x="700" y="130" width="120" height="50" fill="#e8e8e8" stroke="#666" stroke-width="2" rx="3"/>
+  <text x="760" y="155" class="tufte-code" text-anchor="middle">novel.txt</text>
+  <text x="760" y="172" class="tufte-small" text-anchor="middle">11:00 AM</text>
+  <line x1="760" y1="180" x2="760" y2="240" stroke="#666" stroke-width="1" stroke-dasharray="3,3"/>
+  <circle cx="760" cy="240" r="5" fill="#666"/>
+
+  <!-- Result -->
+  <rect x="560" y="275" width="200" height="25" fill="#ccc" stroke="#666" stroke-width="1" rx="3"/>
+  <text x="660" y="293" class="tufte-small" text-anchor="middle">python countwords.py ...</text>
+
+</svg>

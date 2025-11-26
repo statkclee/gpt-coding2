@@ -14,4 +14,7 @@ publishing/
 # Docker development
 r-docker/
 
+# make
+make-novice/
+
 **/*.quarto_ipynb
