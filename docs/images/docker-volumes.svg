@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-20 30 900 380">
+  <defs>
+    <style>
+      .tufte-text {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+        font-size: 14px;
+      }
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+        font-size: 16px;
+        font-weight: bold;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #666;
+        font-size: 12px;
+      }
+      .tufte-code {
+        font-family: 'Monaco', 'Courier New', monospace;
+        fill: #333;
+        font-size: 11px;
+      }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="-20" y="0" width="900" height="420" fill="#ffffff"/>
+
+  <!-- Left: Host System -->
+  <rect x="60" y="50" width="300" height="250" fill="#f5f5f5" stroke="#333" stroke-width="2" rx="5"/>
+  <text x="210" y="80" class="tufte-title" text-anchor="middle">호스트 (내 컴퓨터)</text>
+
+  <!-- Host folder with files -->
+  <rect x="90" y="100" width="240" height="130" fill="#fff" stroke="#666" stroke-width="1" rx="3"/>
+  <text x="210" y="125" class="tufte-code" text-anchor="middle">/Users/me/project/</text>
+
+  <!-- File icons in host -->
+  <rect x="110" y="145" width="60" height="35" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="2"/>
+  <text x="140" y="167" class="tufte-small" text-anchor="middle">data.csv</text>
+
+  <rect x="180" y="145" width="60" height="35" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="2"/>
+  <text x="210" y="167" class="tufte-small" text-anchor="middle">script.R</text>
+
+  <rect x="250" y="145" width="60" height="35" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="2"/>
+  <text x="280" y="167" class="tufte-small" text-anchor="middle">output/</text>
+
+  <text x="210" y="215" class="tufte-small" text-anchor="middle" fill="#666">파일 영구 저장</text>
+
+  <!-- Persistence badge -->
+  <rect x="130" y="255" width="160" height="35" fill="#ddd" stroke="#999" stroke-width="1" rx="15"/>
+  <text x="210" y="278" class="tufte-small" text-anchor="middle" font-weight="bold">컨테이너 삭제해도 유지</text>
+
+  <!-- Center: Connection -->
+  <path d="M 360 175 L 460 175" stroke="#333" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 460 195 L 360 195" stroke="#333" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+
+  <rect x="380" y="140" width="60" height="25" fill="#fff" stroke="#666" stroke-width="1" rx="3"/>
+  <text x="410" y="157" class="tufte-code" text-anchor="middle">-v</text>
+  <text x="410" y="225" class="tufte-small" text-anchor="middle">양방향 동기화</text>
+
+  <!-- Right: Container -->
+  <rect x="480" y="50" width="300" height="250" fill="#f9f9f9" stroke="#333" stroke-width="2" rx="5"/>
+  <text x="630" y="80" class="tufte-title" text-anchor="middle">컨테이너 (RStudio)</text>
+
+  <!-- Container folder with same files -->
+  <rect x="510" y="100" width="240" height="130" fill="#fff" stroke="#666" stroke-width="1" rx="3"/>
+  <text x="630" y="125" class="tufte-code" text-anchor="middle">/home/rstudio/project/</text>
+
+  <!-- Same file icons in container -->
+  <rect x="530" y="145" width="60" height="35" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="2"/>
+  <text x="560" y="167" class="tufte-small" text-anchor="middle">data.csv</text>
+
+  <rect x="600" y="145" width="60" height="35" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="2"/>
+  <text x="630" y="167" class="tufte-small" text-anchor="middle">script.R</text>
+
+  <rect x="670" y="145" width="60" height="35" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="2"/>
+  <text x="700" y="167" class="tufte-small" text-anchor="middle">output/</text>
+
+  <text x="630" y="215" class="tufte-small" text-anchor="middle" fill="#666">동일한 파일 접근</text>
+
+  <!-- Ephemeral badge -->
+  <rect x="550" y="255" width="160" height="35" fill="#ccc" stroke="#999" stroke-width="1" rx="15"/>
+  <text x="630" y="278" class="tufte-small" text-anchor="middle" fill="#666">컨테이너는 일시적</text>
+
+  <!-- Bottom: Command example -->
+  <rect x="60" y="320" width="720" height="70" fill="#fafafa" stroke="#999" stroke-width="1" rx="5"/>
+  <text x="420" y="345" class="tufte-code" text-anchor="middle">docker run -v $(pwd):/home/rstudio/project rocker/rstudio:4.3.0</text>
+
+  <!-- Command annotations - 정밀 조정 -->
+  <text x="324" y="375" class="tufte-small" text-anchor="middle" fill="#999">호스트 경로</text>
+  <text x="420" y="375" class="tufte-small" text-anchor="middle" fill="#999">컨테이너 경로</text>
+  <text x="562" y="375" class="tufte-small" text-anchor="middle" fill="#999">이미지</text>
+
+  <!-- Underline indicators - 정밀 조정 -->
+  <line x1="304" y1="350" x2="344" y2="350" stroke="#999" stroke-width="1"/>
+  <line x1="351" y1="350" x2="489" y2="350" stroke="#999" stroke-width="1"/>
+  <line x1="496" y1="350" x2="628" y2="350" stroke="#999" stroke-width="1"/>
+
+</svg>

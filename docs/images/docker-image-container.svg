@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 50 900 420">
+  <defs>
+    <style>
+      .tufte-text {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+        font-size: 14px;
+      }
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+        font-size: 16px;
+        font-weight: bold;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #666;
+        font-size: 12px;
+      }
+      .tufte-code {
+        font-family: 'Monaco', 'Courier New', monospace;
+        fill: #333;
+        font-size: 11px;
+      }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="900" height="500" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="450" y="35" class="tufte-title" text-anchor="middle" font-size="18">도커 이미지와 컨테이너</text>
+
+  <!-- IMAGE Section (Left) -->
+  <rect x="40" y="70" width="280" height="380" fill="#f5f5f5" stroke="#999" stroke-width="1.5" rx="5"/>
+  <text x="180" y="100" class="tufte-title" text-anchor="middle">이미지 (Image)</text>
+  <text x="180" y="120" class="tufte-small" text-anchor="middle" fill="#999">읽기 전용 템플릿</text>
+
+  <!-- Image box -->
+  <rect x="70" y="145" width="220" height="180" fill="#e8e8e8" stroke="#666" stroke-width="2" rx="3"/>
+  <text x="180" y="175" class="tufte-text" text-anchor="middle" font-weight="bold">rocker/rstudio:4.3.0</text>
+
+  <!-- Layers -->
+  <rect x="90" y="195" width="180" height="25" fill="#ddd" stroke="#999" stroke-width="1"/>
+  <text x="180" y="212" class="tufte-small" text-anchor="middle">Ubuntu 20.04</text>
+
+  <rect x="90" y="222" width="180" height="25" fill="#ccc" stroke="#999" stroke-width="1"/>
+  <text x="180" y="239" class="tufte-small" text-anchor="middle">R 4.3.0</text>
+
+  <rect x="90" y="249" width="180" height="25" fill="#bbb" stroke="#999" stroke-width="1"/>
+  <text x="180" y="266" class="tufte-small" text-anchor="middle">RStudio Server</text>
+
+  <rect x="90" y="276" width="180" height="25" fill="#aaa" stroke="#999" stroke-width="1"/>
+  <text x="180" y="293" class="tufte-small" text-anchor="middle">tidyverse 패키지</text>
+
+  <!-- Image characteristics -->
+  <text x="60" y="355" class="tufte-small">• 파일로 저장 (수백 MB)</text>
+  <text x="60" y="375" class="tufte-small">• 변경 불가 (immutable)</text>
+  <text x="60" y="395" class="tufte-small">• Docker Hub에서 공유</text>
+  <text x="60" y="415" class="tufte-small">• 버전 태그로 관리</text>
+  <text x="60" y="435" class="tufte-small" font-style="italic" fill="#999">"설계도" / "클래스" / "레시피"</text>
+
+  <!-- Arrow from Image to Containers -->
+  <path d="M 320 250 L 400 250" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="360" y="235" class="tufte-code" text-anchor="middle">docker run</text>
+
+  <!-- CONTAINER Section (Right) -->
+  <rect x="400" y="70" width="460" height="380" fill="#fafafa" stroke="#999" stroke-width="1.5" rx="5"/>
+  <text x="630" y="100" class="tufte-title" text-anchor="middle">컨테이너 (Container)</text>
+  <text x="630" y="120" class="tufte-small" text-anchor="middle" fill="#999">실행 중인 인스턴스</text>
+
+  <!-- Container 1 -->
+  <rect x="420" y="145" width="130" height="140" fill="#ffffff" stroke="#333" stroke-width="2" rx="3"/>
+  <circle cx="440" cy="165" r="6" fill="#4a4" stroke="#333"/>
+  <text x="455" y="169" class="tufte-small" font-weight="bold">실행 중</text>
+  <text x="485" y="195" class="tufte-text" text-anchor="middle">컨테이너 1</text>
+  <text x="485" y="215" class="tufte-code" text-anchor="middle">:8787</text>
+  <rect x="435" y="230" width="100" height="40" fill="#f0f0f0" stroke="#999" stroke-width="1" rx="2"/>
+  <text x="485" y="255" class="tufte-small" text-anchor="middle">RStudio</text>
+
+  <!-- Container 2 -->
+  <rect x="565" y="145" width="130" height="140" fill="#ffffff" stroke="#333" stroke-width="2" rx="3"/>
+  <circle cx="585" cy="165" r="6" fill="#4a4" stroke="#333"/>
+  <text x="600" y="169" class="tufte-small" font-weight="bold">실행 중</text>
+  <text x="630" y="195" class="tufte-text" text-anchor="middle">컨테이너 2</text>
+  <text x="630" y="215" class="tufte-code" text-anchor="middle">:8788</text>
+  <rect x="580" y="230" width="100" height="40" fill="#f0f0f0" stroke="#999" stroke-width="1" rx="2"/>
+  <text x="630" y="255" class="tufte-small" text-anchor="middle">RStudio</text>
+
+  <!-- Container 3 -->
+  <rect x="710" y="145" width="130" height="140" fill="#ffffff" stroke="#666" stroke-width="2" stroke-dasharray="5,3" rx="3"/>
+  <circle cx="730" cy="165" r="6" fill="#999" stroke="#666"/>
+  <text x="745" y="169" class="tufte-small" fill="#999">중지됨</text>
+  <text x="775" y="195" class="tufte-text" text-anchor="middle" fill="#999">컨테이너 3</text>
+  <text x="775" y="215" class="tufte-code" text-anchor="middle" fill="#999">:8789</text>
+  <rect x="725" y="230" width="100" height="40" fill="#f5f5f5" stroke="#ccc" stroke-width="1" rx="2"/>
+  <text x="775" y="255" class="tufte-small" text-anchor="middle" fill="#999">RStudio</text>
+
+  <!-- Container characteristics -->
+  <text x="420" y="320" class="tufte-small">• 이미지에서 생성 (여러 개 가능)</text>
+  <text x="420" y="340" class="tufte-small">• 실행/중지/삭제 가능</text>
+  <text x="420" y="360" class="tufte-small">• 각자 독립된 파일 시스템</text>
+  <text x="420" y="380" class="tufte-small">• 각자 다른 포트 매핑</text>
+  <text x="420" y="400" class="tufte-small" font-style="italic" fill="#999">"완성된 요리" / "인스턴스" / "건물"</text>
+
+  <!-- Key insight box -->
+  <rect x="420" y="420" width="420" height="25" fill="#e5e5e5" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="630" y="438" class="tufte-text" text-anchor="middle">하나의 이미지 → 여러 컨테이너 (각각 독립 실행)</text>
+
+  <!-- Bottom analogy -->
+  <text x="270" y="390" class="tufte-small" text-anchor="middle" fill="#333" text-decoration="underline">Class (정의)</text>
+  <text x="360" y="390" class="tufte-code" text-anchor="middle" fill="#333" text-decoration="underline">new</text>
+  <text x="730" y="390" class="tufte-small" text-anchor="middle" fill="#333" text-decoration="underline">Instance (obj1, obj2, obj3...)</text>
+</svg>

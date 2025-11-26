@@ -42,8 +42,15 @@ book:
   
 # ---------------------------------- #  
   chapters:
-    # - acknowledgments.qmd
     - index.qmd
+
+    - part: "**6부** 도커"
+      chapters:
+        - docker_concept.qmd
+
+    # - part: "**4부** 분야별 코딩"
+    #   chapters:
+    #     - tool-make.qmd       # Make 장
 
     # - part: "**1부** 프로그래밍" # OK
     #   chapters:

@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 20 900 400">
+  <defs>
+    <style>
+      .tufte-text {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+        font-size: 14px;
+      }
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+        font-size: 16px;
+        font-weight: bold;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #666;
+        font-size: 12px;
+      }
+      .tufte-code {
+        font-family: 'Monaco', 'Courier New', monospace;
+        fill: #333;
+        font-size: 11px;
+      }
+      .tufte-code-small {
+        font-family: 'Monaco', 'Courier New', monospace;
+        fill: #333;
+        font-size: 10px;
+      }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="900" height="420" fill="#ffffff"/>
+
+  <!-- Left: Dockerfile -->
+  <rect x="40" y="40" width="280" height="320" fill="#f9f9f9" stroke="#999" stroke-width="1.5" rx="5"/>
+  <text x="180" y="70" class="tufte-title" text-anchor="middle">Dockerfile</text>
+  <text x="180" y="90" class="tufte-small" text-anchor="middle" fill="#999">이미지 빌드 레시피</text>
+
+  <!-- Dockerfile content -->
+  <rect x="55" y="105" width="250" height="240" fill="#fff" stroke="#ccc" stroke-width="1" rx="3"/>
+
+  <!-- Code lines -->
+  <text x="65" y="128" class="tufte-code-small" fill="#666"># 베이스 이미지</text>
+  <text x="65" y="145" class="tufte-code-small"><tspan fill="#666">FROM</tspan> rocker/rstudio:4.3.0</text>
+
+  <text x="65" y="170" class="tufte-code-small" fill="#666"># 시스템 패키지</text>
+  <text x="65" y="187" class="tufte-code-small"><tspan fill="#666">RUN</tspan> apt-get update &amp;&amp; \</text>
+  <text x="85" y="202" class="tufte-code-small">apt-get install -y libxml2-dev</text>
+
+  <text x="65" y="227" class="tufte-code-small" fill="#666"># R 패키지</text>
+  <text x="65" y="244" class="tufte-code-small"><tspan fill="#666">RUN</tspan> R -e "install.packages(</text>
+  <text x="85" y="259" class="tufte-code-small">c('tidyverse', 'shiny'))"</text>
+
+  <text x="65" y="284" class="tufte-code-small" fill="#666"># 프로젝트 파일 복사</text>
+  <text x="65" y="301" class="tufte-code-small"><tspan fill="#666">COPY</tspan> . /home/rstudio/project</text>
+
+  <text x="65" y="326" class="tufte-code-small" fill="#666"># 작업 디렉토리</text>
+  <text x="65" y="343" class="tufte-code-small"><tspan fill="#666">WORKDIR</tspan> /home/rstudio/project</text>
+
+  <!-- Arrow 1: Dockerfile → Build -->
+  <path d="M 320 200 L 380 200" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="350" y="185" class="tufte-code" text-anchor="middle">docker</text>
+  <text x="350" y="200" class="tufte-code" text-anchor="middle">build</text>
+
+  <!-- Middle: Build Process -->
+  <rect x="390" y="100" width="180" height="200" fill="#e8e8e8" stroke="#666" stroke-width="1.5" rx="5"/>
+  <text x="480" y="130" class="tufte-title" text-anchor="middle">빌드 과정</text>
+
+  <!-- Layers -->
+  <rect x="410" y="150" width="140" height="25" fill="#ddd" stroke="#999" stroke-width="1"/>
+  <text x="480" y="167" class="tufte-small" text-anchor="middle">Layer 1: Ubuntu</text>
+
+  <rect x="410" y="175" width="140" height="25" fill="#ccc" stroke="#999" stroke-width="1"/>
+  <text x="480" y="192" class="tufte-small" text-anchor="middle">Layer 2: R 4.3.0</text>
+
+  <rect x="410" y="200" width="140" height="25" fill="#bbb" stroke="#999" stroke-width="1"/>
+  <text x="480" y="217" class="tufte-small" text-anchor="middle">Layer 3: RStudio</text>
+
+  <rect x="410" y="225" width="140" height="25" fill="#aaa" stroke="#999" stroke-width="1"/>
+  <text x="480" y="242" class="tufte-small" text-anchor="middle">Layer 4: 패키지</text>
+
+  <rect x="410" y="250" width="140" height="25" fill="#999" stroke="#666" stroke-width="1"/>
+  <text x="480" y="267" class="tufte-small" text-anchor="middle" fill="#fff">Layer 5: 프로젝트</text>
+
+  <!-- Arrow 2: Build → Image -->
+  <path d="M 570 200 L 630 200" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Right: Custom Image -->
+  <rect x="640" y="40" width="220" height="320" fill="#f5f5f5" stroke="#333" stroke-width="2" rx="5"/>
+  <text x="750" y="70" class="tufte-title" text-anchor="middle">커스텀 이미지</text>
+  <text x="750" y="90" class="tufte-small" text-anchor="middle" fill="#666">myproject:1.0</text>
+
+  <!-- Image box -->
+  <rect x="660" y="105" width="180" height="180" fill="#e5e5e5" stroke="#666" stroke-width="1.5" rx="3"/>
+  <text x="750" y="130" class="tufte-text" text-anchor="middle" font-weight="bold">완전한 환경</text>
+
+  <text x="680" y="155" class="tufte-small">✓ Ubuntu + R 4.3.0</text>
+  <text x="680" y="175" class="tufte-small">✓ RStudio Server</text>
+  <text x="680" y="195" class="tufte-small">✓ tidyverse, shiny</text>
+  <text x="680" y="215" class="tufte-small">✓ 시스템 라이브러리</text>
+  <text x="680" y="235" class="tufte-small">✓ 프로젝트 코드</text>
+  <text x="680" y="260" class="tufte-small" fill="#999" font-style="italic">→ 어디서나 동일 실행</text>
+
+  <!-- docker run -->
+  <rect x="660" y="295" width="180" height="50" fill="#fff" stroke="#666" stroke-width="1" rx="3"/>
+  <text x="750" y="318" class="tufte-code" text-anchor="middle">docker run -p 8787:8787</text>
+  <text x="750" y="335" class="tufte-code" text-anchor="middle">myproject:1.0</text>
+
+  <!-- Bottom annotation -->
+  <rect x="40" y="375" width="820" height="35" fill="#fafafa" stroke="#999" stroke-width="1" rx="5"/>
+  <text x="450" y="398" class="tufte-text" text-anchor="middle">Dockerfile = 코드로 작성된 환경 설정 → 버전 관리 가능, 재현 가능, 공유 가능</text>
+
+</svg>

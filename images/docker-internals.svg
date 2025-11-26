@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 25 900 380">
+  <defs>
+    <style>
+      .tufte-text {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+        font-size: 14px;
+      }
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+        font-size: 16px;
+        font-weight: bold;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #666;
+        font-size: 12px;
+      }
+      .tufte-code {
+        font-family: 'Monaco', 'Courier New', monospace;
+        fill: #333;
+        font-size: 11px;
+      }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="900" height="490" fill="#ffffff"/>
+
+  <!-- Host System base -->
+  <rect x="40" y="340" width="820" height="50" fill="#e5e5e5" stroke="#333" stroke-width="2" rx="5"/>
+  <text x="350" y="370" class="tufte-title" text-anchor="middle">호스트 리눅스 커널</text>
+  <text x="550" y="370" class="tufte-small" text-anchor="middle">네임스페이스 + cgroups + UnionFS</text>
+
+  <!-- Docker Engine -->
+  <rect x="40" y="280" width="820" height="50" fill="#ddd" stroke="#666" stroke-width="1.5" rx="3"/>
+  <text x="450" y="310" class="tufte-text" text-anchor="middle" font-weight="bold">Docker Engine (dockerd)</text>
+
+  <!-- Container 1 -->
+  <rect x="60" y="40" width="250" height="230" fill="#f9f9f9" stroke="#333" stroke-width="2" rx="5"/>
+  <text x="185" y="65" class="tufte-title" text-anchor="middle">컨테이너 A</text>
+
+  <!-- Container 1: Namespace isolation -->
+  <rect x="75" y="80" width="220" height="80" fill="#fff" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="185" y="100" class="tufte-small" text-anchor="middle" font-weight="bold">네임스페이스 격리</text>
+  <text x="85" y="120" class="tufte-small">PID: 자체 프로세스 트리</text>
+  <text x="85" y="138" class="tufte-small">NET: 독립 네트워크 스택</text>
+  <text x="85" y="156" class="tufte-small">MNT: 격리된 파일시스템</text>
+
+  <!-- Container 1: Layers -->
+  <rect x="75" y="170" width="220" height="90" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="185" y="190" class="tufte-small" text-anchor="middle" font-weight="bold">레이어 (읽기 전용)</text>
+  <rect x="85" y="200" width="200" height="15" fill="#ccc" stroke="#999" stroke-width="0.5"/>
+  <text x="185" y="211" class="tufte-code" text-anchor="middle" font-size="9">Ubuntu</text>
+  <rect x="85" y="215" width="200" height="15" fill="#bbb" stroke="#999" stroke-width="0.5"/>
+  <text x="185" y="226" class="tufte-code" text-anchor="middle" font-size="9">R 4.3.0</text>
+  <rect x="85" y="230" width="200" height="15" fill="#aaa" stroke="#999" stroke-width="0.5"/>
+  <text x="185" y="241" class="tufte-code" text-anchor="middle" font-size="9">tidyverse</text>
+  <rect x="85" y="245" width="200" height="12" fill="#fff" stroke="#666" stroke-width="1"/>
+  <text x="185" y="255" class="tufte-code" text-anchor="middle" font-size="9">쓰기 레이어 (변경사항)</text>
+
+  <!-- Container 2 -->
+  <rect x="325" y="40" width="250" height="230" fill="#f9f9f9" stroke="#333" stroke-width="2" rx="5"/>
+  <text x="450" y="65" class="tufte-title" text-anchor="middle">컨테이너 B</text>
+
+  <!-- Container 2: Namespace isolation -->
+  <rect x="340" y="80" width="220" height="80" fill="#fff" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="450" y="100" class="tufte-small" text-anchor="middle" font-weight="bold">네임스페이스 격리</text>
+  <text x="350" y="120" class="tufte-small">PID: 자체 프로세스 트리</text>
+  <text x="350" y="138" class="tufte-small">NET: 독립 네트워크 스택</text>
+  <text x="350" y="156" class="tufte-small">MNT: 격리된 파일시스템</text>
+
+  <!-- Container 2: Layers (shared base) -->
+  <rect x="340" y="170" width="220" height="90" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="450" y="190" class="tufte-small" text-anchor="middle" font-weight="bold">레이어 (공유)</text>
+  <rect x="350" y="200" width="200" height="15" fill="#ccc" stroke="#999" stroke-width="0.5"/>
+  <text x="450" y="211" class="tufte-code" text-anchor="middle" font-size="9">Ubuntu (A와 공유)</text>
+  <rect x="350" y="215" width="200" height="15" fill="#bbb" stroke="#999" stroke-width="0.5"/>
+  <text x="450" y="226" class="tufte-code" text-anchor="middle" font-size="9">Python 3.11</text>
+  <rect x="350" y="230" width="200" height="15" fill="#aaa" stroke="#999" stroke-width="0.5"/>
+  <text x="450" y="241" class="tufte-code" text-anchor="middle" font-size="9">pandas, numpy</text>
+  <rect x="350" y="245" width="200" height="12" fill="#fff" stroke="#666" stroke-width="1"/>
+  <text x="450" y="255" class="tufte-code" text-anchor="middle" font-size="9">쓰기 레이어 (변경사항)</text>
+
+  <!-- cgroups panel -->
+  <rect x="590" y="40" width="260" height="230" fill="#fafafa" stroke="#666" stroke-width="1.5" rx="5"/>
+  <text x="720" y="65" class="tufte-title" text-anchor="middle">cgroups (자원 제한)</text>
+
+  <!-- Container A resources -->
+  <rect x="605" y="85" width="230" height="80" fill="#fff" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="720" y="105" class="tufte-small" text-anchor="middle" font-weight="bold">컨테이너 A 할당</text>
+  <text x="615" y="125" class="tufte-small">CPU: 2 cores (최대)</text>
+  <text x="615" y="143" class="tufte-small">Memory: 4GB (제한)</text>
+  <text x="615" y="158" class="tufte-code" fill="#999">--cpus=2 --memory=4g</text>
+
+  <!-- Container B resources -->
+  <rect x="605" y="170" width="230" height="80" fill="#fff" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="720" y="190" class="tufte-small" text-anchor="middle" font-weight="bold">컨테이너 B 할당</text>
+  <text x="615" y="210" class="tufte-small">CPU: 4 cores (최대)</text>
+  <text x="615" y="228" class="tufte-small">Memory: 8GB (제한)</text>
+  <text x="615" y="243" class="tufte-code" fill="#999">--cpus=4 --memory=8g</text>
+
+  <!-- Arrows from containers to Docker Engine -->
+  <path d="M 185 270 L 185 280" stroke="#666" stroke-width="1.0" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 450 270 L 450 280" stroke="#666" stroke-width="1.0" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 720 270 L 720 280" stroke="#666" stroke-width="1.0" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Arrow from Docker Engine to Kernel -->
+  <path d="M 450 330 L 450 340" stroke="#333" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Key insight at bottom -->
+  <!-- <rect x="40" y="430" width="820" height="25" fill="#fafafa" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="450" y="448" class="tufte-text" text-anchor="middle">VM: 각자 커널 포함 (무거움) → 컨테이너: 커널 공유 (가벼움, 빠름)</text> -->
+
+</svg>

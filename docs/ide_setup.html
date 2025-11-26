@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.9.8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="이광춘(Openai)">
-<title>4&nbsp; 개발 환경 구축 – 챗GPT 코딩2</title>
+<title>5&nbsp; 개발 환경 구축 – 챗GPT 코딩2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -147,7 +147,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ide.html"><strong>5부</strong> 통합 개발 환경</a></li><li class="breadcrumb-item"><a href="./ide_setup.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">개발 환경 구축</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ide.html"><strong>5부</strong> 통합 개발 환경</a></li><li class="breadcrumb-item"><a href="./ide_setup.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">개발 환경 구축</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="검색" onclick="window.quartoOpenSearch();">
@@ -185,7 +185,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text"><strong>5부</strong> 통합 개발 환경</span></a>
+ <span class="menu-text"><strong>6부</strong> 도커</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="토글 섹션">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -193,26 +193,43 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./docker_concept.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">도커: 재현가능한 환경</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>5부</strong> 통합 개발 환경</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./ide.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">IDE 선택과 발전</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">IDE 선택과 발전</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ide_positron.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">포지트론</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">포지트론</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ide_extension.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">IDE 확장 프로그램</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">IDE 확장 프로그램</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ide_setup.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">개발 환경 구축</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">개발 환경 구축</span></span></a>
   </div>
 </li>
       </ul>
@@ -232,57 +249,57 @@ window.Quarto = {
    
   <ul>
 <li>
-<a href="#sec-setup-git" id="toc-sec-setup-git" class="nav-link active" data-scroll-target="#sec-setup-git"><span class="header-section-number">4.1</span> Git 설치</a>
+<a href="#sec-setup-git" id="toc-sec-setup-git" class="nav-link active" data-scroll-target="#sec-setup-git"><span class="header-section-number">5.1</span> Git 설치</a>
   <ul class="collapse">
-<li><a href="#sec-setup-git-install" id="toc-sec-setup-git-install" class="nav-link" data-scroll-target="#sec-setup-git-install"><span class="header-section-number">4.1.1</span> Git 설치</a></li>
-  <li><a href="#sec-setup-git-verify" id="toc-sec-setup-git-verify" class="nav-link" data-scroll-target="#sec-setup-git-verify"><span class="header-section-number">4.1.2</span> 설치 확인</a></li>
-  <li><a href="#sec-setup-git-config" id="toc-sec-setup-git-config" class="nav-link" data-scroll-target="#sec-setup-git-config"><span class="header-section-number">4.1.3</span> 최초 설정</a></li>
+<li><a href="#sec-setup-git-install" id="toc-sec-setup-git-install" class="nav-link" data-scroll-target="#sec-setup-git-install"><span class="header-section-number">5.1.1</span> Git 설치</a></li>
+  <li><a href="#sec-setup-git-verify" id="toc-sec-setup-git-verify" class="nav-link" data-scroll-target="#sec-setup-git-verify"><span class="header-section-number">5.1.2</span> 설치 확인</a></li>
+  <li><a href="#sec-setup-git-config" id="toc-sec-setup-git-config" class="nav-link" data-scroll-target="#sec-setup-git-config"><span class="header-section-number">5.1.3</span> 최초 설정</a></li>
   </ul>
 </li>
-  <li><a href="#%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88-%ED%99%98%EA%B2%BD-%EB%8F%84%EC%BB%A4-%EC%84%A4%EC%B9%98" id="toc-컨테이너-환경-도커-설치" class="nav-link" data-scroll-target="#%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88-%ED%99%98%EA%B2%BD-%EB%8F%84%EC%BB%A4-%EC%84%A4%EC%B9%98"><span class="header-section-number">4.2</span> 컨테이너 환경: 도커 설치</a></li>
+  <li><a href="#%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88-%ED%99%98%EA%B2%BD-%EB%8F%84%EC%BB%A4-%EC%84%A4%EC%B9%98" id="toc-컨테이너-환경-도커-설치" class="nav-link" data-scroll-target="#%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88-%ED%99%98%EA%B2%BD-%EB%8F%84%EC%BB%A4-%EC%84%A4%EC%B9%98"><span class="header-section-number">5.2</span> 컨테이너 환경: 도커 설치</a></li>
   <li>
-<a href="#sec-setup-make" id="toc-sec-setup-make" class="nav-link" data-scroll-target="#sec-setup-make"><span class="header-section-number">4.3</span> 워크플로우 자동화</a>
+<a href="#sec-setup-make" id="toc-sec-setup-make" class="nav-link" data-scroll-target="#sec-setup-make"><span class="header-section-number">5.3</span> 워크플로우 자동화</a>
   <ul class="collapse">
-<li><a href="#sec-setup-make-install" id="toc-sec-setup-make-install" class="nav-link" data-scroll-target="#sec-setup-make-install"><span class="header-section-number">4.3.1</span> Make 설치</a></li>
-  <li><a href="#sec-setup-workflow-evolution" id="toc-sec-setup-workflow-evolution" class="nav-link" data-scroll-target="#sec-setup-workflow-evolution"><span class="header-section-number">4.3.2</span> 워크플로우 도구 진화</a></li>
-  <li><a href="#sec-setup-modern-tools" id="toc-sec-setup-modern-tools" class="nav-link" data-scroll-target="#sec-setup-modern-tools"><span class="header-section-number">4.3.3</span> 현대 데이터 과학 도구</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#sec-setup-isolation-comparison" id="toc-sec-setup-isolation-comparison" class="nav-link" data-scroll-target="#sec-setup-isolation-comparison"><span class="header-section-number">4.4</span> uv vs 도커</a>
-  <ul class="collapse">
-<li><a href="#%EC%9C%A0%EC%82%AC%EC%A0%90" id="toc-유사점" class="nav-link" data-scroll-target="#%EC%9C%A0%EC%82%AC%EC%A0%90"><span class="header-section-number">4.4.1</span> 유사점</a></li>
-  <li><a href="#%EC%B0%A8%EC%9D%B4%EC%A0%90" id="toc-차이점" class="nav-link" data-scroll-target="#%EC%B0%A8%EC%9D%B4%EC%A0%90"><span class="header-section-number">4.4.2</span> 차이점</a></li>
-  <li><a href="#sec-setup-when-to-use" id="toc-sec-setup-when-to-use" class="nav-link" data-scroll-target="#sec-setup-when-to-use"><span class="header-section-number">4.4.3</span> 언제 무엇을 사용하나?</a></li>
+<li><a href="#sec-setup-make-install" id="toc-sec-setup-make-install" class="nav-link" data-scroll-target="#sec-setup-make-install"><span class="header-section-number">5.3.1</span> Make 설치</a></li>
+  <li><a href="#sec-setup-workflow-evolution" id="toc-sec-setup-workflow-evolution" class="nav-link" data-scroll-target="#sec-setup-workflow-evolution"><span class="header-section-number">5.3.2</span> 워크플로우 도구 진화</a></li>
+  <li><a href="#sec-setup-modern-tools" id="toc-sec-setup-modern-tools" class="nav-link" data-scroll-target="#sec-setup-modern-tools"><span class="header-section-number">5.3.3</span> 현대 데이터 과학 도구</a></li>
   </ul>
 </li>
   <li>
-<a href="#sec-setup-languages" id="toc-sec-setup-languages" class="nav-link" data-scroll-target="#sec-setup-languages"><span class="header-section-number">4.5</span> 코딩 언어 설치</a>
+<a href="#sec-setup-isolation-comparison" id="toc-sec-setup-isolation-comparison" class="nav-link" data-scroll-target="#sec-setup-isolation-comparison"><span class="header-section-number">5.4</span> uv vs 도커</a>
   <ul class="collapse">
-<li><a href="#r-%EC%84%A4%EC%B9%98-%EB%B0%8F-%ED%99%98%EA%B2%BD-%EA%B4%80%EB%A6%AC" id="toc-r-설치-및-환경-관리" class="nav-link" data-scroll-target="#r-%EC%84%A4%EC%B9%98-%EB%B0%8F-%ED%99%98%EA%B2%BD-%EA%B4%80%EB%A6%AC"><span class="header-section-number">4.5.1</span> R 설치 및 환경 관리</a></li>
-  <li><a href="#%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%84%A4%EC%B9%98-%EB%B0%8F-%ED%99%98%EA%B2%BD-%EA%B4%80%EB%A6%AC" id="toc-파이썬-설치-및-환경-관리" class="nav-link" data-scroll-target="#%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%84%A4%EC%B9%98-%EB%B0%8F-%ED%99%98%EA%B2%BD-%EA%B4%80%EB%A6%AC"><span class="header-section-number">4.5.2</span> 파이썬 설치 및 환경 관리</a></li>
+<li><a href="#%EC%9C%A0%EC%82%AC%EC%A0%90" id="toc-유사점" class="nav-link" data-scroll-target="#%EC%9C%A0%EC%82%AC%EC%A0%90"><span class="header-section-number">5.4.1</span> 유사점</a></li>
+  <li><a href="#%EC%B0%A8%EC%9D%B4%EC%A0%90" id="toc-차이점" class="nav-link" data-scroll-target="#%EC%B0%A8%EC%9D%B4%EC%A0%90"><span class="header-section-number">5.4.2</span> 차이점</a></li>
+  <li><a href="#sec-setup-when-to-use" id="toc-sec-setup-when-to-use" class="nav-link" data-scroll-target="#sec-setup-when-to-use"><span class="header-section-number">5.4.3</span> 언제 무엇을 사용하나?</a></li>
   </ul>
 </li>
   <li>
-<a href="#sec-setup-ide" id="toc-sec-setup-ide" class="nav-link" data-scroll-target="#sec-setup-ide"><span class="header-section-number">4.6</span> 통합 개발 환경 설치</a>
+<a href="#sec-setup-languages" id="toc-sec-setup-languages" class="nav-link" data-scroll-target="#sec-setup-languages"><span class="header-section-number">5.5</span> 코딩 언어 설치</a>
   <ul class="collapse">
-<li><a href="#sec-setup-positron" id="toc-sec-setup-positron" class="nav-link" data-scroll-target="#sec-setup-positron"><span class="header-section-number">4.6.1</span> Positron IDE 설치</a></li>
+<li><a href="#r-%EC%84%A4%EC%B9%98-%EB%B0%8F-%ED%99%98%EA%B2%BD-%EA%B4%80%EB%A6%AC" id="toc-r-설치-및-환경-관리" class="nav-link" data-scroll-target="#r-%EC%84%A4%EC%B9%98-%EB%B0%8F-%ED%99%98%EA%B2%BD-%EA%B4%80%EB%A6%AC"><span class="header-section-number">5.5.1</span> R 설치 및 환경 관리</a></li>
+  <li><a href="#%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%84%A4%EC%B9%98-%EB%B0%8F-%ED%99%98%EA%B2%BD-%EA%B4%80%EB%A6%AC" id="toc-파이썬-설치-및-환경-관리" class="nav-link" data-scroll-target="#%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%84%A4%EC%B9%98-%EB%B0%8F-%ED%99%98%EA%B2%BD-%EA%B4%80%EB%A6%AC"><span class="header-section-number">5.5.2</span> 파이썬 설치 및 환경 관리</a></li>
   </ul>
 </li>
-  <li><a href="#sec-setup-quarto" id="toc-sec-setup-quarto" class="nav-link" data-scroll-target="#sec-setup-quarto"><span class="header-section-number">4.7</span> 문학적 프로그래밍</a></li>
   <li>
-<a href="#sec-setup-fonts" id="toc-sec-setup-fonts" class="nav-link" data-scroll-target="#sec-setup-fonts"><span class="header-section-number">4.8</span> 개발 글꼴</a>
+<a href="#sec-setup-ide" id="toc-sec-setup-ide" class="nav-link" data-scroll-target="#sec-setup-ide"><span class="header-section-number">5.6</span> 통합 개발 환경 설치</a>
   <ul class="collapse">
-<li><a href="#sec-setup-font-install" id="toc-sec-setup-font-install" class="nav-link" data-scroll-target="#sec-setup-font-install"><span class="header-section-number">4.8.1</span> D2코딩 폰트 설치</a></li>
-  <li><a href="#sec-setup-font-pretendard" id="toc-sec-setup-font-pretendard" class="nav-link" data-scroll-target="#sec-setup-font-pretendard"><span class="header-section-number">4.8.2</span> 프리텐다드 가변 글꼴</a></li>
+<li><a href="#sec-setup-positron" id="toc-sec-setup-positron" class="nav-link" data-scroll-target="#sec-setup-positron"><span class="header-section-number">5.6.1</span> Positron IDE 설치</a></li>
   </ul>
 </li>
-  <li><a href="#sec-setup-verify" id="toc-sec-setup-verify" class="nav-link" data-scroll-target="#sec-setup-verify"><span class="header-section-number">4.9</span> 개발 환경 검증</a></li>
+  <li><a href="#sec-setup-quarto" id="toc-sec-setup-quarto" class="nav-link" data-scroll-target="#sec-setup-quarto"><span class="header-section-number">5.7</span> 문학적 프로그래밍</a></li>
+  <li>
+<a href="#sec-setup-fonts" id="toc-sec-setup-fonts" class="nav-link" data-scroll-target="#sec-setup-fonts"><span class="header-section-number">5.8</span> 개발 글꼴</a>
+  <ul class="collapse">
+<li><a href="#sec-setup-font-install" id="toc-sec-setup-font-install" class="nav-link" data-scroll-target="#sec-setup-font-install"><span class="header-section-number">5.8.1</span> D2코딩 폰트 설치</a></li>
+  <li><a href="#sec-setup-font-pretendard" id="toc-sec-setup-font-pretendard" class="nav-link" data-scroll-target="#sec-setup-font-pretendard"><span class="header-section-number">5.8.2</span> 프리텐다드 가변 글꼴</a></li>
+  </ul>
+</li>
+  <li><a href="#sec-setup-verify" id="toc-sec-setup-verify" class="nav-link" data-scroll-target="#sec-setup-verify"><span class="header-section-number">5.9</span> 개발 환경 검증</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/ide_setup.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ide.html"><strong>5부</strong> 통합 개발 환경</a></li><li class="breadcrumb-item"><a href="./ide_setup.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">개발 환경 구축</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="sec-setup-intro" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">개발 환경 구축</span></span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ide.html"><strong>5부</strong> 통합 개발 환경</a></li><li class="breadcrumb-item"><a href="./ide_setup.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">개발 환경 구축</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-setup-intro" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">개발 환경 구축</span></span></h1>
 </div>
 
 
@@ -302,33 +319,33 @@ window.Quarto = {
 <img src="images/ide-setup-workflow.svg" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-setup-workflow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-그림&nbsp;4.1: 데이터 과학 개발 환경 구축 순서
+그림&nbsp;5.1: 데이터 과학 개발 환경 구축 순서
 </figcaption></figure>
 </div>
-<p><a href="#fig-setup-workflow" class="quarto-xref">그림&nbsp;<span>4.1</span></a> 는 데이터 과학 개발 환경 구축의 전체 단계를 보여준다. Git, 도커, Make 같은 필수 도구를 먼저 설치하고, R과 파이썬을 설치한 후, 마지막으로 포지트론 IDE를 설치한다.</p>
-<section id="sec-setup-git" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="sec-setup-git">
-<span class="header-section-number">4.1</span> Git 설치</h2>
+<p><a href="#fig-setup-workflow" class="quarto-xref">그림&nbsp;<span>5.1</span></a> 는 데이터 과학 개발 환경 구축의 전체 단계를 보여준다. Git, 도커, Make 같은 필수 도구를 먼저 설치하고, R과 파이썬을 설치한 후, 마지막으로 포지트론 IDE를 설치한다.</p>
+<section id="sec-setup-git" class="level2" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="sec-setup-git">
+<span class="header-section-number">5.1</span> Git 설치</h2>
 <p>본격적인 개발 환경 구축에 앞서, 가장 중요한 버전 관리 시스템 Git을 먼저 설치한다. Git은 코드 변경 이력을 추적하고, 여러 개발자가 협업하게 하며, AI 모델 개발 시 다양한 실험을 관리하는 필수 도구다.</p>
-<section id="sec-setup-git-install" class="level3" data-number="4.1.1"><h3 data-number="4.1.1" class="anchored" data-anchor-id="sec-setup-git-install">
-<span class="header-section-number">4.1.1</span> Git 설치</h3>
+<section id="sec-setup-git-install" class="level3" data-number="5.1.1"><h3 data-number="5.1.1" class="anchored" data-anchor-id="sec-setup-git-install">
+<span class="header-section-number">5.1.1</span> Git 설치</h3>
 <p><strong>맥OS(macOS)</strong>에서는 터미널을 열고 <code>xcode-select --install</code> 명령어를 실행하면 뜨는 팝업창에서 ’설치’를 클릭한다. Xcode Command Line Tools에 Git이 포함되어 있다. 이미 설치되어 있다면 <code>git --version</code> 명령어로 확인한다.</p>
 <p><strong>윈도우(Windows)</strong>에서는 <a href="https://git-scm.com/downloads">git-scm.com 공식 다운로드 페이지</a>에 접속해 최신 버전 설치 파일을 다운로드한다. 설치 프로그램을 실행하고 대부분 옵션을 기본값으로 두고 설치를 진행한다. ’Git Bash’가 함께 설치되어 강력한 명령어 환경을 제공한다.</p>
 <p><strong>리눅스(Linux, 우분투/데비안)</strong>에서는 터미널을 열고 다음 명령어를 실행한다:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get update</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install git</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
-</section><section id="sec-setup-git-verify" class="level3" data-number="4.1.2"><h3 data-number="4.1.2" class="anchored" data-anchor-id="sec-setup-git-verify">
-<span class="header-section-number">4.1.2</span> 설치 확인</h3>
+</section><section id="sec-setup-git-verify" class="level3" data-number="5.1.2"><h3 data-number="5.1.2" class="anchored" data-anchor-id="sec-setup-git-verify">
+<span class="header-section-number">5.1.2</span> 설치 확인</h3>
 <p>터미널에서 다음 명령어를 실행해 Git이 정상 설치되었는지 확인한다:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git <span class="at">--version</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> version 2.39.2 <span class="er">(</span><span class="ex">Apple</span> Git-143<span class="kw">)</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
-</section><section id="sec-setup-git-config" class="level3" data-number="4.1.3"><h3 data-number="4.1.3" class="anchored" data-anchor-id="sec-setup-git-config">
-<span class="header-section-number">4.1.3</span> 최초 설정</h3>
+</section><section id="sec-setup-git-config" class="level3" data-number="5.1.3"><h3 data-number="5.1.3" class="anchored" data-anchor-id="sec-setup-git-config">
+<span class="header-section-number">5.1.3</span> 최초 설정</h3>
 <p>Git 설치 후, 터미널에서 다음 두 명령어를 실행해 사용자 이름과 이메일 주소를 반드시 설정한다. 정보는 코드를 변경하고 저장(커밋)할 때마다 기록된다.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Your Name"</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"youremail@example.com"</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
 <p><em><code>"Your Name"</code>과 <code>"youremail@example.com"</code> 부분을 본인의 정보로 바꿔서 입력하세요.</em></p>
-</section></section><section id="컨테이너-환경-도커-설치" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="컨테이너-환경-도커-설치">
-<span class="header-section-number">4.2</span> 컨테이너 환경: 도커 설치</h2>
+</section></section><section id="컨테이너-환경-도커-설치" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="컨테이너-환경-도커-설치">
+<span class="header-section-number">5.2</span> 컨테이너 환경: 도커 설치</h2>
 <p>AI/머신러닝 프로젝트는 복잡한 라이브러리, 시스템 의존성, 드라이버 버전 등으로 내 컴퓨터에서는 잘 동작하던 코드가 다른 사람의 컴퓨터나 서버에서는 동작하지 않는 ’환경 문제’를 자주 겪는다. 도커는 프로젝트에 필요한 모든 것을 ’컨테이너’라는 격리된 공간에 담아 어디서든 동일한 환경을 완벽하게 복제한다. 재현 가능한 연구와 안정적 배포를 위한 현대 AI 개발 필수 도구다.</p>
 <ol type="1">
 <li>
@@ -347,38 +364,38 @@ window.Quarto = {
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Hello</span> from Docker!</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="ex">This</span> message shows that your installation appears to be working correctly.</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
 </li>
-</ol></section><section id="sec-setup-make" class="level2" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="sec-setup-make">
-<span class="header-section-number">4.3</span> 워크플로우 자동화</h2>
+</ol></section><section id="sec-setup-make" class="level2" data-number="5.3"><h2 data-number="5.3" class="anchored" data-anchor-id="sec-setup-make">
+<span class="header-section-number">5.3</span> 워크플로우 자동화</h2>
 <p>데이터 과학 프로젝트는 ‘데이터 가져오기 → 전처리 → 모델 학습 → 결과 분석 → 보고서 생성’ 같은 여러 단계 작업 흐름을 가진다. 각 단계를 수동으로 반복 실행하는 것은 비효율적일 뿐 아니라 실수를 유발한다. 1970년대 유닉스 시스템에서 탄생한 <code>make</code>는 이런 반복 작업을 자동화하는 검증된 도구다.</p>
 <p><code>make</code> 핵심은 <strong>의존성 기반 실행</strong>이다. <code>Makefile</code>에 “분석 보고서는 전처리된 데이터에 의존하고, 전처리된 데이터는 원본 데이터에 의존한다”는 관계를 정의하면, <code>make</code>는 변경된 파일만 감지해 필요한 작업만 지능적으로 재실행한다. 예를 들어 원본 데이터가 바뀌면 전처리부터 보고서까지 전부 재생성하지만, 분석 코드만 수정했다면 전처리는 건너뛰고 분석과 보고서만 다시 생성한다. 시간과 컴퓨팅 자원을 크게 절약하는 방식이다.</p>
-<section id="sec-setup-make-install" class="level3" data-number="4.3.1"><h3 data-number="4.3.1" class="anchored" data-anchor-id="sec-setup-make-install">
-<span class="header-section-number">4.3.1</span> Make 설치</h3>
+<section id="sec-setup-make-install" class="level3" data-number="5.3.1"><h3 data-number="5.3.1" class="anchored" data-anchor-id="sec-setup-make-install">
+<span class="header-section-number">5.3.1</span> Make 설치</h3>
 <p>make는 대부분의 운영체제에 이미 설치되어 있거나 개발 도구와 함께 제공된다. 맥OS에서는 Git 설치 시 사용한 Xcode Command Line Tools에 make가 포함되어 있고, 리눅스(우분투/데비안)에서도 기본으로 설치된 경우가 많다. 터미널에서 <code>make --version</code>을 실행해 설치 여부를 확인할 수 있다. 리눅스에서 make가 없다면 <code>sudo apt-get install build-essential</code> 명령어로 컴파일 도구 일체를 설치한다.</p>
 <p>윈도우는 상황이 다르다. Git for Windows를 설치했다면 Git Bash 환경에서 make를 사용할 수 있지만, 네이티브 윈도우 환경에서는 별도 설치가 필요하다. Chocolatey 패키지 매니저가 설치되어 있다면 <code>choco install make</code> 명령어로 간단히 설치할 수 있다.</p>
-</section><section id="sec-setup-workflow-evolution" class="level3" data-number="4.3.2"><h3 data-number="4.3.2" class="anchored" data-anchor-id="sec-setup-workflow-evolution">
-<span class="header-section-number">4.3.2</span> 워크플로우 도구 진화</h3>
+</section><section id="sec-setup-workflow-evolution" class="level3" data-number="5.3.2"><h3 data-number="5.3.2" class="anchored" data-anchor-id="sec-setup-workflow-evolution">
+<span class="header-section-number">5.3.2</span> 워크플로우 도구 진화</h3>
 <p>make는 1976년 Stuart Feldman이 Bell Labs에서 C 프로그램 컴파일 자동화를 위해 개발했다. 이후 50년 가까이 소프트웨어 빌드의 표준 도구로 자리잡았지만, 데이터 과학의 부상과 함께 새로운 요구가 생겼다. make의 shell 스크립트 기반 문법은 데이터 분석 파이프라인을 표현하기에 복잡하고, 크로스 플랫폼 지원도 제한적이다. 특히 R이나 Python 생태계와의 통합이 자연스럽지 않다. 이런 한계를 극복하기 위해 언어별, 용도별로 특화된 도구들이 등장했다.</p>
 <div id="fig-workflow-timeline" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-workflow-timeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/workflow-tools-timeline.svg" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-workflow-timeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-그림&nbsp;4.2: 워크플로우 자동화 도구의 진화
+그림&nbsp;5.2: 워크플로우 자동화 도구의 진화
 </figcaption></figure>
 </div>
-<p>지난 50년간 워크플로우 자동화 도구는 세 번의 큰 물결을 거쳤다. <a href="#fig-workflow-timeline" class="quarto-xref">그림&nbsp;<span>4.2</span></a> 은 이 진화 과정을 시간순으로 보여준다. 첫 번째 물결은 1976년 make로 시작되었다. C 프로그램 컴파일을 위해 탄생했지만, 곧 소프트웨어 빌드 전반의 표준이 되었다. 두 번째 물결은 2012년 스네이크메이크의 등장이다. 독일 뒤셀도르프 대학의 Johannes Köster가 생물정보학 연구를 위해 개발했는데, 수백 개의 샘플을 처리하는 유전체 분석 파이프라인에서 make의 한계가 명확했기 때문이다. Python 문법을 직접 사용할 수 있고, 클러스터 환경에서 자동 병렬화를 지원하는 스네이크메이크는 곧 생명과학을 넘어 데이터 과학 전반으로 확산되었다. 세 번째 물결은 2017-2020년 사이 동시다발적으로 일어났다. 2017년 Go로 작성된 Task가 YAML 기반의 간결한 문법으로 등장했고, 2018년에는 Rust 기반 Just가 명령어 실행에 특화된 미니멀한 접근으로 개발자들을 끌어모았다. 2020년 R 커뮤니티에서는 Will Landau가 targets를 발표하며 데이터 과학 워크플로우 자동화의 새 장을 열었다. drake 패키지의 후속작인 targets는 R 객체 수준에서 의존성을 추적하고, Quarto와의 완벽한 통합으로 재현가능한 연구의 표준 도구가 되었다.</p>
-</section><section id="sec-setup-modern-tools" class="level3" data-number="4.3.3"><h3 data-number="4.3.3" class="anchored" data-anchor-id="sec-setup-modern-tools">
-<span class="header-section-number">4.3.3</span> 현대 데이터 과학 도구</h3>
+<p>지난 50년간 워크플로우 자동화 도구는 세 번의 큰 물결을 거쳤다. <a href="#fig-workflow-timeline" class="quarto-xref">그림&nbsp;<span>5.2</span></a> 은 이 진화 과정을 시간순으로 보여준다. 첫 번째 물결은 1976년 make로 시작되었다. C 프로그램 컴파일을 위해 탄생했지만, 곧 소프트웨어 빌드 전반의 표준이 되었다. 두 번째 물결은 2012년 스네이크메이크의 등장이다. 독일 뒤셀도르프 대학의 Johannes Köster가 생물정보학 연구를 위해 개발했는데, 수백 개의 샘플을 처리하는 유전체 분석 파이프라인에서 make의 한계가 명확했기 때문이다. Python 문법을 직접 사용할 수 있고, 클러스터 환경에서 자동 병렬화를 지원하는 스네이크메이크는 곧 생명과학을 넘어 데이터 과학 전반으로 확산되었다. 세 번째 물결은 2017-2020년 사이 동시다발적으로 일어났다. 2017년 Go로 작성된 Task가 YAML 기반의 간결한 문법으로 등장했고, 2018년에는 Rust 기반 Just가 명령어 실행에 특화된 미니멀한 접근으로 개발자들을 끌어모았다. 2020년 R 커뮤니티에서는 Will Landau가 targets를 발표하며 데이터 과학 워크플로우 자동화의 새 장을 열었다. drake 패키지의 후속작인 targets는 R 객체 수준에서 의존성을 추적하고, Quarto와의 완벽한 통합으로 재현가능한 연구의 표준 도구가 되었다.</p>
+</section><section id="sec-setup-modern-tools" class="level3" data-number="5.3.3"><h3 data-number="5.3.3" class="anchored" data-anchor-id="sec-setup-modern-tools">
+<span class="header-section-number">5.3.3</span> 현대 데이터 과학 도구</h3>
 <p>make가 50년 역사를 자랑하지만, 현대 데이터 과학 프로젝트는 make가 설계되지 않았던 요구사항들을 갖는다. R 데이터 분석 프로젝트는 함수와 데이터 객체 간의 복잡한 의존성을 추적해야 하고, Python 생물정보학 파이프라인은 수천 개의 파일을 클러스터에서 병렬 처리해야 한다. 웹 기반 Quarto 프로젝트는 윈도우와 맥OS, 리눅스에서 동일한 명령어로 작동해야 한다. 이런 특수한 요구를 충족하기 위해 언어별, 용도별로 최적화된 도구들이 등장했다.</p>
 <div id="fig-workflow-tools" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-workflow-tools-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/workflow-tools-comparison.svg" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-workflow-tools-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-그림&nbsp;4.3: 데이터 과학 워크플로우 자동화 도구
+그림&nbsp;5.3: 데이터 과학 워크플로우 자동화 도구
 </figcaption></figure>
 </div>
-<p><a href="#fig-workflow-tools" class="quarto-xref">그림&nbsp;<span>4.3</span></a> 는 현대 데이터 과학에서 사용되는 세 가지 워크플로우 자동화 도구를 비교한다. R 커뮤니티는 targets를 통해 데이터 분석의 재현가능성을 한 단계 높였다. 함수 하나를 수정하면 그 함수에 의존하는 모든 타겟이 자동으로 재계산되고, Quarto 보고서까지 연쇄적으로 업데이트된다. Python 생태계는 스네이크메이크로 대규모 데이터 파이프라인을 관리한다. make와 비슷한 규칙 기반 문법에 Python의 강력함을 더해, 생물정보학부터 기계학습 실험 추적까지 폭넓게 활용된다. 범용 빌드 도구로는 Task가 부상했다. YAML 파일 하나로 프로젝트의 모든 반복 작업을 정의하고, 크로스 플랫폼 환경에서 동일하게 실행할 수 있다.</p>
+<p><a href="#fig-workflow-tools" class="quarto-xref">그림&nbsp;<span>5.3</span></a> 는 현대 데이터 과학에서 사용되는 세 가지 워크플로우 자동화 도구를 비교한다. R 커뮤니티는 targets를 통해 데이터 분석의 재현가능성을 한 단계 높였다. 함수 하나를 수정하면 그 함수에 의존하는 모든 타겟이 자동으로 재계산되고, Quarto 보고서까지 연쇄적으로 업데이트된다. Python 생태계는 스네이크메이크로 대규모 데이터 파이프라인을 관리한다. make와 비슷한 규칙 기반 문법에 Python의 강력함을 더해, 생물정보학부터 기계학습 실험 추적까지 폭넓게 활용된다. 범용 빌드 도구로는 Task가 부상했다. YAML 파일 하나로 프로젝트의 모든 반복 작업을 정의하고, 크로스 플랫폼 환경에서 동일하게 실행할 수 있다.</p>
 <section id="sec-setup-targets" class="level4"><h4 class="anchored" data-anchor-id="sec-setup-targets">R 데이터 과학: targets</h4>
 <p>R 프로젝트에서는 targets 패키지가 워크플로우 자동화의 표준이다. targets는 함수와 데이터 객체 간의 의존성을 자동으로 추적하고, 변경이 발생한 부분만 재실행한다. 특히 Quarto 문서와의 통합이 뛰어나 데이터 분석부터 보고서 생성까지 하나의 워크플로우로 관리할 수 있다.</p>
 <p>R 콘솔이나 포지트론 터미널에서 다음 명령어로 설치한다:</p>
@@ -422,23 +439,23 @@ window.Quarto = {
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 설치 확인</span></span>
 <span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="ex">task</span> <span class="at">--version</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
 <p>프로젝트 루트에 <code>Taskfile.yml</code>을 생성하고 작업을 정의하면, <code>task 작업명</code> 명령어로 실행할 수 있다. targets나 스네이크메이크처럼 복잡한 의존성 추적은 제공하지 않지만, 간단한 빌드 스크립트를 작성할 때 make보다 훨씬 직관적이다.</p>
-</section></section></section><section id="sec-setup-isolation-comparison" class="level2" data-number="4.4"><h2 data-number="4.4" class="anchored" data-anchor-id="sec-setup-isolation-comparison">
-<span class="header-section-number">4.4</span> uv vs 도커</h2>
+</section></section></section><section id="sec-setup-isolation-comparison" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="sec-setup-isolation-comparison">
+<span class="header-section-number">5.4</span> uv vs 도커</h2>
 <p>파이썬 개발 환경 격리 도구인 uv와 도커는 모두 ‘재현 가능한 환경’ 구축을 목표로 하지만, 접근 방식과 범위가 다르다.</p>
 <div id="fig-isolation-levels" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-isolation-levels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/ide-isolation-levels.svg" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-isolation-levels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-그림&nbsp;4.4: 환경 격리 수준 비교: uv vs 도커
+그림&nbsp;5.4: 환경 격리 수준 비교: uv vs 도커
 </figcaption></figure>
 </div>
-<p><a href="#fig-isolation-levels" class="quarto-xref">그림&nbsp;<span>4.4</span></a> 는 uv와 도커의 가상화 계층 구조를 보여준다. uv는 파이썬 패키지 수준만 격리하는 반면, 도커는 OS부터 모든 시스템 의존성까지 완전히 격리한다.</p>
-<section id="유사점" class="level3" data-number="4.4.1"><h3 data-number="4.4.1" class="anchored" data-anchor-id="유사점">
-<span class="header-section-number">4.4.1</span> 유사점</h3>
+<p><a href="#fig-isolation-levels" class="quarto-xref">그림&nbsp;<span>5.4</span></a> 는 uv와 도커의 가상화 계층 구조를 보여준다. uv는 파이썬 패키지 수준만 격리하는 반면, 도커는 OS부터 모든 시스템 의존성까지 완전히 격리한다.</p>
+<section id="유사점" class="level3" data-number="5.4.1"><h3 data-number="5.4.1" class="anchored" data-anchor-id="유사점">
+<span class="header-section-number">5.4.1</span> 유사점</h3>
 <p>두 도구 모두 프로젝트마다 독립적 환경을 제공해 의존성 충돌을 방지하는 <strong>환경 격리</strong>를 목표로 한다. 또한 동일한 환경을 다른 시스템에서 정확히 재현할 수 있는 <strong>재현가능성</strong>을 보장하며, 프로젝트 의존성을 파일로 명확히 정의한다. uv는 <code>requirements.txt</code>로, 도커는 <code>Dockerfile</code>로 의존성을 명시한다.</p>
-</section><section id="차이점" class="level3" data-number="4.4.2"><h3 data-number="4.4.2" class="anchored" data-anchor-id="차이점">
-<span class="header-section-number">4.4.2</span> 차이점</h3>
+</section><section id="차이점" class="level3" data-number="5.4.2"><h3 data-number="5.4.2" class="anchored" data-anchor-id="차이점">
+<span class="header-section-number">5.4.2</span> 차이점</h3>
 <div class="cell">
 <div id="tbl-uv-docker-comparison" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure"><div aria-describedby="tbl-uv-docker-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -940,12 +957,12 @@ window.Quarto = {
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-tbl" id="tbl-uv-docker-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-표&nbsp;4.1: uv와 도커 환경 격리 도구 비교
+표&nbsp;5.1: uv와 도커 환경 격리 도구 비교
 </figcaption></figure>
 </div>
 </div>
-</section><section id="sec-setup-when-to-use" class="level3" data-number="4.4.3"><h3 data-number="4.4.3" class="anchored" data-anchor-id="sec-setup-when-to-use">
-<span class="header-section-number">4.4.3</span> 언제 무엇을 사용하나?</h3>
+</section><section id="sec-setup-when-to-use" class="level3" data-number="5.4.3"><h3 data-number="5.4.3" class="anchored" data-anchor-id="sec-setup-when-to-use">
+<span class="header-section-number">5.4.3</span> 언제 무엇을 사용하나?</h3>
 <p><strong>uv로 충분한 경우</strong>:</p>
 <p>순수 파이썬 패키지만 사용하는 프로젝트는 uv로 완벽히 재현 가능하다.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 예: 웹 개발, 데이터 분석 기본</span></span>
@@ -960,13 +977,13 @@ window.Quarto = {
 <p>이런 패키지는 OS의 시스템 라이브러리가 필요하므로, 도커로 OS부터 완전히 격리하는 것이 안전하다.</p>
 <p><strong>둘 다 사용</strong>: 도커 컨테이너 안에서 uv를 사용해 파이썬 패키지를 관리하는 것도 가능하다. 도커로 시스템 라이브러리 환경을 구축하고, uv로 파이썬 패키지를 빠르게 관리하는 조합이다.</p>
 <p><strong>결론</strong>: 순수 파이썬 프로젝트는 uv로 시작하고, 시스템 의존성이 생기면 도커를 고려한다.</p>
-<hr></section></section><section id="sec-setup-languages" class="level2" data-number="4.5"><h2 data-number="4.5" class="anchored" data-anchor-id="sec-setup-languages">
-<span class="header-section-number">4.5</span> 코딩 언어 설치</h2>
+<hr></section></section><section id="sec-setup-languages" class="level2" data-number="5.5"><h2 data-number="5.5" class="anchored" data-anchor-id="sec-setup-languages">
+<span class="header-section-number">5.5</span> 코딩 언어 설치</h2>
 <p><strong>R</strong>은 통계 분석, 데이터 시각화, 학술 연구 분야에서 전통적 강점을 가진다. <code>ggplot2</code> 같은 강력한 시각화 라이브러리와 수많은 통계 패키지는 R의 큰 자산이다.</p>
 <p>반면 <strong>파이썬</strong>은 머신러닝, 딥러닝, 웹 개발, 시스템 자동화 등 범용성과 확장성에서 뛰어나다. <code>TensorFlow</code>, <code>PyTorch</code> 같은 딥러닝 프레임워크와 방대한 커뮤니티를 자랑한다.</p>
 <p>두 언어는 경쟁 관계이기도 하지만, 서로의 단점을 보완하는 강력한 상보 관계이기도 하다. R로 데이터를 깊이 있게 탐색하고 시각화한 후, 파이썬으로 복잡한 머신러닝 모델을 구축하거나 서비스로 배포하는 워크플로우는 매우 효과적이다. 현대 데이터 과학자에게 두 언어 모두를 능숙하게 다루는 능력은 큰 경쟁력이 된다.</p>
-<section id="r-설치-및-환경-관리" class="level3" data-number="4.5.1"><h3 data-number="4.5.1" class="anchored" data-anchor-id="r-설치-및-환경-관리">
-<span class="header-section-number">4.5.1</span> R 설치 및 환경 관리</h3>
+<section id="r-설치-및-환경-관리" class="level3" data-number="5.5.1"><h3 data-number="5.5.1" class="anchored" data-anchor-id="r-설치-및-환경-관리">
+<span class="header-section-number">5.5.1</span> R 설치 및 환경 관리</h3>
 <section id="sec-setup-r-install" class="level4"><h4 class="anchored" data-anchor-id="sec-setup-r-install">R 설치</h4>
 <p>R은 <strong>CRAN(The Comprehensive R Archive Network)</strong> 공식 네트워크로 배포된다.</p>
 <p><a href="https://cran.r-project.org/">CRAN 공식 웹사이트</a>에 접속해 자신의 운영체제(리눅스, 맥OS, 윈도우)에 맞는 R 설치 파일을 다운로드하고 실행한다. 설치 과정에서는 대부분 기본 설정을 유지하는 것이 좋다.</p>
@@ -986,11 +1003,11 @@ window.Quarto = {
 <img src="images/ide-isolation-r-python.svg" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-isolation-r-python-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-그림&nbsp;4.5: uv vs rig + renv: 런타임 격리 방식 비교
+그림&nbsp;5.5: uv vs rig + renv: 런타임 격리 방식 비교
 </figcaption></figure>
 </div>
-</section></section><section id="파이썬-설치-및-환경-관리" class="level3" data-number="4.5.2"><h3 data-number="4.5.2" class="anchored" data-anchor-id="파이썬-설치-및-환경-관리">
-<span class="header-section-number">4.5.2</span> 파이썬 설치 및 환경 관리</h3>
+</section></section><section id="파이썬-설치-및-환경-관리" class="level3" data-number="5.5.2"><h3 data-number="5.5.2" class="anchored" data-anchor-id="파이썬-설치-및-환경-관리">
+<span class="header-section-number">5.5.2</span> 파이썬 설치 및 환경 관리</h3>
 <section id="sec-setup-python-install" class="level4"><h4 class="anchored" data-anchor-id="sec-setup-python-install">파이썬 설치</h4>
 <p>파이썬 설치 방법은 크게 두 가지다.</p>
 <p><strong>공식 파이썬 설치 프로그램 사용 (권장)</strong>: <a href="https://www.python.org/downloads/">파이썬 공식 웹사이트</a>에 접속해 최신 안정화 버전을 다운로드한다. 윈도우 설치 시 첫 화면에서 <strong>“Add Python.exe to PATH”</strong> 옵션을 반드시 체크해야 터미널에서 <code>python</code> 명령어를 바로 사용할 수 있다. 이 방법은 가장 깔끔하고 표준적인 파이썬 환경을 제공한다.</p>
@@ -1011,15 +1028,15 @@ window.Quarto = {
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="ex">----------</span> <span class="at">-------</span></span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span>        24.0</span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="ex">setuptools</span> 69.0.3</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
-</section></section></section><section id="sec-setup-ide" class="level2" data-number="4.6"><h2 data-number="4.6" class="anchored" data-anchor-id="sec-setup-ide">
-<span class="header-section-number">4.6</span> 통합 개발 환경 설치</h2>
-<section id="sec-setup-positron" class="level3" data-number="4.6.1"><h3 data-number="4.6.1" class="anchored" data-anchor-id="sec-setup-positron">
-<span class="header-section-number">4.6.1</span> Positron IDE 설치</h3>
+</section></section></section><section id="sec-setup-ide" class="level2" data-number="5.6"><h2 data-number="5.6" class="anchored" data-anchor-id="sec-setup-ide">
+<span class="header-section-number">5.6</span> 통합 개발 환경 설치</h2>
+<section id="sec-setup-positron" class="level3" data-number="5.6.1"><h3 data-number="5.6.1" class="anchored" data-anchor-id="sec-setup-positron">
+<span class="header-section-number">5.6.1</span> Positron IDE 설치</h3>
 <p>Positron은 R과 파이썬을 모두 지원하는 차세대 데이터 과학 IDE다. VS Code 기반의 현대적인 인터페이스와 RStudio의 강력한 데이터 과학 기능을 결합하여 두 언어를 함께 사용하는 데이터 과학자에게 최적화된 환경을 제공한다.</p>
 <p><a href="https://posit.co/products/positron/">Positron 다운로드</a>에서 운영체제(윈도우, 맥OS, 리눅스)에 맞는 설치 프로그램을 다운로드한다. Positron은 현재 베타 버전이므로 최신 정보를 확인하는 것이 중요하다. 다운로드한 파일을 실행하고 안내에 따라 설치를 진행한다. 대부분 경우 기본 설정을 따르는 것이 좋다.</p>
 <p>Positron은 R과 파이썬 인터프리터를 함께 사용한다. 설치 후 Positron을 실행하여 <code>Tools</code> → <code>Global Options</code> 또는 <code>Preferences</code>에서 R 및 파이썬 인터프리터 경로가 올바르게 설정되었는지 확인한다. 이를 통해 Positron이 시스템에 설치된 R 및 파이썬 환경을 정확히 인식하고 활용할 수 있다.</p>
-</section></section><section id="sec-setup-quarto" class="level2" data-number="4.7"><h2 data-number="4.7" class="anchored" data-anchor-id="sec-setup-quarto">
-<span class="header-section-number">4.7</span> 문학적 프로그래밍</h2>
+</section></section><section id="sec-setup-quarto" class="level2" data-number="5.7"><h2 data-number="5.7" class="anchored" data-anchor-id="sec-setup-quarto">
+<span class="header-section-number">5.7</span> 문학적 프로그래밍</h2>
 <p>Positron IDE는 쿼토를 잘 지원하지만, 쿼토의 모든 기능을 활용해 다양한 포맷(특히 PDF)으로 문서를 렌더링하려면 몇 가지 추가 도구가 필요할 수 있다.</p>
 <p><strong>판독(Pandoc)</strong>: 쿼토는 문서 변환의 핵심 엔진으로 판독을 사용한다. 대부분 경우 쿼토 설치 시 판독이 함께 번들되어 제공되므로 별도로 설치할 필요는 없다. 터미널에서 <code>pandoc --version</code> 명령어를 실행해 설치 여부와 버전을 확인할 수 있다.</p>
 <p><strong><span class="math inline">\(\LaTeX\)</span> 배포판 (PDF 출력을 위해 필수)</strong>: 쿼토로 PDF 문서를 생성하려면 <span class="math inline">\(\LaTeX\)</span> 배포판이 시스템에 설치되어 있어야 한다. 쿼토는 자동으로 <span style="font-family: 'Palatino', 'Book Antiqua', Georgia, serif;">Tiny<span style="letter-spacing:-2px;">T</span><sub style="font-size: inherit; letter-spacing:-1px;">E</sub>X</span>을 설치할 수 있도록 지원하며, 이는 가장 권장되는 방법이다. R 콘솔 또는 Positron의 터미널에서 다음 명령어를 실행해 <span style="font-family: 'Palatino', 'Book Antiqua', Georgia, serif;">Tiny<span style="letter-spacing:-2px;">T</span><sub style="font-size: inherit; letter-spacing:-1px;">E</sub>X</span>을 설치한다:</p>
@@ -1028,28 +1045,28 @@ window.Quarto = {
 <p><span style="font-family: 'Palatino', 'Book Antiqua', Georgia, serif;">Tiny<span style="letter-spacing:-2px;">T</span><sub style="font-size: inherit; letter-spacing:-1px;">E</sub>X</span> 대신 <span style="font-family: 'Palatino', 'Book Antiqua', Georgia, serif;">MiK<span style="letter-spacing:-2px;">T</span><sub style="font-size: inherit; letter-spacing:-1px;">E</sub>X</span>(윈도우)나 <span style="font-family: 'Palatino', 'Book Antiqua', Georgia, serif;"><span style="letter-spacing:-2px;">T</span><sub style="font-size: inherit; letter-spacing:-1px;">E</sub>X Live</span>(리눅스/맥OS) 같은 다른 <span class="math inline">\(\LaTeX\)</span> 배포판을 설치할 수도 있다. 하지만 <span style="font-family: 'Palatino', 'Book Antiqua', Georgia, serif;">Tiny<span style="letter-spacing:-2px;">T</span><sub style="font-size: inherit; letter-spacing:-1px;">E</sub>X</span>이 가장 가볍고 쿼토와 통합이 용이하다.</p>
 <p><strong>쿼토 CLI 설치 확인</strong>: Positron 자체에 쿼토 기능이 통합되어 있더라도 터미널에서 쿼토 명령어를 직접 사용하려면 쿼토 CLI가 설치되어 있어야 한다. 쿼토 공식 웹사이트에서 설치하거나 <code>quarto install</code> 명령어를 통해 설치할 수 있다. Positron이 쿼토를 번들하는 경우도 많으므로 먼저 <code>quarto --version</code>으로 확인하는 것이 좋다.</p>
 <p><strong>설정 확인</strong>: 쿼토 관련 설정이 모두 완료되면 터미널에서 <code>quarto check</code> 명령어를 실행해 필요한 도구들이 올바르게 설정되었는지 진단할 수 있다.</p>
-</section><section id="sec-setup-fonts" class="level2" data-number="4.8"><h2 data-number="4.8" class="anchored" data-anchor-id="sec-setup-fonts">
-<span class="header-section-number">4.8</span> 개발 글꼴</h2>
+</section><section id="sec-setup-fonts" class="level2" data-number="5.8"><h2 data-number="5.8" class="anchored" data-anchor-id="sec-setup-fonts">
+<span class="header-section-number">5.8</span> 개발 글꼴</h2>
 <p>개발자가 마주하는 폰트 환경은 세 가지로 나뉜다. 코드 편집기와 터미널에서는 고정폭(monospace) 폰트가 필수다. 웹이나 앱의 UI를 디자인할 때는 시스템과 조화를 이루는 가변폭 산세리프 폰트를 사용한다. 기술 문서나 블로그처럼 장문을 다룰 때는 장시간 읽기에 적합한 폰트가 필요하다.</p>
 <div id="fig-font-comparison" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-font-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/ide-font-comparison.svg" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-font-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-그림&nbsp;4.6: 개발자 폰트 생태계
+그림&nbsp;5.6: 개발자 폰트 생태계
 </figcaption></figure>
 </div>
-<p><a href="#fig-font-comparison" class="quarto-xref">그림&nbsp;<span>4.6</span></a> 은 개발자 폰트 생태계를 용도별로 정리한다. 코딩 환경에서는 JetBrains Mono, Fira Code, D2코딩이 대표적이다. 특히 D2코딩은 한글 가독성이 뛰어나 한국 개발자에게 필수로 꼽힌다. 웹과 앱 UI에서는 프리텐다드가 한국 웹 표준으로 자리잡았고, 글로벌 환경에서는 Inter가 널리 쓰인다. 구글의 Noto Sans CJK는 “No more Tofu”라는 슬로건 아래 800개 이상의 언어를 지원하며, 폰트 깨짐 없는 다국어 환경을 제공한다. 문서 작성에서는 Noto 패밀리가 Sans, Serif, Mono 전방위로 활약하며, IBM Plex Sans나 마루부리 같은 폰트도 기술 블로그와 출판물에 자주 등장한다.</p>
+<p><a href="#fig-font-comparison" class="quarto-xref">그림&nbsp;<span>5.6</span></a> 은 개발자 폰트 생태계를 용도별로 정리한다. 코딩 환경에서는 JetBrains Mono, Fira Code, D2코딩이 대표적이다. 특히 D2코딩은 한글 가독성이 뛰어나 한국 개발자에게 필수로 꼽힌다. 웹과 앱 UI에서는 프리텐다드가 한국 웹 표준으로 자리잡았고, 글로벌 환경에서는 Inter가 널리 쓰인다. 구글의 Noto Sans CJK는 “No more Tofu”라는 슬로건 아래 800개 이상의 언어를 지원하며, 폰트 깨짐 없는 다국어 환경을 제공한다. 문서 작성에서는 Noto 패밀리가 Sans, Serif, Mono 전방위로 활약하며, IBM Plex Sans나 마루부리 같은 폰트도 기술 블로그와 출판물에 자주 등장한다.</p>
 <p>Noto 프로젝트는 구글이 시작한 범세계적 폰트 이니셔티브다. “Tofu”는 폰트가 없어서 나타나는 □ 문자를 의미하는데, Noto는 이 문제를 해결하고자 탄생했다. 한글, 중국어, 일본어를 포함한 CJK(Chinese, Japanese, Korean) 언어부터 아랍어, 히브리어, 태국어까지 모든 문자를 하나의 통일된 디자인으로 제공한다. 개발자가 다국어 환경을 구축할 때 Noto 패밀리를 사용하면 언어별로 폰트를 따로 관리할 필요 없이 일관된 타이포그래피를 유지할 수 있다.</p>
-<section id="sec-setup-font-install" class="level3" data-number="4.8.1"><h3 data-number="4.8.1" class="anchored" data-anchor-id="sec-setup-font-install">
-<span class="header-section-number">4.8.1</span> D2코딩 폰트 설치</h3>
+<section id="sec-setup-font-install" class="level3" data-number="5.8.1"><h3 data-number="5.8.1" class="anchored" data-anchor-id="sec-setup-font-install">
+<span class="header-section-number">5.8.1</span> D2코딩 폰트 설치</h3>
 <p>개발 환경에서 폰트를 사용하려면 두 단계를 거친다. 먼저 폰트를 운영체제에 설치하고, 그 다음 IDE 설정에서 해당 폰트를 지정한다. D2코딩은 한글과 영문이 조화롭게 어우러지도록 설계된 모노스페이스 폰트로, 한국 개발자에게 가장 많이 쓰인다.</p>
 <p><a href="https://github.com/naver/d2codingfont/releases/latest">D2코딩 GitHub 릴리즈 페이지</a>에서 최신 zip 파일을 다운로드한 뒤 압축을 풀면 <code>.ttf</code> 파일이 나타난다. 이 파일을 더블 클릭하면 윈도우에서는 ‘설치’ 버튼이, 맥OS에서는 ‘서체 설치’ 버튼이 나타난다. 버튼을 클릭하면 시스템 전체에서 D2코딩 폰트를 사용할 수 있게 된다.</p>
 <p>시스템 설치가 끝나면 IDE에서 이 폰트를 지정한다. Positron이나 VS Code에서 <code>Cmd/Ctrl + ,</code>로 설정을 열고 <code>font family</code>를 검색한다. ‘Editor: Font Family’ 항목의 맨 앞에 <code>'D2Coding',</code>을 추가하면 코드 편집기가 D2코딩을 최우선으로 사용한다. 예를 들어 다음과 같은 형태가 된다:</p>
 <pre><code>'D2Coding', "Apple SD Gothic Neo", "Malgun Gothic", monospace</code></pre>
 <p>폰트 목록의 맨 앞에 배치한 이유는 간단하다. IDE는 목록 순서대로 폰트를 찾아 사용하므로, D2코딩이 설치되어 있으면 이 폰트로 표시하고, 없으면 다음 폰트로 넘어간다. 설정을 저장하면 편집기 화면이 즉시 D2코딩으로 바뀐다.</p>
-</section><section id="sec-setup-font-pretendard" class="level3" data-number="4.8.2"><h3 data-number="4.8.2" class="anchored" data-anchor-id="sec-setup-font-pretendard">
-<span class="header-section-number">4.8.2</span> 프리텐다드 가변 글꼴</h3>
+</section><section id="sec-setup-font-pretendard" class="level3" data-number="5.8.2"><h3 data-number="5.8.2" class="anchored" data-anchor-id="sec-setup-font-pretendard">
+<span class="header-section-number">5.8.2</span> 프리텐다드 가변 글꼴</h3>
 <p>프리텐다드는 D2코딩과 달리 웹 환경을 위해 설계된 가변 글꼴이다. 가변 폰트(Variable Font)는 하나의 파일에 여러 weight(두께)를 담는 기술로, 프리텐다드는 Thin(100)부터 Black(900)까지 9단계를 지원한다. 한글, 영문, 일본어를 모두 포괄하며, 윈도우와 맥OS, 리눅스에서 일관된 렌더링을 보장한다. 특히 쿼토로 생성한 HTML 문서나 GitHub Pages, 기술 블로그처럼 웹에 게시되는 콘텐츠에서 시스템 폰트의 한계를 넘어서는 가독성을 제공한다.</p>
 <p>프리텐다드는 사용 목적에 따라 두 가지 방식으로 설치한다. <a href="https://github.com/orioncactus/pretendard/releases/latest">프리텐다드 GitHub 릴리즈</a>에서 zip 파일을 다운로드하면 여러 형식의 폰트 파일이 들어 있다. IDE나 데스크톱 애플리케이션에서 사용하려면 <code>public/static</code> 폴더의 OTF나 TTF 파일을 시스템에 설치한다. D2코딩과 같은 방식이다.</p>
 <p>웹 페이지에 직접 삽입하려면 <code>web/variable</code> 폴더의 WOFF2 파일을 사용한다. 쿼토 프로젝트의 <code>_quarto.yml</code>이나 CSS 파일에서 <code>@font-face</code>로 선언하면 방문자의 시스템에 폰트가 없어도 웹 페이지에서 프리텐다드를 표시할 수 있다:</p>
@@ -1063,8 +1080,8 @@ window.Quarto = {
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">font-family</span><span class="ch">:</span> <span class="st">'Pretendard'</span><span class="op">,</span> <span class="dv">-apple-system</span><span class="op">,</span> <span class="dv">BlinkMacSystemFont</span><span class="op">,</span> <span class="dv">sans-serif</span><span class="op">;</span></span>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
 <p>웹 폰트로 사용하면 모든 플랫폼의 방문자에게 일관된 타이포그래피를 제공할 수 있다. 시스템 폰트는 사용자의 OS에 따라 달라지지만, 웹 폰트는 제작자가 의도한 대로 정확히 표시된다.</p>
-</section></section><section id="sec-setup-verify" class="level2" data-number="4.9"><h2 data-number="4.9" class="anchored" data-anchor-id="sec-setup-verify">
-<span class="header-section-number">4.9</span> 개발 환경 검증</h2>
+</section></section><section id="sec-setup-verify" class="level2" data-number="5.9"><h2 data-number="5.9" class="anchored" data-anchor-id="sec-setup-verify">
+<span class="header-section-number">5.9</span> 개발 환경 검증</h2>
 <p>지금까지 포지트론 IDE부터 시작해 R과 파이썬, Git과 도커, 워크플로우 자동화 도구(make, targets, 스네이크메이크, Task), 쿼토 출판 시스템, 개발 글꼴(D2코딩, 프리텐다드)까지 현대 데이터 과학 환경의 핵심 요소들을 설치했다. 각 도구는 독립적으로 작동하지만, 함께 사용할 때 시너지를 발휘한다. 포지트론에서 R 코드로 데이터를 분석하고, targets로 워크플로우를 자동화하며, 쿼토로 결과를 문서화하고, Git으로 버전을 관리하는 통합 환경이 완성된 것이다. 설치가 제대로 되었는지 확인하는 것이 다음 단계다.</p>
 <p>핵심 도구들의 설치 여부를 터미널에서 한번에 확인할 수 있다:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git <span class="at">--version</span> <span class="kw">&amp;&amp;</span> <span class="ex">docker</span> <span class="at">--version</span> <span class="kw">&amp;&amp;</span> <span class="fu">make</span> <span class="at">--version</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-1</span> <span class="kw">&amp;&amp;</span> <span class="ex">R</span> <span class="at">--version</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-1</span> <span class="kw">&amp;&amp;</span> <span class="ex">python</span> <span class="at">--version</span> <span class="kw">&amp;&amp;</span> <span class="ex">uv</span> <span class="at">--version</span></span>
@@ -1526,7 +1543,7 @@ window.Quarto = {
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./ide_extension.html" class="pagination-link" aria-label="IDE 확장 프로그램">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">IDE 확장 프로그램</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">IDE 확장 프로그램</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
