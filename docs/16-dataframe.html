@@ -1368,6 +1368,7 @@ globalThis.qwebrExecuteCode = async function (
   <li><a href="#data-type-vector" id="toc-data-type-vector" class="nav-link" data-scroll-target="#data-type-vector"><span class="header-section-number">13.6</span> 벡터, 행렬, 배열, 데이터프레임</a></li>
   <li><a href="#is-na-null" id="toc-is-na-null" class="nav-link" data-scroll-target="#is-na-null"><span class="header-section-number">13.7</span> <code>NULL</code>과 <code>NA</code></a></li>
   <li><a href="#fp-list-columns" id="toc-fp-list-columns" class="nav-link" data-scroll-target="#fp-list-columns"><span class="header-section-number">13.8</span> 리스트 칼럼</a></li>
+  <li><a href="#sec-dataframe-ai" id="toc-sec-dataframe-ai" class="nav-link" data-scroll-target="#sec-dataframe-ai"><span class="header-section-number">13.9</span> AI와 함께하는 데이터프레임 처리</a></li>
   <li>
 <a href="#%EC%97%B0%EC%8A%B5%EB%AC%B8%EC%A0%9C" id="toc-연습문제" class="nav-link" data-scroll-target="#%EC%97%B0%EC%8A%B5%EB%AC%B8%EC%A0%9C">연습문제</a>
   <ul class="collapse">
@@ -1565,6 +1566,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 
 
 </header><p></p>
+<p>데이터 분석에서 가장 중요한 자료구조가 데이터프레임이다. CSV 파일, 데이터베이스 쿼리 결과, 엑셀 시트 등 거의 모든 표 형식 데이터가 데이터프레임으로 표현된다. R에서는 <code>data.frame</code>과 <code>tibble</code>, Python에서는 <code>pandas.DataFrame</code>이 이 역할을 한다.</p>
+<p>데이터프레임의 구조와 조작 방법을 이해하면, AI에게 “특정 조건을 만족하는 행을 필터링해줘”, “그룹별 평균을 계산해줘”, “두 데이터프레임을 조인해줘”와 같은 데이터 처리 요청을 명확하게 전달할 수 있다.</p>
 <p>다른 프로그래밍 언어에서 다루지 않는 독특한 자료구조가 데이터프레임(Dataframe)이다. R도 프로그래밍 언어이기 때문에 다른 언어에서 갖고 있는 자료구조를 대부분 갖추고 있지만, 데이터 분석, 시각화, 모형 개발 등에 꼭 필요한 기본 자료구조가 데이터프레임이다. 데이터프레임을 본격적으로 살펴보기 전에 통계학에서 다루는 측정에 대해 살펴보고, 측정 척도(scale)에 대한 이론적 배경을 이해한다. 척도의 개념에 대응되는 R 자료구조를 통해 데이터프레임과 추후 프로그래밍 과정에서 많이 다뤄지는 리스트에 대한 차별점도 살펴본다.</p>
 <section id="data-type-for-data-science" class="level2" data-number="13.1"><h2 data-number="13.1" class="anchored" data-anchor-id="data-type-for-data-science">
 <span class="header-section-number">13.1</span> 측정 변수의 구분</h2>
@@ -1842,7 +1845,22 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>인덱싱(Indexing) 측면에서는 티블이 데이터프레임과 동일하게 <code>[]</code>, <code>[[]]</code>, <code>$</code> 연산자를 사용하여 원소에 접근할 수 있어, 열 이름이나 위치를 사용하여 원하는 변수나 관측값을 추출할 수 있다.</p>
 <p>연산(Compute) 측면에서도 리스트-칼럼을 포함한 티블에서 <code>mutate()</code>, <code>summarise()</code> 등의 함수를 사용하여 새로운 변수를 생성하거나 요약 통계량을 계산할 수 있으며, 이 과정에서 리스트-칼럼에 대한 연산도 자연스럽게 수행할 수 있다.</p>
 <p>마지막으로 간략화(Simplify) 측면에서는 리스트-칼럼을 포함한 티블을 일반적인 데이터프레임으로 변환할 때, <code>unnest()</code> 함수를 사용할 수 있다. 이를 통해 리스트-칼럼의 각 요소를 개별 행으로 풀어내어, 분석에 더 용이한 형태로 만들 수 있다.</p>
-</section><section id="연습문제" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="연습문제">연습문제</h2>
+</section><section id="sec-dataframe-ai" class="level2" data-number="13.9"><h2 data-number="13.9" class="anchored" data-anchor-id="sec-dataframe-ai">
+<span class="header-section-number">13.9</span> AI와 함께하는 데이터프레임 처리</h2>
+<p>데이터프레임은 행과 열로 구성된 표 형식 데이터의 표준이다. AI에게 데이터프레임 작업을 요청할 때는 <strong>입력 데이터의 구조</strong>, <strong>원하는 변환 작업</strong>, <strong>출력 형태</strong>를 명확히 전달해야 한다.</p>
+<p><strong>명세 작성 패턴</strong></p>
+<ol type="1">
+<li>데이터프레임의 구조(열 이름, 자료형, 샘플 데이터) 제시</li>
+<li>필터링, 그룹화, 조인 등 원하는 변환 작업 기술</li>
+<li>결과 데이터프레임의 예상 형태 설명</li>
+</ol>
+<p><strong>프롬프트 예시</strong></p>
+<ul>
+<li>“sales 데이터프레임에서 region이 ’Seoul’이고 amount가 10000 이상인 행만 추출하는 R/Python 코드를 작성해줘”</li>
+<li>“customers와 orders 두 데이터프레임을 customer_id로 조인해서 고객별 총 주문금액을 계산하는 코드를 작성해줘”</li>
+<li>“월별 매출 데이터가 wide format인데, long format으로 변환하고 싶어. tidyr/pandas를 사용해줘”</li>
+<li>“NA 값이 포함된 데이터프레임에서 결측치를 그룹별 평균으로 대체하는 방법을 알려줘”</li>
+</ul></section><section id="연습문제" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="연습문제">연습문제</h2>
 <section id="객관식" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="객관식">객관식</h3>
 <ol type="1">
 <li>R에서 벡터 자료형을 주로 어떻게 분류하는가?</li>

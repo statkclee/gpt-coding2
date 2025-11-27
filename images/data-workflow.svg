@@ -1,0 +1,221 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 20 900 210">
+  <defs>
+    <style>
+      .title { font-family: 'Noto Sans KR', Palatino, serif; font-size: 15px; font-weight: bold; fill: #333; }
+      .subtitle { font-family: 'Noto Sans KR', Palatino, serif; font-size: 11px; font-style: italic; fill: #555; }
+      .label { font-family: 'Noto Sans KR', Palatino, serif; font-size: 10px; fill: #444; }
+      .small-label { font-family: 'Noto Sans KR', Palatino, serif; font-size: 9px; fill: #666; }
+      .box { fill: #fff; stroke: #333; stroke-width: 1.5; }
+      .flow-line { fill: none; stroke: #666; stroke-width: 1.5; }
+      .chaos-item { fill: #f0f0f0; stroke: #666; stroke-width: 1; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="900" height="300" fill="#ffffff"/>
+
+  <!-- Main Title -->
+  <!-- <text x="450" y="25" class="title" text-anchor="middle">데이터 처리 워크플로우: 혼돈에서 질서로</text> -->
+
+  <!-- Zone 1: Raw Data (Chaos) -->
+  <g transform="translate(20, 55)">
+    <text x="55" y="0" class="title" text-anchor="middle">1. 원시 데이터</text>
+    <text x="55" y="16" class="subtitle" text-anchor="middle">비정형, 혼돈</text>
+
+    <!-- Scattered Items -->
+    <g transform="rotate(-12 40 70)">
+      <rect x="20" y="50" width="30" height="38" class="chaos-item" rx="2"/>
+      <line x1="25" y1="60" x2="45" y2="60" stroke="#999" stroke-width="0.8"/>
+      <line x1="25" y1="68" x2="42" y2="68" stroke="#999" stroke-width="0.8"/>
+      <line x1="25" y1="76" x2="38" y2="76" stroke="#999" stroke-width="0.8"/>
+    </g>
+    <g transform="rotate(18 85 110)">
+      <rect x="70" y="95" width="35" height="28" class="chaos-item" rx="2"/>
+      <text x="76" y="112" font-size="8" fill="#666">LOG</text>
+    </g>
+    <g transform="rotate(-8 35 135)">
+      <circle cx="40" cy="130" r="15" class="chaos-item"/>
+      <text x="34" y="134" font-size="10" fill="#666">@</text>
+    </g>
+    <g transform="rotate(5 90 65)">
+      <rect x="78" y="48" width="24" height="30" class="chaos-item" rx="2"/>
+      <text x="82" y="66" font-size="7" fill="#666">.csv</text>
+    </g>
+  </g>
+
+  <!-- Flow: Zone 1 → Zone 2 -->
+  <path d="M 130 130 C 145 130 155 130 170 130" class="flow-line" marker-end="url(#arrow)"/>
+
+  <!-- Zone 2: The Engine (AI + Python/R) -->
+  <g transform="translate(165, 55)">
+    <text x="85" y="0" class="title" text-anchor="middle">2. AI + Python/R</text>
+    <text x="85" y="16" class="subtitle" text-anchor="middle">코드 생성 및 실행</text>
+
+    <!-- Left: AI Neural Network -->
+    <g transform="translate(0, 0)">
+      <!-- Hexagonal Chip Frame -->
+      <polygon points="45,32 80,50 80,100 45,118 10,100 10,50"
+               fill="#fafafa" stroke="#333" stroke-width="1.5"/>
+
+      <!-- Inner Hexagon -->
+      <polygon points="45,42 70,55 70,95 45,108 20,95 20,55"
+               fill="#fff" stroke="#999" stroke-width="1"/>
+
+      <!-- Neural Network Nodes - Input -->
+      <circle cx="25" cy="65" r="3" fill="#666"/>
+      <circle cx="25" cy="75" r="3" fill="#666"/>
+      <circle cx="25" cy="85" r="3" fill="#666"/>
+
+      <!-- Neural Network Nodes - Hidden -->
+      <circle cx="45" cy="62" r="4" fill="#444"/>
+      <circle cx="45" cy="75" r="4" fill="#444"/>
+      <circle cx="45" cy="88" r="4" fill="#444"/>
+
+      <!-- Neural Network Nodes - Output -->
+      <circle cx="65" cy="68" r="3" fill="#666"/>
+      <circle cx="65" cy="82" r="3" fill="#666"/>
+
+      <!-- Connections -->
+      <line x1="28" y1="65" x2="41" y2="62" stroke="#ccc" stroke-width="0.8"/>
+      <line x1="28" y1="75" x2="41" y2="75" stroke="#ccc" stroke-width="0.8"/>
+      <line x1="28" y1="85" x2="41" y2="88" stroke="#ccc" stroke-width="0.8"/>
+      <line x1="49" y1="62" x2="62" y2="68" stroke="#ccc" stroke-width="0.8"/>
+      <line x1="49" y1="75" x2="62" y2="68" stroke="#ccc" stroke-width="0.8"/>
+      <line x1="49" y1="75" x2="62" y2="82" stroke="#ccc" stroke-width="0.8"/>
+      <line x1="49" y1="88" x2="62" y2="82" stroke="#ccc" stroke-width="0.8"/>
+
+      <text x="45" y="132" class="small-label" text-anchor="middle">AI</text>
+    </g>
+
+    <!-- Arrow: AI → Python -->
+    <path d="M 82 75 L 98 75" class="flow-line" marker-end="url(#arrow)"/>
+
+    <!-- Right: Python/R Code Block -->
+    <g transform="translate(100, 32)">
+      <!-- Code window frame -->
+      <rect x="0" y="0" width="70" height="88" fill="#f8f8f8" stroke="#333" stroke-width="1.5" rx="3"/>
+
+      <!-- Title bar -->
+      <rect x="0" y="0" width="70" height="14" fill="#e0e0e0" rx="3"/>
+      <circle cx="8" cy="7" r="2.5" fill="#999"/>
+      <circle cx="16" cy="7" r="2.5" fill="#999"/>
+      <circle cx="24" cy="7" r="2.5" fill="#999"/>
+      <text x="55" y="10" font-size="6" fill="#666" font-family="monospace">py</text>
+
+      <!-- Code lines -->
+      <text x="5" y="28" font-size="7" fill="#666" font-family="monospace">import json</text>
+      <text x="5" y="40" font-size="7" fill="#666" font-family="monospace">data = []</text>
+      <text x="5" y="52" font-size="7" fill="#666" font-family="monospace">for line:</text>
+      <text x="5" y="64" font-size="7" fill="#666" font-family="monospace">  parsed =</text>
+      <text x="5" y="76" font-size="7" fill="#666" font-family="monospace">  data.add()</text>
+
+      <text x="35" y="102" class="small-label" text-anchor="middle">Python/R</text>
+    </g>
+
+    <!-- Processing Label -->
+    <text x="85" y="155" class="small-label" text-anchor="middle">"JSON으로 변환해줘"</text>
+  </g>
+
+  <!-- Flow: Zone 2 → Zone 3 -->
+  <path d="M 335 130 C 350 130 360 130 375 130" class="flow-line" marker-end="url(#arrow)"/>
+
+  <!-- Zone 3: Structured Data (Order) -->
+  <g transform="translate(385, 45)">
+    <text x="105" y="10" class="title" text-anchor="middle">3. 구조화된 데이터</text>
+    <text x="105" y="26" class="subtitle" text-anchor="middle">정형, 질서</text>
+
+    <!-- 3-1. List -->
+    <g transform="translate(0, 40)">
+      <rect x="0" y="0" width="50" height="75" class="box" rx="3"/>
+      <text x="6" y="18" font-size="8" fill="#666">[0]</text>
+      <line x1="6" y1="24" x2="44" y2="24" stroke="#ddd"/>
+      <text x="6" y="38" font-size="8" fill="#666">[1]</text>
+      <line x1="6" y1="44" x2="44" y2="44" stroke="#ddd"/>
+      <text x="6" y="58" font-size="8" fill="#666">[2]</text>
+      <line x1="6" y1="64" x2="44" y2="64" stroke="#ddd"/>
+      <text x="25" y="90" class="label" text-anchor="middle">List</text>
+      <text x="25" y="102" class="small-label" text-anchor="middle">(순서)</text>
+    </g>
+
+    <!-- 3-2. Dictionary -->
+    <g transform="translate(65, 40)">
+      <rect x="0" y="0" width="60" height="75" class="box" rx="3"/>
+      <text x="5" y="18" font-size="8" fill="#444">name:</text>
+      <text x="32" y="18" font-size="8" fill="#666">"홍"</text>
+      <line x1="5" y1="24" x2="55" y2="24" stroke="#ddd"/>
+      <text x="5" y="38" font-size="8" fill="#444">age:</text>
+      <text x="32" y="38" font-size="8" fill="#666">30</text>
+      <line x1="5" y1="44" x2="55" y2="44" stroke="#ddd"/>
+      <text x="5" y="58" font-size="8" fill="#444">city:</text>
+      <text x="32" y="58" font-size="8" fill="#666">"서울"</text>
+      <text x="30" y="90" class="label" text-anchor="middle">Dict</text>
+      <text x="30" y="102" class="small-label" text-anchor="middle">(키-값)</text>
+    </g>
+
+    <!-- 3-3. DataFrame -->
+    <g transform="translate(140, 40)">
+      <rect x="0" y="0" width="75" height="75" class="box" rx="3"/>
+      <!-- Header row -->
+      <rect x="0" y="0" width="75" height="18" fill="#f0f0f0" rx="3"/>
+      <text x="12" y="12" font-size="7" fill="#333" font-weight="bold">이름</text>
+      <text x="37" y="12" font-size="7" fill="#333" font-weight="bold">나이</text>
+      <text x="60" y="12" font-size="7" fill="#333" font-weight="bold">도시</text>
+      <line x1="0" y1="18" x2="75" y2="18" stroke="#333"/>
+      <!-- Data rows -->
+      <text x="12" y="32" font-size="7" fill="#666">홍</text>
+      <text x="40" y="32" font-size="7" fill="#666">30</text>
+      <text x="58" y="32" font-size="7" fill="#666">서울</text>
+      <line x1="0" y1="38" x2="75" y2="38" stroke="#ddd"/>
+      <text x="12" y="52" font-size="7" fill="#666">김</text>
+      <text x="40" y="52" font-size="7" fill="#666">25</text>
+      <text x="58" y="52" font-size="7" fill="#666">부산</text>
+      <line x1="0" y1="58" x2="75" y2="58" stroke="#ddd"/>
+      <!-- Column lines -->
+      <line x1="25" y1="0" x2="25" y2="75" stroke="#ddd"/>
+      <line x1="50" y1="0" x2="50" y2="75" stroke="#ddd"/>
+      <text x="37" y="90" class="label" text-anchor="middle">DataFrame</text>
+      <text x="37" y="102" class="small-label" text-anchor="middle">(표)</text>
+    </g>
+  </g>
+
+  <!-- Flow: Zone 3 → Zone 4 -->
+  <path d="M 605 130 C 620 130 630 130 645 130" class="flow-line" marker-end="url(#arrow)"/>
+
+  <!-- Zone 4: Insight (Value) -->
+  <g transform="translate(655, 45)">
+    <text x="115" y="10" class="title" text-anchor="middle">4. 가치</text>
+    <text x="115" y="26" class="subtitle" text-anchor="middle">분석, 시각화</text>
+
+    <rect x="10" y="40" width="210" height="110" class="box" rx="3" stroke-dasharray="5,3"/>
+
+    <!-- Bar Chart (left) -->
+    <g transform="translate(25, 55)">
+      <line x1="0" y1="70" x2="70" y2="70" stroke="#333" stroke-width="1"/>
+      <line x1="0" y1="70" x2="0" y2="0" stroke="#333" stroke-width="1"/>
+      <rect x="8" y="25" width="12" height="45" fill="#666"/>
+      <rect x="28" y="10" width="12" height="60" fill="#999"/>
+      <rect x="48" y="35" width="12" height="35" fill="#666"/>
+      <text x="35" y="85" class="small-label" text-anchor="middle">막대 그래프</text>
+    </g>
+
+    <!-- Line Chart (right) -->
+    <g transform="translate(115, 55)">
+      <line x1="0" y1="70" x2="90" y2="70" stroke="#333" stroke-width="1"/>
+      <line x1="0" y1="70" x2="0" y2="0" stroke="#333" stroke-width="1"/>
+      <path d="M 0 55 L 22 30 L 44 45 L 66 15 L 88 25" fill="none" stroke="#333" stroke-width="2"/>
+      <circle cx="0" cy="55" r="3" fill="#333"/>
+      <circle cx="22" cy="30" r="3" fill="#333"/>
+      <circle cx="44" cy="45" r="3" fill="#333"/>
+      <circle cx="66" cy="15" r="3" fill="#333"/>
+      <circle cx="88" cy="25" r="3" fill="#333"/>
+      <text x="45" y="85" class="small-label" text-anchor="middle">추세선 분석</text>
+    </g>
+  </g>
+
+  <!-- Bottom annotation -->
+  <text x="450" y="285" class="small-label" text-anchor="middle">각 단계에서 AI에게 작업 요청 가능 • 자료구조를 알면 명세가 명확해진다</text>
+
+</svg>

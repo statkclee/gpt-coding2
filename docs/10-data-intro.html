@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.9.8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="이광춘(Openai)">
-<title>12&nbsp; 튜플(Tuples) – 챗GPT 코딩2</title>
+<title>8&nbsp; 데이터, AI의 식량 – 챗GPT 코딩2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -62,8 +62,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./16-dataframe.html" rel="next">
-<link href="./14-dictionaries.html" rel="prev">
+<link href="./11-string.html" rel="next">
+<link href="./07-abstraction.html" rel="prev">
 <link href="./images/logo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -122,7 +122,7 @@ ga('send', {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./11-string.html"><strong>2부</strong> 자료구조</a></li><li class="breadcrumb-item"><a href="./15-tuples.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">튜플(Tuples)</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-data-intro.html"><strong>2부</strong> 자료구조</a></li><li class="breadcrumb-item"><a href="./10-data-intro.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">데이터, AI의 식량</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="검색" onclick="window.quartoOpenSearch();">
@@ -221,38 +221,44 @@ ga('send', {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./10-data-intro.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">데이터, AI의 식량</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./11-string.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">문자열</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">문자열</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./12-file.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">파일</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">파일</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./13-list.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">리스트</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">리스트</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./14-dictionaries.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">딕셔너리</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">딕셔너리</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./15-tuples.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">튜플(Tuples)</span></span></a>
+  <a href="./15-tuples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">튜플(Tuples)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./16-dataframe.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">데이터프레임</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">데이터프레임</span></span></a>
   </div>
 </li>
       </ul>
@@ -269,55 +275,55 @@ ga('send', {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">자동화된 버전 관리</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">자동화된 버전 관리</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-setup-create.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Git 설정과 저장소</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Git 설정과 저장소</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-change.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">변경사항 추적</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">변경사항 추적</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-history.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">이력 탐색</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">이력 탐색</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-ignore.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">추적 대상에서 제외</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">추적 대상에서 제외</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-github.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">GitHub 원격 작업</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">GitHub 원격 작업</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-open.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">공개 과학과 협업</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">공개 과학과 협업</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-conflict.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">충돌</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">충돌</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-ide.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">통합개발환경</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">통합개발환경</span></span></a>
   </div>
 </li>
       </ul>
@@ -334,37 +340,37 @@ ga('send', {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-regex.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">정규 표현식</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">정규 표현식</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-network.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-web.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">웹서비스 사용하기</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">웹서비스 사용하기</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-database.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">데이터베이스와 SQL</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">데이터베이스와 SQL</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-viz.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">시각화</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">시각화</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-gpt.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">챗GPT 코딩</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">챗GPT 코딩</span></span></a>
   </div>
 </li>
       </ul>
@@ -381,25 +387,25 @@ ga('send', {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ide.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">IDE 선택과 발전</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">IDE 선택과 발전</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ide_positron.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">포지트론</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">포지트론</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ide_extension.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">IDE 확장 프로그램</span></span></a>
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">IDE 확장 프로그램</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ide_setup.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">개발 환경 구축</span></span></a>
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">개발 환경 구축</span></span></a>
   </div>
 </li>
       </ul>
@@ -416,19 +422,19 @@ ga('send', {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./docker_concept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">도커: 재현 환경</span></span></a>
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">도커: 재현 환경</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./make_concept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Make: 자동화</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Make: 자동화</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./compendium.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">연구 컴펜디엄</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">연구 컴펜디엄</span></span></a>
   </div>
 </li>
       </ul>
@@ -464,24 +470,24 @@ ga('send', {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">목차</h2>
    
   <ul>
-<li><a href="#tuple-immutable" id="toc-tuple-immutable" class="nav-link active" data-scroll-target="#tuple-immutable"><span class="header-section-number">12.1</span> 튜플은 불변이다</a></li>
-  <li><a href="#tuple-frequency" id="toc-tuple-frequency" class="nav-link" data-scroll-target="#tuple-frequency"><span class="header-section-number">12.2</span> 가장 빈도수 높은 단어</a></li>
-  <li><a href="#tuple-sequences" id="toc-tuple-sequences" class="nav-link" data-scroll-target="#tuple-sequences"><span class="header-section-number">12.3</span> 순열: 문자열, 리스트, 튜플</a></li>
-  <li><a href="#tuple-debugging" id="toc-tuple-debugging" class="nav-link" data-scroll-target="#tuple-debugging"><span class="header-section-number">12.4</span> 디버깅</a></li>
+<li><a href="#data-intro-types" id="toc-data-intro-types" class="nav-link active" data-scroll-target="#data-intro-types"><span class="header-section-number">8.1</span> 데이터의 두 얼굴</a></li>
+  <li><a href="#data-intro-ai-role" id="toc-data-intro-ai-role" class="nav-link" data-scroll-target="#data-intro-ai-role"><span class="header-section-number">8.2</span> AI의 역할: 변환과 분석</a></li>
   <li>
-<a href="#r-tuple-ai" id="toc-r-tuple-ai" class="nav-link" data-scroll-target="#r-tuple-ai"><span class="header-section-number">12.5</span> AI와 함께하는 복합 자료구조 처리</a>
+<a href="#data-intro-preview" id="toc-data-intro-preview" class="nav-link" data-scroll-target="#data-intro-preview"><span class="header-section-number">8.3</span> 핵심 자료구조 미리보기</a>
   <ul class="collapse">
-<li><a href="#%EB%AA%85%EC%84%B8-%EC%9E%91%EC%84%B1-%ED%8C%A8%ED%84%B4" id="toc-명세-작성-패턴" class="nav-link" data-scroll-target="#%EB%AA%85%EC%84%B8-%EC%9E%91%EC%84%B1-%ED%8C%A8%ED%84%B4"><span class="header-section-number">12.5.1</span> 명세 작성 패턴</a></li>
-  <li><a href="#%ED%94%84%EB%A1%AC%ED%94%84%ED%8A%B8-%EC%98%88%EC%8B%9C" id="toc-프롬프트-예시" class="nav-link" data-scroll-target="#%ED%94%84%EB%A1%AC%ED%94%84%ED%8A%B8-%EC%98%88%EC%8B%9C"><span class="header-section-number">12.5.2</span> 프롬프트 예시</a></li>
+<li><a href="#data-intro-list" id="toc-data-intro-list" class="nav-link" data-scroll-target="#data-intro-list"><span class="header-section-number">8.3.1</span> 순서가 중요하면: 리스트</a></li>
+  <li><a href="#data-intro-dict" id="toc-data-intro-dict" class="nav-link" data-scroll-target="#data-intro-dict"><span class="header-section-number">8.3.2</span> 이름표가 중요하면: 딕셔너리</a></li>
+  <li><a href="#data-intro-dataframe" id="toc-data-intro-dataframe" class="nav-link" data-scroll-target="#data-intro-dataframe"><span class="header-section-number">8.3.3</span> 표 형태면: 데이터프레임</a></li>
   </ul>
 </li>
-  <li><a href="#r-tuple-terminology" id="toc-r-tuple-terminology" class="nav-link" data-scroll-target="#r-tuple-terminology"><span class="header-section-number">12.6</span> 용어정의</a></li>
-  <li><a href="#tuple-ex" id="toc-tuple-ex" class="nav-link" data-scroll-target="#tuple-ex"><span class="header-section-number">12.7</span> 연습문제</a></li>
-  </ul><div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/15-tuples.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
+  <li><a href="#data-intro-workflow" id="toc-data-intro-workflow" class="nav-link" data-scroll-target="#data-intro-workflow"><span class="header-section-number">8.4</span> 데이터 처리 워크플로우</a></li>
+  <li><a href="#data-intro-overview" id="toc-data-intro-overview" class="nav-link" data-scroll-target="#data-intro-overview"><span class="header-section-number">8.5</span> 이 부에서 배울 내용</a></li>
+  <li><a href="#data-intro-ai-request" id="toc-data-intro-ai-request" class="nav-link" data-scroll-target="#data-intro-ai-request"><span class="header-section-number">8.6</span> AI에게 데이터 작업 요청하기</a></li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/10-data-intro.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./11-string.html"><strong>2부</strong> 자료구조</a></li><li class="breadcrumb-item"><a href="./15-tuples.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">튜플(Tuples)</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="r-tuple" class="quarto-section-identifier"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">튜플(Tuples)</span></span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-data-intro.html"><strong>2부</strong> 자료구조</a></li><li class="breadcrumb-item"><a href="./10-data-intro.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">데이터, AI의 식량</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="data-intro" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">데이터, AI의 식량</span></span></h1>
 </div>
 
 
@@ -495,212 +501,161 @@ ga('send', {
   
 
 
-</header><p>여러 값을 묶어서 하나의 단위로 다루는 것은 프로그래밍의 기본이다. 파이썬에서는 불변성을 가진 튜플이 이 역할을 하고, R에서는 다양한 자료형을 담을 수 있는 리스트가 유사한 역할을 한다. 함수에서 여러 값을 반환하거나, 정렬을 위해 키-값 쌍을 만들거나, 데이터를 그룹화할 때 이런 복합 자료구조가 필요하다.</p>
-<p>이 장에서 다루는 패턴을 이해하면, AI에게 “빈도순으로 정렬해줘”, “여러 값을 묶어서 반환해줘”와 같은 요청을 할 때 기대하는 결과를 정확히 전달할 수 있다.</p>
-<div id="tuple-list-column" class="rmdcaution">
-<p>파이썬 튜플은 다양한 자료형을 갖는 리스트에 대응된다. 튜플이 갖는 불변성이 R에서 데이터 분석 등의 작업에 꼭 필요한 기능은 아니라서 불변성을 활용한 튜플 개념이 많이 사용되지는 않고 있다.</p>
-<p>하지만, 다양한 자료형을 갖는 리스트는 데이터프레임을 확장한 개념으로 고급 데이터 분석과 처리에 필히 이해를 가져야하는 내용이다.</p>
-<p>추후 다양한 자료형을 갖는 리스트는 별도 장을 따로 만들어 풀어나갈 예정이다.</p>
-</div>
-<section id="tuple-immutable" class="level2" data-number="12.1"><h2 data-number="12.1" class="anchored" data-anchor-id="tuple-immutable">
-<span class="header-section-number">12.1</span> 튜플은 불변이다</h2>
-<p>다양한 자료형을 갖는 리스트가 <strong>튜플(tuple)</strong>이다. <strong>튜플(tuple)</strong>[^about-tuple]은 리스트와 마찬가지로 순서(sequence) 값이다. 튜플에 저장된 값은 임의 자료형(type)이 될 수 있고, 정수로 색인 된다. 일반적으로 알려진 튜플은 <strong>불변(immutable</strong>하다는 것이다. 튜플은 <strong>비교 가능(comparable)</strong>하고 <strong>해쉬형(hashable)</strong>이다. 따라서, 리스트 값을 정렬할 수 있고, 키 값으로 튜플을 사용할 수 있다.</p>
-<p>[^about-tuple] : 재미난 사실: 단어 ‘’튜플(tuple)’’은 가변 길이 (한배, 두배, 세배, 네배, 다섯배, 여섯배, 일곱배 등) 숫자열에 붙여진 이름에서 유래한다</p>
-<p>구문론적으로, 튜플은 콤마로 구분되는 서로 다른 자료형을 갖는 리스트 값이다.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">'a'</span>, <span class="st">'b'</span>, <span class="st">'c'</span>, <span class="st">'d'</span>, <span class="st">'e'</span><span class="op">)</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p><code>튜플(tuple)</code>이 생성자 이름이기 <code>list</code>이기 때문에 변수명으로 리스트(list) 사용을 피해야 한다.</p>
-<p>대부분의 리스트 연산자는 튜플에서도 사용 가능하다. 꺾쇠 연산자가 요소를 색인한다.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">t</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
-<span><span class="co">#&gt; [[1]]</span></span>
-<span><span class="co">#&gt; [1] "a"</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>그리고, 슬라이스 연산자(slice operator)는 요소 범위를 선택한다.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">t</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></span>
-<span><span class="co">#&gt; [[1]]</span></span>
-<span><span class="co">#&gt; [1] "b"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[2]]</span></span>
-<span><span class="co">#&gt; [1] "c"</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>하지만, 파이썬 튜플 요소 중 하나를 변경하고 하면 오류가 발생하지만, R에서 리스트는 다양한 자료형을 담을 수 있고 변경도 가능하다.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">t</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">'A'</span></span>
-<span><span class="va">t</span></span>
-<span><span class="co">#&gt; [[1]]</span></span>
-<span><span class="co">#&gt; [1] "A"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[2]]</span></span>
-<span><span class="co">#&gt; [1] "b"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[3]]</span></span>
-<span><span class="co">#&gt; [1] "c"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[4]]</span></span>
-<span><span class="co">#&gt; [1] "d"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[5]]</span></span>
-<span><span class="co">#&gt; [1] "e"</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section><section id="tuple-frequency" class="level2" data-number="12.2"><h2 data-number="12.2" class="anchored" data-anchor-id="tuple-frequency">
-<span class="header-section-number">12.2</span> 가장 빈도수 높은 단어</h2>
-<p><em>로미오와 쥴리엣 2장 2막</em> 텍스트 파일(<code>romeo-full.txt</code>)로 다시 돌아와서, 텍스트에서 가장 빈도수가 높은 단어를 10개를 출력하는 프로그램을 작성한다.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">romeo_text</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_lines.html">read_lines</a></span><span class="op">(</span><span class="st">"data/romeo-full.txt"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">romeo_split</span> <span class="op">&lt;-</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_split.html">str_split</a></span><span class="op">(</span><span class="va">romeo_text</span>, <span class="st">" "</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/case.html">str_to_lower</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace_all</a></span><span class="op">(</span><span class="va">.</span>, pattern <span class="op">=</span> <span class="st">"[[:punct:]]"</span>,</span>
-<span>                           replacement <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">romeo_split</span> <span class="op">&lt;-</span> <span class="va">romeo_split</span><span class="op">[</span><span class="va">romeo_split</span> <span class="op">!=</span> <span class="st">""</span><span class="op">]</span></span>
-<span></span>
-<span><span class="va">romeo_full_freq</span> <span class="op">&lt;-</span> <span class="va">romeo_split</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rlang.r-lib.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"key"</span>, <span class="st">"value"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_head</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># romeo_full_freq</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>파일을 읽고 각 단어를 문서의 단어 빈도수는 전처리 로직으로 구두점을 제거하고 모두 소문자로 변환한 후에 <code><a href="https://rdrr.io/r/base/table.html">table()</a></code> 함수로 단어별 빈도수를 계산하고 데이터프레임으로 변환 후 고빈도 단어 10개를 추출한다.</p>
-<p>이제 단어 빈도 분석을 위해서 작성한 프로그램의 마지막 출력결과는 원하는 바를 완수한 것처럼 보인다.</p>
-<div class="cell">
-<pre><code>#&gt; # A tibble: 10 × 2
-#&gt;   key   value
-#&gt;   &lt;chr&gt; &lt;int&gt;
-#&gt; 1 that     14
-#&gt; 2 is       13
-#&gt; 3 her      11
-#&gt; 4 the      11
-#&gt; 5 and      10
-#&gt; 6 she       9
-#&gt; # ℹ 4 more rows</code></pre>
-</div>
-</section><section id="tuple-sequences" class="level2" data-number="12.3"><h2 data-number="12.3" class="anchored" data-anchor-id="tuple-sequences">
-<span class="header-section-number">12.3</span> 순열: 문자열, 리스트, 튜플</h2>
-<p>여기서 리스트 튜플에 초점을 맞추었지만, 이장의 거의 모든 예제가 또한 리스트의 리스트, 튜플의 튜플, 리스트 튜플에도 동작한다. 가능한 모든 조합을 열거하는 것을 피하기 위해서, 순열의 순열(sequences of sequences)에 대해서 논의하는 것이 때로는 쉽다.</p>
-<p>대부분의 문맥에서 다른 종류의 순열(문자열, 리스트, 튜플)은 상호 호환해서 사용될 수 있다. 그런데 왜 그리고 어떻게 다른 것보다 이것을 선택해야 될까?</p>
-<p>서로 다른 자료형이 갖는 특징을 잘 파악하고 주어진 문제를 가장 쉽게 풀수 있는 방향의 자료형을 선택한다.</p>
-</section><section id="tuple-debugging" class="level2" data-number="12.4"><h2 data-number="12.4" class="anchored" data-anchor-id="tuple-debugging">
-<span class="header-section-number">12.4</span> 디버깅</h2>
-<p>리스트, 딕셔너리, 튜플은 <strong>자료 구조(data structures)</strong>로 일반적으로 알려져 있다. 이번장에서 리스트 튜플, 키로 튜플, 값으로 리스트를 담고 있는 딕셔너리 같은 복합 자료 구조를 보기 시작했다. 복합 자료 구조는 유용하지만, 저자가 작명한 <strong>형태 오류(shape errors)</strong>라고 불리는 오류에 노출되어 있다. 즉, 자료 구조가 잘못된 자료형(type), 크기, 구성일 경우 오류가 발생한다. 혹은 코드를 작성하고, 자료의 모양이 생각나지 않는 경우도 오류의 원인이 된다.</p>
-<p>예를 들어, 정수 하나를 가진 리스트를 기대하고, (리스트가 아닌) 일반 정수를 넘긴다면, 작동하지 않는다.</p>
-<p>프로그램을 디버깅할 때, 정말 어려운 버그를 잡으려고 작업을 한다면, 다음 네가지를 시도할 수 있다.</p>
-<ol type="1">
-<li><p><strong>코드 읽기(reading)</strong>: 코드를 면밀히 조사하고, 스스로에게 다시 읽어 주고, 코드가 자신이 작성한 의도를 담고 있는지 점검하라.</p></li>
-<li><p><strong>실행(running)</strong>: 변경해서 다른 버젼을 실행해서 실험하라. 종종, 프로그램이 적절한 곳에 적절한 것을 보여준다면, 문제가 명확하다. 발판(scaffolding)을 만들기 위해서 때때로 시간을 들일 필요도 있다.</p></li>
-<li><p><strong>반추(ruminating)</strong>:생각의 시간을 갖자. 어떤 종류의 오류인가: 구문, 실행, 의미론(semantic). 오류 메시지로부터 혹은 프로그램 출력결과로부터 무슨 정보를 얻을 수 있는가? 어떤 종류 오류가 지금 보고 있는 문제를 만들었을까? 문제가 나타나기 전에, 마지막으로 변경한 것은 무엇인가?</p></li>
-<li><p><strong>퇴각(retreating)</strong>: 어느 시점에선가, 최선은 물러서서, 최근의 변경을 다시 원복하는 것이다. 잘 동작하고 이해하는 프로그램으로 다시 돌아가서, 다시 프로그램을 작성한다.</p></li>
-</ol>
-<p>초보 프로그래머는 종종 이들 활동 중 하나에 사로잡혀 다른 것을 잊곤 한다. 활동 각각은 고유한 실패 방식과 함께 온다.</p>
-<p>예를 들어, 프로그램을 정독하는 것은 문제가 인쇄상의 오류에 있다면 도움이 되지만, 문제가 개념상 오해에 뿌리를 두고 있다면 그다지 도움이 되지 못한다. 만약 작성한 프로그램을 이해하지 못한다면, 100번 읽을 수는 있지만, 오류를 발견할 수는 없다. 왜냐하면, 오류는 여러분 머리에 있기 때문입니다.</p>
-<p>만약 작고 간단한 테스트를 진행한다면, 실험을 수행하는 것이 도움이 될 수 있다. 하지만, 코드를 읽지 않거나, 생각없이 실험을 수행한다면, 프로그램이 작동될 때까지 무작위 변경하여 개발하는 “랜덤 워크 프로그램(random walk programming)” 패턴에 빠질 수 있다. 말할 필요없이 랜덤 워크 프로그래밍은 시간이 오래 걸린다.</p>
-<p>생각할 시간을 가져야 한다. 디버깅은 실험 과학 같은 것이다. 문제가 무엇인지에 대한 최소한 한 가지 가설을 가져야 한다. 만약 두개 혹은 그 이상의 가능성이 있다면, 이러한 가능성 중에서 하나라도 줄일 수 있는 테스트를 생각해야 한다.</p>
-<p>휴식 시간을 가지는 것은 생각하는데 도움이 된다. 대화를 하는 것도 도움이 된다. 문제를 다른 사람 혹은 자신에게도 설명할 수 있다면, 질문을 마치기도 전에 답을 종종 발견할 수 있다.</p>
-<p>하지만, 오류가 너무 많고 수정하려는 코드가 매우 크고, 복잡하다면 최고의 디버깅 기술도 무용지물이다. 가끔, 최선의 선택은 퇴각하는 것이다. 작동하고 이해하는 곳까지 후퇴해서 프로그램을 간략화하라.</p>
-<p>초보 프로그래머는 종종 퇴각하기를 꺼려한다. 왜냐하면, 설사 잘못되었지만, 한줄 코드를 지울 수 없기 때문이다. 삭제하지 않는 것이 기분을 좋게 한다면, 다시 작성하기 전에 프로그램을 다른 파일에 복사하라. 그리고 나서, 한번에 조금씩 붙여넣어라.</p>
-<p>정말 어려운 버그(hard bug)를 발견하고 고치는 것은 코드 읽기, 실행, 반추, 때때로 퇴각을 요구한다. 만약 이들 활동 중 하나도 먹히지 않는다면, 다른 것들을 시도해 보세요.</p>
-</section><section id="r-tuple-ai" class="level2" data-number="12.5"><h2 data-number="12.5" class="anchored" data-anchor-id="r-tuple-ai">
-<span class="header-section-number">12.5</span> AI와 함께하는 복합 자료구조 처리</h2>
-<p>복합 자료구조(튜플, 리스트의 리스트 등)는 빈도 분석, 정렬, 그룹화 등 다양한 작업에 활용된다. AI에게 이런 작업을 요청할 때는 데이터의 구조와 기대하는 출력 형태를 명확히 전달한다.</p>
-<section id="명세-작성-패턴" class="level3" data-number="12.5.1"><h3 data-number="12.5.1" class="anchored" data-anchor-id="명세-작성-패턴">
-<span class="header-section-number">12.5.1</span> 명세 작성 패턴</h3>
-<p>AI에게 복합 자료구조 처리를 요청할 때 포함해야 할 정보:</p>
-<ol type="1">
-<li>
-<strong>입력 구조</strong>: 데이터의 형태 (리스트, 딕셔너리, 중첩 구조)</li>
-<li>
-<strong>처리 방식</strong>: 정렬 기준, 그룹화 방법, 집계 함수</li>
-<li>
-<strong>출력 형태</strong>: 튜플 리스트, 딕셔너리, 데이터프레임 등</li>
-</ol></section><section id="프롬프트-예시" class="level3" data-number="12.5.2"><h3 data-number="12.5.2" class="anchored" data-anchor-id="프롬프트-예시">
-<span class="header-section-number">12.5.2</span> 프롬프트 예시</h3>
-<p><strong>빈도 기반 정렬</strong></p>
-<blockquote class="blockquote">
-<p>텍스트에서 단어 빈도를 계산하고 빈도순으로 내림차순 정렬해줘.</p>
-<p>입력: 텍스트 문자열 또는 파일</p>
-<p>출력: <code>[("the", 45), ("and", 32), ("is", 28), ...]</code></p>
-<p>조건: - 대소문자 무시 - 구두점 제거 - 상위 N개만 반환</p>
-</blockquote>
-<p><strong>다중 값 반환</strong></p>
-<blockquote class="blockquote">
-<p>리스트의 통계값(최소, 최대, 평균, 중앙값)을 한 번에 계산해서 반환하는 함수를 작성해줘.</p>
-<p>입력: 숫자 리스트 <code>[1, 2, 3, 4, 5]</code></p>
-<p>출력: 명명된 리스트 <code>list(min=1, max=5, mean=3, median=3)</code></p>
-</blockquote>
-<p><strong>복합 키 정렬</strong></p>
-<blockquote class="blockquote">
-<p>학생 정보 리스트를 학년순, 같은 학년 내에서는 점수 내림차순으로 정렬해줘.</p>
-<p>입력: <code>[{"name": "홍길동", "grade": 3, "score": 85}, ...]</code></p>
-<p>출력: 정렬된 리스트</p>
-</blockquote>
-<p>이처럼 복합 자료구조 작업을 명세할 때는 정렬 기준이나 그룹화 방법을 구체적으로 제시하면 AI가 정확한 코드를 생성한다. DSU(Decorate-Sort-Undecorate) 패턴이나 다중 키 정렬 같은 개념을 알고 있으면 결과 검증도 수월하다.</p>
-</section></section><section id="r-tuple-terminology" class="level2" data-number="12.6"><h2 data-number="12.6" class="anchored" data-anchor-id="r-tuple-terminology">
-<span class="header-section-number">12.6</span> 용어정의</h2>
-<ul>
-<li>
-<strong>비교가능한(comparable)</strong>:동일한 자료형의 다른 값과 비교하여 큰지, 작은지, 혹은 같은지를 확인하기 위해서 확인할 수 있는 자료형(type). 비교가능한(comparable) 자료형은 리스트에 넣어서 정렬할 수 있다.</li>
-<li>
-<strong>자료 구조(data structure)</strong>:연관된 값의 집합, 종종 리스트, 딕셔너리, 튜플 등으로 조직화된다.</li>
-<li>
-<strong>DSU</strong>: “decorate-sort-undecorate,”의 약어로 리스트 튜플을 생성, 정렬, 결과 일부 추출을 포함하는 패턴.</li>
-<li>
-<strong>모음(gather)</strong>: 가변-길이 인자 튜플을 조합하는 연산.</li>
-<li>
-<strong>해쉬형(hashable)</strong>: 해쉬 함수를 가진 자료형(type). 정수, 소수점, 문자열 같은 불변형은 해쉬형이다. 리스트나 딕셔너리 처럼 변경가능한 형은 해쉬형이 아니다.</li>
-<li>
-<strong>스캐터(scatter)</strong>: 순서(sequence)를 리스트 인자로 다루는 연산.</li>
-<li>
-<strong>(자료 구조의) 형태</strong>: 자료 구조의 자료형(type), 크기, 구성을 요약.</li>
-<li>
-<strong>싱글톤(singleton)</strong>: 단일 요소를 가진 리스트 (혹은 다른 순서(sequence)).</li>
-<li>
-<strong>튜플(tuple)</strong>: 불변 요소들의 순서 (sequence).</li>
-<li>
-<strong>튜플 대입(tuple assignment)</strong>: 오른편 순서(sequence)와 왼편 튜플 변수를 대입. 오른편이 평가되고나서 각 요소들은 왼편의 변수에 대입된다.</li>
-</ul></section><section id="tuple-ex" class="level2" data-number="12.7"><h2 data-number="12.7" class="anchored" data-anchor-id="tuple-ex">
-<span class="header-section-number">12.7</span> 연습문제</h2>
-<ol type="1">
-<li><p>앞서 작성한 프로그램을 다음과 같이 수정하세요. “From”라인을 읽고 파싱하여 라인에서 주소를 뽑아내세요. 딕셔너리를 사용하여 각 사람으로부터 메시지 숫자를 계수(count)한다.</p></li>
-<li><p>모든 데이터를 읽은 후에 가장 많은 커밋(commit)을 한 사람을 출력하세요. 딕셔너리로부터 리스트 (count, email) 튜플을 생성하고 역순으로 리스트를 정렬한 후에 가장 많은 커밋을 한 사람을 출력하세요.</p></li>
-</ol>
-<pre><code>    Sample Line:
-    From stephen.marquard@uct.ac.za Sat Jan  5 09:14:16 2008
+</header><p></p>
+<p>1부에서 프로그래밍의 핵심이 “의도를 명확히 전달하는 것”임을 배웠다. 테스트로 원하는 결과를 정의하고, AI에게 코드를 요청하고, 생성된 코드를 검증하는 흐름이었다. 이제 실제 데이터를 다룰 차례다.</p>
+<p>프로그램은 데이터를 처리한다. 사용자 입력, 파일, 웹 API, 데이터베이스 등 다양한 곳에서 데이터가 들어오고, 프로그램은 이를 변환하여 유용한 결과물을 만들어낸다. AI도 마찬가지다. AI에게 작업을 요청할 때, 데이터의 형태와 구조를 명확히 전달해야 원하는 결과를 얻을 수 있다.</p>
+<p>이 부를 마치면, 지저분한 텍스트 파일 하나를 AI에게 던져주고 “이 로그에서 에러만 추출해서 날짜별로 정리해줘”라고 요청할 수 있게 된다.</p>
+<section id="data-intro-types" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="data-intro-types">
+<span class="header-section-number">8.1</span> 데이터의 두 얼굴</h2>
+<p> </p>
+<p>데이터는 크게 두 가지 형태로 나뉜다.</p>
+<p><strong>비정형 데이터(Unstructured Data)</strong>는 자유로운 형식의 데이터다. 이메일 본문, 채팅 로그, 웹페이지 HTML, 자연어 텍스트 등이 해당한다. 사람은 읽을 수 있지만, 컴퓨터가 바로 처리하기엔 구조가 없다.</p>
+<pre><code>From: user@example.com
+Date: 2024-01-15
+Subject: 프로젝트 회의 결과
 
-    Enter a file name: mbox-short.txt
-    cwen@iupui.edu 5
-
-    Enter a file name: mbox.txt
-    zqian@umich.edu 195</code></pre>
-<ol start="3" type="1">
-<li>이번 프로그램은 각 메시지에 대한 하루 중 시간의 분포를 계수(count)한다. “From” 라인으로부터 시간 문자열을 찾고 콜론(:) 문자를 사용하여 문자열을 쪼개서 시간을 추출합니다. 각 시간별로 계수(count)를 누적하고 아래에 보여지듯이 시간 단위로 정렬하여 한 라인에 한시간씩 계수(count)를 출력합니다.</li>
+오늘 회의에서 다음 주 마감을 3월 20일로 확정했습니다.
+참석자: 홍길동, 김철수, 이영희</code></pre>
+<p><strong>정형 데이터(Structured Data)</strong>는 미리 정해진 구조를 따르는 데이터다. CSV 파일, JSON, 데이터베이스 테이블, 엑셀 시트 등이 해당한다. 행과 열, 또는 키와 값으로 명확히 구분되어 있어 컴퓨터가 바로 처리할 수 있다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"meeting"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"date"</span><span class="fu">:</span> <span class="st">"2024-01-15"</span><span class="fu">,</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"deadline"</span><span class="fu">:</span> <span class="st">"2024-03-20"</span><span class="fu">,</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"participants"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"홍길동"</span><span class="ot">,</span> <span class="st">"김철수"</span><span class="ot">,</span> <span class="st">"이영희"</span><span class="ot">]</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</section><section id="data-intro-ai-role" class="level2" data-number="8.2"><h2 data-number="8.2" class="anchored" data-anchor-id="data-intro-ai-role">
+<span class="header-section-number">8.2</span> AI의 역할: 변환과 분석</h2>
+<p> </p>
+<p>AI 코딩 도구가 데이터 처리에서 하는 역할은 크게 두 가지다.</p>
+<p><strong>변환(Transformation)</strong>: 비정형 데이터를 정형 데이터로 바꾸는 작업이다. 로그 파일에서 특정 패턴을 추출하거나, 이메일에서 날짜와 발신자를 파싱하거나, 웹페이지에서 표를 긁어오는 작업이 해당한다.</p>
+<p><strong>분석(Analysis)</strong>: 정형 데이터를 집계, 필터링, 시각화하는 작업이다. 월별 매출 합계를 구하거나, 특정 조건을 만족하는 행만 추출하거나, 데이터 분포를 차트로 그리는 작업이 해당한다.</p>
+<p>이 두 역할을 수행하려면, AI에게 데이터의 <strong>현재 구조</strong>와 <strong>원하는 결과 구조</strong>를 명확히 전달해야 한다. 바로 여기서 자료구조 지식이 필요하다.</p>
+</section><section id="data-intro-preview" class="level2" data-number="8.3"><h2 data-number="8.3" class="anchored" data-anchor-id="data-intro-preview">
+<span class="header-section-number">8.3</span> 핵심 자료구조 미리보기</h2>
+<p>프로그래밍에서 자료구조는 데이터를 담는 그릇이다. 어떤 그릇을 선택하느냐에 따라 할 수 있는 작업이 달라진다. AI에게 요청할 때도 적절한 자료구조를 언급하면 더 정확한 결과를 얻는다.</p>
+<section id="data-intro-list" class="level3" data-number="8.3.1"><h3 data-number="8.3.1" class="anchored" data-anchor-id="data-intro-list">
+<span class="header-section-number">8.3.1</span> 순서가 중요하면: 리스트</h3>
+<p></p>
+<p><strong>리스트(List)</strong>는 순서가 있는 데이터 모음이다. 첫 번째, 두 번째, 세 번째 등 위치가 의미를 갖는다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 할 일 목록 - 순서대로 처리해야 함</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>tasks <span class="op">=</span> [<span class="st">"데이터 수집"</span>, <span class="st">"전처리"</span>, <span class="st">"분석"</span>, <span class="st">"시각화"</span>, <span class="st">"보고서 작성"</span>]</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 월별 매출 - 시간 순서가 중요함</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>monthly_sales <span class="op">=</span> [<span class="dv">1200</span>, <span class="dv">1500</span>, <span class="dv">1350</span>, <span class="dv">1800</span>, <span class="dv">2100</span>]</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>AI에게 요청할 때: “파일의 각 라인을 <strong>리스트</strong>로 읽어서 처리해줘”</p>
+</section><section id="data-intro-dict" class="level3" data-number="8.3.2"><h3 data-number="8.3.2" class="anchored" data-anchor-id="data-intro-dict">
+<span class="header-section-number">8.3.2</span> 이름표가 중요하면: 딕셔너리</h3>
+<p></p>
+<p><strong>딕셔너리(Dictionary)</strong>는 키-값 쌍의 모음이다. 이름표(키)로 값을 찾는다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 사용자 정보 - 필드명으로 접근</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>user <span class="op">=</span> {</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"name"</span>: <span class="st">"홍길동"</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"email"</span>: <span class="st">"hong@example.com"</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"age"</span>: <span class="dv">30</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 설정 파일 - 키로 값 조회</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>config <span class="op">=</span> {</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"database_host"</span>: <span class="st">"localhost"</span>,</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"port"</span>: <span class="dv">5432</span>,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"debug"</span>: <span class="va">True</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>AI에게 요청할 때: “JSON 응답에서 <code>user.email</code> 필드를 추출해줘”</p>
+</section><section id="data-intro-dataframe" class="level3" data-number="8.3.3"><h3 data-number="8.3.3" class="anchored" data-anchor-id="data-intro-dataframe">
+<span class="header-section-number">8.3.3</span> 표 형태면: 데이터프레임</h3>
+<p></p>
+<p><strong>데이터프레임(DataFrame)</strong>은 행과 열로 구성된 표 형식 데이터다. 엑셀 시트와 유사하다.</p>
+<pre><code>   이름      부서      급여
+0  홍길동    개발팀   5000
+1  김철수    기획팀   4500
+2  이영희    마케팅   4800</code></pre>
+<p>AI에게 요청할 때: “이 CSV를 <strong>데이터프레임</strong>으로 읽고, 급여가 4500 이상인 행만 필터링해줘”</p>
+</section></section><section id="data-intro-workflow" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="data-intro-workflow">
+<span class="header-section-number">8.4</span> 데이터 처리 워크플로우</h2>
+<p>실제 데이터 처리는 다음과 같은 흐름을 따른다.</p>
+<div id="fig-data-workflow" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-data-workflow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/data-workflow.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-workflow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;8.1: 데이터 처리 워크플로우
+</figcaption></figure>
+</div>
+<p>데이터 처리는 혼돈에서 질서로 나아가는 과정이다. 처음에는 로그 파일, CSV, 이메일 등 형식이 제각각인 <strong>원시 데이터</strong>가 있다. 이 비정형 데이터를 그대로 분석에 사용할 수는 없다.</p>
+<p>여기서 <strong>AI와 프로그래밍 언어</strong>가 등장한다. “JSON으로 변환해줘”라고 요청하면, AI가 Python이나 R 코드를 생성하고 실행한다. 사용자는 원하는 결과만 말하고, 구체적인 구현은 AI가 담당하는 구조다.</p>
+<p>AI가 생성한 코드는 원시 데이터를 <strong>구조화된 형태</strong>로 변환한다. 순서가 중요하면 리스트, 이름표로 접근해야 하면 딕셔너리, 행과 열로 구성된 표 형식이면 데이터프레임이 된다. 자료구조를 알면 AI에게 더 정확한 명세를 전달할 수 있다.</p>
+<p>구조화된 데이터는 곧 <strong>가치</strong>로 이어진다. 집계하고, 필터링하고, 시각화하여 의미 있는 인사이트를 도출한다. 막대 그래프로 비교하거나 추세선으로 패턴을 파악하는 것이 최종 목표다.</p>
+</section><section id="data-intro-overview" class="level2" data-number="8.5"><h2 data-number="8.5" class="anchored" data-anchor-id="data-intro-overview">
+<span class="header-section-number">8.5</span> 이 부에서 배울 내용</h2>
+<p>2부에서는 다음 자료구조를 순서대로 학습한다.</p>
+<table class="table">
+<thead><tr class="header">
+<th style="text-align: center;">장</th>
+<th style="text-align: center;">자료구조</th>
+<th style="text-align: left;">핵심 개념</th>
+<th style="text-align: left;">AI 활용 예시</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">문자열</td>
+<td style="text-align: left;">시퀀스, 슬라이싱, 패턴 매칭</td>
+<td style="text-align: left;">텍스트 전처리, 정보 추출</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">파일</td>
+<td style="text-align: left;">읽기/쓰기, 스트리밍</td>
+<td style="text-align: left;">대용량 파일 처리</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">13</td>
+<td style="text-align: center;">리스트</td>
+<td style="text-align: left;">순회, 필터링, 변환</td>
+<td style="text-align: left;">컬렉션 처리</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">14</td>
+<td style="text-align: center;">딕셔너리</td>
+<td style="text-align: left;">키-값, 해시</td>
+<td style="text-align: left;">JSON/API 데이터</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">튜플</td>
+<td style="text-align: left;">불변성, 다중 반환</td>
+<td style="text-align: left;">복합 데이터 그룹화</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">데이터프레임</td>
+<td style="text-align: left;">행/열, 조인, 그룹화</td>
+<td style="text-align: left;">표 형식 데이터 분석</td>
+</tr>
+</tbody>
+</table>
+<p>각 장에서는 해당 자료구조의 기본 개념을 익힌 뒤, AI에게 관련 작업을 요청하는 방법을 다룬다. 자료구조를 이해하면 AI가 생성한 코드를 검증하고 수정하는 것도 수월해진다.</p>
+</section><section id="data-intro-ai-request" class="level2" data-number="8.6"><h2 data-number="8.6" class="anchored" data-anchor-id="data-intro-ai-request">
+<span class="header-section-number">8.6</span> AI에게 데이터 작업 요청하기</h2>
+<p>자료구조를 배우면서 항상 기억할 패턴이 있다.</p>
+<p><strong>명세 작성의 3요소</strong></p>
+<ol type="1">
+<li>
+<strong>입력 구조</strong>: 데이터가 현재 어떤 형태인가?</li>
+<li>
+<strong>변환 작업</strong>: 어떤 처리가 필요한가?</li>
+<li>
+<strong>출력 형태</strong>: 결과가 어떤 모습이어야 하는가?</li>
 </ol>
-<pre><code>    Sample Execution:
-    Rscript timeofday.R
-    Enter a file name: mbox-short.txt
-    04 3
-    06 1
-    07 1
-    09 2
-    10 3
-    11 6
-    14 1
-    15 2
-    16 4
-    17 2
-    18 1
-    19 1</code></pre>
-<ol start="4" type="1">
-<li>파일을 읽고, 빈도(frequencey)에 따라 내림차순으로 <em>문자(letters)</em>를 출력하는 프로그램을 작성하세요. 작성한 프로그램은 모든 입력을 소문자로 변환하고 a-z 문자만 계수(count)한다. 공백, 숫자, 문장기호 a-z를 제외한 다른 어떤 것도 계수하지 않습니다. 다른 언어로 구성된 텍스트 샘플을 구해서 언어마다 문자 빈도가 어떻게 변하는지 살펴보세요. 결과를 <a href="wikipedia.org/wiki/Letter_frequencies">wikipedia.org/wiki/Letter_frequencies</a> 표와 비교하세요.</li>
-</ol>
+<p><strong>예시: 로그 파일 분석 요청</strong></p>
+<blockquote class="blockquote">
+<p>서버 로그 파일(<code>server.log</code>)에서 ERROR가 포함된 라인만 추출해서 날짜별로 그룹화해줘.</p>
+<p>입력: 텍스트 파일, 각 라인 형식 <code>[2024-01-15 10:30:45] ERROR: 메시지...</code></p>
+<p>출력: 딕셔너리 <code>{"2024-01-15": ["에러1", "에러2"], "2024-01-16": ["에러3"]}</code></p>
+</blockquote>
+<p>이처럼 자료구조 용어(리스트, 딕셔너리, 데이터프레임)를 사용하여 입출력을 명세하면, AI가 정확한 코드를 생성할 가능성이 높아진다.</p>
+<p>이제 문자열부터 시작해서 각 자료구조를 하나씩 살펴보자.</p>
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
@@ -1142,13 +1097,13 @@ ga('send', {
     }
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./14-dictionaries.html" class="pagination-link" aria-label="딕셔너리">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">딕셔너리</span></span>
+      <a href="./07-abstraction.html" class="pagination-link" aria-label="추상화">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">추상화</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./16-dataframe.html" class="pagination-link" aria-label="데이터프레임">
-        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">데이터프레임</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./11-string.html" class="pagination-link" aria-label="문자열">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">문자열</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1159,7 +1114,7 @@ ga('send', {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/15-tuples.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/10-data-intro.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>순수하게 <a href="https://quarto.org/">쿼토(Quarto)</a>로 제작되었습니다.</p>
 </div>

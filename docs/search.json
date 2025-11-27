@@ -483,177 +483,177 @@
   {
     "objectID": "11-string.html",
     "href": "11-string.html",
-    "title": "8  문자열",
+    "title": "9  문자열",
     "section": "",
-    "text": "8.1 문자열은 시퀀스다\n문자열은 여러 문자들의 시퀀스(sequence)다. 꺾쇠 연산자로 한 번에 하나씩 문자에 접근한다. substr() 함수를 사용해서 바로 특정 문자를 추출할 수도 있지만, strsplit() 함수로 문자열을 문자의 벡터로 다루는 방법도 있다.\n두 번째 문장은 변수 fruit_letter에서 1번 위치 문자를 추출하여 변수 letter에 대입한다. 꺾쇠 표현식을 인덱스(index)라고 부른다. 인덱스는 순서(sequence)에서 사용자가 어떤 문자를 원하는지 표시한다.\n하지만, 여러분이 기대한 것은 출력됨이 확인된다.\n파이썬 사용자에게 ’banana’의 첫 문자는 a가 아니라 b다. 하지만, 파이썬 인덱스는 문자열 처음부터 오프셋(offset)1이다. 첫 글자 오프셋은 0이다.\n하지만, R은 사람 친화적이기 때문에 b가 ’banana’의 첫 번째 문자가 되고 a가 두 번째, n이 세 번째 문자가 된다.\n인덱스로 문자와 연산자를 포함하는 어떤 표현식도 사용 가능지만, 인덱스 값은 정수일 필요는 없다. 정수가 아닌 경우 다음과 같은 결과를 얻게 된다. 문제는 R에서 1.5를 내려서 1로 처리한다는 점이다. 경우에 따라서는 반올림으로 판단해서 2가 될 수도 있어 오해의 소지가 있기 때문에 무조건 정수로 표현한다.",
+    "text": "9.1 문자열은 시퀀스다\n텍스트 데이터는 프로그래밍에서 가장 흔히 다루는 데이터 유형이다. 사용자 이름, 이메일 주소, 로그 파일, 웹페이지 내용, CSV 파일의 각 셀 등 모든 곳에 문자열이 존재한다. 데이터 분석에서도 텍스트 전처리, 패턴 매칭, 정보 추출 등 문자열 조작은 핵심 기술이다.\n문자열을 다루는 기본 개념을 이해하면, AI에게 텍스트 처리 작업을 명세할 때도 정확한 요구사항을 전달할 수 있다. “문자열의 3번째부터 7번째 문자를 추출해줘”라고 말하려면, 먼저 인덱싱과 슬라이싱이 무엇인지 알아야 한다.\n문자열은 여러 문자들의 시퀀스(sequence)다. 꺾쇠 연산자로 한 번에 하나씩 문자에 접근한다. substr() 함수를 사용해서 바로 특정 문자를 추출할 수도 있지만, strsplit() 함수로 문자열을 문자의 벡터로 다루는 방법도 있다.\n두 번째 문장은 변수 fruit_letter에서 1번 위치 문자를 추출하여 변수 letter에 대입한다. 꺾쇠 표현식을 인덱스(index)라고 부른다. 인덱스는 순서(sequence)에서 사용자가 어떤 문자를 원하는지 표시한다.\n하지만, 여러분이 기대한 것은 출력됨이 확인된다.\n파이썬 사용자에게 ’banana’의 첫 문자는 a가 아니라 b다. 하지만, 파이썬 인덱스는 문자열 처음부터 오프셋(offset)1이다. 첫 글자 오프셋은 0이다.\n하지만, R은 사람 친화적이기 때문에 b가 ’banana’의 첫 번째 문자가 되고 a가 두 번째, n이 세 번째 문자가 된다.\n인덱스로 문자와 연산자를 포함하는 어떤 표현식도 사용 가능지만, 인덱스 값은 정수일 필요는 없다. 정수가 아닌 경우 다음과 같은 결과를 얻게 된다. 문제는 R에서 1.5를 내려서 1로 처리한다는 점이다. 경우에 따라서는 반올림으로 판단해서 2가 될 수도 있어 오해의 소지가 있기 때문에 무조건 정수로 표현한다.",
     "crumbs": [
       "**2부** 자료구조",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>문자열</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>문자열</span>"
     ]
   },
   {
     "objectID": "11-string.html#r-string-sequence",
     "href": "11-string.html#r-string-sequence",
-    "title": "8  문자열",
+    "title": "9  문자열",
     "section": "",
-    "text": "R\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\n\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\n\n\n\n\n\n\n그림 8.1: 바나나 문자열\n\n\n\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.",
+    "text": "R\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\n\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\n\n\n\n\n\n\n그림 9.1: 바나나 문자열\n\n\n\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.",
     "crumbs": [
       "**2부** 자료구조",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>문자열</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>문자열</span>"
     ]
   },
   {
     "objectID": "11-string.html#r-string-length",
     "href": "11-string.html#r-string-length",
-    "title": "8  문자열",
-    "section": "\n8.2 length() 함수 사용 문자열 길이 구하기",
-    "text": "8.2 length() 함수 사용 문자열 길이 구하기\nlength() 함수는 문자열의 문자 갯수를 반환하는 내장함수다. \n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n문자열의 가장 마지막 문자를 얻기 위해서, 아래와 같이 시도하고 싶을 것이다. \n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n파이썬에서는 인덱스 오류(IndexError)가 발생하는데 이유는 ’banana’에 6번 인덱스 문자가 없기 때문이다. 0에서부터 시작했기 때문에 6개 문자는 0에서부터 5까지 번호가 매겨졌다. 마지막 문자를 얻기 위해서 length에서 1을 빼야 한다. fruit[-1]은 마지막 문자를, fruit[-2]는 끝에서 두 번째 문자를 가리킨다. 하지만, R에서는 사람이 생각하는 방식대로 마지막 문자를 얻는다.",
+    "title": "9  문자열",
+    "section": "\n9.2 length() 함수 사용 문자열 길이 구하기",
+    "text": "9.2 length() 함수 사용 문자열 길이 구하기\nlength() 함수는 문자열의 문자 갯수를 반환하는 내장함수다. \n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n문자열의 가장 마지막 문자를 얻기 위해서, 아래와 같이 시도하고 싶을 것이다. \n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n파이썬에서는 인덱스 오류(IndexError)가 발생하는데 이유는 ’banana’에 6번 인덱스 문자가 없기 때문이다. 0에서부터 시작했기 때문에 6개 문자는 0에서부터 5까지 번호가 매겨졌다. 마지막 문자를 얻기 위해서 length에서 1을 빼야 한다. fruit[-1]은 마지막 문자를, fruit[-2]는 끝에서 두 번째 문자를 가리킨다. 하지만, R에서는 사람이 생각하는 방식대로 마지막 문자를 얻는다.",
     "crumbs": [
       "**2부** 자료구조",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>문자열</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>문자열</span>"
     ]
   },
   {
     "objectID": "11-string.html#r-string-traversal",
     "href": "11-string.html#r-string-traversal",
-    "title": "8  문자열",
-    "section": "\n8.3 루프를 사용한 문자열 순회",
-    "text": "8.3 루프를 사용한 문자열 순회\n \n연산의 많은 경우에 문자열을 한 번에 한 문자씩 처리한다. 종종 처음에서 시작해서, 차례로 각 문자를 선택하고, 선택된 문자에 임의 연산을 수행하고, 끝까지 계속한다. 이런 처리 패턴을 순회(traversal)라고 한다. 순회를 작성하는 한 방법이 while 루프다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nwhile 루프가 문자열을 순회하여 문자열을 한 줄에 한 글자씩 화면에 출력한다. 루프 조건이 index &lt;= length(fruit_letter)이어서, index가 문자열 길이와 같을 때, 조건은 거짓이 되고, 루프의 몸통 부문은 실행되지 않는다. R이 접근한 마지막 length(fruit_letter) 인덱스 문자로, 문자열의 마지막 문자다.\n\n\n\n\n\n\n경고연습문제\n\n\n\n문자열의 마지막 문자에서 시작해서, 문자열 처음으로 역진행하면서 한 줄에 한 자씩 화면에 출력하는 while 루프를 작성하세요.\n\n\n순회를 작성하는 또 다른 방법은 for 루프다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n루프를 매번 반복할 때, 문자열 다음 문자가 변수 char에 대입된다. 루프는 더 이상 남겨진 문자가 없을 때까지 계속 실행된다.",
+    "title": "9  문자열",
+    "section": "\n9.3 루프를 사용한 문자열 순회",
+    "text": "9.3 루프를 사용한 문자열 순회\n \n연산의 많은 경우에 문자열을 한 번에 한 문자씩 처리한다. 종종 처음에서 시작해서, 차례로 각 문자를 선택하고, 선택된 문자에 임의 연산을 수행하고, 끝까지 계속한다. 이런 처리 패턴을 순회(traversal)라고 한다. 순회를 작성하는 한 방법이 while 루프다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nwhile 루프가 문자열을 순회하여 문자열을 한 줄에 한 글자씩 화면에 출력한다. 루프 조건이 index &lt;= length(fruit_letter)이어서, index가 문자열 길이와 같을 때, 조건은 거짓이 되고, 루프의 몸통 부문은 실행되지 않는다. R이 접근한 마지막 length(fruit_letter) 인덱스 문자로, 문자열의 마지막 문자다.\n\n\n\n\n\n\n경고연습문제\n\n\n\n문자열의 마지막 문자에서 시작해서, 문자열 처음으로 역진행하면서 한 줄에 한 자씩 화면에 출력하는 while 루프를 작성하세요.\n\n\n순회를 작성하는 또 다른 방법은 for 루프다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n루프를 매번 반복할 때, 문자열 다음 문자가 변수 char에 대입된다. 루프는 더 이상 남겨진 문자가 없을 때까지 계속 실행된다.",
     "crumbs": [
       "**2부** 자료구조",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>문자열</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>문자열</span>"
     ]
   },
   {
     "objectID": "11-string.html#r-string-slice",
     "href": "11-string.html#r-string-slice",
-    "title": "8  문자열",
-    "section": "\n8.4 문자열 슬라이스",
-    "text": "8.4 문자열 슬라이스\n \n문자열의 일부분을 슬라이스(slice)라고 한다. 문자열 슬라이스를 선택하는 것은 문자를 선택하는 것과 유사하다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n[n:m] 연산자는 n번째 문자부터 m번째 문자까지의 문자열 부분을 반환한다.\n파이썬에서 fruit[:3]와 같이 콜론 앞 첫 인덱스를 생략하면, 문자열 슬라이스는 문자열 처음부터 시작한다. 파이썬에서 fruit[3:]와 같이 두 번째 인덱스를 생략하면, 문자열 슬라이스는 문자열 끝까지 간다.\n이와 동일한 역할을 수행하는 방법은 head(fruit_letter, 3), tail(fruit_letter, 3)와 같이 head(), tail() 함수를 활용한다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n만약 첫 번째 인덱스가 두 번째보다 크거나 같은 경우 파이썬에서는 결과가 인용부호로 표현되는 빈 문자열(empty string)이 된다. 하지만, R에서는 해당 인덱스에 해당되는 문자가 추출된다. \n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n빈 문자열은 어떤 문자도 포함하지 않아서 길이가 0이지만, 이것을 제외하고 다른 문자열과 동일하다. \n\n\n\n\n\n\n경고연습문제 (파이썬)\n\n\n\nfruit이 문자열로 주어졌을 때, fruit[:]의 의미는 무엇인가요?",
+    "title": "9  문자열",
+    "section": "\n9.4 문자열 슬라이스",
+    "text": "9.4 문자열 슬라이스\n \n문자열의 일부분을 슬라이스(slice)라고 한다. 문자열 슬라이스를 선택하는 것은 문자를 선택하는 것과 유사하다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n[n:m] 연산자는 n번째 문자부터 m번째 문자까지의 문자열 부분을 반환한다.\n파이썬에서 fruit[:3]와 같이 콜론 앞 첫 인덱스를 생략하면, 문자열 슬라이스는 문자열 처음부터 시작한다. 파이썬에서 fruit[3:]와 같이 두 번째 인덱스를 생략하면, 문자열 슬라이스는 문자열 끝까지 간다.\n이와 동일한 역할을 수행하는 방법은 head(fruit_letter, 3), tail(fruit_letter, 3)와 같이 head(), tail() 함수를 활용한다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n만약 첫 번째 인덱스가 두 번째보다 크거나 같은 경우 파이썬에서는 결과가 인용부호로 표현되는 빈 문자열(empty string)이 된다. 하지만, R에서는 해당 인덱스에 해당되는 문자가 추출된다. \n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n빈 문자열은 어떤 문자도 포함하지 않아서 길이가 0이지만, 이것을 제외하고 다른 문자열과 동일하다. \n\n\n\n\n\n\n경고연습문제 (파이썬)\n\n\n\nfruit이 문자열로 주어졌을 때, fruit[:]의 의미는 무엇인가요?",
     "crumbs": [
       "**2부** 자료구조",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>문자열</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>문자열</span>"
     ]
   },
   {
     "objectID": "11-string.html#문자열은-불변이다-파이썬",
     "href": "11-string.html#문자열은-불변이다-파이썬",
-    "title": "8  문자열",
-    "section": "\n8.5 문자열은 불변이다 (파이썬)",
-    "text": "8.5 문자열은 불변이다 (파이썬)\n \n문자열 내부에 있는 문자를 변경하려고 대입문 왼쪽편에 [] 연산자를 사용하고 싶은 유혹이 있을 것이다. 예를 들어 다음과 같다. \n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n파이썬에서 “TypeError: ‘str’ object does not support item assignment” 오류가 발생하는데 파이썬 문자열이 불변(immutable)하기 때문이다. 즉, 파이썬에서 문자열의 특정 문자를 직접 변경하려고 할 때 이 오류가 발생한다. 반면에, R에서는 문자열 자체가 불변 객체로 취급되지 않기 때문에 strsplit 함수를 사용하여 문자열을 문자의 벡터로 변환하면, 벡터의 각 요소는 별도의 문자열로 취급되어 개별적으로 변경할 수 있다. R은 파이썬과 달리 불변 문자열에 대한 제약이 없기 때문에 오류를 발생시키지않는다.\n파이썬에서 “객체(object)”는 문자열이고, 대입하고자 하는 문자는 “항목(item)”이다. 지금으로서 객체는 값과 동일하지만, 나중에 객체 정의를 좀 더 상세화할 것이다. 항목은 순서 값 중의 하나다. 최선의 방법은 원래 문자열을 변형한 새로운 문자열을 생성하는 것이다. \n새로운 첫 문자에 greeting 문자열 슬라이스를 연결한다. 원래 문자열에는 어떤 영향도 주지 않는 새로운 문자열이 생성되었다.",
+    "title": "9  문자열",
+    "section": "\n9.5 문자열은 불변이다 (파이썬)",
+    "text": "9.5 문자열은 불변이다 (파이썬)\n \n문자열 내부에 있는 문자를 변경하려고 대입문 왼쪽편에 [] 연산자를 사용하고 싶은 유혹이 있을 것이다. 예를 들어 다음과 같다. \n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n파이썬에서 “TypeError: ‘str’ object does not support item assignment” 오류가 발생하는데 파이썬 문자열이 불변(immutable)하기 때문이다. 즉, 파이썬에서 문자열의 특정 문자를 직접 변경하려고 할 때 이 오류가 발생한다. 반면에, R에서는 문자열 자체가 불변 객체로 취급되지 않기 때문에 strsplit 함수를 사용하여 문자열을 문자의 벡터로 변환하면, 벡터의 각 요소는 별도의 문자열로 취급되어 개별적으로 변경할 수 있다. R은 파이썬과 달리 불변 문자열에 대한 제약이 없기 때문에 오류를 발생시키지않는다.\n파이썬에서 “객체(object)”는 문자열이고, 대입하고자 하는 문자는 “항목(item)”이다. 지금으로서 객체는 값과 동일하지만, 나중에 객체 정의를 좀 더 상세화할 것이다. 항목은 순서 값 중의 하나다. 최선의 방법은 원래 문자열을 변형한 새로운 문자열을 생성하는 것이다. \n새로운 첫 문자에 greeting 문자열 슬라이스를 연결한다. 원래 문자열에는 어떤 영향도 주지 않는 새로운 문자열이 생성되었다.",
     "crumbs": [
       "**2부** 자료구조",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>문자열</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>문자열</span>"
     ]
   },
   {
     "objectID": "11-string.html#r-string-count",
     "href": "11-string.html#r-string-count",
-    "title": "8  문자열",
-    "section": "\n8.6 루프 사용 문자 계수하기",
-    "text": "8.6 루프 사용 문자 계수하기\n \n다음 프로그램은 문자열에 문자 a가 나타나는 횟수를 계수(counting)한다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n상기 프로그램은 계수기(counter)라고 부르는 또 다른 연산 패턴을 보여준다. 변수 count는 0으로 초기화되고, 매번 a를 찾을 때마다 증가한다. 루프를 빠져나갔을 때, count는 결과 값 즉, a가 나타난 총 횟수를 담고 있다.\n\n\n\n\n\n\n경고연습문제\n\n\n\n문자열과 문자를 인자(argument)로 받도록 상기 코드를 count라는 함수로 캡슐화(encapsulation)하고 일반화하세요.",
+    "title": "9  문자열",
+    "section": "\n9.6 루프 사용 문자 계수하기",
+    "text": "9.6 루프 사용 문자 계수하기\n \n다음 프로그램은 문자열에 문자 a가 나타나는 횟수를 계수(counting)한다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n상기 프로그램은 계수기(counter)라고 부르는 또 다른 연산 패턴을 보여준다. 변수 count는 0으로 초기화되고, 매번 a를 찾을 때마다 증가한다. 루프를 빠져나갔을 때, count는 결과 값 즉, a가 나타난 총 횟수를 담고 있다.\n\n\n\n\n\n\n경고연습문제\n\n\n\n문자열과 문자를 인자(argument)로 받도록 상기 코드를 count라는 함수로 캡슐화(encapsulation)하고 일반화하세요.",
     "crumbs": [
       "**2부** 자료구조",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>문자열</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>문자열</span>"
     ]
   },
   {
     "objectID": "11-string.html#r-string-in-operator",
     "href": "11-string.html#r-string-in-operator",
-    "title": "8  문자열",
-    "section": "\n8.7 %in% 연산자",
-    "text": "8.7 %in% 연산자\n\\index{%in% 연산자} \\index{연산자!%in%} \n연산자 in은 부울 연산자로 두 개의 문자열을 받아, 첫 번째 문자열이 두 번째 문자열의 일부이면 참(TRUE)을 반환한다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.",
+    "title": "9  문자열",
+    "section": "\n9.7 %in% 연산자",
+    "text": "9.7 %in% 연산자\n\\index{%in% 연산자} \\index{연산자!%in%} \n연산자 in은 부울 연산자로 두 개의 문자열을 받아, 첫 번째 문자열이 두 번째 문자열의 일부이면 참(TRUE)을 반환한다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.",
     "crumbs": [
       "**2부** 자료구조",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>문자열</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>문자열</span>"
     ]
   },
   {
     "objectID": "11-string.html#r-string-comparison-operator",
     "href": "11-string.html#r-string-comparison-operator",
-    "title": "8  문자열",
-    "section": "\n8.8 문자열 비교",
-    "text": "8.8 문자열 비교\n \n비교 연산자도 문자열에서 동작한다. 두 문자열이 같은지를 살펴보자.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n다른 비교 연산자는 단어를 알파벳 순서로 정렬하는 데 유용하다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nR과 파이썬 같은 프로그래밍 언어는 사람과 동일한 방식으로 대문자와 소문자를 다루지 않는다. 모든 대문자는 소문자 앞에 온다. 프로그래밍 언어에서 대문자와 소문자를 다루는 방식은 ASCII 코드 값을 기반으로 한다. ASCII 코드에서 대문자(A-Z)는 65부터 90까지의 값을, 소문자(a-z)는 97부터 122까지의 값을 갖기 때문에 대문자가 숫자적으로 소문자보다 먼저 나오기 때문에 문자열을 정렬하거나 비교할 때, 대문자가 소문자 앞에 위치하게 된다.\nYour word, Pineapple, comes before banana.\n이러한 문제를 다루는 일반적인 방식은 비교 연산을 수행하기 전에 문자열을 표준 포맷으로 예를 들어 모두 소문자로 변환하는 것이다. 경우에 따라서 “Pineapple”로 무장한 사람들로부터 여러분을 보호해야 하는 것도 명심한다.",
+    "title": "9  문자열",
+    "section": "\n9.8 문자열 비교",
+    "text": "9.8 문자열 비교\n \n비교 연산자도 문자열에서 동작한다. 두 문자열이 같은지를 살펴보자.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n다른 비교 연산자는 단어를 알파벳 순서로 정렬하는 데 유용하다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nR과 파이썬 같은 프로그래밍 언어는 사람과 동일한 방식으로 대문자와 소문자를 다루지 않는다. 모든 대문자는 소문자 앞에 온다. 프로그래밍 언어에서 대문자와 소문자를 다루는 방식은 ASCII 코드 값을 기반으로 한다. ASCII 코드에서 대문자(A-Z)는 65부터 90까지의 값을, 소문자(a-z)는 97부터 122까지의 값을 갖기 때문에 대문자가 숫자적으로 소문자보다 먼저 나오기 때문에 문자열을 정렬하거나 비교할 때, 대문자가 소문자 앞에 위치하게 된다.\nYour word, Pineapple, comes before banana.\n이러한 문제를 다루는 일반적인 방식은 비교 연산을 수행하기 전에 문자열을 표준 포맷으로 예를 들어 모두 소문자로 변환하는 것이다. 경우에 따라서 “Pineapple”로 무장한 사람들로부터 여러분을 보호해야 하는 것도 명심한다.",
     "crumbs": [
       "**2부** 자료구조",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>문자열</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>문자열</span>"
     ]
   },
   {
     "objectID": "11-string.html#r-string-method",
     "href": "11-string.html#r-string-method",
-    "title": "8  문자열",
-    "section": "\n8.9 문자열 함수",
-    "text": "8.9 문자열 함수\nR은 객체지향언어 특성을 갖고 있지만 함수형 프로그래밍 언어 특성도 갖고 있다. 문자열을 R 객체(objects)로 객체를 데이터(실제 문자열 자체)와 메서드(methods)를 담고 있는 것으로 바라볼 수도 있다. 메서드는 객체에 내장되고 어떤 객체의 인스턴스(instance)에도 사용되는 사실상 함수다. \n\n\n\n\n\n\n노트파이썬 dir 함수\n\n\n\n객체에 대해 이용 가능한 메서드를 보여주는 dir 함수가 파이썬에 있다. type 함수는 객체의 자료형(type)을 보여주고, dir은 객체에 사용될 수 있는 메서드를 보여준다.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\ndir 함수가 메서드 목록을 보여주고, 메서드에 대한 간단한 문서 정보는 help를 사용할 수 있지만, 문자열 메서드에 대한 좀 더 좋은 문서 정보는 https://docs.python.org/3/library/string.html에서 찾을 수 있다.\n인자를 받고 값을 반환한다는 점에서 메서드(method)를 호출하는 것은 함수를 호출하는 것과 유사하지만, 구문은 다르다. 구분자로 점을 사용해서 변수명에 메서드명을 붙여 메서드를 호출한다.\n예를 들어, upper 메서드는 문자열을 받아 모두 대문자로 변환된 새로운 문자열을 반환한다. 함수 구문 upper(word) 대신에, word.upper() 메서드 구문을 사용한다.\n\n\n하지만, 함수형 프로그래밍 패러다임으로 문자열을 객체로 두고 함수를 적용시켜 다양한 작업을 하는 것이 일반적이다. tidyverse 패키지를 설치하게 되면 stringr 패키지가 구성요소로 포함되어 있다. str_로 시작되는 다양한 함수가 지원된다. \n예를 들어, stringr 패키지 str_to_upper() 함수는 문자열을 받아 모두 대문자로 변환된 새로운 문자열을 반환한다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n동일한 작업을 함수형 패러다임으로 str_to_upper(word)와 같이 표현하는 데 반해, 객체지향으로 구현하면 파이썬 같은 경우 word.upper() 메서드 구문이 사용된다.\n예를 들어, 문자열 안에 문자열의 위치를 찾는 str_locate(), str_locate_all()이라는 문자열 함수가 있다. str_locate()는 매칭되는 첫 번째만 반환하는 반면에 str_locate_all()은 매칭되는 전부를 반환하는 차이가 있다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n상기 예제에서, word 문자열에 str_locate_all() 함수를 호출하여 매개 변수로 찾고자 하는 문자를 넘긴다.\nstr_locate_all() 함수로 문자뿐만 아니라 부속 문자열(substring)도 찾을 수 있다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n한 가지 자주 있는 작업은 str_trim() 함수를 사용해서 문자열 시작과 끝의 공백(공백 여러 개, 탭, 새줄)을 제거하는 것이다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nstr_detect() 함수와 나중에 다룰 정규표현식을 섞어 표현하게 되면 참, 거짓 같은 부울 값(boolean value)을 반환한다. '^Please'에서 ^은 문자열 시작을 지정한다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n대소문자를 구별하는 것을 요구하기 때문에 str_to_lower() 함수를 사용해서 검증을 수행하기 전에, 한 줄을 입력받아 모두 소문자로 변환하는 것이 필요하다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n마지막 예제에서 문자열이 문자 “p”로 시작하는지를 검증하기 위해서, str_to_lower() 함수를 호출하고 나서 바로 str_detect() 함수를 사용한다. 주의 깊게 순서만 다룬다면, 한 줄에 다수 함수를 괄호에 넣어 호출할 수 있다.\n\n\n\n\n\n\n경고연습문제\n\n\n\n앞선 예제와 유사한 함수인 str_count()로 불리는 문자열 메서드가 stringr 패키지 내부에 있다. ? str_count() 도움말로 str_count() 함수에 대한 문서를 읽고, 문자열 ’banana’의 문자가 몇 개인지 계수하는 메서드 호출 프로그램을 작성하세요.",
+    "title": "9  문자열",
+    "section": "\n9.9 문자열 함수",
+    "text": "9.9 문자열 함수\nR은 객체지향언어 특성을 갖고 있지만 함수형 프로그래밍 언어 특성도 갖고 있다. 문자열을 R 객체(objects)로 객체를 데이터(실제 문자열 자체)와 메서드(methods)를 담고 있는 것으로 바라볼 수도 있다. 메서드는 객체에 내장되고 어떤 객체의 인스턴스(instance)에도 사용되는 사실상 함수다. \n\n\n\n\n\n\n노트파이썬 dir 함수\n\n\n\n객체에 대해 이용 가능한 메서드를 보여주는 dir 함수가 파이썬에 있다. type 함수는 객체의 자료형(type)을 보여주고, dir은 객체에 사용될 수 있는 메서드를 보여준다.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\ndir 함수가 메서드 목록을 보여주고, 메서드에 대한 간단한 문서 정보는 help를 사용할 수 있지만, 문자열 메서드에 대한 좀 더 좋은 문서 정보는 https://docs.python.org/3/library/string.html에서 찾을 수 있다.\n인자를 받고 값을 반환한다는 점에서 메서드(method)를 호출하는 것은 함수를 호출하는 것과 유사하지만, 구문은 다르다. 구분자로 점을 사용해서 변수명에 메서드명을 붙여 메서드를 호출한다.\n예를 들어, upper 메서드는 문자열을 받아 모두 대문자로 변환된 새로운 문자열을 반환한다. 함수 구문 upper(word) 대신에, word.upper() 메서드 구문을 사용한다.\n\n\n하지만, 함수형 프로그래밍 패러다임으로 문자열을 객체로 두고 함수를 적용시켜 다양한 작업을 하는 것이 일반적이다. tidyverse 패키지를 설치하게 되면 stringr 패키지가 구성요소로 포함되어 있다. str_로 시작되는 다양한 함수가 지원된다. \n예를 들어, stringr 패키지 str_to_upper() 함수는 문자열을 받아 모두 대문자로 변환된 새로운 문자열을 반환한다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n동일한 작업을 함수형 패러다임으로 str_to_upper(word)와 같이 표현하는 데 반해, 객체지향으로 구현하면 파이썬 같은 경우 word.upper() 메서드 구문이 사용된다.\n예를 들어, 문자열 안에 문자열의 위치를 찾는 str_locate(), str_locate_all()이라는 문자열 함수가 있다. str_locate()는 매칭되는 첫 번째만 반환하는 반면에 str_locate_all()은 매칭되는 전부를 반환하는 차이가 있다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n상기 예제에서, word 문자열에 str_locate_all() 함수를 호출하여 매개 변수로 찾고자 하는 문자를 넘긴다.\nstr_locate_all() 함수로 문자뿐만 아니라 부속 문자열(substring)도 찾을 수 있다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n한 가지 자주 있는 작업은 str_trim() 함수를 사용해서 문자열 시작과 끝의 공백(공백 여러 개, 탭, 새줄)을 제거하는 것이다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nstr_detect() 함수와 나중에 다룰 정규표현식을 섞어 표현하게 되면 참, 거짓 같은 부울 값(boolean value)을 반환한다. '^Please'에서 ^은 문자열 시작을 지정한다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n대소문자를 구별하는 것을 요구하기 때문에 str_to_lower() 함수를 사용해서 검증을 수행하기 전에, 한 줄을 입력받아 모두 소문자로 변환하는 것이 필요하다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n마지막 예제에서 문자열이 문자 “p”로 시작하는지를 검증하기 위해서, str_to_lower() 함수를 호출하고 나서 바로 str_detect() 함수를 사용한다. 주의 깊게 순서만 다룬다면, 한 줄에 다수 함수를 괄호에 넣어 호출할 수 있다.\n\n\n\n\n\n\n경고연습문제\n\n\n\n앞선 예제와 유사한 함수인 str_count()로 불리는 문자열 메서드가 stringr 패키지 내부에 있다. ? str_count() 도움말로 str_count() 함수에 대한 문서를 읽고, 문자열 ’banana’의 문자가 몇 개인지 계수하는 메서드 호출 프로그램을 작성하세요.",
     "crumbs": [
       "**2부** 자료구조",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>문자열</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>문자열</span>"
     ]
   },
   {
     "objectID": "11-string.html#r-string-parsing",
     "href": "11-string.html#r-string-parsing",
-    "title": "8  문자열",
-    "section": "\n8.10 문자열 파싱",
-    "text": "8.10 문자열 파싱\n종종, 문자열을 들여다보고 특정 부속 문자열(substring)을 찾고 싶다. 예를 들어, 아래와 같은 형식으로 작성된 일련의 라인이 주어졌다고 가정하면,\n\nFrom stephen.marquard@uct.ac.zaSat Jan  5 09:14:16 2008\n\n각 라인마다 뒤쪽 전자우편 주소(즉, uct.ac.za)만 뽑아내고 싶을 것이다. str_locate() 함수와 문자열 슬라이싱(string sliceing)을 사용해서 작업을 수행할 수 있다.\n우선, 문자열에서 골뱅이(@, at-sign) 기호의 위치를 찾는다. 그리고, 골뱅이 기호 뒤 첫 공백 위치를 찾는다. 그리고 나서, 찾고자 하는 부속 문자열을 뽑아내기 위해서 문자열 슬라이싱을 사용한다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nstr_locate() 함수를 사용해서 찾고자 하는 문자열의 시작 위치를 명세한다. 문자열 슬라이싱(slicing)할 때, 골뱅이 기호 뒤부터 빈 공백을 포함하지 않는 위치까지 문자열을 뽑아낸다.",
+    "title": "9  문자열",
+    "section": "\n9.10 문자열 파싱",
+    "text": "9.10 문자열 파싱\n종종, 문자열을 들여다보고 특정 부속 문자열(substring)을 찾고 싶다. 예를 들어, 아래와 같은 형식으로 작성된 일련의 라인이 주어졌다고 가정하면,\n\nFrom stephen.marquard@uct.ac.zaSat Jan  5 09:14:16 2008\n\n각 라인마다 뒤쪽 전자우편 주소(즉, uct.ac.za)만 뽑아내고 싶을 것이다. str_locate() 함수와 문자열 슬라이싱(string sliceing)을 사용해서 작업을 수행할 수 있다.\n우선, 문자열에서 골뱅이(@, at-sign) 기호의 위치를 찾는다. 그리고, 골뱅이 기호 뒤 첫 공백 위치를 찾는다. 그리고 나서, 찾고자 하는 부속 문자열을 뽑아내기 위해서 문자열 슬라이싱을 사용한다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nstr_locate() 함수를 사용해서 찾고자 하는 문자열의 시작 위치를 명세한다. 문자열 슬라이싱(slicing)할 때, 골뱅이 기호 뒤부터 빈 공백을 포함하지 않는 위치까지 문자열을 뽑아낸다.",
     "crumbs": [
       "**2부** 자료구조",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>문자열</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>문자열</span>"
     ]
   },
   {
     "objectID": "11-string.html#r-string-format",
     "href": "11-string.html#r-string-format",
-    "title": "8  문자열",
-    "section": "\n8.11 서식 연산자",
-    "text": "8.11 서식 연산자\n \n서식 연산자(format operator) Base R의 sprintf() 함수에 C언어 스타일로 %를 사용하기도 하지만 glue: Interpreted String Literals 패키지도 최근에 많이 사용된다. glue 패키지 {}는 문자열 일부를 변수에 저장된 값으로 바꿔 문자열을 구성한다. 정수에 서식 연산자가 적용될 때, {}는 나머지 연산자가 된다. 하지만 첫 피연산자가 문자열이면, {}은 서식 연산자가 된다. 동일한 기능을 stringr 패키지 str_glue() 함수로 수행할 수 있다. \n첫 피연산자는 서식 문자열(format string)로 두 번째 피연산자가 어떤 형식으로 표현되는지를 명세하는 하나 혹은 그 이상의 서식 순서(format sequence)를 담고 있다. 결과값은 문자열이다. \n예를 들어, 형식 순서 ’%d’의 의미는 두 번째 피연산자가 정수 형식으로 표현됨을 뜻한다. (d는 “decimal”을 나타낸다.)\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n결과는 문자열 ’42’로 정수 42와 혼동하면 안 된다.\n서식 순서는 문자열 어디에도 나타날 수 있어서 문장 중간에 값을 임베드(embed)할 수 있다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n만약 문자열 서식 순서가 하나 이상이라면, 두 번째 인자는 튜플(tuple)이 된다. 서식 순서 각각은 순서대로 튜플 요소와 매칭된다.\n다음 예제는 정수 형식을 표현하기 위해서 ‘%d’, 부동 소수점 형식을 표현하기 위해서 ‘%g’, 문자열 형식을 표현하기 위해서 ‘%s’을 사용한 사례다. 여기서 왜 부동 소수점 형식이’%f’ 대신에 ’%g’인지는 질문하지 말아주세요. \n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n문자열 서식 순서와 갯수는 일치해야 하고, 요소의 자료형(type)도 서식 순서와 일치해야 한다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n상기 첫 예제는 충분한 요소 개수가 되지 않고, 두 번째 예제는 자료형이 맞지 않는다. 서식 연산자는 강력하지만, 사용하기가 까다로운 점이 있으니, str_glue를 사용하는 것도 권장된다.",
+    "title": "9  문자열",
+    "section": "\n9.11 서식 연산자",
+    "text": "9.11 서식 연산자\n \n서식 연산자(format operator) Base R의 sprintf() 함수에 C언어 스타일로 %를 사용하기도 하지만 glue: Interpreted String Literals 패키지도 최근에 많이 사용된다. glue 패키지 {}는 문자열 일부를 변수에 저장된 값으로 바꿔 문자열을 구성한다. 정수에 서식 연산자가 적용될 때, {}는 나머지 연산자가 된다. 하지만 첫 피연산자가 문자열이면, {}은 서식 연산자가 된다. 동일한 기능을 stringr 패키지 str_glue() 함수로 수행할 수 있다. \n첫 피연산자는 서식 문자열(format string)로 두 번째 피연산자가 어떤 형식으로 표현되는지를 명세하는 하나 혹은 그 이상의 서식 순서(format sequence)를 담고 있다. 결과값은 문자열이다. \n예를 들어, 형식 순서 ’%d’의 의미는 두 번째 피연산자가 정수 형식으로 표현됨을 뜻한다. (d는 “decimal”을 나타낸다.)\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n결과는 문자열 ’42’로 정수 42와 혼동하면 안 된다.\n서식 순서는 문자열 어디에도 나타날 수 있어서 문장 중간에 값을 임베드(embed)할 수 있다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n만약 문자열 서식 순서가 하나 이상이라면, 두 번째 인자는 튜플(tuple)이 된다. 서식 순서 각각은 순서대로 튜플 요소와 매칭된다.\n다음 예제는 정수 형식을 표현하기 위해서 ‘%d’, 부동 소수점 형식을 표현하기 위해서 ‘%g’, 문자열 형식을 표현하기 위해서 ‘%s’을 사용한 사례다. 여기서 왜 부동 소수점 형식이’%f’ 대신에 ’%g’인지는 질문하지 말아주세요. \n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n문자열 서식 순서와 갯수는 일치해야 하고, 요소의 자료형(type)도 서식 순서와 일치해야 한다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n상기 첫 예제는 충분한 요소 개수가 되지 않고, 두 번째 예제는 자료형이 맞지 않는다. 서식 연산자는 강력하지만, 사용하기가 까다로운 점이 있으니, str_glue를 사용하는 것도 권장된다.",
     "crumbs": [
       "**2부** 자료구조",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>문자열</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>문자열</span>"
     ]
   },
   {
     "objectID": "11-string.html#r-string-debug",
     "href": "11-string.html#r-string-debug",
-    "title": "8  문자열",
-    "section": "\n8.12 디버깅",
-    "text": "8.12 디버깅\n\n프로그램을 작성하면서 배양해야 하는 기술은 항상 자신에게 질문을 하는 것이다. “여기서 무엇이 잘못될 수 있을까?” 혹은 “내가 작성한 완벽한 프로그램을 망가뜨리기 위해 사용자는 무슨 엄청난 일을 할 것인가?”\n예를 들어 앞장의 반복 while 루프를 시연하기 위해 사용한 프로그램을 살펴봅시다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n사용자가 입력값으로 빈 공백 줄을 입력하게 될 때 무엇이 발생하는지 살펴봅시다.\n&gt; hello there\n[1] hello there\n&gt; # don't print this\n&gt; print this!\n[2] print this!\n&gt; \n[1] \"\"\n&gt; done\n빈 공백 줄이 입력될 때까지 코드는 잘 작동한다. 그리고 나서, 파이썬의 경우 0번째 문자가 없어서 트레이스백(traceback)이 발생한다. R의 경우 정상 실행되지만 원하는 바는 아니다. 입력 줄이 비어있을 때, 코드 3번째 줄을 “안전”하게 만드는 두 가지 방법이 있다.\n하나는 빈 문자열이면 거짓(FALSE)을 반환하도록 str_detect() 함수를 사용하는 것이다.\n\n\nR\nif(str_detect(line, '^#'))\n\n\n\n\n파이썬\nif line.startswith('#') :\n\n\n\n가디언 패턴(guardian pattern)을 사용한 if문으로 문자열에 적어도 하나의 문자가 있는 경우만 두 번째 논리 표현식이 평가되도록 코드를 작성한다. \n\n\nR\nif(str_length(line) &gt; 0 & str_detect(line, '^#'))\n\n\n\n\n파이썬\nif len(line) &gt; 0 and line[0] == '#' :",
+    "title": "9  문자열",
+    "section": "\n9.12 디버깅",
+    "text": "9.12 디버깅\n\n프로그램을 작성하면서 배양해야 하는 기술은 항상 자신에게 질문을 하는 것이다. “여기서 무엇이 잘못될 수 있을까?” 혹은 “내가 작성한 완벽한 프로그램을 망가뜨리기 위해 사용자는 무슨 엄청난 일을 할 것인가?”\n예를 들어 앞장의 반복 while 루프를 시연하기 위해 사용한 프로그램을 살펴봅시다.\n\n\nR\n파이썬\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n사용자가 입력값으로 빈 공백 줄을 입력하게 될 때 무엇이 발생하는지 살펴봅시다.\n&gt; hello there\n[1] hello there\n&gt; # don't print this\n&gt; print this!\n[2] print this!\n&gt; \n[1] \"\"\n&gt; done\n빈 공백 줄이 입력될 때까지 코드는 잘 작동한다. 그리고 나서, 파이썬의 경우 0번째 문자가 없어서 트레이스백(traceback)이 발생한다. R의 경우 정상 실행되지만 원하는 바는 아니다. 입력 줄이 비어있을 때, 코드 3번째 줄을 “안전”하게 만드는 두 가지 방법이 있다.\n하나는 빈 문자열이면 거짓(FALSE)을 반환하도록 str_detect() 함수를 사용하는 것이다.\n\n\nR\nif(str_detect(line, '^#'))\n\n\n\n\n파이썬\nif line.startswith('#') :\n\n\n\n가디언 패턴(guardian pattern)을 사용한 if문으로 문자열에 적어도 하나의 문자가 있는 경우만 두 번째 논리 표현식이 평가되도록 코드를 작성한다. \n\n\nR\nif(str_length(line) &gt; 0 & str_detect(line, '^#'))\n\n\n\n\n파이썬\nif len(line) &gt; 0 and line[0] == '#' :",
     "crumbs": [
       "**2부** 자료구조",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>문자열</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>문자열</span>"
     ]
   },
   {
     "objectID": "11-string.html#r-string-terminology",
     "href": "11-string.html#r-string-terminology",
-    "title": "8  문자열",
-    "section": "\n8.13 용어 정의",
-    "text": "8.13 용어 정의\n\n\n계수기(counter): 무언가를 계수하기 위해서 사용되는 변수로 일반적으로 0으로 초기화하고 나서 증가한다. \n\n빈 문자열(empty string): 두 인용부호로 표현되고, 어떤 문자도 없고 길이가 0인 문자열. \n\n서식 연산자(format operator): 서식 문자열과 튜플을 받아, 서식 문자열에 지정된 서식으로 튜플 요소를 포함하는 문자열을 생성하는 연산자. \n\n서식 순서(format sequence): d처럼 어떤 값의 서식으로 표현되어야 하는지를 명세하는 “서식 문자열” 문자 순서. \n\n서식 문자열(format string): 서식 순서를 포함하는 서식 연산자와 함께 사용되는 문자열. \n\n플래그(flag): 조건이 참인지를 표기하기 위해 사용하는 불 변수(boolean variable) \n\n호출(invocation): 메서드를 호출하는 명령문. \n\n불변(immutable): 순서의 항목에 대입할 수 없는 특성. \n\n인덱스(index): 문자열의 문자처럼 순서(sequence)에 항목을 선택하기 위해 사용되는 정수 값. \n\n항목(item): 순서에 있는 값의 하나. \n\n메서드(method): 객체와 연관되어 점 표기법을 사용하여 호출되는 함수. \n\n객체(object): 변수가 참조하는 무엇. 지금은 “객체”와 “값”을 구별 없이 사용한다. \n\n검색(search): 찾고자 하는 것을 찾았을 때 멈추는 순회 패턴. \n\n순서(sequence): 정돈된 집합. 즉, 정수 인덱스로 각각의 값이 확인되는 값의 집합. \n\n슬라이스(slice): 인덱스 범위로 지정되는 문자열 부분. \n\n순회(traverse): 순서(sequence)의 항목을 반복적으로 훑기, 각각에 대해서는 동일한 연산을 수행.",
+    "title": "9  문자열",
+    "section": "\n9.14 용어 정의",
+    "text": "9.14 용어 정의\n\n\n계수기(counter): 무언가를 계수하기 위해서 사용되는 변수로 일반적으로 0으로 초기화하고 나서 증가한다. \n\n빈 문자열(empty string): 두 인용부호로 표현되고, 어떤 문자도 없고 길이가 0인 문자열. \n\n서식 연산자(format operator): 서식 문자열과 튜플을 받아, 서식 문자열에 지정된 서식으로 튜플 요소를 포함하는 문자열을 생성하는 연산자. \n\n서식 순서(format sequence): d처럼 어떤 값의 서식으로 표현되어야 하는지를 명세하는 “서식 문자열” 문자 순서. \n\n서식 문자열(format string): 서식 순서를 포함하는 서식 연산자와 함께 사용되는 문자열. \n\n플래그(flag): 조건이 참인지를 표기하기 위해 사용하는 불 변수(boolean variable) \n\n호출(invocation): 메서드를 호출하는 명령문. \n\n불변(immutable): 순서의 항목에 대입할 수 없는 특성. \n\n인덱스(index): 문자열의 문자처럼 순서(sequence)에 항목을 선택하기 위해 사용되는 정수 값. \n\n항목(item): 순서에 있는 값의 하나. \n\n메서드(method): 객체와 연관되어 점 표기법을 사용하여 호출되는 함수. \n\n객체(object): 변수가 참조하는 무엇. 지금은 “객체”와 “값”을 구별 없이 사용한다. \n\n검색(search): 찾고자 하는 것을 찾았을 때 멈추는 순회 패턴. \n\n순서(sequence): 정돈된 집합. 즉, 정수 인덱스로 각각의 값이 확인되는 값의 집합. \n\n슬라이스(slice): 인덱스 범위로 지정되는 문자열 부분. \n\n순회(traverse): 순서(sequence)의 항목을 반복적으로 훑기, 각각에 대해서는 동일한 연산을 수행.",
     "crumbs": [
       "**2부** 자료구조",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>문자열</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>문자열</span>"
     ]
   },
   {
     "objectID": "11-string.html#r-string-ex",
     "href": "11-string.html#r-string-ex",
-    "title": "8  문자열",
+    "title": "9  문자열",
     "section": "연습문제",
     "text": "연습문제\n\n다음 문자열에서 숫자를 뽑아내는 R 코드를 작성하라.\n\nstr &lt;- 'X-DSPAM-Confidence: 0.8475'\nstr_locate() 함수와 문자열 슬라이싱을 사용하여 str_sub() 문자 뒤 문자열을 뽑아내고 as.numeric() 함수를 사용하여 뽑아낸 문자열을 부동 소수점 숫자로 변환하라.",
     "crumbs": [
       "**2부** 자료구조",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>문자열</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>문자열</span>"
     ]
   },
   {
     "objectID": "11-string.html#footnotes",
     "href": "11-string.html#footnotes",
-    "title": "8  문자열",
+    "title": "9  문자열",
     "section": "",
     "text": "컴퓨터에서 어떤 주소로부터 간격을 두고 떨어진 주소와의 거리를 말한다. 기억 장치가 페이지 혹은 세그먼트 단위로 나누어져 있을 때 하나의 시작 주소로부터 오프셋만큼 떨어진 위치를 나타낸다. 네이버 지식백과(IT용어사전, 한국정보통신기술협회)↩︎",
     "crumbs": [
       "**2부** 자료구조",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>문자열</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>문자열</span>"
     ]
   },
   {
@@ -661,7 +661,7 @@
     "href": "12-file.html",
     "title": "9  파일",
     "section": "",
-    "text": "9.1 영속성\n지금까지, 프로그램을 어떻게 작성하고 조건문, 함수, 반복을 사용하여 중앙처리장치(CPU, Central Processing Unit)에 프로그래머의 의도를 전달하는지 학습했다. 주기억장치(Main Memory)에 어떻게 자료구조를 생성하고 사용하는지도 배웠다. CPU와 주기억장치는 소프트웨어가 동작하고 실행되는 곳이고, 모든 “생각(thinking)”이 발생하는 장소다.\n하지만, 앞서 하드웨어 아키텍처를 논의했던 기억을 되살린다면, 전원이 꺼지게 되면, CPU와 주기억장치에 저장된 모든 것이 지워진다. 지금까지 작성한 프로그램은 R을 배우기 위한 일시적으로 재미로 연습한 것에 불과하다.\n이번 장에서 보조 기억장치(Secondary Memory) 혹은 파일을 가지고 작업을 시작한다. 보조 기억장치는 전원이 꺼져도 지워지지 않는다. 혹은, USB 플래시 드라이브를 사용한 경우에는 프로그램으로부터 작성한 데이터는 시스템에서 제거되어 다른 시스템으로 전송될 수 있다.\n우선 텍스트 편집기로 작성한 텍스트 파일을 읽고 쓰는 것에 초점을 맞출 것이다. 나중에 데이터베이스 소프트웨어를 통해서 읽고 쓰도록 설계된 바이너리 파일 데이터베이스를 가지고 어떻게 작업하는지를 살펴볼 것이다.",
+    "text": "9.1 영속성\n데이터 분석의 시작과 끝은 파일이다. CSV, JSON, 텍스트 로그, 설정 파일 등 거의 모든 데이터가 파일 형태로 저장되고 교환된다. 웹에서 데이터를 가져오든, 데이터베이스 결과를 저장하든, 결국 파일 읽기와 쓰기 작업이 필요하다.\n파일 처리의 기본 개념인 열기, 읽기, 쓰기, 닫기 패턴을 이해하면, AI에게 데이터 전처리 작업을 요청할 때도 “대용량 파일을 청크 단위로 읽어서 처리해줘”와 같은 구체적인 명세가 가능해진다.\n지금까지, 프로그램을 어떻게 작성하고 조건문, 함수, 반복을 사용하여 중앙처리장치(CPU, Central Processing Unit)에 프로그래머의 의도를 전달하는지 학습했다. 주기억장치(Main Memory)에 어떻게 자료구조를 생성하고 사용하는지도 배웠다. CPU와 주기억장치는 소프트웨어가 동작하고 실행되는 곳이고, 모든 “생각(thinking)”이 발생하는 장소다.\n하지만, 앞서 하드웨어 아키텍처를 논의했던 기억을 되살린다면, 전원이 꺼지게 되면, CPU와 주기억장치에 저장된 모든 것이 지워진다. 지금까지 작성한 프로그램은 R을 배우기 위한 일시적으로 재미로 연습한 것에 불과하다.\n이번 장에서 보조 기억장치(Secondary Memory) 혹은 파일을 가지고 작업을 시작한다. 보조 기억장치는 전원이 꺼져도 지워지지 않는다. 혹은, USB 플래시 드라이브를 사용한 경우에는 프로그램으로부터 작성한 데이터는 시스템에서 제거되어 다른 시스템으로 전송될 수 있다.\n우선 텍스트 편집기로 작성한 텍스트 파일을 읽고 쓰는 것에 초점을 맞출 것이다. 나중에 데이터베이스 소프트웨어를 통해서 읽고 쓰도록 설계된 바이너리 파일 데이터베이스를 가지고 어떻게 작업하는지를 살펴볼 것이다.",
     "crumbs": [
       "**2부** 자료구조",
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>파일</span>"
@@ -770,8 +770,8 @@
     "objectID": "12-file.html#r-file-terminology",
     "href": "12-file.html#r-file-terminology",
     "title": "9  파일",
-    "section": "\n9.10 용어 정의",
-    "text": "9.10 용어 정의\n\n\n잡기(catch): tryCatch 함수를 사용하여 프로그램이 예외 상황으로 인해 종료되는 것을 방지하는 과정으로 예외가 발생할 때 실행할 코드를 지정하고,정상적으로 코드를 계속 실행할 수 있게 한다. \n\n줄바꿈: 라인 끝을 표기하기 위해 파일이나 문자열에 사용되는 특수 문자. \n\n파이썬다움(Pythonic): 파이썬에서 우아하게 작동하는 기술. “try와 catch를 사용하는 것은 파일이 없는 경우를 복구하는 파이썬스러운 방식이다.” \n\n품질 보증(Quality Assurance, QA): 소프트웨어 제품의 전반적인 품질을 보증하는 데 집중하는 사람이나 조직. 품질 보증은 소프트웨어 제품을 시험하고, 제품이 시장에 출시되기 전에 문제를 확인하는 데 관여한다. \n\n텍스트 파일: 하드디스크 같은 영구 저장소에 저장된 일련의 문자 집합.",
+    "section": "\n9.11 용어 정의",
+    "text": "9.11 용어 정의\n\n\n잡기(catch): tryCatch 함수를 사용하여 프로그램이 예외 상황으로 인해 종료되는 것을 방지하는 과정으로 예외가 발생할 때 실행할 코드를 지정하고,정상적으로 코드를 계속 실행할 수 있게 한다. \n\n줄바꿈: 라인 끝을 표기하기 위해 파일이나 문자열에 사용되는 특수 문자. \n\n파이썬다움(Pythonic): 파이썬에서 우아하게 작동하는 기술. “try와 catch를 사용하는 것은 파일이 없는 경우를 복구하는 파이썬스러운 방식이다.” \n\n품질 보증(Quality Assurance, QA): 소프트웨어 제품의 전반적인 품질을 보증하는 데 집중하는 사람이나 조직. 품질 보증은 소프트웨어 제품을 시험하고, 제품이 시장에 출시되기 전에 문제를 확인하는 데 관여한다. \n\n텍스트 파일: 하드디스크 같은 영구 저장소에 저장된 일련의 문자 집합.",
     "crumbs": [
       "**2부** 자료구조",
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>파일</span>"
@@ -804,7 +804,7 @@
     "href": "13-list.html",
     "title": "10  리스트",
     "section": "",
-    "text": "10.1 리스트는 시퀀스다\n문자열처럼, 리스트(list)는 값의 시퀀스다. 문자열에서, 값은 문자지만, 리스트에서는 임의 자료형(type)도 될 수 있다. 리스트 값은 요소(elements)나 때때로 항목(items)으로 불린다.\n신규 리스트를 생성하는 방법은 여러 가지가 있다. 가장 간단한 방법은 list() 함수로 요소를 감싸는 것이다.\n첫 번째 예제는 4개 정수 리스트다. 두번째 예제는 3개 문자열 리스트다. 세 번째 예제는 한글 문자열 리스트다. 리스트 문자열 요소가 동일한 자료형(type)일 필요는 없다. 다음 리스트는 문자열, 부동 소수점 숫자, 정수, (아!) 또 다른 리스트를 담고 있다.\n또 다른 리스트 내부에 리스트가 중첩(nested)되어 있다.\n어떤 요소도 담고 있지 않는 리스트를 빈 리스트(empty list)라고 부르고, list()로 생성한다.\n예상했듯이, 리스트 값을 변수에 대입할 수 있다.",
+    "text": "10.1 리스트는 시퀀스다\n프로그래밍에서 여러 값을 하나로 묶어 관리해야 하는 상황은 매우 흔하다. 파일에서 읽어온 데이터 라인들, 사용자로부터 입력받은 숫자들, 웹에서 가져온 항목들 모두 리스트로 저장하고 처리한다. 리스트는 데이터를 순서대로 저장하고, 반복 처리하고, 필터링하는 가장 기본적인 도구다.\n리스트의 개념과 조작 방법을 이해하면, AI에게 데이터 처리 작업을 요청할 때 “리스트에서 조건에 맞는 요소만 필터링해줘”, “각 요소에 함수를 적용해줘”와 같은 명확한 요구사항을 전달할 수 있다.\n문자열처럼, 리스트(list)는 값의 시퀀스다. 문자열에서, 값은 문자지만, 리스트에서는 임의 자료형(type)도 될 수 있다. 리스트 값은 요소(elements)나 때때로 항목(items)으로 불린다.\n신규 리스트를 생성하는 방법은 여러 가지가 있다. 가장 간단한 방법은 list() 함수로 요소를 감싸는 것이다.\n첫 번째 예제는 4개 정수 리스트다. 두번째 예제는 3개 문자열 리스트다. 세 번째 예제는 한글 문자열 리스트다. 리스트 문자열 요소가 동일한 자료형(type)일 필요는 없다. 다음 리스트는 문자열, 부동 소수점 숫자, 정수, (아!) 또 다른 리스트를 담고 있다.\n또 다른 리스트 내부에 리스트가 중첩(nested)되어 있다.\n어떤 요소도 담고 있지 않는 리스트를 빈 리스트(empty list)라고 부르고, list()로 생성한다.\n예상했듯이, 리스트 값을 변수에 대입할 수 있다.",
     "crumbs": [
       "**2부** 자료구조",
       "<span class='chapter-number'>10</span>  <span class='chapter-title'>리스트</span>"
@@ -957,8 +957,8 @@
     "objectID": "13-list.html#r-list-terminology",
     "href": "13-list.html#r-list-terminology",
     "title": "10  리스트",
-    "section": "\n10.14 용어 정의",
-    "text": "10.14 용어 정의\n\n\n에일리어싱(aliasing): 하나 혹은 그 이상의 변수가 동일한 객체를 참조하는 상황. \n\n구분자(delimiter): 문자열이 어디서 분할되어야 할지를 표기하기 위해서 사용되는 문자나 문자열. \n\n요소(element): 리스트 혹은 다른 시퀀스 값의 하나로 항목(item)이라고도 한다. \n\n동등한(equivalent): 같은 값을 가짐. \n\n인덱스(index): 리스트의 요소를 지칭하는 정수 값. \n\n\n동일한(identical): 동등을 함축하는 같은 객체임. \n\n리스트(list): 시퀀스 값. \n\n리스트 순회(list traversal): 리스트의 각 요소를 순차적으로 접근함. \n\n중첩 리스트(nested list): 또 다른 리스트의 요소인 리스트. \n\n객체(object): 변수가 참조할 수 있는 무엇. 객체는 자료형(type)과 값(value)을 가진다. \n\n참조(reference): 변수와 값의 연관.",
+    "section": "\n10.15 용어 정의",
+    "text": "10.15 용어 정의\n\n\n에일리어싱(aliasing): 하나 혹은 그 이상의 변수가 동일한 객체를 참조하는 상황. \n\n구분자(delimiter): 문자열이 어디서 분할되어야 할지를 표기하기 위해서 사용되는 문자나 문자열. \n\n요소(element): 리스트 혹은 다른 시퀀스 값의 하나로 항목(item)이라고도 한다. \n\n동등한(equivalent): 같은 값을 가짐. \n\n인덱스(index): 리스트의 요소를 지칭하는 정수 값. \n\n\n동일한(identical): 동등을 함축하는 같은 객체임. \n\n리스트(list): 시퀀스 값. \n\n리스트 순회(list traversal): 리스트의 각 요소를 순차적으로 접근함. \n\n중첩 리스트(nested list): 또 다른 리스트의 요소인 리스트. \n\n객체(object): 변수가 참조할 수 있는 무엇. 객체는 자료형(type)과 값(value)을 가진다. \n\n참조(reference): 변수와 값의 연관.",
     "crumbs": [
       "**2부** 자료구조",
       "<span class='chapter-number'>10</span>  <span class='chapter-title'>리스트</span>"
@@ -980,7 +980,7 @@
     "href": "14-dictionaries.html",
     "title": "11  딕셔너리",
     "section": "",
-    "text": "11.1 명칭을 갖는 리스트\n명칭을 갖는 리스트(named list)는 딕셔너리로 더 잘 알려져 있고, 딕셔너리(dictionary)는 리스트와 유사하지만 좀 더 일반적이다. 리스트에서 위치(인덱스)가 정수이지만, 딕셔너리에서 인덱스는 임의 자료형(type)이 될 수 있다.\n딕셔너리를 인덱스 집합(키(keys)라고 부름)에서 값(value) 집합으로 사상(mapping)하는 것으로 생각할 수 있다. 각각의 키는 값에 대응한다. 키와 값을 연관시키는 것을 키-값 페어(key-value pair)라고 부르고, 종종 항목(item)으로도 부른다.\n한 예제로, 영어 단어에서 한국어 단어로 매핑되는 사전을 만들 것이다. 키와 값은 모두 문자열이다.\nlist 함수는 항목이 전혀 없는 리스트를 신규로 생성한다. list는 내장함수명이기 때문에 변수명으로 사용하는 것을 피해야 한다.\nlist()는 빈 리스트임을 나타낸다. 리스트에 신규 요소를 추가하기 위해서 list() 함수 내부에 '명칭'='값'과 같이 명칭과 값을 지정한다. 상기 코드는 키(명칭) 'one'에서 값 '하나'를 매핑하는 항목을 생성한다. 명칭을 갖는 리스트를 다시 출력하면, 키-값 페어(key-value pair)를 볼 수 있다.\n다수 키-값을 갖는 명칭을 갖는 리스트를 제작할 경우 순차적으로 작성하고 list()로 감싼다.예를 들어, 세개 항목을 가진 명칭을 갖는 리스트를 생성할 수 있다. eng2kr을 출력하면 다음과 같다.\n명칭을 갖는 리스트에서 키를 사용해서 상응하는 값을 찾을 수 있다.\n'two' 키는 항상 값 '둘'에 상응되어서 명칭을 갖는 리스트 항목 순서는 문제가 되지 않는다. 만약 키가 리스트에 존재하지 않으면, NULL 값을 반환한다. length() 함수를 리스트에 사용하여 키-값 페어(key-value pair) 항목 개수를 파악할 수 있다.\n%in% 연산자는 명칭을 갖는 리스트에 키(Key, 명칭)가 있는지 알려준다. %in% 연산자는 각 항목마다 키(명칭)가 있는지 참/거짓으로 알려주기 때문에 any()와 결합해서 사용하게 되면 리스트에 키가 있는지 없는지만 확인할 때 요긴하다. \\index{%in% 연산자} \\index{연산자!%in%}\n이번에는 리스트에 값이 있는지를 확인해보자. unlist() 함수를 사용해서 값을 얻은 후에 %in% 연산자를 사용해서 값이 있는지를 확인할 수 있다.\n“둘” 값을 갖는 항목이 있는지를 %in% 연산자를 사용해서 확인했다. 조금 확장해서 “둘”, “셋”이 있는지도 없는지도 쉽게 확인할 수 있다.",
+    "text": "11.1 명칭을 갖는 리스트\n현대 프로그래밍에서 딕셔너리(키-값 쌍)는 가장 중요한 자료구조 중 하나다. 웹 API에서 데이터를 가져오면 대부분 JSON 형식인데, JSON의 기본 구조가 바로 딕셔너리다. 설정 파일, 사용자 정보, 데이터베이스 조회 결과 등 거의 모든 곳에서 키-값 구조를 만난다.\n딕셔너리의 개념을 이해하면, AI에게 “JSON 데이터에서 특정 필드를 추출해줘”, “사용자 정보를 딕셔너리로 구성해줘”와 같은 요청을 명확하게 전달할 수 있다.\n명칭을 갖는 리스트(named list)는 딕셔너리로 더 잘 알려져 있고, 딕셔너리(dictionary)는 리스트와 유사하지만 좀 더 일반적이다. 리스트에서 위치(인덱스)가 정수이지만, 딕셔너리에서 인덱스는 임의 자료형(type)이 될 수 있다.\n딕셔너리를 인덱스 집합(키(keys)라고 부름)에서 값(value) 집합으로 사상(mapping)하는 것으로 생각할 수 있다. 각각의 키는 값에 대응한다. 키와 값을 연관시키는 것을 키-값 페어(key-value pair)라고 부르고, 종종 항목(item)으로도 부른다.\n한 예제로, 영어 단어에서 한국어 단어로 매핑되는 사전을 만들 것이다. 키와 값은 모두 문자열이다.\nlist 함수는 항목이 전혀 없는 리스트를 신규로 생성한다. list는 내장함수명이기 때문에 변수명으로 사용하는 것을 피해야 한다.\nlist()는 빈 리스트임을 나타낸다. 리스트에 신규 요소를 추가하기 위해서 list() 함수 내부에 '명칭'='값'과 같이 명칭과 값을 지정한다. 상기 코드는 키(명칭) 'one'에서 값 '하나'를 매핑하는 항목을 생성한다. 명칭을 갖는 리스트를 다시 출력하면, 키-값 페어(key-value pair)를 볼 수 있다.\n다수 키-값을 갖는 명칭을 갖는 리스트를 제작할 경우 순차적으로 작성하고 list()로 감싼다.예를 들어, 세개 항목을 가진 명칭을 갖는 리스트를 생성할 수 있다. eng2kr을 출력하면 다음과 같다.\n명칭을 갖는 리스트에서 키를 사용해서 상응하는 값을 찾을 수 있다.\n'two' 키는 항상 값 '둘'에 상응되어서 명칭을 갖는 리스트 항목 순서는 문제가 되지 않는다. 만약 키가 리스트에 존재하지 않으면, NULL 값을 반환한다. length() 함수를 리스트에 사용하여 키-값 페어(key-value pair) 항목 개수를 파악할 수 있다.\n%in% 연산자는 명칭을 갖는 리스트에 키(Key, 명칭)가 있는지 알려준다. %in% 연산자는 각 항목마다 키(명칭)가 있는지 참/거짓으로 알려주기 때문에 any()와 결합해서 사용하게 되면 리스트에 키가 있는지 없는지만 확인할 때 요긴하다. \\index{%in% 연산자} \\index{연산자!%in%}\n이번에는 리스트에 값이 있는지를 확인해보자. unlist() 함수를 사용해서 값을 얻은 후에 %in% 연산자를 사용해서 값이 있는지를 확인할 수 있다.\n“둘” 값을 갖는 항목이 있는지를 %in% 연산자를 사용해서 확인했다. 조금 확장해서 “둘”, “셋”이 있는지도 없는지도 쉽게 확인할 수 있다.",
     "crumbs": [
       "**2부** 자료구조",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>딕셔너리</span>"
@@ -1056,8 +1056,8 @@
     "objectID": "14-dictionaries.html#r-dictionaries-terminology",
     "href": "14-dictionaries.html#r-dictionaries-terminology",
     "title": "11  딕셔너리",
-    "section": "\n11.7 용어 정의",
-    "text": "11.7 용어 정의\n\n\n명칭있는 리스트/딕셔너리(dictionary): 키(key)에서 해당 값으로 매핑(mapping) \n\n해시테이블(hashtable): 파이썬 딕셔너리를 구현하기 위해 사용된 알고리즘 \n\n해시 함수(hash function): 키에 대한 위치를 계산하기 위해서 해시테이블에서 사용되는 함수 \n\n히스토그램(histogram): 계수기(counter) 집합. \n\n\n구현(implementation): 연산(computation)을 수행하는 방법 \n\n항목(item): 키-값 페어(key-value pair)에 대한 또 다른 이름. \n\n키(key): 키-값 페어(key-value pair)의 첫 번째 부분으로 딕셔너리에 나타나는 객체. \n\n키-값 페어(key-value pair): 키에서 값으로 매핑 표현. \n\n룩업(lookup): 키를 가지고 해당 값을 찾는 딕셔너리 연산. \n\n중첩 루프(nested loops): 루프 “내부”에 하나 혹은 그 이상의 루프가 있음. 외곽 루프가 1회 실행될 때, 내부 루프는 전체 반복을 완료함. \n\n값(value):키-값 페어(key-value pair)의 두 번째 부분으로 딕셔너리에 나타나는 객체. 앞에서 사용한 단어 “값(value)”보다 더 구체적이다.",
+    "section": "\n11.8 용어 정의",
+    "text": "11.8 용어 정의\n\n\n명칭있는 리스트/딕셔너리(dictionary): 키(key)에서 해당 값으로 매핑(mapping) \n\n해시테이블(hashtable): 파이썬 딕셔너리를 구현하기 위해 사용된 알고리즘 \n\n해시 함수(hash function): 키에 대한 위치를 계산하기 위해서 해시테이블에서 사용되는 함수 \n\n히스토그램(histogram): 계수기(counter) 집합. \n\n\n구현(implementation): 연산(computation)을 수행하는 방법 \n\n항목(item): 키-값 페어(key-value pair)에 대한 또 다른 이름. \n\n키(key): 키-값 페어(key-value pair)의 첫 번째 부분으로 딕셔너리에 나타나는 객체. \n\n키-값 페어(key-value pair): 키에서 값으로 매핑 표현. \n\n룩업(lookup): 키를 가지고 해당 값을 찾는 딕셔너리 연산. \n\n중첩 루프(nested loops): 루프 “내부”에 하나 혹은 그 이상의 루프가 있음. 외곽 루프가 1회 실행될 때, 내부 루프는 전체 반복을 완료함. \n\n값(value):키-값 페어(key-value pair)의 두 번째 부분으로 딕셔너리에 나타나는 객체. 앞에서 사용한 단어 “값(value)”보다 더 구체적이다.",
     "crumbs": [
       "**2부** 자료구조",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>딕셔너리</span>"
@@ -1079,7 +1079,7 @@
     "href": "15-tuples.html",
     "title": "12  튜플(Tuples)",
     "section": "",
-    "text": "12.1 튜플은 불변이다\n다양한 자료형을 갖는 리스트가 튜플(tuple)이다. 튜플(tuple)[^about-tuple]은 리스트와 마찬가지로 순서(sequence) 값이다. 튜플에 저장된 값은 임의 자료형(type)이 될 수 있고, 정수로 색인 된다. 일반적으로 알려진 튜플은 불변(immutable하다는 것이다. 튜플은 비교 가능(comparable)하고 해쉬형(hashable)이다. 따라서, 리스트 값을 정렬할 수 있고, 키 값으로 튜플을 사용할 수 있다.\n[^about-tuple] : 재미난 사실: 단어 ‘’튜플(tuple)’’은 가변 길이 (한배, 두배, 세배, 네배, 다섯배, 여섯배, 일곱배 등) 숫자열에 붙여진 이름에서 유래한다\n구문론적으로, 튜플은 콤마로 구분되는 서로 다른 자료형을 갖는 리스트 값이다.\nt &lt;- list('a', 'b', 'c', 'd', 'e')\n튜플(tuple)이 생성자 이름이기 list이기 때문에 변수명으로 리스트(list) 사용을 피해야 한다.\n대부분의 리스트 연산자는 튜플에서도 사용 가능하다. 꺾쇠 연산자가 요소를 색인한다.\nt[1]\n#&gt; [[1]]\n#&gt; [1] \"a\"\n그리고, 슬라이스 연산자(slice operator)는 요소 범위를 선택한다.\nt[2:3]\n#&gt; [[1]]\n#&gt; [1] \"b\"\n#&gt; \n#&gt; [[2]]\n#&gt; [1] \"c\"\n하지만, 파이썬 튜플 요소 중 하나를 변경하고 하면 오류가 발생하지만, R에서 리스트는 다양한 자료형을 담을 수 있고 변경도 가능하다.\nt[1] &lt;- 'A'\nt\n#&gt; [[1]]\n#&gt; [1] \"A\"\n#&gt; \n#&gt; [[2]]\n#&gt; [1] \"b\"\n#&gt; \n#&gt; [[3]]\n#&gt; [1] \"c\"\n#&gt; \n#&gt; [[4]]\n#&gt; [1] \"d\"\n#&gt; \n#&gt; [[5]]\n#&gt; [1] \"e\"",
+    "text": "12.1 튜플은 불변이다\n여러 값을 묶어서 하나의 단위로 다루는 것은 프로그래밍의 기본이다. 파이썬에서는 불변성을 가진 튜플이 이 역할을 하고, R에서는 다양한 자료형을 담을 수 있는 리스트가 유사한 역할을 한다. 함수에서 여러 값을 반환하거나, 정렬을 위해 키-값 쌍을 만들거나, 데이터를 그룹화할 때 이런 복합 자료구조가 필요하다.\n이 장에서 다루는 패턴을 이해하면, AI에게 “빈도순으로 정렬해줘”, “여러 값을 묶어서 반환해줘”와 같은 요청을 할 때 기대하는 결과를 정확히 전달할 수 있다.\n다양한 자료형을 갖는 리스트가 튜플(tuple)이다. 튜플(tuple)[^about-tuple]은 리스트와 마찬가지로 순서(sequence) 값이다. 튜플에 저장된 값은 임의 자료형(type)이 될 수 있고, 정수로 색인 된다. 일반적으로 알려진 튜플은 불변(immutable하다는 것이다. 튜플은 비교 가능(comparable)하고 해쉬형(hashable)이다. 따라서, 리스트 값을 정렬할 수 있고, 키 값으로 튜플을 사용할 수 있다.\n[^about-tuple] : 재미난 사실: 단어 ‘’튜플(tuple)’’은 가변 길이 (한배, 두배, 세배, 네배, 다섯배, 여섯배, 일곱배 등) 숫자열에 붙여진 이름에서 유래한다\n구문론적으로, 튜플은 콤마로 구분되는 서로 다른 자료형을 갖는 리스트 값이다.\nt &lt;- list('a', 'b', 'c', 'd', 'e')\n튜플(tuple)이 생성자 이름이기 list이기 때문에 변수명으로 리스트(list) 사용을 피해야 한다.\n대부분의 리스트 연산자는 튜플에서도 사용 가능하다. 꺾쇠 연산자가 요소를 색인한다.\nt[1]\n#&gt; [[1]]\n#&gt; [1] \"a\"\n그리고, 슬라이스 연산자(slice operator)는 요소 범위를 선택한다.\nt[2:3]\n#&gt; [[1]]\n#&gt; [1] \"b\"\n#&gt; \n#&gt; [[2]]\n#&gt; [1] \"c\"\n하지만, 파이썬 튜플 요소 중 하나를 변경하고 하면 오류가 발생하지만, R에서 리스트는 다양한 자료형을 담을 수 있고 변경도 가능하다.\nt[1] &lt;- 'A'\nt\n#&gt; [[1]]\n#&gt; [1] \"A\"\n#&gt; \n#&gt; [[2]]\n#&gt; [1] \"b\"\n#&gt; \n#&gt; [[3]]\n#&gt; [1] \"c\"\n#&gt; \n#&gt; [[4]]\n#&gt; [1] \"d\"\n#&gt; \n#&gt; [[5]]\n#&gt; [1] \"e\"",
     "crumbs": [
       "**2부** 자료구조",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>튜플(Tuples)</span>"
@@ -1122,8 +1122,8 @@
     "objectID": "15-tuples.html#r-tuple-terminology",
     "href": "15-tuples.html#r-tuple-terminology",
     "title": "12  튜플(Tuples)",
-    "section": "\n12.5 용어정의",
-    "text": "12.5 용어정의\n\n\n비교가능한(comparable):동일한 자료형의 다른 값과 비교하여 큰지, 작은지, 혹은 같은지를 확인하기 위해서 확인할 수 있는 자료형(type). 비교가능한(comparable) 자료형은 리스트에 넣어서 정렬할 수 있다.\n\n자료 구조(data structure):연관된 값의 집합, 종종 리스트, 딕셔너리, 튜플 등으로 조직화된다.\n\nDSU: “decorate-sort-undecorate,”의 약어로 리스트 튜플을 생성, 정렬, 결과 일부 추출을 포함하는 패턴.\n\n모음(gather): 가변-길이 인자 튜플을 조합하는 연산.\n\n해쉬형(hashable): 해쉬 함수를 가진 자료형(type). 정수, 소수점, 문자열 같은 불변형은 해쉬형이다. 리스트나 딕셔너리 처럼 변경가능한 형은 해쉬형이 아니다.\n\n스캐터(scatter): 순서(sequence)를 리스트 인자로 다루는 연산.\n\n(자료 구조의) 형태: 자료 구조의 자료형(type), 크기, 구성을 요약.\n\n싱글톤(singleton): 단일 요소를 가진 리스트 (혹은 다른 순서(sequence)).\n\n튜플(tuple): 불변 요소들의 순서 (sequence).\n\n튜플 대입(tuple assignment): 오른편 순서(sequence)와 왼편 튜플 변수를 대입. 오른편이 평가되고나서 각 요소들은 왼편의 변수에 대입된다.",
+    "section": "\n12.6 용어정의",
+    "text": "12.6 용어정의\n\n\n비교가능한(comparable):동일한 자료형의 다른 값과 비교하여 큰지, 작은지, 혹은 같은지를 확인하기 위해서 확인할 수 있는 자료형(type). 비교가능한(comparable) 자료형은 리스트에 넣어서 정렬할 수 있다.\n\n자료 구조(data structure):연관된 값의 집합, 종종 리스트, 딕셔너리, 튜플 등으로 조직화된다.\n\nDSU: “decorate-sort-undecorate,”의 약어로 리스트 튜플을 생성, 정렬, 결과 일부 추출을 포함하는 패턴.\n\n모음(gather): 가변-길이 인자 튜플을 조합하는 연산.\n\n해쉬형(hashable): 해쉬 함수를 가진 자료형(type). 정수, 소수점, 문자열 같은 불변형은 해쉬형이다. 리스트나 딕셔너리 처럼 변경가능한 형은 해쉬형이 아니다.\n\n스캐터(scatter): 순서(sequence)를 리스트 인자로 다루는 연산.\n\n(자료 구조의) 형태: 자료 구조의 자료형(type), 크기, 구성을 요약.\n\n싱글톤(singleton): 단일 요소를 가진 리스트 (혹은 다른 순서(sequence)).\n\n튜플(tuple): 불변 요소들의 순서 (sequence).\n\n튜플 대입(tuple assignment): 오른편 순서(sequence)와 왼편 튜플 변수를 대입. 오른편이 평가되고나서 각 요소들은 왼편의 변수에 대입된다.",
     "crumbs": [
       "**2부** 자료구조",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>튜플(Tuples)</span>"
@@ -1133,8 +1133,8 @@
     "objectID": "15-tuples.html#tuple-ex",
     "href": "15-tuples.html#tuple-ex",
     "title": "12  튜플(Tuples)",
-    "section": "\n12.6 연습문제",
-    "text": "12.6 연습문제\n\n앞서 작성한 프로그램을 다음과 같이 수정하세요. “From”라인을 읽고 파싱하여 라인에서 주소를 뽑아내세요. 딕셔너리를 사용하여 각 사람으로부터 메시지 숫자를 계수(count)한다.\n모든 데이터를 읽은 후에 가장 많은 커밋(commit)을 한 사람을 출력하세요. 딕셔너리로부터 리스트 (count, email) 튜플을 생성하고 역순으로 리스트를 정렬한 후에 가장 많은 커밋을 한 사람을 출력하세요.\n\n    Sample Line:\n    From stephen.marquard@uct.ac.za Sat Jan  5 09:14:16 2008\n\n    Enter a file name: mbox-short.txt\n    cwen@iupui.edu 5\n\n    Enter a file name: mbox.txt\n    zqian@umich.edu 195\n\n이번 프로그램은 각 메시지에 대한 하루 중 시간의 분포를 계수(count)한다. “From” 라인으로부터 시간 문자열을 찾고 콜론(:) 문자를 사용하여 문자열을 쪼개서 시간을 추출합니다. 각 시간별로 계수(count)를 누적하고 아래에 보여지듯이 시간 단위로 정렬하여 한 라인에 한시간씩 계수(count)를 출력합니다.\n\n    Sample Execution:\n    Rscript timeofday.R\n    Enter a file name: mbox-short.txt\n    04 3\n    06 1\n    07 1\n    09 2\n    10 3\n    11 6\n    14 1\n    15 2\n    16 4\n    17 2\n    18 1\n    19 1\n\n파일을 읽고, 빈도(frequencey)에 따라 내림차순으로 문자(letters)를 출력하는 프로그램을 작성하세요. 작성한 프로그램은 모든 입력을 소문자로 변환하고 a-z 문자만 계수(count)한다. 공백, 숫자, 문장기호 a-z를 제외한 다른 어떤 것도 계수하지 않습니다. 다른 언어로 구성된 텍스트 샘플을 구해서 언어마다 문자 빈도가 어떻게 변하는지 살펴보세요. 결과를 wikipedia.org/wiki/Letter_frequencies 표와 비교하세요.",
+    "section": "\n12.7 연습문제",
+    "text": "12.7 연습문제\n\n앞서 작성한 프로그램을 다음과 같이 수정하세요. “From”라인을 읽고 파싱하여 라인에서 주소를 뽑아내세요. 딕셔너리를 사용하여 각 사람으로부터 메시지 숫자를 계수(count)한다.\n모든 데이터를 읽은 후에 가장 많은 커밋(commit)을 한 사람을 출력하세요. 딕셔너리로부터 리스트 (count, email) 튜플을 생성하고 역순으로 리스트를 정렬한 후에 가장 많은 커밋을 한 사람을 출력하세요.\n\n    Sample Line:\n    From stephen.marquard@uct.ac.za Sat Jan  5 09:14:16 2008\n\n    Enter a file name: mbox-short.txt\n    cwen@iupui.edu 5\n\n    Enter a file name: mbox.txt\n    zqian@umich.edu 195\n\n이번 프로그램은 각 메시지에 대한 하루 중 시간의 분포를 계수(count)한다. “From” 라인으로부터 시간 문자열을 찾고 콜론(:) 문자를 사용하여 문자열을 쪼개서 시간을 추출합니다. 각 시간별로 계수(count)를 누적하고 아래에 보여지듯이 시간 단위로 정렬하여 한 라인에 한시간씩 계수(count)를 출력합니다.\n\n    Sample Execution:\n    Rscript timeofday.R\n    Enter a file name: mbox-short.txt\n    04 3\n    06 1\n    07 1\n    09 2\n    10 3\n    11 6\n    14 1\n    15 2\n    16 4\n    17 2\n    18 1\n    19 1\n\n파일을 읽고, 빈도(frequencey)에 따라 내림차순으로 문자(letters)를 출력하는 프로그램을 작성하세요. 작성한 프로그램은 모든 입력을 소문자로 변환하고 a-z 문자만 계수(count)한다. 공백, 숫자, 문장기호 a-z를 제외한 다른 어떤 것도 계수하지 않습니다. 다른 언어로 구성된 텍스트 샘플을 구해서 언어마다 문자 빈도가 어떻게 변하는지 살펴보세요. 결과를 wikipedia.org/wiki/Letter_frequencies 표와 비교하세요.",
     "crumbs": [
       "**2부** 자료구조",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>튜플(Tuples)</span>"
@@ -1145,7 +1145,7 @@
     "href": "16-dataframe.html",
     "title": "13  데이터프레임",
     "section": "",
-    "text": "13.1 측정 변수의 구분\n다른 프로그래밍 언어에서 다루지 않는 독특한 자료구조가 데이터프레임(Dataframe)이다. R도 프로그래밍 언어이기 때문에 다른 언어에서 갖고 있는 자료구조를 대부분 갖추고 있지만, 데이터 분석, 시각화, 모형 개발 등에 꼭 필요한 기본 자료구조가 데이터프레임이다. 데이터프레임을 본격적으로 살펴보기 전에 통계학에서 다루는 측정에 대해 살펴보고, 측정 척도(scale)에 대한 이론적 배경을 이해한다. 척도의 개념에 대응되는 R 자료구조를 통해 데이터프레임과 추후 프로그래밍 과정에서 많이 다뤄지는 리스트에 대한 차별점도 살펴본다.\n분석 과정에서 현실 세계의 다양한 사건과 현상들을 관찰하고, 이후 측정 단계를 거쳐 수치나 범주 형태로 자료, 즉 데이터로 생산된다. 이는 복잡한 실제 현상들을 체계적이고 구조화된 데이터로 전환하는 과정으로, 이러한 데이터 분석 과정에서 컴퓨터 활용이 중요하다. 프로그래밍 언어들마다 데이터를 처리하고 관리하기 위한 고유한 자료구조를 가지고 있다. 측정 단계에서 생산된 다양한 데이터를 담아낼 수 있는 자료구조가 데이터프레임이다.\n자료의 고유 특성을 수치화하는 측정 척도로 명목형, 순서형, 구간형, 비율형 4가지 주요 유형으로 분류된다. 측정 척도는 데이터 유형별로 적합한 유의미한 통계량을 결정하는 데 중요한 역할을 한다. [1] [2] [3]",
+    "text": "13.1 측정 변수의 구분\n데이터 분석에서 가장 중요한 자료구조가 데이터프레임이다. CSV 파일, 데이터베이스 쿼리 결과, 엑셀 시트 등 거의 모든 표 형식 데이터가 데이터프레임으로 표현된다. R에서는 data.frame과 tibble, Python에서는 pandas.DataFrame이 이 역할을 한다.\n데이터프레임의 구조와 조작 방법을 이해하면, AI에게 “특정 조건을 만족하는 행을 필터링해줘”, “그룹별 평균을 계산해줘”, “두 데이터프레임을 조인해줘”와 같은 데이터 처리 요청을 명확하게 전달할 수 있다.\n다른 프로그래밍 언어에서 다루지 않는 독특한 자료구조가 데이터프레임(Dataframe)이다. R도 프로그래밍 언어이기 때문에 다른 언어에서 갖고 있는 자료구조를 대부분 갖추고 있지만, 데이터 분석, 시각화, 모형 개발 등에 꼭 필요한 기본 자료구조가 데이터프레임이다. 데이터프레임을 본격적으로 살펴보기 전에 통계학에서 다루는 측정에 대해 살펴보고, 측정 척도(scale)에 대한 이론적 배경을 이해한다. 척도의 개념에 대응되는 R 자료구조를 통해 데이터프레임과 추후 프로그래밍 과정에서 많이 다뤄지는 리스트에 대한 차별점도 살펴본다.\n분석 과정에서 현실 세계의 다양한 사건과 현상들을 관찰하고, 이후 측정 단계를 거쳐 수치나 범주 형태로 자료, 즉 데이터로 생산된다. 이는 복잡한 실제 현상들을 체계적이고 구조화된 데이터로 전환하는 과정으로, 이러한 데이터 분석 과정에서 컴퓨터 활용이 중요하다. 프로그래밍 언어들마다 데이터를 처리하고 관리하기 위한 고유한 자료구조를 가지고 있다. 측정 단계에서 생산된 다양한 데이터를 담아낼 수 있는 자료구조가 데이터프레임이다.\n자료의 고유 특성을 수치화하는 측정 척도로 명목형, 순서형, 구간형, 비율형 4가지 주요 유형으로 분류된다. 측정 척도는 데이터 유형별로 적합한 유의미한 통계량을 결정하는 데 중요한 역할을 한다. [1] [2] [3]",
     "crumbs": [
       "**2부** 자료구조",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>데이터프레임</span>"
@@ -2732,6 +2732,149 @@
     "text": "[1] 이경화, 고등학교 실용통계. 통계청\n통계교육원, 2020.\n\n\n[2] N.\nWiener, “A new theory of measurement: A study in the logic of\nmathematics,” Proceedings of the London Mathematical\nSociety, vol. 2, no. 1, pp. 181–205, 1921.\n\n\n[3] S.\nS. Stevens, “On the theory of scales of measurement,”\nScience, vol. 103, no. 2684, pp. 677–680, 1946.\n\n\n[4] F.\nMarkowetz, “Five selfish reasons to work reproducibly,”\nGenome Biology, vol. 16, no. 1, p. 274, Dec. 2015, doi: 10.1186/s13059-015-0850-7.\n\n\n[5] M.\nBaker, “1,500 scientists lift the lid on reproducibility,”\nNature, vol. 533, no. 7604, pp. 452–454, May 2016, doi: 10.1038/533452a.\n\n\n[6] A.\nVaswani et al., “Attention is all you need,”\nAdvances in neural information processing systems, vol. 30,\n2017.\n\n\n[7] T.\nWu et al., “A brief overview of ChatGPT: The history,\nstatus quo and potential future development,” IEEE/CAA\nJournal of Automatica Sinica, vol. 10, no. 5, pp. 1122–1136,\n2023.\n\n\n[8] T.\nChiang, “ChatGPT is a blurry JPEG of the web,” The New\nYorker, vol. 9, p. 2023, 2023.\n\n\n[9] H.\nWickham, M. Çetinkaya-Rundel, and G. Grolemund, R for data\nscience. \" O’Reilly Media, Inc.\", 2023.\n\n\n[10] R.\nGozalo-Brizuela and E. C. Garrido-Merchan, “ChatGPT is not all you\nneed. A state of the art review of large generative AI models,”\narXiv preprint arXiv:2301.04655, 2023.\n\n\n[11] B.\nMarwick, C. Boettiger, and L. Mullen, “Packaging data analytical\nwork reproducibly using r (and friends),” The American\nStatistician, vol. 72, no. 1, pp. 80–88, 2018.\n\n\n[12] E.\nC. McKiernan et al., “How open science helps researchers\nsucceed,” eLife, vol. 5, p. e16800, 2016, doi: 10.7554/eLife.16800.\n\n\n[13] K.\nBollen, J. T. Cacioppo, R. M. Kaplan, J. A. Krosnick, J. L. Olds, and H.\nDean, “Social, behavioral, and economic sciences perspectives on\nrobust and reliable science,” National Science Foundation,\nDirectorate for Social, Behavioral,; Economic Sciences, Report of the\nSubcommittee on Replicability in Science Advisory Committee to the\nNational Science Foundation, 2015. Available: https://www.nsf.gov/sbe/AC_Materials/SBE_Robust_and_Reliable_Research_Report.pdf\n\n\n[14] J.\nP. Simmons, L. D. Nelson, and U. Simonsohn, “False-positive\npsychology: Undisclosed flexibility in data collection and analysis\nallows presenting anything as significant,” Psychological\nScience, vol. 22, no. 11, pp. 1359–1366, Nov. 2011, doi: 10.1177/0956797611417632.\n\n\n[15] N.\nL. Kerr, “HARKing: Hypothesizing after the results are\nknown,” Personality and Social Psychology Review, vol.\n2, no. 3, pp. 196–217, 1998, doi: 10.1207/s15327957pspr0203_4.\n\n\n[16] L.\nK. John, G. Loewenstein, and D. Prelec, “Measuring the prevalence\nof questionable research practices with incentives for truth\ntelling,” Psychological Science, vol. 23, no. 5, pp.\n524–532, May 2012, doi: 10.1177/0956797611430953.\n\n\n[17] M.\nD. Wilkinson et al., “The FAIR guiding principles for\nscientific data management and stewardship,” Scientific\nData, vol. 3, no. 1, p. 160018, 2016, doi: 10.1038/sdata.2016.18.\n\n\n[18] R.\nGentleman and D. Temple Lang, “Statistical analyses and\nreproducible research,” Bioconductor Project, Working Paper 2,\nMay 2004. Available: https://biostats.bepress.com/bioconductor/paper2/\n\n\n[19] J.\nF. Claerbout and M. Karrenbach, “Electronic documents give\nreproducible research a new meaning,” in SEG technical\nprogram expanded abstracts, New Orleans, Louisiana: Society of\nExploration Geophysicists, 1992, pp. 601–604. doi: 10.1190/1.1822162.\n\n\n[20] H.\nA. Piwowar, R. S. Day, and D. B. Fridsma, “Sharing detailed\nresearch data is associated with increased citation rate,”\nPLoS ONE, vol. 2, no. 3, p. e308, Mar. 2007, doi: 10.1371/journal.pone.0000308.\n\n\n[21] H.\nA. Piwowar and T. J. Vision, “Data reuse and the open data\ncitation advantage,” PeerJ, vol. 1, p. e175, 2013, doi:\n10.7717/peerj.175.\n\n\n[22] A.\nM. Pienta, G. C. Alter, and J. A. Lyle, “The enduring value of\nsocial science research: The use and reuse of primary research\ndata,” in The organisation, economics and policy of\nscientific research workshop, Torino, Italy, 2010. Available: https://deepblue.lib.umich.edu/handle/2027.42/78307\n\n\n[23] V.\nStodden, “The legal framework for reproducible scientific\nresearch: Licensing and copyright,” Computing in Science\n& Engineering, vol. 11, no. 1, pp. 35–40, 2009, doi: 10.1109/MCSE.2009.19.\n\n\n[24] M.\nKlein et al., “Scholarly context not found: One in five\narticles suffers from reference rot,” PLoS ONE, vol. 9,\nno. 12, p. e115253, 2014, doi: 10.1371/journal.pone.0115253.\n\n\n[25] A.\nH. C. van Kampen et al., “ENCORE: A\npractical implementation to improve reproducibility and transparency of\ncomputational research,” Nature Communications, vol. 15,\nno. 1, p. 8117, Sep. 2024, doi: 10.1038/s41467-024-52446-8.\n\n\n[26] The Turing Way Community, The turing way: A\nhandbook for reproducible, ethical and collaborative research.\nZenodo, 2024. doi: 10.5281/zenodo.3233853.\n\n\n[27] M.\nJones, “Introducing reproducible research standards at the world\nbank,” Harvard Data Science Review, vol. 6, no. 4, Oct.\n2024, doi: 10.1162/99608f92.21328ce3.\n\n\n[28] G.\nWilson, J. Bryan, K. Cranston, J. Kitzes, L. Nederbragt, and T. K. Teal,\n“Good enough practices in scientific computing,” PLOS\nComputational Biology, vol. 13, no. 6, p. e1005510, 2017, doi: 10.1371/journal.pcbi.1005510.\n\n\n[29] A.\nRule et al., “Ten simple rules for writing and sharing\ncomputational analyses in jupyter notebooks,” PLOS\nComputational Biology, vol. 15, no. 7, p. e1007007, 2019, doi: 10.1371/journal.pcbi.1007007.\n\n\n[30] J.\nF. Pimentel, L. Murta, V. Braganholo, and J. Freire, “A\nlarge-scale study about quality and reproducibility of jupyter\nnotebooks,” in Proceedings of the 16th international\nconference on mining software repositories (MSR), IEEE, 2019, pp.\n507–517. doi: 10.1109/MSR.2019.00077.\n\n\n[31] T.\nKluyver et al., “Jupyter notebooks – a publishing format\nfor reproducible computational workflows,” in Positioning and\npower in academic publishing: Players, agents and agendas, IOS\nPress, 2016, pp. 87–90. doi: 10.3233/978-1-61499-649-1-87.\n\n\n[32] Aakanksha, P. Kumari, M. Thakur, and S.\nChakraborty, “Natural language outlines for code: Literate\nprogramming in the LLM era,” Proceedings of the ACM\nInternational Conference on the Foundations of Software Engineering\n(FSE), 2024, doi: 10.1145/3696630.3728541.\n\n\n[33] Y.\nZhu et al., “Renaissance of literate programming in the\nera of LLMs: Enhancing LLM-based code generation in large-scale\nprojects,” arXiv preprint, 2024, Available: https://arxiv.org/abs/2502.17441\n\n\n[34] R.\nSouza et al., “Workflow provenance in the computing\ncontinuum for responsible, trustworthy, and energy-efficient AI,”\nin IEEE international conference on e-science, 2024.\n\n\n[35] R.\nSouza et al., “PROV-AGENT: Unified provenance for\ntracking AI agent interactions in agentic workflows,” 5th\nWorkshop on Reproducible Workflows, Data Management, and Security,\n2024.\n\n\n[36] H.\nChen, R. Souza, et al., “The (r)evolution of scientific\nworkflows in the agentic AI era: Towards autonomous science,”\nProceedings of the SC ’25 Workshops, 2025, doi: 10.1145/3731599.3767580.",
     "crumbs": [
       "참고문헌"
+    ]
+  },
+  {
+    "objectID": "11-string.html#r-string-ai",
+    "href": "11-string.html#r-string-ai",
+    "title": "9  문자열",
+    "section": "\n9.13 AI와 함께하는 문자열 처리",
+    "text": "9.13 AI와 함께하는 문자열 처리\n문자열 처리는 AI 코딩 도구가 특히 강점을 발휘하는 영역이다. 복잡한 텍스트 변환, 패턴 추출, 데이터 정제 작업을 AI에게 요청할 때 다음과 같은 명세 패턴을 활용한다.\n\n9.13.1 명세 작성 패턴\nAI에게 문자열 처리를 요청할 때 포함해야 할 정보:\n\n\n입력 데이터 형태: 처리할 문자열의 구조와 예시\n\n원하는 출력 형태: 기대하는 결과물의 형태와 예시\n\n경계 조건: 빈 문자열, 특수문자, 다국어 등 예외 상황\n\n9.13.2 프롬프트 예시\n이메일 주소 추출\n\n다음 형식의 로그 라인에서 도메인(뒤? 부분)만 추출하는 R/Python 함수를 작성해줘.\n입력 예시: \"From user@example.com Sat Jan 5 09:14:16 2008\"\n출력 예시: \"example.com\"\n조건: 이메일이 없는 라인은 빈 문자열 반환\n\n텍스트 정규화\n\n사용자 입력 문자열을 정규화하는 함수가 필요해.\n\n앞뒤 공백 제거\n연속된 공백은 하나로\n모두 소문자로 변환\n\n입력: \"  Hello   WORLD  \"\n출력: \"hello world\"\n\n패턴 기반 분리\n\nCSV 형식이 아닌 고정 너비 텍스트 파일을 파싱해야 해.\n형식: 이름(20자) + 나이(3자) + 도시(15자)\n예시 라인: \"홍길동              025서울           \"\n결과: 리스트나 데이터프레임으로 분리\n\n이처럼 구체적인 입출력 예시와 경계 조건을 명시하면, AI가 정확한 코드를 생성할 가능성이 높아진다. 앞서 배운 슬라이싱, 문자열 함수, 정규표현식 개념을 알고 있으면 AI가 생성한 코드를 검증하고 수정하는 것도 수월해진다.",
+    "crumbs": [
+      "**2부** 자료구조",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>문자열</span>"
+    ]
+  },
+  {
+    "objectID": "12-file.html#r-file-ai",
+    "href": "12-file.html#r-file-ai",
+    "title": "9  파일",
+    "section": "\n9.10 AI와 함께하는 파일 처리",
+    "text": "9.10 AI와 함께하는 파일 처리\n파일 처리는 반복적이고 패턴이 명확한 작업이 많아 AI 코딩 도구를 활용하기 좋은 영역이다. 특히 대용량 파일 처리, 복잡한 형식 파싱, 다중 파일 일괄 처리 등에서 AI의 도움이 유용하다.\n\n9.10.1 명세 작성 패턴\nAI에게 파일 처리를 요청할 때 포함해야 할 정보:\n\n\n파일 형식: 텍스트/바이너리, 인코딩, 구분자\n\n처리 방식: 전체 읽기 vs 스트리밍, 청크 크기\n\n예외 처리: 파일 없음, 권한 오류, 인코딩 오류\n\n9.10.2 프롬프트 예시\n로그 파일 분석\n\n수백 MB 크기의 서버 로그 파일에서 ERROR 패턴이 포함된 라인만 추출하는 R/Python 함수를 작성해줘.\n조건: - 파일이 너무 커서 한 번에 메모리에 올릴 수 없음 - 한 줄씩 읽으면서 처리 - 결과는 별도 파일로 저장\n입력: server.log\n출력: errors.log\n\n다중 파일 병합\n\n특정 폴더에 있는 모든 CSV 파일을 하나로 합치는 스크립트가 필요해.\n\n헤더는 첫 번째 파일에서만 가져오기\n파일명을 새 컬럼으로 추가\n빈 파일은 건너뛰기\n\n폴더: data/monthly/\n출력: data/combined.csv\n\n형식 변환\n\nJSON 파일을 읽어서 CSV로 변환하는 함수를 작성해줘.\nJSON 구조:\n[{\"name\": \"홍길동\", \"age\": 30, \"city\": \"서울\"}, ...]\n조건: 중첩된 객체가 있으면 문자열로 평탄화\n\n이처럼 파일 형식, 크기 제약, 예외 상황을 명확히 전달하면 AI가 적절한 처리 전략(스트리밍, 청크 처리, 예외 처리)을 적용한 코드를 생성한다.",
+    "crumbs": [
+      "**2부** 자료구조",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>파일</span>"
+    ]
+  },
+  {
+    "objectID": "13-list.html#r-list-ai",
+    "href": "13-list.html#r-list-ai",
+    "title": "10  리스트",
+    "section": "\n10.14 AI와 함께하는 리스트 처리",
+    "text": "10.14 AI와 함께하는 리스트 처리\n리스트 처리는 데이터 분석과 프로그래밍의 핵심이다. AI에게 리스트 관련 작업을 요청할 때는 입력 데이터의 구조, 처리 방식, 기대 출력을 명확히 전달해야 한다.\n\n10.14.1 명세 작성 패턴\nAI에게 리스트 처리를 요청할 때 포함해야 할 정보:\n\n\n입력 데이터: 리스트의 요소 타입과 예시\n\n처리 방식: 필터링, 변환, 집계 등\n\n출력 형태: 결과 리스트, 단일 값, 또는 다른 자료구조\n\n10.14.2 프롬프트 예시\n조건부 필터링\n\n정수 리스트에서 짝수만 추출하는 R/Python 함수를 작성해줘.\n입력: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\n출력: [2, 4, 6, 8, 10]\n조건: 빈 리스트 입력 시 빈 리스트 반환\n\n리스트 변환\n\n문자열 리스트의 각 요소를 대문자로 변환하고 길이순으로 정렬하는 함수가 필요해.\n입력: [\"apple\", \"banana\", \"kiwi\", \"strawberry\"]\n출력: [\"KIWI\", \"APPLE\", \"BANANA\", \"STRAWBERRY\"]\n\n중첩 리스트 처리\n\n2차원 리스트(행렬)에서 각 행의 합계를 구하는 함수를 작성해줘.\n입력: [[1, 2, 3], [4, 5, 6], [7, 8, 9]]\n출력: [6, 15, 24]\n조건: 행 길이가 다를 수 있음\n\n리스트 집계\n\n단어 리스트에서 가장 자주 등장하는 단어 상위 3개를 찾아줘.\n입력: 텍스트 파일에서 읽어온 단어 리스트\n출력: 튜플 리스트 [(\"the\", 45), (\"and\", 32), (\"is\", 28)]\n\n이처럼 구체적인 입출력 예시를 제공하면, AI가 정확한 로직을 구현한다. 앞서 배운 순회, 슬라이싱, 리스트 함수 개념을 알고 있으면 AI가 생성한 코드가 올바른지 검증하기 수월하다.",
+    "crumbs": [
+      "**2부** 자료구조",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>리스트</span>"
+    ]
+  },
+  {
+    "objectID": "14-dictionaries.html#r-dictionaries-ai",
+    "href": "14-dictionaries.html#r-dictionaries-ai",
+    "title": "11  딕셔너리",
+    "section": "\n11.7 AI와 함께하는 딕셔너리 처리",
+    "text": "11.7 AI와 함께하는 딕셔너리 처리\n딕셔너리는 JSON 데이터 처리, API 응답 파싱, 설정 관리 등 실무에서 핵심적인 역할을 한다. AI에게 딕셔너리 관련 작업을 요청할 때는 데이터 구조와 기대 결과를 명확히 전달해야 한다.\n\n11.7.1 명세 작성 패턴\nAI에게 딕셔너리 처리를 요청할 때 포함해야 할 정보:\n\n\n데이터 구조: 키와 값의 타입, 중첩 여부\n\n처리 방식: 조회, 변환, 필터링, 집계\n\nJSON 연계: API 응답 형식, 필요한 필드\n\n11.7.2 프롬프트 예시\nJSON 데이터 파싱\n\n다음 JSON API 응답에서 사용자 이름과 이메일만 추출하는 R/Python 함수를 작성해줘.\n{\"users\": [{\"id\": 1, \"name\": \"홍길동\", \"email\": \"hong@test.com\", \"age\": 30}, ...]}\n출력: [{\"name\": \"홍길동\", \"email\": \"hong@test.com\"}, ...]\n조건: users 배열이 비어있으면 빈 리스트 반환\n\n단어 빈도 계산\n\n텍스트 파일에서 단어 빈도를 계산하고 상위 10개를 반환하는 함수가 필요해.\n조건: - 대소문자 구분 없음 - 구두점 제거 - 결과: [(\"the\", 45), (\"and\", 32), ...] 형식\n입력: 텍스트 파일 경로\n출력: 튜플 리스트 (단어, 빈도)\n\n설정 파일 처리\n\nYAML 설정 파일을 읽어서 특정 섹션의 값을 업데이트하는 함수를 작성해줘.\n입력: - 파일 경로 - 섹션 이름 (예: “database”) - 업데이트할 키-값 쌍\n조건: 섹션이 없으면 새로 생성\n\n중첩 딕셔너리 평탄화\n\n중첩된 딕셔너리를 평탄한 딕셔너리로 변환해줘.\n입력: {\"user\": {\"name\": \"홍길동\", \"address\": {\"city\": \"서울\"}}}\n출력: {\"user.name\": \"홍길동\", \"user.address.city\": \"서울\"}\n\n이처럼 실제 데이터 구조 예시와 기대 출력 형식을 제공하면, AI가 정확한 딕셔너리 조작 코드를 생성한다. 앞서 배운 키-값 접근, 루프 순회, 중첩 구조 개념을 알고 있으면 생성된 코드를 쉽게 검증할 수 있다.",
+    "crumbs": [
+      "**2부** 자료구조",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>딕셔너리</span>"
+    ]
+  },
+  {
+    "objectID": "15-tuples.html#r-tuple-ai",
+    "href": "15-tuples.html#r-tuple-ai",
+    "title": "12  튜플(Tuples)",
+    "section": "\n12.5 AI와 함께하는 복합 자료구조 처리",
+    "text": "12.5 AI와 함께하는 복합 자료구조 처리\n복합 자료구조(튜플, 리스트의 리스트 등)는 빈도 분석, 정렬, 그룹화 등 다양한 작업에 활용된다. AI에게 이런 작업을 요청할 때는 데이터의 구조와 기대하는 출력 형태를 명확히 전달한다.\n\n12.5.1 명세 작성 패턴\nAI에게 복합 자료구조 처리를 요청할 때 포함해야 할 정보:\n\n\n입력 구조: 데이터의 형태 (리스트, 딕셔너리, 중첩 구조)\n\n처리 방식: 정렬 기준, 그룹화 방법, 집계 함수\n\n출력 형태: 튜플 리스트, 딕셔너리, 데이터프레임 등\n\n12.5.2 프롬프트 예시\n빈도 기반 정렬\n\n텍스트에서 단어 빈도를 계산하고 빈도순으로 내림차순 정렬해줘.\n입력: 텍스트 문자열 또는 파일\n출력: [(\"the\", 45), (\"and\", 32), (\"is\", 28), ...]\n조건: - 대소문자 무시 - 구두점 제거 - 상위 N개만 반환\n\n다중 값 반환\n\n리스트의 통계값(최소, 최대, 평균, 중앙값)을 한 번에 계산해서 반환하는 함수를 작성해줘.\n입력: 숫자 리스트 [1, 2, 3, 4, 5]\n출력: 명명된 리스트 list(min=1, max=5, mean=3, median=3)\n\n복합 키 정렬\n\n학생 정보 리스트를 학년순, 같은 학년 내에서는 점수 내림차순으로 정렬해줘.\n입력: [{\"name\": \"홍길동\", \"grade\": 3, \"score\": 85}, ...]\n출력: 정렬된 리스트\n\n이처럼 복합 자료구조 작업을 명세할 때는 정렬 기준이나 그룹화 방법을 구체적으로 제시하면 AI가 정확한 코드를 생성한다. DSU(Decorate-Sort-Undecorate) 패턴이나 다중 키 정렬 같은 개념을 알고 있으면 결과 검증도 수월하다.",
+    "crumbs": [
+      "**2부** 자료구조",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>튜플(Tuples)</span>"
+    ]
+  },
+  {
+    "objectID": "16-dataframe.html#sec-dataframe-ai",
+    "href": "16-dataframe.html#sec-dataframe-ai",
+    "title": "13  데이터프레임",
+    "section": "\n13.9 AI와 함께하는 데이터프레임 처리",
+    "text": "13.9 AI와 함께하는 데이터프레임 처리\n데이터프레임은 행과 열로 구성된 표 형식 데이터의 표준이다. AI에게 데이터프레임 작업을 요청할 때는 입력 데이터의 구조, 원하는 변환 작업, 출력 형태를 명확히 전달해야 한다.\n명세 작성 패턴\n\n데이터프레임의 구조(열 이름, 자료형, 샘플 데이터) 제시\n필터링, 그룹화, 조인 등 원하는 변환 작업 기술\n결과 데이터프레임의 예상 형태 설명\n\n프롬프트 예시\n\n“sales 데이터프레임에서 region이 ’Seoul’이고 amount가 10000 이상인 행만 추출하는 R/Python 코드를 작성해줘”\n“customers와 orders 두 데이터프레임을 customer_id로 조인해서 고객별 총 주문금액을 계산하는 코드를 작성해줘”\n“월별 매출 데이터가 wide format인데, long format으로 변환하고 싶어. tidyr/pandas를 사용해줘”\n“NA 값이 포함된 데이터프레임에서 결측치를 그룹별 평균으로 대체하는 방법을 알려줘”",
+    "crumbs": [
+      "**2부** 자료구조",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>데이터프레임</span>"
+    ]
+  },
+  {
+    "objectID": "10-data-intro.html",
+    "href": "10-data-intro.html",
+    "title": "8  데이터, AI의 식량",
+    "section": "",
+    "text": "8.1 데이터의 두 얼굴\n1부에서 프로그래밍의 핵심이 “의도를 명확히 전달하는 것”임을 배웠다. 테스트로 원하는 결과를 정의하고, AI에게 코드를 요청하고, 생성된 코드를 검증하는 흐름이었다. 이제 실제 데이터를 다룰 차례다.\n프로그램은 데이터를 처리한다. 사용자 입력, 파일, 웹 API, 데이터베이스 등 다양한 곳에서 데이터가 들어오고, 프로그램은 이를 변환하여 유용한 결과물을 만들어낸다. AI도 마찬가지다. AI에게 작업을 요청할 때, 데이터의 형태와 구조를 명확히 전달해야 원하는 결과를 얻을 수 있다.\n이 부를 마치면, 지저분한 텍스트 파일 하나를 AI에게 던져주고 “이 로그에서 에러만 추출해서 날짜별로 정리해줘”라고 요청할 수 있게 된다.\n데이터는 크게 두 가지 형태로 나뉜다.\n비정형 데이터(Unstructured Data)는 자유로운 형식의 데이터다. 이메일 본문, 채팅 로그, 웹페이지 HTML, 자연어 텍스트 등이 해당한다. 사람은 읽을 수 있지만, 컴퓨터가 바로 처리하기엔 구조가 없다.\n정형 데이터(Structured Data)는 미리 정해진 구조를 따르는 데이터다. CSV 파일, JSON, 데이터베이스 테이블, 엑셀 시트 등이 해당한다. 행과 열, 또는 키와 값으로 명확히 구분되어 있어 컴퓨터가 바로 처리할 수 있다.",
+    "crumbs": [
+      "**2부** 자료구조",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>데이터, AI의 식량</span>"
+    ]
+  },
+  {
+    "objectID": "10-data-intro.html#data-intro-types",
+    "href": "10-data-intro.html#data-intro-types",
+    "title": "8  데이터, AI의 식량",
+    "section": "",
+    "text": "From: user@example.com\nDate: 2024-01-15\nSubject: 프로젝트 회의 결과\n\n오늘 회의에서 다음 주 마감을 3월 20일로 확정했습니다.\n참석자: 홍길동, 김철수, 이영희\n\n{\n  \"meeting\": {\n    \"date\": \"2024-01-15\",\n    \"deadline\": \"2024-03-20\",\n    \"participants\": [\"홍길동\", \"김철수\", \"이영희\"]\n  }\n}",
+    "crumbs": [
+      "**2부** 자료구조",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>데이터, AI의 식량</span>"
+    ]
+  },
+  {
+    "objectID": "10-data-intro.html#data-intro-ai-role",
+    "href": "10-data-intro.html#data-intro-ai-role",
+    "title": "8  데이터, AI의 식량",
+    "section": "\n8.2 AI의 역할: 변환과 분석",
+    "text": "8.2 AI의 역할: 변환과 분석\n \nAI 코딩 도구가 데이터 처리에서 하는 역할은 크게 두 가지다.\n변환(Transformation): 비정형 데이터를 정형 데이터로 바꾸는 작업이다. 로그 파일에서 특정 패턴을 추출하거나, 이메일에서 날짜와 발신자를 파싱하거나, 웹페이지에서 표를 긁어오는 작업이 해당한다.\n분석(Analysis): 정형 데이터를 집계, 필터링, 시각화하는 작업이다. 월별 매출 합계를 구하거나, 특정 조건을 만족하는 행만 추출하거나, 데이터 분포를 차트로 그리는 작업이 해당한다.\n이 두 역할을 수행하려면, AI에게 데이터의 현재 구조와 원하는 결과 구조를 명확히 전달해야 한다. 바로 여기서 자료구조 지식이 필요하다.",
+    "crumbs": [
+      "**2부** 자료구조",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>데이터, AI의 식량</span>"
+    ]
+  },
+  {
+    "objectID": "10-data-intro.html#data-intro-preview",
+    "href": "10-data-intro.html#data-intro-preview",
+    "title": "8  데이터, AI의 식량",
+    "section": "\n8.3 핵심 자료구조 미리보기",
+    "text": "8.3 핵심 자료구조 미리보기\n프로그래밍에서 자료구조는 데이터를 담는 그릇이다. 어떤 그릇을 선택하느냐에 따라 할 수 있는 작업이 달라진다. AI에게 요청할 때도 적절한 자료구조를 언급하면 더 정확한 결과를 얻는다.\n\n8.3.1 순서가 중요하면: 리스트\n\n리스트(List)는 순서가 있는 데이터 모음이다. 첫 번째, 두 번째, 세 번째 등 위치가 의미를 갖는다.\n# 할 일 목록 - 순서대로 처리해야 함\ntasks = [\"데이터 수집\", \"전처리\", \"분석\", \"시각화\", \"보고서 작성\"]\n\n# 월별 매출 - 시간 순서가 중요함\nmonthly_sales = [1200, 1500, 1350, 1800, 2100]\nAI에게 요청할 때: “파일의 각 라인을 리스트로 읽어서 처리해줘”\n\n8.3.2 이름표가 중요하면: 딕셔너리\n\n딕셔너리(Dictionary)는 키-값 쌍의 모음이다. 이름표(키)로 값을 찾는다.\n# 사용자 정보 - 필드명으로 접근\nuser = {\n    \"name\": \"홍길동\",\n    \"email\": \"hong@example.com\",\n    \"age\": 30\n}\n\n# 설정 파일 - 키로 값 조회\nconfig = {\n    \"database_host\": \"localhost\",\n    \"port\": 5432,\n    \"debug\": True\n}\nAI에게 요청할 때: “JSON 응답에서 user.email 필드를 추출해줘”\n\n8.3.3 표 형태면: 데이터프레임\n\n데이터프레임(DataFrame)은 행과 열로 구성된 표 형식 데이터다. 엑셀 시트와 유사하다.\n   이름      부서      급여\n0  홍길동    개발팀   5000\n1  김철수    기획팀   4500\n2  이영희    마케팅   4800\nAI에게 요청할 때: “이 CSV를 데이터프레임으로 읽고, 급여가 4500 이상인 행만 필터링해줘”",
+    "crumbs": [
+      "**2부** 자료구조",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>데이터, AI의 식량</span>"
+    ]
+  },
+  {
+    "objectID": "10-data-intro.html#data-intro-workflow",
+    "href": "10-data-intro.html#data-intro-workflow",
+    "title": "8  데이터, AI의 식량",
+    "section": "\n8.4 데이터 처리 워크플로우",
+    "text": "8.4 데이터 처리 워크플로우\n실제 데이터 처리는 다음과 같은 흐름을 따른다.\n\n\n\n\n\n그림 8.1: 데이터 처리 워크플로우\n\n\n데이터 처리는 혼돈에서 질서로 나아가는 과정이다. 처음에는 로그 파일, CSV, 이메일 등 형식이 제각각인 원시 데이터가 있다. 이 비정형 데이터를 그대로 분석에 사용할 수는 없다.\n여기서 AI와 프로그래밍 언어가 등장한다. “JSON으로 변환해줘”라고 요청하면, AI가 Python이나 R 코드를 생성하고 실행한다. 사용자는 원하는 결과만 말하고, 구체적인 구현은 AI가 담당하는 구조다.\nAI가 생성한 코드는 원시 데이터를 구조화된 형태로 변환한다. 순서가 중요하면 리스트, 이름표로 접근해야 하면 딕셔너리, 행과 열로 구성된 표 형식이면 데이터프레임이 된다. 자료구조를 알면 AI에게 더 정확한 명세를 전달할 수 있다.\n구조화된 데이터는 곧 가치로 이어진다. 집계하고, 필터링하고, 시각화하여 의미 있는 인사이트를 도출한다. 막대 그래프로 비교하거나 추세선으로 패턴을 파악하는 것이 최종 목표다.",
+    "crumbs": [
+      "**2부** 자료구조",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>데이터, AI의 식량</span>"
+    ]
+  },
+  {
+    "objectID": "10-data-intro.html#data-intro-overview",
+    "href": "10-data-intro.html#data-intro-overview",
+    "title": "8  데이터, AI의 식량",
+    "section": "\n8.5 이 부에서 배울 내용",
+    "text": "8.5 이 부에서 배울 내용\n2부에서는 다음 자료구조를 순서대로 학습한다.\n\n\n장\n자료구조\n핵심 개념\nAI 활용 예시\n\n\n\n11\n문자열\n시퀀스, 슬라이싱, 패턴 매칭\n텍스트 전처리, 정보 추출\n\n\n12\n파일\n읽기/쓰기, 스트리밍\n대용량 파일 처리\n\n\n13\n리스트\n순회, 필터링, 변환\n컬렉션 처리\n\n\n14\n딕셔너리\n키-값, 해시\nJSON/API 데이터\n\n\n15\n튜플\n불변성, 다중 반환\n복합 데이터 그룹화\n\n\n16\n데이터프레임\n행/열, 조인, 그룹화\n표 형식 데이터 분석\n\n\n\n각 장에서는 해당 자료구조의 기본 개념을 익힌 뒤, AI에게 관련 작업을 요청하는 방법을 다룬다. 자료구조를 이해하면 AI가 생성한 코드를 검증하고 수정하는 것도 수월해진다.",
+    "crumbs": [
+      "**2부** 자료구조",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>데이터, AI의 식량</span>"
+    ]
+  },
+  {
+    "objectID": "10-data-intro.html#data-intro-ai-request",
+    "href": "10-data-intro.html#data-intro-ai-request",
+    "title": "8  데이터, AI의 식량",
+    "section": "\n8.6 AI에게 데이터 작업 요청하기",
+    "text": "8.6 AI에게 데이터 작업 요청하기\n자료구조를 배우면서 항상 기억할 패턴이 있다.\n명세 작성의 3요소\n\n\n입력 구조: 데이터가 현재 어떤 형태인가?\n\n변환 작업: 어떤 처리가 필요한가?\n\n출력 형태: 결과가 어떤 모습이어야 하는가?\n\n예시: 로그 파일 분석 요청\n\n서버 로그 파일(server.log)에서 ERROR가 포함된 라인만 추출해서 날짜별로 그룹화해줘.\n입력: 텍스트 파일, 각 라인 형식 [2024-01-15 10:30:45] ERROR: 메시지...\n출력: 딕셔너리 {\"2024-01-15\": [\"에러1\", \"에러2\"], \"2024-01-16\": [\"에러3\"]}\n\n이처럼 자료구조 용어(리스트, 딕셔너리, 데이터프레임)를 사용하여 입출력을 명세하면, AI가 정확한 코드를 생성할 가능성이 높아진다.\n이제 문자열부터 시작해서 각 자료구조를 하나씩 살펴보자.",
+    "crumbs": [
+      "**2부** 자료구조",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>데이터, AI의 식량</span>"
     ]
   }
 ]

@@ -1698,7 +1698,14 @@ window.Quarto = {
   <li><a href="#r-list-object-value" id="toc-r-list-object-value" class="nav-link" data-scroll-target="#r-list-object-value"><span class="header-section-number">10.11</span> 객체와 값</a></li>
   <li><a href="#r-list-aliasing" id="toc-r-list-aliasing" class="nav-link" data-scroll-target="#r-list-aliasing"><span class="header-section-number">10.12</span> 에일리어싱</a></li>
   <li><a href="#r-list-debug" id="toc-r-list-debug" class="nav-link" data-scroll-target="#r-list-debug"><span class="header-section-number">10.13</span> 디버깅</a></li>
-  <li><a href="#r-list-terminology" id="toc-r-list-terminology" class="nav-link" data-scroll-target="#r-list-terminology"><span class="header-section-number">10.14</span> 용어 정의</a></li>
+  <li>
+<a href="#r-list-ai" id="toc-r-list-ai" class="nav-link" data-scroll-target="#r-list-ai"><span class="header-section-number">10.14</span> AI와 함께하는 리스트 처리</a>
+  <ul class="collapse">
+<li><a href="#%EB%AA%85%EC%84%B8-%EC%9E%91%EC%84%B1-%ED%8C%A8%ED%84%B4" id="toc-명세-작성-패턴" class="nav-link" data-scroll-target="#%EB%AA%85%EC%84%B8-%EC%9E%91%EC%84%B1-%ED%8C%A8%ED%84%B4"><span class="header-section-number">10.14.1</span> 명세 작성 패턴</a></li>
+  <li><a href="#%ED%94%84%EB%A1%AC%ED%94%84%ED%8A%B8-%EC%98%88%EC%8B%9C" id="toc-프롬프트-예시" class="nav-link" data-scroll-target="#%ED%94%84%EB%A1%AC%ED%94%84%ED%8A%B8-%EC%98%88%EC%8B%9C"><span class="header-section-number">10.14.2</span> 프롬프트 예시</a></li>
+  </ul>
+</li>
+  <li><a href="#r-list-terminology" id="toc-r-list-terminology" class="nav-link" data-scroll-target="#r-list-terminology"><span class="header-section-number">10.15</span> 용어 정의</a></li>
   <li><a href="#r-list-ex" id="toc-r-list-ex" class="nav-link" data-scroll-target="#r-list-ex">연습문제</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/13-list.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
     </div>
@@ -1898,6 +1905,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 
 
 </header><p> </p>
+<p>프로그래밍에서 여러 값을 하나로 묶어 관리해야 하는 상황은 매우 흔하다. 파일에서 읽어온 데이터 라인들, 사용자로부터 입력받은 숫자들, 웹에서 가져온 항목들 모두 리스트로 저장하고 처리한다. 리스트는 데이터를 순서대로 저장하고, 반복 처리하고, 필터링하는 가장 기본적인 도구다.</p>
+<p>리스트의 개념과 조작 방법을 이해하면, AI에게 데이터 처리 작업을 요청할 때 “리스트에서 조건에 맞는 요소만 필터링해줘”, “각 요소에 함수를 적용해줘”와 같은 명확한 요구사항을 전달할 수 있다.</p>
 <section id="r-list-sequence" class="level2" data-number="10.1"><h2 data-number="10.1" class="anchored" data-anchor-id="r-list-sequence">
 <span class="header-section-number">10.1</span> 리스트는 시퀀스다</h2>
 <p>문자열처럼, 리스트(list)는 값의 시퀀스다. 문자열에서, 값은 문자지만, 리스트에서는 임의 자료형(type)도 될 수 있다. 리스트 값은 요소(elements)나 때때로 항목(items)으로 불린다. </p>
@@ -2753,8 +2762,50 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>변경된 프로그램이 성공적으로 실행되어서, 아마도 올바르게 작성된 것으로 보인다. 가디언 문장(guardian statement)이 <code>words[1]</code>가 정상 작동할 것이라는 것을 확인해 주지만, 충분하지 않을 수도 있다. 프로그램을 작성할 때, “무엇이 잘못될 수 있을까?”를 항상 생각해야 한다.</p>
 <p><strong>연습문제:</strong> 상기 프로그램의 어느 라인이 여전히 적절하게 보호되지 않은지를 생각해 보세요. 텍스트 파일을 구성해서 프로그램이 실패하도록 만들 수 있는지 살펴보세요. 그리고 나서, 프로그램을 변경해서 라인이 적절하게 보호되게 하고, 새로운 텍스트 파일을 잘 다룰 수 있도록 시험하세요.</p>
 <p><strong>연습문제:</strong> 두 <code>if</code> 문 없이, 상기 예제의 가디언 코드(guardian code)를 다시 작성하세요. 대신에 단일 <code>if</code>문과 <code>&amp;</code> 논리 연산자를 사용하는 복합 논리 표현식을 사용하세요.</p>
-</section><section id="r-list-terminology" class="level2" data-number="10.14"><h2 data-number="10.14" class="anchored" data-anchor-id="r-list-terminology">
-<span class="header-section-number">10.14</span> 용어 정의</h2>
+</section><section id="r-list-ai" class="level2" data-number="10.14"><h2 data-number="10.14" class="anchored" data-anchor-id="r-list-ai">
+<span class="header-section-number">10.14</span> AI와 함께하는 리스트 처리</h2>
+<p>리스트 처리는 데이터 분석과 프로그래밍의 핵심이다. AI에게 리스트 관련 작업을 요청할 때는 입력 데이터의 구조, 처리 방식, 기대 출력을 명확히 전달해야 한다.</p>
+<section id="명세-작성-패턴" class="level3" data-number="10.14.1"><h3 data-number="10.14.1" class="anchored" data-anchor-id="명세-작성-패턴">
+<span class="header-section-number">10.14.1</span> 명세 작성 패턴</h3>
+<p>AI에게 리스트 처리를 요청할 때 포함해야 할 정보:</p>
+<ol type="1">
+<li>
+<strong>입력 데이터</strong>: 리스트의 요소 타입과 예시</li>
+<li>
+<strong>처리 방식</strong>: 필터링, 변환, 집계 등</li>
+<li>
+<strong>출력 형태</strong>: 결과 리스트, 단일 값, 또는 다른 자료구조</li>
+</ol></section><section id="프롬프트-예시" class="level3" data-number="10.14.2"><h3 data-number="10.14.2" class="anchored" data-anchor-id="프롬프트-예시">
+<span class="header-section-number">10.14.2</span> 프롬프트 예시</h3>
+<p><strong>조건부 필터링</strong></p>
+<blockquote class="blockquote">
+<p>정수 리스트에서 짝수만 추출하는 R/Python 함수를 작성해줘.</p>
+<p>입력: <code>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</code></p>
+<p>출력: <code>[2, 4, 6, 8, 10]</code></p>
+<p>조건: 빈 리스트 입력 시 빈 리스트 반환</p>
+</blockquote>
+<p><strong>리스트 변환</strong></p>
+<blockquote class="blockquote">
+<p>문자열 리스트의 각 요소를 대문자로 변환하고 길이순으로 정렬하는 함수가 필요해.</p>
+<p>입력: <code>["apple", "banana", "kiwi", "strawberry"]</code></p>
+<p>출력: <code>["KIWI", "APPLE", "BANANA", "STRAWBERRY"]</code></p>
+</blockquote>
+<p><strong>중첩 리스트 처리</strong></p>
+<blockquote class="blockquote">
+<p>2차원 리스트(행렬)에서 각 행의 합계를 구하는 함수를 작성해줘.</p>
+<p>입력: <code>[[1, 2, 3], [4, 5, 6], [7, 8, 9]]</code></p>
+<p>출력: <code>[6, 15, 24]</code></p>
+<p>조건: 행 길이가 다를 수 있음</p>
+</blockquote>
+<p><strong>리스트 집계</strong></p>
+<blockquote class="blockquote">
+<p>단어 리스트에서 가장 자주 등장하는 단어 상위 3개를 찾아줘.</p>
+<p>입력: 텍스트 파일에서 읽어온 단어 리스트</p>
+<p>출력: 튜플 리스트 <code>[("the", 45), ("and", 32), ("is", 28)]</code></p>
+</blockquote>
+<p>이처럼 구체적인 입출력 예시를 제공하면, AI가 정확한 로직을 구현한다. 앞서 배운 순회, 슬라이싱, 리스트 함수 개념을 알고 있으면 AI가 생성한 코드가 올바른지 검증하기 수월하다.</p>
+</section></section><section id="r-list-terminology" class="level2" data-number="10.15"><h2 data-number="10.15" class="anchored" data-anchor-id="r-list-terminology">
+<span class="header-section-number">10.15</span> 용어 정의</h2>
 <ul>
 <li>
 <strong>에일리어싱(aliasing)</strong>: 하나 혹은 그 이상의 변수가 동일한 객체를 참조하는 상황. </li>

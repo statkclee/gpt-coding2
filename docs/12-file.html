@@ -1669,7 +1669,14 @@ globalThis._qpyodideGetInstance = function() {
   <li><a href="#r-file-trycatch" id="toc-r-file-trycatch" class="nav-link" data-scroll-target="#r-file-trycatch"><span class="header-section-number">9.7</span> <code>tryCatch</code> 사용하기</a></li>
   <li><a href="#r-file-write" id="toc-r-file-write" class="nav-link" data-scroll-target="#r-file-write"><span class="header-section-number">9.8</span> 파일에 쓰기</a></li>
   <li><a href="#r-file-debug" id="toc-r-file-debug" class="nav-link" data-scroll-target="#r-file-debug"><span class="header-section-number">9.9</span> 디버깅</a></li>
-  <li><a href="#r-file-terminology" id="toc-r-file-terminology" class="nav-link" data-scroll-target="#r-file-terminology"><span class="header-section-number">9.10</span> 용어 정의</a></li>
+  <li>
+<a href="#r-file-ai" id="toc-r-file-ai" class="nav-link" data-scroll-target="#r-file-ai"><span class="header-section-number">9.10</span> AI와 함께하는 파일 처리</a>
+  <ul class="collapse">
+<li><a href="#%EB%AA%85%EC%84%B8-%EC%9E%91%EC%84%B1-%ED%8C%A8%ED%84%B4" id="toc-명세-작성-패턴" class="nav-link" data-scroll-target="#%EB%AA%85%EC%84%B8-%EC%9E%91%EC%84%B1-%ED%8C%A8%ED%84%B4"><span class="header-section-number">9.10.1</span> 명세 작성 패턴</a></li>
+  <li><a href="#%ED%94%84%EB%A1%AC%ED%94%84%ED%8A%B8-%EC%98%88%EC%8B%9C" id="toc-프롬프트-예시" class="nav-link" data-scroll-target="#%ED%94%84%EB%A1%AC%ED%94%84%ED%8A%B8-%EC%98%88%EC%8B%9C"><span class="header-section-number">9.10.2</span> 프롬프트 예시</a></li>
+  </ul>
+</li>
+  <li><a href="#r-file-terminology" id="toc-r-file-terminology" class="nav-link" data-scroll-target="#r-file-terminology"><span class="header-section-number">9.11</span> 용어 정의</a></li>
   <li><a href="#r-file-ex" id="toc-r-file-ex" class="nav-link" data-scroll-target="#r-file-ex">연습문제</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/12-file.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
     </div>
@@ -1869,6 +1876,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 
 
 </header><p> </p>
+<p>데이터 분석의 시작과 끝은 파일이다. CSV, JSON, 텍스트 로그, 설정 파일 등 거의 모든 데이터가 파일 형태로 저장되고 교환된다. 웹에서 데이터를 가져오든, 데이터베이스 결과를 저장하든, 결국 파일 읽기와 쓰기 작업이 필요하다.</p>
+<p>파일 처리의 기본 개념인 열기, 읽기, 쓰기, 닫기 패턴을 이해하면, AI에게 데이터 전처리 작업을 요청할 때도 “대용량 파일을 청크 단위로 읽어서 처리해줘”와 같은 구체적인 명세가 가능해진다.</p>
 <section id="r-file-persistence" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="r-file-persistence">
 <span class="header-section-number">9.1</span> 영속성</h2>
 <p> </p>
@@ -2367,8 +2376,49 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 <p>여러분이 봉착하는 또 다른 문제는 다른 시스템에서는 라인 끝을 표기하기 위해서 다른 문자를 사용한다는 점이다. 어떤 시스템은 <code>\n</code>으로 줄바꿈을 표기하고, 다른 시스템은 <code>\r</code>으로 반환 문자(return character)를 사용한다. 둘 다 모두 사용하는 시스템도 있다. 파일을 다른 시스템으로 이식한다면, 이러한 불일치가 문제를 야기한다. </p>
 <p>대부분의 시스템에는 A 포맷에서 B 포맷으로 변환하는 응용프로그램이 있다. <a href="https://en.wikipedia.org/wiki/Newline">https://en.wikipedia.org/wiki/Newline</a>에서 응용프로그램을 찾을 수 있고, 좀 더 많은 것을 읽을 수 있다. 물론, 여러분이 직접 프로그램을 작성할 수도 있다.</p>
-</section><section id="r-file-terminology" class="level2" data-number="9.10"><h2 data-number="9.10" class="anchored" data-anchor-id="r-file-terminology">
-<span class="header-section-number">9.10</span> 용어 정의</h2>
+</section><section id="r-file-ai" class="level2" data-number="9.10"><h2 data-number="9.10" class="anchored" data-anchor-id="r-file-ai">
+<span class="header-section-number">9.10</span> AI와 함께하는 파일 처리</h2>
+<p>파일 처리는 반복적이고 패턴이 명확한 작업이 많아 AI 코딩 도구를 활용하기 좋은 영역이다. 특히 대용량 파일 처리, 복잡한 형식 파싱, 다중 파일 일괄 처리 등에서 AI의 도움이 유용하다.</p>
+<section id="명세-작성-패턴" class="level3" data-number="9.10.1"><h3 data-number="9.10.1" class="anchored" data-anchor-id="명세-작성-패턴">
+<span class="header-section-number">9.10.1</span> 명세 작성 패턴</h3>
+<p>AI에게 파일 처리를 요청할 때 포함해야 할 정보:</p>
+<ol type="1">
+<li>
+<strong>파일 형식</strong>: 텍스트/바이너리, 인코딩, 구분자</li>
+<li>
+<strong>처리 방식</strong>: 전체 읽기 vs 스트리밍, 청크 크기</li>
+<li>
+<strong>예외 처리</strong>: 파일 없음, 권한 오류, 인코딩 오류</li>
+</ol></section><section id="프롬프트-예시" class="level3" data-number="9.10.2"><h3 data-number="9.10.2" class="anchored" data-anchor-id="프롬프트-예시">
+<span class="header-section-number">9.10.2</span> 프롬프트 예시</h3>
+<p><strong>로그 파일 분석</strong></p>
+<blockquote class="blockquote">
+<p>수백 MB 크기의 서버 로그 파일에서 ERROR 패턴이 포함된 라인만 추출하는 R/Python 함수를 작성해줘.</p>
+<p>조건: - 파일이 너무 커서 한 번에 메모리에 올릴 수 없음 - 한 줄씩 읽으면서 처리 - 결과는 별도 파일로 저장</p>
+<p>입력: <code>server.log</code></p>
+<p>출력: <code>errors.log</code></p>
+</blockquote>
+<p><strong>다중 파일 병합</strong></p>
+<blockquote class="blockquote">
+<p>특정 폴더에 있는 모든 CSV 파일을 하나로 합치는 스크립트가 필요해.</p>
+<ul>
+<li>헤더는 첫 번째 파일에서만 가져오기</li>
+<li>파일명을 새 컬럼으로 추가</li>
+<li>빈 파일은 건너뛰기</li>
+</ul>
+<p>폴더: <code>data/monthly/</code></p>
+<p>출력: <code>data/combined.csv</code></p>
+</blockquote>
+<p><strong>형식 변환</strong></p>
+<blockquote class="blockquote">
+<p>JSON 파일을 읽어서 CSV로 변환하는 함수를 작성해줘.</p>
+<p>JSON 구조:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="fu">{</span><span class="dt">"name"</span><span class="fu">:</span> <span class="st">"홍길동"</span><span class="fu">,</span> <span class="dt">"age"</span><span class="fu">:</span> <span class="dv">30</span><span class="fu">,</span> <span class="dt">"city"</span><span class="fu">:</span> <span class="st">"서울"</span><span class="fu">}</span><span class="ot">,</span> <span class="er">...</span><span class="ot">]</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>조건: 중첩된 객체가 있으면 문자열로 평탄화</p>
+</blockquote>
+<p>이처럼 파일 형식, 크기 제약, 예외 상황을 명확히 전달하면 AI가 적절한 처리 전략(스트리밍, 청크 처리, 예외 처리)을 적용한 코드를 생성한다.</p>
+</section></section><section id="r-file-terminology" class="level2" data-number="9.11"><h2 data-number="9.11" class="anchored" data-anchor-id="r-file-terminology">
+<span class="header-section-number">9.11</span> 용어 정의</h2>
 <ul>
 <li>
 <strong>잡기(catch)</strong>: <code>tryCatch</code> 함수를 사용하여 프로그램이 예외 상황으로 인해 종료되는 것을 방지하는 과정으로 예외가 발생할 때 실행할 코드를 지정하고,정상적으로 코드를 계속 실행할 수 있게 한다. </li>
@@ -2385,13 +2435,13 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <li>파일을 읽고 한 줄씩 파일의 내용을 모두 대문자로 출력하는 프로그램을 작성하세요. 프로그램을 실행하면 다음과 같이 보일 것입니다.</li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span> Rscript shout.R <span class="st">"mbox-short.txt"</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>FROM STEPHEN.MARQUARD<span class="sc">@</span>UCT.AC.ZA SAT JAN <span class="dv">5</span> <span class="dv">09</span><span class="sc">:</span><span class="dv">14</span><span class="sc">:</span><span class="dv">16</span> <span class="dv">2008</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>RETURN<span class="sc">-</span>PATH<span class="sc">:</span> <span class="er">&lt;</span>POSTMASTER<span class="sc">@</span>COLLAB.SAKAIPROJECT.ORG<span class="sc">&gt;</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>RECEIVED<span class="sc">:</span> FROM <span class="fu">MURDER</span> (MAIL.UMICH.EDU [<span class="dv">141</span>.<span class="dv">211</span>.<span class="fl">14.90</span>])</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>BY <span class="fu">FRANKENSTEIN.MAIL.UMICH.EDU</span> (CYRUS V2.<span class="fl">3.8</span>) WITH LMTPA;</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>SAT, <span class="dv">05</span> JAN <span class="dv">2008</span> <span class="dv">09</span><span class="sc">:</span><span class="dv">14</span><span class="sc">:</span><span class="dv">16</span> <span class="sc">-</span><span class="dv">0500</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span> Rscript shout.R <span class="st">"mbox-short.txt"</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>FROM STEPHEN.MARQUARD<span class="sc">@</span>UCT.AC.ZA SAT JAN <span class="dv">5</span> <span class="dv">09</span><span class="sc">:</span><span class="dv">14</span><span class="sc">:</span><span class="dv">16</span> <span class="dv">2008</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>RETURN<span class="sc">-</span>PATH<span class="sc">:</span> <span class="er">&lt;</span>POSTMASTER<span class="sc">@</span>COLLAB.SAKAIPROJECT.ORG<span class="sc">&gt;</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>RECEIVED<span class="sc">:</span> FROM <span class="fu">MURDER</span> (MAIL.UMICH.EDU [<span class="dv">141</span>.<span class="dv">211</span>.<span class="fl">14.90</span>])</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>BY <span class="fu">FRANKENSTEIN.MAIL.UMICH.EDU</span> (CYRUS V2.<span class="fl">3.8</span>) WITH LMTPA;</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>SAT, <span class="dv">05</span> JAN <span class="dv">2008</span> <span class="dv">09</span><span class="sc">:</span><span class="dv">14</span><span class="sc">:</span><span class="dv">16</span> <span class="sc">-</span><span class="dv">0500</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><a href="http://www.py4inf.com/code/mbox-short.txt">http://www.py4inf.com/code/mbox-short.txt</a>에서 파일을 다운로드 받으세요.</p>
 <ol start="2" type="1">
@@ -2402,25 +2452,25 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </blockquote>
 <p>“X-DSPAM-Confidence:”로 시작하는 라인을 만나게 되면, 부동 소수점 숫자를 뽑아내기 위해 해당 라인을 별도로 보관하세요. 라인 수를 세고, 라인으로부터 스팸 신뢰값의 총계를 계산하세요. 파일의 끝에 도달했을 때, 평균 스팸 신뢰도를 출력하세요.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span> Rscript calc.R <span class="st">"mbox-short.txt"</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>Average spam confidence<span class="sc">:</span> <span class="fl">0.750718518519</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span> Rscript calc.R <span class="st">"mbox.txt"</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>Average spam confidence<span class="sc">:</span> <span class="fl">0.894128046745</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span> Rscript calc.R <span class="st">"mbox-short.txt"</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>Average spam confidence<span class="sc">:</span> <span class="fl">0.750718518519</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span> Rscript calc.R <span class="st">"mbox.txt"</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>Average spam confidence<span class="sc">:</span> <span class="fl">0.894128046745</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><code>mbox.txt</code>와 <code>mbox-short.txt</code> 파일에 작성한 프로그램을 시험하세요.</p>
 <ol start="3" type="1">
 <li>때때로, 프로그래머가 지루해지거나, 약간 재미를 목적으로, 프로그램에 무해한 부활절 달걀(Easter Egg, <a href="https://en.wikipedia.org/wiki/Easter_egg_(media)">https://en.wikipedia.org/wiki/Easter_egg_(media)</a>)을 넣습니다. 사용자가 파일명을 입력하는 프로그램을 변형시켜, ’na na boo boo’로 파일명을 정확하게 입력했을 때, 재미있는 메시지를 출력하는 프로그램을 작성하세요. 파일이 존재하거나, 존재하지 않는 다른 모든 파일에 대해서도 정상적으로 작동해야 합니다. 여기 프로그램을 실행한 견본이 있습니다.</li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span> Rscript egg.R <span class="st">"mbox.txt"</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>There were <span class="dv">1797</span> subject lines <span class="cf">in</span> mbox.txt</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span> Rscript egg.R <span class="st">"missing.tyxt"</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>File cannot be opened<span class="sc">:</span> missing.tyxt</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span> Rscript egg.R <span class="st">"na na boo boo"</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="cn">NA</span> <span class="cn">NA</span> BOO BOO TO YOU <span class="sc">-</span> You have been punk<span class="st">'d!</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span> Rscript egg.R <span class="st">"mbox.txt"</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>There were <span class="dv">1797</span> subject lines <span class="cf">in</span> mbox.txt</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span> Rscript egg.R <span class="st">"missing.tyxt"</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>File cannot be opened<span class="sc">:</span> missing.tyxt</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="sc">$</span> Rscript egg.R <span class="st">"na na boo boo"</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="cn">NA</span> <span class="cn">NA</span> BOO BOO TO YOU <span class="sc">-</span> You have been punk<span class="st">'d!</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>프로그램에 부활절 달걀을 넣도록 격려하지는 않습니다. 단지 연습입니다.</p>
 

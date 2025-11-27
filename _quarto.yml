@@ -59,6 +59,7 @@ book:
 
     - part: "**2부** 자료구조"
       chapters:
+        - 10-data-intro.qmd     # 데이터, AI의 식량 - 자료구조 개요
         - 11-string.qmd         # 문자열
         - 12-file.qmd           # 파일
         - 13-list.qmd           # 리스트

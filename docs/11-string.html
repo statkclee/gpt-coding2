@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.9.8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="이광춘(Openai)">
-<title>8&nbsp; 문자열 – 챗GPT 코딩2</title>
+<title>9&nbsp; 문자열 – 챗GPT 코딩2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -63,7 +63,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./12-file.html" rel="next">
-<link href="./07-abstraction.html" rel="prev">
+<link href="./10-data-intro.html" rel="prev">
 <link href="./images/logo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -1318,7 +1318,7 @@ globalThis._qpyodideGetInstance = function() {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./11-string.html"><strong>2부</strong> 자료구조</a></li><li class="breadcrumb-item"><a href="./11-string.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">문자열</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-data-intro.html"><strong>2부</strong> 자료구조</a></li><li class="breadcrumb-item"><a href="./11-string.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">문자열</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="검색" onclick="window.quartoOpenSearch();">
@@ -1417,38 +1417,44 @@ globalThis._qpyodideGetInstance = function() {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./10-data-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">데이터, AI의 식량</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./11-string.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">문자열</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">문자열</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./12-file.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">파일</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">파일</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./13-list.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">리스트</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">리스트</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./14-dictionaries.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">딕셔너리</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">딕셔너리</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./15-tuples.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">튜플(Tuples)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">튜플(Tuples)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./16-dataframe.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">데이터프레임</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">데이터프레임</span></span></a>
   </div>
 </li>
       </ul>
@@ -1465,55 +1471,55 @@ globalThis._qpyodideGetInstance = function() {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">자동화된 버전 관리</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">자동화된 버전 관리</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-setup-create.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Git 설정과 저장소</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Git 설정과 저장소</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-change.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">변경사항 추적</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">변경사항 추적</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-history.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">이력 탐색</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">이력 탐색</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-ignore.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">추적 대상에서 제외</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">추적 대상에서 제외</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-github.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">GitHub 원격 작업</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">GitHub 원격 작업</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-open.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">공개 과학과 협업</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">공개 과학과 협업</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-conflict.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">충돌</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">충돌</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-ide.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">통합개발환경</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">통합개발환경</span></span></a>
   </div>
 </li>
       </ul>
@@ -1530,37 +1536,37 @@ globalThis._qpyodideGetInstance = function() {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-regex.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">정규 표현식</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">정규 표현식</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-network.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-web.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">웹서비스 사용하기</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">웹서비스 사용하기</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-database.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">데이터베이스와 SQL</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">데이터베이스와 SQL</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-viz.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">시각화</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">시각화</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-gpt.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">챗GPT 코딩</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">챗GPT 코딩</span></span></a>
   </div>
 </li>
       </ul>
@@ -1577,25 +1583,25 @@ globalThis._qpyodideGetInstance = function() {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ide.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">IDE 선택과 발전</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">IDE 선택과 발전</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ide_positron.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">포지트론</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">포지트론</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ide_extension.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">IDE 확장 프로그램</span></span></a>
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">IDE 확장 프로그램</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ide_setup.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">개발 환경 구축</span></span></a>
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">개발 환경 구축</span></span></a>
   </div>
 </li>
       </ul>
@@ -1612,19 +1618,19 @@ globalThis._qpyodideGetInstance = function() {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./docker_concept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">도커: 재현 환경</span></span></a>
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">도커: 재현 환경</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./make_concept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Make: 자동화</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Make: 자동화</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./compendium.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">연구 컴펜디엄</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">연구 컴펜디엄</span></span></a>
   </div>
 </li>
       </ul>
@@ -1660,19 +1666,26 @@ globalThis._qpyodideGetInstance = function() {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">목차</h2>
    
   <ul>
-<li><a href="#r-string-sequence" id="toc-r-string-sequence" class="nav-link active" data-scroll-target="#r-string-sequence"><span class="header-section-number">8.1</span> 문자열은 시퀀스다</a></li>
-  <li><a href="#r-string-length" id="toc-r-string-length" class="nav-link" data-scroll-target="#r-string-length"><span class="header-section-number">8.2</span> <code>length()</code> 함수 사용 문자열 길이 구하기</a></li>
-  <li><a href="#r-string-traversal" id="toc-r-string-traversal" class="nav-link" data-scroll-target="#r-string-traversal"><span class="header-section-number">8.3</span> 루프를 사용한 문자열 순회</a></li>
-  <li><a href="#r-string-slice" id="toc-r-string-slice" class="nav-link" data-scroll-target="#r-string-slice"><span class="header-section-number">8.4</span> 문자열 슬라이스</a></li>
-  <li><a href="#%EB%AC%B8%EC%9E%90%EC%97%B4%EC%9D%80-%EB%B6%88%EB%B3%80%EC%9D%B4%EB%8B%A4-%ED%8C%8C%EC%9D%B4%EC%8D%AC" id="toc-문자열은-불변이다-파이썬" class="nav-link" data-scroll-target="#%EB%AC%B8%EC%9E%90%EC%97%B4%EC%9D%80-%EB%B6%88%EB%B3%80%EC%9D%B4%EB%8B%A4-%ED%8C%8C%EC%9D%B4%EC%8D%AC"><span class="header-section-number">8.5</span> 문자열은 불변이다 (파이썬)</a></li>
-  <li><a href="#r-string-count" id="toc-r-string-count" class="nav-link" data-scroll-target="#r-string-count"><span class="header-section-number">8.6</span> 루프 사용 문자 계수하기</a></li>
-  <li><a href="#r-string-in-operator" id="toc-r-string-in-operator" class="nav-link" data-scroll-target="#r-string-in-operator"><span class="header-section-number">8.7</span> <code>%in%</code> 연산자</a></li>
-  <li><a href="#r-string-comparison-operator" id="toc-r-string-comparison-operator" class="nav-link" data-scroll-target="#r-string-comparison-operator"><span class="header-section-number">8.8</span> 문자열 비교</a></li>
-  <li><a href="#r-string-method" id="toc-r-string-method" class="nav-link" data-scroll-target="#r-string-method"><span class="header-section-number">8.9</span> 문자열 함수</a></li>
-  <li><a href="#r-string-parsing" id="toc-r-string-parsing" class="nav-link" data-scroll-target="#r-string-parsing"><span class="header-section-number">8.10</span> 문자열 파싱</a></li>
-  <li><a href="#r-string-format" id="toc-r-string-format" class="nav-link" data-scroll-target="#r-string-format"><span class="header-section-number">8.11</span> 서식 연산자</a></li>
-  <li><a href="#r-string-debug" id="toc-r-string-debug" class="nav-link" data-scroll-target="#r-string-debug"><span class="header-section-number">8.12</span> 디버깅</a></li>
-  <li><a href="#r-string-terminology" id="toc-r-string-terminology" class="nav-link" data-scroll-target="#r-string-terminology"><span class="header-section-number">8.13</span> 용어 정의</a></li>
+<li><a href="#r-string-sequence" id="toc-r-string-sequence" class="nav-link active" data-scroll-target="#r-string-sequence"><span class="header-section-number">9.1</span> 문자열은 시퀀스다</a></li>
+  <li><a href="#r-string-length" id="toc-r-string-length" class="nav-link" data-scroll-target="#r-string-length"><span class="header-section-number">9.2</span> <code>length()</code> 함수 사용 문자열 길이 구하기</a></li>
+  <li><a href="#r-string-traversal" id="toc-r-string-traversal" class="nav-link" data-scroll-target="#r-string-traversal"><span class="header-section-number">9.3</span> 루프를 사용한 문자열 순회</a></li>
+  <li><a href="#r-string-slice" id="toc-r-string-slice" class="nav-link" data-scroll-target="#r-string-slice"><span class="header-section-number">9.4</span> 문자열 슬라이스</a></li>
+  <li><a href="#%EB%AC%B8%EC%9E%90%EC%97%B4%EC%9D%80-%EB%B6%88%EB%B3%80%EC%9D%B4%EB%8B%A4-%ED%8C%8C%EC%9D%B4%EC%8D%AC" id="toc-문자열은-불변이다-파이썬" class="nav-link" data-scroll-target="#%EB%AC%B8%EC%9E%90%EC%97%B4%EC%9D%80-%EB%B6%88%EB%B3%80%EC%9D%B4%EB%8B%A4-%ED%8C%8C%EC%9D%B4%EC%8D%AC"><span class="header-section-number">9.5</span> 문자열은 불변이다 (파이썬)</a></li>
+  <li><a href="#r-string-count" id="toc-r-string-count" class="nav-link" data-scroll-target="#r-string-count"><span class="header-section-number">9.6</span> 루프 사용 문자 계수하기</a></li>
+  <li><a href="#r-string-in-operator" id="toc-r-string-in-operator" class="nav-link" data-scroll-target="#r-string-in-operator"><span class="header-section-number">9.7</span> <code>%in%</code> 연산자</a></li>
+  <li><a href="#r-string-comparison-operator" id="toc-r-string-comparison-operator" class="nav-link" data-scroll-target="#r-string-comparison-operator"><span class="header-section-number">9.8</span> 문자열 비교</a></li>
+  <li><a href="#r-string-method" id="toc-r-string-method" class="nav-link" data-scroll-target="#r-string-method"><span class="header-section-number">9.9</span> 문자열 함수</a></li>
+  <li><a href="#r-string-parsing" id="toc-r-string-parsing" class="nav-link" data-scroll-target="#r-string-parsing"><span class="header-section-number">9.10</span> 문자열 파싱</a></li>
+  <li><a href="#r-string-format" id="toc-r-string-format" class="nav-link" data-scroll-target="#r-string-format"><span class="header-section-number">9.11</span> 서식 연산자</a></li>
+  <li><a href="#r-string-debug" id="toc-r-string-debug" class="nav-link" data-scroll-target="#r-string-debug"><span class="header-section-number">9.12</span> 디버깅</a></li>
+  <li>
+<a href="#r-string-ai" id="toc-r-string-ai" class="nav-link" data-scroll-target="#r-string-ai"><span class="header-section-number">9.13</span> AI와 함께하는 문자열 처리</a>
+  <ul class="collapse">
+<li><a href="#%EB%AA%85%EC%84%B8-%EC%9E%91%EC%84%B1-%ED%8C%A8%ED%84%B4" id="toc-명세-작성-패턴" class="nav-link" data-scroll-target="#%EB%AA%85%EC%84%B8-%EC%9E%91%EC%84%B1-%ED%8C%A8%ED%84%B4"><span class="header-section-number">9.13.1</span> 명세 작성 패턴</a></li>
+  <li><a href="#%ED%94%84%EB%A1%AC%ED%94%84%ED%8A%B8-%EC%98%88%EC%8B%9C" id="toc-프롬프트-예시" class="nav-link" data-scroll-target="#%ED%94%84%EB%A1%AC%ED%94%84%ED%8A%B8-%EC%98%88%EC%8B%9C"><span class="header-section-number">9.13.2</span> 프롬프트 예시</a></li>
+  </ul>
+</li>
+  <li><a href="#r-string-terminology" id="toc-r-string-terminology" class="nav-link" data-scroll-target="#r-string-terminology"><span class="header-section-number">9.14</span> 용어 정의</a></li>
   <li><a href="#r-string-ex" id="toc-r-string-ex" class="nav-link" data-scroll-target="#r-string-ex">연습문제</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/11-string.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
     </div>
@@ -1856,8 +1869,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
       'vs': 'https://cdn.jsdelivr.net/npm/monaco-editor@0.46.0/min/vs'
     }
   });
-</script><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./11-string.html"><strong>2부</strong> 자료구조</a></li><li class="breadcrumb-item"><a href="./11-string.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">문자열</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="r-string" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">문자열</span></span></h1>
+</script><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-data-intro.html"><strong>2부</strong> 자료구조</a></li><li class="breadcrumb-item"><a href="./11-string.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">문자열</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="r-string" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">문자열</span></span></h1>
 </div>
 
 
@@ -1871,8 +1884,10 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   
 
 
-</header><section id="r-string-sequence" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="r-string-sequence">
-<span class="header-section-number">8.1</span> 문자열은 시퀀스다</h2>
+</header><p>텍스트 데이터는 프로그래밍에서 가장 흔히 다루는 데이터 유형이다. 사용자 이름, 이메일 주소, 로그 파일, 웹페이지 내용, CSV 파일의 각 셀 등 모든 곳에 문자열이 존재한다. 데이터 분석에서도 텍스트 전처리, 패턴 매칭, 정보 추출 등 문자열 조작은 핵심 기술이다.</p>
+<p>문자열을 다루는 기본 개념을 이해하면, AI에게 텍스트 처리 작업을 명세할 때도 정확한 요구사항을 전달할 수 있다. “문자열의 3번째부터 7번째 문자를 추출해줘”라고 말하려면, 먼저 인덱싱과 슬라이싱이 무엇인지 알아야 한다.</p>
+<section id="r-string-sequence" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="r-string-sequence">
+<span class="header-section-number">9.1</span> 문자열은 시퀀스다</h2>
 <p> </p>
 <p>문자열은 여러 문자들의 시퀀스(sequence)다. 꺾쇠 연산자로 한 번에 하나씩 문자에 접근한다. <code><a href="https://rdrr.io/r/base/substr.html">substr()</a></code> 함수를 사용해서 바로 특정 문자를 추출할 수도 있지만, <code><a href="https://rdrr.io/r/base/strsplit.html">strsplit()</a></code> 함수로 문자열을 문자의 벡터로 다루는 방법도 있다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
@@ -1916,7 +1931,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <img src="images/string-banana.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="251">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-banana-string-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-그림&nbsp;8.1: 바나나 문자열
+그림&nbsp;9.1: 바나나 문자열
 </figcaption></figure>
 </div>
 <p>인덱스로 문자와 연산자를 포함하는 어떤 표현식도 사용 가능지만, 인덱스 값은 정수일 필요는 없다. 정수가 아닌 경우 다음과 같은 결과를 얻게 된다. 문제는 R에서 <code>1.5</code>를 내려서 <code>1</code>로 처리한다는 점이다. 경우에 따라서는 반올림으로 판단해서 <code>2</code>가 될 수도 있어 오해의 소지가 있기 때문에 무조건 정수로 표현한다. </p>
@@ -1936,8 +1951,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 </div>
-</section><section id="r-string-length" class="level2" data-number="8.2"><h2 data-number="8.2" class="anchored" data-anchor-id="r-string-length">
-<span class="header-section-number">8.2</span> <code>length()</code> 함수 사용 문자열 길이 구하기</h2>
+</section><section id="r-string-length" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="r-string-length">
+<span class="header-section-number">9.2</span> <code>length()</code> 함수 사용 문자열 길이 구하기</h2>
 <p><code><a href="https://rdrr.io/r/base/length.html">length()</a></code> 함수는 문자열의 문자 갯수를 반환하는 내장함수다. </p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
@@ -1973,8 +1988,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 <p>파이썬에서는 인덱스 오류(IndexError)가 발생하는데 이유는 ’banana’에 6번 인덱스 문자가 없기 때문이다. 0에서부터 시작했기 때문에 6개 문자는 0에서부터 5까지 번호가 매겨졌다. 마지막 문자를 얻기 위해서 length에서 1을 빼야 한다. <code>fruit[-1]</code>은 마지막 문자를, <code>fruit[-2]</code>는 끝에서 두 번째 문자를 가리킨다. 하지만, R에서는 사람이 생각하는 방식대로 마지막 문자를 얻는다. </p>
-</section><section id="r-string-traversal" class="level2" data-number="8.3"><h2 data-number="8.3" class="anchored" data-anchor-id="r-string-traversal">
-<span class="header-section-number">8.3</span> 루프를 사용한 문자열 순회</h2>
+</section><section id="r-string-traversal" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="r-string-traversal">
+<span class="header-section-number">9.3</span> 루프를 사용한 문자열 순회</h2>
 <p> </p>
 <p>연산의 많은 경우에 문자열을 한 번에 한 문자씩 처리한다. 종종 처음에서 시작해서, 차례로 각 문자를 선택하고, 선택된 문자에 임의 연산을 수행하고, 끝까지 계속한다. 이런 처리 패턴을 <strong>순회(traversal)</strong>라고 한다. 순회를 작성하는 한 방법이 <code>while</code> 루프다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
@@ -2025,8 +2040,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 <p>루프를 매번 반복할 때, 문자열 다음 문자가 변수 <code>char</code>에 대입된다. 루프는 더 이상 남겨진 문자가 없을 때까지 계속 실행된다.</p>
-</section><section id="r-string-slice" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="r-string-slice">
-<span class="header-section-number">8.4</span> 문자열 슬라이스</h2>
+</section><section id="r-string-slice" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="r-string-slice">
+<span class="header-section-number">9.4</span> 문자열 슬라이스</h2>
 <p> </p>
 <p>문자열의 일부분을 <strong>슬라이스(slice)</strong>라고 한다. 문자열 슬라이스를 선택하는 것은 문자를 선택하는 것과 유사하다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
@@ -2095,8 +2110,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p><code>fruit</code>이 문자열로 주어졌을 때, <code>fruit[:]</code>의 의미는 무엇인가요?</p>
 </div>
 </div>
-</section><section id="문자열은-불변이다-파이썬" class="level2" data-number="8.5"><h2 data-number="8.5" class="anchored" data-anchor-id="문자열은-불변이다-파이썬">
-<span class="header-section-number">8.5</span> 문자열은 불변이다 (파이썬)</h2>
+</section><section id="문자열은-불변이다-파이썬" class="level2" data-number="9.5"><h2 data-number="9.5" class="anchored" data-anchor-id="문자열은-불변이다-파이썬">
+<span class="header-section-number">9.5</span> 문자열은 불변이다 (파이썬)</h2>
 <p> </p>
 <p>문자열 내부에 있는 문자를 변경하려고 대입문 왼쪽편에 <code>[]</code> 연산자를 사용하고 싶은 유혹이 있을 것이다. 예를 들어 다음과 같다. </p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
@@ -2118,8 +2133,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>파이썬에서 “TypeError: ‘str’ object does not support item assignment” 오류가 발생하는데 파이썬 문자열이 불변(immutable)하기 때문이다. 즉, 파이썬에서 문자열의 특정 문자를 직접 변경하려고 할 때 이 오류가 발생한다. 반면에, R에서는 문자열 자체가 불변 객체로 취급되지 않기 때문에 <code>strsplit</code> 함수를 사용하여 문자열을 문자의 벡터로 변환하면, 벡터의 각 요소는 별도의 문자열로 취급되어 개별적으로 변경할 수 있다. R은 파이썬과 달리 불변 문자열에 대한 제약이 없기 때문에 오류를 발생시키지않는다.</p>
 <p>파이썬에서 “객체(object)”는 문자열이고, 대입하고자 하는 문자는 “항목(item)”이다. 지금으로서 객체는 값과 동일하지만, 나중에 객체 정의를 좀 더 상세화할 것이다. 항목은 순서 값 중의 하나다. 최선의 방법은 원래 문자열을 변형한 새로운 문자열을 생성하는 것이다. </p>
 <p>새로운 첫 문자에 <code>greeting</code> 문자열 슬라이스를 연결한다. 원래 문자열에는 어떤 영향도 주지 않는 새로운 문자열이 생성되었다. </p>
-</section><section id="r-string-count" class="level2" data-number="8.6"><h2 data-number="8.6" class="anchored" data-anchor-id="r-string-count">
-<span class="header-section-number">8.6</span> 루프 사용 문자 계수하기</h2>
+</section><section id="r-string-count" class="level2" data-number="9.6"><h2 data-number="9.6" class="anchored" data-anchor-id="r-string-count">
+<span class="header-section-number">9.6</span> 루프 사용 문자 계수하기</h2>
 <p> </p>
 <p>다음 프로그램은 문자열에 문자 <code>a</code>가 나타나는 횟수를 계수(counting)한다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
@@ -2152,8 +2167,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>문자열과 문자를 인자(argument)로 받도록 상기 코드를 <code>count</code>라는 함수로 <strong>캡슐화(encapsulation)</strong>하고 일반화하세요. </p>
 </div>
 </div>
-</section><section id="r-string-in-operator" class="level2" data-number="8.7"><h2 data-number="8.7" class="anchored" data-anchor-id="r-string-in-operator">
-<span class="header-section-number">8.7</span> <code>%in%</code> 연산자</h2>
+</section><section id="r-string-in-operator" class="level2" data-number="9.7"><h2 data-number="9.7" class="anchored" data-anchor-id="r-string-in-operator">
+<span class="header-section-number">9.7</span> <code>%in%</code> 연산자</h2>
 <p>\index{%in% 연산자} \index{연산자!%in%} </p>
 <p>연산자 <code>in</code>은 부울 연산자로 두 개의 문자열을 받아, 첫 번째 문자열이 두 번째 문자열의 일부이면 참(TRUE)을 반환한다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
@@ -2172,8 +2187,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 </div>
-</section><section id="r-string-comparison-operator" class="level2" data-number="8.8"><h2 data-number="8.8" class="anchored" data-anchor-id="r-string-comparison-operator">
-<span class="header-section-number">8.8</span> 문자열 비교</h2>
+</section><section id="r-string-comparison-operator" class="level2" data-number="9.8"><h2 data-number="9.8" class="anchored" data-anchor-id="r-string-comparison-operator">
+<span class="header-section-number">9.8</span> 문자열 비교</h2>
 <p> </p>
 <p>비교 연산자도 문자열에서 동작한다. 두 문자열이 같은지를 살펴보자.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
@@ -2212,8 +2227,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>R과 파이썬 같은 프로그래밍 언어는 사람과 동일한 방식으로 대문자와 소문자를 다루지 않는다. 모든 대문자는 소문자 앞에 온다. 프로그래밍 언어에서 대문자와 소문자를 다루는 방식은 ASCII 코드 값을 기반으로 한다. ASCII 코드에서 대문자(A-Z)는 65부터 90까지의 값을, 소문자(a-z)는 97부터 122까지의 값을 갖기 때문에 대문자가 숫자적으로 소문자보다 먼저 나오기 때문에 문자열을 정렬하거나 비교할 때, 대문자가 소문자 앞에 위치하게 된다.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Your</span> word, Pineapple, comes before banana.</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
 <p>이러한 문제를 다루는 일반적인 방식은 비교 연산을 수행하기 전에 문자열을 표준 포맷으로 예를 들어 모두 소문자로 변환하는 것이다. 경우에 따라서 “Pineapple”로 무장한 사람들로부터 여러분을 보호해야 하는 것도 명심한다.</p>
-</section><section id="r-string-method" class="level2" data-number="8.9"><h2 data-number="8.9" class="anchored" data-anchor-id="r-string-method">
-<span class="header-section-number">8.9</span> 문자열 함수</h2>
+</section><section id="r-string-method" class="level2" data-number="9.9"><h2 data-number="9.9" class="anchored" data-anchor-id="r-string-method">
+<span class="header-section-number">9.9</span> 문자열 함수</h2>
 <p>R은 객체지향언어 특성을 갖고 있지만 함수형 프로그래밍 언어 특성도 갖고 있다. 문자열을 R 객체(objects)로 객체를 데이터(실제 문자열 자체)와 메서드(methods)를 담고 있는 것으로 바라볼 수도 있다. 메서드는 객체에 내장되고 어떤 객체의 인스턴스(instance)에도 사용되는 사실상 함수다. </p>
 <div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -2352,8 +2367,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>앞선 예제와 유사한 함수인 <code>str_count()</code>로 불리는 문자열 메서드가 <code>stringr</code> 패키지 내부에 있다. <code>? str_count()</code> 도움말로 <code>str_count()</code> 함수에 대한 문서를 읽고, 문자열 ’banana’의 문자가 몇 개인지 계수하는 메서드 호출 프로그램을 작성하세요.</p>
 </div>
 </div>
-</section><section id="r-string-parsing" class="level2" data-number="8.10"><h2 data-number="8.10" class="anchored" data-anchor-id="r-string-parsing">
-<span class="header-section-number">8.10</span> 문자열 파싱</h2>
+</section><section id="r-string-parsing" class="level2" data-number="9.10"><h2 data-number="9.10" class="anchored" data-anchor-id="r-string-parsing">
+<span class="header-section-number">9.10</span> 문자열 파싱</h2>
 <p>종종, 문자열을 들여다보고 특정 부속 문자열(substring)을 찾고 싶다. 예를 들어, 아래와 같은 형식으로 작성된 일련의 라인이 주어졌다고 가정하면,</p>
 <blockquote class="blockquote">
 <p><code>From stephen.marquard@</code><strong>uct.ac.za</strong><code>Sat Jan  5 09:14:16 2008</code></p>
@@ -2377,8 +2392,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 <p><code>str_locate()</code> 함수를 사용해서 찾고자 하는 문자열의 시작 위치를 명세한다. 문자열 슬라이싱(slicing)할 때, 골뱅이 기호 뒤부터 빈 공백을 포함하지 않는 위치까지 문자열을 뽑아낸다.</p>
-</section><section id="r-string-format" class="level2" data-number="8.11"><h2 data-number="8.11" class="anchored" data-anchor-id="r-string-format">
-<span class="header-section-number">8.11</span> 서식 연산자</h2>
+</section><section id="r-string-format" class="level2" data-number="9.11"><h2 data-number="9.11" class="anchored" data-anchor-id="r-string-format">
+<span class="header-section-number">9.11</span> 서식 연산자</h2>
 <p> </p>
 <p><strong>서식 연산자(format operator)</strong> Base R의 <code><a href="https://rdrr.io/r/base/sprintf.html">sprintf()</a></code> 함수에 C언어 스타일로 <code>%</code>를 사용하기도 하지만 <a href="https://cran.r-project.org/web/packages/glue/index.html">glue: Interpreted String Literals</a> 패키지도 최근에 많이 사용된다. <code>glue</code> 패키지 <code><a href="https://rdrr.io/r/base/Paren.html">{}</a></code>는 문자열 일부를 변수에 저장된 값으로 바꿔 문자열을 구성한다. 정수에 서식 연산자가 적용될 때, {}는 나머지 연산자가 된다. 하지만 첫 피연산자가 문자열이면, {}은 서식 연산자가 된다. 동일한 기능을 <code>stringr</code> 패키지 <code>str_glue()</code> 함수로 수행할 수 있다. </p>
 <p>첫 피연산자는 서식 문자열(format string)로 두 번째 피연산자가 어떤 형식으로 표현되는지를 명세하는 하나 혹은 그 이상의 서식 순서(format sequence)를 담고 있다. 결과값은 문자열이다. </p>
@@ -2453,8 +2468,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 <p>상기 첫 예제는 충분한 요소 개수가 되지 않고, 두 번째 예제는 자료형이 맞지 않는다. 서식 연산자는 강력하지만, 사용하기가 까다로운 점이 있으니, <code>str_glue</code>를 사용하는 것도 권장된다.</p>
-</section><section id="r-string-debug" class="level2" data-number="8.12"><h2 data-number="8.12" class="anchored" data-anchor-id="r-string-debug">
-<span class="header-section-number">8.12</span> 디버깅</h2>
+</section><section id="r-string-debug" class="level2" data-number="9.12"><h2 data-number="9.12" class="anchored" data-anchor-id="r-string-debug">
+<span class="header-section-number">9.12</span> 디버깅</h2>
 <p></p>
 <p>프로그램을 작성하면서 배양해야 하는 기술은 항상 자신에게 질문을 하는 것이다. “여기서 무엇이 잘못될 수 있을까?” 혹은 “내가 작성한 완벽한 프로그램을 망가뜨리기 위해 사용자는 무슨 엄청난 일을 할 것인가?”</p>
 <p>예를 들어 앞장의 반복 while 루프를 시연하기 위해 사용한 프로그램을 살펴봅시다.</p>
@@ -2512,8 +2527,49 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </section>
 </div>
 </div>
-</section><section id="r-string-terminology" class="level2" data-number="8.13"><h2 data-number="8.13" class="anchored" data-anchor-id="r-string-terminology">
-<span class="header-section-number">8.13</span> 용어 정의</h2>
+</section><section id="r-string-ai" class="level2" data-number="9.13"><h2 data-number="9.13" class="anchored" data-anchor-id="r-string-ai">
+<span class="header-section-number">9.13</span> AI와 함께하는 문자열 처리</h2>
+<p>문자열 처리는 AI 코딩 도구가 특히 강점을 발휘하는 영역이다. 복잡한 텍스트 변환, 패턴 추출, 데이터 정제 작업을 AI에게 요청할 때 다음과 같은 명세 패턴을 활용한다.</p>
+<section id="명세-작성-패턴" class="level3" data-number="9.13.1"><h3 data-number="9.13.1" class="anchored" data-anchor-id="명세-작성-패턴">
+<span class="header-section-number">9.13.1</span> 명세 작성 패턴</h3>
+<p>AI에게 문자열 처리를 요청할 때 포함해야 할 정보:</p>
+<ol type="1">
+<li>
+<strong>입력 데이터 형태</strong>: 처리할 문자열의 구조와 예시</li>
+<li>
+<strong>원하는 출력 형태</strong>: 기대하는 결과물의 형태와 예시</li>
+<li>
+<strong>경계 조건</strong>: 빈 문자열, 특수문자, 다국어 등 예외 상황</li>
+</ol></section><section id="프롬프트-예시" class="level3" data-number="9.13.2"><h3 data-number="9.13.2" class="anchored" data-anchor-id="프롬프트-예시">
+<span class="header-section-number">9.13.2</span> 프롬프트 예시</h3>
+<p><strong>이메일 주소 추출</strong></p>
+<blockquote class="blockquote">
+<p>다음 형식의 로그 라인에서 도메인(<span class="citation" data-cites="뒤"><a href="references.html#ref-%EB%92%A4" role="doc-biblioref"><strong>뒤?</strong></a></span> 부분)만 추출하는 R/Python 함수를 작성해줘.</p>
+<p>입력 예시: <code>"From user@example.com Sat Jan 5 09:14:16 2008"</code></p>
+<p>출력 예시: <code>"example.com"</code></p>
+<p>조건: 이메일이 없는 라인은 빈 문자열 반환</p>
+</blockquote>
+<p><strong>텍스트 정규화</strong></p>
+<blockquote class="blockquote">
+<p>사용자 입력 문자열을 정규화하는 함수가 필요해.</p>
+<ul>
+<li>앞뒤 공백 제거</li>
+<li>연속된 공백은 하나로</li>
+<li>모두 소문자로 변환</li>
+</ul>
+<p>입력: <code>"  Hello   WORLD  "</code></p>
+<p>출력: <code>"hello world"</code></p>
+</blockquote>
+<p><strong>패턴 기반 분리</strong></p>
+<blockquote class="blockquote">
+<p>CSV 형식이 아닌 고정 너비 텍스트 파일을 파싱해야 해.</p>
+<p>형식: 이름(20자) + 나이(3자) + 도시(15자)</p>
+<p>예시 라인: <code>"홍길동              025서울           "</code></p>
+<p>결과: 리스트나 데이터프레임으로 분리</p>
+</blockquote>
+<p>이처럼 구체적인 입출력 예시와 경계 조건을 명시하면, AI가 정확한 코드를 생성할 가능성이 높아진다. 앞서 배운 슬라이싱, 문자열 함수, 정규표현식 개념을 알고 있으면 AI가 생성한 코드를 검증하고 수정하는 것도 수월해진다.</p>
+</section></section><section id="r-string-terminology" class="level2" data-number="9.14"><h2 data-number="9.14" class="anchored" data-anchor-id="r-string-terminology">
+<span class="header-section-number">9.14</span> 용어 정의</h2>
 <ul>
 <li>
 <strong>계수기(counter)</strong>: 무언가를 계수하기 위해서 사용되는 변수로 일반적으로 0으로 초기화하고 나서 증가한다. </li>
@@ -2997,13 +3053,13 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
     }
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./07-abstraction.html" class="pagination-link" aria-label="추상화">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">추상화</span></span>
+      <a href="./10-data-intro.html" class="pagination-link" aria-label="데이터, AI의 식량">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">데이터, AI의 식량</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./12-file.html" class="pagination-link" aria-label="파일">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">파일</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">파일</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
