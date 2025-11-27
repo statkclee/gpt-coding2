@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" xml:lang="ko-KR"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.9.8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
 <meta name="author" content="이광춘(Openai)">
-
-<title>6&nbsp; 논리와 흐름 – 챗GPT 코딩2</title>
+<title>12&nbsp; 튜플(Tuples) – 챗GPT 코딩2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -58,7 +55,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
-
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -66,8 +62,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./07-abstraction.html" rel="next">
-<link href="./05-data.html" rel="prev">
+<link href="./A-dataframe.html" rel="next">
+<link href="./09-dictionaries.html" rel="prev">
 <link href="./images/logo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -79,8 +75,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-d58a991db70fa947aaf03a466910673c.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-51eba2ad75c50bd4dffcd83a6d692c13.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-51eba2ad75c50bd4dffcd83a6d692c13.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -106,9 +101,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "검색",
     "search-label": "검색"
   }
-}</script>
-
-<script type="text/javascript">
+}</script><script type="text/javascript">
 
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -121,33 +114,24 @@ ga('send', {
   'anonymizeIp': true,
 });
 </script>
-
-
 </head>
-
 <body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-intro.html"><strong>1부</strong> AI 시대 프로그래밍</a></li><li class="breadcrumb-item"><a href="./06-logic.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">논리와 흐름</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-string.html"><strong>2부</strong> 자료구조</a></li><li class="breadcrumb-item"><a href="./10-tuples.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">튜플(Tuples)</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="검색" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">챗GPT 코딩2</a> 
         <div class="sidebar-tools-main">
@@ -167,7 +151,7 @@ ga('send', {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">서문</span></a>
@@ -181,8 +165,8 @@ ga('send', {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">프로그래밍 시작하기</span></span></a>
@@ -214,7 +198,7 @@ ga('send', {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06-logic.html" class="sidebar-item-text sidebar-link active">
+  <a href="./06-logic.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">논리와 흐름</span></span></a>
   </div>
 </li>
@@ -225,7 +209,7 @@ ga('send', {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
@@ -234,8 +218,8 @@ ga('send', {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-string.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">문자열</span></span></a>
@@ -261,7 +245,7 @@ ga('send', {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./10-tuples.html" class="sidebar-item-text sidebar-link">
+  <a href="./10-tuples.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">튜플(Tuples)</span></span></a>
   </div>
 </li>
@@ -272,7 +256,7 @@ ga('send', {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
@@ -281,8 +265,8 @@ ga('send', {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./git-basics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">자동화된 버전 관리</span></span></a>
@@ -337,7 +321,7 @@ ga('send', {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
@@ -346,8 +330,8 @@ ga('send', {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tool-regex.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">정규 표현식</span></span></a>
@@ -384,7 +368,7 @@ ga('send', {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
@@ -393,8 +377,8 @@ ga('send', {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ide.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">IDE 선택과 발전</span></span></a>
@@ -419,7 +403,7 @@ ga('send', {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
@@ -428,8 +412,8 @@ ga('send', {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./docker_concept.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">도커: 재현 환경</span></span></a>
@@ -448,7 +432,7 @@ ga('send', {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
@@ -457,15 +441,15 @@ ga('send', {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glossary.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">용어사전</span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
@@ -473,41 +457,24 @@ ga('send', {
   </div>
 </li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">목차</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">목차</h2>
    
   <ul>
-  <li><a href="#sec-logic-condition" id="toc-sec-logic-condition" class="nav-link active" data-scroll-target="#sec-logic-condition"><span class="header-section-number">6.1</span> 조건문: 분기 만들기</a>
-  <ul class="collapse">
-  <li><a href="#sec-logic-divide-test" id="toc-sec-logic-divide-test" class="nav-link" data-scroll-target="#sec-logic-divide-test"><span class="header-section-number">6.1.1</span> 테스트 먼저</a></li>
-  <li><a href="#sec-logic-divide-impl" id="toc-sec-logic-divide-impl" class="nav-link" data-scroll-target="#sec-logic-divide-impl"><span class="header-section-number">6.1.2</span> 조건문 구현</a></li>
-  <li><a href="#sec-logic-if-elif" id="toc-sec-logic-if-elif" class="nav-link" data-scroll-target="#sec-logic-if-elif"><span class="header-section-number">6.1.3</span> if-elif-else 구조</a></li>
-  </ul></li>
-  <li><a href="#sec-logic-loop" id="toc-sec-logic-loop" class="nav-link" data-scroll-target="#sec-logic-loop"><span class="header-section-number">6.2</span> 반복문: 작업 되풀이하기</a>
-  <ul class="collapse">
-  <li><a href="#sec-logic-for" id="toc-sec-logic-for" class="nav-link" data-scroll-target="#sec-logic-for"><span class="header-section-number">6.2.1</span> for 반복문</a></li>
-  <li><a href="#sec-logic-while" id="toc-sec-logic-while" class="nav-link" data-scroll-target="#sec-logic-while"><span class="header-section-number">6.2.2</span> while 반복문</a></li>
-  </ul></li>
-  <li><a href="#sec-logic-expression" id="toc-sec-logic-expression" class="nav-link" data-scroll-target="#sec-logic-expression"><span class="header-section-number">6.3</span> 계산기 확장: 수식 계산</a>
-  <ul class="collapse">
-  <li><a href="#sec-logic-expr-test" id="toc-sec-logic-expr-test" class="nav-link" data-scroll-target="#sec-logic-expr-test"><span class="header-section-number">6.3.1</span> 테스트 먼저</a></li>
-  <li><a href="#sec-logic-expr-impl" id="toc-sec-logic-expr-impl" class="nav-link" data-scroll-target="#sec-logic-expr-impl"><span class="header-section-number">6.3.2</span> 구현</a></li>
-  </ul></li>
-  <li><a href="#sec-logic-summary" id="toc-sec-logic-summary" class="nav-link" data-scroll-target="#sec-logic-summary"><span class="header-section-number">6.4</span> 핵심 정리</a></li>
-  </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/06-logic.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
+<li><a href="#tuple-immutable" id="toc-tuple-immutable" class="nav-link active" data-scroll-target="#tuple-immutable"><span class="header-section-number">12.1</span> 튜플은 불변이다</a></li>
+  <li><a href="#tuple-frequency" id="toc-tuple-frequency" class="nav-link" data-scroll-target="#tuple-frequency"><span class="header-section-number">12.2</span> 가장 빈도수 높은 단어</a></li>
+  <li><a href="#tuple-sequences" id="toc-tuple-sequences" class="nav-link" data-scroll-target="#tuple-sequences"><span class="header-section-number">12.3</span> 순열: 문자열, 리스트, 튜플</a></li>
+  <li><a href="#tuple-debugging" id="toc-tuple-debugging" class="nav-link" data-scroll-target="#tuple-debugging"><span class="header-section-number">12.4</span> 디버깅</a></li>
+  <li><a href="#r-tuple-terminology" id="toc-r-tuple-terminology" class="nav-link" data-scroll-target="#r-tuple-terminology"><span class="header-section-number">12.5</span> 용어정의</a></li>
+  <li><a href="#tuple-ex" id="toc-tuple-ex" class="nav-link" data-scroll-target="#tuple-ex"><span class="header-section-number">12.6</span> 연습문제</a></li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/10-tuples.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-intro.html"><strong>1부</strong> AI 시대 프로그래밍</a></li><li class="breadcrumb-item"><a href="./06-logic.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">논리와 흐름</span></a></li></ol></nav>
-<div class="quarto-title">
-<h1 class="title"><span id="sec-logic" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">논리와 흐름</span></span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-string.html"><strong>2부</strong> 자료구조</a></li><li class="breadcrumb-item"><a href="./10-tuples.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">튜플(Tuples)</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="r-tuple" class="quarto-section-identifier"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">튜플(Tuples)</span></span></h1>
 </div>
 
 
@@ -521,167 +488,178 @@ ga('send', {
   
 
 
-</header>
-
-
-<p>프로그램은 순차적으로만 실행되지 않는다. 조건에 따라 다른 경로를 선택하고, 같은 작업을 반복해야 할 때가 있다. 계산기 코드를 확장하면서 <strong>조건문</strong>과 <strong>반복문</strong>을 이해해보자.</p>
-<section id="sec-logic-condition" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="sec-logic-condition"><span class="header-section-number">6.1</span> 조건문: 분기 만들기</h2>
-<p>계산기에 나눗셈 기능을 추가할 때, 0으로 나누는 경우를 처리해야 한다.</p>
-<section id="sec-logic-divide-test" class="level3" data-number="6.1.1">
-<h3 data-number="6.1.1" class="anchored" data-anchor-id="sec-logic-divide-test"><span class="header-section-number">6.1.1</span> 테스트 먼저</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_divide():</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""나눗셈 기능 명세"""</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> divide(<span class="dv">10</span>, <span class="dv">2</span>) <span class="op">==</span> <span class="dv">5</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> divide(<span class="dv">7</span>, <span class="dv">2</span>) <span class="op">==</span> <span class="fl">3.5</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> divide(<span class="dv">0</span>, <span class="dv">5</span>) <span class="op">==</span> <span class="dv">0</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 0으로 나누기</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> divide(<span class="dv">5</span>, <span class="dv">0</span>) <span class="kw">is</span> <span class="va">None</span>  <span class="co"># 또는 에러 처리</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="sec-logic-divide-impl" class="level3" data-number="6.1.2">
-<h3 data-number="6.1.2" class="anchored" data-anchor-id="sec-logic-divide-impl"><span class="header-section-number">6.1.2</span> 조건문 구현</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> divide(a, b):</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""a를 b로 나눈다. b가 0이면 None 반환."""</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> b <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> a <span class="op">/</span> b</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 테스트</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> divide(<span class="dv">10</span>, <span class="dv">2</span>) <span class="op">==</span> <span class="dv">5</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> divide(<span class="dv">7</span>, <span class="dv">2</span>) <span class="op">==</span> <span class="fl">3.5</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> divide(<span class="dv">5</span>, <span class="dv">0</span>) <span class="kw">is</span> <span class="va">None</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"나눗셈 테스트 통과!"</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="sec-logic-if-elif" class="level3" data-number="6.1.3">
-<h3 data-number="6.1.3" class="anchored" data-anchor-id="sec-logic-if-elif"><span class="header-section-number">6.1.3</span> if-elif-else 구조</h3>
-<p>여러 조건을 검사할 때:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate(a, b, operation):</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""두 수와 연산자를 받아 계산한다."""</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> operation <span class="op">==</span> <span class="st">"+"</span>:</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> a <span class="op">+</span> b</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> operation <span class="op">==</span> <span class="st">"-"</span>:</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> a <span class="op">-</span> b</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> operation <span class="op">==</span> <span class="st">"*"</span>:</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> a <span class="op">*</span> b</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> operation <span class="op">==</span> <span class="st">"/"</span>:</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> b <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">None</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> a <span class="op">/</span> b</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span>  <span class="co"># 알 수 없는 연산자</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 테스트</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> calculate(<span class="dv">10</span>, <span class="dv">3</span>, <span class="st">"+"</span>) <span class="op">==</span> <span class="dv">13</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> calculate(<span class="dv">10</span>, <span class="dv">3</span>, <span class="st">"-"</span>) <span class="op">==</span> <span class="dv">7</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> calculate(<span class="dv">10</span>, <span class="dv">3</span>, <span class="st">"*"</span>) <span class="op">==</span> <span class="dv">30</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> calculate(<span class="dv">10</span>, <span class="dv">2</span>, <span class="st">"/"</span>) <span class="op">==</span> <span class="dv">5</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"계산기 테스트 통과!"</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-</section>
-<section id="sec-logic-loop" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="sec-logic-loop"><span class="header-section-number">6.2</span> 반복문: 작업 되풀이하기</h2>
-<p>같은 작업을 여러 번 해야 할 때 반복문을 사용한다.</p>
-<section id="sec-logic-for" class="level3" data-number="6.2.1">
-<h3 data-number="6.2.1" class="anchored" data-anchor-id="sec-logic-for"><span class="header-section-number">6.2.1</span> for 반복문</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_many(numbers):</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""리스트의 모든 숫자를 더한다."""</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    total <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> num <span class="kw">in</span> numbers:</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        total <span class="op">=</span> total <span class="op">+</span> num</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> total</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> add_many([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>])</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"1+2+3+4+5 = </span><span class="sc">{</span>result<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="sec-logic-while" class="level3" data-number="6.2.2">
-<h3 data-number="6.2.2" class="anchored" data-anchor-id="sec-logic-while"><span class="header-section-number">6.2.2</span> while 반복문</h3>
-<p>조건이 참인 동안 반복:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> countdown(n):</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""n부터 1까지 카운트다운한다."""</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> n <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(n)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        n <span class="op">=</span> n <span class="op">-</span> <span class="dv">1</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"발사!"</span>)</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>countdown(<span class="dv">3</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-</section>
-<section id="sec-logic-expression" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="sec-logic-expression"><span class="header-section-number">6.3</span> 계산기 확장: 수식 계산</h2>
-<p>여러 연산을 연속으로 처리해보자.</p>
-<section id="sec-logic-expr-test" class="level3" data-number="6.3.1">
-<h3 data-number="6.3.1" class="anchored" data-anchor-id="sec-logic-expr-test"><span class="header-section-number">6.3.1</span> 테스트 먼저</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_calculate_expression():</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""수식 계산 명세"""</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># "2 + 3 * 4" 같은 수식은 복잡하므로</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 단순화: [(숫자, 연산자), ...] 형태</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> calculate_sequence([(<span class="dv">2</span>, <span class="va">None</span>), (<span class="dv">3</span>, <span class="st">"+"</span>)]) <span class="op">==</span> <span class="dv">5</span>  <span class="co"># 2 + 3</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="sec-logic-expr-impl" class="level3" data-number="6.3.2">
-<h3 data-number="6.3.2" class="anchored" data-anchor-id="sec-logic-expr-impl"><span class="header-section-number">6.3.2</span> 구현</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_sequence(operations):</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""순차적 계산을 수행한다.</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">    operations: [(값, 연산자), ...] 형태</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">    첫 번째 연산자는 None (초기값)</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> operations:</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">0</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    result, _ <span class="op">=</span> operations[<span class="dv">0</span>]  <span class="co"># 첫 번째 값이 시작점</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(operations)):</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>        value, operator <span class="op">=</span> operations[i]</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> operator <span class="op">==</span> <span class="st">"+"</span>:</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>            result <span class="op">=</span> result <span class="op">+</span> value</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> operator <span class="op">==</span> <span class="st">"-"</span>:</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>            result <span class="op">=</span> result <span class="op">-</span> value</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> operator <span class="op">==</span> <span class="st">"*"</span>:</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>            result <span class="op">=</span> result <span class="op">*</span> value</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> operator <span class="op">==</span> <span class="st">"/"</span>:</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> value <span class="op">!=</span> <span class="dv">0</span>:</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>                result <span class="op">=</span> result <span class="op">/</span> value</span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="co"># 테스트: 2 + 3 - 1 = 4</span></span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>ops <span class="op">=</span> [(<span class="dv">2</span>, <span class="va">None</span>), (<span class="dv">3</span>, <span class="st">"+"</span>), (<span class="dv">1</span>, <span class="st">"-"</span>)]</span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"2 + 3 - 1 = </span><span class="sc">{</span>calculate_sequence(ops)<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-</section>
-<section id="sec-logic-summary" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="sec-logic-summary"><span class="header-section-number">6.4</span> 핵심 정리</h2>
-<div class="callout callout-style-simple callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+</header><div id="tuple-list-column" class="rmdcaution">
+<p>파이썬 튜플은 다양한 자료형을 갖는 리스트에 대응된다. 튜플이 갖는 불변성이 R에서 데이터 분석 등의 작업에 꼭 필요한 기능은 아니라서 불변성을 활용한 튜플 개념이 많이 사용되지는 않고 있다.</p>
+<p>하지만, 다양한 자료형을 갖는 리스트는 데이터프레임을 확장한 개념으로 고급 데이터 분석과 처리에 필히 이해를 가져야하는 내용이다.</p>
+<p>추후 다양한 자료형을 갖는 리스트는 별도 장을 따로 만들어 풀어나갈 예정이다.</p>
 </div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">힌트</span>논리와 흐름의 핵심
+<section id="tuple-immutable" class="level2" data-number="12.1"><h2 data-number="12.1" class="anchored" data-anchor-id="tuple-immutable">
+<span class="header-section-number">12.1</span> 튜플은 불변이다</h2>
+<p>다양한 자료형을 갖는 리스트가 <strong>튜플(tuple)</strong>이다. <strong>튜플(tuple)</strong>[^about-tuple]은 리스트와 마찬가지로 순서(sequence) 값이다. 튜플에 저장된 값은 임의 자료형(type)이 될 수 있고, 정수로 색인 된다. 일반적으로 알려진 튜플은 <strong>불변(immutable</strong>하다는 것이다. 튜플은 <strong>비교 가능(comparable)</strong>하고 <strong>해쉬형(hashable)</strong>이다. 따라서, 리스트 값을 정렬할 수 있고, 키 값으로 튜플을 사용할 수 있다.</p>
+<p>[^about-tuple] : 재미난 사실: 단어 ‘’튜플(tuple)’’은 가변 길이 (한배, 두배, 세배, 네배, 다섯배, 여섯배, 일곱배 등) 숫자열에 붙여진 이름에서 유래한다</p>
+<p>구문론적으로, 튜플은 콤마로 구분되는 서로 다른 자료형을 갖는 리스트 값이다.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">'a'</span>, <span class="st">'b'</span>, <span class="st">'c'</span>, <span class="st">'d'</span>, <span class="st">'e'</span><span class="op">)</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<p><code>튜플(tuple)</code>이 생성자 이름이기 <code>list</code>이기 때문에 변수명으로 리스트(list) 사용을 피해야 한다.</p>
+<p>대부분의 리스트 연산자는 튜플에서도 사용 가능하다. 꺾쇠 연산자가 요소를 색인한다.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">t</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
+<span><span class="co">#&gt; [[1]]</span></span>
+<span><span class="co">#&gt; [1] "a"</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="callout-body-container callout-body">
+<p>그리고, 슬라이스 연산자(slice operator)는 요소 범위를 선택한다.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">t</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></span>
+<span><span class="co">#&gt; [[1]]</span></span>
+<span><span class="co">#&gt; [1] "b"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[2]]</span></span>
+<span><span class="co">#&gt; [1] "c"</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>하지만, 파이썬 튜플 요소 중 하나를 변경하고 하면 오류가 발생하지만, R에서 리스트는 다양한 자료형을 담을 수 있고 변경도 가능하다.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">t</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">'A'</span></span>
+<span><span class="va">t</span></span>
+<span><span class="co">#&gt; [[1]]</span></span>
+<span><span class="co">#&gt; [1] "A"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[2]]</span></span>
+<span><span class="co">#&gt; [1] "b"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[3]]</span></span>
+<span><span class="co">#&gt; [1] "c"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[4]]</span></span>
+<span><span class="co">#&gt; [1] "d"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[5]]</span></span>
+<span><span class="co">#&gt; [1] "e"</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section><section id="tuple-frequency" class="level2" data-number="12.2"><h2 data-number="12.2" class="anchored" data-anchor-id="tuple-frequency">
+<span class="header-section-number">12.2</span> 가장 빈도수 높은 단어</h2>
+<p><em>로미오와 쥴리엣 2장 2막</em> 텍스트 파일(<code>romeo-full.txt</code>)로 다시 돌아와서, 텍스트에서 가장 빈도수가 높은 단어를 10개를 출력하는 프로그램을 작성한다.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">romeo_text</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_lines.html">read_lines</a></span><span class="op">(</span><span class="st">"data/romeo-full.txt"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">romeo_split</span> <span class="op">&lt;-</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_split.html">str_split</a></span><span class="op">(</span><span class="va">romeo_text</span>, <span class="st">" "</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/case.html">str_to_lower</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html">str_replace_all</a></span><span class="op">(</span><span class="va">.</span>, pattern <span class="op">=</span> <span class="st">"[[:punct:]]"</span>,</span>
+<span>                           replacement <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">romeo_split</span> <span class="op">&lt;-</span> <span class="va">romeo_split</span><span class="op">[</span><span class="va">romeo_split</span> <span class="op">!=</span> <span class="st">""</span><span class="op">]</span></span>
+<span></span>
+<span><span class="va">romeo_full_freq</span> <span class="op">&lt;-</span> <span class="va">romeo_split</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rlang.r-lib.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"key"</span>, <span class="st">"value"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_head</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># romeo_full_freq</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>파일을 읽고 각 단어를 문서의 단어 빈도수는 전처리 로직으로 구두점을 제거하고 모두 소문자로 변환한 후에 <code><a href="https://rdrr.io/r/base/table.html">table()</a></code> 함수로 단어별 빈도수를 계산하고 데이터프레임으로 변환 후 고빈도 단어 10개를 추출한다.</p>
+<p>이제 단어 빈도 분석을 위해서 작성한 프로그램의 마지막 출력결과는 원하는 바를 완수한 것처럼 보인다.</p>
+<div class="cell">
+<pre><code>#&gt; # A tibble: 10 × 2
+#&gt;   key   value
+#&gt;   &lt;chr&gt; &lt;int&gt;
+#&gt; 1 that     14
+#&gt; 2 is       13
+#&gt; 3 her      11
+#&gt; 4 the      11
+#&gt; 5 and      10
+#&gt; 6 she       9
+#&gt; # ℹ 4 more rows</code></pre>
+</div>
+</section><section id="tuple-sequences" class="level2" data-number="12.3"><h2 data-number="12.3" class="anchored" data-anchor-id="tuple-sequences">
+<span class="header-section-number">12.3</span> 순열: 문자열, 리스트, 튜플</h2>
+<p>여기서 리스트 튜플에 초점을 맞추었지만, 이장의 거의 모든 예제가 또한 리스트의 리스트, 튜플의 튜플, 리스트 튜플에도 동작한다. 가능한 모든 조합을 열거하는 것을 피하기 위해서, 순열의 순열(sequences of sequences)에 대해서 논의하는 것이 때로는 쉽다.</p>
+<p>대부분의 문맥에서 다른 종류의 순열(문자열, 리스트, 튜플)은 상호 호환해서 사용될 수 있다. 그런데 왜 그리고 어떻게 다른 것보다 이것을 선택해야 될까?</p>
+<p>서로 다른 자료형이 갖는 특징을 잘 파악하고 주어진 문제를 가장 쉽게 풀수 있는 방향의 자료형을 선택한다.</p>
+</section><section id="tuple-debugging" class="level2" data-number="12.4"><h2 data-number="12.4" class="anchored" data-anchor-id="tuple-debugging">
+<span class="header-section-number">12.4</span> 디버깅</h2>
+<p>리스트, 딕셔너리, 튜플은 <strong>자료 구조(data structures)</strong>로 일반적으로 알려져 있다. 이번장에서 리스트 튜플, 키로 튜플, 값으로 리스트를 담고 있는 딕셔너리 같은 복합 자료 구조를 보기 시작했다. 복합 자료 구조는 유용하지만, 저자가 작명한 <strong>형태 오류(shape errors)</strong>라고 불리는 오류에 노출되어 있다. 즉, 자료 구조가 잘못된 자료형(type), 크기, 구성일 경우 오류가 발생한다. 혹은 코드를 작성하고, 자료의 모양이 생각나지 않는 경우도 오류의 원인이 된다.</p>
+<p>예를 들어, 정수 하나를 가진 리스트를 기대하고, (리스트가 아닌) 일반 정수를 넘긴다면, 작동하지 않는다.</p>
+<p>프로그램을 디버깅할 때, 정말 어려운 버그를 잡으려고 작업을 한다면, 다음 네가지를 시도할 수 있다.</p>
 <ol type="1">
-<li><strong>조건문 (if)</strong> - 조건에 따라 다른 코드를 실행</li>
-<li><strong>반복문 (for, while)</strong> - 같은 작업을 여러 번 반복</li>
-<li><strong>흐름 제어</strong> - 프로그램의 실행 순서를 조절</li>
+<li><p><strong>코드 읽기(reading)</strong>: 코드를 면밀히 조사하고, 스스로에게 다시 읽어 주고, 코드가 자신이 작성한 의도를 담고 있는지 점검하라.</p></li>
+<li><p><strong>실행(running)</strong>: 변경해서 다른 버젼을 실행해서 실험하라. 종종, 프로그램이 적절한 곳에 적절한 것을 보여준다면, 문제가 명확하다. 발판(scaffolding)을 만들기 위해서 때때로 시간을 들일 필요도 있다.</p></li>
+<li><p><strong>반추(ruminating)</strong>:생각의 시간을 갖자. 어떤 종류의 오류인가: 구문, 실행, 의미론(semantic). 오류 메시지로부터 혹은 프로그램 출력결과로부터 무슨 정보를 얻을 수 있는가? 어떤 종류 오류가 지금 보고 있는 문제를 만들었을까? 문제가 나타나기 전에, 마지막으로 변경한 것은 무엇인가?</p></li>
+<li><p><strong>퇴각(retreating)</strong>: 어느 시점에선가, 최선은 물러서서, 최근의 변경을 다시 원복하는 것이다. 잘 동작하고 이해하는 프로그램으로 다시 돌아가서, 다시 프로그램을 작성한다.</p></li>
 </ol>
-</div>
-</div>
+<p>초보 프로그래머는 종종 이들 활동 중 하나에 사로잡혀 다른 것을 잊곤 한다. 활동 각각은 고유한 실패 방식과 함께 온다.</p>
+<p>예를 들어, 프로그램을 정독하는 것은 문제가 인쇄상의 오류에 있다면 도움이 되지만, 문제가 개념상 오해에 뿌리를 두고 있다면 그다지 도움이 되지 못한다. 만약 작성한 프로그램을 이해하지 못한다면, 100번 읽을 수는 있지만, 오류를 발견할 수는 없다. 왜냐하면, 오류는 여러분 머리에 있기 때문입니다.</p>
+<p>만약 작고 간단한 테스트를 진행한다면, 실험을 수행하는 것이 도움이 될 수 있다. 하지만, 코드를 읽지 않거나, 생각없이 실험을 수행한다면, 프로그램이 작동될 때까지 무작위 변경하여 개발하는 “랜덤 워크 프로그램(random walk programming)” 패턴에 빠질 수 있다. 말할 필요없이 랜덤 워크 프로그래밍은 시간이 오래 걸린다.</p>
+<p>생각할 시간을 가져야 한다. 디버깅은 실험 과학 같은 것이다. 문제가 무엇인지에 대한 최소한 한 가지 가설을 가져야 한다. 만약 두개 혹은 그 이상의 가능성이 있다면, 이러한 가능성 중에서 하나라도 줄일 수 있는 테스트를 생각해야 한다.</p>
+<p>휴식 시간을 가지는 것은 생각하는데 도움이 된다. 대화를 하는 것도 도움이 된다. 문제를 다른 사람 혹은 자신에게도 설명할 수 있다면, 질문을 마치기도 전에 답을 종종 발견할 수 있다.</p>
+<p>하지만, 오류가 너무 많고 수정하려는 코드가 매우 크고, 복잡하다면 최고의 디버깅 기술도 무용지물이다. 가끔, 최선의 선택은 퇴각하는 것이다. 작동하고 이해하는 곳까지 후퇴해서 프로그램을 간략화하라.</p>
+<p>초보 프로그래머는 종종 퇴각하기를 꺼려한다. 왜냐하면, 설사 잘못되었지만, 한줄 코드를 지울 수 없기 때문이다. 삭제하지 않는 것이 기분을 좋게 한다면, 다시 작성하기 전에 프로그램을 다른 파일에 복사하라. 그리고 나서, 한번에 조금씩 붙여넣어라.</p>
+<p>정말 어려운 버그(hard bug)를 발견하고 고치는 것은 코드 읽기, 실행, 반추, 때때로 퇴각을 요구한다. 만약 이들 활동 중 하나도 먹히지 않는다면, 다른 것들을 시도해 보세요.</p>
+</section><section id="r-tuple-terminology" class="level2" data-number="12.5"><h2 data-number="12.5" class="anchored" data-anchor-id="r-tuple-terminology">
+<span class="header-section-number">12.5</span> 용어정의</h2>
+<ul>
+<li>
+<strong>비교가능한(comparable)</strong>:동일한 자료형의 다른 값과 비교하여 큰지, 작은지, 혹은 같은지를 확인하기 위해서 확인할 수 있는 자료형(type). 비교가능한(comparable) 자료형은 리스트에 넣어서 정렬할 수 있다.</li>
+<li>
+<strong>자료 구조(data structure)</strong>:연관된 값의 집합, 종종 리스트, 딕셔너리, 튜플 등으로 조직화된다.</li>
+<li>
+<strong>DSU</strong>: “decorate-sort-undecorate,”의 약어로 리스트 튜플을 생성, 정렬, 결과 일부 추출을 포함하는 패턴.</li>
+<li>
+<strong>모음(gather)</strong>: 가변-길이 인자 튜플을 조합하는 연산.</li>
+<li>
+<strong>해쉬형(hashable)</strong>: 해쉬 함수를 가진 자료형(type). 정수, 소수점, 문자열 같은 불변형은 해쉬형이다. 리스트나 딕셔너리 처럼 변경가능한 형은 해쉬형이 아니다.</li>
+<li>
+<strong>스캐터(scatter)</strong>: 순서(sequence)를 리스트 인자로 다루는 연산.</li>
+<li>
+<strong>(자료 구조의) 형태</strong>: 자료 구조의 자료형(type), 크기, 구성을 요약.</li>
+<li>
+<strong>싱글톤(singleton)</strong>: 단일 요소를 가진 리스트 (혹은 다른 순서(sequence)).</li>
+<li>
+<strong>튜플(tuple)</strong>: 불변 요소들의 순서 (sequence).</li>
+<li>
+<strong>튜플 대입(tuple assignment)</strong>: 오른편 순서(sequence)와 왼편 튜플 변수를 대입. 오른편이 평가되고나서 각 요소들은 왼편의 변수에 대입된다.</li>
+</ul></section><section id="tuple-ex" class="level2" data-number="12.6"><h2 data-number="12.6" class="anchored" data-anchor-id="tuple-ex">
+<span class="header-section-number">12.6</span> 연습문제</h2>
+<ol type="1">
+<li><p>앞서 작성한 프로그램을 다음과 같이 수정하세요. “From”라인을 읽고 파싱하여 라인에서 주소를 뽑아내세요. 딕셔너리를 사용하여 각 사람으로부터 메시지 숫자를 계수(count)한다.</p></li>
+<li><p>모든 데이터를 읽은 후에 가장 많은 커밋(commit)을 한 사람을 출력하세요. 딕셔너리로부터 리스트 (count, email) 튜플을 생성하고 역순으로 리스트를 정렬한 후에 가장 많은 커밋을 한 사람을 출력하세요.</p></li>
+</ol>
+<pre><code>    Sample Line:
+    From stephen.marquard@uct.ac.za Sat Jan  5 09:14:16 2008
+
+    Enter a file name: mbox-short.txt
+    cwen@iupui.edu 5
+
+    Enter a file name: mbox.txt
+    zqian@umich.edu 195</code></pre>
+<ol start="3" type="1">
+<li>이번 프로그램은 각 메시지에 대한 하루 중 시간의 분포를 계수(count)한다. “From” 라인으로부터 시간 문자열을 찾고 콜론(:) 문자를 사용하여 문자열을 쪼개서 시간을 추출합니다. 각 시간별로 계수(count)를 누적하고 아래에 보여지듯이 시간 단위로 정렬하여 한 라인에 한시간씩 계수(count)를 출력합니다.</li>
+</ol>
+<pre><code>    Sample Execution:
+    Rscript timeofday.R
+    Enter a file name: mbox-short.txt
+    04 3
+    06 1
+    07 1
+    09 2
+    10 3
+    11 6
+    14 1
+    15 2
+    16 4
+    17 2
+    18 1
+    19 1</code></pre>
+<ol start="4" type="1">
+<li>파일을 읽고, 빈도(frequencey)에 따라 내림차순으로 <em>문자(letters)</em>를 출력하는 프로그램을 작성하세요. 작성한 프로그램은 모든 입력을 소문자로 변환하고 a-z 문자만 계수(count)한다. 공백, 숫자, 문장기호 a-z를 제외한 다른 어떤 것도 계수하지 않습니다. 다른 언어로 구성된 텍스트 샘플을 구해서 언어마다 문자 빈도가 어떻게 변하는지 살펴보세요. 결과를 <a href="wikipedia.org/wiki/Letter_frequencies">wikipedia.org/wiki/Letter_frequencies</a> 표와 비교하세요.</li>
+</ol>
 
 
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
     const anchorJS = new window.AnchorJS();
@@ -1119,35 +1097,30 @@ ga('send', {
       }
     }
   });
-  </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-      <a href="./05-data.html" class="pagination-link" aria-label="데이터와 타입">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">데이터와 타입</span></span>
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./09-dictionaries.html" class="pagination-link" aria-label="딕셔너리">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">딕셔너리</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./07-abstraction.html" class="pagination-link" aria-label="추상화">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">추상화</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./A-dataframe.html" class="pagination-link" aria-label="데이터프레임">
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">데이터프레임</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
 <p>챗GPT 쿼토 책은 소프트웨어 카펜트리 “Git 버전제어”를 번역한 것이 포함되어 있습니다.</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/06-logic.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/10-tuples.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>순수하게 <a href="https://quarto.org/">쿼토(Quarto)</a>로 제작되었습니다.</p>
 </div>
   </div>
 </footer>
-
-
 
 
 </body></html>

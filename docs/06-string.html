@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.9.8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="이광춘(Openai)">
-<title>24&nbsp; 네트워크 프로그램 – 챗GPT 코딩2</title>
+<title>8&nbsp; 문자열 – 챗GPT 코딩2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -62,8 +62,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./tool-web.html" rel="next">
-<link href="./tool-regex.html" rel="prev">
+<link href="./07-file.html" rel="next">
+<link href="./07-abstraction.html" rel="prev">
 <link href="./images/logo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -278,7 +278,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"code":"con <- socketConnection(host = \"data.pr4e.org\", port = 80, blocking = TRUE, open = \"r+b\", timeout = 60)\n\ncmd <- \"GET http://data.pr4e.org/romeo.txt HTTP/1.0\\r\\n\\r\\n\"\n\nwriteLines(cmd, con)\n\nflush(con)\n\nwhile(length(line <- readLines(con, warn = FALSE, n = 1)) > 0) {\n  cat(line, sep = \"\\n\")\n}\n\nclose(con)","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"r-socket-example","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"download.file(\"http://data.pr4e.org/cover3.jpg\", \n              destfile = \"data/cover3.jpg\",\n              mode = \"wb\")","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"r-socket-images","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(httr)\n\nurl <- 'http://www.py4inf.com/code/romeo.txt'\n\nresponse <- GET(url)\ncontent <- content(response, \"text\", encoding = \"UTF-8\")\nlines <- strsplit(content, split = \"\\n\")[[1]]\nlines","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"r-httr-package","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(httr)\n\nurl <- \"http://www.py4inf.com/code/romeo.txt\"\n\nresponse <- GET(url)\ncontent <- content(response, \"text\", , encoding = \"UTF-8\")\n\ncounts <- strsplit(content, \"\\\\s+\") |> \n  unlist() |> \n  table()\n\nprint(counts)","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"r-httr-package-output","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(stringr)\n\ncat(\"웹사이트 입력 - \")\nurl <- readLines(file(\"stdin\"), 1)\n\nhtml <- readLines(url, warn = FALSE)\nhtml <- paste(html, collapse = \"\\n\")\n\nlinks <- str_extract_all(html, 'href=\"http://[^\"]*\"')[[1]]\nlinks <- str_replace_all(links, 'href=\"', '')\n\nprint(links)","id":5,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"r-httr-extract-urls","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(httr)\nlibrary(xml2)\nlibrary(rvest)\n\ncat(\"웹사이트 입력 - \")\nurl <- readLines(file(\"stdin\"), 1)\n\nhtml_content <- read_html(GET(url))\n\nhrefs <- html_nodes(html_content, \"a\") |> \n  html_attr(\"href\")\n\nprint(hrefs)","id":6,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"r-httr-rvest-combo","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(httr)\nlibrary(rvest)\n\ncat(\"웹사이트 입력 - \")\nurl <- readLines(file(\"stdin\"), 1)\n\nresponse <- GET(url)\nhtml_content <- content(response, \"text\", encoding = \"UTF-8\")\n\nhtml <- read_html(html_content)\ntags <- html_nodes(html, \"a\")\n\nfor (tag in tags) {\n  # Tag\n  cat(\"TAG:\", toString(xml2::xml_find_first(tag, xpath = \".\")), \"\\n\")\n  \n  # URL\n  url <- html_attr(tag, \"href\")\n  cat(\"URL:\", url, \"\\n\")\n  \n  # Content\n  content <- html_text(tag)\n  cat(\"Content:\", content, \"\\n\")\n  \n  # Attributes\n  attrs <- html_attrs(tag)\n  cat(\"Attrs:\", paste(names(attrs), attrs, sep=\": \", collapse=\", \"), \"\\n\\n\")\n}","id":7,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"r-rvest-extract-tags","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"url <- \"https://www.dr-chuck.com/py4inf/cover.jpg\"\ndestination_file <- \"cover.jpg\"\n\ndownload.file(url, destfile = destination_file, mode = \"wb\")","id":8,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"r-download-files","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(httr)\n\nurl <- 'https://www.fhfa.gov/DataTools/Downloads/Documents/Enterprise-PUDB/National-File-A/2022_SFNationalFileA2022.zip'\nresp <- GET(url, write_disk(\"2022_SFNationalFileA2022.zip\", overwrite = TRUE))\n\n# Check if the request was successful and report the size\nif (status_code(resp) == 200) {\n  file_info <- file.info(\"2022_SFNationalFileA2022.zip\")\n  size <- file_info$size\n  message(size, \"문자 복사완료!\")\n} else {\n  message(\"파일 다운로드 실패!\")\n}\n#> 20232194문자 복사완료!","id":9,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"r-download-big-file","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
+globalThis.qwebrCellDetails = [{"code":"fruit <- 'banana'\nfruit_letter <- strsplit(fruit, \"\")[[1]]\n\nletter <- fruit_letter[1]","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"r-string-seq","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"letter","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"r-string-seq-output","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"fruit_letter[1.5]","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"r-string-integer","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"fruit <- 'banana'\nfruit_letter <- strsplit(fruit, \"\")[[1]]\n\nlength(fruit_letter)","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"r-string-length","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"len <- length(fruit_letter)\nfruit_letter[len]","id":5,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"r-string-last","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"index <- 1\n\nwhile(index <= length(fruit_letter)){\n  letter <- fruit_letter[index]\n  print(letter)\n  index <- index + 1\n}","id":6,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"r-string-traversal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"for(char in fruit_letter) {\n  print(char)\n}","id":7,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"r-string-banana-for","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"s <- strsplit('Monty Python', \"\")[[1]]\npaste(s[1:5], collapse=\"\")\n#> [1] \"Monty\"\npaste(s[7:12], collapse=\"\")\n#> [1] \"Python\"","id":8,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"r-string-slice}","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"fruit <- 'banana'\nfruit_letter <- strsplit(fruit, \"\")[[1]]\n\npaste(head(fruit_letter, 3), collapse=\"\")\npaste(tail(fruit_letter, 3), collapse=\"\")","id":9,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"r-string-slice-banana","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"fruit_letter[3:3]","id":10,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"r-string-slice-empty","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"greeting <- strsplit('Hello, world!', \"\")[[1]]\ngreeting[1] <- 'J'\n\npaste0(greeting, collapse=\"\")","id":11,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"r-string-immutable","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"word <- strsplit('banana', \"\")[[1]]\ncount <- 0\nfor(letter in word) {\n  if(letter == 'a'){\n    count <- count + 1\n  }\n}\n\ncount","id":12,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"r-string-a-count","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"'a' %in% strsplit('banana', \"\")[[1]]\n'seed' %in% strsplit('banana', \"\")[[1]]","id":13,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"r-string-in-op","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"word <- 'banana'\n\nif(word == 'banana') {\n  print('All right, bananas.')\n}","id":14,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"r-string-comparison","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"word <- 'Pineapple'\n\nif(word < 'banana') {\n  message('Your word ',  word, ' comes before banana.')\n} else if (word > 'banana') {\n  message('Your word ', word, ' comes after banana.')\n} else {\n  message('All right, bananas.')\n}","id":15,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"r-string-pineapple","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(stringr)\n\nword <- 'banana'\nnew_word <- stringr::str_to_upper(word)\nnew_word\n#> [1] \"BANANA\"","id":16,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"r-string-upper","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"str_locate(word, 'a')\n#>      start end\n#> [1,]     2   2","id":17,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"r-string-locate","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"str_locate_all(word, 'na')[[1]]\n#>      start end\n#> [1,]     3   4\n#> [2,]     5   6","id":18,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"r-string-locate-substring","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"line <- '     Here we go '\nstr_trim(line)\n#> [1] \"Here we go\"","id":19,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"r-string-strip","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"line <- '좋은 하루되세요!'\nstr_detect(line, '^좋은')\n#> [1] TRUE","id":20,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"r-string-startwith","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"line <- 'Please have a nice day'\nstr_detect(line, '^p')\n\nstr_to_lower(line)\n\nstr_detect(str_to_lower(line), '^p')","id":21,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"r-string-startwith-to-lower","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"data <- 'From stephen.marquard@uct.ac.za Sat Jan 5 09:14:16 2008'\natpos <- str_locate(data, '@')\natpos[1,1]\n#> start \n#>    5 \nsppos <- str_locate_all(data, ' ')[[1]]\nsppos\n#>      start end\n#> [1,]     5   5\n#> [2,]    32  32\n#> [3,]    36  36\n#> [4,]    40  40\n#> [5,]    42  42\n#> [6,]    51  51\nstr_sub(data, start = atpos[1,1] + 1, end = sppos[2,2] - 1)\n#> [1] \"uct.ac.za\"","id":22,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"r-string-email-parsing","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"camels <- 42\nsprintf('%d', camels)\n#> [1] \"42\"\nstr_glue(\"{camels}\")\n#> 42","id":23,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"r-string-format","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"camels <- 42\nsprintf('I have spotted %d camels.', camels)\n#> [1] \"I have spotted 42 camels.\"\nstr_glue('I have spotted {camels} camels.')\n#> I have spotted 42 camels.","id":24,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"r-string-format-camels","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"sprintf('In %d years I have spotted %g %s', 3, 0.1, 'camels')\n#> [1] \"In 3 years I have spotted 0.1 camels\"\n\nstr_glue('In {3} years I have spotted {0.1} {\"camels\"}')\n#> In 3 years I have spotted 0.1 camels","id":25,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"r-string-matching","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"sprintf('%d %d %d', 1, 2)\n#> sprintf(\"%d %d %d\", 1, 2)에서 다음과 같은 에러가 발생했습니다:인자들의 수가 너무 적습니다\nsprintf('%d', 'dollars')\n#> sprintf(\"%d\", \"dollars\")에서 다음과 같은 에러가 발생했습니다: '%d'는 유효하지 않은 포맷입니다; 문자형 객체들에는 포맷 %s를 사용해주세요","id":26,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"r-string-type-error","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"while(TRUE) {\n  line <- readline(prompt = '> ')\n  if(substr(line,1,1) == \"#\") {\n    next\n  }\n  if(line == 'done') {\n    break\n  }\n  print(line)\n}","id":27,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"r-string-debug","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
 
 </script><script type="module">
 // Declare startupMessageQWebR globally
@@ -1150,7 +1150,7 @@ globalThis.qpyodideCustomizedPyodideOptions = {
 }
 
 // Store cell data
-globalThis.qpyodideCellDetails = [{"code":"import socket\n\nmysock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\nmysock.connect(('data.pr4e.org', 80))\ncmd = 'GET http://data.pr4e.org/romeo.txt HTTP/1.0\\r\\n\\r\\n'.encode()\nmysock.send(cmd)\n\nwhile True:\n    data = mysock.recv(512)\n    if len(data) < 1:\n        break\n    print(data.decode(),end='')\n\nmysock.close()","id":1,"options":{"autorun":"","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"py-socket-example","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"import socket\nimport time\n\nHOST = 'data.pr4e.org'\nPORT = 80\nmysock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\nmysock.connect((HOST, PORT))\nmysock.sendall(b'GET http://data.pr4e.org/cover3.jpg HTTP/1.0\\r\\n\\r\\n')\ncount = 0\npicture = b\"\"\n\nwhile True:\n    data = mysock.recv(5120)\n    if len(data) < 1: break\n    #time.sleep(0.25)\n    count = count + len(data)\n    print(len(data), count)\n    picture = picture + data\n\nmysock.close()\n\n# 헤더 종료지점 탐색 (2 CRLF)\npos = picture.find(b\"\\r\\n\\r\\n\")\nprint('Header length', pos)\nprint(picture[:pos].decode())\n\n# 헤더를 건너뛰고 사진 데이터 저장\npicture = picture[pos+4:]\nfhand = open(\"images/stuff.jpg\", \"wb\")\nfhand.write(picture)\nfhand.close()","id":2,"options":{"autorun":"","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"py-socket-images","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"import urllib.request\n\nfhand = urllib.request.urlopen('http://www.py4inf.com/code/romeo.txt')\nfor line in fhand:\n    print(line.decode().strip())","id":3,"options":{"autorun":"","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"py-httr-package","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"import urllib.request\n\ncounts = dict()\nfhand = urllib.request.urlopen('http://www.py4inf.com/code/romeo.txt')\n\nfor line in fhand:\n    words = line.decode().strip().split()\n    for word in words:\n        counts[word] = counts.get(word, 0) + 1\n\nprint(counts)","id":4,"options":{"autorun":"","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"py-httr-package-output","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"import urllib.request\nimport re\n\nurl = input('웹사이트 입력 - ')\nhtml = urllib.request.urlopen(url).read().decode()\nlinks = re.findall('href=\"(http://.*?)\"', html)\nfor link in links:\n    print(link)","id":5,"options":{"autorun":"","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"py-httr-extract-urls","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"import urllib.request\nfrom bs4 import BeautifulSoup\n\nurl = input('웹사이트 입력 - ')\nhtml = urllib.request.urlopen(url).read()\nsoup = BeautifulSoup(html, 'html.parser')\n\ntags = soup('a')\nfor tag in tags:\n    print(tag.get('href', None))","id":6,"options":{"autorun":"","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"py-httr-rvest-combo","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"import urllib.request\nfrom bs4 import BeautifulSoup\n\nurl = input('Enter - ')\nhtml = urllib.request.urlopen(url).read()\nsoup = BeautifulSoup(html, 'html.parser')\n\ntags = soup('a')\nfor tag in tags:\n  \n    print('TAG:', tag)\n    print('URL:', tag.get('href', None))\n    content = tag.contents[0] if tag.contents else \"None\"\n    print('Content:', content)\n    print('Attrs:', tag.attrs)","id":7,"options":{"autorun":"","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"py-rvest-extract-tags","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"import urllib.request\n\nurl = 'http://www.py4inf.com/cover.jpg'\n\nimg = urllib.request.urlopen(url).read()\nwith open('cover.jpg', 'wb') as fhand:\n    fhand.write(img)","id":8,"options":{"autorun":"","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"py-download-files","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"import urllib.request\n\nurl = 'https://www.fhfa.gov/DataTools/Downloads/Documents/Enterprise-PUDB/National-File-A/2022_SFNationalFileA2022.zip'\nzip_file = urllib.request.urlopen(url)\nfhand = open('2022_SFNationalFileA2022.zip', 'wb')  # Open in binary write mode\nsize = 0\n\nwhile True:\n    info = zip_file.read(100000)\n    if len(info) < 1:\n        break\n    size += len(info)\n    fhand.write(info)\n\nfhand.close()\nprint(size, '문자 복사완료!')\n#> 20232194문자 복사완료!","id":9,"options":{"autorun":"","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"py-download-big-file","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
+globalThis.qpyodideCellDetails = [{"code":"fruit = 'banana'\nletter = fruit[1]","id":1,"options":{"autorun":"","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"r-string-seq","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"letter","id":2,"options":{"autorun":"","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"py-string-seq-output","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"letter = fruit[1.5]\n#> TypeError: string indices must be integers","id":3,"options":{"autorun":"","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"py-string-integer","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"fruit = 'banana'\nlen(fruit)\n#> 6","id":4,"options":{"autorun":"","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"py-string-length","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"length = len(fruit)\nlast = fruit[length]\n#> IndexError: string index out of range","id":5,"options":{"autorun":"","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"py-string-last","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"index = 0\n\nwhile index < len(fruit):\n    letter = fruit[index]\n    print(letter)\n    index = index + 1","id":6,"options":{"autorun":"","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"py-string-traversal","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"for char in fruit:\n    print(char)","id":7,"options":{"autorun":"","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"py-string-banana-for}","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"s = 'Monty Python'\nprint(s[0:5])\n#> [1] \"Monty\"\nprint(s[6:13])\n#> [1] \"Python\"","id":8,"options":{"autorun":"","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"py-string-slice}","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"fruit = 'banana'\n\nfruit[:3]\nfruit[3:]","id":9,"options":{"autorun":"","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"py-string-slice-banana","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"fruit = 'banana'\nfruit[3:3]\n#> ''","id":10,"options":{"autorun":"","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"py-string-slice-empty","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"greeting = 'Hello, world!'\ngreeting[0] = 'J'\n#> TypeError: 'str' object does not support item assignment\n\ngreeting = 'Hello, world!'\nnew_greeting = 'J' + greeting[1:]\nprint(new_greeting)\n#> Jello, world!","id":11,"options":{"autorun":"","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"py-string-immutable","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"word = 'banana'\ncount = 0\n\nfor letter in word:\n    if letter == 'a':\n        count = count + 1\n\nprint(count)","id":12,"options":{"autorun":"","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"py-string-a-count","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"'a' in 'banana'\n#> True\n'seed' in 'banana'\n#> False","id":13,"options":{"autorun":"","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"py-string-in-op","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"word = 'banana'\n\nif word == 'banana':\n    print('All right, bananas.')","id":14,"options":{"autorun":"","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"py-string-comparison","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"word = 'Pineapple'\n\nif word < 'banana':\n    print('Your word, ' + word + ', comes before banana.')\nelif word > 'banana':\n    print('Your word, ' + word + ', comes after banana.')\nelse:\n    print('All right, bananas.')","id":15,"options":{"autorun":"","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"py-string-pineapple","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"#| \nstuff = 'Hello world'\ntype(stuff)\n#> <type 'str'>\nmethods = [method for method in dir(stuff) if not method.startswith('__') and not method.endswith('__')]\nmethods\n#> ['capitalize', 'casefold', 'center', 'count', 'encode', 'endswith', 'expandtabs', 'find', 'format', 'format_map', 'index', 'isalnum', 'isalpha', 'isascii', 'isdecimal', 'isdigit', 'isidentifier', 'islower', 'isnumeric', 'isprintable', 'isspace', 'istitle', 'isupper', 'join', 'ljust', 'lower', 'lstrip', 'maketrans', 'partition', 'removeprefix', 'removesuffix', 'replace', 'rfind', 'rindex', 'rjust', 'rpartition', 'rsplit', 'rstrip', 'split', 'splitlines', 'startswith', 'strip', 'swapcase', 'title', 'translate', 'upper', 'zfill']","id":16,"options":{"autorun":"","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"py-string-dir","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"word = 'banana'\nnew_word = word.upper()\nprint(new_word)\n#> BANANA","id":17,"options":{"autorun":"","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"r-string-upper","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"word = 'banana'\nindex = word.find('a')\nprint(index)\n#> 1","id":18,"options":{"autorun":"","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"py-string-locate","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"word.find('na')\n#> 2\nword.find('na', 3)\n#> 4","id":19,"options":{"autorun":"","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"py-string-locate-substring","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"line = '     Here we go '\nline.strip()\n#> 'Here we go'","id":20,"options":{"autorun":"","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"py-string-strip","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"line = '좋은 하루되세요!'\nline.startswith('좋은')\n#> True\nline.startswith('조은')\n#> False","id":21,"options":{"autorun":"","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"py-string-startwith","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"line = 'Please have a nice day'\nline.startswith('p')\n#> False\nline.lower()\n#> 'please have a nice day'\nline.lower().startswith('p')\n#> True","id":22,"options":{"autorun":"","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"py-string-startwith-to-lower","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"data = 'From stephen.marquard@uct.ac.za Sat Jan 5 09:14:16 2008'\natpos = data.find('@')\nprint(atpos)\n#> 21\nsppos = data.find(' ',atpos)\nprint(sppos)\n#> 31\nhost = data[atpos+1:sppos]\nprint(host)\n#> uct.ac.za","id":23,"options":{"autorun":"","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"py-string-email-parsing","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"camels = 42\n'%d' % camels\n#> '42'","id":24,"options":{"autorun":"","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"py-string-format","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"camels = 42\n'I have spotted %d camels.' % camels\n#> 'I have spotted 42 camels.'","id":25,"options":{"autorun":"","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"py-string-format-camels","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# `format` 메서드\nresult = 'In {} years I have spotted {} {}'.format(3, 0.1, 'camels')\nprint(result)\n#> In 3 years I have spotted 0.1 camels\n\n# `f-string`\nyears = 3\ncamels = 0.1\nresult = f'In {years} years I have spotted {camels} {\"camels\"}'\nprint(result)\n#> In 3 years I have spotted 0.1 camels","id":26,"options":{"autorun":"","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"py-string-matching","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"'%d %d %d' % (1, 2)\n#> TypeError: not enough arguments for format string\n'%d' % 'dollars'\n#> TypeError: %d format: a number is required, not str","id":27,"options":{"autorun":"","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"py-string-type-error","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"while True:\n    line = input('> ')\n    if line[0] == '#':\n        continue\n    if line == 'done':\n        break\n    print(line)\nprint('Done!')","id":28,"options":{"autorun":"","classes":"","comment":"","context":"interactive","dpi":72,"fig-cap":"","fig-height":5,"fig-width":7,"label":"py-string-debug","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
 
 
 </script><script type="module">
@@ -1318,7 +1318,7 @@ globalThis._qpyodideGetInstance = function() {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tool-regex.html"><strong>4부</strong> 분야별 코딩</a></li><li class="breadcrumb-item"><a href="./tool-network.html"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-string.html"><strong>2부</strong> 자료구조</a></li><li class="breadcrumb-item"><a href="./06-string.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">문자열</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="검색" onclick="window.quartoOpenSearch();">
@@ -1417,7 +1417,7 @@ globalThis._qpyodideGetInstance = function() {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06-string.html" class="sidebar-item-text sidebar-link">
+  <a href="./06-string.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">문자열</span></span></a>
   </div>
 </li>
@@ -1535,7 +1535,7 @@ globalThis._qpyodideGetInstance = function() {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tool-network.html" class="sidebar-item-text sidebar-link active">
+  <a href="./tool-network.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span></a>
   </div>
 </li>
@@ -1660,17 +1660,21 @@ globalThis._qpyodideGetInstance = function() {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">목차</h2>
    
   <ul>
-<li><a href="#network-http" id="toc-network-http" class="nav-link active" data-scroll-target="#network-http"><span class="header-section-number">24.1</span> 하이퍼텍스트 전송 프로토콜</a></li>
-  <li><a href="#network-web-browser" id="toc-network-web-browser" class="nav-link" data-scroll-target="#network-web-browser"><span class="header-section-number">24.2</span> 가장 간단한 웹 브라우저</a></li>
-  <li><a href="#socket-images" id="toc-socket-images" class="nav-link" data-scroll-target="#socket-images"><span class="header-section-number">24.3</span> HTTP 경유 이미지 가져오기</a></li>
-  <li><a href="#httr" id="toc-httr" class="nav-link" data-scroll-target="#httr"><span class="header-section-number">24.4</span> <code>httr</code> 웹페이지 가져오기</a></li>
-  <li><a href="#html-webscraping" id="toc-html-webscraping" class="nav-link" data-scroll-target="#html-webscraping"><span class="header-section-number">24.5</span> HTML 파싱과 웹 스크래핑</a></li>
-  <li><a href="#webscarping-regex" id="toc-webscarping-regex" class="nav-link" data-scroll-target="#webscarping-regex"><span class="header-section-number">24.6</span> 정규 표현식 HTML 파싱</a></li>
-  <li><a href="#rvest-scraping" id="toc-rvest-scraping" class="nav-link" data-scroll-target="#rvest-scraping"><span class="header-section-number">24.7</span> <code>rvest</code> HTML 파싱</a></li>
-  <li><a href="#GET-binary" id="toc-GET-binary" class="nav-link" data-scroll-target="#GET-binary"><span class="header-section-number">24.8</span> 바이너리 파일 읽기</a></li>
-  <li><a href="#network-terminology" id="toc-network-terminology" class="nav-link" data-scroll-target="#network-terminology"><span class="header-section-number">24.9</span> 용어 정의</a></li>
-  <li><a href="#network-ex" id="toc-network-ex" class="nav-link" data-scroll-target="#network-ex">연습문제</a></li>
-  </ul><div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/tool-network.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
+<li><a href="#r-string-sequence" id="toc-r-string-sequence" class="nav-link active" data-scroll-target="#r-string-sequence"><span class="header-section-number">8.1</span> 문자열은 시퀀스다</a></li>
+  <li><a href="#r-string-length" id="toc-r-string-length" class="nav-link" data-scroll-target="#r-string-length"><span class="header-section-number">8.2</span> <code>length()</code> 함수 사용 문자열 길이 구하기</a></li>
+  <li><a href="#r-string-traversal" id="toc-r-string-traversal" class="nav-link" data-scroll-target="#r-string-traversal"><span class="header-section-number">8.3</span> 루프를 사용한 문자열 순회</a></li>
+  <li><a href="#r-string-slice" id="toc-r-string-slice" class="nav-link" data-scroll-target="#r-string-slice"><span class="header-section-number">8.4</span> 문자열 슬라이스</a></li>
+  <li><a href="#%EB%AC%B8%EC%9E%90%EC%97%B4%EC%9D%80-%EB%B6%88%EB%B3%80%EC%9D%B4%EB%8B%A4-%ED%8C%8C%EC%9D%B4%EC%8D%AC" id="toc-문자열은-불변이다-파이썬" class="nav-link" data-scroll-target="#%EB%AC%B8%EC%9E%90%EC%97%B4%EC%9D%80-%EB%B6%88%EB%B3%80%EC%9D%B4%EB%8B%A4-%ED%8C%8C%EC%9D%B4%EC%8D%AC"><span class="header-section-number">8.5</span> 문자열은 불변이다 (파이썬)</a></li>
+  <li><a href="#r-string-count" id="toc-r-string-count" class="nav-link" data-scroll-target="#r-string-count"><span class="header-section-number">8.6</span> 루프 사용 문자 계수하기</a></li>
+  <li><a href="#r-string-in-operator" id="toc-r-string-in-operator" class="nav-link" data-scroll-target="#r-string-in-operator"><span class="header-section-number">8.7</span> <code>%in%</code> 연산자</a></li>
+  <li><a href="#r-string-comparison-operator" id="toc-r-string-comparison-operator" class="nav-link" data-scroll-target="#r-string-comparison-operator"><span class="header-section-number">8.8</span> 문자열 비교</a></li>
+  <li><a href="#r-string-method" id="toc-r-string-method" class="nav-link" data-scroll-target="#r-string-method"><span class="header-section-number">8.9</span> 문자열 함수</a></li>
+  <li><a href="#r-string-parsing" id="toc-r-string-parsing" class="nav-link" data-scroll-target="#r-string-parsing"><span class="header-section-number">8.10</span> 문자열 파싱</a></li>
+  <li><a href="#r-string-format" id="toc-r-string-format" class="nav-link" data-scroll-target="#r-string-format"><span class="header-section-number">8.11</span> 서식 연산자</a></li>
+  <li><a href="#r-string-debug" id="toc-r-string-debug" class="nav-link" data-scroll-target="#r-string-debug"><span class="header-section-number">8.12</span> 디버깅</a></li>
+  <li><a href="#r-string-terminology" id="toc-r-string-terminology" class="nav-link" data-scroll-target="#r-string-terminology"><span class="header-section-number">8.13</span> 용어 정의</a></li>
+  <li><a href="#r-string-ex" id="toc-r-string-ex" class="nav-link" data-scroll-target="#r-string-ex">연습문제</a></li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/06-string.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script><script type="module" id="qwebr-monaco-editor-init">
@@ -1852,8 +1856,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
       'vs': 'https://cdn.jsdelivr.net/npm/monaco-editor@0.46.0/min/vs'
     }
   });
-</script><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tool-regex.html"><strong>4부</strong> 분야별 코딩</a></li><li class="breadcrumb-item"><a href="./tool-network.html"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="network" class="quarto-section-identifier"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span></h1>
+</script><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-string.html"><strong>2부</strong> 자료구조</a></li><li class="breadcrumb-item"><a href="./06-string.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">문자열</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="r-string" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">문자열</span></span></h1>
 </div>
 
 
@@ -1867,44 +1871,10 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
   
 
 
-</header><p>지금까지 책의 많은 예제는 파일을 읽고 파일 속 정보를 찾는 데 집중했지만, 다양한 많은 정보의 원천이 인터넷에 있다. 이번 장에서는 웹 브라우저로 가장하고 HTTP 프로토콜(HyperText Transport Protocol, HTTP)을 사용하여 웹페이지를 검색할 것이다. 웹페이지 데이터를 읽고 파싱할 것이다.</p>
-<div class="callout callout-style-simple callout-tip">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>파이썬 튜플과 마찬가지로 R에서 네트워크 프로그래밍을 위해 소켓까지 내려가서 프로그래밍을 할 경우는 많지 않다. 하지만 네트워크 프로그램에 대한 이해와 개념을 잡기 위해 파이썬 소켓 네트워크 프로그래밍을 먼저 살펴본다.</p>
-</div>
-</div>
-</div>
-<section id="network-http" class="level2" data-number="24.1"><h2 data-number="24.1" class="anchored" data-anchor-id="network-http">
-<span class="header-section-number">24.1</span> 하이퍼텍스트 전송 프로토콜</h2>
-<p>웹에 동력을 공급하는 네트워크 프로토콜(HyperText Transport Protocol - HTTP)은 실제로 매우 단순하다. 파이썬에는 <code>소켓(sockets)</code>이라고 불리는 내장 지원 모듈이 있다. 파이썬 프로그램에서 소켓 모듈을 통해서 네트워크 연결을 하고, 데이터 검색을 매우 용이하게 한다.</p>
-<p><strong>소켓(socket)</strong>은 단일 소켓으로 두 프로그램 사이에 양방향 연결을 제공한다는 점을 제외하고 파일과 매우 유사하다. 동일한 소켓에 읽거나 쓸 수 있다. 소켓에 무언가를 쓰게 되면, 소켓의 다른 끝에 있는 응용프로그램에 전송된다. 소켓으로부터 읽게 되면, 다른 응용 프로그램이 전송한 데이터를 받게 된다.</p>
-<p>하지만, 소켓의 다른쪽 끝에 프로그램이 어떠한 데이터도 전송하지 않았는데 소켓을 읽으려고 하면, 단지 앉아서 기다리기만 한다. 만약 어떠한 것도 보내지 않고 양쪽 소켓 끝의 프로그램 모두 기다리기만 한다면, 모두 매우 오랜 시간 동안 기다리게 될 것이다.</p>
-<p>인터넷으로 통신하는 프로그램의 중요한 부분은 특정 종류의 프로토콜을 공유하는 것이다. 프로토콜(protocol)은 정교한 규칙의 집합으로 누가 메시지를 먼저 보내고, 메시지로 무엇을 하며, 메시지에 대한 응답은 무엇이고, 다음에 누가 메시지를 보내는지 등을 포함한다. 이런 관점에서 소켓 끝의 두 응용프로그램이 함께 춤을 추고 있으니, 다른 사람 발을 밟지 않도록 확인해야 한다.</p>
-<p>네트워크 프로토콜을 기술하는 문서가 많이 있다. 하이퍼텍스트 전송 프로토콜(HyperText Transport Protocol)은 다음 문서에 기술되어 있다.</p>
-<p><a href="http://www.w3.org/Protocols/rfc2616/rfc2616.txt" class="uri">http://www.w3.org/Protocols/rfc2616/rfc2616.txt</a></p>
-<p>매우 상세한 176페이지나 되는 장문의 복잡한 문서다. 흥미롭다면 시간을 가지고 읽어보기 바란다. RFC2616에 36페이지를 읽어보면, GET 요청(request)에 대한 구문을 발견하게 된다. 꼼꼼히 읽게 되면, 웹서버에 문서를 요청하기 위해서, 80 포트로 <code>www.py4inf.com</code> 서버에 연결을 하고 나서 다음 양식 한 라인을 전송한다.</p>
-<p><code>GET http://www.py4inf.com/code/romeo.txt HTTP/1.0</code></p>
-<p>두 번째 매개변수는 요청하는 웹페이지가 된다. 그리고 또한 빈 라인도 전송한다. 웹서버는 문서에 대한 헤더 정보와 빈 라인 그리고 문서 본문으로 응답한다.</p>
-<div class="callout callout-style-simple callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">경고</span>웹브라우저 실행금지 사유
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><code>webr</code> <code>pyodide</code>는 웹 브라우저 샌드박스 환경에서 R, 파이썬을 실행하며, 브라우저 보안 제한으로 인해 일반 R, 파이썬 환경에서와 같은 네트워크 소켓에 대한 직접적인 접근이 불가능하다. 접근을 허용하는 것이 중대한 보안 위험을 초래할 수 있기 때문에 웹 브라우저에서 실행이 되지 않게 되어 있어 오류가 나는 것이 정상이다.</p>
-</div>
-</div>
-</section><section id="network-web-browser" class="level2" data-number="24.2"><h2 data-number="24.2" class="anchored" data-anchor-id="network-web-browser">
-<span class="header-section-number">24.2</span> 가장 간단한 웹 브라우저</h2>
-<p>아마도 HTTP 프로토콜이 어떻게 작동하는지 알아보는 가장 간단한 방법은 매우 간단한 파이썬 프로그램을 작성하는 것이다. 웹서버에 접속하고 HTTP 프로토콜 규칙에 따라 문서를 요청하고 서버가 다시 보내주는 결과를 보여주는 것이다.</p>
+</header><section id="r-string-sequence" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="r-string-sequence">
+<span class="header-section-number">8.1</span> 문자열은 시퀀스다</h2>
+<p> </p>
+<p>문자열은 여러 문자들의 시퀀스(sequence)다. 꺾쇠 연산자로 한 번에 하나씩 문자에 접근한다. <code><a href="https://rdrr.io/r/base/substr.html">substr()</a></code> 함수를 사용해서 바로 특정 문자를 추출할 수도 있지만, <code><a href="https://rdrr.io/r/base/strsplit.html">strsplit()</a></code> 함수로 문자열을 문자의 벡터로 다루는 방법도 있다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
 <li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">R</a></li>
@@ -1921,42 +1891,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 </div>
-<p>처음에 프로그램은 <a href="www.py4e.com">www.py4e.com</a> 서버에 80 포트로 연결한다. “웹 브라우저” 역할로 작성된 프로그램이 하기 때문에 HTTP 프로토콜은 GET 명령어를 공백 라인과 함께 보낸다.</p>
-<div id="fig-network-concept" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-network-concept-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/socket-concept.png" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-network-concept-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-그림&nbsp;24.1: 소켓 개념도
-</figcaption></figure>
-</div>
-<p>공백 라인을 보내자마자, 512 문자 덩어리의 데이터를 소켓에서 받아 더 이상 읽을 데이터가 없을 때까지(즉, recv()이 빈 문자열을 반환한다.) 데이터를 출력하는 루프를 작성한다.</p>
-<p>프로그램 실행 결과 다음을 얻을 수 있다.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">HTTP/1.1</span> 200 OK</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span> Wed, 11 Apr 2018 18:52:55 GMT</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Server:</span> Apache/2.4.7 <span class="er">(</span><span class="ex">Ubuntu</span><span class="kw">)</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Last-Modified:</span> Sat, 13 May 2017 11:22:22 GMT</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">ETag:</span> <span class="st">"a7-54f6609245537"</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">Accept-Ranges:</span> bytes</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Content-Length:</span> 167</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">Cache-Control:</span> max-age=0, no-cache, no-store, must-revalidate</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Pragma:</span> no-cache</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Expires:</span> Wed, 11 Jan 1984 05:00:00 GMT</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Connection:</span> close</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="ex">Content-Type:</span> text/plain</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="ex">But</span> soft what light through yonder window breaks</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="ex">It</span> is the east and Juliet is the sun</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="ex">Arise</span> fair sun and kill the envious moon</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="ex">Who</span> is already sick and pale with grief</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
-<p>출력결과는 웹서버가 문서를 기술하기 위해서 보내는 헤더(header)로 시작한다. 예를 들어, <code>Content-Type</code> 헤더는 문서가 일반 텍스트 문서(<code>text/plain</code>)임을 표기한다.</p>
-<p>서버가 헤더를 보낸 후에, 빈 라인을 추가해서 헤더 끝임을 표기하고 나서 실제 파일<code>romeo.txt</code>을 보낸다.</p>
-<p>이 예제를 통해서 소켓을 통해서 저수준(low-level) 네트워크 연결을 어떻게 하는지 확인할 수 있다. 소켓을 사용해서 웹서버, 메일 서버 혹은 다른 종류의 서버와 통신할 수 있다. 필요한 것은 프로토콜을 기술하는 문서를 찾고 프로토콜에 따라 데이터를 주고받는 코드를 작성하는 것이다.</p>
-<p>하지만, 가장 흔히 사용하는 프로토콜은 HTTP (즉, 웹) 프로토콜이기 때문에, 파이썬에는 HTTP 프로토콜을 지원하기 위해 특별히 설계된 라이브러리가 있다. 이것을 통해서 웹상에서 데이터나 문서 검색을 쉽게 할 수 있다.</p>
-</section><section id="socket-images" class="level2" data-number="24.3"><h2 data-number="24.3" class="anchored" data-anchor-id="socket-images">
-<span class="header-section-number">24.3</span> HTTP 경유 이미지 가져오기</h2>
-<p> </p>
-<p>상기 예제에서는 파일에 줄바꿈(newline)이 있는 일반 텍스트 파일을 가져왔다. 그리고 나서, 프로그램을 실행해서 데이터를 단순히 화면에 복사했다. HTTP를 사용하여 이미지를 가져오도록 비슷하게 프로그램을 작성할 수 있다. 프로그램 실행 시에 화면에 데이터를 복사하는 대신에, 데이터를 문자열로 누적하고, 다음과 같이 헤더를 잘라내고 나서 파일에 이미지 데이터를 저장한다.</p>
+<p>두 번째 문장은 변수 <code>fruit_letter</code>에서 1번 위치 문자를 추출하여 변수 <code>letter</code>에 대입한다. 꺾쇠 표현식을 인덱스(index)라고 부른다. 인덱스는 순서(sequence)에서 사용자가 어떤 문자를 원하는지 표시한다.</p>
+<p>하지만, 여러분이 기대한 것은 출력됨이 확인된다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
 <li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">R</a></li>
@@ -1973,64 +1909,17 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 </div>
-<p>프로그램을 실행하면, 다음과 같은 출력을 생성한다.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> python urljpeg.py</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">5120</span> 5120</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">5120</span> 10240</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">4240</span> 14480</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">5120</span> 19600</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ex">...</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="ex">5120</span> 214000</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="ex">3200</span> 217200</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="ex">5120</span> 222320</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="ex">5120</span> 227440</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="ex">3167</span> 230607</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="ex">Header</span> length 393</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="ex">HTTP/1.1</span> 200 OK</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span> Wed, 11 Apr 2018 18:54:09 GMT</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="ex">Server:</span> Apache/2.4.7 <span class="er">(</span><span class="ex">Ubuntu</span><span class="kw">)</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="ex">Last-Modified:</span> Mon, 15 May 2017 12:27:40 GMT</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="ex">ETag:</span> <span class="st">"38342-54f8f2e5b6277"</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="ex">Accept-Ranges:</span> bytes</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="ex">Content-Length:</span> 230210</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="ex">Vary:</span> Accept-Encoding</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="ex">Cache-Control:</span> max-age=0, no-cache, no-store, must-revalidate</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="ex">Pragma:</span> no-cache</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="ex">Expires:</span> Wed, 11 Jan 1984 05:00:00 GMT</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="ex">Connection:</span> close</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="ex">Content-Type:</span> image/jpeg</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
-<p>상기 url에 대해서, <code>Content-Type</code> 헤더가 문서 본문이 이미지(<code>image/jpeg</code>)를 나타내는 것을 볼 수 있다. 프로그램이 완료되면, 이미지 뷰어로 <code>stuff.jpg</code> 파일을 열어서 이미지 데이터를 볼 수 있다.</p>
-<p>프로그램을 실행하면, <code>recv()</code> 메서드를 호출할 때마다 5120 문자는 전달받지 못하는 것을 볼 수 있다. <code>recv()</code> 호출하는 순간마다 웹서버에서 네트워크로 전송되는 가능한 많은 문자를 받을 뿐이다. 매번 5120 문자까지 요청하지만, 1460 혹은 2920 문자만 전송받는다.</p>
-<p>결과값은 네트워크 속도에 따라 달라질 수 있다. recv()<code>메서드 마지막 호출에는 스트림 마지막인 1681 바이트만 받았고,</code>recv()<code>다음 호출에는 0 길이 문자열을 전송받아서, 서버가 소켓 마지막에</code>close()` 메서드를 호출하고 더 이상의 데이터가 없다는 신호를 준다. </p>
-<p>주석 처리한 <code>time.sleep()</code>을 풀어줌으로써 <code>recv()</code> 연속 호출을 늦출 수 있다. 이런 방식으로 매번 호출 후에 0.25초 기다리게 한다. 그래서, 사용자가 <code>recv()</code> 메서드를 호출하기 전에 서버가 먼저 도착할 수 있어서 더 많은 데이터를 보낼 수가 있다. 정지 시간을 넣어서 프로그램을 다시 실행하면 다음과 같다.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> python urljpeg.py</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">5120</span> 5120</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">5120</span> 10240</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">5120</span> 15360</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">...</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="ex">5120</span> 225280</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="ex">5120</span> 230400</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="ex">207</span> 230607</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Header</span> length 393</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="ex">HTTP/1.1</span> 200 OK</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Date:</span> Wed, 11 Apr 2018 21:42:08 GMT</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="ex">Server:</span> Apache/2.4.7 <span class="er">(</span><span class="ex">Ubuntu</span><span class="kw">)</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="ex">Last-Modified:</span> Mon, 15 May 2017 12:27:40 GMT</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="ex">ETag:</span> <span class="st">"38342-54f8f2e5b6277"</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="ex">Accept-Ranges:</span> bytes</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="ex">Content-Length:</span> 230210</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="ex">Vary:</span> Accept-Encoding</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="ex">Cache-Control:</span> max-age=0, no-cache, no-store, must-revalidate</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="ex">Pragma:</span> no-cache</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="ex">Expires:</span> Wed, 11 Jan 1984 05:00:00 GMT</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="ex">Connection:</span> close</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="ex">Content-Type:</span> image/jpeg</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
-<p><code>recv()</code> 메서드 호출의 처음과 마지막을 제외하고, 매번 새로운 데이터를 요청할 때마다 이제 5120 문자가 전송된다.</p>
-<p>서버 <code>send()</code> 요청과 응용프로그램 <code>recv()</code> 요청 사이에 버퍼가 있다. 프로그램에 지연을 넣어 실행하게 될 때, 어느 지점엔가 서버가 소켓 버퍼를 채우고 응용프로그램이 버퍼를 비울 때까지 잠시 멈춰야 된다. 송신하는 응용프로그램 혹은 수신하는 응용프로그램을 멈추게 하는 행위를 “흐름 제어(flow control)”라고 한다. </p>
-</section><section id="httr" class="level2" data-number="24.4"><h2 data-number="24.4" class="anchored" data-anchor-id="httr">
-<span class="header-section-number">24.4</span> <code>httr</code> 웹페이지 가져오기</h2>
-<p>수작업으로 소켓 라이브러리를 사용하여 HTTP로 데이터를 주고받을 수 있지만, <code>httr</code> 패키지를 사용하여 R에서 동일한 작업을 수행하는 좀 더 간편한 방식이 있다. <code>httr</code>을 사용하여 파일처럼 웹페이지를 다룰 수가 있다. 단순하게 어느 웹페이지를 가져올 것인지만 지정하면 <code>httr</code> 라이브러리가 모든 HTTP 프로토콜과 헤더 관련 사항을 처리해 준다.</p>
-<p><code>GET()</code> 함수를 사용하여 웹페이지를 열게 되면, 파일처럼 다룰 수 있고 <code>content()</code> 함수를 사용해서 데이터를 읽을 수 있다. 프로그램을 실행하면, 파일 내용 출력결과만을 볼 수 있다. 헤더 정보는 여전히 전송되었지만, <code>GET()</code> 함수가 헤더를 받아 내부적으로 처리하고, 사용자에게는 단지 데이터만 반환한다. 파이썬으로 웹에서 <code>romeo.txt</code> 파일을 읽도록 <code>urllib</code>를 사용하여 동일한 기능을 구현할 수 있다.</p>
+<p>파이썬 사용자에게 ’banana’의 첫 문자는 a가 아니라 b다. 하지만, 파이썬 인덱스는 문자열 처음부터 오프셋(offset)<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>이다. 첫 글자 오프셋은 0이다.</p>
+<p>하지만, R은 사람 친화적이기 때문에 b가 ’banana’의 첫 번째 문자가 되고 a가 두 번째, n이 세 번째 문자가 된다. </p>
+<div id="fig-banana-string" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-banana-string-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/string-banana.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="251">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-banana-string-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;8.1: 바나나 문자열
+</figcaption></figure>
+</div>
+<p>인덱스로 문자와 연산자를 포함하는 어떤 표현식도 사용 가능지만, 인덱스 값은 정수일 필요는 없다. 정수가 아닌 경우 다음과 같은 결과를 얻게 된다. 문제는 R에서 <code>1.5</code>를 내려서 <code>1</code>로 처리한다는 점이다. 경우에 따라서는 반올림으로 판단해서 <code>2</code>가 될 수도 있어 오해의 소지가 있기 때문에 무조건 정수로 표현한다. </p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
 <li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">R</a></li>
@@ -2047,7 +1936,9 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 </div>
-<p>예제로, <code>romeo.txt</code> 데이터를 가져와서 파일의 각 단어 빈도를 계산하는 프로그램을 다음과 같이 작성할 수 있다. 웹페이지를 로컬 텍스트로 변환시킨 후에 공백과 <code>\n</code>으로 텍스트를 잘게 쪼개고, 단어 빈도수를 <code><a href="https://rdrr.io/r/base/table.html">table()</a></code>로 계산한 후 단어 빈도수를 확인한다.</p>
+</section><section id="r-string-length" class="level2" data-number="8.2"><h2 data-number="8.2" class="anchored" data-anchor-id="r-string-length">
+<span class="header-section-number">8.2</span> <code>length()</code> 함수 사용 문자열 길이 구하기</h2>
+<p><code><a href="https://rdrr.io/r/base/length.html">length()</a></code> 함수는 문자열의 문자 갯수를 반환하는 내장함수다. </p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
 <li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href="">R</a></li>
@@ -2064,26 +1955,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 </div>
-<p>다시 한번, 웹페이지를 열게 되면, 로컬 파일처럼 웹페이지를 읽을 수 있다.</p>
-</section><section id="html-webscraping" class="level2" data-number="24.5"><h2 data-number="24.5" class="anchored" data-anchor-id="html-webscraping">
-<span class="header-section-number">24.5</span> HTML 파싱과 웹 스크래핑</h2>
-<p> </p>
-<p>R <code>httr</code> 패키지를 활용하는 일반적인 사례는 웹 <strong>스크래핑(scraping)</strong>이다. 웹 스크래핑은 웹 브라우저를 가장한 프로그램을 작성하는 것이다. 웹페이지를 가져와서, 패턴을 찾아 페이지 내부의 데이터를 꼼꼼히 조사한다. 예로, 구글 같은 검색엔진은 웹 페이지의 소스를 조사해서 다른 페이지로 가는 링크를 추출하고, 그 해당 페이지를 가져와서 링크 추출하는 작업을 반복한다. 이러한 기법으로 구글은 웹상의 거의 모든 페이지를 <strong>거미(spiders)</strong>줄처럼 연결한다.</p>
-<p>구글은 또한 발견한 웹페이지에서 특정 페이지로 연결되는 링크 빈도를 사용하여 얼마나 중요한 페이지인지를 측정하고 검색결과에 페이지가 얼마나 높은 순위로 노출되어야 하는지 평가한다.</p>
-</section><section id="webscarping-regex" class="level2" data-number="24.6"><h2 data-number="24.6" class="anchored" data-anchor-id="webscarping-regex">
-<span class="header-section-number">24.6</span> 정규 표현식 HTML 파싱</h2>
-<p>HTML을 파싱하는 간단한 방식은 정규 표현식을 사용하여 특정한 패턴과 매칭되는 부속 문자열을 반복적으로 찾아 추출하는 것이다.</p>
-<p>여기 간단한 웹페이지가 있다.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>The First Page<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>If you like, you can switch to the</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"http://www.dr-chuck.com/page2.htm"</span><span class="dt">&gt;</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>Second Page<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span>.</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
-<p>모양 좋은 정규표현식을 구성해서 다음과 같이 상기 웹페이지에서 링크를 매칭하고 추출할 수 있다.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="va">href</span><span class="op">=</span><span class="st">"http://.+?"</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
-<p>작성된 정규 표현식은 “href=http://”로 시작하고, 하나 이상의 문자를 “.+?” 가지고 큰 따옴표를 가진 문자열을 찾는다. “.+?”에 물음표가 갖는 의미는 매칭이 “욕심쟁이(greedy)” 방식보다 “비욕심쟁이(non-greedy)” 방식으로 수행됨을 나타낸다. 비욕심쟁이(non-greedy) 매칭 방식은 가능한 <em>가장 적게</em> 매칭되는 문자열을 찾는 방식이고, 욕심 방식은 가능한 <em>가장 크게</em> 매칭되는 문자열을 찾는 방식이다. </p>
-<p>추출하고자 하는 문자열이 매칭된 문자열의 어느 부분인지를 표기하기 위해서 정규 표현식에 괄호를 추가하여 다음과 같이 프로그램을 작성한다. </p>
+<p>문자열의 가장 마지막 문자를 얻기 위해서, 아래와 같이 시도하고 싶을 것이다. </p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
 <li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true" href="">R</a></li>
@@ -2100,39 +1972,11 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 </div>
-<p><code>str_extract_all</code> 정규 표현식 함수는 정규 표현식과 매칭되는 모든 문자열 리스트를 추출하여 큰 따옴표 사이에 링크 텍스트만을 반환한다. 프로그램을 실행하면, 다음 출력을 얻게 된다.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> Rscript.exe ./code/extract_link.R</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">웹사이트</span> 입력 <span class="at">-</span> http://www.dr-chuck.com/page1.htm</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[1]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://www.dr-chuck.com/page2.htm</span><span class="dt">\"</span><span class="st">"</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> Rscript.exe ./code/extract_link.R</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="ex">웹사이트</span> 입력 <span class="at">-</span> http://www.py4inf.com/book.htm</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a> <span class="ex">[1]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://amzn.to/1KkULF3</span><span class="dt">\"</span><span class="st">"</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a> <span class="ex">[2]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://www.py4e.com/book</span><span class="dt">\"</span><span class="st">"</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a> <span class="ex">[3]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://amzn.to/1KkULF3</span><span class="dt">\"</span><span class="st">"</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a> <span class="ex">[4]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://amzn.to/1hLcoBy</span><span class="dt">\"</span><span class="st">"</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a> <span class="ex">[5]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://amzn.to/1KkV42z</span><span class="dt">\"</span><span class="st">"</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a> <span class="ex">[6]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://amzn.to/1fNOnbd</span><span class="dt">\"</span><span class="st">"</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a> <span class="ex">[7]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://amzn.to/1N74xLt</span><span class="dt">\"</span><span class="st">"</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a> <span class="ex">[8]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://do1.dr-chuck.net/py4inf/EN-us/book.pdf</span><span class="dt">\"</span><span class="st">"</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a> <span class="ex">[9]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://do1.dr-chuck.net/py4inf/ES-es/book.pdf</span><span class="dt">\"</span><span class="st">"</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="ex">[10]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://do1.dr-chuck.net/py4inf/PT-br/book.pdf</span><span class="dt">\"</span><span class="st">"</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="ex">[11]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://www.xwmooc.net/python/</span><span class="dt">\"</span><span class="st">"</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="ex">[12]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://fanwscu.gitbooks.io/py4inf-zh-cn/</span><span class="dt">\"</span><span class="st">"</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="ex">[13]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://itunes.apple.com/us/book/python-for-informatics/id554638579?mt=13</span><span class="dt">\"</span><span class="st">"</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="ex">[14]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://www-personal.umich.edu/~csev/books/py4inf/ibooks//python_for_informatics.ibooks</span><span class="dt">\"</span><span class="st">"</span></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="ex">[15]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://www.py4inf.com/code</span><span class="dt">\"</span><span class="st">"</span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="ex">[16]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://www.greenteapress.com/thinkpython/thinkCSpy/</span><span class="dt">\"</span><span class="st">"</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="ex">[17]</span> <span class="st">"href=</span><span class="dt">\"</span><span class="st">http://allendowney.com/</span><span class="dt">\"</span><span class="st">"</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
-<p>정규 표현식은 HTML이 예측 가능하고 잘 구성된 경우에 멋지게 작동한다. 하지만, “망가진” HTML 페이지가 많아서, 정규 표현식만을 사용하는 솔루션은 유효한 링크를 놓치거나 잘못된 데이터만 찾고 끝날 수 있다.</p>
-<p>이 문제는 강건한 HTML 파싱 라이브러리를 사용해서 해결될 수 있다.</p>
-</section><section id="rvest-scraping" class="level2" data-number="24.7"><h2 data-number="24.7" class="anchored" data-anchor-id="rvest-scraping">
-<span class="header-section-number">24.7</span> <code>rvest</code> HTML 파싱</h2>
-<p></p>
-<p>HTML을 파싱하여 페이지에서 데이터를 추출할 수 있는 R 패키지는 많이 있다. 패키지 각각은 강점과 약점이 있어서 사용자 필요에 따라 취사선택한다.</p>
-<p>예로, 간단하게 HTML 입력을 파싱하여 <strong>rvest</strong> 라이브러리를 사용하여 링크를 추출할 것이다.</p>
-<p>HTML이 XML처럼 보이고 몇몇 페이지는 XML로 되도록 꼼꼼하게 구축되었지만, 일반적으로 대부분의 HTML이 깨져서 XML 파서가 HTML 전체 페이지를 잘못 구성된 것으로 간주하고 받아들이지 않는다. <code>rvest</code> 패키지는 결점 많은 HTML 페이지에 내성이 있어서 사용자가 필요로 하는 데이터를 쉽게 추출할 수 있게 한다.</p>
-<p><code>httr</code> 패키지를 사용하여 페이지를 읽어들이고, <code>rvest</code>를 사용해서 앵커 태그(<code>a</code>)로부터 <code>href</code> 속성을 추출한다. </p>
+<p>파이썬에서는 인덱스 오류(IndexError)가 발생하는데 이유는 ’banana’에 6번 인덱스 문자가 없기 때문이다. 0에서부터 시작했기 때문에 6개 문자는 0에서부터 5까지 번호가 매겨졌다. 마지막 문자를 얻기 위해서 length에서 1을 빼야 한다. <code>fruit[-1]</code>은 마지막 문자를, <code>fruit[-2]</code>는 끝에서 두 번째 문자를 가리킨다. 하지만, R에서는 사람이 생각하는 방식대로 마지막 문자를 얻는다. </p>
+</section><section id="r-string-traversal" class="level2" data-number="8.3"><h2 data-number="8.3" class="anchored" data-anchor-id="r-string-traversal">
+<span class="header-section-number">8.3</span> 루프를 사용한 문자열 순회</h2>
+<p> </p>
+<p>연산의 많은 경우에 문자열을 한 번에 한 문자씩 처리한다. 종종 처음에서 시작해서, 차례로 각 문자를 선택하고, 선택된 문자에 임의 연산을 수행하고, 끝까지 계속한다. 이런 처리 패턴을 <strong>순회(traversal)</strong>라고 한다. 순회를 작성하는 한 방법이 <code>while</code> 루프다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
 <li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true" href="">R</a></li>
@@ -2149,39 +1993,21 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 </div>
-<p>프로그램이 웹 주소를 입력받고, 웹페이지를 열고, 데이터를 읽어서 BeautifulSoup 파서에 전달하고, 그리고 나서 모든 앵커 태그를 불러와서 각 태그별로 <code>href</code> 속성을 출력한다. 프로그램을 실행하면, 아래와 같다.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> Rscript.exe ./code/extract_link_rvest.R</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">웹사이트</span> 입력 <span class="at">-</span> http://www.dr-chuck.com/page1.htm</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[1]</span> <span class="st">"http://www.dr-chuck.com/page2.htm"</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> Rscript.exe ./code/extract_link_rvest.R</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="ex">웹사이트</span> 입력 <span class="at">-</span> http://www.py4inf.com/book.htm</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a> <span class="ex">[1]</span> <span class="st">"http://amzn.to/1KkULF3"</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a> <span class="ex">[2]</span> <span class="st">"http://www.py4e.com/book"</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a> <span class="ex">[3]</span> <span class="st">"http://amzn.to/1KkULF3"</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a> <span class="ex">[4]</span> <span class="st">"http://amzn.to/1hLcoBy"</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a> <span class="ex">[5]</span> <span class="st">"http://amzn.to/1KkV42z"</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a> <span class="ex">[6]</span> <span class="st">"http://amzn.to/1fNOnbd"</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a> <span class="ex">[7]</span> <span class="st">"http://amzn.to/1N74xLt"</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a> <span class="ex">[8]</span> <span class="st">"http://do1.dr-chuck.net/py4inf/EN-us/book.pdf"</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a> <span class="ex">[9]</span> <span class="st">"http://do1.dr-chuck.net/py4inf/ES-es/book.pdf"</span></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="ex">[10]</span> <span class="st">"https://twitter.com/fertardio"</span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="ex">[11]</span> <span class="st">"http://do1.dr-chuck.net/py4inf/PT-br/book.pdf"</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="ex">[12]</span> <span class="st">"https://twitter.com/victorjabur"</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="ex">[13]</span> <span class="st">"translations/KO/book_009_ko.pdf"</span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="ex">[14]</span> <span class="st">"http://www.xwmooc.net/python/"</span></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="ex">[15]</span> <span class="st">"http://fanwscu.gitbooks.io/py4inf-zh-cn/"</span></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="ex">[16]</span> <span class="st">"book_270.epub"</span></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="ex">[17]</span> <span class="st">"translations/ES/book_272_es4.epub"</span></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="ex">[18]</span> <span class="st">"https://www.gitbook.com/download/epub/book/fanwscu/py4inf-zh-cn"</span></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="ex">[19]</span> <span class="st">"html-270/"</span></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="ex">[20]</span> <span class="st">"html_270.zip"</span></span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="ex">[21]</span> <span class="st">"http://itunes.apple.com/us/book/python-for-informatics/id554638579?mt=13"</span></span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="ex">[22]</span> <span class="st">"http://www-personal.umich.edu/~csev/books/py4inf/ibooks//python_for_informatics.ibooks"</span></span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="ex">[23]</span> <span class="st">"http://www.py4inf.com/code"</span></span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="ex">[24]</span> <span class="st">"http://www.greenteapress.com/thinkpython/thinkCSpy/"</span></span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="ex">[25]</span> <span class="st">"http://allendowney.com/"</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
-<p><code>rvest</code>을 사용하여 다음과 같이 각 태그별로 다양한 부분을 뽑아낼 수 있다.</p>
+<p><code>while</code> 루프가 문자열을 순회하여 문자열을 한 줄에 한 글자씩 화면에 출력한다. 루프 조건이 <code>index &lt;= length(fruit_letter)</code>이어서, <code>index</code>가 문자열 길이와 같을 때, 조건은 거짓이 되고, 루프의 몸통 부문은 실행되지 않는다. R이 접근한 마지막 <code>length(fruit_letter)</code> 인덱스 문자로, 문자열의 마지막 문자다.</p>
+<div class="callout callout-style-simple callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">경고</span>연습문제
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>문자열의 마지막 문자에서 시작해서, 문자열 처음으로 역진행하면서 한 줄에 한 자씩 화면에 출력하는 <code>while</code> 루프를 작성하세요.</p>
+</div>
+</div>
+<p>순회를 작성하는 또 다른 방법은 <code>for</code> 루프다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
 <li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true" href="">R</a></li>
@@ -2198,24 +2024,11 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 </div>
-<p>상기 프로그램은 다음을 출력한다.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> Rscript.exe ./code/extract_link_tag.R</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">웹사이트</span> 입력 <span class="at">-</span> http://www.dr-chuck.com/page1.htm</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">경고메시지</span><span class="er">(</span><span class="ex">들</span><span class="kw">)</span><span class="bu">:</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="kw">(</span><span class="ex">name</span> in names<span class="er">(</span><span class="ex">public_methods</span><span class="kw">))</span> <span class="ex">lockBinding</span><span class="er">(</span><span class="ex">name,</span> public_bind_env<span class="kw">)</span><span class="ex">에서:</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="ex">사용되지</span> 않는 커넥션 3 <span class="er">(</span><span class="ex">stdin</span><span class="kw">)</span><span class="ex">를</span> 닫습니다</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="ex">TAG:</span> <span class="op">&lt;</span>a href=<span class="st">"http://www.dr-chuck.com/page2.htm"</span><span class="op">&gt;</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Second</span> Page<span class="op">&lt;</span>/a<span class="op">&gt;</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="ex">URL:</span> http://www.dr-chuck.com/page2.htm</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Content:</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Second</span> Page</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Attrs:</span> href: http://www.dr-chuck.com/page2.htm</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
-<p>HTML을 파싱하는 데 <code>rvest</code>가 가진 강력한 기능을 예제로 보여줬다. 좀 더 자세한 사항은 <a href="https://rvest.tidyverse.org/" class="uri">https://rvest.tidyverse.org/</a>에서 문서와 예제를 살펴보기 바란다.</p>
-</section><section id="GET-binary" class="level2" data-number="24.8"><h2 data-number="24.8" class="anchored" data-anchor-id="GET-binary">
-<span class="header-section-number">24.8</span> 바이너리 파일 읽기</h2>
-<p>이미지나 비디오 같은 텍스트가 아닌 (혹은 바이너리) 파일을 가져올 때가 종종 있다. 일반적으로 이런 파일 데이터를 출력하는 것은 유용하지 않다. 하지만, <code><a href="https://rdrr.io/r/utils/download.file.html">download.file()</a></code> 함수를 사용하여, 하드 디스크 로컬 파일에 URL 사본을 쉽게 만들 수 있다.</p>
-<p></p>
-<p><code><a href="https://rdrr.io/r/utils/download.file.html">download.file()</a></code> 함수 내부에 인터넷에 공개된 이미지 <code>url</code>을 적고, <code>destfile</code>에는 로컬 파일에 저장할 파일명을 적어준다. 중요한 것은 텍스트가 아니라 바이너리 이미지라 <code>mode = "wb"</code>를 지정한다.</p>
+<p>루프를 매번 반복할 때, 문자열 다음 문자가 변수 <code>char</code>에 대입된다. 루프는 더 이상 남겨진 문자가 없을 때까지 계속 실행된다.</p>
+</section><section id="r-string-slice" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="r-string-slice">
+<span class="header-section-number">8.4</span> 문자열 슬라이스</h2>
+<p> </p>
+<p>문자열의 일부분을 <strong>슬라이스(slice)</strong>라고 한다. 문자열 슬라이스를 선택하는 것은 문자를 선택하는 것과 유사하다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
 <li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-8-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-1" role="tab" aria-controls="tabset-8-1" aria-selected="true" href="">R</a></li>
@@ -2232,17 +2045,9 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 </div>
-<p>작성된 프로그램은 네트워크로 모든 데이터를 한번에 읽어서 컴퓨터 <code>cover.jpg</code> 파일을 다운로드받아 로컬 디스크에 지정한 디렉터리 파일명으로 데이터를 쓴다. 이 방식은 파일 크기가 사용자 컴퓨터의 메모리 크기보다 작다면 정상적으로 작동한다.</p>
-<div id="fig-network-binary" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-network-binary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/py4inf_cover.jpeg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="213">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-network-binary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-그림&nbsp;24.2: 바이너리 파일 다운로드
-</figcaption></figure>
-</div>
-<p>하지만, 오디오 혹은 비디오 파일 대용량이면, 상기 프로그램은 멈추거나 사용자 컴퓨터 메모리가 부족할 때 극단적으로 느려질 수 있다. 메모리 부족을 회피하기 위해서, 데이터를 블록 혹은 버퍼로 가져와서, 다음 블록을 가져오기 전에 디스크에 각각의 블록을 쓴다. 이런 방식으로 사용자가 가진 모든 메모리를 사용하지 않고 어떠한 크기 파일도 읽어올 수 있다.</p>
-<p><a href="https://www.fhfa.gov/">Fannie Mae and Freddie Mac</a>은 주택금융공사에 상응하는 기관으로 주택 구매자에게 저리의 장기 고정금리 주택담보대출을 제공하고 주택 모기지를 재융자하는 역할을 통해 주택 금융 시장의 안정을 도모하고 국민의 주거 안정에 기여한다. <a href="https://www.fhfa.gov/DataTools/Downloads">웹사이트</a>에 공공데이터로 인터넷에 공개된 주택담보대출 나름 크기가 큰 데이터를 가져온다.</p>
+<p><code>[n:m]</code> 연산자는 <code>n</code>번째 문자부터 <code>m</code>번째 문자까지의 문자열 부분을 반환한다.</p>
+<p>파이썬에서 <code>fruit[:3]</code>와 같이 콜론 앞 첫 인덱스를 생략하면, 문자열 슬라이스는 문자열 처음부터 시작한다. 파이썬에서 <code>fruit[3:]</code>와 같이 두 번째 인덱스를 생략하면, 문자열 슬라이스는 문자열 끝까지 간다.</p>
+<p>이와 동일한 역할을 수행하는 방법은 <code>head(fruit_letter, 3)</code>, <code>tail(fruit_letter, 3)</code>와 같이 <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code>, <code><a href="https://rdrr.io/r/utils/head.html">tail()</a></code> 함수를 활용한다.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
 <li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-9-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-1" role="tab" aria-controls="tabset-9-1" aria-selected="true" href="">R</a></li>
@@ -2259,34 +2064,501 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>
 </div>
 </div>
-<p>UNIX 혹은 매킨토시 컴퓨터를 가지고 있다면, 다음과 같이 상기 동작을 수행하는 명령어가 운영체제 자체에 내장되어 있다. </p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-O</span> https://www.dr-chuck.com/py4inf/cover.jpg</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
-</section><section id="network-terminology" class="level2" data-number="24.9"><h2 data-number="24.9" class="anchored" data-anchor-id="network-terminology">
-<span class="header-section-number">24.9</span> 용어 정의</h2>
+<p>만약 첫 번째 인덱스가 두 번째보다 크거나 같은 경우 파이썬에서는 결과가 인용부호로 표현되는 빈 문자열(empty string)이 된다. 하지만, R에서는 해당 인덱스에 해당되는 문자가 추출된다. </p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-10-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-1" role="tab" aria-controls="tabset-10-1" aria-selected="true" href="">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-10-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-2" role="tab" aria-controls="tabset-10-2" aria-selected="false" href="">파이썬</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-10-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-10-1-tab">
+<div id="qwebr-insertion-location-10"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<div id="tabset-10-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-10-2-tab">
+<div id="qpyodide-insertion-location-10"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+</div>
+</div>
+<p>빈 문자열은 어떤 문자도 포함하지 않아서 길이가 0이지만, 이것을 제외하고 다른 문자열과 동일하다. </p>
+<div class="callout callout-style-simple callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">경고</span>연습문제 (파이썬)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>fruit</code>이 문자열로 주어졌을 때, <code>fruit[:]</code>의 의미는 무엇인가요?</p>
+</div>
+</div>
+</section><section id="문자열은-불변이다-파이썬" class="level2" data-number="8.5"><h2 data-number="8.5" class="anchored" data-anchor-id="문자열은-불변이다-파이썬">
+<span class="header-section-number">8.5</span> 문자열은 불변이다 (파이썬)</h2>
+<p> </p>
+<p>문자열 내부에 있는 문자를 변경하려고 대입문 왼쪽편에 <code>[]</code> 연산자를 사용하고 싶은 유혹이 있을 것이다. 예를 들어 다음과 같다. </p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-11-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-1" role="tab" aria-controls="tabset-11-1" aria-selected="true" href="">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-11-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-2" role="tab" aria-controls="tabset-11-2" aria-selected="false" href="">파이썬</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-11-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-11-1-tab">
+<div id="qwebr-insertion-location-11"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<div id="tabset-11-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-11-2-tab">
+<div id="qpyodide-insertion-location-11"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+</div>
+</div>
+<p>파이썬에서 “TypeError: ‘str’ object does not support item assignment” 오류가 발생하는데 파이썬 문자열이 불변(immutable)하기 때문이다. 즉, 파이썬에서 문자열의 특정 문자를 직접 변경하려고 할 때 이 오류가 발생한다. 반면에, R에서는 문자열 자체가 불변 객체로 취급되지 않기 때문에 <code>strsplit</code> 함수를 사용하여 문자열을 문자의 벡터로 변환하면, 벡터의 각 요소는 별도의 문자열로 취급되어 개별적으로 변경할 수 있다. R은 파이썬과 달리 불변 문자열에 대한 제약이 없기 때문에 오류를 발생시키지않는다.</p>
+<p>파이썬에서 “객체(object)”는 문자열이고, 대입하고자 하는 문자는 “항목(item)”이다. 지금으로서 객체는 값과 동일하지만, 나중에 객체 정의를 좀 더 상세화할 것이다. 항목은 순서 값 중의 하나다. 최선의 방법은 원래 문자열을 변형한 새로운 문자열을 생성하는 것이다. </p>
+<p>새로운 첫 문자에 <code>greeting</code> 문자열 슬라이스를 연결한다. 원래 문자열에는 어떤 영향도 주지 않는 새로운 문자열이 생성되었다. </p>
+</section><section id="r-string-count" class="level2" data-number="8.6"><h2 data-number="8.6" class="anchored" data-anchor-id="r-string-count">
+<span class="header-section-number">8.6</span> 루프 사용 문자 계수하기</h2>
+<p> </p>
+<p>다음 프로그램은 문자열에 문자 <code>a</code>가 나타나는 횟수를 계수(counting)한다.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-12-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-12-1" role="tab" aria-controls="tabset-12-1" aria-selected="true" href="">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-12-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-12-2" role="tab" aria-controls="tabset-12-2" aria-selected="false" href="">파이썬</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-12-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-12-1-tab">
+<div id="qwebr-insertion-location-12"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<div id="tabset-12-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-12-2-tab">
+<div id="qpyodide-insertion-location-12"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+</div>
+</div>
+<p>상기 프로그램은 <strong>계수기(counter)</strong>라고 부르는 또 다른 연산 패턴을 보여준다. 변수 count는 0으로 초기화되고, 매번 <code>a</code>를 찾을 때마다 증가한다. 루프를 빠져나갔을 때, <code>count</code>는 결과 값 즉, a가 나타난 총 횟수를 담고 있다.</p>
+<div class="callout callout-style-simple callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">경고</span>연습문제
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>문자열과 문자를 인자(argument)로 받도록 상기 코드를 <code>count</code>라는 함수로 <strong>캡슐화(encapsulation)</strong>하고 일반화하세요. </p>
+</div>
+</div>
+</section><section id="r-string-in-operator" class="level2" data-number="8.7"><h2 data-number="8.7" class="anchored" data-anchor-id="r-string-in-operator">
+<span class="header-section-number">8.7</span> <code>%in%</code> 연산자</h2>
+<p>\index{%in% 연산자} \index{연산자!%in%} </p>
+<p>연산자 <code>in</code>은 부울 연산자로 두 개의 문자열을 받아, 첫 번째 문자열이 두 번째 문자열의 일부이면 참(TRUE)을 반환한다.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-13-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-13-1" role="tab" aria-controls="tabset-13-1" aria-selected="true" href="">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-13-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-13-2" role="tab" aria-controls="tabset-13-2" aria-selected="false" href="">파이썬</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-13-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-13-1-tab">
+<div id="qwebr-insertion-location-13"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<div id="tabset-13-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-13-2-tab">
+<div id="qpyodide-insertion-location-13"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+</div>
+</div>
+</section><section id="r-string-comparison-operator" class="level2" data-number="8.8"><h2 data-number="8.8" class="anchored" data-anchor-id="r-string-comparison-operator">
+<span class="header-section-number">8.8</span> 문자열 비교</h2>
+<p> </p>
+<p>비교 연산자도 문자열에서 동작한다. 두 문자열이 같은지를 살펴보자.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-14-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-14-1" role="tab" aria-controls="tabset-14-1" aria-selected="true" href="">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-14-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-14-2" role="tab" aria-controls="tabset-14-2" aria-selected="false" href="">파이썬</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-14-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-14-1-tab">
+<div id="qwebr-insertion-location-14"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<div id="tabset-14-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-14-2-tab">
+<div id="qpyodide-insertion-location-14"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+</div>
+</div>
+<p>다른 비교 연산자는 단어를 알파벳 순서로 정렬하는 데 유용하다.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-15-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-15-1" role="tab" aria-controls="tabset-15-1" aria-selected="true" href="">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-15-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-15-2" role="tab" aria-controls="tabset-15-2" aria-selected="false" href="">파이썬</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-15-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-15-1-tab">
+<div id="qwebr-insertion-location-15"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<div id="tabset-15-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-15-2-tab">
+<div id="qpyodide-insertion-location-15"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+</div>
+</div>
+<p>R과 파이썬 같은 프로그래밍 언어는 사람과 동일한 방식으로 대문자와 소문자를 다루지 않는다. 모든 대문자는 소문자 앞에 온다. 프로그래밍 언어에서 대문자와 소문자를 다루는 방식은 ASCII 코드 값을 기반으로 한다. ASCII 코드에서 대문자(A-Z)는 65부터 90까지의 값을, 소문자(a-z)는 97부터 122까지의 값을 갖기 때문에 대문자가 숫자적으로 소문자보다 먼저 나오기 때문에 문자열을 정렬하거나 비교할 때, 대문자가 소문자 앞에 위치하게 된다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Your</span> word, Pineapple, comes before banana.</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>이러한 문제를 다루는 일반적인 방식은 비교 연산을 수행하기 전에 문자열을 표준 포맷으로 예를 들어 모두 소문자로 변환하는 것이다. 경우에 따라서 “Pineapple”로 무장한 사람들로부터 여러분을 보호해야 하는 것도 명심한다.</p>
+</section><section id="r-string-method" class="level2" data-number="8.9"><h2 data-number="8.9" class="anchored" data-anchor-id="r-string-method">
+<span class="header-section-number">8.9</span> 문자열 함수</h2>
+<p>R은 객체지향언어 특성을 갖고 있지만 함수형 프로그래밍 언어 특성도 갖고 있다. 문자열을 R 객체(objects)로 객체를 데이터(실제 문자열 자체)와 메서드(methods)를 담고 있는 것으로 바라볼 수도 있다. 메서드는 객체에 내장되고 어떤 객체의 인스턴스(instance)에도 사용되는 사실상 함수다. </p>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">노트</span>파이썬 <code>dir</code> 함수
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>객체에 대해 이용 가능한 메서드를 보여주는 <code>dir</code> 함수가 파이썬에 있다. <code>type</code> 함수는 객체의 자료형(type)을 보여주고, <code>dir</code>은 객체에 사용될 수 있는 메서드를 보여준다.</p>
+<div id="qpyodide-insertion-location-16"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p><code>dir</code> 함수가 메서드 목록을 보여주고, 메서드에 대한 간단한 문서 정보는 <code>help</code>를 사용할 수 있지만, 문자열 메서드에 대한 좀 더 좋은 문서 정보는 <a href="https://docs.python.org/3/library/string.html" class="uri">https://docs.python.org/3/library/string.html</a>에서 찾을 수 있다.</p>
+<p>인자를 받고 값을 반환한다는 점에서 메서드(method)를 호출하는 것은 함수를 호출하는 것과 유사하지만, 구문은 다르다. 구분자로 점을 사용해서 변수명에 메서드명을 붙여 메서드를 호출한다.</p>
+<p>예를 들어, <code>upper</code> 메서드는 문자열을 받아 모두 대문자로 변환된 새로운 문자열을 반환한다. 함수 구문 <code>upper(word)</code> 대신에, <code>word.upper()</code> 메서드 구문을 사용한다.</p>
+</div>
+</div>
+<p>하지만, 함수형 프로그래밍 패러다임으로 문자열을 객체로 두고 함수를 적용시켜 다양한 작업을 하는 것이 일반적이다. <code>tidyverse</code> 패키지를 설치하게 되면 <code>stringr</code> 패키지가 구성요소로 포함되어 있다. <code>str_</code>로 시작되는 다양한 함수가 지원된다. </p>
+<p>예를 들어, <code>stringr</code> 패키지 <code>str_to_upper()</code> 함수는 문자열을 받아 모두 대문자로 변환된 새로운 문자열을 반환한다.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-16-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-16-1" role="tab" aria-controls="tabset-16-1" aria-selected="true" href="">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-16-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-16-2" role="tab" aria-controls="tabset-16-2" aria-selected="false" href="">파이썬</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-16-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-16-1-tab">
+<div id="qwebr-insertion-location-16"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<div id="tabset-16-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-16-2-tab">
+<div id="qpyodide-insertion-location-17"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+</div>
+</div>
+<p>동일한 작업을 함수형 패러다임으로 <code>str_to_upper(word)</code>와 같이 표현하는 데 반해, 객체지향으로 구현하면 파이썬 같은 경우 <code>word.upper()</code> 메서드 구문이 사용된다.</p>
+<p>예를 들어, 문자열 안에 문자열의 위치를 찾는 <code>str_locate()</code>, <code>str_locate_all()</code>이라는 문자열 함수가 있다. <code>str_locate()</code>는 매칭되는 첫 번째만 반환하는 반면에 <code>str_locate_all()</code>은 매칭되는 전부를 반환하는 차이가 있다.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-17-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-17-1" role="tab" aria-controls="tabset-17-1" aria-selected="true" href="">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-17-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-17-2" role="tab" aria-controls="tabset-17-2" aria-selected="false" href="">파이썬</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-17-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-17-1-tab">
+<div id="qwebr-insertion-location-17"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<div id="tabset-17-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-17-2-tab">
+<div id="qpyodide-insertion-location-18"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+</div>
+</div>
+<p>상기 예제에서, word 문자열에 <code>str_locate_all()</code> 함수를 호출하여 매개 변수로 찾고자 하는 문자를 넘긴다.</p>
+<p><code>str_locate_all()</code> 함수로 문자뿐만 아니라 부속 문자열(substring)도 찾을 수 있다.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-18-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-18-1" role="tab" aria-controls="tabset-18-1" aria-selected="true" href="">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-18-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-18-2" role="tab" aria-controls="tabset-18-2" aria-selected="false" href="">파이썬</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-18-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-18-1-tab">
+<div id="qwebr-insertion-location-18"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<div id="tabset-18-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-18-2-tab">
+<div id="qpyodide-insertion-location-19"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+</div>
+</div>
+<p>한 가지 자주 있는 작업은 <code>str_trim()</code> 함수를 사용해서 문자열 시작과 끝의 공백(공백 여러 개, 탭, 새줄)을 제거하는 것이다.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-19-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-19-1" role="tab" aria-controls="tabset-19-1" aria-selected="true" href="">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-19-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-19-2" role="tab" aria-controls="tabset-19-2" aria-selected="false" href="">파이썬</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-19-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-19-1-tab">
+<div id="qwebr-insertion-location-19"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<div id="tabset-19-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-19-2-tab">
+<div id="qpyodide-insertion-location-20"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+</div>
+</div>
+<p><code>str_detect()</code> 함수와 나중에 다룰 정규표현식을 섞어 표현하게 되면 참, 거짓 같은 부울 값(boolean value)을 반환한다. <code>'^Please'</code>에서 <code>^</code>은 문자열 시작을 지정한다.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-20-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-20-1" role="tab" aria-controls="tabset-20-1" aria-selected="true" href="">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-20-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-20-2" role="tab" aria-controls="tabset-20-2" aria-selected="false" href="">파이썬</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-20-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-20-1-tab">
+<div id="qwebr-insertion-location-20"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<div id="tabset-20-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-20-2-tab">
+<div id="qpyodide-insertion-location-21"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+</div>
+</div>
+<p>대소문자를 구별하는 것을 요구하기 때문에 <code>str_to_lower()</code> 함수를 사용해서 검증을 수행하기 전에, 한 줄을 입력받아 모두 소문자로 변환하는 것이 필요하다.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-21-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-21-1" role="tab" aria-controls="tabset-21-1" aria-selected="true" href="">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-21-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-21-2" role="tab" aria-controls="tabset-21-2" aria-selected="false" href="">파이썬</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-21-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-21-1-tab">
+<div id="qwebr-insertion-location-21"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<div id="tabset-21-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-21-2-tab">
+<div id="qpyodide-insertion-location-22"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+</div>
+</div>
+<p>마지막 예제에서 문자열이 문자 “p”로 시작하는지를 검증하기 위해서, <code>str_to_lower()</code> 함수를 호출하고 나서 바로 <code>str_detect()</code> 함수를 사용한다. 주의 깊게 순서만 다룬다면, 한 줄에 다수 함수를 괄호에 넣어 호출할 수 있다.</p>
+<div class="callout callout-style-simple callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">경고</span>연습문제
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>앞선 예제와 유사한 함수인 <code>str_count()</code>로 불리는 문자열 메서드가 <code>stringr</code> 패키지 내부에 있다. <code>? str_count()</code> 도움말로 <code>str_count()</code> 함수에 대한 문서를 읽고, 문자열 ’banana’의 문자가 몇 개인지 계수하는 메서드 호출 프로그램을 작성하세요.</p>
+</div>
+</div>
+</section><section id="r-string-parsing" class="level2" data-number="8.10"><h2 data-number="8.10" class="anchored" data-anchor-id="r-string-parsing">
+<span class="header-section-number">8.10</span> 문자열 파싱</h2>
+<p>종종, 문자열을 들여다보고 특정 부속 문자열(substring)을 찾고 싶다. 예를 들어, 아래와 같은 형식으로 작성된 일련의 라인이 주어졌다고 가정하면,</p>
+<blockquote class="blockquote">
+<p><code>From stephen.marquard@</code><strong>uct.ac.za</strong><code>Sat Jan  5 09:14:16 2008</code></p>
+</blockquote>
+<p>각 라인마다 뒤쪽 전자우편 주소(즉, uct.ac.za)만 뽑아내고 싶을 것이다. <code>str_locate()</code> 함수와 문자열 슬라이싱(string sliceing)을 사용해서 작업을 수행할 수 있다.</p>
+<p>우선, 문자열에서 골뱅이(<code>@</code>, at-sign) 기호의 위치를 찾는다. 그리고, 골뱅이 기호 뒤 첫 공백 위치를 찾는다. 그리고 나서, 찾고자 하는 부속 문자열을 뽑아내기 위해서 문자열 슬라이싱을 사용한다.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-22-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-22-1" role="tab" aria-controls="tabset-22-1" aria-selected="true" href="">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-22-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-22-2" role="tab" aria-controls="tabset-22-2" aria-selected="false" href="">파이썬</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-22-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-22-1-tab">
+<div id="qwebr-insertion-location-22"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<div id="tabset-22-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-22-2-tab">
+<div id="qpyodide-insertion-location-23"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+</div>
+</div>
+<p><code>str_locate()</code> 함수를 사용해서 찾고자 하는 문자열의 시작 위치를 명세한다. 문자열 슬라이싱(slicing)할 때, 골뱅이 기호 뒤부터 빈 공백을 포함하지 않는 위치까지 문자열을 뽑아낸다.</p>
+</section><section id="r-string-format" class="level2" data-number="8.11"><h2 data-number="8.11" class="anchored" data-anchor-id="r-string-format">
+<span class="header-section-number">8.11</span> 서식 연산자</h2>
+<p> </p>
+<p><strong>서식 연산자(format operator)</strong> Base R의 <code><a href="https://rdrr.io/r/base/sprintf.html">sprintf()</a></code> 함수에 C언어 스타일로 <code>%</code>를 사용하기도 하지만 <a href="https://cran.r-project.org/web/packages/glue/index.html">glue: Interpreted String Literals</a> 패키지도 최근에 많이 사용된다. <code>glue</code> 패키지 <code><a href="https://rdrr.io/r/base/Paren.html">{}</a></code>는 문자열 일부를 변수에 저장된 값으로 바꿔 문자열을 구성한다. 정수에 서식 연산자가 적용될 때, {}는 나머지 연산자가 된다. 하지만 첫 피연산자가 문자열이면, {}은 서식 연산자가 된다. 동일한 기능을 <code>stringr</code> 패키지 <code>str_glue()</code> 함수로 수행할 수 있다. </p>
+<p>첫 피연산자는 서식 문자열(format string)로 두 번째 피연산자가 어떤 형식으로 표현되는지를 명세하는 하나 혹은 그 이상의 서식 순서(format sequence)를 담고 있다. 결과값은 문자열이다. </p>
+<p>예를 들어, 형식 순서 ’%d’의 의미는 두 번째 피연산자가 정수 형식으로 표현됨을 뜻한다. (d는 “decimal”을 나타낸다.)</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-23-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-23-1" role="tab" aria-controls="tabset-23-1" aria-selected="true" href="">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-23-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-23-2" role="tab" aria-controls="tabset-23-2" aria-selected="false" href="">파이썬</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-23-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-23-1-tab">
+<div id="qwebr-insertion-location-23"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<div id="tabset-23-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-23-2-tab">
+<div id="qpyodide-insertion-location-24"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+</div>
+</div>
+<p>결과는 문자열 ’42’로 정수 42와 혼동하면 안 된다.</p>
+<p>서식 순서는 문자열 어디에도 나타날 수 있어서 문장 중간에 값을 임베드(embed)할 수 있다.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-24-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-24-1" role="tab" aria-controls="tabset-24-1" aria-selected="true" href="">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-24-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-24-2" role="tab" aria-controls="tabset-24-2" aria-selected="false" href="">파이썬</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-24-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-24-1-tab">
+<div id="qwebr-insertion-location-24"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<div id="tabset-24-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-24-2-tab">
+<div id="qpyodide-insertion-location-25"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+</div>
+</div>
+<p>만약 문자열 서식 순서가 하나 이상이라면, 두 번째 인자는 튜플(tuple)이 된다. 서식 순서 각각은 순서대로 튜플 요소와 매칭된다.</p>
+<p>다음 예제는 정수 형식을 표현하기 위해서 ‘%d’, 부동 소수점 형식을 표현하기 위해서 ‘%g’, 문자열 형식을 표현하기 위해서 ‘%s’을 사용한 사례다. 여기서 왜 부동 소수점 형식이’%f’ 대신에 ’%g’인지는 질문하지 말아주세요. </p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-25-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-25-1" role="tab" aria-controls="tabset-25-1" aria-selected="true" href="">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-25-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-25-2" role="tab" aria-controls="tabset-25-2" aria-selected="false" href="">파이썬</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-25-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-25-1-tab">
+<div id="qwebr-insertion-location-25"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<div id="tabset-25-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-25-2-tab">
+<div id="qpyodide-insertion-location-26"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+</div>
+</div>
+<p>문자열 서식 순서와 갯수는 일치해야 하고, 요소의 자료형(type)도 서식 순서와 일치해야 한다.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-26-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-26-1" role="tab" aria-controls="tabset-26-1" aria-selected="true" href="">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-26-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-26-2" role="tab" aria-controls="tabset-26-2" aria-selected="false" href="">파이썬</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-26-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-26-1-tab">
+<div id="qwebr-insertion-location-26"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<div id="tabset-26-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-26-2-tab">
+<div id="qpyodide-insertion-location-27"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+</div>
+</div>
+<p>상기 첫 예제는 충분한 요소 개수가 되지 않고, 두 번째 예제는 자료형이 맞지 않는다. 서식 연산자는 강력하지만, 사용하기가 까다로운 점이 있으니, <code>str_glue</code>를 사용하는 것도 권장된다.</p>
+</section><section id="r-string-debug" class="level2" data-number="8.12"><h2 data-number="8.12" class="anchored" data-anchor-id="r-string-debug">
+<span class="header-section-number">8.12</span> 디버깅</h2>
+<p></p>
+<p>프로그램을 작성하면서 배양해야 하는 기술은 항상 자신에게 질문을 하는 것이다. “여기서 무엇이 잘못될 수 있을까?” 혹은 “내가 작성한 완벽한 프로그램을 망가뜨리기 위해 사용자는 무슨 엄청난 일을 할 것인가?”</p>
+<p>예를 들어 앞장의 반복 while 루프를 시연하기 위해 사용한 프로그램을 살펴봅시다.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-27-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-27-1" role="tab" aria-controls="tabset-27-1" aria-selected="true" href="">R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-27-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-27-2" role="tab" aria-controls="tabset-27-2" aria-selected="false" href="">파이썬</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-27-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-27-1-tab">
+<div id="qwebr-insertion-location-27"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<div id="tabset-27-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-27-2-tab">
+<div id="qpyodide-insertion-location-28"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+</div>
+</div>
+<p>사용자가 입력값으로 빈 공백 줄을 입력하게 될 때 무엇이 발생하는지 살펴봅시다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> hello <span class="ex">there</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[1]</span> hello there</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> <span class="co"># don't print this</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> print <span class="ex">this!</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">[2]</span> print this!</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="ex">[1]</span> <span class="st">""</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> done</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>빈 공백 줄이 입력될 때까지 코드는 잘 작동한다. 그리고 나서, 파이썬의 경우 0번째 문자가 없어서 트레이스백(traceback)이 발생한다. R의 경우 정상 실행되지만 원하는 바는 아니다. 입력 줄이 비어있을 때, 코드 3번째 줄을 “안전”하게 만드는 두 가지 방법이 있다.</p>
+<p>하나는 빈 문자열이면 거짓(FALSE)을 반환하도록 <code>str_detect()</code> 함수를 사용하는 것이다.</p>
+<div class="columns">
+<div class="column" style="width:47.5%;">
+<section id="r-27" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="r-27">R</h3>
+<p><code>if(str_detect(line, '^#'))</code></p>
+</section>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:47.5%;">
+<section id="파이썬-27" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="파이썬-27">파이썬</h3>
+<p><code>if line.startswith('#') :</code></p>
+</section>
+</div>
+</div>
+<p><strong>가디언 패턴(guardian pattern)</strong>을 사용한 <code>if</code>문으로 문자열에 적어도 하나의 문자가 있는 경우만 두 번째 논리 표현식이 평가되도록 코드를 작성한다. </p>
+<div class="columns">
+<div class="column" style="width:47.5%;">
+<section id="r-28" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="r-28">R</h3>
+<p><code>if(str_length(line) &gt; 0 &amp; str_detect(line, '^#'))</code></p>
+</section>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:47.5%;">
+<section id="파이썬-28" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="파이썬-28">파이썬</h3>
+<p><code>if len(line) &gt; 0 and line[0] == '#' :</code></p>
+</section>
+</div>
+</div>
+</section><section id="r-string-terminology" class="level2" data-number="8.13"><h2 data-number="8.13" class="anchored" data-anchor-id="r-string-terminology">
+<span class="header-section-number">8.13</span> 용어 정의</h2>
 <ul>
 <li>
-<strong>BeautifulSoup</strong>: 파이썬 라이브러리로 HTML 문서를 파싱하고 브라우저가 일반적으로 생략하는 HTML의 불완전한 부분을 보정하여 HTML 문서에서 데이터를 추출한다. <a href="www.crummy.com">www.crummy.com</a> 사이트에서 BeautifulSoup 코드를 다운로드 받을 수 있다. </li>
+<strong>계수기(counter)</strong>: 무언가를 계수하기 위해서 사용되는 변수로 일반적으로 0으로 초기화하고 나서 증가한다. </li>
 <li>
-<strong><code>rvest</code></strong>: 파이썬 BeautifulSoup에 대응되는 R 크롤링 패키징 </li>
+<strong>빈 문자열(empty string)</strong>: 두 인용부호로 표현되고, 어떤 문자도 없고 길이가 0인 문자열. </li>
 <li>
-<strong>포트(port)</strong>: 서버에 소켓 연결을 만들 때, 사용자가 무슨 응용프로그램을 연결하는지 나타내는숫자. 예로, 웹 트래픽은 통상 80 포트, 전자우편은 25 포트를 사용한다. </li>
+<strong>서식 연산자(format operator)</strong>: 서식 문자열과 튜플을 받아, 서식 문자열에 지정된 서식으로 튜플 요소를 포함하는 문자열을 생성하는 연산자. </li>
 <li>
-<strong>스크래핑(scraping)</strong>: 프로그램이 웹 브라우저를 가장하여 웹페이지를 가져와서 웹 페이지의 내용을 검색한다. 종종 프로그램이 한 페이지의 링크를 따라 다른 페이지를 찾게 된다. 그래서, 웹페이지 네트워크 혹은 소셜 네트워크 전체를 훑을 수 있다. </li>
+<strong>서식 순서(format sequence)</strong>: d처럼 어떤 값의 서식으로 표현되어야 하는지를 명세하는 “서식 문자열” 문자 순서. </li>
 <li>
-<strong>소켓(socket)</strong>: 두 응용프로그램 사이 네트워크 연결. 두 응용프로그램은 양방향으로 데이터를 주고받는다. </li>
+<strong>서식 문자열(format string)</strong>: 서식 순서를 포함하는 서식 연산자와 함께 사용되는 문자열. </li>
 <li>
-<strong>스파이더(spider)</strong>:검색 색인을 구축하기 위해서 한 웹페이지를 검색하고, 그 웹페이지에 링크된 모든 페이지 검색을 반복하여 인터넷에 있는 거의 모든 웹페이지를 가져오기 위해서 사용되는 검색엔진 행동. </li>
-</ul></section><section id="network-ex" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="network-ex">연습문제</h2>
+<strong>플래그(flag)</strong>: 조건이 참인지를 표기하기 위해 사용하는 불 변수(boolean variable) </li>
+<li>
+<strong>호출(invocation)</strong>: 메서드를 호출하는 명령문. </li>
+<li>
+<strong>불변(immutable)</strong>: 순서의 항목에 대입할 수 없는 특성. </li>
+<li>
+<strong>인덱스(index)</strong>: 문자열의 문자처럼 순서(sequence)에 항목을 선택하기 위해 사용되는 정수 값. </li>
+<li>
+<strong>항목(item)</strong>: 순서에 있는 값의 하나. </li>
+<li>
+<strong>메서드(method)</strong>: 객체와 연관되어 점 표기법을 사용하여 호출되는 함수. </li>
+<li>
+<strong>객체(object)</strong>: 변수가 참조하는 무엇. 지금은 “객체”와 “값”을 구별 없이 사용한다. </li>
+<li>
+<strong>검색(search)</strong>: 찾고자 하는 것을 찾았을 때 멈추는 순회 패턴. </li>
+<li>
+<strong>순서(sequence)</strong>: 정돈된 집합. 즉, 정수 인덱스로 각각의 값이 확인되는 값의 집합. </li>
+<li>
+<strong>슬라이스(slice)</strong>: 인덱스 범위로 지정되는 문자열 부분. </li>
+<li>
+<strong>순회(traverse)</strong>: 순서(sequence)의 항목을 반복적으로 훑기, 각각에 대해서는 동일한 연산을 수행. </li>
+</ul></section><section id="r-string-ex" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="r-string-ex">연습문제</h2>
 <ol type="1">
-<li><p>소켓 프로그램 <code>socket1.py</code>을 변경하여 임의 웹페이지를 읽을 수 있도록 URL을 사용자가 입력하도록 수정한다. <code>split('/')</code>을 사용하여 URL을 컴포넌트로 쪼개서 소켓 <code>connect</code> 호출에 대해 호스트 명을 추출할 수 있다. 사용자가 적절하지 못한 형식 혹은 존재하지 않는 URL을 입력하는 경우를 처리할 수 있도록 <code>try</code>, <code>except</code>를 사용하여 오류 검사기능을 추가한다.</p></li>
-<li><p>소켓 프로그램을 변경하여 전송받은 문자를 계수(count)하고 3000 문자를 출력한 후에 그 이상 텍스트 출력을 멈추게 한다. 프로그램은 전체 문서를 가져와야 하고, 전체 문자를 계수(count)하고, 문서 마지막에 문자 계수(count)결과를 출력해야 한다.</p></li>
-<li><p><code>httr</code> 패키지를 사용하여 이전 예제를 반복한다. (1) 사용자가 입력한 URL에서 문서 가져오기 (2) 3000 문자까지 화면에 보여주기 (3) 문서의 전체 문자 계수(count)하기. 이 연습문제에서 헤더에 대해서는 걱정하지 말고, 단지 문서 본문에서 첫 3000 문자만 화면에 출력한다.</p></li>
-<li><p><code>urllinks.R</code> 프로그램을 변경하여 가져온 HTML 문서에서 문단(p) 태그를 추출하고 프로그램의 출력물로 문단을 계수(count)하고 화면에 출력한다. 문단 텍스트를 화면에 출력하지 말고 단지 숫자만 센다. 작성한 프로그램을 작은 웹페이지뿐만 아니라 조금 큰 웹 페이지에도 테스트한다.</p></li>
-<li><p>(고급) 소켓 프로그램을 변경하여 헤더와 빈 라인 다음에 데이터만 보이도록 개발한다. <code>recv</code>는 라인이 아니라 문자(새줄(newline)과 모든 문자)를 전송받는다는 것을 기억한다.</p></li>
+<li>다음 문자열에서 숫자를 뽑아내는 R 코드를 작성하라.</li>
 </ol>
+<p><code>str &lt;- 'X-DSPAM-Confidence: 0.8475'</code></p>
+<p><code>str_locate()</code> 함수와 문자열 슬라이싱을 사용하여 <code>str_sub()</code> 문자 뒤 문자열을 뽑아내고 <code><a href="https://rdrr.io/r/base/numeric.html">as.numeric()</a></code> 함수를 사용하여 뽑아낸 문자열을 부동 소수점 숫자로 변환하라.</p>
 
 
-</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+<ol>
+<li id="fn1"><p>컴퓨터에서 어떤 주소로부터 간격을 두고 떨어진 주소와의 거리를 말한다. 기억 장치가 페이지 혹은 세그먼트 단위로 나누어져 있을 때 하나의 시작 주소로부터 오프셋만큼 떨어진 위치를 나타낸다. 네이버 지식백과(IT용어사전, 한국정보통신기술협회)<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
     const anchorJS = new window.AnchorJS();
@@ -2725,13 +2997,13 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
     }
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./tool-regex.html" class="pagination-link" aria-label="정규 표현식">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">정규 표현식</span></span>
+      <a href="./07-abstraction.html" class="pagination-link" aria-label="추상화">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">추상화</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./tool-web.html" class="pagination-link" aria-label="웹서비스 사용하기">
-        <span class="nav-page-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">웹서비스 사용하기</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./07-file.html" class="pagination-link" aria-label="파일">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">파일</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -2742,7 +3014,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/tool-network.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/06-string.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>순수하게 <a href="https://quarto.org/">쿼토(Quarto)</a>로 제작되었습니다.</p>
 </div>

@@ -57,26 +57,16 @@ book:
         - 06-logic.qmd          # 논리와 흐름 - 조건, 반복
         - 07-abstraction.qmd    # 추상화 - 함수, 모듈화
 
-    # ============================================
-    # 기존 구문 중심 구조 (참고용 보관)
-    # ============================================
-    # - part: "**1부** 프로그래밍" # OK
-    #   chapters:
-    #     - 01-intro.qmd          # A\ + idx
-    #     - 02-var.qmd            # A\ + idx
-    #     - 03-cont.qmd           # A\ + idx
-    #     - 04-func.qmd           # A\ + idx
-    #     - 05-loop.qmd           # A\ + idx
-    #
-    # - part: "**2부** 자료구조"
-    #   chapters:
-    #     - 06-string.qmd         # A\ + idx
-    #     - 07-file.qmd           # A\ + idx
-    #     - 08-list.qmd           # A\ + idx
-    #     - 09-dictionaries.qmd   # A\ + idx
-    #     - A-dataframe.qmd       # A\ + idx
+    - part: "**2부** 자료구조"
+      chapters:
+        - 06-string.qmd         # 문자열
+        - 07-file.qmd           # 파일
+        - 08-list.qmd           # 리스트
+        - 09-dictionaries.qmd   # 딕셔너리
+        - 10-tuples.qmd         # 튜플
+        - A-dataframe.qmd       # 데이터프레임
 
-    - part: "**2부** 버전제어와 협업" # OK
+    - part: "**3부** 버전제어와 협업"
       chapters:
         - git-basics.qmd        # A\ + + idx
         - git-setup-create.qmd  # A\ + idx
@@ -88,7 +78,7 @@ book:
         - git-conflict.qmd     # A\ + idx +layout
         - git-ide.qmd          # A\ + idx +layout
 
-    - part: "**3부** 분야별 코딩" # OK
+    - part: "**4부** 분야별 코딩"
       chapters:
         - tool-regex.qmd      # A\ + idx + layout
         - tool-network.qmd    # A\ + idx + layout
@@ -98,14 +88,14 @@ book:
         - tool-viz.qmd        # A\ + idx + layout
         - tool-gpt.qmd
 
-    - part: "**4부** 통합 개발 환경"
+    - part: "**5부** 통합 개발 환경"
       chapters:
         - ide.qmd
         - ide_positron.qmd
         - ide_extension.qmd
         - ide_setup.qmd
 
-    - part: "**5부** 자동화, 도커, 재현성"
+    - part: "**6부** 자동화, 도커, 재현성"
       chapters:
         - docker_concept.qmd
         - make_concept.qmd
