@@ -1119,37 +1119,37 @@ globalThis.qwebrExecuteCode = async function (
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06-string.html" class="sidebar-item-text sidebar-link">
+  <a href="./11-string.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">문자열</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07-file.html" class="sidebar-item-text sidebar-link">
+  <a href="./12-file.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">파일</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./08-list.html" class="sidebar-item-text sidebar-link">
+  <a href="./13-list.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">리스트</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./09-dictionaries.html" class="sidebar-item-text sidebar-link">
+  <a href="./14-dictionaries.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">딕셔너리</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./10-tuples.html" class="sidebar-item-text sidebar-link">
+  <a href="./15-tuples.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">튜플(Tuples)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./A-dataframe.html" class="sidebar-item-text sidebar-link">
+  <a href="./16-dataframe.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">데이터프레임</span></span></a>
   </div>
 </li>
@@ -1618,8 +1618,8 @@ classDef A font-size:16px;
 </div>
 <p>챗GPT 코딩 구성요소는 프롬프트와 언어모형으로 구성되어 있다고 보면 된다. 자연어 프롬프트를 통해 생성하고자 하는 코드의 목적과 요구사항을 명시하여 언어모형에 전달하면 언어모형은 프롬프트를 이해하고 관련 코드를 생성한다. 몇년전 영어가 가장 뜨거운 프로그래밍 언어라는 주장이 허언은 아닌 것이다.</p>
 <p></p>
-<div id="tweet-42140"></div>
-<script>tweet={"url":"https:\/\/twitter.com\/karpathy\/status\/1617979122625712128","author_name":"Andrej Karpathy","author_url":"https:\/\/twitter.com\/karpathy","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EThe hottest new programming language is English\u003C\/p\u003E&mdash; Andrej Karpathy (@karpathy) \u003Ca href=\"https:\/\/twitter.com\/karpathy\/status\/1617979122625712128?ref_src=twsrc%5Etfw\"\u003EJanuary 24, 2023\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-42140").innerHTML = tweet["html"];</script></section><section id="챗gui-인터페이스" class="level2" data-number="28.3"><h2 data-number="28.3" class="anchored" data-anchor-id="챗gui-인터페이스">
+<div id="tweet-57804"></div>
+<script>tweet={"url":"https:\/\/twitter.com\/karpathy\/status\/1617979122625712128","author_name":"Andrej Karpathy","author_url":"https:\/\/twitter.com\/karpathy","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EThe hottest new programming language is English\u003C\/p\u003E&mdash; Andrej Karpathy (@karpathy) \u003Ca href=\"https:\/\/twitter.com\/karpathy\/status\/1617979122625712128?ref_src=twsrc%5Etfw\"\u003EJanuary 24, 2023\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-57804").innerHTML = tweet["html"];</script></section><section id="챗gui-인터페이스" class="level2" data-number="28.3"><h2 data-number="28.3" class="anchored" data-anchor-id="챗gui-인터페이스">
 <span class="header-section-number">28.3</span> 챗GUI 인터페이스</h2>
 <p> </p>
 <p>OpenAI 챗GPT, 구글 Gemini, 앤트로픽 클로드 등을 사용하여 코드를 생성시킬 수 있다. 챗GPT를 비롯한 대규모 언어모형은 API도 제공하고 있어서 챗 인터페이스가 불편한 경우 API를 통해 개발하고 있는 프로그램에 직접 적용할 수도 있다. 먼저 최근 인기를 얻고 있는 챗GPT 대항마로 떠오르고 있는 앤트로픽 <a href="https://claude.ai/chat/">클로드(claude)</a>를 통해 코드를 생성하는 방법을 알아보자.</p>

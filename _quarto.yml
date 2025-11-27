@@ -59,12 +59,12 @@ book:
 
     - part: "**2부** 자료구조"
       chapters:
-        - 06-string.qmd         # 문자열
-        - 07-file.qmd           # 파일
-        - 08-list.qmd           # 리스트
-        - 09-dictionaries.qmd   # 딕셔너리
-        - 10-tuples.qmd         # 튜플
-        - A-dataframe.qmd       # 데이터프레임
+        - 11-string.qmd         # 문자열
+        - 12-file.qmd           # 파일
+        - 13-list.qmd           # 리스트
+        - 14-dictionaries.qmd   # 딕셔너리
+        - 15-tuples.qmd         # 튜플
+        - 16-dataframe.qmd      # 데이터프레임
 
     - part: "**3부** 버전제어와 협업"
       chapters:
