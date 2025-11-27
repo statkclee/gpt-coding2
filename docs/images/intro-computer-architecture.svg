@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360">
+  <defs>
+    <style>
+      .tufte-text {
+        font-family: 'Noto Sans KR', Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+      }
+      .tufte-title {
+        font-family: 'Noto Sans KR', Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+        font-size: 13px;
+        font-weight: 500;
+      }
+      .tufte-label {
+        font-family: 'Noto Sans KR', Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #555;
+        font-size: 11px;
+      }
+      .tufte-small {
+        font-family: 'Noto Sans KR', Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #666;
+        font-size: 9px;
+      }
+      .tufte-new {
+        font-family: 'Noto Sans KR', Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #555;
+        font-size: 9px;
+        font-style: italic;
+      }
+      .tufte-thought {
+        font-family: 'Noto Sans KR', Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #444;
+        font-size: 10px;
+      }
+    </style>
+  </defs>
+
+  <!-- White background -->
+  <rect x="0" y="0" width="600" height="360" fill="#ffffff"/>
+
+  <!-- CPU (Central) - emphasized -->
+  <rect x="220" y="100" width="120" height="85" rx="4" fill="#f0f0f0" stroke="#333" stroke-width="1.5"/>
+  <text x="280" y="120" class="tufte-title" text-anchor="middle">중앙처리장치</text>
+  <text x="280" y="136" class="tufte-title" text-anchor="middle">(CPU)</text>
+  <line x1="235" y1="145" x2="325" y2="145" stroke="#ddd" stroke-width="1"/>
+  <text x="280" y="160" class="tufte-small" text-anchor="middle">순차 처리</text>
+  <text x="280" y="175" class="tufte-small" text-anchor="middle">범용 연산</text>
+
+  <!-- Thought bubble "다음에 무엇을 할까요?" -->
+  <ellipse cx="420" cy="55" rx="75" ry="35" fill="#f9f9f9" stroke="#666" stroke-width="1"/>
+  <circle cx="350" cy="85" r="6" fill="#f9f9f9" stroke="#666" stroke-width="1"/>
+  <circle cx="335" cy="95" r="4" fill="#f9f9f9" stroke="#666" stroke-width="1"/>
+  <text x="420" y="48" class="tufte-thought" text-anchor="middle">"다음에</text>
+  <text x="420" y="62" class="tufte-thought" text-anchor="middle">무엇을</text>
+  <text x="420" y="76" class="tufte-thought" text-anchor="middle">할까요?"</text>
+
+  <!-- I/O Device (Left) -->
+  <rect x="30" y="100" width="100" height="85" rx="4" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+  <text x="80" y="120" class="tufte-title" text-anchor="middle">입출력장치</text>
+  <line x1="45" y1="130" x2="115" y2="130" stroke="#ddd" stroke-width="1"/>
+  <text x="80" y="145" class="tufte-small" text-anchor="middle">텍스트 · 클릭</text>
+  <text x="80" y="158" class="tufte-small" text-anchor="middle">화면 · 파일</text>
+  <line x1="55" y1="166" x2="105" y2="166" stroke="#eee" stroke-width="1"/>
+  <text x="80" y="180" class="tufte-new" text-anchor="middle">음성 · 이미지</text>
+
+  <!-- Network (Right) -->
+  <rect x="430" y="100" width="100" height="85" rx="4" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+  <text x="480" y="120" class="tufte-title" text-anchor="middle">네트워크</text>
+  <line x1="445" y1="130" x2="515" y2="130" stroke="#ddd" stroke-width="1"/>
+  <text x="480" y="145" class="tufte-small" text-anchor="middle">인터넷</text>
+  <text x="480" y="158" class="tufte-small" text-anchor="middle">클라우드</text>
+  <line x1="455" y1="166" x2="505" y2="166" stroke="#eee" stroke-width="1"/>
+  <text x="480" y="180" class="tufte-new" text-anchor="middle">AI API</text>
+
+  <!-- GPU (Bottom Left) - AI era addition -->
+  <rect x="30" y="235" width="100" height="70" rx="4" fill="#f8f8f8" stroke="#333" stroke-width="1.5"/>
+  <text x="80" y="255" class="tufte-title" text-anchor="middle">GPU</text>
+  <line x1="45" y1="265" x2="115" y2="265" stroke="#ddd" stroke-width="1"/>
+  <text x="80" y="280" class="tufte-new" text-anchor="middle">병렬 처리</text>
+  <text x="80" y="293" class="tufte-new" text-anchor="middle">AI 가속</text>
+
+  <!-- Main Memory (Bottom Center) -->
+  <rect x="170" y="235" width="120" height="70" rx="4" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+  <text x="230" y="260" class="tufte-title" text-anchor="middle">주기억장치</text>
+  <text x="230" y="278" class="tufte-small" text-anchor="middle">(RAM)</text>
+
+  <!-- Secondary Memory (Bottom Right) -->
+  <rect x="360" y="235" width="120" height="70" rx="4" fill="#ffffff" stroke="#333" stroke-width="1.5"/>
+  <text x="420" y="260" class="tufte-title" text-anchor="middle">보조기억장치</text>
+  <text x="420" y="278" class="tufte-small" text-anchor="middle">(SSD/HDD)</text>
+
+  <!-- Connection lines -->
+  <!-- I/O to CPU -->
+  <line x1="130" y1="142" x2="220" y2="142" stroke="#666" stroke-width="1.5"/>
+
+  <!-- CPU to Network -->
+  <line x1="340" y1="142" x2="430" y2="142" stroke="#666" stroke-width="1.5"/>
+
+  <!-- CPU to GPU -->
+  <line x1="220" y1="170" x2="170" y2="170" stroke="#666" stroke-width="1.5"/>
+  <line x1="170" y1="170" x2="170" y2="210" stroke="#666" stroke-width="1.5"/>
+  <line x1="170" y1="210" x2="80" y2="210" stroke="#666" stroke-width="1.5"/>
+  <line x1="80" y1="210" x2="80" y2="235" stroke="#666" stroke-width="1.5"/>
+
+  <!-- CPU to Main Memory -->
+  <line x1="280" y1="185" x2="280" y2="210" stroke="#666" stroke-width="1.5"/>
+  <line x1="280" y1="210" x2="230" y2="210" stroke="#666" stroke-width="1.5"/>
+  <line x1="230" y1="210" x2="230" y2="235" stroke="#666" stroke-width="1.5"/>
+
+  <!-- Main Memory to Secondary Memory -->
+  <line x1="290" y1="270" x2="360" y2="270" stroke="#666" stroke-width="1.5"/>
+
+  <!-- GPU to Main Memory -->
+  <line x1="130" y1="270" x2="170" y2="270" stroke="#666" stroke-width="1.5"/>
+
+  <!-- Caption -->
+  <text x="300" y="345" class="tufte-label" text-anchor="middle">프로그래머는 "다음에 무엇을 할까?"에 대한 답을 미리 작성한다</text>
+
+</svg>

@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 33 650 220">
+  <defs>
+    <style>
+      .tufte-title {
+        font-family: 'Noto Sans KR', Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .tufte-header {
+        font-family: 'Noto Sans KR', Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+        font-size: 12px;
+        font-weight: 600;
+      }
+      .tufte-label {
+        font-family: 'Noto Sans KR', Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #444;
+        font-size: 11px;
+      }
+      .tufte-small {
+        font-family: 'Noto Sans KR', Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #666;
+        font-size: 10px;
+      }
+      .tufte-example {
+        font-family: 'D2Coding', 'Consolas', monospace;
+        fill: #555;
+        font-size: 9px;
+      }
+    </style>
+  </defs>
+
+  <!-- White background -->
+  <rect x="0" y="0" width="650" height="280" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="325" y="25" class="tufte-title" text-anchor="middle">인간 언어 vs 프로그래밍 언어</text>
+
+  <!-- Column headers -->
+  <text x="100" y="55" class="tufte-header" text-anchor="middle">구분</text>
+  <text x="280" y="55" class="tufte-header" text-anchor="middle">인간 언어</text>
+  <text x="520" y="55" class="tufte-header" text-anchor="middle">프로그래밍 언어</text>
+
+  <!-- Header line -->
+  <line x1="30" y1="65" x2="620" y2="65" stroke="#999" stroke-width="1"/>
+
+  <!-- Row 1: 어휘 -->
+  <g transform="translate(0, 90)">
+    <text x="100" y="0" class="tufte-label" text-anchor="middle">어휘</text>
+    <rect x="170" y="-15" width="220" height="30" fill="#f8f8f8" stroke="#ddd" stroke-width="1" rx="3"/>
+    <text x="280" y="5" class="tufte-small" text-anchor="middle">수만~수십만 개 단어</text>
+    <rect x="410" y="-15" width="220" height="30" fill="#f0f0f0" stroke="#ddd" stroke-width="1" rx="3"/>
+    <text x="520" y="5" class="tufte-small" text-anchor="middle">35개 예약어 (파이썬)</text>
+  </g>
+
+  <!-- Row 2: 문법 -->
+  <g transform="translate(0, 135)">
+    <text x="100" y="0" class="tufte-label" text-anchor="middle">문법</text>
+    <rect x="170" y="-15" width="220" height="30" fill="#f8f8f8" stroke="#ddd" stroke-width="1" rx="3"/>
+    <text x="280" y="5" class="tufte-small" text-anchor="middle">유연함 · 예외 허용</text>
+    <rect x="410" y="-15" width="220" height="30" fill="#f0f0f0" stroke="#ddd" stroke-width="1" rx="3"/>
+    <text x="520" y="5" class="tufte-small" text-anchor="middle">엄격함 · 예외 불허</text>
+  </g>
+
+  <!-- Row 3: 의미 -->
+  <g transform="translate(0, 180)">
+    <text x="100" y="0" class="tufte-label" text-anchor="middle">의미</text>
+    <rect x="170" y="-15" width="220" height="30" fill="#f8f8f8" stroke="#ddd" stroke-width="1" rx="3"/>
+    <text x="280" y="5" class="tufte-small" text-anchor="middle">맥락에 따라 달라짐</text>
+    <rect x="410" y="-15" width="220" height="30" fill="#f0f0f0" stroke="#ddd" stroke-width="1" rx="3"/>
+    <text x="520" y="5" class="tufte-small" text-anchor="middle">항상 정확히 하나</text>
+  </g>
+
+  <!-- Row 4: 오류 -->
+  <g transform="translate(0, 225)">
+    <text x="100" y="0" class="tufte-label" text-anchor="middle">오류 시</text>
+    <rect x="170" y="-15" width="220" height="30" fill="#f8f8f8" stroke="#ddd" stroke-width="1" rx="3"/>
+    <text x="280" y="5" class="tufte-small" text-anchor="middle">의사소통 계속 가능</text>
+    <rect x="410" y="-15" width="220" height="30" fill="#f0f0f0" stroke="#ddd" stroke-width="1" rx="3"/>
+    <text x="520" y="5" class="tufte-small" text-anchor="middle">즉시 실행 중단</text>
+  </g>
+
+  <!-- Bottom caption -->
+  <text x="325" y="268" class="tufte-small" text-anchor="middle">프로그래밍 언어는 인간 언어보다 훨씬 작고, 엄격하고, 정확하다</text>
+
+</svg>

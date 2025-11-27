@@ -1,0 +1,166 @@
+---
+execute:
+  eval: false
+---
+
+# 논리와 흐름 {#sec-logic}
+
+프로그램은 순차적으로만 실행되지 않는다. 조건에 따라 다른 경로를 선택하고, 같은 작업을 반복해야 할 때가 있다. 계산기 코드를 확장하면서 **조건문**과 **반복문**을 이해해보자.
+
+## 조건문: 분기 만들기 {#sec-logic-condition}
+
+\index{조건문}계산기에 나눗셈 기능을 추가할 때, 0으로 나누는 경우를 처리해야 한다.
+
+### 테스트 먼저 {#sec-logic-divide-test}
+
+```python
+#| eval: false
+def test_divide():
+    """나눗셈 기능 명세"""
+    assert divide(10, 2) == 5
+    assert divide(7, 2) == 3.5
+    assert divide(0, 5) == 0
+
+    # 0으로 나누기
+    assert divide(5, 0) is None  # 또는 에러 처리
+```
+
+### 조건문 구현 {#sec-logic-divide-impl}
+
+```python
+#| eval: false
+def divide(a, b):
+    """a를 b로 나눈다. b가 0이면 None 반환."""
+    if b == 0:
+        return None
+    else:
+        return a / b
+
+# 테스트
+assert divide(10, 2) == 5
+assert divide(7, 2) == 3.5
+assert divide(5, 0) is None
+print("나눗셈 테스트 통과!")
+```
+
+### if-elif-else 구조 {#sec-logic-if-elif}
+
+여러 조건을 검사할 때:
+
+```python
+#| eval: false
+def calculate(a, b, operation):
+    """두 수와 연산자를 받아 계산한다."""
+    if operation == "+":
+        return a + b
+    elif operation == "-":
+        return a - b
+    elif operation == "*":
+        return a * b
+    elif operation == "/":
+        if b == 0:
+            return None
+        return a / b
+    else:
+        return None  # 알 수 없는 연산자
+
+# 테스트
+assert calculate(10, 3, "+") == 13
+assert calculate(10, 3, "-") == 7
+assert calculate(10, 3, "*") == 30
+assert calculate(10, 2, "/") == 5
+print("계산기 테스트 통과!")
+```
+
+## 반복문: 작업 되풀이하기 {#sec-logic-loop}
+
+\index{반복문}같은 작업을 여러 번 해야 할 때 반복문을 사용한다.
+
+### for 반복문 {#sec-logic-for}
+
+```python
+#| eval: false
+def add_many(numbers):
+    """리스트의 모든 숫자를 더한다."""
+    total = 0
+    for num in numbers:
+        total = total + num
+    return total
+
+result = add_many([1, 2, 3, 4, 5])
+print(f"1+2+3+4+5 = {result}")
+```
+
+### while 반복문 {#sec-logic-while}
+
+조건이 참인 동안 반복:
+
+```python
+#| eval: false
+def countdown(n):
+    """n부터 1까지 카운트다운한다."""
+    while n > 0:
+        print(n)
+        n = n - 1
+    print("발사!")
+
+countdown(3)
+```
+
+## 계산기 확장: 수식 계산 {#sec-logic-expression}
+
+여러 연산을 연속으로 처리해보자.
+
+### 테스트 먼저 {#sec-logic-expr-test}
+
+```python
+#| eval: false
+def test_calculate_expression():
+    """수식 계산 명세"""
+    # "2 + 3 * 4" 같은 수식은 복잡하므로
+    # 단순화: [(숫자, 연산자), ...] 형태
+    assert calculate_sequence([(2, None), (3, "+")]) == 5  # 2 + 3
+```
+
+### 구현 {#sec-logic-expr-impl}
+
+```python
+#| eval: false
+def calculate_sequence(operations):
+    """순차적 계산을 수행한다.
+    operations: [(값, 연산자), ...] 형태
+    첫 번째 연산자는 None (초기값)
+    """
+    if not operations:
+        return 0
+
+    result, _ = operations[0]  # 첫 번째 값이 시작점
+
+    for i in range(1, len(operations)):
+        value, operator = operations[i]
+        if operator == "+":
+            result = result + value
+        elif operator == "-":
+            result = result - value
+        elif operator == "*":
+            result = result * value
+        elif operator == "/":
+            if value != 0:
+                result = result / value
+
+    return result
+
+# 테스트: 2 + 3 - 1 = 4
+ops = [(2, None), (3, "+"), (1, "-")]
+print(f"2 + 3 - 1 = {calculate_sequence(ops)}")
+```
+
+## 핵심 정리 {#sec-logic-summary}
+
+:::{.callout-tip}
+## 논리와 흐름의 핵심
+
+1. **조건문 (if)** - 조건에 따라 다른 코드를 실행
+2. **반복문 (for, while)** - 같은 작업을 여러 번 반복
+3. **흐름 제어** - 프로그램의 실행 순서를 조절
+:::

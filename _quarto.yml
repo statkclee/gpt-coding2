@@ -43,23 +43,40 @@ book:
   chapters:
     - index.qmd
 
-    - part: "**1부** 프로그래밍" # OK
+    # ============================================
+    # AI 시대 프로그래밍 - 개념 중심 재구성
+    # 구문(Syntax) → 개념(Concept), 코드 작성자 → 설계자/검토자
+    # ============================================
+    - part: "**1부** AI 시대 프로그래밍"
       chapters:
-        - 01-intro.qmd          # A\ + idx
-        - 02-var.qmd            # A\ + idx
-        - 03-cont.qmd           # A\ + idx
-        - 04-func.qmd           # A\ + idx
-        - 05-loop.qmd           # A\ + idx
+        - 01-intro.qmd          # 프로그램이란 - 컴퓨터에게 일 시키기
+        - 02-spec.qmd           # 의도 명세하기 - 테스트로 "원하는 것" 정의 (신규)
+        - 03-ai-request.qmd     # AI에게 코드 요청 - 프롬프트 작성법
+        - 04-verify.qmd         # 코드 읽기와 검증 - AI 생성 코드 이해 (신규)
+        - 05-data.qmd           # 데이터와 타입 - 변수, 문자열, 리스트
+        - 06-logic.qmd          # 논리와 흐름 - 조건, 반복
+        - 07-abstraction.qmd    # 추상화 - 함수, 모듈화
 
-    - part: "**2부** 자료구조"
-      chapters:
-        - 06-string.qmd         # A\ + idx
-        - 07-file.qmd           # A\ + idx
-        - 08-list.qmd           # A\ + idx
-        - 09-dictionaries.qmd   # A\ + idx You can't use `macro parameter character #'
-        - A-dataframe.qmd       # A\ + idx
+    # ============================================
+    # 기존 구문 중심 구조 (참고용 보관)
+    # ============================================
+    # - part: "**1부** 프로그래밍" # OK
+    #   chapters:
+    #     - 01-intro.qmd          # A\ + idx
+    #     - 02-var.qmd            # A\ + idx
+    #     - 03-cont.qmd           # A\ + idx
+    #     - 04-func.qmd           # A\ + idx
+    #     - 05-loop.qmd           # A\ + idx
+    #
+    # - part: "**2부** 자료구조"
+    #   chapters:
+    #     - 06-string.qmd         # A\ + idx
+    #     - 07-file.qmd           # A\ + idx
+    #     - 08-list.qmd           # A\ + idx
+    #     - 09-dictionaries.qmd   # A\ + idx
+    #     - A-dataframe.qmd       # A\ + idx
 
-    - part: "**3부** 버전제어와 협업" # OK
+    - part: "**2부** 버전제어와 협업" # OK
       chapters:
         - git-basics.qmd        # A\ + + idx
         - git-setup-create.qmd  # A\ + idx
@@ -71,7 +88,7 @@ book:
         - git-conflict.qmd     # A\ + idx +layout
         - git-ide.qmd          # A\ + idx +layout
 
-    - part: "**4부** 분야별 코딩" # OK
+    - part: "**3부** 분야별 코딩" # OK
       chapters:
         - tool-regex.qmd      # A\ + idx + layout
         - tool-network.qmd    # A\ + idx + layout
@@ -81,18 +98,22 @@ book:
         - tool-viz.qmd        # A\ + idx + layout
         - tool-gpt.qmd
 
-    - part: "**5부** 통합 개발 환경"
+    - part: "**4부** 통합 개발 환경"
       chapters:
         - ide.qmd
         - ide_positron.qmd
         - ide_extension.qmd
         - ide_setup.qmd
 
-    - part: "**6부** 자동화, 도커, 재현성"
+    - part: "**5부** 자동화, 도커, 재현성"
       chapters:
         - docker_concept.qmd
         - make_concept.qmd
         - compendium.qmd
+
+    - part: "**부록**"
+      chapters:
+        - glossary.qmd
 
     - references.qmd 
 

@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 420">
+  <defs>
+    <style>
+      .tufte-title {
+        font-family: 'Noto Sans KR', Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .tufte-subtitle {
+        font-family: 'Noto Sans KR', Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #555;
+        font-size: 11px;
+      }
+      .tufte-label {
+        font-family: 'Noto Sans KR', Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #666;
+        font-size: 10px;
+        font-style: italic;
+      }
+      .tufte-tech {
+        font-family: 'D2Coding', 'Consolas', monospace;
+        fill: #444;
+        font-size: 10px;
+      }
+      .tufte-question {
+        font-family: 'Noto Sans KR', Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #555;
+        font-size: 9px;
+        font-style: italic;
+      }
+    </style>
+  </defs>
+
+  <!-- White background -->
+  <rect x="0" y="0" width="650" height="420" fill="#ffffff"/>
+
+  <!-- Layer 4: 조율 계층 (Top) -->
+  <rect x="50" y="30" width="550" height="80" rx="4" fill="#f0f0f0" stroke="#333" stroke-width="1.5"/>
+  <text x="75" y="55" class="tufte-title">조율 계층 (Orchestration Layer)</text>
+  <text x="75" y="72" class="tufte-tech">Make, GitHub Actions</text>
+  <text x="75" y="95" class="tufte-question">"매일 아침 9시, 키보드에 손대지 않고도 자동으로 실행되게 하려면?"</text>
+  <text x="520" y="75" class="tufte-label">지휘자</text>
+
+  <!-- Arrow down -->
+  <line x1="325" y1="110" x2="325" y2="125" stroke="#666" stroke-width="1.5"/>
+  <polygon points="325,130 320,122 330,122" fill="#666"/>
+
+  <!-- Layer 3: 지능 계층 -->
+  <rect x="50" y="135" width="550" height="80" rx="4" fill="#e8e8e8" stroke="#333" stroke-width="1.5"/>
+  <text x="75" y="160" class="tufte-title">지능 계층 (Intelligence Layer)</text>
+  <text x="75" y="177" class="tufte-tech">LLM APIs, Vector DBs</text>
+  <text x="75" y="200" class="tufte-question">"수만 개의 리뷰에서 핵심 불만과 긍정 반응을 어떻게 추출할 수 있는가?"</text>
+  <text x="520" y="180" class="tufte-label">인지 코어</text>
+
+  <!-- Arrow down -->
+  <line x1="325" y1="215" x2="325" y2="230" stroke="#666" stroke-width="1.5"/>
+  <polygon points="325,235 320,227 330,227" fill="#666"/>
+
+  <!-- Layer 2: 처리 계층 -->
+  <rect x="50" y="240" width="550" height="80" rx="4" fill="#f5f5f5" stroke="#333" stroke-width="1.5"/>
+  <text x="75" y="265" class="tufte-title">처리 계층 (Processing Layer)</text>
+  <text x="75" y="282" class="tufte-tech">R &amp; Python</text>
+  <text x="75" y="305" class="tufte-question">"지저분한 원본 데이터를 의미 있는 형태로 어떻게 바꿀 수 있는가?"</text>
+  <text x="520" y="285" class="tufte-label">논리 엔진</text>
+
+  <!-- Arrow down -->
+  <line x1="325" y1="320" x2="325" y2="335" stroke="#666" stroke-width="1.5"/>
+  <polygon points="325,340 320,332 330,332" fill="#666"/>
+
+  <!-- Layer 1: 기반 계층 (Bottom) -->
+  <rect x="50" y="345" width="550" height="80" rx="4" fill="#ffffff" stroke="#333" stroke-width="2"/>
+  <text x="75" y="370" class="tufte-title">기반 계층 (Foundation Layer)</text>
+  <text x="75" y="387" class="tufte-tech">Git, Docker, Shell</text>
+  <text x="75" y="410" class="tufte-question">"1년 뒤 동료 컴퓨터에서도 똑같이 작동한다고 어떻게 확신할 수 있는가?"</text>
+  <text x="520" y="390" class="tufte-label">재현성 암반</text>
+
+  <!-- Side annotation: Stack direction -->
+  <text x="625" y="220" class="tufte-label" text-anchor="middle" transform="rotate(-90 625 220)">AI-Native Stack</text>
+
+</svg>

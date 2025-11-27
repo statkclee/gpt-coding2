@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 30 650 120">
+  <defs>
+    <style>
+      .tufte-title {
+        font-family: 'Noto Sans KR', Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .tufte-label {
+        font-family: 'Noto Sans KR', Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+        font-size: 11px;
+        font-weight: 500;
+      }
+      .tufte-small {
+        font-family: 'Noto Sans KR', Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #666;
+        font-size: 9px;
+      }
+      .tufte-code {
+        font-family: 'D2Coding', 'Consolas', monospace;
+        fill: #555;
+        font-size: 9px;
+      }
+    </style>
+  </defs>
+
+  <!-- White background -->
+  <rect x="0" y="0" width="650" height="160" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="325" y="22" class="tufte-title" text-anchor="middle">세 가지 오류 유형</text>
+
+  <!-- 1. 구문 오류 (Syntax Error) -->
+  <g transform="translate(110, 90)">
+    <rect x="-85" y="-45" width="170" height="90" rx="4" fill="#f8f8f8" stroke="#333" stroke-width="1.5"/>
+    <text x="0" y="-25" class="tufte-label" text-anchor="middle">구문 오류</text>
+    <text x="0" y="-10" class="tufte-small" text-anchor="middle">(Syntax Error)</text>
+    <line x1="-70" y1="-2" x2="70" y2="-2" stroke="#ddd" stroke-width="1"/>
+    <text x="0" y="15" class="tufte-small" text-anchor="middle">문법 규칙 위반</text>
+    <text x="0" y="28" class="tufte-code" text-anchor="middle">if x &gt; 0</text>
+    <text x="0" y="40" class="tufte-small" text-anchor="middle">(콜론 누락)</text>
+  </g>
+
+  <!-- 2. 논리 오류 (Logic Error) -->
+  <g transform="translate(325, 90)">
+    <rect x="-85" y="-45" width="170" height="90" rx="4" fill="#f0f0f0" stroke="#333" stroke-width="1.5"/>
+    <text x="0" y="-25" class="tufte-label" text-anchor="middle">논리 오류</text>
+    <text x="0" y="-10" class="tufte-small" text-anchor="middle">(Logic Error)</text>
+    <line x1="-70" y1="-2" x2="70" y2="-2" stroke="#ddd" stroke-width="1"/>
+    <text x="0" y="15" class="tufte-small" text-anchor="middle">실행 순서 잘못</text>
+    <text x="0" y="28" class="tufte-code" text-anchor="middle">마시고 → 닫고 → 넣기</text>
+    <text x="0" y="40" class="tufte-small" text-anchor="middle">(순서 뒤바뀜)</text>
+  </g>
+
+  <!-- 3. 의미론적 오류 (Semantic Error) -->
+  <g transform="translate(540, 90)">
+    <rect x="-85" y="-45" width="170" height="90" rx="4" fill="#fafafa" stroke="#333" stroke-width="1.5"/>
+    <text x="0" y="-25" class="tufte-label" text-anchor="middle">의미론적 오류</text>
+    <text x="0" y="-10" class="tufte-small" text-anchor="middle">(Semantic Error)</text>
+    <line x1="-70" y1="-2" x2="70" y2="-2" stroke="#ddd" stroke-width="1"/>
+    <text x="0" y="15" class="tufte-small" text-anchor="middle">의도와 다른 동작</text>
+    <text x="0" y="28" class="tufte-code" text-anchor="middle">"왼쪽" → "오른쪽"</text>
+    <text x="0" y="40" class="tufte-small" text-anchor="middle">(잘못된 방향)</text>
+  </g>
+
+</svg>

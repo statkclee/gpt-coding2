@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 10 700 410">
+  <defs>
+    <style>
+      .tufte-title {
+        font-family: 'Noto Sans KR', Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .tufte-tech {
+        font-family: 'D2Coding', 'Consolas', monospace;
+        fill: #555;
+        font-size: 10px;
+      }
+      .tufte-time {
+        font-family: 'Noto Sans KR', Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #666;
+        font-size: 10px;
+        font-style: italic;
+      }
+      .tufte-question {
+        font-family: 'Noto Sans KR', Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+        font-size: 18px;
+        font-weight: 600;
+      }
+      .tufte-axis {
+        font-family: 'Noto Sans KR', Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #999;
+        font-size: 9px;
+      }
+      .tufte-insight {
+        font-family: 'Noto Sans KR', Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #444;
+        font-size: 9px;
+      }
+    </style>
+  </defs>
+
+  <!-- White background -->
+  <rect x="-10" y="0" width="700" height="420" fill="#ffffff"/>
+
+  <!-- Left axis: Time Scale -->
+  <text x="25" y="30" class="tufte-axis" text-anchor="middle">시간 척도</text>
+  <line x1="25" y1="45" x2="25" y2="380" stroke="#ccc" stroke-width="1"/>
+  <text x="25" y="395" class="tufte-axis" text-anchor="middle">Time Scale</text>
+
+  <!-- Time markers -->
+  <text x="40" y="75" class="tufte-time">daily</text>
+  <text x="40" y="88" class="tufte-time">weekly</text>
+  <line x1="20" y1="80" x2="30" y2="80" stroke="#999" stroke-width="1"/>
+
+  <text x="40" y="168" class="tufte-time">seconds</text>
+  <line x1="20" y1="170" x2="30" y2="170" stroke="#999" stroke-width="1"/>
+
+  <text x="40" y="258" class="tufte-time">minutes</text>
+  <text x="40" y="271" class="tufte-time">hours</text>
+  <line x1="20" y1="265" x2="30" y2="265" stroke="#999" stroke-width="1"/>
+
+  <text x="40" y="353" class="tufte-time">months</text>
+  <text x="40" y="366" class="tufte-time">years</text>
+  <line x1="20" y1="360" x2="30" y2="360" stroke="#999" stroke-width="1"/>
+
+  <!-- Layer 4: 조율 계층 (Top) - narrowest -->
+  <rect x="120" y="40" width="420" height="75" rx="3" fill="#f8f8f8" stroke="#333" stroke-width="1.2"/>
+  <text x="145" y="65" class="tufte-question">When?</text>
+  <text x="145" y="85" class="tufte-title">조율 계층 Orchestration</text>
+  <text x="145" y="102" class="tufte-tech">Make · GitHub Actions · Cron</text>
+  <text x="460" y="75" class="tufte-insight" text-anchor="end">스케줄에 따라</text>
+  <text x="460" y="88" class="tufte-insight" text-anchor="end">파이프라인 트리거</text>
+
+  <!-- Arrow down -->
+  <line x1="330" y1="115" x2="330" y2="128" stroke="#666" stroke-width="1.2"/>
+  <polygon points="330,133 326,126 334,126" fill="#666"/>
+
+  <!-- Layer 3: 지능 계층 -->
+  <rect x="110" y="138" width="440" height="75" rx="3" fill="#f0f0f0" stroke="#333" stroke-width="1.2"/>
+  <text x="135" y="163" class="tufte-question">What?</text>
+  <text x="135" y="183" class="tufte-title">지능 계층 Intelligence</text>
+  <text x="135" y="200" class="tufte-tech">LLM APIs · Vector DBs · RAG</text>
+  <text x="470" y="173" class="tufte-insight" text-anchor="end">실시간 추론으로</text>
+  <text x="470" y="186" class="tufte-insight" text-anchor="end">의사결정 수행</text>
+
+  <!-- Arrow down -->
+  <line x1="330" y1="213" x2="330" y2="226" stroke="#666" stroke-width="1.2"/>
+  <polygon points="330,231 326,224 334,224" fill="#666"/>
+
+  <!-- Layer 2: 처리 계층 -->
+  <rect x="100" y="236" width="460" height="75" rx="3" fill="#e8e8e8" stroke="#333" stroke-width="1.2"/>
+  <text x="125" y="261" class="tufte-question">How?</text>
+  <text x="125" y="281" class="tufte-title">처리 계층 Processing</text>
+  <text x="125" y="298" class="tufte-tech">R · Python · SQL</text>
+  <text x="480" y="271" class="tufte-insight" text-anchor="end">분석 단위로</text>
+  <text x="480" y="284" class="tufte-insight" text-anchor="end">데이터 변환</text>
+
+  <!-- Arrow down -->
+  <line x1="330" y1="311" x2="330" y2="324" stroke="#666" stroke-width="1.2"/>
+  <polygon points="330,329 326,322 334,322" fill="#666"/>
+
+  <!-- Layer 1: 기반 계층 (Bottom) - widest, thickest border -->
+  <rect x="90" y="334" width="480" height="75" rx="3" fill="#ffffff" stroke="#333" stroke-width="2"/>
+  <text x="115" y="359" class="tufte-question">Forever</text>
+  <text x="115" y="379" class="tufte-title">기반 계층 Foundation</text>
+  <text x="115" y="396" class="tufte-tech">Git · Docker · Shell · renv</text>
+  <text x="490" y="369" class="tufte-insight" text-anchor="end">한 번 구축하면</text>
+  <text x="490" y="382" class="tufte-insight" text-anchor="end">영구적 재현성</text>
+
+  <!-- Right side: Volatility indicator -->
+  <text x="610" y="80" class="tufte-axis">높은 변동성</text>
+  <text x="610" y="93" class="tufte-axis">High Volatility</text>
+  <line x1="620" y1="100" x2="620" y2="340" stroke="#ccc" stroke-width="1" stroke-dasharray="4,3"/>
+  <polygon points="620,100 616,110 624,110" fill="#ccc"/>
+  <polygon points="620,340 616,330 624,330" fill="#ccc"/>
+  <text x="610" y="355" class="tufte-axis">낮은 변동성</text>
+  <text x="610" y="368" class="tufte-axis">Low Volatility</text>
+
+  <!-- Key insight annotation -->
+  <text x="660" y="210" class="tufte-insight" text-anchor="middle" transform="rotate(90 660 210)">빠른 계층일수록 자주 바뀐다</text>
+
+</svg>

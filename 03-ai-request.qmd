@@ -1,0 +1,92 @@
+---
+execute:
+  eval: false
+---
+
+# AI에게 코드 요청하기 {#sec-ai-request}
+
+앞 장에서 테스트를 통해 "원하는 것"을 명세했다. 이제 이 명세를 AI에게 전달하여 실제 코드를 생성받는 방법을 알아본다.
+
+## 효과적인 프롬프트 작성법 {#sec-ai-request-prompt}
+
+\index{프롬프트}AI에게 코드를 요청할 때 가장 중요한 것은 **맥락(Context)**을 제공하는 것이다.
+
+### 맥락 전달의 3요소 {#sec-ai-request-context}
+
+1. **무엇을 만들려 하는가** (목적)
+2. **어떤 제약이 있는가** (조건)
+3. **어떻게 동작해야 하는가** (명세/테스트)
+
+## 계산기 예제: 덧셈 구현 요청 {#sec-ai-request-add}
+
+2장에서 작성한 테스트를 기반으로 AI에게 코드를 요청해보자.
+
+### 테스트 기반 프롬프트 {#sec-ai-request-test-prompt}
+
+```
+다음 테스트를 통과하는 add 함수를 작성해주세요:
+
+def test_add():
+    assert add(2, 3) == 5
+    assert add(0, 0) == 0
+    assert add(-1, 1) == 0
+    assert add(-2, -3) == -5
+    assert add(1.5, 2.5) == 4.0
+```
+
+### AI의 응답 {#sec-ai-request-response}
+
+```python
+#| eval: false
+def add(a, b):
+    """두 수를 더한 값을 반환한다."""
+    return a + b
+```
+
+테스트 실행으로 검증:
+
+```python
+#| eval: false
+# 테스트 실행
+assert add(2, 3) == 5
+assert add(0, 0) == 0
+assert add(-1, 1) == 0
+assert add(-2, -3) == -5
+assert add(1.5, 2.5) == 4.0
+
+print("모든 테스트 통과!")
+```
+
+## 맥락을 풍부하게 제공하기 {#sec-ai-request-rich-context}
+
+단순한 테스트만 전달하는 것보다 더 풍부한 맥락을 제공하면 더 좋은 코드를 받을 수 있다:
+
+```
+# 프로젝트 맥락
+Python으로 간단한 계산기를 만들고 있습니다.
+초보자도 이해할 수 있는 깔끔한 코드가 필요합니다.
+
+# 요구사항
+- 덧셈 함수 구현
+- 정수, 실수, 음수 모두 처리
+- 타입 힌트 포함
+- docstring 포함
+
+# 테스트 (명세)
+def test_add():
+    assert add(2, 3) == 5
+    assert add(-1, 1) == 0
+    assert add(1.5, 2.5) == 4.0
+```
+
+## 핵심 정리 {#sec-ai-request-summary}
+
+:::{.callout-tip}
+## AI 코드 요청의 핵심
+
+1. **테스트를 먼저 보여준다** - 가장 정확한 명세
+2. **맥락을 제공한다** - 프로젝트 목적, 제약조건
+3. **구체적으로 요청한다** - 모호함을 피한다
+:::
+
+다음 장에서는 AI가 생성한 코드를 읽고 이해하는 방법을 알아본다.

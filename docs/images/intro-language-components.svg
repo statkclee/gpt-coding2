@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 30 600 160">
+  <defs>
+    <style>
+      .tufte-title {
+        font-family: 'Noto Sans KR', Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .tufte-label {
+        font-family: 'Noto Sans KR', Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+        font-size: 12px;
+        font-weight: 500;
+      }
+      .tufte-small {
+        font-family: 'Noto Sans KR', Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #666;
+        font-size: 10px;
+      }
+      .tufte-example {
+        font-family: 'D2Coding', 'Consolas', monospace;
+        fill: #555;
+        font-size: 9px;
+      }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <polygon points="0 0, 8 4, 0 8" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- White background -->
+  <rect x="0" y="0" width="600" height="200" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="300" y="25" class="tufte-title" text-anchor="middle">언어의 세 가지 구성요소</text>
+
+  <!-- 1. 어휘 (Vocabulary) -->
+  <g transform="translate(100, 100)">
+    <circle cx="0" cy="0" r="45" fill="#f5f5f5" stroke="#333" stroke-width="1.5"/>
+    <text x="0" y="-8" class="tufte-label" text-anchor="middle">어휘</text>
+    <text x="0" y="8" class="tufte-small" text-anchor="middle">(Vocabulary)</text>
+    <text x="0" y="65" class="tufte-small" text-anchor="middle">단어 목록</text>
+    <text x="0" y="80" class="tufte-example" text-anchor="middle">if, for, print</text>
+  </g>
+
+  <!-- Arrow 1→2 -->
+  <line x1="155" y1="100" x2="195" y2="100" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 2. 문법 (Grammar/Syntax) -->
+  <g transform="translate(300, 100)">
+    <circle cx="0" cy="0" r="45" fill="#f0f0f0" stroke="#333" stroke-width="1.5"/>
+    <text x="0" y="-8" class="tufte-label" text-anchor="middle">문법</text>
+    <text x="0" y="8" class="tufte-small" text-anchor="middle">(Syntax)</text>
+    <text x="0" y="65" class="tufte-small" text-anchor="middle">배열 규칙</text>
+    <text x="0" y="80" class="tufte-example" text-anchor="middle">if x &gt; 0:</text>
+  </g>
+
+  <!-- Arrow 2→3 -->
+  <line x1="355" y1="100" x2="395" y2="100" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 3. 의미 (Semantics) -->
+  <g transform="translate(500, 100)">
+    <circle cx="0" cy="0" r="45" fill="#f8f8f8" stroke="#333" stroke-width="1.5"/>
+    <text x="0" y="-8" class="tufte-label" text-anchor="middle">의미</text>
+    <text x="0" y="8" class="tufte-small" text-anchor="middle">(Semantics)</text>
+    <text x="0" y="65" class="tufte-small" text-anchor="middle">뜻과 동작</text>
+    <text x="0" y="80" class="tufte-example" text-anchor="middle">"x가 양수면..."</text>
+  </g>
+
+  <!-- Caption -->
+  <text x="300" y="45" class="tufte-small" text-anchor="middle">인간 언어와 프로그래밍 언어 모두 동일한 구성요소를 갖는다</text>
+
+</svg>

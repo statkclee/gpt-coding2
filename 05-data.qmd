@@ -1,0 +1,142 @@
+---
+execute:
+  eval: false
+---
+
+# 데이터와 타입 {#sec-data}
+
+AI가 생성한 계산기 코드를 분석하면서 프로그래밍의 기본 요소인 **데이터**와 **타입**을 이해해보자.
+
+## 데이터란 무엇인가 {#sec-data-what}
+
+\index{데이터}프로그램은 데이터를 처리하는 도구다. 계산기 예제에서:
+
+- **입력 데이터**: 사용자가 입력한 숫자 (2, 3)
+- **출력 데이터**: 계산 결과 (5)
+
+```python
+#| eval: false
+def add(a, b):
+    return a + b
+
+# a와 b는 입력 데이터, 결과는 출력 데이터
+result = add(2, 3)
+print(f"결과: {result}")
+```
+
+## 변수: 데이터에 이름 붙이기 {#sec-data-variable}
+
+\index{변수}`a`, `b`, `result`는 모두 **변수(Variable)**다. 변수는 데이터를 담는 이름표가 붙은 상자라고 생각하면 된다.
+
+```python
+#| eval: false
+# 변수에 값 할당
+first_number = 10
+second_number = 20
+
+# 변수 사용
+total = add(first_number, second_number)
+print(f"{first_number} + {second_number} = {total}")
+```
+
+### 변수 명명 규칙 {#sec-data-naming}
+
+좋은 변수 이름은 코드의 의도를 드러낸다:
+
+```python
+#| eval: false
+# 나쁜 예
+x = 100
+y = 15
+z = x + y
+
+# 좋은 예
+price = 100
+tax_rate = 15
+total_price = price + tax_rate
+```
+
+## 타입: 데이터의 종류 {#sec-data-type}
+
+\index{타입}Python의 기본 데이터 타입:
+
+### 숫자 타입 {#sec-data-numbers}
+
+```python
+#| eval: false
+# 정수 (int)
+count = 42
+print(f"count의 타입: {type(count)}")
+
+# 실수 (float)
+price = 19.99
+print(f"price의 타입: {type(price)}")
+```
+
+### 문자열 타입 {#sec-data-string}
+
+\index{문자열}
+
+```python
+#| eval: false
+# 문자열 (str)
+name = "계산기"
+message = '두 수를 더합니다'
+print(f"name의 타입: {type(name)}")
+```
+
+### 리스트 타입 {#sec-data-list}
+
+\index{리스트}여러 값을 담는 자료구조:
+
+```python
+#| eval: false
+# 리스트 (list)
+numbers = [1, 2, 3, 4, 5]
+print(f"numbers의 타입: {type(numbers)}")
+print(f"첫 번째 요소: {numbers[0]}")
+```
+
+## 계산기 확장: 여러 숫자 더하기 {#sec-data-extend}
+
+리스트를 활용해 계산기를 확장해보자.
+
+### 테스트 먼저 작성 {#sec-data-extend-test}
+
+```python
+#| eval: false
+def test_add_many():
+    """여러 숫자를 더하는 기능 명세"""
+    assert add_many([1, 2, 3]) == 6
+    assert add_many([10]) == 10
+    assert add_many([]) == 0
+    assert add_many([-1, 1, -1, 1]) == 0
+```
+
+### AI 생성 코드 {#sec-data-extend-impl}
+
+```python
+#| eval: false
+def add_many(numbers):
+    """리스트에 있는 모든 숫자를 더한다."""
+    total = 0
+    for num in numbers:
+        total = total + num
+    return total
+
+# 테스트
+assert add_many([1, 2, 3]) == 6
+assert add_many([10]) == 10
+assert add_many([]) == 0
+print("모든 테스트 통과!")
+```
+
+## 핵심 정리 {#sec-data-summary}
+
+:::{.callout-tip}
+## 데이터와 타입의 핵심
+
+1. **변수** - 데이터에 의미 있는 이름을 붙인다
+2. **타입** - 데이터의 종류를 구분한다 (정수, 실수, 문자열, 리스트)
+3. **의미 있는 이름** - 변수명으로 코드의 의도를 전달한다
+:::

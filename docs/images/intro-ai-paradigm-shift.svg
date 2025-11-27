@@ -1,0 +1,162 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 40 800 325">
+  <defs>
+    <style>
+      .title { font-family: 'Noto Sans KR', Palatino, serif; font-size: 18px; font-weight: bold; fill: #111; }
+      .subtitle { font-family: 'Noto Sans KR', Palatino, serif; font-size: 17px; font-weight: 600; fill: #333; }
+      .label { font-family: 'Noto Sans KR', Palatino, serif; font-size: 13px; fill: #333; }
+      .small { font-family: 'Noto Sans KR', Palatino, serif; font-size: 12px; fill: #555; }
+      .emphasis { font-family: 'Noto Sans KR', Palatino, serif; font-size: 13px; fill: #333; font-weight: 600; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <polygon points="0 0, 8 4, 0 8" fill="#333"/>
+    </marker>
+    <marker id="arrow-gray" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <polygon points="0 0, 8 4, 0 8" fill="#999"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="800" height="380" fill="#ffffff"/>
+
+  <!-- Main Title -->
+  <text x="400" y="32" class="title" text-anchor="middle">프로그래밍 패러다임 변화</text>
+
+  <!-- ===== LEFT SIDE: Traditional ===== -->
+  <g transform="translate(40, 55)">
+    <rect x="0" y="0" width="330" height="290" fill="#fafafa" stroke="#ccc" stroke-width="1" rx="4"/>
+    <text x="165" y="30" class="subtitle" text-anchor="middle">과거: 벽돌공</text>
+
+    <!-- Human figure with hammer -->
+    <g transform="translate(100, 100)">
+      <!-- Head -->
+      <circle cx="0" cy="0" r="18" fill="#fff" stroke="#333" stroke-width="2"/>
+      <!-- Eyes -->
+      <circle cx="-6" cy="-3" r="2" fill="#333"/>
+      <circle cx="6" cy="-3" r="2" fill="#333"/>
+      <!-- Focused expression -->
+      <path d="M -5 6 Q 0 10 5 6" fill="none" stroke="#333" stroke-width="1.5"/>
+      <!-- Body -->
+      <line x1="0" y1="18" x2="0" y2="55" stroke="#333" stroke-width="2"/>
+      <!-- Arms - one holding hammer -->
+      <line x1="0" y1="28" x2="-25" y2="45" stroke="#333" stroke-width="2"/>
+      <line x1="0" y1="28" x2="30" y2="50" stroke="#333" stroke-width="2"/>
+      <!-- Hammer -->
+      <rect x="25" y="45" width="18" height="10" fill="#666" stroke="#333" stroke-width="1"/>
+      <line x1="34" y1="55" x2="34" y2="75" stroke="#333" stroke-width="2"/>
+      <!-- Legs -->
+      <line x1="0" y1="55" x2="-12" y2="85" stroke="#333" stroke-width="2"/>
+      <line x1="0" y1="55" x2="12" y2="85" stroke="#333" stroke-width="2"/>
+    </g>
+
+    <!-- Bricks being stacked -->
+    <g transform="translate(180, 130)">
+      <!-- Stack of bricks -->
+      <rect x="0" y="55" width="35" height="14" fill="#e0e0e0" stroke="#333" stroke-width="1"/>
+      <rect x="35" y="55" width="35" height="14" fill="#e0e0e0" stroke="#333" stroke-width="1"/>
+      <rect x="70" y="55" width="35" height="14" fill="#e0e0e0" stroke="#333" stroke-width="1"/>
+      <rect x="17" y="41" width="35" height="14" fill="#e0e0e0" stroke="#333" stroke-width="1"/>
+      <rect x="52" y="41" width="35" height="14" fill="#e0e0e0" stroke="#333" stroke-width="1"/>
+      <rect x="35" y="27" width="35" height="14" fill="#f5f5f5" stroke="#333" stroke-width="1" stroke-dasharray="3,2"/>
+      <!-- Arrow showing manual work -->
+      <path d="M -30 30 Q -15 20 5 25" fill="none" stroke="#999" stroke-width="1" marker-end="url(#arrow-gray)"/>
+    </g>
+
+    <!-- Description -->
+    <text x="165" y="230" class="small" text-anchor="middle">직접 코드 작성</text>
+    <text x="165" y="250" class="small" text-anchor="middle">문법 암기 필수</text>
+    <text x="165" y="270" class="small" text-anchor="middle">한 줄 한 줄 타이핑</text>
+  </g>
+
+  <!-- Center Arrow -->
+  <g transform="translate(400, 200)">
+    <line x1="-15" y1="0" x2="15" y2="0" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- ===== RIGHT SIDE: AI Era ===== -->
+  <g transform="translate(430, 55)">
+    <rect x="0" y="0" width="330" height="290" fill="#fafafa" stroke="#333" stroke-width="1.5" rx="4"/>
+    <text x="165" y="30" class="subtitle" text-anchor="middle">AI 시대: 건축가</text>
+
+    <!-- Human figure with clipboard/blueprint -->
+    <g transform="translate(70, 100)">
+      <!-- Head -->
+      <circle cx="0" cy="0" r="18" fill="#fff" stroke="#333" stroke-width="2"/>
+      <!-- Eyes -->
+      <circle cx="-6" cy="-3" r="2" fill="#333"/>
+      <circle cx="6" cy="-3" r="2" fill="#333"/>
+      <!-- Confident smile -->
+      <path d="M -6 5 Q 0 12 6 5" fill="none" stroke="#333" stroke-width="1.5"/>
+      <!-- Body -->
+      <line x1="0" y1="18" x2="0" y2="55" stroke="#333" stroke-width="2"/>
+      <!-- Arms - holding clipboard -->
+      <line x1="0" y1="28" x2="-20" y2="50" stroke="#333" stroke-width="2"/>
+      <line x1="0" y1="28" x2="20" y2="38" stroke="#333" stroke-width="2"/>
+      <!-- Clipboard/Blueprint -->
+      <rect x="15" y="32" width="30" height="40" fill="#fff" stroke="#333" stroke-width="1.5" rx="2"/>
+      <line x1="20" y1="40" x2="40" y2="40" stroke="#999" stroke-width="1"/>
+      <line x1="20" y1="48" x2="40" y2="48" stroke="#999" stroke-width="1"/>
+      <line x1="20" y1="56" x2="35" y2="56" stroke="#999" stroke-width="1"/>
+      <text x="30" y="68" font-size="8" fill="#666" text-anchor="middle">SPEC</text>
+      <!-- Legs -->
+      <line x1="0" y1="55" x2="-12" y2="85" stroke="#333" stroke-width="2"/>
+      <line x1="0" y1="55" x2="12" y2="85" stroke="#333" stroke-width="2"/>
+    </g>
+
+    <!-- Direction arrow from human to AI -->
+    <path d="M 120 130 Q 145 110 170 115" fill="none" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <text x="145" y="100" class="small" text-anchor="middle">지시</text>
+
+    <!-- Robot/AI figure -->
+    <g transform="translate(210, 90)">
+      <!-- Robot head -->
+      <rect x="-20" y="-15" width="40" height="30" rx="5" fill="#fff" stroke="#333" stroke-width="2"/>
+      <!-- Antenna -->
+      <line x1="0" y1="-15" x2="0" y2="-25" stroke="#333" stroke-width="1.5"/>
+      <circle cx="0" cy="-28" r="4" fill="#fff" stroke="#333" stroke-width="1"/>
+      <!-- Eyes (LED style) -->
+      <rect x="-12" y="-5" width="8" height="8" fill="#333" rx="1"/>
+      <rect x="4" y="-5" width="8" height="8" fill="#333" rx="1"/>
+      <!-- Body -->
+      <rect x="-15" y="18" width="30" height="35" fill="#fff" stroke="#333" stroke-width="2" rx="3"/>
+      <!-- Arms building -->
+      <line x1="-15" y1="28" x2="-35" y2="50" stroke="#333" stroke-width="2"/>
+      <line x1="15" y1="28" x2="35" y2="50" stroke="#333" stroke-width="2"/>
+      <!-- Legs -->
+      <rect x="-12" y="55" width="8" height="20" fill="#fff" stroke="#333" stroke-width="1.5"/>
+      <rect x="4" y="55" width="8" height="20" fill="#fff" stroke="#333" stroke-width="1.5"/>
+    </g>
+
+    <!-- Building being constructed (larger, complete) -->
+    <g transform="translate(200, 175)">
+      <!-- Building outline -->
+      <rect x="-40" y="10" width="90" height="70" fill="#f0f0f0" stroke="#333" stroke-width="1.5"/>
+      <!-- Windows grid -->
+      <rect x="-30" y="20" width="15" height="12" fill="#fff" stroke="#999" stroke-width="0.8"/>
+      <rect x="-10" y="20" width="15" height="12" fill="#fff" stroke="#999" stroke-width="0.8"/>
+      <rect x="10" y="20" width="15" height="12" fill="#fff" stroke="#999" stroke-width="0.8"/>
+      <rect x="30" y="20" width="15" height="12" fill="#fff" stroke="#999" stroke-width="0.8"/>
+      <rect x="-30" y="38" width="15" height="12" fill="#fff" stroke="#999" stroke-width="0.8"/>
+      <rect x="-10" y="38" width="15" height="12" fill="#fff" stroke="#999" stroke-width="0.8"/>
+      <rect x="10" y="38" width="15" height="12" fill="#fff" stroke="#999" stroke-width="0.8"/>
+      <rect x="30" y="38" width="15" height="12" fill="#fff" stroke="#999" stroke-width="0.8"/>
+      <!-- Door -->
+      <rect x="0" y="60" width="12" height="20" fill="#666" stroke="#333" stroke-width="0.8"/>
+    </g>
+
+    <!-- Labels -->
+    <text x="70" y="200" class="label" text-anchor="middle">설계</text>
+    <text x="210" y="180" class="label" text-anchor="middle">구현</text>
+
+    <!-- Description -->
+    <text x="165" y="275" class="small" text-anchor="middle">의도 설계 · 검증 · 책임</text>
+  </g>
+
+  <!-- building -->
+  <text x="615" y="305" class="title" text-anchor="middle">빌</text>
+  <text x="655" y="305" class="title" text-anchor="middle">딩</text>
+
+  <!-- Bottom comparison labels -->
+  <text x="205" y="105" class="emphasis" text-anchor="middle">코드 = 직접 생산물</text>
+  <text x="595" y="105" class="emphasis" text-anchor="middle">코드 = AI 산출물</text>
+
+</svg>

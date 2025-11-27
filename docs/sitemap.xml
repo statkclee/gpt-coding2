@@ -2,47 +2,35 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://r2bit.com/gpt-coding/index.html</loc>
-    <lastmod>2025-11-24T00:42:34.731Z</lastmod>
+    <lastmod>2025-11-27T00:44:58.418Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/gpt-coding/01-intro.html</loc>
-    <lastmod>2025-11-24T00:42:34.464Z</lastmod>
+    <lastmod>2025-11-27T06:19:24.884Z</lastmod>
   </url>
   <url>
-    <loc>https://r2bit.com/gpt-coding/02-var.html</loc>
-    <lastmod>2025-11-24T00:42:34.468Z</lastmod>
+    <loc>https://r2bit.com/gpt-coding/02-spec.html</loc>
+    <lastmod>2025-11-26T23:32:46.361Z</lastmod>
   </url>
   <url>
-    <loc>https://r2bit.com/gpt-coding/03-cont.html</loc>
-    <lastmod>2025-11-24T00:42:34.469Z</lastmod>
+    <loc>https://r2bit.com/gpt-coding/03-ai-request.html</loc>
+    <lastmod>2025-11-26T23:32:46.364Z</lastmod>
   </url>
   <url>
-    <loc>https://r2bit.com/gpt-coding/04-func.html</loc>
-    <lastmod>2025-11-24T00:42:34.469Z</lastmod>
+    <loc>https://r2bit.com/gpt-coding/04-verify.html</loc>
+    <lastmod>2025-11-26T23:32:46.370Z</lastmod>
   </url>
   <url>
-    <loc>https://r2bit.com/gpt-coding/05-loop.html</loc>
-    <lastmod>2025-11-24T00:42:34.469Z</lastmod>
+    <loc>https://r2bit.com/gpt-coding/05-data.html</loc>
+    <lastmod>2025-11-26T23:32:46.374Z</lastmod>
   </url>
   <url>
-    <loc>https://r2bit.com/gpt-coding/06-string.html</loc>
-    <lastmod>2025-11-24T00:42:34.469Z</lastmod>
+    <loc>https://r2bit.com/gpt-coding/06-logic.html</loc>
+    <lastmod>2025-11-26T23:32:46.376Z</lastmod>
   </url>
   <url>
-    <loc>https://r2bit.com/gpt-coding/07-file.html</loc>
-    <lastmod>2025-11-24T00:42:34.470Z</lastmod>
-  </url>
-  <url>
-    <loc>https://r2bit.com/gpt-coding/08-list.html</loc>
-    <lastmod>2025-11-24T00:42:34.470Z</lastmod>
-  </url>
-  <url>
-    <loc>https://r2bit.com/gpt-coding/09-dictionaries.html</loc>
-    <lastmod>2025-11-24T00:42:34.470Z</lastmod>
-  </url>
-  <url>
-    <loc>https://r2bit.com/gpt-coding/A-dataframe.html</loc>
-    <lastmod>2025-11-24T00:42:34.470Z</lastmod>
+    <loc>https://r2bit.com/gpt-coding/07-abstraction.html</loc>
+    <lastmod>2025-11-26T23:32:46.378Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/gpt-coding/git-basics.html</loc>
@@ -131,6 +119,10 @@
   <url>
     <loc>https://r2bit.com/gpt-coding/compendium.html</loc>
     <lastmod>2025-11-26T13:01:21.139Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r2bit.com/gpt-coding/glossary.html</loc>
+    <lastmod>2025-11-27T00:36:44.614Z</lastmod>
   </url>
   <url>
     <loc>https://r2bit.com/gpt-coding/references.html</loc>

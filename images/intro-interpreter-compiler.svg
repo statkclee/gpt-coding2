@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 20 600 160">
+  <defs>
+    <style>
+      .tufte-title {
+        font-family: 'Noto Sans KR', Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .tufte-label {
+        font-family: 'Noto Sans KR', Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+        font-size: 11px;
+        font-weight: 500;
+      }
+      .tufte-small {
+        font-family: 'Noto Sans KR', Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #666;
+        font-size: 9px;
+      }
+      .tufte-code {
+        font-family: 'D2Coding', 'Consolas', monospace;
+        fill: #555;
+        font-size: 9px;
+      }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <polygon points="0 0, 8 4, 0 8" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- White background -->
+  <rect x="0" y="0" width="600" height="200" fill="#ffffff"/>
+
+  <!-- Title -->
+  <!-- <text x="300" y="22" class="tufte-title" text-anchor="middle">인터프리터 vs 컴파일러</text> -->
+
+  <!-- ===== TOP: Interpreter ===== -->
+  <g transform="translate(0, 55)">
+    <!-- Label -->
+    <text x="50" y="5" class="tufte-label" text-anchor="middle">인터프리터</text>
+    <text x="50" y="18" class="tufte-small" text-anchor="middle">(파이썬)</text>
+
+    <!-- Source code -->
+    <g transform="translate(130, 0)">
+      <rect x="-35" y="-20" width="70" height="40" rx="3" fill="#f8f8f8" stroke="#333" stroke-width="1.2"/>
+      <text x="0" y="-3" class="tufte-code" text-anchor="middle">print()</text>
+      <text x="0" y="10" class="tufte-code" text-anchor="middle">x = 5</text>
+    </g>
+
+    <!-- Arrow -->
+    <line x1="175" y1="0" x2="215" y2="0" stroke="#666" stroke-width="1.2" marker-end="url(#arrow)"/>
+    <text x="195" y="-8" class="tufte-small" text-anchor="middle">한 줄씩</text>
+
+    <!-- Interpreter box -->
+    <g transform="translate(280, 0)">
+      <rect x="-50" y="-22" width="100" height="44" rx="3" fill="#f0f0f0" stroke="#333" stroke-width="1.2"/>
+      <text x="0" y="0" class="tufte-label" text-anchor="middle">인터프리터</text>
+      <text x="0" y="12" class="tufte-small" text-anchor="middle">읽기 → 실행</text>
+    </g>
+
+    <!-- Arrow -->
+    <line x1="340" y1="0" x2="380" y2="0" stroke="#666" stroke-width="1.2" marker-end="url(#arrow)"/>
+    <text x="360" y="-8" class="tufte-small" text-anchor="middle">즉시</text>
+
+    <!-- Result -->
+    <g transform="translate(445, 0)">
+      <rect x="-50" y="-20" width="100" height="40" rx="3" fill="#fafafa" stroke="#333" stroke-width="1.2"/>
+      <text x="0" y="-3" class="tufte-label" text-anchor="middle">결과 출력</text>
+      <text x="0" y="12" class="tufte-small" text-anchor="middle">한 줄씩 피드백</text>
+    </g>
+
+    <!-- Cycle arrow (Feedback loop) -->
+    <path d="M 445 25 Q 287 65 130 25" fill="none" stroke="#999" stroke-width="1" stroke-dasharray="3,2"/>
+    <polygon points="130 25, 136 30, 138 22" fill="#999"/>
+  </g>
+
+  <!-- ===== BOTTOM: Compiler ===== -->
+  <g transform="translate(0, 145)">
+    <!-- Label -->
+    <text x="50" y="5" class="tufte-label" text-anchor="middle">컴파일러</text>
+    <text x="50" y="18" class="tufte-small" text-anchor="middle">(C, Java)</text>
+
+    <!-- Source code -->
+    <g transform="translate(130, 0)">
+      <rect x="-35" y="-20" width="70" height="40" rx="3" fill="#f8f8f8" stroke="#333" stroke-width="1.2"/>
+      <text x="0" y="-3" class="tufte-code" text-anchor="middle">main()</text>
+      <text x="0" y="10" class="tufte-code" text-anchor="middle">{...}</text>
+    </g>
+
+    <!-- Arrow -->
+    <line x1="175" y1="0" x2="215" y2="0" stroke="#666" stroke-width="1.2" marker-end="url(#arrow)"/>
+    <text x="195" y="-8" class="tufte-small" text-anchor="middle">전체</text>
+
+    <!-- Compiler box -->
+    <g transform="translate(280, 0)">
+      <rect x="-50" y="-22" width="100" height="44" rx="3" fill="#e8e8e8" stroke="#333" stroke-width="1.2"/>
+      <text x="0" y="0" class="tufte-label" text-anchor="middle">컴파일러</text>
+      <text x="0" y="12" class="tufte-small" text-anchor="middle">번역 → 실행파일</text>
+    </g>
+
+    <!-- Arrow -->
+    <line x1="340" y1="0" x2="380" y2="0" stroke="#666" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+    <!-- Executable -->
+    <g transform="translate(420, 0)">
+      <rect x="-25" y="-18" width="50" height="36" rx="2" fill="#ddd" stroke="#333" stroke-width="1.2"/>
+      <text x="0" y="0" class="tufte-code" text-anchor="middle">.exe</text>
+      <text x="0" y="12" class="tufte-small" text-anchor="middle">실행파일</text>
+    </g>
+
+    <!-- Arrow -->
+    <line x1="455" y1="0" x2="485" y2="0" stroke="#666" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+    <!-- Result -->
+    <g transform="translate(535, 0)">
+      <rect x="-35" y="-18" width="70" height="36" rx="3" fill="#fafafa" stroke="#333" stroke-width="1.2"/>
+      <text x="0" y="5" class="tufte-label" text-anchor="middle">실행</text>
+    </g>
+  </g>
+
+</svg>

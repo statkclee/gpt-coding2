@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.9.8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="이광춘(Openai)">
-<title>32&nbsp; 연구 컴펜디엄 – 챗GPT 코딩2</title>
+<title>29&nbsp; 연구 컴펜디엄 – 챗GPT 코딩2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -82,7 +82,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./references.html" rel="next">
+<link href="./glossary.html" rel="next">
 <link href="./make_concept.html" rel="prev">
 <link href="./images/logo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
@@ -142,7 +142,7 @@ ga('send', {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./docker_concept.html"><strong>6부</strong> 자동화, 도커, 재현성</a></li><li class="breadcrumb-item"><a href="./compendium.html"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">연구 컴펜디엄</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./docker_concept.html"><strong>5부</strong> 자동화, 도커, 재현성</a></li><li class="breadcrumb-item"><a href="./compendium.html"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">연구 컴펜디엄</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="검색" onclick="window.quartoOpenSearch();">
@@ -180,7 +180,7 @@ ga('send', {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text"><strong>1부</strong> 프로그래밍</span></a>
+ <span class="menu-text"><strong>1부</strong> AI 시대 프로그래밍</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="토글 섹션">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -194,26 +194,38 @@ ga('send', {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02-var.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">변수, 표현식, 문장</span></span></a>
+  <a href="./02-spec.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">의도 명세하기</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03-cont.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">조건부 실행</span></span></a>
+  <a href="./03-ai-request.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">AI에게 코드 요청하기</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-func.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">함수</span></span></a>
+  <a href="./04-verify.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">코드 읽기와 검증</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05-loop.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">반복</span></span></a>
+  <a href="./05-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">데이터와 타입</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-logic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">논리와 흐름</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-abstraction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">추상화</span></span></a>
   </div>
 </li>
       </ul>
@@ -221,7 +233,7 @@ ga('send', {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text"><strong>2부</strong> 자료구조</span></a>
+ <span class="menu-text"><strong>2부</strong> 버전제어와 협업</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="토글 섹션">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -229,32 +241,56 @@ ga('send', {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06-string.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">문자열</span></span></a>
+  <a href="./git-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">자동화된 버전 관리</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07-file.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">파일</span></span></a>
+  <a href="./git-setup-create.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Git 설정과 저장소</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./08-list.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">리스트</span></span></a>
+  <a href="./git-change.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">변경사항 추적</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./09-dictionaries.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">딕셔너리</span></span></a>
+  <a href="./git-history.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">이력 탐색</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./A-dataframe.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">데이터프레임</span></span></a>
+  <a href="./git-ignore.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">추적 대상에서 제외</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-github.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">GitHub 원격 작업</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-open.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">공개 과학과 협업</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-conflict.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">충돌</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-ide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">통합개발환경</span></span></a>
   </div>
 </li>
       </ul>
@@ -262,7 +298,7 @@ ga('send', {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text"><strong>3부</strong> 버전제어와 협업</span></a>
+ <span class="menu-text"><strong>3부</strong> 분야별 코딩</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="토글 섹션">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -270,56 +306,38 @@ ga('send', {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./git-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">자동화된 버전 관리</span></span></a>
+  <a href="./tool-regex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">정규 표현식</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./git-setup-create.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Git 설정과 저장소</span></span></a>
+  <a href="./tool-network.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./git-change.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">변경사항 추적</span></span></a>
+  <a href="./tool-web.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">웹서비스 사용하기</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./git-history.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">이력 탐색</span></span></a>
+  <a href="./tool-database.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">데이터베이스와 SQL</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./git-ignore.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">추적 대상에서 제외</span></span></a>
+  <a href="./tool-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">시각화</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./git-github.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">GitHub 원격 작업</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./git-open.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">공개 과학과 협업</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./git-conflict.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">충돌</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./git-ide.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">통합개발환경</span></span></a>
+  <a href="./tool-gpt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">챗GPT 코딩</span></span></a>
   </div>
 </li>
       </ul>
@@ -327,7 +345,7 @@ ga('send', {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
- <span class="menu-text"><strong>4부</strong> 분야별 코딩</span></a>
+ <span class="menu-text"><strong>4부</strong> 통합 개발 환경</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="토글 섹션">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -335,38 +353,26 @@ ga('send', {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tool-regex.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">정규 표현식</span></span></a>
+  <a href="./ide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">IDE 선택과 발전</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tool-network.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span></a>
+  <a href="./ide_positron.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">포지트론</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tool-web.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">웹서비스 사용하기</span></span></a>
+  <a href="./ide_extension.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">IDE 확장 프로그램</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tool-database.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">데이터베이스와 SQL</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./tool-viz.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">시각화</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./tool-gpt.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">챗GPT 코딩</span></span></a>
+  <a href="./ide_setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">개발 환경 구축</span></span></a>
   </div>
 </li>
       </ul>
@@ -374,7 +380,7 @@ ga('send', {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
- <span class="menu-text"><strong>5부</strong> 통합 개발 환경</span></a>
+ <span class="menu-text"><strong>5부</strong> 자동화, 도커, 재현성</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="토글 섹션">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -382,26 +388,20 @@ ga('send', {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ide.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">IDE 선택과 발전</span></span></a>
+  <a href="./docker_concept.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">도커: 재현 환경</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ide_positron.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">포지트론</span></span></a>
+  <a href="./make_concept.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Make: 자동화</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ide_extension.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">IDE 확장 프로그램</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./ide_setup.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">개발 환경 구축</span></span></a>
+  <a href="./compendium.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">연구 컴펜디엄</span></span></a>
   </div>
 </li>
       </ul>
@@ -409,7 +409,7 @@ ga('send', {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text"><strong>6부</strong> 자동화, 도커, 재현성</span></a>
+ <span class="menu-text"><strong>부록</strong></span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="토글 섹션">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -417,20 +417,8 @@ ga('send', {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docker_concept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">도커: 재현 환경</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./make_concept.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Make: 자동화</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./compendium.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">연구 컴펜디엄</span></span></a>
+  <a href="./glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">용어사전</span></a>
   </div>
 </li>
       </ul>
@@ -449,50 +437,50 @@ ga('send', {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">목차</h2>
    
   <ul>
-<li><a href="#sec-compendium-concepts" id="toc-sec-compendium-concepts" class="nav-link active" data-scroll-target="#sec-compendium-concepts"><span class="header-section-number">32.1</span> 재현성 4가지 개념</a></li>
-  <li><a href="#sec-compendium-what" id="toc-sec-compendium-what" class="nav-link" data-scroll-target="#sec-compendium-what"><span class="header-section-number">32.2</span> 연구 컴펜디엄이란</a></li>
-  <li><a href="#sec-compendium-why" id="toc-sec-compendium-why" class="nav-link" data-scroll-target="#sec-compendium-why"><span class="header-section-number">32.3</span> 왜 연구 컴펜디엄을 만드는가</a></li>
+<li><a href="#sec-compendium-concepts" id="toc-sec-compendium-concepts" class="nav-link active" data-scroll-target="#sec-compendium-concepts"><span class="header-section-number">29.1</span> 재현성 4가지 개념</a></li>
+  <li><a href="#sec-compendium-what" id="toc-sec-compendium-what" class="nav-link" data-scroll-target="#sec-compendium-what"><span class="header-section-number">29.2</span> 연구 컴펜디엄이란</a></li>
+  <li><a href="#sec-compendium-why" id="toc-sec-compendium-why" class="nav-link" data-scroll-target="#sec-compendium-why"><span class="header-section-number">29.3</span> 왜 연구 컴펜디엄을 만드는가</a></li>
   <li>
-<a href="#sec-compendium-organization" id="toc-sec-compendium-organization" class="nav-link" data-scroll-target="#sec-compendium-organization"><span class="header-section-number">32.4</span> 파일 조직 원칙</a>
+<a href="#sec-compendium-organization" id="toc-sec-compendium-organization" class="nav-link" data-scroll-target="#sec-compendium-organization"><span class="header-section-number">29.4</span> 파일 조직 원칙</a>
   <ul class="collapse">
-<li><a href="#sec-compendium-ai-era" id="toc-sec-compendium-ai-era" class="nav-link" data-scroll-target="#sec-compendium-ai-era"><span class="header-section-number">32.4.1</span> AI 시대 파일 조직 원칙</a></li>
+<li><a href="#sec-compendium-ai-era" id="toc-sec-compendium-ai-era" class="nav-link" data-scroll-target="#sec-compendium-ai-era"><span class="header-section-number">29.4.1</span> AI 시대 파일 조직 원칙</a></li>
   </ul>
 </li>
-  <li><a href="#sec-compendium-components" id="toc-sec-compendium-components" class="nav-link" data-scroll-target="#sec-compendium-components"><span class="header-section-number">32.5</span> 핵심 구성요소</a></li>
-  <li><a href="#sec-compendium-rrtools" id="toc-sec-compendium-rrtools" class="nav-link" data-scroll-target="#sec-compendium-rrtools"><span class="header-section-number">32.6</span> rrtools: 컴펜디엄 자동화</a></li>
+  <li><a href="#sec-compendium-components" id="toc-sec-compendium-components" class="nav-link" data-scroll-target="#sec-compendium-components"><span class="header-section-number">29.5</span> 핵심 구성요소</a></li>
+  <li><a href="#sec-compendium-rrtools" id="toc-sec-compendium-rrtools" class="nav-link" data-scroll-target="#sec-compendium-rrtools"><span class="header-section-number">29.6</span> rrtools: 컴펜디엄 자동화</a></li>
   <li>
-<a href="#sec-compendium-examples" id="toc-sec-compendium-examples" class="nav-link" data-scroll-target="#sec-compendium-examples"><span class="header-section-number">32.7</span> 실제 연구 컴펜디엄 사례</a>
+<a href="#sec-compendium-examples" id="toc-sec-compendium-examples" class="nav-link" data-scroll-target="#sec-compendium-examples"><span class="header-section-number">29.7</span> 실제 연구 컴펜디엄 사례</a>
   <ul class="collapse">
-<li><a href="#%EC%86%8C%EA%B7%9C%EB%AA%A8-%EC%BB%B4%ED%8E%9C%EB%94%94%EC%97%84-duffy-2015" id="toc-소규모-컴펜디엄-duffy-2015" class="nav-link" data-scroll-target="#%EC%86%8C%EA%B7%9C%EB%AA%A8-%EC%BB%B4%ED%8E%9C%EB%94%94%EC%97%84-duffy-2015"><span class="header-section-number">32.7.1</span> 소규모 컴펜디엄: Duffy (2015)</a></li>
-  <li><a href="#%EC%A4%91%EA%B7%9C%EB%AA%A8-%EC%BB%B4%ED%8E%9C%EB%94%94%EC%97%84-hollister-et-al.-2016" id="toc-중규모-컴펜디엄-hollister-et-al.-2016" class="nav-link" data-scroll-target="#%EC%A4%91%EA%B7%9C%EB%AA%A8-%EC%BB%B4%ED%8E%9C%EB%94%94%EC%97%84-hollister-et-al.-2016"><span class="header-section-number">32.7.2</span> 중규모 컴펜디엄: Hollister et al.&nbsp;(2016)</a></li>
-  <li><a href="#%EB%8C%80%EA%B7%9C%EB%AA%A8-%EC%BB%B4%ED%8E%9C%EB%94%94%EC%97%84-boettiger-et-al.-2015" id="toc-대규모-컴펜디엄-boettiger-et-al.-2015" class="nav-link" data-scroll-target="#%EB%8C%80%EA%B7%9C%EB%AA%A8-%EC%BB%B4%ED%8E%9C%EB%94%94%EC%97%84-boettiger-et-al.-2015"><span class="header-section-number">32.7.3</span> 대규모 컴펜디엄: Boettiger et al.&nbsp;(2015)</a></li>
+<li><a href="#%EC%86%8C%EA%B7%9C%EB%AA%A8-%EC%BB%B4%ED%8E%9C%EB%94%94%EC%97%84-duffy-2015" id="toc-소규모-컴펜디엄-duffy-2015" class="nav-link" data-scroll-target="#%EC%86%8C%EA%B7%9C%EB%AA%A8-%EC%BB%B4%ED%8E%9C%EB%94%94%EC%97%84-duffy-2015"><span class="header-section-number">29.7.1</span> 소규모 컴펜디엄: Duffy (2015)</a></li>
+  <li><a href="#%EC%A4%91%EA%B7%9C%EB%AA%A8-%EC%BB%B4%ED%8E%9C%EB%94%94%EC%97%84-hollister-et-al.-2016" id="toc-중규모-컴펜디엄-hollister-et-al.-2016" class="nav-link" data-scroll-target="#%EC%A4%91%EA%B7%9C%EB%AA%A8-%EC%BB%B4%ED%8E%9C%EB%94%94%EC%97%84-hollister-et-al.-2016"><span class="header-section-number">29.7.2</span> 중규모 컴펜디엄: Hollister et al.&nbsp;(2016)</a></li>
+  <li><a href="#%EB%8C%80%EA%B7%9C%EB%AA%A8-%EC%BB%B4%ED%8E%9C%EB%94%94%EC%97%84-boettiger-et-al.-2015" id="toc-대규모-컴펜디엄-boettiger-et-al.-2015" class="nav-link" data-scroll-target="#%EB%8C%80%EA%B7%9C%EB%AA%A8-%EC%BB%B4%ED%8E%9C%EB%94%94%EC%97%84-boettiger-et-al.-2015"><span class="header-section-number">29.7.3</span> 대규모 컴펜디엄: Boettiger et al.&nbsp;(2015)</a></li>
   </ul>
 </li>
   <li>
-<a href="#sec-compendium-environment" id="toc-sec-compendium-environment" class="nav-link" data-scroll-target="#sec-compendium-environment"><span class="header-section-number">32.8</span> 계산 환경 명세</a>
+<a href="#sec-compendium-environment" id="toc-sec-compendium-environment" class="nav-link" data-scroll-target="#sec-compendium-environment"><span class="header-section-number">29.8</span> 계산 환경 명세</a>
   <ul class="collapse">
-<li><a href="#r-%ED%8C%A8%ED%82%A4%EC%A7%80-%EB%B2%84%EC%A0%84-%EA%B4%80%EB%A6%AC%EC%9D%98-%EC%A7%84%ED%99%94" id="toc-r-패키지-버전-관리의-진화" class="nav-link" data-scroll-target="#r-%ED%8C%A8%ED%82%A4%EC%A7%80-%EB%B2%84%EC%A0%84-%EA%B4%80%EB%A6%AC%EC%9D%98-%EC%A7%84%ED%99%94"><span class="header-section-number">32.8.1</span> R 패키지 버전 관리의 진화</a></li>
+<li><a href="#r-%ED%8C%A8%ED%82%A4%EC%A7%80-%EB%B2%84%EC%A0%84-%EA%B4%80%EB%A6%AC%EC%9D%98-%EC%A7%84%ED%99%94" id="toc-r-패키지-버전-관리의-진화" class="nav-link" data-scroll-target="#r-%ED%8C%A8%ED%82%A4%EC%A7%80-%EB%B2%84%EC%A0%84-%EA%B4%80%EB%A6%AC%EC%9D%98-%EC%A7%84%ED%99%94"><span class="header-section-number">29.8.1</span> R 패키지 버전 관리의 진화</a></li>
   </ul>
 </li>
-  <li><a href="#sec-compendium-encore" id="toc-sec-compendium-encore" class="nav-link" data-scroll-target="#sec-compendium-encore"><span class="header-section-number">32.9</span> ENCORE: 2024년의 실천 프레임워크</a></li>
-  <li><a href="#sec-compendium-worldbank" id="toc-sec-compendium-worldbank" class="nav-link" data-scroll-target="#sec-compendium-worldbank"><span class="header-section-number">32.10</span> 세계은행의 재현가능 연구 이니셔티브</a></li>
+  <li><a href="#sec-compendium-encore" id="toc-sec-compendium-encore" class="nav-link" data-scroll-target="#sec-compendium-encore"><span class="header-section-number">29.9</span> ENCORE: 2024년의 실천 프레임워크</a></li>
+  <li><a href="#sec-compendium-worldbank" id="toc-sec-compendium-worldbank" class="nav-link" data-scroll-target="#sec-compendium-worldbank"><span class="header-section-number">29.10</span> 세계은행의 재현가능 연구 이니셔티브</a></li>
   <li>
-<a href="#sec-compendium-sharing" id="toc-sec-compendium-sharing" class="nav-link" data-scroll-target="#sec-compendium-sharing"><span class="header-section-number">32.11</span> 연구 컴펜디엄 공유 방법</a>
+<a href="#sec-compendium-sharing" id="toc-sec-compendium-sharing" class="nav-link" data-scroll-target="#sec-compendium-sharing"><span class="header-section-number">29.11</span> 연구 컴펜디엄 공유 방법</a>
   <ul class="collapse">
-<li><a href="#%EB%9D%BC%EC%9D%B4%EC%84%A0%EC%8A%A4-%EC%84%A0%ED%83%9D" id="toc-라이선스-선택" class="nav-link" data-scroll-target="#%EB%9D%BC%EC%9D%B4%EC%84%A0%EC%8A%A4-%EC%84%A0%ED%83%9D"><span class="header-section-number">32.11.1</span> 라이선스 선택</a></li>
-  <li><a href="#%EB%B2%84%EC%A0%84-%EA%B4%80%EB%A6%AC%EC%99%80-git" id="toc-버전-관리와-git" class="nav-link" data-scroll-target="#%EB%B2%84%EC%A0%84-%EA%B4%80%EB%A6%AC%EC%99%80-git"><span class="header-section-number">32.11.2</span> 버전 관리와 Git</a></li>
-  <li><a href="#doi%EC%99%80-%EC%98%81%EC%86%8D%EC%A0%81-%EC%95%84%EC%B9%B4%EC%9D%B4%EB%B8%8C" id="toc-doi와-영속적-아카이브" class="nav-link" data-scroll-target="#doi%EC%99%80-%EC%98%81%EC%86%8D%EC%A0%81-%EC%95%84%EC%B9%B4%EC%9D%B4%EB%B8%8C"><span class="header-section-number">32.11.3</span> DOI와 영속적 아카이브</a></li>
-  <li><a href="#cran%EC%9D%84-%ED%94%BC%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0" id="toc-cran을-피하는-이유" class="nav-link" data-scroll-target="#cran%EC%9D%84-%ED%94%BC%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0"><span class="header-section-number">32.11.4</span> CRAN을 피하는 이유</a></li>
+<li><a href="#%EB%9D%BC%EC%9D%B4%EC%84%A0%EC%8A%A4-%EC%84%A0%ED%83%9D" id="toc-라이선스-선택" class="nav-link" data-scroll-target="#%EB%9D%BC%EC%9D%B4%EC%84%A0%EC%8A%A4-%EC%84%A0%ED%83%9D"><span class="header-section-number">29.11.1</span> 라이선스 선택</a></li>
+  <li><a href="#%EB%B2%84%EC%A0%84-%EA%B4%80%EB%A6%AC%EC%99%80-git" id="toc-버전-관리와-git" class="nav-link" data-scroll-target="#%EB%B2%84%EC%A0%84-%EA%B4%80%EB%A6%AC%EC%99%80-git"><span class="header-section-number">29.11.2</span> 버전 관리와 Git</a></li>
+  <li><a href="#doi%EC%99%80-%EC%98%81%EC%86%8D%EC%A0%81-%EC%95%84%EC%B9%B4%EC%9D%B4%EB%B8%8C" id="toc-doi와-영속적-아카이브" class="nav-link" data-scroll-target="#doi%EC%99%80-%EC%98%81%EC%86%8D%EC%A0%81-%EC%95%84%EC%B9%B4%EC%9D%B4%EB%B8%8C"><span class="header-section-number">29.11.3</span> DOI와 영속적 아카이브</a></li>
+  <li><a href="#cran%EC%9D%84-%ED%94%BC%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0" id="toc-cran을-피하는-이유" class="nav-link" data-scroll-target="#cran%EC%9D%84-%ED%94%BC%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0"><span class="header-section-number">29.11.4</span> CRAN을 피하는 이유</a></li>
   </ul>
 </li>
-  <li><a href="#sec-compendium-practice" id="toc-sec-compendium-practice" class="nav-link" data-scroll-target="#sec-compendium-practice"><span class="header-section-number">32.12</span> 실전: 논문 프로젝트 구축</a></li>
-  <li><a href="#sec-compendium-comparison" id="toc-sec-compendium-comparison" class="nav-link" data-scroll-target="#sec-compendium-comparison"><span class="header-section-number">32.13</span> 연구 컴펜디엄 vs 단순 코드 공개</a></li>
-  <li><a href="#sec-compendium-turingway" id="toc-sec-compendium-turingway" class="nav-link" data-scroll-target="#sec-compendium-turingway"><span class="header-section-number">32.14</span> The Turing Way: 커뮤니티 가이드</a></li>
+  <li><a href="#sec-compendium-practice" id="toc-sec-compendium-practice" class="nav-link" data-scroll-target="#sec-compendium-practice"><span class="header-section-number">29.12</span> 실전: 논문 프로젝트 구축</a></li>
+  <li><a href="#sec-compendium-comparison" id="toc-sec-compendium-comparison" class="nav-link" data-scroll-target="#sec-compendium-comparison"><span class="header-section-number">29.13</span> 연구 컴펜디엄 vs 단순 코드 공개</a></li>
+  <li><a href="#sec-compendium-turingway" id="toc-sec-compendium-turingway" class="nav-link" data-scroll-target="#sec-compendium-turingway"><span class="header-section-number">29.14</span> The Turing Way: 커뮤니티 가이드</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/compendium.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./docker_concept.html"><strong>6부</strong> 자동화, 도커, 재현성</a></li><li class="breadcrumb-item"><a href="./compendium.html"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">연구 컴펜디엄</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="sec-compendium-intro" class="quarto-section-identifier"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">연구 컴펜디엄</span></span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./docker_concept.html"><strong>5부</strong> 자동화, 도커, 재현성</a></li><li class="breadcrumb-item"><a href="./compendium.html"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">연구 컴펜디엄</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-compendium-intro" class="quarto-section-identifier"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">연구 컴펜디엄</span></span></h1>
 </div>
 
 
@@ -511,21 +499,21 @@ ga('send', {
 <p>재현성 위기의 배경에는 <strong>의심스러운 연구 관행(questionable research practices)</strong>이 있다 <span class="citation" data-cites="John2012"><a href="references.html#ref-John2012" role="doc-biblioref">[2]</a></span>. 2012년 설문조사에 따르면 심리학자의 50% 이상이 이러한 관행을 경험했다고 보고했다. 대표적인 예로 <strong>p-해킹(p-hacking)</strong>은 통계적으로 유의미한 결과(p &lt; 0.05)가 나올 때까지 데이터를 조작하는 행위이고 <span class="citation" data-cites="Simmons2011"><a href="references.html#ref-Simmons2011" role="doc-biblioref">[3]</a></span>, <strong>HARKing(Hypothesizing After the Results are Known)</strong>은 결과를 보고 나서 가설을 사후에 설정하는 것이다 <span class="citation" data-cites="Kerr1998"><a href="references.html#ref-Kerr1998" role="doc-biblioref">[4]</a></span>. <strong>선별 취사(cherry-picking)</strong>는 자신에게 유리한 데이터만 선택적으로 보고하는 관행이다. 투명한 연구 컴펜디엄은 이러한 관행을 어렵게 만들어 과학의 신뢰성을 높인다.</p>
 <p><strong>연구 컴펜디엄(Research Compendium)</strong><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>은 재현성 문제에 대한 체계적인 해결책 중 하나로 제시되었다 <span class="citation" data-cites="marwick2018packaging"><a href="references.html#ref-marwick2018packaging" role="doc-biblioref">[5]</a></span>. 핵심 목표는 “연구의 모든 디지털 구성요소—데이터, 코드, 텍스트—를 하나의 컨테이너에 담아 결과 재현을 간단하게 만드는 것”이다.</p>
 <p>재현성 연구의 역사는 1990년대 초로 거슬러 올라간다. 스탠퍼드 대학 지구물리학 연구실에서 처음 도입되었고 <span class="citation" data-cites="Claerbout1992"><a href="references.html#ref-Claerbout1992" role="doc-biblioref">[6]</a></span>, 2004년 R 기반 연구 컴펜디엄의 이론적 토대가 마련되었다 <span class="citation" data-cites="Gentleman2004"><a href="references.html#ref-Gentleman2004" role="doc-biblioref">[7]</a></span>. 2018년에는 이러한 아이디어가 실용적인 R 패키지 기반 워크플로우로 구체화되었다 <span class="citation" data-cites="marwick2018packaging"><a href="references.html#ref-marwick2018packaging" role="doc-biblioref">[5]</a></span>.</p>
-<section id="sec-compendium-concepts" class="level2" data-number="32.1"><h2 data-number="32.1" class="anchored" data-anchor-id="sec-compendium-concepts">
-<span class="header-section-number">32.1</span> 재현성 4가지 개념</h2>
+<section id="sec-compendium-concepts" class="level2" data-number="29.1"><h2 data-number="29.1" class="anchored" data-anchor-id="sec-compendium-concepts">
+<span class="header-section-number">29.1</span> 재현성 4가지 개념</h2>
 <p>미국 국립과학재단(NSF) 사회과학분야 자문위원회는 2015년 보고서 <span class="citation" data-cites="NSF2015"><a href="references.html#ref-NSF2015" role="doc-biblioref">[8]</a></span>에서 과학 연구의 핵심 개념을 명확히 정의했다. <strong>재현성(reproducibility)</strong>, <strong>복제성(replicability)</strong>, <strong>강건성(robustness)</strong>, <strong>일반화(generalizability)</strong>는 서로 다른 차원의 검증을 의미한다.</p>
 <div id="fig-reproducibility-concepts" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-reproducibility-concepts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/reproducibility-concepts.svg" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-reproducibility-concepts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-그림&nbsp;32.1: 재현성 연구 4가지 핵심 개념
+그림&nbsp;29.1: 재현성 연구 4가지 핵심 개념
 </figcaption></figure>
 </div>
-<p><a href="#fig-reproducibility-concepts" class="quarto-xref">그림&nbsp;<span>32.1</span></a> 는 데이터와 분석 방법의 조합에 따른 4가지 검증 수준을 보여준다. <strong>재현성</strong>은 동일한 데이터에 동일한 분석을 수행하여 같은 결과를 얻는 것으로, NSF 보고서가 명시한 과학적 발견의 <strong>최소한의 필요 조건</strong>이다. <strong>복제성</strong>은 다른 데이터에 동일한 분석을 적용하여 유사한 결과를 얻는지 검증한다. <strong>강건성</strong>은 동일한 데이터를 다른 분석 방법(예: R과 Python)으로 처리해도 같은 결론에 도달하는지 확인한다. <strong>일반화</strong>는 복제성과 강건성을 결합한 가장 높은 수준의 검증으로, 다른 데이터와 다른 분석 방법을 사용해도 유사한 결론을 얻는지 평가한다.</p>
+<p><a href="#fig-reproducibility-concepts" class="quarto-xref">그림&nbsp;<span>29.1</span></a> 는 데이터와 분석 방법의 조합에 따른 4가지 검증 수준을 보여준다. <strong>재현성</strong>은 동일한 데이터에 동일한 분석을 수행하여 같은 결과를 얻는 것으로, NSF 보고서가 명시한 과학적 발견의 <strong>최소한의 필요 조건</strong>이다. <strong>복제성</strong>은 다른 데이터에 동일한 분석을 적용하여 유사한 결과를 얻는지 검증한다. <strong>강건성</strong>은 동일한 데이터를 다른 분석 방법(예: R과 Python)으로 처리해도 같은 결론에 도달하는지 확인한다. <strong>일반화</strong>는 복제성과 강건성을 결합한 가장 높은 수준의 검증으로, 다른 데이터와 다른 분석 방법을 사용해도 유사한 결론을 얻는지 평가한다.</p>
 <p>연구 컴펜디엄은 재현성 연구 핵심 개념 중 <strong>재현성</strong>을 보장하는 도구다. 재현성 없이는 복제성도, 강건성도, 일반화도 확인할 수 없다. 따라서 연구 컴펜디엄은 과학적 발견의 토대를 만드는 작업이다.</p>
-</section><section id="sec-compendium-what" class="level2" data-number="32.2"><h2 data-number="32.2" class="anchored" data-anchor-id="sec-compendium-what">
-<span class="header-section-number">32.2</span> 연구 컴펜디엄이란</h2>
+</section><section id="sec-compendium-what" class="level2" data-number="29.2"><h2 data-number="29.2" class="anchored" data-anchor-id="sec-compendium-what">
+<span class="header-section-number">29.2</span> 연구 컴펜디엄이란</h2>
 <p>연구 컴펜디엄은 논문과 함께 제공되는 분석 코드, 데이터, 그리고 필요한 계산 환경을 담은 단일 컨테이너다. 단순히 코드를 공개하는 수준을 넘어, 누구나 동일한 결과를 얻을 수 있도록 모든 구성요소를 체계적으로 조직화한다.</p>
 <p>마윅 등 <span class="citation" data-cites="marwick2018packaging"><a href="references.html#ref-marwick2018packaging" role="doc-biblioref">[5]</a></span>은 연구 컴펜디엄의 세 가지 핵심 원칙을 제시했다. 첫째, <strong>관례적 폴더 구조</strong>다. 파일을 표준화된 디렉토리 구조로 조직하면 처음 보는 사람도 프로젝트 구성을 쉽게 파악할 수 있다. 둘째, <strong>데이터·방법·결과 분리</strong>다. 원본 데이터, 분석 코드, 생성된 결과물을 명확히 구분하면 어떤 파일이 입력이고 어떤 파일이 산출물인지 혼동하지 않는다. 셋째, <strong>계산 환경 명세</strong>다. 사용된 소프트웨어 버전과 의존성을 기록하면 “내 컴퓨터에서는 되는데요”라는 문제를 방지할 수 있다.</p>
 <div id="fig-compendium-structure" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -533,12 +521,12 @@ ga('send', {
 <img src="images/compendium-structure.svg" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-compendium-structure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-그림&nbsp;32.2: 연구 컴펜디엄의 구조
+그림&nbsp;29.2: 연구 컴펜디엄의 구조
 </figcaption></figure>
 </div>
-<p><a href="#fig-compendium-structure" class="quarto-xref">그림&nbsp;<span>32.2</span></a> 는 연구 컴펜디엄의 기본 구조를 보여준다. 가장 단순한 형태는 <code>data/</code>, <code>analysis/</code> 폴더와 <code>README.md</code>만으로 구성된다. 하지만 재현가능성을 완전히 보장하려면 <code>Dockerfile</code>로 계산 환경을, <code>renv.lock</code>으로 패키지 버전을, <code>Makefile</code>로 실행 순서를 명시해야 한다. 이 모든 구성요소가 Git으로 버전 관리되고, GitHub에서 공유된다.</p>
-</section><section id="sec-compendium-why" class="level2" data-number="32.3"><h2 data-number="32.3" class="anchored" data-anchor-id="sec-compendium-why">
-<span class="header-section-number">32.3</span> 왜 연구 컴펜디엄을 만드는가</h2>
+<p><a href="#fig-compendium-structure" class="quarto-xref">그림&nbsp;<span>29.2</span></a> 는 연구 컴펜디엄의 기본 구조를 보여준다. 가장 단순한 형태는 <code>data/</code>, <code>analysis/</code> 폴더와 <code>README.md</code>만으로 구성된다. 하지만 재현가능성을 완전히 보장하려면 <code>Dockerfile</code>로 계산 환경을, <code>renv.lock</code>으로 패키지 버전을, <code>Makefile</code>로 실행 순서를 명시해야 한다. 이 모든 구성요소가 Git으로 버전 관리되고, GitHub에서 공유된다.</p>
+</section><section id="sec-compendium-why" class="level2" data-number="29.3"><h2 data-number="29.3" class="anchored" data-anchor-id="sec-compendium-why">
+<span class="header-section-number">29.3</span> 왜 연구 컴펜디엄을 만드는가</h2>
 <p>연구 컴펜디엄 작성에는 시간과 노력이 필요하다. 그런데도 왜 해야 할까? 마코베츠(Markowetz) <span class="citation" data-cites="Markowetz2015"><a href="references.html#ref-Markowetz2015" role="doc-biblioref">[9]</a></span>는 재현가능 연구를 해야 하는 “5가지 이기적인 이유”를 제시했다. 윤리적 의무를 넘어 <strong>연구자 본인에게 실질적으로 유리</strong>하기 때문이라는 것이다.</p>
 <p>첫째, <strong>데이터 손실과 재난을 방지</strong>한다. 연구자들 사이에 회자되는 악몽이 있다. “SPSS 파일이 열리지 않습니다. 6개월 작업이 날아갔습니다.”라는 이메일이다. 바이너리 파일 형식은 손상 시 복구가 거의 불가능하다. 반면 Git으로 버전 관리되는 플레인 텍스트는 GitHub 서버, 로컬 PC, 연구실 백업 서버에 동시에 존재한다. 리눅스 커널은 20년 넘게 100만 건 이상의 커밋으로 관리되지만 단 한 줄의 코드도 잃어버린 적이 없다. 연구 컴펜디엄은 이런 수준의 안전망을 제공한다.</p>
 <p>둘째, <strong>논문 작성 효율성</strong>이 높아진다. “심사자가 로그 스케일로 다시 그려달라고 요청했어요.” 전통적인 워크플로우에서는 엑셀에서 차트를 다시 그리고, 워드에 복사하고, 그림 번호를 다시 매기는 데 며칠이 걸린다. 쿼토로 작성된 논문은 코드 한 줄 수정(<code>scale_y_log10()</code>)으로 몇 분 만에 끝난다. 데이터가 갱신되면 표와 그림이 자동으로 갱신되고, 본문의 통계값도 자동으로 업데이트된다. 피엔타 등 <span class="citation" data-cites="Pienta2010"><a href="references.html#ref-Pienta2010" role="doc-biblioref">[10]</a></span>은 7,040건의 NSF/NIH 연구비 수혜 과제를 분석한 결과, 데이터를 아카이브한 연구과제가 그렇지 않은 과제보다 출판 논문 수가 두 배(중앙값 10편 vs 5편) 많았음을 보여주었다.</p>
@@ -561,8 +549,8 @@ ga('send', {
 <p>R의 연구 컴펜디엄 개념과 비교하면, 파이썬 생태계는 <strong>통합된 프레임워크보다 개별 도구의 조합</strong>에 의존한다. Cookiecutter Data Science가 프로젝트 템플릿을, poetry/pipenv가 패키지 관리를, DVC가 데이터 버전 관리를 담당하지만, 이들을 하나로 묶는 학술적 프레임워크는 아직 정립되지 않았다. 마윅 등 <span class="citation" data-cites="marwick2018packaging"><a href="references.html#ref-marwick2018packaging" role="doc-biblioref">[5]</a></span>처럼 “연구 컴펜디엄”을 학술적으로 정의하고 R 패키지 시스템과 통합한 사례가 파이썬에는 부재하다.</p>
 </div>
 </div>
-</section><section id="sec-compendium-organization" class="level2" data-number="32.4"><h2 data-number="32.4" class="anchored" data-anchor-id="sec-compendium-organization">
-<span class="header-section-number">32.4</span> 파일 조직 원칙</h2>
+</section><section id="sec-compendium-organization" class="level2" data-number="29.4"><h2 data-number="29.4" class="anchored" data-anchor-id="sec-compendium-organization">
+<span class="header-section-number">29.4</span> 파일 조직 원칙</h2>
 <p>연구 프로젝트의 파일은 세 가지 유형으로 나뉜다. <strong>읽기 전용(read-only)</strong> 파일은 원본 데이터와 메타데이터다. 수정해서는 안 되며, 분석의 출발점이다. <strong>사람이 생성한(human-generated)</strong> 파일은 분석 스크립트, 논문 원고, 문서다. 연구자가 직접 작성하고 수정한다. <strong>프로젝트가 생성한(project-generated)</strong> 파일은 전처리된 데이터, 그래프, 테이블 등 코드 실행의 산출물이다.</p>
 <p>이러한 분류가 중요한 이유는 버전 관리 전략과 직결되기 때문이다. 읽기 전용 데이터는 변경되면 안 되고, 프로젝트 생성 파일은 코드에서 재생성할 수 있으므로 Git에서 제외할 수 있다. 사람이 생성한 파일만 Git으로 추적하면 저장소가 깔끔해진다.</p>
 <pre><code>myproject/
@@ -587,15 +575,15 @@ ga('send', {
 ├── renv.lock           # R 패키지 버전
 ├── Dockerfile          # 계산 환경
 └── Makefile            # 실행 순서</code></pre>
-<section id="sec-compendium-ai-era" class="level3" data-number="32.4.1"><h3 data-number="32.4.1" class="anchored" data-anchor-id="sec-compendium-ai-era">
-<span class="header-section-number">32.4.1</span> AI 시대 파일 조직 원칙</h3>
-<p>앞서 제시한 파일 분류 체계—읽기 전용, 사람 생성, 프로젝트 생성—는 연구자가 모든 코드를 직접 작성하던 시대의 산물이다. 그러나 ChatGPT, Claude, GitHub Copilot 같은 AI 도구가 연구 현장에 빠르게 침투하면서, “누가 이 코드를 작성했는가”라는 질문이 더 이상 자명하지 않게 되었다. AI가 초안을 작성하고 연구자가 검토·수정하는 협업 패턴이 일상화되면서, 파일의 출처와 생성 과정을 추적하는 새로운 원칙이 필요해졌다. <a href="#fig-file-org-evolution" class="quarto-xref">그림&nbsp;<span>32.3</span></a> 은 수작업 시대에서 자동화 시대를 거쳐 AI 협업 시대로 이어지는 변화를 보여준다.</p>
+<section id="sec-compendium-ai-era" class="level3" data-number="29.4.1"><h3 data-number="29.4.1" class="anchored" data-anchor-id="sec-compendium-ai-era">
+<span class="header-section-number">29.4.1</span> AI 시대 파일 조직 원칙</h3>
+<p>앞서 제시한 파일 분류 체계—읽기 전용, 사람 생성, 프로젝트 생성—는 연구자가 모든 코드를 직접 작성하던 시대의 산물이다. 그러나 ChatGPT, Claude, GitHub Copilot 같은 AI 도구가 연구 현장에 빠르게 침투하면서, “누가 이 코드를 작성했는가”라는 질문이 더 이상 자명하지 않게 되었다. AI가 초안을 작성하고 연구자가 검토·수정하는 협업 패턴이 일상화되면서, 파일의 출처와 생성 과정을 추적하는 새로운 원칙이 필요해졌다. <a href="#fig-file-org-evolution" class="quarto-xref">그림&nbsp;<span>29.3</span></a> 은 수작업 시대에서 자동화 시대를 거쳐 AI 협업 시대로 이어지는 변화를 보여준다.</p>
 <div id="fig-file-org-evolution" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-file-org-evolution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/compendium-file-organization-evolution.svg" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-file-org-evolution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-그림&nbsp;32.3: 수작업에서 자동화를 거쳐 AI 협업
+그림&nbsp;29.3: 수작업에서 자동화를 거쳐 AI 협업
 </figcaption></figure>
 </div>
 <p><strong>1단계: 수작업 시대(1990s~2010s)</strong>에는 연구자가 모든 작업을 직접 수행했다. 코드 작성, 문서화, 폴더 구조 설계, 데이터 전처리, 환경 명세까지 100% 연구자의 몫이었다. 재현성 검증은 “희망사항”에 가까웠고, 실제로 실행되는 경우는 드물었다.</p>
@@ -649,8 +637,8 @@ ga('send', {
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="fu">Suggests</span><span class="kw">:</span></span>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="at">    testthat,</span></span>
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="at">    knitr</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
-</section></section><section id="sec-compendium-components" class="level2" data-number="32.5"><h2 data-number="32.5" class="anchored" data-anchor-id="sec-compendium-components">
-<span class="header-section-number">32.5</span> 핵심 구성요소</h2>
+</section></section><section id="sec-compendium-components" class="level2" data-number="29.5"><h2 data-number="29.5" class="anchored" data-anchor-id="sec-compendium-components">
+<span class="header-section-number">29.5</span> 핵심 구성요소</h2>
 <p>“모든 파일이 다 있는데 왜 재현이 안 될까?” 연구 컴펜디엄을 처음 접하는 연구자들이 흔히 던지는 질문이다. 코드와 데이터가 있어도 패키지 버전이 다르면 오류가 발생하고, 패키지 버전을 맞춰도 운영체제가 다르면 결과가 달라진다. AI 도구로 생성한 코드라면 어떤 프롬프트로 만들었는지, 어떤 모델을 사용했는지도 기록해야 한다. 재현성은 단순히 파일을 공유하는 것이 아니라, 연구의 모든 맥락을 함께 전달하는 것이다.</p>
 <p><strong>재현성 성숙도 모델(Reproducibility Maturity Model)</strong>은 연구 컴펜디엄의 구성요소를 단계별로 정리한 프레임워크다. 기본적인 문서화에서 시작해 법적 명확성, 구조화된 명세, 패키지 고정, 환경 고정을 거쳐 AI 맥락 통합까지 이어진다. 각 단계는 이전 단계 위에 쌓이며, 높은 수준으로 갈수록 더 완전한 재현이 가능해진다. 모든 프로젝트가 최고 수준을 목표로 할 필요는 없다. 프로젝트의 복잡도와 재현성 요구 수준에 따라 적절한 단계를 선택하면 된다.</p>
 <div id="fig-compendium-components" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -658,15 +646,15 @@ ga('send', {
 <img src="images/compendium-components.svg" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-compendium-components-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-그림&nbsp;32.4: 연구 컴펜디엄의 핵심 구성요소
+그림&nbsp;29.4: 연구 컴펜디엄의 핵심 구성요소
 </figcaption></figure>
 </div>
-<p><a href="#fig-compendium-components" class="quarto-xref">그림&nbsp;<span>32.4</span></a> 는 기본 재현에서 인지 재현(Cognitive Reproducibility)까지 이어지는 여섯 가지 핵심 구성요소를 보여준다. 가장 기본적인 <strong>README.md</strong>는 프로젝트의 “현관문”으로, 무엇을 연구했는지, 어떻게 실행하는지 설명한다. GitHub 저장소 첫 화면에 표시되므로 처음 방문자가 프로젝트를 이해하는 유일한 경로다.</p>
+<p><a href="#fig-compendium-components" class="quarto-xref">그림&nbsp;<span>29.4</span></a> 는 기본 재현에서 인지 재현(Cognitive Reproducibility)까지 이어지는 여섯 가지 핵심 구성요소를 보여준다. 가장 기본적인 <strong>README.md</strong>는 프로젝트의 “현관문”으로, 무엇을 연구했는지, 어떻게 실행하는지 설명한다. GitHub 저장소 첫 화면에 표시되므로 처음 방문자가 프로젝트를 이해하는 유일한 경로다.</p>
 <p><strong>LICENSE</strong>는 코드와 데이터의 사용 권한을 명시하여 법적 보호를 제공한다. MIT, GPL, CC-BY 중 하나를 선택하며, 라이선스 없이 공개하면 저작권법상 “모든 권리 보유”가 되어 재사용이 법적으로 불가능해진다. <strong>DESCRIPTION</strong>은 R 패키지 표준 메타데이터 형식으로, 의존성 목록과 저자 정보를 기계가 읽을 수 있는 구조로 제공한다.</p>
 <p>재현성 수준이 높아지면 환경 고정이 필요하다. <strong>renv.lock</strong>은 R/Python 패키지 버전을 정확한 해시로 고정하여 “tidyverse 2.0에서는 되는데 1.3에서는 안 돼요” 문제를 방지한다. <strong>Dockerfile</strong>은 한 걸음 더 나아가 운영체제, 시스템 라이브러리, 런타임 환경까지 컨테이너화하여 완전한 환경 스냅샷을 제공한다.</p>
 <p>AI 협업 시대에는 여기서 멈추지 않는다. <strong>AGENT.md</strong>는 프로젝트 맥락과 도메인 지식, 코딩 규칙과 금지 패턴, 모델 버전과 검증 이력을 기록하여 AI 출처를 추적한다. Docker가 계산 환경을 재현한다면, AGENT.md는 AI 협업 맥락을 재현한다. 이 둘이 결합되어야 AI 시대의 진정한 재현성이 확보된다.</p>
-</section><section id="sec-compendium-rrtools" class="level2" data-number="32.6"><h2 data-number="32.6" class="anchored" data-anchor-id="sec-compendium-rrtools">
-<span class="header-section-number">32.6</span> rrtools: 컴펜디엄 자동화</h2>
+</section><section id="sec-compendium-rrtools" class="level2" data-number="29.6"><h2 data-number="29.6" class="anchored" data-anchor-id="sec-compendium-rrtools">
+<span class="header-section-number">29.6</span> rrtools: 컴펜디엄 자동화</h2>
 <p>연구 컴펜디엄을 처음부터 만드는 것은 번거롭다. <strong>rrtools</strong> 패키지는 이 과정을 자동화한다. 벤 마윅이 개발한 이 도구는 한 줄 명령으로 재현가능한 연구 프로젝트 구조를 생성한다.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># rrtools 설치</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span></span>
@@ -694,10 +682,10 @@ ga('send', {
 <img src="images/compendium-rrtools.svg" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-compendium-rrtools-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-그림&nbsp;32.5: rrtools 워크플로우
+그림&nbsp;29.5: rrtools 워크플로우
 </figcaption></figure>
 </div>
-<p><a href="#fig-compendium-rrtools" class="quarto-xref">그림&nbsp;<span>32.5</span></a> 는 rrtools가 생성하는 프로젝트 구조를 보여준다. <code>analysis/</code> 폴더에는 Quarto 기반 논문 템플릿이, <code>R/</code> 폴더에는 재사용 함수가, 루트에는 DESCRIPTION과 README가 위치한다. GitHub Actions는 코드 변경 시 자동으로 Docker 이미지를 빌드하고 테스트를 실행한다.</p>
+<p><a href="#fig-compendium-rrtools" class="quarto-xref">그림&nbsp;<span>29.5</span></a> 는 rrtools가 생성하는 프로젝트 구조를 보여준다. <code>analysis/</code> 폴더에는 Quarto 기반 논문 템플릿이, <code>R/</code> 폴더에는 재사용 함수가, 루트에는 DESCRIPTION과 README가 위치한다. GitHub Actions는 코드 변경 시 자동으로 Docker 이미지를 빌드하고 테스트를 실행한다.</p>
 <p>rrtools가 생성하는 <code>analysis/</code> 폴더 구조:</p>
 <pre><code>analysis/
 ├── paper/
@@ -708,11 +696,11 @@ ga('send', {
 │   ├── raw_data/       # 원본 데이터
 │   └── derived_data/   # 전처리 데이터
 └── supplementary-materials/</code></pre>
-</section><section id="sec-compendium-examples" class="level2" data-number="32.7"><h2 data-number="32.7" class="anchored" data-anchor-id="sec-compendium-examples">
-<span class="header-section-number">32.7</span> 실제 연구 컴펜디엄 사례</h2>
+</section><section id="sec-compendium-examples" class="level2" data-number="29.7"><h2 data-number="29.7" class="anchored" data-anchor-id="sec-compendium-examples">
+<span class="header-section-number">29.7</span> 실제 연구 컴펜디엄 사례</h2>
 <p>마윅 등 <span class="citation" data-cites="marwick2018packaging"><a href="references.html#ref-marwick2018packaging" role="doc-biblioref">[5]</a></span>은 논문에서 복잡도에 따른 세 가지 수준의 실제 연구 컴펜디엄 사례를 제시한다. 각 사례는 GitHub에서 개발되고 Zenodo에서 DOI와 함께 아카이브되었다.</p>
-<section id="소규모-컴펜디엄-duffy-2015" class="level3" data-number="32.7.1"><h3 data-number="32.7.1" class="anchored" data-anchor-id="소규모-컴펜디엄-duffy-2015">
-<span class="header-section-number">32.7.1</span> 소규모 컴펜디엄: Duffy (2015)</h3>
+<section id="소규모-컴펜디엄-duffy-2015" class="level3" data-number="29.7.1"><h3 data-number="29.7.1" class="anchored" data-anchor-id="소규모-컴펜디엄-duffy-2015">
+<span class="header-section-number">29.7.1</span> 소규모 컴펜디엄: Duffy (2015)</h3>
 <p>더피(Duffy) 등의 기생충 연구는 가장 단순한 형태의 연구 컴펜디엄을 보여준다.</p>
 <pre><code>BroodParasiteDescription/
 ├── DESCRIPTION          # 프로젝트 메타데이터
@@ -728,8 +716,8 @@ ga('send', {
 <strong>Zenodo</strong>: doi.org/10.5281/zenodo.17804</li>
 </ul>
 <p>DESCRIPTION 파일이 R 버전(3.2.0 이상)과 의존 패키지를 명시하고 있어, 세 가지 핵심 원칙(관례적 폴더 구조, 데이터·방법 분리, 환경 명세)을 모두 충족한다. 이 정도면 대부분의 단일 논문 프로젝트에 충분하다.</p>
-</section><section id="중규모-컴펜디엄-hollister-et-al.-2016" class="level3" data-number="32.7.2"><h3 data-number="32.7.2" class="anchored" data-anchor-id="중규모-컴펜디엄-hollister-et-al.-2016">
-<span class="header-section-number">32.7.2</span> 중규모 컴펜디엄: Hollister et al.&nbsp;(2016)</h3>
+</section><section id="중규모-컴펜디엄-hollister-et-al.-2016" class="level3" data-number="29.7.2"><h3 data-number="29.7.2" class="anchored" data-anchor-id="중규모-컴펜디엄-hollister-et-al.-2016">
+<span class="header-section-number">29.7.2</span> 중규모 컴펜디엄: Hollister et al.&nbsp;(2016)</h3>
 <p>홀리스터(Hollister) 등의 호수 영양 상태 모델링 연구는 R 패키지 구조를 더 완전하게 활용한다.</p>
 <pre><code>LakeTrophicModelling/
 ├── DESCRIPTION
@@ -751,8 +739,8 @@ ga('send', {
 <strong>Zenodo</strong>: doi.org/10.5281/zenodo.40271</li>
 </ul>
 <p>핵심 차이점은 <code>R/</code> 디렉토리에 재사용 가능한 함수가 있고, <code>man/</code> 디렉토리에 자동 생성된 문서가 있다는 것이다. 논문 원고는 <code>vignettes/</code> 디렉토리에 R Markdown 형식으로 작성되어, 패키지 설치 시 자동으로 렌더링된다. 그래프, 테이블, 통계 결과가 모두 코드에서 생성된다.</p>
-</section><section id="대규모-컴펜디엄-boettiger-et-al.-2015" class="level3" data-number="32.7.3"><h3 data-number="32.7.3" class="anchored" data-anchor-id="대규모-컴펜디엄-boettiger-et-al.-2015">
-<span class="header-section-number">32.7.3</span> 대규모 컴펜디엄: Boettiger et al.&nbsp;(2015)</h3>
+</section><section id="대규모-컴펜디엄-boettiger-et-al.-2015" class="level3" data-number="29.7.3"><h3 data-number="29.7.3" class="anchored" data-anchor-id="대규모-컴펜디엄-boettiger-et-al.-2015">
+<span class="header-section-number">29.7.3</span> 대규모 컴펜디엄: Boettiger et al.&nbsp;(2015)</h3>
 <p>보에티거(Boettiger) 등의 어업 관리 연구는 가장 복잡한 형태의 연구 컴펜디엄이다.</p>
 <pre><code>nonparametric-bayes/
 ├── DESCRIPTION
@@ -779,11 +767,11 @@ ga('send', {
 </ul>
 <p>Docker 컨테이너가 전체 계산 환경을 캡슐화하고, Travis CI(현재는 GitHub Actions으로 대체)가 커밋마다 자동으로 분석을 재실행한다. <code>.zenodo.json</code> 파일은 Zenodo 아카이브를 위한 메타데이터를 제공한다. <code>tests/</code> 디렉토리의 단위 테스트는 함수가 예상대로 작동하는지 확인한다.</p>
 <p>이 세 가지 사례는 프로젝트 규모와 요구사항에 따라 컴펜디엄 복잡도를 조절할 수 있음을 보여준다. 단순한 분석은 소규모 구조로 충분하고, 복잡한 시뮬레이션이나 장기 프로젝트는 대규모 구조가 필요하다.</p>
-</section></section><section id="sec-compendium-environment" class="level2" data-number="32.8"><h2 data-number="32.8" class="anchored" data-anchor-id="sec-compendium-environment">
-<span class="header-section-number">32.8</span> 계산 환경 명세</h2>
+</section></section><section id="sec-compendium-environment" class="level2" data-number="29.8"><h2 data-number="29.8" class="anchored" data-anchor-id="sec-compendium-environment">
+<span class="header-section-number">29.8</span> 계산 환경 명세</h2>
 <p>코드와 데이터가 있어도 환경이 다르면 결과가 달라진다. R 4.2에서 4.3으로 업그레이드되면서 기본 난수 생성기가 바뀌었고, ggplot2 3.4에서 테마 기본값이 변경되었다. 재현가능성은 환경 명세에서 완성된다.</p>
-<section id="r-패키지-버전-관리의-진화" class="level3" data-number="32.8.1"><h3 data-number="32.8.1" class="anchored" data-anchor-id="r-패키지-버전-관리의-진화">
-<span class="header-section-number">32.8.1</span> R 패키지 버전 관리의 진화</h3>
+<section id="r-패키지-버전-관리의-진화" class="level3" data-number="29.8.1"><h3 data-number="29.8.1" class="anchored" data-anchor-id="r-패키지-버전-관리의-진화">
+<span class="header-section-number">29.8.1</span> R 패키지 버전 관리의 진화</h3>
 <p>R 패키지 버전 관리 도구는 시간이 지나면서 발전해왔다.</p>
 <p><strong>packrat</strong>(2014)은 RStudio가 개발한 최초의 프로젝트별 패키지 관리 도구였다. 사용한 패키지의 소스 코드를 프로젝트 내 <code>packrat/</code> 디렉토리에 다운로드하여 저장한다. 그러나 대규모 프로젝트에서 느려지고, 재현성 보장이 불완전한 문제가 있었다.</p>
 <p><strong>checkpoint</strong>(2017)은 Microsoft가 개발했다. Microsoft R Archived Network(MRAN)에서 특정 날짜의 CRAN 스냅샷을 설치한다. “2023년 1월 15일 기준 CRAN”처럼 시점을 지정할 수 있어 간편하지만, MRAN 서비스가 2023년 종료되면서 더 이상 권장되지 않는다.</p>
@@ -837,8 +825,8 @@ ga('send', {
 <span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> . /home/rstudio/project</span>
 <span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="kw">WORKDIR</span> /home/rstudio/project</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Docker와 renv를 함께 사용하면 “완전한 재현”이 가능하다. Docker가 OS와 시스템 라이브러리를, renv가 R 패키지 버전을 보장한다. 5년 후에도, 다른 대륙에서도, 정확히 같은 결과를 얻을 수 있다.</p>
-</section></section><section id="sec-compendium-encore" class="level2" data-number="32.9"><h2 data-number="32.9" class="anchored" data-anchor-id="sec-compendium-encore">
-<span class="header-section-number">32.9</span> ENCORE: 2024년의 실천 프레임워크</h2>
+</section></section><section id="sec-compendium-encore" class="level2" data-number="29.9"><h2 data-number="29.9" class="anchored" data-anchor-id="sec-compendium-encore">
+<span class="header-section-number">29.9</span> ENCORE: 2024년의 실천 프레임워크</h2>
 <p>반캄펜 등 <span class="citation" data-cites="vanKampen2024"><a href="references.html#ref-vanKampen2024" role="doc-biblioref">[23]</a></span>이 Nature Communications에 발표한 <strong>ENCORE(ENhancing COmputational REproducibility)</strong>는 연구 컴펜디엄 개념을 실천적 프레임워크로 발전시켰다. 기존 가이드라인이 “무엇을 해야 하는지”를 설명했다면, ENCORE는 “어떻게 해야 하는지”를 구체화한다.</p>
 <p>ENCORE의 핵심 특징:</p>
 <ol type="1">
@@ -872,36 +860,36 @@ ga('send', {
     ├── Dockerfile
     └── renv.lock</code></pre>
 <p>ENCORE가 지적하는 재현가능성의 가장 큰 장벽은 기술적 문제가 아니다. “연구자가 재현가능성을 위해 시간과 노력을 투자할 인센티브가 부족하다”는 점이다. 논문 출판이 주된 평가 기준인 학계에서, 코드 정리와 문서화에 시간을 쓰는 것은 “보상 없는 노동”으로 여겨진다. ENCORE는 이 문제를 최소한의 추가 노력으로 재현가능성을 달성하도록 프레임워크를 설계함으로써 해결하려 한다.</p>
-</section><section id="sec-compendium-worldbank" class="level2" data-number="32.10"><h2 data-number="32.10" class="anchored" data-anchor-id="sec-compendium-worldbank">
-<span class="header-section-number">32.10</span> 세계은행의 재현가능 연구 이니셔티브</h2>
+</section><section id="sec-compendium-worldbank" class="level2" data-number="29.10"><h2 data-number="29.10" class="anchored" data-anchor-id="sec-compendium-worldbank">
+<span class="header-section-number">29.10</span> 세계은행의 재현가능 연구 이니셔티브</h2>
 <p>2023년 세계은행(World Bank)은 대규모 조직이 연구 컴펜디엄을 제도화한 첫 사례를 만들었다 <span class="citation" data-cites="Jones2024"><a href="references.html#ref-Jones2024" role="doc-biblioref">[24]</a></span>. 기존의 개방 데이터·개방 지식 정책을 확장해 <strong>재현가능성 패키지(reproducibility package)</strong> 제출을 장려하기 시작했다.</p>
 <p>재현가능성 패키지는 세 가지 컬렉션으로 구성된다: - 정책 연구 워킹페이퍼(Policy Research Working Papers) - 학술지 논문(Journal Articles) - 세계은행 보고서(World Bank Reports)</p>
 <p>2024년 6월 기준, 2023년 9월 이후 제출된 워킹페이퍼 중 43.4%가 재현가능성 패키지를 포함했다. 의무가 아닌 자발적 참여임에도 높은 채택률을 보인 것은 연구자들이 재현가능성의 가치를 인식하고 있음을 보여준다.</p>
 <p>세계은행 재현가능성 저장소(Reproducible Research Repository)는 포괄적인 메타데이터와 함께 패키지를 공개해 검색과 발견이 가능하게 한다. 이는 연구 컴펜디엄이 개인 연구자의 선택이 아닌 조직 차원의 정책이 될 수 있음을 증명한 사례다.</p>
-</section><section id="sec-compendium-sharing" class="level2" data-number="32.11"><h2 data-number="32.11" class="anchored" data-anchor-id="sec-compendium-sharing">
-<span class="header-section-number">32.11</span> 연구 컴펜디엄 공유 방법</h2>
+</section><section id="sec-compendium-sharing" class="level2" data-number="29.11"><h2 data-number="29.11" class="anchored" data-anchor-id="sec-compendium-sharing">
+<span class="header-section-number">29.11</span> 연구 컴펜디엄 공유 방법</h2>
 <p>연구 컴펜디엄 공유는 오픈 사이언스의 국제 표준인 <strong>FAIR 원칙</strong> <span class="citation" data-cites="Wilkinson2016"><a href="references.html#ref-Wilkinson2016" role="doc-biblioref">[25]</a></span>에 부합해야 한다. FAIR는 Findable(찾을 수 있는), Accessible(접근 가능한), Interoperable(상호운용 가능한), Reusable(재사용 가능한)의 약자로, 과학 데이터 관리와 공유의 핵심 원칙이다.</p>
 <div class="cell">
 <div id="tbl-fair-compendium" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure"><div aria-describedby="tbl-fair-compendium-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="xwnyxaqsgi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#xwnyxaqsgi table {
+<div id="bjiqgrtvmf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#bjiqgrtvmf table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xwnyxaqsgi thead, #xwnyxaqsgi tbody, #xwnyxaqsgi tfoot, #xwnyxaqsgi tr, #xwnyxaqsgi td, #xwnyxaqsgi th {
+#bjiqgrtvmf thead, #bjiqgrtvmf tbody, #bjiqgrtvmf tfoot, #bjiqgrtvmf tr, #bjiqgrtvmf td, #bjiqgrtvmf th {
   border-style: none;
 }
 
-#xwnyxaqsgi p {
+#bjiqgrtvmf p {
   margin: 0;
   padding: 0;
 }
 
-#xwnyxaqsgi .gt_table {
+#bjiqgrtvmf .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -927,12 +915,12 @@ ga('send', {
   border-left-color: #D3D3D3;
 }
 
-#xwnyxaqsgi .gt_caption {
+#bjiqgrtvmf .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xwnyxaqsgi .gt_title {
+#bjiqgrtvmf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -944,7 +932,7 @@ ga('send', {
   border-bottom-width: 0;
 }
 
-#xwnyxaqsgi .gt_subtitle {
+#bjiqgrtvmf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -956,7 +944,7 @@ ga('send', {
   border-top-width: 0;
 }
 
-#xwnyxaqsgi .gt_heading {
+#bjiqgrtvmf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -968,13 +956,13 @@ ga('send', {
   border-right-color: #D3D3D3;
 }
 
-#xwnyxaqsgi .gt_bottom_border {
+#bjiqgrtvmf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xwnyxaqsgi .gt_col_headings {
+#bjiqgrtvmf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -989,7 +977,7 @@ ga('send', {
   border-right-color: #D3D3D3;
 }
 
-#xwnyxaqsgi .gt_col_heading {
+#bjiqgrtvmf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1009,7 +997,7 @@ ga('send', {
   overflow-x: hidden;
 }
 
-#xwnyxaqsgi .gt_column_spanner_outer {
+#bjiqgrtvmf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1021,15 +1009,15 @@ ga('send', {
   padding-right: 4px;
 }
 
-#xwnyxaqsgi .gt_column_spanner_outer:first-child {
+#bjiqgrtvmf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xwnyxaqsgi .gt_column_spanner_outer:last-child {
+#bjiqgrtvmf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xwnyxaqsgi .gt_column_spanner {
+#bjiqgrtvmf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1041,11 +1029,11 @@ ga('send', {
   width: 100%;
 }
 
-#xwnyxaqsgi .gt_spanner_row {
+#bjiqgrtvmf .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xwnyxaqsgi .gt_group_heading {
+#bjiqgrtvmf .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1071,7 +1059,7 @@ ga('send', {
   text-align: left;
 }
 
-#xwnyxaqsgi .gt_empty_group_heading {
+#bjiqgrtvmf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1086,15 +1074,15 @@ ga('send', {
   vertical-align: middle;
 }
 
-#xwnyxaqsgi .gt_from_md > :first-child {
+#bjiqgrtvmf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xwnyxaqsgi .gt_from_md > :last-child {
+#bjiqgrtvmf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xwnyxaqsgi .gt_row {
+#bjiqgrtvmf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1113,7 +1101,7 @@ ga('send', {
   overflow-x: hidden;
 }
 
-#xwnyxaqsgi .gt_stub {
+#bjiqgrtvmf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1126,7 +1114,7 @@ ga('send', {
   padding-right: 5px;
 }
 
-#xwnyxaqsgi .gt_stub_row_group {
+#bjiqgrtvmf .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1140,15 +1128,15 @@ ga('send', {
   vertical-align: top;
 }
 
-#xwnyxaqsgi .gt_row_group_first td {
+#bjiqgrtvmf .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xwnyxaqsgi .gt_row_group_first th {
+#bjiqgrtvmf .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xwnyxaqsgi .gt_summary_row {
+#bjiqgrtvmf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1158,16 +1146,16 @@ ga('send', {
   padding-right: 5px;
 }
 
-#xwnyxaqsgi .gt_first_summary_row {
+#bjiqgrtvmf .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xwnyxaqsgi .gt_first_summary_row.thick {
+#bjiqgrtvmf .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xwnyxaqsgi .gt_last_summary_row {
+#bjiqgrtvmf .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1177,7 +1165,7 @@ ga('send', {
   border-bottom-color: #D3D3D3;
 }
 
-#xwnyxaqsgi .gt_grand_summary_row {
+#bjiqgrtvmf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1187,7 +1175,7 @@ ga('send', {
   padding-right: 5px;
 }
 
-#xwnyxaqsgi .gt_first_grand_summary_row {
+#bjiqgrtvmf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1197,7 +1185,7 @@ ga('send', {
   border-top-color: #D3D3D3;
 }
 
-#xwnyxaqsgi .gt_last_grand_summary_row_top {
+#bjiqgrtvmf .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1207,11 +1195,11 @@ ga('send', {
   border-bottom-color: #D3D3D3;
 }
 
-#xwnyxaqsgi .gt_striped {
+#bjiqgrtvmf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xwnyxaqsgi .gt_table_body {
+#bjiqgrtvmf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1220,7 +1208,7 @@ ga('send', {
   border-bottom-color: #D3D3D3;
 }
 
-#xwnyxaqsgi .gt_footnotes {
+#bjiqgrtvmf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1234,7 +1222,7 @@ ga('send', {
   border-right-color: #D3D3D3;
 }
 
-#xwnyxaqsgi .gt_footnote {
+#bjiqgrtvmf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1243,7 +1231,7 @@ ga('send', {
   padding-right: 5px;
 }
 
-#xwnyxaqsgi .gt_sourcenotes {
+#bjiqgrtvmf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1257,7 +1245,7 @@ ga('send', {
   border-right-color: #D3D3D3;
 }
 
-#xwnyxaqsgi .gt_sourcenote {
+#bjiqgrtvmf .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1265,72 +1253,72 @@ ga('send', {
   padding-right: 5px;
 }
 
-#xwnyxaqsgi .gt_left {
+#bjiqgrtvmf .gt_left {
   text-align: left;
 }
 
-#xwnyxaqsgi .gt_center {
+#bjiqgrtvmf .gt_center {
   text-align: center;
 }
 
-#xwnyxaqsgi .gt_right {
+#bjiqgrtvmf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xwnyxaqsgi .gt_font_normal {
+#bjiqgrtvmf .gt_font_normal {
   font-weight: normal;
 }
 
-#xwnyxaqsgi .gt_font_bold {
+#bjiqgrtvmf .gt_font_bold {
   font-weight: bold;
 }
 
-#xwnyxaqsgi .gt_font_italic {
+#bjiqgrtvmf .gt_font_italic {
   font-style: italic;
 }
 
-#xwnyxaqsgi .gt_super {
+#bjiqgrtvmf .gt_super {
   font-size: 65%;
 }
 
-#xwnyxaqsgi .gt_footnote_marks {
+#bjiqgrtvmf .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xwnyxaqsgi .gt_asterisk {
+#bjiqgrtvmf .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xwnyxaqsgi .gt_indent_1 {
+#bjiqgrtvmf .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xwnyxaqsgi .gt_indent_2 {
+#bjiqgrtvmf .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xwnyxaqsgi .gt_indent_3 {
+#bjiqgrtvmf .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xwnyxaqsgi .gt_indent_4 {
+#bjiqgrtvmf .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xwnyxaqsgi .gt_indent_5 {
+#bjiqgrtvmf .gt_indent_5 {
   text-indent: 25px;
 }
 
-#xwnyxaqsgi .katex-display {
+#bjiqgrtvmf .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#xwnyxaqsgi div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#bjiqgrtvmf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1371,13 +1359,13 @@ ga('send', {
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-tbl" id="tbl-fair-compendium-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-표&nbsp;32.1: FAIR 원칙과 연구 컴펜디엄의 관계
+표&nbsp;29.1: FAIR 원칙과 연구 컴펜디엄의 관계
 </figcaption></figure>
 </div>
 </div>
 <p>연구 컴펜디엄을 공유할 때는 라이선스, 버전 관리, 영속성, 메타데이터를 고려해야 한다. 마윅 등 <span class="citation" data-cites="marwick2018packaging"><a href="references.html#ref-marwick2018packaging" role="doc-biblioref">[5]</a></span>은 각 요소에 대한 구체적인 권고사항을 제시한다.</p>
-<section id="라이선스-선택" class="level3" data-number="32.11.1"><h3 data-number="32.11.1" class="anchored" data-anchor-id="라이선스-선택">
-<span class="header-section-number">32.11.1</span> 라이선스 선택</h3>
+<section id="라이선스-선택" class="level3" data-number="29.11.1"><h3 data-number="29.11.1" class="anchored" data-anchor-id="라이선스-선택">
+<span class="header-section-number">29.11.1</span> 라이선스 선택</h3>
 <p>라이선스 없이 공개된 코드와 데이터는 저작권법상 “모든 권리 보유”가 된다. 다른 연구자가 법적으로 재사용할 수 없다. 명시적인 라이선스가 필수다.</p>
 <p><strong>데이터</strong>: 스토든 <span class="citation" data-cites="Stodden2009"><a href="references.html#ref-Stodden2009" role="doc-biblioref">[26]</a></span>은 데이터에 <strong>CC-0(Creative Commons Public Domain)</strong>을 권장한다. 데이터는 많은 법적 관할권에서 창작물이 아닌 “사실”로 간주되어 저작권 보호를 받지 못할 수 있다. CC-0는 이러한 법적 불확실성을 제거하고 최대한의 재사용을 허용한다.</p>
 <p><strong>문서와 논문</strong>: <strong>CC-BY(Creative Commons Attribution)</strong>가 적절하다. 원저자 표시를 조건으로 재사용을 허용한다. 학술 인용 관행과 일치한다.</p>
@@ -1387,11 +1375,11 @@ ga('send', {
 ├── LICENSE-CC0        # CC-0 for data
 ├── data/              # CC-0 applies here
 └── R/                 # MIT applies here</code></pre>
-</section><section id="버전-관리와-git" class="level3" data-number="32.11.2"><h3 data-number="32.11.2" class="anchored" data-anchor-id="버전-관리와-git">
-<span class="header-section-number">32.11.2</span> 버전 관리와 Git</h3>
+</section><section id="버전-관리와-git" class="level3" data-number="29.11.2"><h3 data-number="29.11.2" class="anchored" data-anchor-id="버전-관리와-git">
+<span class="header-section-number">29.11.2</span> 버전 관리와 Git</h3>
 <p>Git은 연구 컴펜디엄의 변경 이력을 보존하는 가장 좋은 방법이다. 모든 수정 사항이 기록되어, 특정 시점의 코드 상태를 정확히 복원할 수 있다. GitHub, GitLab 같은 호스팅 서비스는 협업과 배포를 용이하게 한다.</p>
-</section><section id="doi와-영속적-아카이브" class="level3" data-number="32.11.3"><h3 data-number="32.11.3" class="anchored" data-anchor-id="doi와-영속적-아카이브">
-<span class="header-section-number">32.11.3</span> DOI와 영속적 아카이브</h3>
+</section><section id="doi와-영속적-아카이브" class="level3" data-number="29.11.3"><h3 data-number="29.11.3" class="anchored" data-anchor-id="doi와-영속적-아카이브">
+<span class="header-section-number">29.11.3</span> DOI와 영속적 아카이브</h3>
 <p>GitHub URL은 영구적이지 않다. 저장소가 삭제되거나 이름이 바뀌면 링크가 깨진다. 클라인 등 <span class="citation" data-cites="Klein2014"><a href="references.html#ref-Klein2014" role="doc-biblioref">[27]</a></span>의 연구에 따르면, 학술 논문 인용의 5분의 1이 “참조 부패(reference rot)”를 겪고 있다.</p>
 <p><strong>DOI(Digital Object Identifier)</strong>를 발급하는 저장소에 아카이브하면 이 문제를 해결할 수 있다:</p>
 <ul>
@@ -1405,8 +1393,8 @@ ga('send', {
 <strong>Dryad</strong> (datadryad.org): 생태학·진화생물학 중심</li>
 </ul>
 <p>Zenodo는 GitHub 저장소와 자동 통합되어, 릴리스를 생성하면 자동으로 DOI가 발급된다. 논문에 이 DOI를 인용하면 심사위원과 독자가 정확한 버전의 코드에 접근할 수 있다.</p>
-</section><section id="cran을-피하는-이유" class="level3" data-number="32.11.4"><h3 data-number="32.11.4" class="anchored" data-anchor-id="cran을-피하는-이유">
-<span class="header-section-number">32.11.4</span> CRAN을 피하는 이유</h3>
+</section><section id="cran을-피하는-이유" class="level3" data-number="29.11.4"><h3 data-number="29.11.4" class="anchored" data-anchor-id="cran을-피하는-이유">
+<span class="header-section-number">29.11.4</span> CRAN을 피하는 이유</h3>
 <p>CRAN(Comprehensive R Archive Network)은 R 패키지의 표준 저장소지만, 연구 컴펜디엄에는 적합하지 않다:</p>
 <ol type="1">
 <li>
@@ -1417,8 +1405,8 @@ ga('send', {
 <strong>업데이트 제약</strong>: 잦은 업데이트가 요구되는 개발 중 프로젝트에 부적합</li>
 </ol>
 <p>Zenodo, OSF 같은 DOI 발급 저장소는 이러한 제한이 없고, 오히려 연구 아카이브에 특화되어 있다.</p>
-</section></section><section id="sec-compendium-practice" class="level2" data-number="32.12"><h2 data-number="32.12" class="anchored" data-anchor-id="sec-compendium-practice">
-<span class="header-section-number">32.12</span> 실전: 논문 프로젝트 구축</h2>
+</section></section><section id="sec-compendium-practice" class="level2" data-number="29.12"><h2 data-number="29.12" class="anchored" data-anchor-id="sec-compendium-practice">
+<span class="header-section-number">29.12</span> 실전: 논문 프로젝트 구축</h2>
 <p>논문 프로젝트를 연구 컴펜디엄으로 구축하는 전체 과정을 살펴보자.</p>
 <p><strong>1단계: 프로젝트 생성</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># rrtools로 컴펜디엄 생성</span></span>
@@ -1529,30 +1517,30 @@ ga('send', {
 <span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
 <span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">name</span><span class="kw">:</span><span class="at"> paper</span></span>
 <span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">path</span><span class="kw">:</span><span class="at"> analysis/paper/paper.pdf</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
-</section><section id="sec-compendium-comparison" class="level2" data-number="32.13"><h2 data-number="32.13" class="anchored" data-anchor-id="sec-compendium-comparison">
-<span class="header-section-number">32.13</span> 연구 컴펜디엄 vs 단순 코드 공개</h2>
+</section><section id="sec-compendium-comparison" class="level2" data-number="29.13"><h2 data-number="29.13" class="anchored" data-anchor-id="sec-compendium-comparison">
+<span class="header-section-number">29.13</span> 연구 컴펜디엄 vs 단순 코드 공개</h2>
 <p>“GitHub에 코드만 올리면 되지 않나요?”라는 질문을 자주 받는다. 코드 공개와 연구 컴펜디엄은 근본적으로 다르다.</p>
 <div class="cell">
 <div id="tbl-compendium-comparison" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure"><div aria-describedby="tbl-compendium-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="yuirkkgvjo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#yuirkkgvjo table {
+<div id="wsfcyonksa" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wsfcyonksa table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#yuirkkgvjo thead, #yuirkkgvjo tbody, #yuirkkgvjo tfoot, #yuirkkgvjo tr, #yuirkkgvjo td, #yuirkkgvjo th {
+#wsfcyonksa thead, #wsfcyonksa tbody, #wsfcyonksa tfoot, #wsfcyonksa tr, #wsfcyonksa td, #wsfcyonksa th {
   border-style: none;
 }
 
-#yuirkkgvjo p {
+#wsfcyonksa p {
   margin: 0;
   padding: 0;
 }
 
-#yuirkkgvjo .gt_table {
+#wsfcyonksa .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1578,12 +1566,12 @@ ga('send', {
   border-left-color: #D3D3D3;
 }
 
-#yuirkkgvjo .gt_caption {
+#wsfcyonksa .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#yuirkkgvjo .gt_title {
+#wsfcyonksa .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1595,7 +1583,7 @@ ga('send', {
   border-bottom-width: 0;
 }
 
-#yuirkkgvjo .gt_subtitle {
+#wsfcyonksa .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1607,7 +1595,7 @@ ga('send', {
   border-top-width: 0;
 }
 
-#yuirkkgvjo .gt_heading {
+#wsfcyonksa .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1619,13 +1607,13 @@ ga('send', {
   border-right-color: #D3D3D3;
 }
 
-#yuirkkgvjo .gt_bottom_border {
+#wsfcyonksa .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#yuirkkgvjo .gt_col_headings {
+#wsfcyonksa .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1640,7 +1628,7 @@ ga('send', {
   border-right-color: #D3D3D3;
 }
 
-#yuirkkgvjo .gt_col_heading {
+#wsfcyonksa .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1660,7 +1648,7 @@ ga('send', {
   overflow-x: hidden;
 }
 
-#yuirkkgvjo .gt_column_spanner_outer {
+#wsfcyonksa .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1672,15 +1660,15 @@ ga('send', {
   padding-right: 4px;
 }
 
-#yuirkkgvjo .gt_column_spanner_outer:first-child {
+#wsfcyonksa .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#yuirkkgvjo .gt_column_spanner_outer:last-child {
+#wsfcyonksa .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#yuirkkgvjo .gt_column_spanner {
+#wsfcyonksa .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1692,11 +1680,11 @@ ga('send', {
   width: 100%;
 }
 
-#yuirkkgvjo .gt_spanner_row {
+#wsfcyonksa .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#yuirkkgvjo .gt_group_heading {
+#wsfcyonksa .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1722,7 +1710,7 @@ ga('send', {
   text-align: left;
 }
 
-#yuirkkgvjo .gt_empty_group_heading {
+#wsfcyonksa .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1737,15 +1725,15 @@ ga('send', {
   vertical-align: middle;
 }
 
-#yuirkkgvjo .gt_from_md > :first-child {
+#wsfcyonksa .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#yuirkkgvjo .gt_from_md > :last-child {
+#wsfcyonksa .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#yuirkkgvjo .gt_row {
+#wsfcyonksa .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1764,7 +1752,7 @@ ga('send', {
   overflow-x: hidden;
 }
 
-#yuirkkgvjo .gt_stub {
+#wsfcyonksa .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1777,7 +1765,7 @@ ga('send', {
   padding-right: 5px;
 }
 
-#yuirkkgvjo .gt_stub_row_group {
+#wsfcyonksa .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1791,15 +1779,15 @@ ga('send', {
   vertical-align: top;
 }
 
-#yuirkkgvjo .gt_row_group_first td {
+#wsfcyonksa .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#yuirkkgvjo .gt_row_group_first th {
+#wsfcyonksa .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#yuirkkgvjo .gt_summary_row {
+#wsfcyonksa .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1809,16 +1797,16 @@ ga('send', {
   padding-right: 5px;
 }
 
-#yuirkkgvjo .gt_first_summary_row {
+#wsfcyonksa .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#yuirkkgvjo .gt_first_summary_row.thick {
+#wsfcyonksa .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#yuirkkgvjo .gt_last_summary_row {
+#wsfcyonksa .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1828,7 +1816,7 @@ ga('send', {
   border-bottom-color: #D3D3D3;
 }
 
-#yuirkkgvjo .gt_grand_summary_row {
+#wsfcyonksa .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1838,7 +1826,7 @@ ga('send', {
   padding-right: 5px;
 }
 
-#yuirkkgvjo .gt_first_grand_summary_row {
+#wsfcyonksa .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1848,7 +1836,7 @@ ga('send', {
   border-top-color: #D3D3D3;
 }
 
-#yuirkkgvjo .gt_last_grand_summary_row_top {
+#wsfcyonksa .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1858,11 +1846,11 @@ ga('send', {
   border-bottom-color: #D3D3D3;
 }
 
-#yuirkkgvjo .gt_striped {
+#wsfcyonksa .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#yuirkkgvjo .gt_table_body {
+#wsfcyonksa .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1871,7 +1859,7 @@ ga('send', {
   border-bottom-color: #D3D3D3;
 }
 
-#yuirkkgvjo .gt_footnotes {
+#wsfcyonksa .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1885,7 +1873,7 @@ ga('send', {
   border-right-color: #D3D3D3;
 }
 
-#yuirkkgvjo .gt_footnote {
+#wsfcyonksa .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1894,7 +1882,7 @@ ga('send', {
   padding-right: 5px;
 }
 
-#yuirkkgvjo .gt_sourcenotes {
+#wsfcyonksa .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1908,7 +1896,7 @@ ga('send', {
   border-right-color: #D3D3D3;
 }
 
-#yuirkkgvjo .gt_sourcenote {
+#wsfcyonksa .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1916,72 +1904,72 @@ ga('send', {
   padding-right: 5px;
 }
 
-#yuirkkgvjo .gt_left {
+#wsfcyonksa .gt_left {
   text-align: left;
 }
 
-#yuirkkgvjo .gt_center {
+#wsfcyonksa .gt_center {
   text-align: center;
 }
 
-#yuirkkgvjo .gt_right {
+#wsfcyonksa .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#yuirkkgvjo .gt_font_normal {
+#wsfcyonksa .gt_font_normal {
   font-weight: normal;
 }
 
-#yuirkkgvjo .gt_font_bold {
+#wsfcyonksa .gt_font_bold {
   font-weight: bold;
 }
 
-#yuirkkgvjo .gt_font_italic {
+#wsfcyonksa .gt_font_italic {
   font-style: italic;
 }
 
-#yuirkkgvjo .gt_super {
+#wsfcyonksa .gt_super {
   font-size: 65%;
 }
 
-#yuirkkgvjo .gt_footnote_marks {
+#wsfcyonksa .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#yuirkkgvjo .gt_asterisk {
+#wsfcyonksa .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#yuirkkgvjo .gt_indent_1 {
+#wsfcyonksa .gt_indent_1 {
   text-indent: 5px;
 }
 
-#yuirkkgvjo .gt_indent_2 {
+#wsfcyonksa .gt_indent_2 {
   text-indent: 10px;
 }
 
-#yuirkkgvjo .gt_indent_3 {
+#wsfcyonksa .gt_indent_3 {
   text-indent: 15px;
 }
 
-#yuirkkgvjo .gt_indent_4 {
+#wsfcyonksa .gt_indent_4 {
   text-indent: 20px;
 }
 
-#yuirkkgvjo .gt_indent_5 {
+#wsfcyonksa .gt_indent_5 {
   text-indent: 25px;
 }
 
-#yuirkkgvjo .katex-display {
+#wsfcyonksa .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#yuirkkgvjo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#wsfcyonksa div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2028,13 +2016,13 @@ ga('send', {
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-tbl" id="tbl-compendium-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-표&nbsp;32.2: 코드 공개 vs 연구 컴펜디엄 비교
+표&nbsp;29.2: 코드 공개 vs 연구 컴펜디엄 비교
 </figcaption></figure>
 </div>
 </div>
 <p>단순 코드 공개는 “이론적으로 재현 가능”하다. 하지만 실제로 재현하려면 패키지 버전을 맞추고, 실행 순서를 파악하고, 누락된 데이터를 찾아야 한다. 연구 컴펜디엄은 “실질적으로 재현 가능”하다. <code>docker build &amp;&amp; docker run</code> 두 줄이면 논문의 모든 결과를 재생성한다.</p>
-</section><section id="sec-compendium-turingway" class="level2" data-number="32.14"><h2 data-number="32.14" class="anchored" data-anchor-id="sec-compendium-turingway">
-<span class="header-section-number">32.14</span> The Turing Way: 커뮤니티 가이드</h2>
+</section><section id="sec-compendium-turingway" class="level2" data-number="29.14"><h2 data-number="29.14" class="anchored" data-anchor-id="sec-compendium-turingway">
+<span class="header-section-number">29.14</span> The Turing Way: 커뮤니티 가이드</h2>
 <p><strong>The Turing Way</strong> <span class="citation" data-cites="TuringWay2024"><a href="references.html#ref-TuringWay2024" role="doc-biblioref">[28]</a></span>는 영국 앨런 튜링 연구소가 운영하는 재현가능 연구 가이드북이다. 오픈소스 커뮤니티 방식으로 작성되어 누구나 기여할 수 있으며, 연구 컴펜디엄을 포함한 재현가능 연구의 모든 측면을 다룬다.</p>
 <p>The Turing Way가 제시하는 연구 컴펜디엄의 두 가지 수준:</p>
 <p><strong>기본 컴펜디엄 (Basic Compendium)</strong>:</p>
@@ -2624,12 +2612,12 @@ ga('send', {
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./make_concept.html" class="pagination-link" aria-label="Make: 자동화">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Make: 자동화</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Make: 자동화</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./references.html" class="pagination-link" aria-label="참고문헌">
-        <span class="nav-page-text">참고문헌</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./glossary.html" class="pagination-link" aria-label="용어사전">
+        <span class="nav-page-text">용어사전</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

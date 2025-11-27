@@ -1,0 +1,116 @@
+---
+execute:
+  eval: false
+---
+
+# 코드 읽기와 검증 {#sec-verify}
+
+AI가 생성한 코드를 무조건 신뢰해서는 안 된다. 코드가 의도대로 동작하는지 검증하고, 어떻게 동작하는지 이해하는 것이 AI 시대 프로그래머의 핵심 역량이다.
+
+## 왜 코드를 읽어야 하는가 {#sec-verify-why-read}
+
+\index{코드 리뷰}AI가 코드를 생성해주지만, 그 코드에는 여전히 문제가 있을 수 있다:
+
+1. **잘못된 이해** - AI가 의도를 오해했을 수 있다
+2. **엣지 케이스 누락** - 명세하지 않은 상황에서 오류 발생 가능
+3. **비효율적 구현** - 동작하지만 성능이 나쁜 코드
+4. **보안 취약점** - 의도치 않은 보안 문제
+
+## 계산기 예제: 코드 검증 {#sec-verify-calculator}
+
+AI가 생성한 덧셈 함수를 검증해보자.
+
+### 기본 테스트 실행 {#sec-verify-basic-test}
+
+```python
+#| eval: false
+def add(a, b):
+    return a + b
+
+# 기본 테스트
+assert add(2, 3) == 5
+assert add(-1, 1) == 0
+print("기본 테스트 통과!")
+```
+
+### 엣지 케이스 추가 {#sec-verify-edge-cases}
+
+명세에 없던 상황을 테스트해본다:
+
+```python
+#| eval: false
+# 큰 수
+assert add(10**10, 10**10) == 2 * 10**10
+
+# 아주 작은 소수
+result = add(0.1, 0.2)
+print(f"0.1 + 0.2 = {result}")  # 부동소수점 주의!
+```
+
+부동소수점 연산의 특성상 `0.1 + 0.2`가 정확히 `0.3`이 아닐 수 있다. 이런 발견이 코드 읽기와 검증의 가치다.
+
+## 코드 이해하기 {#sec-verify-understand}
+
+### 단계별 실행 추적 {#sec-verify-trace}
+
+코드가 어떻게 동작하는지 단계별로 추적해본다:
+
+```python
+#| eval: false
+def add_with_trace(a, b):
+    print(f"입력: a={a}, b={b}")
+    result = a + b
+    print(f"계산: {a} + {b} = {result}")
+    return result
+
+add_with_trace(3, 5)
+```
+
+### 타입 확인 {#sec-verify-type}
+
+\index{타입}입력과 출력의 타입을 확인한다:
+
+```python
+#| eval: false
+def check_types():
+    # 정수 + 정수
+    r1 = add(3, 5)
+    print(f"3 + 5 = {r1}, type: {type(r1)}")
+
+    # 실수 + 실수
+    r2 = add(3.0, 5.0)
+    print(f"3.0 + 5.0 = {r2}, type: {type(r2)}")
+
+    # 정수 + 실수
+    r3 = add(3, 5.0)
+    print(f"3 + 5.0 = {r3}, type: {type(r3)}")
+
+check_types()
+```
+
+## 검증 체크리스트 {#sec-verify-checklist}
+
+AI 생성 코드를 받았을 때 확인할 사항:
+
+:::{.callout-note}
+## 코드 검증 체크리스트
+
+- [ ] 원래 테스트가 모두 통과하는가?
+- [ ] 엣지 케이스에서도 동작하는가?
+- [ ] 예상치 못한 입력에 어떻게 반응하는가?
+- [ ] 코드가 읽기 쉽고 이해 가능한가?
+- [ ] 불필요하게 복잡하지 않은가?
+:::
+
+## 핵심 정리 {#sec-verify-summary}
+
+:::{.callout-tip}
+## 코드 검증의 핵심
+
+1. **테스트 실행** - 명세한 테스트를 먼저 실행
+2. **엣지 케이스** - 명세에 없던 상황도 테스트
+3. **코드 이해** - 동작 원리를 파악
+4. **개선 요청** - 문제 발견 시 AI에게 수정 요청
+:::
+
+다음 장부터는 AI가 생성한 코드를 뜯어보며 프로그래밍의 핵심 개념들을 학습한다.

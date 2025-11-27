@@ -1,0 +1,187 @@
+---
+execute:
+  eval: false
+---
+
+# 추상화 {#sec-abstraction}
+
+프로그래밍의 핵심 기술 중 하나는 **추상화(Abstraction)**다. 복잡한 것을 단순하게, 반복되는 것을 재사용 가능하게 만드는 것이다. 계산기 예제를 통해 **함수**와 **모듈화**를 이해해보자.
+
+## 함수: 코드에 이름 붙이기 {#sec-abstraction-function}
+
+\index{함수}함수는 특정 작업을 수행하는 코드 블록에 이름을 붙인 것이다.
+
+### 함수의 구조 {#sec-abstraction-structure}
+
+```python
+#| eval: false
+def add(a, b):
+    """두 수를 더한다.
+
+    Args:
+        a: 첫 번째 숫자
+        b: 두 번째 숫자
+
+    Returns:
+        두 수의 합
+    """
+    return a + b
+```
+
+- `def`: 함수 정의 시작
+- `add`: 함수 이름
+- `(a, b)`: 매개변수 (입력)
+- `"""..."""`: 문서화 문자열 (docstring)
+- `return`: 반환값 (출력)
+
+### 함수를 만드는 이유 {#sec-abstraction-why}
+
+1. **재사용** - 같은 코드를 여러 번 쓰지 않아도 된다
+2. **추상화** - 복잡한 내용을 숨기고 이름으로 의미 전달
+3. **테스트** - 독립적으로 테스트 가능
+4. **유지보수** - 한 곳만 수정하면 모든 곳에 적용
+
+## 계산기 모듈화 {#sec-abstraction-module}
+
+\index{모듈}지금까지 만든 계산기 함수들을 정리해보자.
+
+### calculator.py {#sec-abstraction-calculator}
+
+```python
+#| eval: false
+# calculator.py
+
+def add(a, b):
+    """두 수를 더한다."""
+    return a + b
+
+def subtract(a, b):
+    """첫 번째 수에서 두 번째 수를 뺀다."""
+    return a - b
+
+def multiply(a, b):
+    """두 수를 곱한다."""
+    return a * b
+
+def divide(a, b):
+    """첫 번째 수를 두 번째 수로 나눈다.
+    0으로 나누면 None을 반환한다.
+    """
+    if b == 0:
+        return None
+    return a / b
+
+def calculate(a, b, operation):
+    """두 수와 연산자를 받아 계산한다."""
+    operations = {
+        "+": add,
+        "-": subtract,
+        "*": multiply,
+        "/": divide
+    }
+    if operation in operations:
+        return operations[operation](a, b)
+    return None
+```
+
+### 모듈 사용하기 {#sec-abstraction-import}
+
+```python
+#| eval: false
+# main.py
+from calculator import add, subtract, calculate
+
+result = calculate(10, 3, "+")
+print(f"10 + 3 = {result}")
+```
+
+## 좋은 함수 설계 원칙 {#sec-abstraction-principles}
+
+### 1. 한 가지 일만 한다 {#sec-abstraction-single}
+
+```python
+#| eval: false
+# 나쁜 예: 너무 많은 일을 함
+def process_and_print_and_save(data):
+    processed = data * 2
+    print(processed)
+    # save_to_file(processed)
+    return processed
+
+# 좋은 예: 각각 분리
+def process(data):
+    return data * 2
+
+def display(data):
+    print(data)
+```
+
+### 2. 이름이 동작을 설명한다 {#sec-abstraction-naming}
+
+```python
+#| eval: false
+# 나쁜 예
+def do_it(x, y):
+    return x + y
+
+# 좋은 예
+def add_numbers(first, second):
+    return first + second
+```
+
+### 3. 입력과 출력이 명확하다 {#sec-abstraction-io}
+
+```python
+#| eval: false
+def add(a: int, b: int) -> int:
+    """두 정수를 더한다.
+
+    Args:
+        a: 첫 번째 정수
+        b: 두 번째 정수
+
+    Returns:
+        두 수의 합
+    """
+    return a + b
+```
+
+## 테스트와 함수 {#sec-abstraction-test}
+
+좋은 함수는 테스트하기 쉽다:
+
+```python
+#| eval: false
+def test_calculator():
+    """계산기 모듈 테스트"""
+    # add
+    assert add(2, 3) == 5
+    assert add(-1, 1) == 0
+
+    # subtract
+    def subtract(a, b): return a - b  # 임시 정의
+    assert subtract(5, 3) == 2
+
+    # divide (0으로 나누기)
+    def divide(a, b):
+        return None if b == 0 else a / b
+    assert divide(10, 2) == 5
+    assert divide(5, 0) is None
+
+    print("모든 테스트 통과!")
+
+test_calculator()
+```
+
+## 핵심 정리 {#sec-abstraction-summary}
+
+:::{.callout-tip}
+## 추상화의 핵심
+
+1. **함수** - 반복되는 코드에 이름을 붙여 재사용
+2. **모듈** - 관련 함수들을 파일로 묶어 정리
+3. **단일 책임** - 함수는 한 가지 일만 잘 해야 한다
+4. **명확한 인터페이스** - 입력과 출력이 분명해야 한다
+:::
+
+이로써 AI 시대 프로그래밍의 기초를 마쳤다. 다음 파트에서는 버전 관리와 협업을 통해 AI와 인간이 함께 코드를 발전시키는 방법을 알아본다.
