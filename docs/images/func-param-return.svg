@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 180">
+  <defs>
+    <style>
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-label { font-size: 12px; }
+      .tufte-small { font-size: 11px; fill: #666; }
+      .tufte-code { font-family: 'Consolas', 'Monaco', monospace; font-size: 11px; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="700" height="180" fill="#ffffff"/>
+
+  <!-- 호출부 (왼쪽) -->
+  <g transform="translate(20, 30)">
+    <rect x="0" y="0" width="150" height="120" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="5"/>
+    <text x="70" y="20" text-anchor="middle" class="tufte-text tufte-label" font-weight="bold">호출부</text>
+    <line x1="10" y1="28" x2="130" y2="28" stroke="#ccc" stroke-width="1"/>
+
+    <text x="15" y="50" class="tufte-code">name = "철수"</text>
+    <text x="15" y="75" class="tufte-code">result = greet(name)</text>
+    <text x="15" y="100" class="tufte-code">print(result)</text>
+  </g>
+
+  <!-- 인자 전달 화살표 -->
+  <path d="M 180 70 L 250 70" fill="none" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="215" y="60" text-anchor="middle" class="tufte-text tufte-small">인자 전달</text>
+  <text x="215" y="90" text-anchor="middle" class="tufte-code">"철수"</text>
+
+  <!-- 함수 정의 (가운데) -->
+  <g transform="translate(260, 20)">
+    <rect x="0" y="0" width="200" height="140" fill="#e8e8e8" stroke="#333" stroke-width="1.5" rx="5"/>
+    <text x="100" y="20" text-anchor="middle" class="tufte-text tufte-label" font-weight="bold">함수: greet(person)</text>
+    <line x1="10" y1="28" x2="190" y2="28" stroke="#999" stroke-width="1"/>
+
+    <!-- 매개변수 표시 -->
+    <rect x="15" y="40" width="170" height="25" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="3"/>
+    <text x="100" y="57" text-anchor="middle" class="tufte-code">person = "철수"</text>
+    <text x="100" y="80" text-anchor="middle" class="tufte-text tufte-small" fill="#888">매개변수에 인자 대입</text>
+
+    <!-- 처리 -->
+    <text x="20" y="100" class="tufte-code">msg = "안녕, " + person</text>
+    <text x="20" y="120" class="tufte-code">return msg</text>
+  </g>
+
+  <!-- 반환값 화살표 -->
+  <path d="M 470 90 L 540 90" fill="none" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="505" y="80" text-anchor="middle" class="tufte-text tufte-small">반환</text>
+  <text x="505" y="110" text-anchor="middle" class="tufte-code">"안녕, 철수"</text>
+
+  <!-- 결과 (오른쪽) -->
+  <g transform="translate(550, 50)">
+    <rect x="0" y="0" width="120" height="80" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="5"/>
+    <text x="60" y="20" text-anchor="middle" class="tufte-text tufte-label" font-weight="bold">반환값</text>
+    <line x1="10" y1="28" x2="110" y2="28" stroke="#ccc" stroke-width="1"/>
+    <text x="60" y="55" text-anchor="middle" class="tufte-code">"안녕, 철수"</text>
+    <text x="60" y="72" text-anchor="middle" class="tufte-text tufte-small" fill="#888">result에 저장</text>
+  </g>
+
+</svg>

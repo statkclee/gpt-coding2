@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 260">
+  <defs>
+    <style>
+      .tufte-text {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+      }
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 14px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 12px;
+        fill: #333;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 11px;
+        fill: #333;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #666;
+      }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="720" height="280" fill="#ffffff"/>
+
+  <!-- Section 1: Direct access vs get() -->
+  <text x="170" y="25" text-anchor="middle" class="tufte-title">키 접근: 직접 vs get()</text>
+
+  <text x="30" y="55" class="tufte-code">counts = {'a': 1, 'b': 2}</text>
+
+  <!-- Direct access -->
+  <text x="30" y="85" class="tufte-label" font-weight="bold">직접 접근 []</text>
+  <text x="30" y="105" class="tufte-code">counts['a']  → 1</text>
+  <text x="30" y="125" class="tufte-code">counts['c']  → KeyError!</text>
+  <rect x="220" y="113" width="70" height="16" fill="#f5f5f5" stroke="#999" rx="2"/>
+  <text x="255" y="124" text-anchor="middle" class="tufte-small" fill="#333">예외 발생</text>
+
+  <!-- get() method -->
+  <text x="30" y="160" class="tufte-label" font-weight="bold">get() 메서드</text>
+  <text x="30" y="180" class="tufte-code">counts.get('a', 0)  → 1</text>
+  <text x="30" y="200" class="tufte-code">counts.get('c', 0)  → 0</text>
+  <rect x="220" y="188" width="70" height="16" fill="#e8e8e8" stroke="#666" rx="2"/>
+  <text x="255" y="199" text-anchor="middle" class="tufte-small">기본값 반환</text>
+
+  <text x="170" y="235" text-anchor="middle" class="tufte-small">키가 없을 때 안전하게 처리</text>
+
+  <!-- Vertical divider -->
+  <line x1="360" y1="15" x2="360" y2="250" stroke="#ccc" stroke-width="1"/>
+
+  <!-- Section 2: Counter pattern -->
+  <text x="540" y="25" text-anchor="middle" class="tufte-title">계수기 패턴</text>
+
+  <text x="390" y="55" class="tufte-code">word = 'banana'</text>
+  <text x="390" y="75" class="tufte-code">d = {}</text>
+
+  <!-- Before -->
+  <text x="390" y="100" class="tufte-label" font-weight="bold">if 문 사용 (4줄)</text>
+  <text x="390" y="118" class="tufte-code">if c not in d:</text>
+  <text x="410" y="133" class="tufte-code">d[c] = 1</text>
+  <text x="390" y="148" class="tufte-code">else:</text>
+  <text x="410" y="163" class="tufte-code">d[c] = d[c] + 1</text>
+
+  <!-- Arrow with label -->
+  <g transform="translate(-50, 0)">
+    <line x1="540" y1="175" x2="540" y2="195" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+    <text x="560" y="190" class="tufte-small">간소화</text>
+  </g>
+
+  <!-- After -->
+  <text x="390" y="215" class="tufte-label" font-weight="bold">get() 사용 (1줄)</text>
+  <rect x="385" y="222" width="180" height="22" fill="#e8e8e8" stroke="#666" rx="3"/>
+  <text x="390" y="238" class="tufte-code">d[c] = d.get(c, 0) + 1</text>
+
+  <text x="630" y="237" text-anchor="middle" class="tufte-small">파이썬 관용구(idiom)</text>
+</svg>

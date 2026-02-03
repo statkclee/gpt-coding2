@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320">
+  <defs>
+    <style>
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 16px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 13px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-desc {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 11px;
+        fill: #666;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Menlo, Monaco, monospace;
+        font-size: 10px;
+        fill: #666;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #999;
+      }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- White background -->
+  <rect x="0" y="0" width="800" height="320" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="400" y="30" class="tufte-title" text-anchor="middle">Decorator 패턴</text>
+
+  <!-- Nesting illustration -->
+  <rect x="50" y="60" width="350" height="180" fill="#f5f5f5" stroke="#333" stroke-width="2" rx="5"/>
+  <text x="225" y="85" class="tufte-label" text-anchor="middle">BracketDecorator</text>
+
+  <rect x="80" y="100" width="290" height="120" fill="#fff" stroke="#666" stroke-width="1.5" rx="4"/>
+  <text x="225" y="120" class="tufte-label" text-anchor="middle">UppercaseDecorator</text>
+
+  <rect x="110" y="135" width="230" height="65" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="225" y="160" class="tufte-label" text-anchor="middle">PlainTextProcessor</text>
+  <text x="225" y="180" class="tufte-code" text-anchor="middle">process(text) → text</text>
+
+  <!-- Arrows showing call flow -->
+  <text x="480" y="85" class="tufte-desc">호출 순서:</text>
+  <text x="480" y="105" class="tufte-code">1. BracketDecorator.process()</text>
+  <text x="480" y="120" class="tufte-code">   → 2. UppercaseDecorator.process()</text>
+  <text x="480" y="135" class="tufte-code">      → 3. PlainTextProcessor.process()</text>
+
+  <text x="480" y="165" class="tufte-desc">결과 전파:</text>
+  <text x="480" y="185" class="tufte-code">3. "hello" → "hello"</text>
+  <text x="480" y="200" class="tufte-code">2. "hello" → "HELLO"</text>
+  <text x="480" y="215" class="tufte-code">1. "HELLO" → "[HELLO]"</text>
+
+  <!-- Code example -->
+  <rect x="50" y="255" width="700" height="50" fill="#fff" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="400" y="277" class="tufte-code" text-anchor="middle">processor = BracketDecorator(UppercaseDecorator(PlainTextProcessor()))</text>
+  <text x="400" y="295" class="tufte-small" text-anchor="middle">각 데코레이터가 이전 결과를 감싸서 새로운 기능 추가</text>
+</svg>

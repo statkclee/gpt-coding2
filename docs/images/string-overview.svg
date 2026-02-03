@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 280">
+  <defs>
+    <style>
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 16px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-subtitle {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 13px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-text {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 11px;
+        fill: #333;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 10px;
+        fill: #333;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #666;
+      }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="650" height="280" fill="#ffffff"/>
+
+  <!-- Center: String concept -->
+  <rect x="225" y="20" width="200" height="50" fill="#fff" stroke="#333" stroke-width="2" rx="5"/>
+  <text x="325" y="42" text-anchor="middle" class="tufte-title">문자열 = 시퀀스</text>
+  <text x="325" y="58" text-anchor="middle" class="tufte-small">순서가 있는 문자의 나열</text>
+
+  <!-- Left branch: 접근 -->
+  <line x1="275" y1="70" x2="130" y2="100" stroke="#666" stroke-width="1.5"/>
+
+  <rect x="30" y="100" width="200" height="80" fill="#fff" stroke="#333" stroke-width="2" rx="4"/>
+  <text x="130" y="120" text-anchor="middle" class="tufte-subtitle">인덱싱 &amp; 슬라이싱</text>
+  <line x1="40" y1="128" x2="220" y2="128" stroke="#ccc" stroke-width="1"/>
+  <text x="130" y="145" text-anchor="middle" class="tufte-code">fruit[0] → 'b'</text>
+  <text x="130" y="162" text-anchor="middle" class="tufte-code">fruit[0:3] → 'ban'</text>
+  <text x="130" y="175" text-anchor="middle" class="tufte-small">위치로 문자 추출</text>
+
+  <!-- Right branch: 조작 -->
+  <line x1="375" y1="70" x2="520" y2="100" stroke="#666" stroke-width="1.5"/>
+
+  <rect x="420" y="100" width="200" height="80" fill="#fff" stroke="#666" stroke-width="2" rx="4"/>
+  <text x="520" y="120" text-anchor="middle" class="tufte-subtitle">메서드</text>
+  <line x1="430" y1="128" x2="610" y2="128" stroke="#ccc" stroke-width="1"/>
+  <text x="520" y="145" text-anchor="middle" class="tufte-code">find(), strip()</text>
+  <text x="520" y="162" text-anchor="middle" class="tufte-code">lower(), startswith()</text>
+  <text x="520" y="175" text-anchor="middle" class="tufte-small">문자열 처리 도구</text>
+
+  <!-- Bottom: 순회 -->
+  <line x1="325" y1="70" x2="325" y2="200" stroke="#666" stroke-width="1.5"/>
+
+  <rect x="225" y="200" width="200" height="65" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="4"/>
+  <text x="325" y="220" text-anchor="middle" class="tufte-subtitle">순회 &amp; 계수</text>
+  <line x1="235" y1="228" x2="415" y2="228" stroke="#ccc" stroke-width="1"/>
+  <text x="325" y="245" text-anchor="middle" class="tufte-code">for char in text:</text>
+  <text x="325" y="260" text-anchor="middle" class="tufte-small">한 글자씩 처리</text>
+
+  <!-- Key property note -->
+  <text x="30" y="195" class="tufte-small">핵심: 문자열은 불변(immutable) - 수정 시 새 문자열 생성</text>
+
+</svg>

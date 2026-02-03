@@ -1,0 +1,188 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320">
+  <defs>
+    <style>
+      .tufte-text {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+      }
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 14px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 12px;
+        fill: #333;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 11px;
+        fill: #333;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #666;
+      }
+      .tufte-error {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 11px;
+        fill: #333;
+        font-weight: bold;
+      }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="720" height="320" fill="#ffffff"/>
+
+  <!-- ========== Section 1: sort() returns None ========== -->
+  <text x="120" y="25" text-anchor="middle" class="tufte-title">함정 1: 메서드 반환값</text>
+
+  <!-- Wrong way -->
+  <text x="25" y="50" class="tufte-code">t = [3, 1, 2]</text>
+  <text x="25" y="68" class="tufte-code">t = t.sort()</text>
+
+  <g transform="translate(25, 80)">
+    <rect x="0" y="0" width="25" height="25" fill="#f5f5f5" stroke="#999"/>
+    <text x="12" y="17" text-anchor="middle" class="tufte-code">t</text>
+  </g>
+  <line x1="50" y1="92" x2="85" y2="92" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <rect x="95" y="80" width="55" height="25" fill="#ccc" stroke="#666" stroke-width="2"/>
+  <text x="122" y="97" text-anchor="middle" class="tufte-code">None</text>
+
+  <text x="25" y="130" class="tufte-error">t가 None이 됨!</text>
+
+  <!-- Divider -->
+  <line x1="25" y1="145" x2="210" y2="145" stroke="#ccc" stroke-width="1"/>
+
+  <!-- Right way -->
+  <text x="25" y="165" class="tufte-code">t = [3, 1, 2]</text>
+  <text x="25" y="183" class="tufte-code">t.sort()</text>
+  <text x="25" y="201" class="tufte-small"># 반환값 무시</text>
+
+  <g transform="translate(25, 215)">
+    <rect x="0" y="0" width="25" height="25" fill="#f5f5f5" stroke="#999"/>
+    <text x="12" y="17" text-anchor="middle" class="tufte-code">t</text>
+  </g>
+  <line x1="50" y1="227" x2="85" y2="227" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <g transform="translate(95, 215)">
+    <rect x="0" y="0" width="30" height="25" fill="#e8e8e8" stroke="#666"/>
+    <rect x="30" y="0" width="30" height="25" fill="#e8e8e8" stroke="#666"/>
+    <rect x="60" y="0" width="30" height="25" fill="#e8e8e8" stroke="#666"/>
+    <text x="15" y="17" text-anchor="middle" class="tufte-code">1</text>
+    <text x="45" y="17" text-anchor="middle" class="tufte-code">2</text>
+    <text x="75" y="17" text-anchor="middle" class="tufte-code">3</text>
+  </g>
+
+  <text x="25" y="265" class="tufte-small">원본이 정렬됨</text>
+
+  <!-- ========== Vertical divider ========== -->
+  <line x1="240" y1="15" x2="240" y2="300" stroke="#ccc" stroke-width="1"/>
+
+  <!-- ========== Section 2: Aliasing ========== -->
+  <text x="370" y="25" text-anchor="middle" class="tufte-title">함정 2: 에일리어싱</text>
+
+  <!-- Wrong way -->
+  <text x="265" y="50" class="tufte-code">a = [1, 2, 3]</text>
+  <text x="265" y="68" class="tufte-code">b = a</text>
+  <text x="265" y="86" class="tufte-code">b[0] = 99</text>
+
+  <g transform="translate(265, 100)">
+    <rect x="0" y="0" width="25" height="22" fill="#f5f5f5" stroke="#999"/>
+    <text x="12" y="15" text-anchor="middle" class="tufte-code">a</text>
+    <rect x="0" y="28" width="25" height="22" fill="#f5f5f5" stroke="#999"/>
+    <text x="12" y="43" text-anchor="middle" class="tufte-code">b</text>
+  </g>
+
+  <line x1="290" y1="111" x2="325" y2="125" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <line x1="290" y1="139" x2="325" y2="130" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+  <g transform="translate(335, 115)">
+    <rect x="0" y="0" width="35" height="25" fill="#999" stroke="#333" stroke-width="2"/>
+    <rect x="35" y="0" width="30" height="25" fill="#e8e8e8" stroke="#666"/>
+    <rect x="65" y="0" width="30" height="25" fill="#e8e8e8" stroke="#666"/>
+    <text x="17" y="17" text-anchor="middle" class="tufte-code" fill="#fff">99</text>
+    <text x="50" y="17" text-anchor="middle" class="tufte-code">2</text>
+    <text x="80" y="17" text-anchor="middle" class="tufte-code">3</text>
+  </g>
+
+  <text x="265" y="170" class="tufte-error">a도 [99, 2, 3]으로 변경!</text>
+
+  <!-- Divider -->
+  <line x1="265" y1="185" x2="470" y2="185" stroke="#ccc" stroke-width="1"/>
+
+  <!-- Right way -->
+  <text x="265" y="205" class="tufte-code">a = [1, 2, 3]</text>
+  <text x="265" y="223" class="tufte-code">b = a[:]</text>
+  <text x="265" y="241" class="tufte-small"># 복사본 생성</text>
+
+  <g transform="translate(265, 255)">
+    <rect x="0" y="0" width="25" height="20" fill="#f5f5f5" stroke="#999"/>
+    <text x="12" y="14" text-anchor="middle" class="tufte-code">a</text>
+  </g>
+  <line x1="290" y1="265" x2="325" y2="265" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <g transform="translate(335, 255)">
+    <rect x="0" y="0" width="25" height="20" fill="#e8e8e8" stroke="#666"/>
+    <rect x="25" y="0" width="25" height="20" fill="#e8e8e8" stroke="#666"/>
+    <rect x="50" y="0" width="25" height="20" fill="#e8e8e8" stroke="#666"/>
+    <text x="12" y="14" text-anchor="middle" class="tufte-code">1</text>
+    <text x="37" y="14" text-anchor="middle" class="tufte-code">2</text>
+    <text x="62" y="14" text-anchor="middle" class="tufte-code">3</text>
+  </g>
+
+  <g transform="translate(265, 280)">
+    <rect x="0" y="0" width="25" height="20" fill="#f5f5f5" stroke="#999"/>
+    <text x="12" y="14" text-anchor="middle" class="tufte-code">b</text>
+  </g>
+  <line x1="290" y1="290" x2="325" y2="290" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <g transform="translate(335, 280)">
+    <rect x="0" y="0" width="25" height="20" fill="#e8e8e8" stroke="#666"/>
+    <rect x="25" y="0" width="25" height="20" fill="#e8e8e8" stroke="#666"/>
+    <rect x="50" y="0" width="25" height="20" fill="#e8e8e8" stroke="#666"/>
+    <text x="12" y="14" text-anchor="middle" class="tufte-code">1</text>
+    <text x="37" y="14" text-anchor="middle" class="tufte-code">2</text>
+    <text x="62" y="14" text-anchor="middle" class="tufte-code">3</text>
+  </g>
+
+  <text x="430" y="275" class="tufte-small">별개 객체</text>
+
+  <!-- ========== Vertical divider ========== -->
+  <line x1="485" y1="15" x2="485" y2="300" stroke="#ccc" stroke-width="1"/>
+
+  <!-- ========== Section 3: Empty list access ========== -->
+  <text x="600" y="25" text-anchor="middle" class="tufte-title">함정 3: 빈 리스트 접근</text>
+
+  <!-- Wrong way -->
+  <text x="505" y="50" class="tufte-code">words = line.split()</text>
+  <text x="505" y="68" class="tufte-code">if words[0] != 'From':</text>
+
+  <text x="505" y="95" class="tufte-label">빈 라인일 때:</text>
+  <g transform="translate(505, 105)">
+    <rect x="0" y="0" width="60" height="25" fill="#f5f5f5" stroke="#999"/>
+    <text x="30" y="17" text-anchor="middle" class="tufte-code">words</text>
+  </g>
+  <line x1="565" y1="117" x2="600" y2="117" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <rect x="610" y="105" width="40" height="25" fill="#ccc" stroke="#666" stroke-width="2"/>
+  <text x="630" y="122" text-anchor="middle" class="tufte-code">[ ]</text>
+
+  <text x="505" y="155" class="tufte-error">IndexError 발생!</text>
+  <text x="505" y="172" class="tufte-small">빈 리스트에 [0] 접근 불가</text>
+
+  <!-- Divider -->
+  <line x1="505" y1="185" x2="700" y2="185" stroke="#ccc" stroke-width="1"/>
+
+  <!-- Right way - Guardian pattern -->
+  <text x="505" y="205" class="tufte-code">words = line.split()</text>
+  <text x="505" y="223" class="tufte-code">if len(words) == 0:</text>
+  <text x="505" y="241" class="tufte-code">    continue</text>
+  <text x="505" y="259" class="tufte-code">if words[0] != 'From':</text>
+
+  <text x="505" y="285" class="tufte-small">가디언 패턴:</text>
+  <text x="505" y="300" class="tufte-small">먼저 길이 검사 후 접근</text>
+</svg>

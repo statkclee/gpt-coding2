@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480">
+  <defs>
+    <style>
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 16px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-subtitle {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 13px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 11px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-desc {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #666;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Menlo, Monaco, monospace;
+        font-size: 9px;
+        fill: #666;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 9px;
+        fill: #999;
+      }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- White background -->
+  <rect x="0" y="0" width="800" height="480" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="400" y="28" class="tufte-title" text-anchor="middle">Software 1.0 vs 2.0: 패러다임 전환</text>
+  <text x="400" y="46" class="tufte-small" text-anchor="middle">Andrej Karpathy, 2017 - "Software 2.0"</text>
+
+  <!-- Software 1.0 Section -->
+  <rect x="40" y="70" width="340" height="180" fill="#fff" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="210" y="95" class="tufte-subtitle" text-anchor="middle">Software 1.0 (전통 프로그래밍)</text>
+  <line x1="55" y1="105" x2="365" y2="105" stroke="#ccc" stroke-width="1"/>
+
+  <!-- 1.0 Flow -->
+  <rect x="60" y="120" width="80" height="40" fill="#f5f5f5" stroke="#666" stroke-width="1.5" rx="2"/>
+  <text x="100" y="138" class="tufte-label" text-anchor="middle">입력</text>
+  <text x="100" y="152" class="tufte-code" text-anchor="middle">데이터</text>
+
+  <line x1="140" y1="140" x2="170" y2="140" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="180" y="120" width="100" height="40" fill="#fff" stroke="#333" stroke-width="2" rx="2"/>
+  <text x="230" y="138" class="tufte-label" text-anchor="middle">프로그램</text>
+  <text x="230" y="152" class="tufte-code" text-anchor="middle">if/else, 규칙</text>
+
+  <line x1="280" y1="140" x2="310" y2="140" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="320" y="120" width="50" height="40" fill="#f5f5f5" stroke="#666" stroke-width="1.5" rx="2"/>
+  <text x="345" y="145" class="tufte-label" text-anchor="middle">출력</text>
+
+  <!-- 1.0 Description -->
+  <text x="210" y="185" class="tufte-desc" text-anchor="middle">개발자가 규칙을 명시적으로 작성</text>
+  <text x="210" y="200" class="tufte-code" text-anchor="middle">if temperature > 30: print("덥다")</text>
+  <text x="210" y="220" class="tufte-desc" text-anchor="middle">모든 조건을 사람이 정의</text>
+  <text x="210" y="240" class="tufte-small" text-anchor="middle">한계: 규칙 폭발, 엣지 케이스, 유지보수 어려움</text>
+
+  <!-- Software 2.0 Section -->
+  <rect x="420" y="70" width="340" height="180" fill="#fff" stroke="#333" stroke-width="2" rx="3"/>
+  <text x="590" y="95" class="tufte-subtitle" text-anchor="middle">Software 2.0 (기계학습)</text>
+  <line x1="435" y1="105" x2="745" y2="105" stroke="#ccc" stroke-width="1"/>
+
+  <!-- 2.0 Flow -->
+  <rect x="440" y="120" width="80" height="40" fill="#f5f5f5" stroke="#666" stroke-width="1.5" rx="2"/>
+  <text x="480" y="138" class="tufte-label" text-anchor="middle">입력</text>
+  <text x="480" y="152" class="tufte-code" text-anchor="middle">데이터 + 정답</text>
+
+  <line x1="520" y1="140" x2="550" y2="140" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="560" y="120" width="100" height="40" fill="#fff" stroke="#333" stroke-width="2" rx="2"/>
+  <text x="610" y="138" class="tufte-label" text-anchor="middle">신경망</text>
+  <text x="610" y="152" class="tufte-code" text-anchor="middle">가중치 학습</text>
+
+  <line x1="660" y1="140" x2="690" y2="140" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="700" y="120" width="50" height="40" fill="#f5f5f5" stroke="#666" stroke-width="1.5" rx="2"/>
+  <text x="725" y="145" class="tufte-label" text-anchor="middle">출력</text>
+
+  <!-- 2.0 Description -->
+  <text x="590" y="185" class="tufte-desc" text-anchor="middle">데이터에서 규칙을 자동으로 학습</text>
+  <text x="590" y="200" class="tufte-code" text-anchor="middle">model.fit(X_train, y_train)</text>
+  <text x="590" y="220" class="tufte-desc" text-anchor="middle">패턴을 신경망이 스스로 발견</text>
+  <text x="590" y="240" class="tufte-small" text-anchor="middle">장점: 복잡한 패턴, 자동 일반화, 지속적 개선</text>
+
+  <!-- Comparison Arrow -->
+  <line x1="380" y1="160" x2="418" y2="160" stroke="#666" stroke-width="2" stroke-dasharray="5,3"/>
+
+  <!-- Key Difference Section -->
+  <rect x="40" y="270" width="720" height="100" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="400" y="295" class="tufte-subtitle" text-anchor="middle">핵심 차이: 누가 규칙을 작성하는가?</text>
+  <line x1="55" y1="305" x2="745" y2="305" stroke="#ccc" stroke-width="1"/>
+
+  <text x="210" y="330" class="tufte-label" text-anchor="middle">Software 1.0</text>
+  <text x="210" y="350" class="tufte-desc" text-anchor="middle">사람이 규칙을 작성</text>
+
+  <text x="400" y="340" class="tufte-label" text-anchor="middle">vs</text>
+
+  <text x="590" y="330" class="tufte-label" text-anchor="middle">Software 2.0</text>
+  <text x="590" y="350" class="tufte-desc" text-anchor="middle">데이터가 규칙을 생성</text>
+
+  <!-- Historical Context -->
+  <rect x="40" y="385" width="720" height="80" fill="#fff" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="400" y="408" class="tufte-subtitle" text-anchor="middle">진화 타임라인</text>
+  <line x1="55" y1="418" x2="745" y2="418" stroke="#ccc" stroke-width="1"/>
+
+  <!-- Timeline -->
+  <line x1="80" y1="445" x2="720" y2="445" stroke="#999" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <circle cx="120" cy="445" r="4" fill="#666"/>
+  <text x="120" y="435" class="tufte-small" text-anchor="middle">1950s</text>
+  <text x="120" y="458" class="tufte-code" text-anchor="middle">초기 AI</text>
+
+  <circle cx="250" cy="445" r="4" fill="#666"/>
+  <text x="250" y="435" class="tufte-small" text-anchor="middle">1980s</text>
+  <text x="250" y="458" class="tufte-code" text-anchor="middle">전문가 시스템</text>
+
+  <circle cx="400" cy="445" r="4" fill="#666"/>
+  <text x="400" y="435" class="tufte-small" text-anchor="middle">2012</text>
+  <text x="400" y="458" class="tufte-code" text-anchor="middle">AlexNet</text>
+
+  <circle cx="530" cy="445" r="4" fill="#333"/>
+  <text x="530" y="435" class="tufte-small" text-anchor="middle">2017</text>
+  <text x="530" y="458" class="tufte-code" text-anchor="middle">Transformer</text>
+
+  <circle cx="650" cy="445" r="4" fill="#333"/>
+  <text x="650" y="435" class="tufte-small" text-anchor="middle">2022</text>
+  <text x="650" y="458" class="tufte-code" text-anchor="middle">ChatGPT</text>
+</svg>

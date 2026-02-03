@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 260">
+  <defs>
+    <style>
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 12px;
+        fill: #333;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 10px;
+        fill: #333;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #666;
+      }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="720" height="260" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="360" y="25" text-anchor="middle" class="tufte-label" font-weight="bold">API 요청/응답 흐름</text>
+
+  <!-- Python Client -->
+  <g transform="translate(30, 45)">
+    <rect x="0" y="0" width="150" height="80" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="75" y="22" text-anchor="middle" class="tufte-label" font-weight="bold">Python 클라이언트</text>
+    <line x1="10" y1="30" x2="140" y2="30" stroke="#ccc"/>
+    <text x="15" y="48" class="tufte-code">import requests</text>
+    <text x="15" y="63" class="tufte-code">import json</text>
+  </g>
+
+  <!-- Arrow 1: Request -->
+  <line x1="185" y1="70" x2="265" y2="70" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <text x="225" y="60" text-anchor="middle" class="tufte-small">요청</text>
+
+  <!-- JSON Request -->
+  <g transform="translate(270, 45)">
+    <rect x="0" y="0" width="180" height="80" fill="#e8e8e8" stroke="#999" rx="3"/>
+    <text x="90" y="22" text-anchor="middle" class="tufte-label" font-weight="bold">JSON 요청</text>
+    <line x1="10" y1="30" x2="170" y2="30" stroke="#ccc"/>
+    <text x="15" y="48" class="tufte-code">{</text>
+    <text x="25" y="63" class="tufte-code">"prompt": "Hello"</text>
+    <text x="15" y="75" class="tufte-code">}</text>
+  </g>
+
+  <!-- Arrow 2: HTTP -->
+  <line x1="455" y1="70" x2="535" y2="70" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <text x="495" y="60" text-anchor="middle" class="tufte-small">HTTP</text>
+
+  <!-- API Server -->
+  <g transform="translate(540, 45)">
+    <rect x="0" y="0" width="150" height="80" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="75" y="22" text-anchor="middle" class="tufte-label" font-weight="bold">API 서버</text>
+    <line x1="10" y1="30" x2="140" y2="30" stroke="#ccc"/>
+    <text x="75" y="50" text-anchor="middle" class="tufte-small">OpenAI, 날씨 API</text>
+    <text x="75" y="68" text-anchor="middle" class="tufte-small">데이터베이스 등</text>
+  </g>
+
+  <!-- Return flow -->
+  <!-- Arrow 3: Response from server -->
+  <line x1="540" y1="140" x2="455" y2="140" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <text x="495" y="155" text-anchor="middle" class="tufte-small">HTTP</text>
+
+  <!-- JSON Response -->
+  <g transform="translate(270, 135)">
+    <rect x="0" y="0" width="180" height="80" fill="#e8e8e8" stroke="#999" rx="3"/>
+    <text x="90" y="22" text-anchor="middle" class="tufte-label" font-weight="bold">JSON 응답</text>
+    <line x1="10" y1="30" x2="170" y2="30" stroke="#ccc"/>
+    <text x="15" y="48" class="tufte-code">{</text>
+    <text x="25" y="63" class="tufte-code">"result": "Hi!"</text>
+    <text x="15" y="75" class="tufte-code">}</text>
+  </g>
+
+  <!-- Arrow 4: Parse -->
+  <line x1="265" y1="175" x2="185" y2="175" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <text x="225" y="165" text-anchor="middle" class="tufte-small">파싱</text>
+
+  <!-- Python Result -->
+  <g transform="translate(30, 135)">
+    <rect x="0" y="0" width="150" height="80" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="75" y="22" text-anchor="middle" class="tufte-label" font-weight="bold">Python dict</text>
+    <line x1="10" y1="30" x2="140" y2="30" stroke="#ccc"/>
+    <text x="15" y="48" class="tufte-code">data = resp.json()</text>
+    <text x="15" y="63" class="tufte-code">msg = data["result"]</text>
+  </g>
+
+  <!-- Bottom summary -->
+  <g transform="translate(30, 230)">
+    <rect x="0" y="0" width="660" height="25" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="330" y="17" text-anchor="middle" class="tufte-small">Python dict → json.dumps() → HTTP 전송 → 서버 처리 → HTTP 응답 → json.loads() → Python dict</text>
+  </g>
+
+</svg>

@@ -1,0 +1,146 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 70 900 380">
+  <defs>
+    <style>
+      .tufte-title { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif; font-size: 20px; font-weight: bold; fill: #111; }
+      .tufte-subtitle { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif; font-size: 15px; font-weight: bold; fill: #222; }
+      .tufte-label { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif; font-size: 13px; font-weight: bold; fill: #333; }
+      .tufte-text { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif; font-size: 12px; fill: #444; }
+      .tufte-small { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif; font-size: 10px; fill: #666; }
+
+      .box-zone { fill: #fcfcfc; stroke: #ddd; stroke-width: 1.5; stroke-dasharray: 4,2; }
+      .box-component { fill: #fff; stroke: #333; stroke-width: 1.5; }
+      .box-highlight { fill: #f5f5f5; stroke: #333; stroke-width: 2; }
+
+      .arrow-main { stroke: #333; stroke-width: 2; fill: none; }
+      .arrow-sub { stroke: #666; stroke-width: 1.5; stroke-dasharray: 2,2; fill: none; }
+      .arrow-feedback { stroke: #333; stroke-width: 2; stroke-dasharray: 4,2; fill: none; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#333" />
+    </marker>
+    <marker id="arrow-sub" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#666" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="900" height="520" fill="#ffffff"/>
+
+  <!-- Title -->
+  <!-- <text x="450" y="35" class="tufte-title" text-anchor="middle">MLOps: 코드와 데이터의 이중 트리거</text>
+  <text x="450" y="58" class="tufte-text" text-anchor="middle" font-style="italic">코드 변경은 CI/CD를, 데이터 변화는 지속 학습(CT)을 촉발한다</text> -->
+
+  <!-- Divider -->
+  <!-- <line x1="40" y1="75" x2="860" y2="75" stroke="#ddd" stroke-width="2"/> -->
+
+  <!-- Zone Labels (Top) -->
+  <text x="140" y="100" class="tufte-subtitle" text-anchor="middle">실험</text>
+  <text x="420" y="100" class="tufte-subtitle" text-anchor="middle">자동화</text>
+  <text x="730" y="100" class="tufte-subtitle" text-anchor="middle">운영</text>
+
+  <!-- ZONE 1: EXPERIMENT -->
+  <rect x="30" y="110" width="220" height="300" class="box-zone" rx="8"/>
+
+  <!-- Code & Config -->
+  <g transform="translate(60, 140)">
+    <rect x="0" y="0" width="160" height="60" class="box-component" rx="4"/>
+    <text x="80" y="25" class="tufte-label" text-anchor="middle">코드/설정</text>
+    <text x="80" y="45" class="tufte-small" text-anchor="middle">model.py, config.yaml</text>
+  </g>
+
+  <!-- Data Lab -->
+  <g transform="translate(60, 240)">
+    <rect x="0" y="0" width="160" height="60" class="box-component" rx="4"/>
+    <text x="80" y="25" class="tufte-label" text-anchor="middle">데이터 탐색</text>
+    <text x="80" y="45" class="tufte-small" text-anchor="middle">EDA, 특징 엔지니어링</text>
+  </g>
+
+  <!-- Experiment Tracking -->
+  <g transform="translate(60, 340)">
+    <rect x="0" y="0" width="160" height="50" class="box-component" rx="4" stroke-dasharray="2,2"/>
+    <text x="80" y="24" class="tufte-label" text-anchor="middle" fill="#666">실험 추적</text>
+    <text x="80" y="40" class="tufte-small" text-anchor="middle">MLflow, W&amp;B</text>
+  </g>
+
+  <!-- ZONE 2: AUTOMATION -->
+  <rect x="270" y="110" width="300" height="300" class="box-zone" rx="8"/>
+
+  <!-- CI/CD Pipeline -->
+  <g transform="translate(290, 140)">
+    <rect x="0" y="0" width="125" height="100" class="box-component" rx="4"/>
+    <text x="62" y="25" class="tufte-label" text-anchor="middle">CI/CD</text>
+    <line x1="10" y1="35" x2="115" y2="35" stroke="#ddd"/>
+    <text x="62" y="55" class="tufte-small" text-anchor="middle">1. 유닛 테스트</text>
+    <text x="62" y="70" class="tufte-small" text-anchor="middle">2. 빌드</text>
+    <text x="62" y="85" class="tufte-small" text-anchor="middle">3. 배포</text>
+  </g>
+
+  <!-- CT Pipeline -->
+  <g transform="translate(435, 140)">
+    <rect x="0" y="0" width="125" height="100" class="box-highlight" rx="4"/>
+    <text x="62" y="25" class="tufte-label" text-anchor="middle">CT (지속 학습)</text>
+    <line x1="10" y1="35" x2="115" y2="35" stroke="#ccc"/>
+    <text x="62" y="55" class="tufte-small" text-anchor="middle">1. 데이터 검증</text>
+    <text x="62" y="70" class="tufte-small" text-anchor="middle">2. 모델 재학습</text>
+    <text x="62" y="85" class="tufte-small" text-anchor="middle">3. 모델 평가</text>
+  </g>
+
+  <!-- Model Registry (Central) -->
+  <g transform="translate(330, 280)">
+    <rect x="0" y="0" width="180" height="80" class="box-highlight" rx="4" stroke-width="2.5" stroke="#111"/>
+    <text x="90" y="30" class="tufte-subtitle" text-anchor="middle">모델 레지스트리</text>
+    <text x="90" y="50" class="tufte-text" text-anchor="middle">버전 관리 &amp; 승인</text>
+    <text x="90" y="68" class="tufte-small" text-anchor="middle">v1.0 (Prod), v1.1 (Stage)</text>
+  </g>
+
+  <!-- ZONE 3: OPERATIONS -->
+  <rect x="590" y="110" width="280" height="300" class="box-zone" rx="8"/>
+
+  <!-- Serving -->
+  <g transform="translate(620, 140)">
+    <rect x="0" y="0" width="220" height="100" class="box-highlight" rx="4"/>
+    <text x="110" y="30" class="tufte-label" text-anchor="middle">서빙 (Serving)</text>
+    <line x1="20" y1="40" x2="200" y2="40" stroke="#ccc"/>
+    <text x="110" y="60" class="tufte-text" text-anchor="middle">REST API / gRPC</text>
+    <text x="110" y="80" class="tufte-small" text-anchor="middle">Load Balancer + Auto-Scaling</text>
+  </g>
+
+  <!-- Monitoring -->
+  <g transform="translate(620, 280)">
+    <rect x="0" y="0" width="220" height="80" class="box-component" rx="4"/>
+    <text x="110" y="28" class="tufte-label" text-anchor="middle">모니터링</text>
+    <text x="110" y="48" class="tufte-text" text-anchor="middle">성능 및 데이터 드리프트</text>
+    <text x="110" y="65" class="tufte-small" text-anchor="middle">Prometheus / Grafana</text>
+  </g>
+
+  <!-- ARROWS: Main Flow -->
+  <!-- Experiment to Pipeline -->
+  <path d="M220,170 L290,170" class="arrow-main" marker-end="url(#arrow)"/>
+  <text x="255" y="160" class="tufte-small" text-anchor="middle">git push</text>
+
+  <!-- Pipeline to Registry (Vertical Down) -->
+  <path d="M352,240 L352,260 L420,260 L420,280" class="arrow-main" marker-end="url(#arrow)"/>
+  <path d="M497,240 L497,260 L420,260 L420,280" class="arrow-main" marker-end="url(#arrow)"/>
+
+  <!-- Registry to Serving (Across Zones) -->
+  <path d="M510,320 L570,320 L570,190 L620,190" class="arrow-main" marker-end="url(#arrow)"/>
+  <text x="530" y="255" class="tufte-small" transform="rotate(-90, 580, 250)">CD 배포 (Deploy)</text>
+
+  <!-- Serving to Monitoring -->
+  <path d="M730,240 L730,280" class="arrow-sub" marker-end="url(#arrow-sub)"/>
+  <text x="740" y="265" class="tufte-small">로그 수집</text>
+
+  <!-- FEEDBACK LOOP (Key Insight!) -->
+  <!-- Monitoring to Data Lab (trigger new data collection) -->
+  <path d="M730,360 L730,440 L90,440 L90,300" class="arrow-feedback" marker-end="url(#arrow)"/>
+  <text x="350" y="432" class="tufte-label" fill="#333">드리프트 감지 → 재학습 트리거</text>
+
+  <!-- Bottom Insight Box -->
+  <!-- <g transform="translate(40, 450)">
+    <rect x="0" y="0" width="820" height="60" fill="#fafafa" stroke="#ccc" stroke-width="1" rx="5"/>
+    <text x="410" y="20" class="tufte-label" text-anchor="middle">핵심 인사이트</text>
+    <line x1="20" y1="28" x2="800" y2="28" stroke="#ddd" stroke-width="1"/>
+    <text x="410" y="45" class="tufte-text" text-anchor="middle">전통 DevOps는 코드만 관리한다. MLOps는 코드 + 데이터 + 모델을 함께 버전 관리하고, 모델 성능 저하를 자동 감지하여 재학습한다.</text>
+  </g> -->
+
+</svg>

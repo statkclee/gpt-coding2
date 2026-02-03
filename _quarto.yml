@@ -1,0 +1,162 @@
+project:
+  type: book
+  output-dir: docs
+  preview:
+    port: 7771
+    browser: false
+  resources:
+    - "data/*.mp3"
+  render:
+    - "*.qmd"
+    - "!*.Rmd"
+
+lang: ko-KR
+
+book:
+  title: "챗GPT 코딩(개정판)"
+  reader-mode: true
+  subtitle: "프로그래밍 기초부터 소프트웨어 아키텍처, 그리고 인공지능까지"
+
+  page-footer:
+    left: |
+      챗GPT 쿼토 책은 소프트웨어 카펜트리 "Git 버전제어"를 번역한 것이 포함되어 있습니다.
+    right: |
+      순수하게 <a href="https://quarto.org/">쿼토(Quarto)</a>로 제작되었습니다.
+
+  cover-image: images/book_cover.jpg
+  favicon: images/logo.png
+  site-url: https://r2bit.com/gpt-coding/
+  repo-url: https://github.com/statkclee/gpt-coding2
+  repo-branch: main
+  repo-actions: [edit, issue]
+
+  google-analytics: "UA-229551680-1"
+  author:
+    - name: "이광춘"
+      affiliations: "국가인공지능전략위원회 자문위원"
+  date: last-modified
+  date-format: "YYYY년 MM월 DD일"
+
+  chapters:
+    - index.qmd
+
+    - part: "**1부** 전통 프로그래밍"
+      chapters:
+        - 01-intro.qmd
+        - 02-var.qmd
+        - 03-cont.qmd
+        - 04-func.qmd
+        - 05-loop.qmd
+
+    - part: "**2부** 자료구조"
+      chapters:
+        - 10-data-intro.qmd
+        - 11-string.qmd
+        - 12-file.qmd
+        - 13-list.qmd
+        - 14-dictionaries.qmd
+        - 15-tuples.qmd
+        - 16-dataframe.qmd
+        - 17-json.qmd
+        - 18-tensor.qmd
+        - 19-embedding.qmd
+        - 20-graph.qmd
+
+    - part: "**3부** 버전제어와 협업"
+      chapters:
+        - git-intro.qmd
+        - git-tracking.qmd
+        - git-history.qmd
+        - git-remote.qmd
+        - git-collab.qmd
+        - git-workflow.qmd
+
+    - part: "**4부** 분야별 코딩"
+      chapters:
+        - tool-intro.qmd
+        - tool-regex.qmd
+        - tool-network.qmd
+        - tool-web.qmd
+        - tool-database.qmd
+        - tool-ds.qmd
+        - tool-auto.qmd
+        - tool-make.qmd
+
+    - part: "**5부** 프로그래밍 패러다임"
+      chapters:
+        - prog-paradigm.qmd
+        - prog-imperative.qmd
+        - prog-oop.qmd
+        - prog-fp.qmd
+        - prog-declarative.qmd
+        - prog-reactive.qmd
+
+    - part: "**6부** 소프트웨어 설계와 아키텍처"
+      chapters:
+        - arch-reuse.qmd
+        - arch-stack.qmd
+        - arch-architecture.qmd
+        - arch-pattern.qmd
+
+    - part: "**7부** 기계학습 패러다임"
+      chapters:
+        - ml-paradigm.qmd
+        - ml-architecture.qmd
+        - ml-workflow.qmd
+        - ml-to-llm.qmd
+
+    - part: "**부록**"
+      chapters:
+        - glossary.qmd
+
+    - references.qmd
+
+format:
+  html:
+    mermaid:
+      theme: neutral
+    theme:
+      light: [cosmo, assets/r2bit.scss]
+    number-depth: 3
+    number-sections: true
+    colorlinks: true
+    code-overflow: wrap
+    code-link: true
+    author-meta: "이광춘(Openai)"
+    callout-appearance: simple
+    tbl-cap-location: bottom
+
+filters:
+  - fontawesome
+  - include-code-files
+  - fancy-text
+
+code-annotations: hover
+
+bibliography: assets/references.bib
+csl: https://www.zotero.org/styles/ieee
+link-citations: true
+cite-method: citeproc
+
+glossary:
+  path: glossary.yml
+  popup: click
+  show: true
+
+engine: knitr
+jupyter: python3
+
+knitr:
+  opts_chunk:
+    message: false
+    warning: false
+    collapse: true
+    code-overflow: wrap
+    fig-crop: false
+    comment: "#>"
+    R.options:
+      knitr.graphics.auto_pdf: true
+
+editor: 
+  markdown: 
+    wrap: 72

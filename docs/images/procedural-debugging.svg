@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 30 700 160">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 14px; fill: #333; font-weight: bold; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 11px; fill: #333; font-weight: bold; }
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 10px; fill: #333; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 9px; fill: #666; }
+      .tufte-code { font-family: 'SF Mono', Menlo, Monaco, monospace; font-size: 9px; fill: #666; }
+      .func-box { fill: #fff; stroke: #666; stroke-width: 1.5; }
+      .data-flow { fill: none; stroke: #333; stroke-width: 2; }
+      .data-lost { fill: none; stroke: #999; stroke-width: 2; stroke-dasharray: 6,4; }
+    </style>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#333"/>
+    </marker>
+    <marker id="arrowhead-lost" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#999"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="700" height="200" fill="#ffffff"/>
+
+  <!-- Title -->
+  <!-- <text x="350" y="25" text-anchor="middle" class="tufte-title">절차적 버그의 핵심: 데이터가 어디서 끊겼나?</text> -->
+
+  <!-- 올바른 파이프라인 -->
+  <text x="50" y="55" class="tufte-label">정상 흐름</text>
+
+  <rect x="50" y="65" width="90" height="35" class="func-box" rx="3"/>
+  <text x="95" y="80" text-anchor="middle" class="tufte-code">read()</text>
+  <text x="95" y="93" text-anchor="middle" class="tufte-small">→ data</text>
+
+  <line x1="140" y1="82" x2="175" y2="82" class="data-flow" marker-end="url(#arrowhead)"/>
+
+  <rect x="175" y="65" width="90" height="35" class="func-box" rx="3"/>
+  <text x="220" y="80" text-anchor="middle" class="tufte-code">validate(data)</text>
+  <text x="220" y="93" text-anchor="middle" class="tufte-small">→ valid</text>
+
+  <line x1="265" y1="82" x2="300" y2="82" class="data-flow" marker-end="url(#arrowhead)"/>
+
+  <rect x="300" y="65" width="90" height="35" class="func-box" rx="3"/>
+  <text x="345" y="80" text-anchor="middle" class="tufte-code">process(valid)</text>
+  <text x="345" y="93" text-anchor="middle" class="tufte-small">→ result</text>
+
+  <line x1="390" y1="82" x2="430" y2="82" class="data-flow" marker-end="url(#arrowhead)"/>
+  <text x="450" y="87" class="tufte-code" style="fill:#333">result ✓</text>
+
+  <!-- 끊긴 파이프라인 -->
+  <text x="50" y="125" class="tufte-label">버그: 반환값 무시</text>
+
+  <rect x="50" y="135" width="90" height="35" class="func-box" rx="3"/>
+  <text x="95" y="150" text-anchor="middle" class="tufte-code">read()</text>
+
+  <line x1="140" y1="152" x2="175" y2="152" class="data-flow" marker-end="url(#arrowhead)"/>
+
+  <rect x="175" y="135" width="90" height="35" class="func-box" rx="3"/>
+  <text x="220" y="150" text-anchor="middle" class="tufte-code">validate(data)</text>
+  <text x="220" y="163" text-anchor="middle" class="tufte-small" style="fill:#333; font-weight:bold">저장 안 함!</text>
+
+  <line x1="265" y1="152" x2="300" y2="152" class="data-lost" marker-end="url(#arrowhead-lost)"/>
+  <text x="283" y="143" text-anchor="middle" class="tufte-small" style="fill:#999">끊김</text>
+
+  <rect x="300" y="135" width="90" height="35" fill="#f5f5f5" stroke="#999" stroke-width="1" stroke-dasharray="4,2" rx="3"/>
+  <text x="345" y="150" text-anchor="middle" class="tufte-code" style="fill:#999">process(???)</text>
+
+  <line x1="390" y1="152" x2="430" y2="152" class="data-lost" marker-end="url(#arrowhead-lost)"/>
+  <text x="450" y="157" class="tufte-code" style="fill:#999">??? ✗</text>
+
+  <!-- 디버깅 팁 -->
+  <g transform="translate(510, 70)">
+    <rect x="0" y="0" width="180" height="80" fill="#f5f5f5" stroke="#ccc" rx="3"/>
+    <text x="90" y="18" text-anchor="middle" class="tufte-label">디버깅 원칙</text>
+    <text x="10" y="38" class="tufte-text">1. 함수 입구에서 인자 출력</text>
+    <text x="10" y="55" class="tufte-text">2. 함수 출구에서 반환값 출력</text>
+    <text x="10" y="72" class="tufte-text">3. 끊긴 지점 = 버그 위치</text>
+  </g>
+
+</svg>

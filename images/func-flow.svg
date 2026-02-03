@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 30 750 260">
+  <defs>
+    <style>
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-title { font-size: 14px; font-weight: bold; }
+      .tufte-label { font-size: 12px; }
+      .tufte-small { font-size: 11px; }
+      .tufte-code { font-family: 'Consolas', 'Monaco', monospace; font-size: 10px; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#666"/>
+    </marker>
+    <marker id="arrow-red" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#999"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="750" height="320" fill="#ffffff"/>
+
+  <!-- Title -->
+  <!-- <text x="375" y="25" text-anchor="middle" class="tufte-text tufte-title">함수 호출과 실행 흐름</text> -->
+
+  <!-- Main Program (Left Side) -->
+  <g transform="translate(30, 50)">
+    <rect x="0" y="0" width="200" height="220" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="5"/>
+    <text x="100" y="20" text-anchor="middle" class="tufte-text tufte-label" font-weight="bold">메인 프로그램</text>
+    <line x1="10" y1="30" x2="190" y2="30" stroke="#ccc" stroke-width="1"/>
+
+    <!-- Line numbers and code -->
+    <text x="20" y="55" class="tufte-text tufte-code" fill="#999">1</text>
+    <text x="40" y="55" class="tufte-text tufte-code">x = 10</text>
+
+    <text x="20" y="80" class="tufte-text tufte-code" fill="#999">2</text>
+    <text x="40" y="80" class="tufte-text tufte-code">y = greet("철수")</text>
+    <circle cx="175" cy="76" r="10" fill="#e8e8e8" stroke="#333" stroke-width="1"/>
+    <text x="175" y="80" text-anchor="middle" class="tufte-text tufte-small" font-weight="bold">1</text>
+
+    <text x="20" y="130" class="tufte-text tufte-code" fill="#999">3</text>
+    <text x="40" y="130" class="tufte-text tufte-code">print(y)</text>
+    <circle cx="175" cy="126" r="10" fill="#e8e8e8" stroke="#333" stroke-width="1"/>
+    <text x="175" y="130" text-anchor="middle" class="tufte-text tufte-small" font-weight="bold">4</text>
+
+    <text x="20" y="155" class="tufte-text tufte-code" fill="#999">4</text>
+    <text x="40" y="155" class="tufte-text tufte-code">z = add(3, 5)</text>
+    <circle cx="175" cy="151" r="10" fill="#e8e8e8" stroke="#333" stroke-width="1"/>
+    <text x="175" y="155" text-anchor="middle" class="tufte-text tufte-small" font-weight="bold">5</text>
+
+    <text x="20" y="205" class="tufte-text tufte-code" fill="#999">5</text>
+    <text x="40" y="205" class="tufte-text tufte-code">print(z)</text>
+    <circle cx="175" cy="201" r="10" fill="#e8e8e8" stroke="#333" stroke-width="1"/>
+    <text x="175" y="205" text-anchor="middle" class="tufte-text tufte-small" font-weight="bold">8</text>
+  </g>
+
+  <!-- Function 1: greet() -->
+  <g transform="translate(280, 50)">
+    <rect x="0" y="0" width="200" height="100" fill="#e8e8e8" stroke="#333" stroke-width="1.5" rx="5"/>
+    <text x="100" y="20" text-anchor="middle" class="tufte-text tufte-label" font-weight="bold">함수: greet(name)</text>
+    <line x1="10" y1="30" x2="190" y2="30" stroke="#999" stroke-width="1"/>
+
+    <text x="20" y="55" class="tufte-text tufte-code">msg = "안녕, " + name</text>
+    <circle cx="175" cy="51" r="10" fill="#f5f5f5" stroke="#333" stroke-width="1"/>
+    <text x="175" y="55" text-anchor="middle" class="tufte-text tufte-small" font-weight="bold">2</text>
+
+    <text x="20" y="80" class="tufte-text tufte-code">return msg</text>
+    <circle cx="175" cy="76" r="10" fill="#f5f5f5" stroke="#333" stroke-width="1"/>
+    <text x="175" y="80" text-anchor="middle" class="tufte-text tufte-small" font-weight="bold">3</text>
+  </g>
+
+  <!-- Function 2: add() -->
+  <g transform="translate(280, 170)">
+    <rect x="0" y="0" width="200" height="100" fill="#e8e8e8" stroke="#333" stroke-width="1.5" rx="5"/>
+    <text x="100" y="20" text-anchor="middle" class="tufte-text tufte-label" font-weight="bold">함수: add(a, b)</text>
+    <line x1="10" y1="30" x2="190" y2="30" stroke="#999" stroke-width="1"/>
+
+    <text x="20" y="55" class="tufte-text tufte-code">result = a + b</text>
+    <circle cx="175" cy="51" r="10" fill="#f5f5f5" stroke="#333" stroke-width="1"/>
+    <text x="175" y="55" text-anchor="middle" class="tufte-text tufte-small" font-weight="bold">6</text>
+
+    <text x="20" y="80" class="tufte-text tufte-code">return result</text>
+    <circle cx="175" cy="76" r="10" fill="#f5f5f5" stroke="#333" stroke-width="1"/>
+    <text x="175" y="80" text-anchor="middle" class="tufte-text tufte-small" font-weight="bold">7</text>
+  </g>
+
+  <!-- Flow arrows -->
+  <!-- Call greet() -->
+  <path d="M 230 126 Q 255 100 280 100" fill="none" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Return from greet() -->
+  <path d="M 280 130 Q 255 145 230 155" fill="none" stroke="#999" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow-red)"/>
+
+  <!-- Call add() -->
+  <path d="M 230 201 Q 255 210 280 220" fill="none" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Return from add() -->
+  <path d="M 280 250 Q 255 255 230 255" fill="none" stroke="#999" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow-red)"/>
+
+  <!-- Legend -->
+  <g transform="translate(520, 60)">
+    <rect x="0" y="0" width="200" height="100" fill="#fafafa" stroke="#999" stroke-width="1" rx="4"/>
+    <text x="100" y="20" text-anchor="middle" class="tufte-text tufte-label" font-weight="bold" fill="#666">실행 순서</text>
+    <line x1="15" y1="30" x2="185" y2="30" stroke="#ccc" stroke-width="1"/>
+
+    <circle cx="30" cy="50" r="10" fill="#e8e8e8" stroke="#333" stroke-width="1"/>
+    <text x="30" y="54" text-anchor="middle" class="tufte-text tufte-small" font-weight="bold">N</text>
+    <text x="50" y="54" class="tufte-text tufte-small">실행 순서 번호</text>
+
+    <line x1="20" y1="75" x2="60" y2="75" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <text x="75" y="78" class="tufte-text tufte-small">함수 호출</text>
+
+    <line x1="20" y1="90" x2="60" y2="90" stroke="#999" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <text x="75" y="93" class="tufte-text tufte-small">반환</text>
+  </g>
+
+  <!-- Bottom annotation -->
+  <g transform="translate(520, 180)">
+    <rect x="0" y="0" width="200" height="90" fill="#fafafa" stroke="#999" stroke-width="1" rx="4"/>
+    <text x="100" y="20" text-anchor="middle" class="tufte-text tufte-label" font-weight="bold" fill="#666">핵심 개념</text>
+    <line x1="15" y1="30" x2="185" y2="30" stroke="#ccc" stroke-width="1"/>
+    <text x="15" y="48" class="tufte-text tufte-small">함수 호출 시 해당 함수로</text>
+    <text x="15" y="63" class="tufte-text tufte-small">"점프"하고, 실행 완료 후</text>
+    <text x="15" y="78" class="tufte-text tufte-small">원래 위치로 복귀한다.</text>
+  </g>
+
+</svg>

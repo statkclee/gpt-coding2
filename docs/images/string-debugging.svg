@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 30 650 290">
+  <defs>
+    <style>
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 16px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-subtitle {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 13px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-text {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 11px;
+        fill: #333;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 10px;
+        fill: #333;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #666;
+      }
+      .tufte-error {
+        font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 9px;
+        fill: #666;
+      }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="650" height="320" fill="#ffffff"/>
+
+  <!-- Title -->
+  <!-- <text x="325" y="25" text-anchor="middle" class="tufte-title">문자열 디버깅: 경계 조건과 가디언 패턴</text> -->
+
+  <!-- Left: 위험한 코드 -->
+  <rect x="20" y="45" width="295" height="120" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="4"/>
+  <text x="167" y="65" text-anchor="middle" class="tufte-subtitle">❌ 위험한 코드</text>
+  <line x1="30" y1="73" x2="305" y2="73" stroke="#ccc" stroke-width="1"/>
+
+  <text x="35" y="92" class="tufte-code">line = input('> ')</text>
+  <text x="35" y="108" class="tufte-code">if line[0] == '#':    # 위험!</text>
+  <text x="35" y="124" class="tufte-code">    continue</text>
+
+  <text x="35" y="148" class="tufte-error">빈 줄 입력 시 → IndexError: string index out of range</text>
+
+  <!-- Right: 안전한 코드 -->
+  <rect x="335" y="45" width="295" height="120" fill="#fff" stroke="#333" stroke-width="2" rx="4"/>
+  <text x="482" y="65" text-anchor="middle" class="tufte-subtitle">✓ 가디언 패턴</text>
+  <line x1="345" y1="73" x2="620" y2="73" stroke="#ccc" stroke-width="1"/>
+
+  <text x="350" y="92" class="tufte-code">line = input('> ')</text>
+  <text x="350" y="108" class="tufte-code">if len(line) > 0 and line[0] == '#':</text>
+  <text x="350" y="124" class="tufte-code">    continue</text>
+
+  <text x="350" y="148" class="tufte-small">길이 먼저 검사 → 빈 줄이면 두 번째 조건 평가 안 함</text>
+
+  <!-- Arrow between boxes -->
+  <line x1="315" y1="105" x2="335" y2="105" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+  <!-- Bottom: 경계 조건 체크리스트 -->
+  <rect x="20" y="180" width="610" height="125" fill="#fff" stroke="#333" stroke-width="2" rx="4"/>
+  <text x="325" y="200" text-anchor="middle" class="tufte-subtitle">문자열 처리 시 점검해야 할 경계 조건</text>
+  <line x1="30" y1="208" x2="620" y2="208" stroke="#ccc" stroke-width="1"/>
+
+  <!-- Three columns -->
+  <!-- Column 1 -->
+  <text x="40" y="230" class="tufte-text">1. 빈 문자열</text>
+  <text x="50" y="248" class="tufte-code">""</text>
+  <text x="50" y="264" class="tufte-small">len() == 0</text>
+  <text x="50" y="280" class="tufte-small">인덱싱 불가</text>
+
+  <!-- Column 2 -->
+  <line x1="175" y1="215" x2="175" y2="295" stroke="#ccc" stroke-width="1"/>
+  <text x="195" y="230" class="tufte-text">2. 공백만 있는 문자열</text>
+  <text x="205" y="248" class="tufte-code">"   "</text>
+  <text x="205" y="264" class="tufte-small">strip() 후 빈 문자열</text>
+  <text x="205" y="280" class="tufte-small">내용 없음 처리 필요</text>
+
+  <!-- Column 3 -->
+  <g transform='translate(-30,0)'>
+    <line x1="370" y1="215" x2="370" y2="295" stroke="#ccc" stroke-width="1"/>
+    <text x="390" y="230" class="tufte-text">3. 예상과 다른 형식</text>
+    <text x="400" y="248" class="tufte-code">"no-at-sign"</text>
+    <text x="400" y="264" class="tufte-small">find('@') == -1</text>
+    <text x="400" y="280" class="tufte-small">패턴 불일치 처리</text>
+
+    <!-- Column 4 -->
+    <line x1="530" y1="215" x2="530" y2="295" stroke="#ccc" stroke-width="1"/>
+    <text x="550" y="230" class="tufte-text">4. 특수문자</text>
+    <text x="560" y="248" class="tufte-code">"\n", "\t"</text>
+    <text x="560" y="264" class="tufte-small">눈에 보이지 않음</text>
+    <text x="560" y="280" class="tufte-small">strip() 필수</text>
+  </g>
+
+
+</svg>

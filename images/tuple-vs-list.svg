@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 30 720 285">
+  <defs>
+    <style>
+      .tufte-text {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+      }
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 14px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 12px;
+        fill: #333;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 11px;
+        fill: #333;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #666;
+      }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+    <!-- X mark -->
+    <marker id="xmark" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+      <line x1="1" y1="1" x2="7" y2="7" stroke="#666" stroke-width="2"/>
+      <line x1="7" y1="1" x2="1" y2="7" stroke="#666" stroke-width="2"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="720" height="320" fill="#ffffff"/>
+
+  <!-- Title -->
+  <!-- <text x="360" y="25" text-anchor="middle" class="tufte-title">파이썬 시퀀스 자료형 비교</text> -->
+
+  <!-- Headers -->
+  <text x="180" y="55" text-anchor="middle" class="tufte-label" font-weight="bold">리스트 (List)</text>
+  <text x="540" y="55" text-anchor="middle" class="tufte-label" font-weight="bold">튜플 (Tuple)</text>
+
+  <!-- List column -->
+  <g transform="translate(40, 65)">
+    <rect x="0" y="0" width="280" height="230" fill="#e8e8e8" stroke="#999" rx="3"/>
+
+    <!-- Syntax -->
+    <text x="140" y="25" text-anchor="middle" class="tufte-label">생성 문법</text>
+    <rect x="60" y="35" width="160" height="25" fill="#fff" stroke="#999" rx="2"/>
+    <text x="140" y="53" text-anchor="middle" class="tufte-code">['a', 'b', 'c']</text>
+
+    <!-- Mutability -->
+    <text x="140" y="80" text-anchor="middle" class="tufte-label">변경 가능성</text>
+    <rect x="60" y="90" width="160" height="25" fill="#fff" stroke="#999" rx="2"/>
+    <text x="140" y="108" text-anchor="middle" class="tufte-code">가변 (mutable)</text>
+
+    <!-- Operations -->
+    <text x="140" y="135" text-anchor="middle" class="tufte-label">지원 연산</text>
+    <text x="20" y="155" class="tufte-code">append(), insert()</text>
+    <text x="20" y="170" class="tufte-code">remove(), pop()</text>
+    <text x="20" y="185" class="tufte-code">lst[0] = 'x'  ✓</text>
+
+    <!-- Dict key -->
+    <text x="140" y="210" text-anchor="middle" class="tufte-label">딕셔너리 키</text>
+    <text x="140" y="225" text-anchor="middle" class="tufte-code" fill="#666">✗ 불가능 (unhashable)</text>
+  </g>
+
+  <!-- vs divider -->
+  <line x1="360" y1="70" x2="360" y2="290" stroke="#ccc" stroke-width="1" stroke-dasharray="5,5"/>
+  <text x="360" y="170" text-anchor="middle" class="tufte-label" fill="#999">vs</text>
+
+  <!-- Tuple column -->
+  <g transform="translate(400, 65)">
+    <rect x="0" y="0" width="280" height="230" fill="#f5f5f5" stroke="#333" stroke-width="2" rx="3"/>
+
+    <!-- Syntax -->
+    <text x="140" y="25" text-anchor="middle" class="tufte-label">생성 문법</text>
+    <rect x="60" y="35" width="160" height="25" fill="#fff" stroke="#999" rx="2"/>
+    <text x="140" y="53" text-anchor="middle" class="tufte-code">('a', 'b', 'c')</text>
+
+    <!-- Mutability -->
+    <text x="140" y="80" text-anchor="middle" class="tufte-label">변경 가능성</text>
+    <rect x="60" y="90" width="160" height="25" fill="#fff" stroke="#333" stroke-width="1.5" rx="2"/>
+    <text x="140" y="108" text-anchor="middle" class="tufte-code" font-weight="bold">불변 (immutable)</text>
+
+    <!-- Operations -->
+    <text x="140" y="135" text-anchor="middle" class="tufte-label">지원 연산</text>
+    <text x="20" y="155" class="tufte-code">index(), count()</text>
+    <text x="20" y="170" class="tufte-code">슬라이싱, 순회</text>
+    <text x="20" y="185" class="tufte-code">t[0] = 'x'  ✗ TypeError</text>
+
+    <!-- Dict key -->
+    <text x="140" y="210" text-anchor="middle" class="tufte-label">딕셔너리 키</text>
+    <text x="140" y="225" text-anchor="middle" class="tufte-code" font-weight="bold">✓ 가능 (hashable)</text>
+  </g>
+
+</svg>

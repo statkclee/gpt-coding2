@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 60 800 190">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #111; font-weight: bold; }
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-mono { font-family: 'SF Mono', Consolas, monospace; fill: #444; font-size: 11px; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #666; font-style: italic; font-size: 11px; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #777; font-size: 10px; }
+      .flow-line { fill: none; stroke: #555; stroke-width: 1.5; }
+      .node-box { fill: #fff; stroke: #333; stroke-width: 1.5; }
+      .node-header { fill: #f0f0f0; }
+      .phase-bg { fill: #fafafa; stroke: #ddd; stroke-width: 1; stroke-dasharray: 4,4; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="2.5" orient="auto">
+      <path d="M0,0 L0,5 L7,2.5 z" fill="#555" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="280" fill="#ffffff"/>
+
+  <!-- 상단 제목 -->
+  <!-- <text x="400" y="30" text-anchor="middle" class="tufte-title" font-size="16">정규표현식: 텍스트 처리의 스위스 군용 칼</text>
+  <text x="400" y="50" text-anchor="middle" class="tufte-label" font-size="12">"알면 한 줄, 모르면 백 줄"</text> -->
+
+  <!-- Phase 1: 기초 패턴 -->
+  <g transform="translate(30, 75)">
+    <rect x="0" y="0" width="150" height="120" class="phase-bg" rx="4"/>
+    <text x="75" y="20" text-anchor="middle" class="tufte-label" font-weight="bold">1단계</text>
+    <text x="75" y="35" text-anchor="middle" class="tufte-small">기초 패턴</text>
+
+    <rect x="10" y="50" width="130" height="55" class="node-box" rx="3"/>
+    <rect x="11" y="51" width="128" height="18" class="node-header" rx="2"/>
+    <text x="75" y="65" text-anchor="middle" class="tufte-text" font-size="11" font-weight="bold">리터럴 매칭</text>
+    <text x="75" y="82" text-anchor="middle" class="tufte-mono">re.search()</text>
+    <text x="75" y="96" text-anchor="middle" class="tufte-small">"From:" → 정확히 일치</text>
+  </g>
+
+  <!-- Arrow 1→2 -->
+  <path d="M 185,135 L 215,135" class="flow-line" marker-end="url(#arrow)"/>
+
+  <!-- Phase 2: 메타문자 -->
+  <g transform="translate(220, 75)">
+    <rect x="0" y="0" width="150" height="120" class="phase-bg" rx="4"/>
+    <text x="75" y="20" text-anchor="middle" class="tufte-label" font-weight="bold">2단계</text>
+    <text x="75" y="35" text-anchor="middle" class="tufte-small">메타문자</text>
+
+    <rect x="10" y="50" width="130" height="55" class="node-box" rx="3"/>
+    <rect x="11" y="51" width="128" height="18" class="node-header" rx="2"/>
+    <text x="75" y="65" text-anchor="middle" class="tufte-text" font-size="11" font-weight="bold">특수 기호</text>
+    <text x="75" y="82" text-anchor="middle" class="tufte-mono">^  $  .  *  +  ?</text>
+    <text x="75" y="96" text-anchor="middle" class="tufte-small">위치, 반복, 와일드카드</text>
+  </g>
+
+  <!-- Arrow 2→3 -->
+  <path d="M 375,135 L 405,135" class="flow-line" marker-end="url(#arrow)"/>
+
+  <!-- Phase 3: 문자 클래스 -->
+  <g transform="translate(410, 75)">
+    <rect x="0" y="0" width="150" height="120" class="phase-bg" rx="4"/>
+    <text x="75" y="20" text-anchor="middle" class="tufte-label" font-weight="bold">3단계</text>
+    <text x="75" y="35" text-anchor="middle" class="tufte-small">문자 클래스</text>
+
+    <rect x="10" y="50" width="130" height="55" class="node-box" rx="3"/>
+    <rect x="11" y="51" width="128" height="18" class="node-header" rx="2"/>
+    <text x="75" y="65" text-anchor="middle" class="tufte-text" font-size="11" font-weight="bold">집합 표기</text>
+    <text x="75" y="82" text-anchor="middle" class="tufte-mono">[a-z]  [0-9]  \S</text>
+    <text x="75" y="96" text-anchor="middle" class="tufte-small">범위, 숫자, 공백</text>
+  </g>
+
+  <!-- Arrow 3→4 -->
+  <path d="M 565,135 L 595,135" class="flow-line" marker-end="url(#arrow)"/>
+
+  <!-- Phase 4: 캡처 그룹 -->
+  <g transform="translate(600, 75)">
+    <rect x="0" y="0" width="170" height="120" class="phase-bg" rx="4"/>
+    <text x="85" y="20" text-anchor="middle" class="tufte-label" font-weight="bold">4단계</text>
+    <text x="85" y="35" text-anchor="middle" class="tufte-small">추출과 캡처</text>
+
+    <rect x="10" y="50" width="150" height="55" class="node-box" rx="3" stroke-width="2"/>
+    <rect x="11" y="51" width="148" height="18" class="node-header" rx="2"/>
+    <text x="85" y="65" text-anchor="middle" class="tufte-text" font-size="11" font-weight="bold">그룹 캡처</text>
+    <text x="85" y="82" text-anchor="middle" class="tufte-mono">re.findall()  (  )</text>
+    <text x="85" y="96" text-anchor="middle" class="tufte-small">원하는 부분만 추출</text>
+  </g>
+
+  <!-- 하단 예제 박스 -->
+  <g transform="translate(30, 210)">
+    <rect x="0" y="0" width="740" height="30" fill="#f8f8f8" stroke="#ccc" stroke-width="1" rx="4"/>
+    <text x="20" y="20" class="tufte-text" font-size="12" font-weight="bold">실전 예제:</text>
+    <text x="100" y="20" class="tufte-mono" font-size="12">이메일 추출   [a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}</text>
+    <text x="480" y="20" class="tufte-small">→ user@example.com</text>
+  </g>
+</svg>

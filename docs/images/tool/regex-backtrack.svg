@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 20 800 220">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #111; font-weight: bold; }
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-mono { font-family: 'SF Mono', Consolas, monospace; fill: #444; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #555; font-style: italic; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #666; }
+      .char-box { fill: #fff; stroke: #333; stroke-width: 1.5; }
+      .char-match { fill: #e0e0e0; stroke: #333; stroke-width: 2; }
+      .char-fail { fill: #fff; stroke: #999; stroke-width: 1.5; stroke-dasharray: 4,4; }
+      .backtrack-line { fill: none; stroke: #555; stroke-width: 2; stroke-dasharray: 6,4; }
+    </style>
+    <marker id="arrow-back" markerWidth="12" markerHeight="12" refX="0" refY="4" orient="auto">
+      <path d="M10,0 L10,8 L0,4 z" fill="#555" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="240" fill="#ffffff"/>
+
+  <!-- 제목 -->
+  <!-- <text x="400" y="24" text-anchor="middle" class="tufte-title" font-size="15">백트래킹(Backtracking): 정규표현식 엔진의 작동 원리</text> -->
+
+  <!-- 패턴과 문자열 -->
+  <text x="30" y="48" class="tufte-text" font-size="12" font-weight="bold">패턴:</text>
+  <text x="70" y="48" class="tufte-mono" font-size="13">a+b</text>
+  <text x="110" y="48" class="tufte-label" font-size="11">(a 1개 이상 + b)</text>
+
+  <text x="450" y="48" class="tufte-text" font-size="12" font-weight="bold">문자열:</text>
+  <text x="505" y="48" class="tufte-mono" font-size="13">"aaac"</text>
+  <text x="560" y="48" class="tufte-label" font-size="11">(매칭 실패 → 백트래킹)</text>
+
+  <!-- 1x4 레이아웃: 4단계 모두 한 줄 -->
+
+  <!-- Step 1 -->
+  <g transform="translate(20, 65)">
+    <text x="60" y="12" text-anchor="middle" class="tufte-label" font-size="11">1단계: a+ 탐욕적 매칭</text> 
+
+    <rect x="0" y="22" width="28" height="28" class="char-match"/>
+    <text x="14" y="42" text-anchor="middle" class="tufte-mono" font-size="14">a</text>
+
+    <rect x="32" y="22" width="28" height="28" class="char-match"/>
+    <text x="46" y="42" text-anchor="middle" class="tufte-mono" font-size="14">a</text>
+
+    <rect x="64" y="22" width="28" height="28" class="char-match"/>
+    <text x="78" y="42" text-anchor="middle" class="tufte-mono" font-size="14">a</text>
+
+    <rect x="96" y="22" width="28" height="28" class="char-box"/>
+    <text x="110" y="42" text-anchor="middle" class="tufte-mono" font-size="14">c</text>
+
+    <path d="M 0,55 L 92,55" stroke="#333" stroke-width="2"/>
+    <text x="46" y="70" text-anchor="middle" class="tufte-small" font-size="10">a+ 매칭 (3개)</text>
+  </g>
+
+  <!-- Step 2 -->
+  <g transform="translate(210, 65)">
+    <text x="60" y="12" text-anchor="middle" class="tufte-label" font-size="11">2단계: 'b' 시도 → 실패</text>
+
+    <rect x="0" y="22" width="28" height="28" class="char-match"/>
+    <text x="14" y="42" text-anchor="middle" class="tufte-mono" font-size="14">a</text>
+
+    <rect x="32" y="22" width="28" height="28" class="char-match"/>
+    <text x="46" y="42" text-anchor="middle" class="tufte-mono" font-size="14">a</text>
+
+    <rect x="64" y="22" width="28" height="28" class="char-match"/>
+    <text x="78" y="42" text-anchor="middle" class="tufte-mono" font-size="14">a</text>
+
+    <rect x="96" y="22" width="28" height="28" class="char-fail"/>
+    <text x="110" y="42" text-anchor="middle" class="tufte-mono" font-size="14" fill="#888">c</text>
+    <text x="110" y="70" text-anchor="middle" class="tufte-mono" font-size="10" fill="#555">b ≠ c</text>
+  </g>
+
+  <!-- Step 3 -->
+  <g transform="translate(400, 65)">
+    <text x="60" y="12" text-anchor="middle" class="tufte-label" font-size="11">3단계: 백트래킹</text>
+
+    <rect x="0" y="22" width="28" height="28" class="char-match"/>
+    <text x="14" y="42" text-anchor="middle" class="tufte-mono" font-size="14">a</text>
+
+    <rect x="32" y="22" width="28" height="28" class="char-match"/>
+    <text x="46" y="42" text-anchor="middle" class="tufte-mono" font-size="14">a</text>
+
+    <rect x="64" y="22" width="28" height="28" class="char-box"/>
+    <text x="78" y="42" text-anchor="middle" class="tufte-mono" font-size="14" fill="#888">a</text>
+
+    <rect x="96" y="22" width="28" height="28" class="char-fail"/>
+    <text x="110" y="42" text-anchor="middle" class="tufte-mono" font-size="14" fill="#888">c</text>
+
+    <!-- 백트래킹 화살표: 박스 아래로 이동 -->
+    <path d="M 48,72 L 58,72 Q 78,72 78,54" class="backtrack-line" marker-start="url(#arrow-back)"/>
+    <text x="78" y="88" text-anchor="middle" class="tufte-small" font-size="10">a 반납</text>
+  </g>
+
+  <!-- Step 4 -->
+  <g transform="translate(590, 65)">
+    <text x="60" y="12" text-anchor="middle" class="tufte-label" font-size="11">4단계: 최종 실패</text>
+
+    <rect x="0" y="22" width="28" height="28" class="char-match"/>
+    <text x="14" y="42" text-anchor="middle" class="tufte-mono" font-size="14">a</text>
+
+    <rect x="32" y="22" width="28" height="28" class="char-box"/>
+    <text x="46" y="42" text-anchor="middle" class="tufte-mono" font-size="14" fill="#888">a</text>
+
+    <rect x="64" y="22" width="28" height="28" class="char-box"/>
+    <text x="78" y="42" text-anchor="middle" class="tufte-mono" font-size="14" fill="#888">a</text>
+
+    <rect x="96" y="22" width="28" height="28" class="char-box"/>
+    <text x="110" y="42" text-anchor="middle" class="tufte-mono" font-size="14" fill="#888">c</text>
+
+    <text x="60" y="70" text-anchor="middle" class="tufte-small" font-size="10">매칭 실패</text>
+  </g>
+
+  <!-- 하단: 핵심 인사이트 -->
+  <g transform="translate(30, 175)">
+    <rect x="0" y="0" width="740" height="55" fill="#f5f5f5" stroke="#ccc" stroke-width="1" rx="4"/>
+
+    <text x="20" y="20" class="tufte-text" font-size="12" font-weight="bold">핵심:</text>
+    <text x="60" y="20" class="tufte-text" font-size="12">탐욕적 수량자는 최대한 매칭 후, 실패 시 하나씩 반납하며 재시도</text>
+
+    <text x="20" y="42" class="tufte-text" font-size="12" font-weight="bold">문제:</text>
+    <text x="60" y="42" class="tufte-text" font-size="12">중첩 수량자 (a+)+는 반납 조합이 지수적 증가 → 25자 입력에서 2²⁵번 시도</text>
+  </g>
+</svg>

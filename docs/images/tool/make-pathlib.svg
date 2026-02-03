@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 280">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #111; font-weight: bold; }
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-mono { font-family: 'SF Mono', Consolas, monospace; fill: #444; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #666; font-style: italic; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #777; font-size: 10px; }
+      .old-box { fill: #f0f0f0; stroke: #999; stroke-width: 1.5; }
+      .new-box { fill: #f8f8f8; stroke: #333; stroke-width: 2; }
+      .code-box { fill: #fff; stroke: #ccc; stroke-width: 1; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="2.5" orient="auto">
+      <path d="M0,0 L0,5 L7,2.5 z" fill="#555" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="280" fill="#ffffff"/>
+
+  <!-- 왼쪽: os.path (구식) -->
+  <g transform="translate(30, 25)">
+    <rect x="0" y="0" width="350" height="220" class="old-box" rx="6"/>
+    <text x="175" y="28" text-anchor="middle" class="tufte-title" font-size="13">os.path (문자열 기반)</text>
+    <line x1="15" y1="40" x2="335" y2="40" stroke="#ccc" stroke-width="1"/>
+
+    <!-- 코드 예제들 -->
+    <g transform="translate(15, 50)">
+      <rect x="0" y="0" width="320" height="25" class="code-box" rx="3"/>
+      <text x="8" y="17" class="tufte-mono" font-size="10">os.path.join("data", "bbc", "sport")</text>
+    </g>
+
+    <g transform="translate(15, 85)">
+      <rect x="0" y="0" width="320" height="25" class="code-box" rx="3"/>
+      <text x="8" y="17" class="tufte-mono" font-size="10">os.path.dirname(filepath)</text>
+    </g>
+
+    <g transform="translate(15, 120)">
+      <rect x="0" y="0" width="320" height="25" class="code-box" rx="3"/>
+      <text x="8" y="17" class="tufte-mono" font-size="10">os.path.basename(filepath)</text>
+    </g>
+
+    <g transform="translate(15, 155)">
+      <rect x="0" y="0" width="320" height="25" class="code-box" rx="3"/>
+      <text x="8" y="17" class="tufte-mono" font-size="10">os.path.splitext(filename)[1]</text>
+    </g>
+
+    <text x="175" y="205" text-anchor="middle" class="tufte-label" font-size="11">함수 조합 필요, 가독성 낮음</text>
+  </g>
+
+  <!-- 화살표 -->
+  <g transform="translate(395, 135)">
+    <path d="M 0,0 L 30,0" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="15" y="-8" text-anchor="middle" class="tufte-small">진화</text>
+  </g>
+
+  <!-- 오른쪽: pathlib (현대적) -->
+  <g transform="translate(420, 25)">
+    <rect x="0" y="0" width="350" height="220" class="new-box" rx="6"/>
+    <text x="175" y="28" text-anchor="middle" class="tufte-title" font-size="13">pathlib (객체 기반)</text>
+    <line x1="15" y1="40" x2="335" y2="40" stroke="#ccc" stroke-width="1"/>
+
+    <!-- 코드 예제들 -->
+    <g transform="translate(15, 50)">
+      <rect x="0" y="0" width="320" height="25" class="code-box" rx="3"/>
+      <text x="8" y="17" class="tufte-mono" font-size="10">Path("data") / "bbc" / "sport"</text>
+    </g>
+
+    <g transform="translate(15, 85)">
+      <rect x="0" y="0" width="320" height="25" class="code-box" rx="3"/>
+      <text x="8" y="17" class="tufte-mono" font-size="10">filepath.parent</text>
+    </g>
+
+    <g transform="translate(15, 120)">
+      <rect x="0" y="0" width="320" height="25" class="code-box" rx="3"/>
+      <text x="8" y="17" class="tufte-mono" font-size="10">filepath.name</text>
+    </g>
+
+    <g transform="translate(15, 155)">
+      <rect x="0" y="0" width="320" height="25" class="code-box" rx="3"/>
+      <text x="8" y="17" class="tufte-mono" font-size="10">filepath.suffix</text>
+    </g>
+
+    <text x="175" y="205" text-anchor="middle" class="tufte-label" font-size="11">직관적 속성, 메서드 체이닝</text>
+  </g>
+
+  <!-- 하단 메시지 -->
+  <text x="400" y="268" text-anchor="middle" class="tufte-label" font-size="12">"경로를 일급 객체로: 코드가 곧 문서"</text>
+
+</svg>

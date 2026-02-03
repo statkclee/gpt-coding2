@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 830 280">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #111; font-weight: bold; }
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-mono { font-family: 'SF Mono', Consolas, monospace; fill: #444; font-size: 11px; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #666; font-style: italic; font-size: 11px; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #777; font-size: 10px; }
+      .flow-line { fill: none; stroke: #555; stroke-width: 1.5; }
+      .node-box { fill: #fff; stroke: #333; stroke-width: 1.5; }
+      .node-header { fill: #f0f0f0; }
+      .layer-bg { fill: #fafafa; stroke: #ccc; stroke-width: 1; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="2.5" orient="auto">
+      <path d="M0,0 L0,5 L7,2.5 z" fill="#555" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="830" height="280" fill="#ffffff"/>
+
+  <!-- 왼쪽: 파이썬 프로그램 -->
+  <g transform="translate(30, 25)">
+    <rect x="0" y="0" width="120" height="230" class="layer-bg" rx="4"/>
+    <text x="60" y="22" text-anchor="middle" class="tufte-title" font-size="13">파이썬</text>
+    <text x="60" y="38" text-anchor="middle" class="tufte-label">프로그램</text>
+
+    <!-- 고수준 -->
+    <rect x="10" y="52" width="100" height="60" class="node-box" rx="3"/>
+    <rect x="11" y="53" width="98" height="16" class="node-header" rx="2"/>
+    <text x="60" y="65" text-anchor="middle" class="tufte-text" font-size="10" font-weight="bold">고수준</text>
+    <text x="60" y="80" text-anchor="middle" class="tufte-mono">requests</text>
+    <text x="60" y="92" text-anchor="middle" class="tufte-mono">urllib</text>
+    <text x="60" y="104" text-anchor="middle" class="tufte-mono">BeautifulSoup</text>
+
+    <!-- 저수준 -->
+    <rect x="10" y="122" width="100" height="50" class="node-box" rx="3"/>
+    <rect x="11" y="123" width="98" height="16" class="node-header" rx="2"/>
+    <text x="60" y="135" text-anchor="middle" class="tufte-text" font-size="10" font-weight="bold">저수준</text>
+    <text x="60" y="152" text-anchor="middle" class="tufte-mono">socket</text>
+    <text x="60" y="164" text-anchor="middle" class="tufte-small">직접 연결/송수신</text>
+
+    <!-- 데이터 처리 -->
+    <rect x="10" y="182" width="100" height="48" class="node-box" rx="3"/>
+    <rect x="11" y="183" width="98" height="16" class="node-header" rx="2"/>
+    <text x="60" y="195" text-anchor="middle" class="tufte-text" font-size="10" font-weight="bold">데이터 처리</text>
+    <text x="60" y="212" text-anchor="middle" class="tufte-mono">정규표현식</text>
+    <text x="60" y="224" text-anchor="middle" class="tufte-mono">HTML 파싱</text>
+  </g>
+
+  <!-- 화살표: 프로그램 → 프로토콜 -->
+  <path d="M 155,140 L 195,140" class="flow-line" marker-end="url(#arrow)"/>
+  <text x="175" y="132" text-anchor="middle" class="tufte-small">요청</text>
+
+  <!-- 중앙: HTTP 프로토콜 -->
+  <g transform="translate(200, 50)">
+    <rect x="0" y="0" width="150" height="180" class="layer-bg" rx="4"/>
+    <text x="75" y="22" text-anchor="middle" class="tufte-title" font-size="13">HTTP 프로토콜</text>
+
+    <!-- 요청 -->
+    <rect x="10" y="40" width="130" height="55" class="node-box" rx="3"/>
+    <rect x="11" y="41" width="128" height="16" class="node-header" rx="2"/>
+    <text x="75" y="53" text-anchor="middle" class="tufte-text" font-size="10" font-weight="bold">요청 (Request)</text>
+    <text x="75" y="70" text-anchor="middle" class="tufte-mono">GET /page HTTP/1.0</text>
+    <text x="75" y="84" text-anchor="middle" class="tufte-small">메서드 + URL + 버전</text>
+
+    <!-- 응답 -->
+    <rect x="10" y="105" width="130" height="65" class="node-box" rx="3"/>
+    <rect x="11" y="106" width="128" height="16" class="node-header" rx="2"/>
+    <text x="75" y="118" text-anchor="middle" class="tufte-text" font-size="10" font-weight="bold">응답 (Response)</text>
+    <text x="75" y="135" text-anchor="middle" class="tufte-mono">HTTP/1.1 200 OK</text>
+    <text x="75" y="149" text-anchor="middle" class="tufte-small">헤더 + 빈 줄 + 본문</text>
+    <text x="75" y="163" text-anchor="middle" class="tufte-small">(HTML/이미지/데이터)</text>
+  </g>
+
+  <!-- 화살표: 프로토콜 → 서버 -->
+  <path d="M 355,115 L 395,115" class="flow-line" marker-end="url(#arrow)"/>
+  <text x="375" y="107" text-anchor="middle" class="tufte-small">80번</text>
+  <text x="375" y="130" text-anchor="middle" class="tufte-small">포트</text>
+
+  <!-- 화살표: 서버 → 프로토콜 (응답) -->
+  <path d="M 395,165 L 355,165" class="flow-line" marker-end="url(#arrow)"/>
+
+  <!-- 오른쪽: 웹서버 -->
+  <g transform="translate(400, 25)">
+    <rect x="0" y="0" width="130" height="230" class="layer-bg" rx="4"/>
+    <text x="65" y="22" text-anchor="middle" class="tufte-title" font-size="13">웹 서버</text>
+    <text x="65" y="38" text-anchor="middle" class="tufte-label">data.pr4e.org</text>
+
+    <!-- 리소스들 -->
+    <rect x="10" y="52" width="110" height="40" class="node-box" rx="3"/>
+    <text x="65" y="70" text-anchor="middle" class="tufte-mono">romeo.txt</text>
+    <text x="65" y="84" text-anchor="middle" class="tufte-small">텍스트 파일</text>
+
+    <rect x="10" y="102" width="110" height="40" class="node-box" rx="3"/>
+    <text x="65" y="120" text-anchor="middle" class="tufte-mono">cover.jpg</text>
+    <text x="65" y="134" text-anchor="middle" class="tufte-small">바이너리 이미지</text>
+
+    <rect x="10" y="152" width="110" height="40" class="node-box" rx="3"/>
+    <text x="65" y="170" text-anchor="middle" class="tufte-mono">page.html</text>
+    <text x="65" y="184" text-anchor="middle" class="tufte-small">웹 페이지</text>
+
+    <rect x="10" y="200" width="110" height="25" class="node-box" rx="3"/>
+    <text x="65" y="217" text-anchor="middle" class="tufte-small">...</text>
+  </g>
+
+  <!-- 맨 오른쪽: 네트워크 스택 -->
+  <g transform="translate(560, 40)">
+    <rect x="0" y="0" width="210" height="205" class="layer-bg" rx="4"/>
+    <text x="105" y="22" text-anchor="middle" class="tufte-title" font-size="13">추상화 계층</text>
+
+    <!-- 스택 -->
+    <rect x="15" y="38" width="180" height="26" class="node-box" rx="3"/>
+    <text x="105" y="56" text-anchor="middle" class="tufte-text" font-size="11">BeautifulSoup (HTML 파싱)</text>
+
+    <rect x="15" y="68" width="180" height="26" class="node-box" rx="3"/>
+    <text x="105" y="86" text-anchor="middle" class="tufte-text" font-size="11">requests (사람을 위한 HTTP)</text>
+
+    <rect x="15" y="98" width="180" height="26" class="node-box" rx="3"/>
+    <text x="105" y="116" text-anchor="middle" class="tufte-text" font-size="11">urllib (HTTP 자동화)</text>
+
+    <rect x="15" y="128" width="180" height="26" class="node-box" rx="3"/>
+    <text x="105" y="146" text-anchor="middle" class="tufte-text" font-size="11">socket (TCP 연결)</text>
+
+    <rect x="15" y="158" width="180" height="26" class="node-box" rx="3"/>
+    <text x="105" y="176" text-anchor="middle" class="tufte-text" font-size="11">OS 네트워크 (IP/이더넷)</text>
+
+    <!-- 화살표 -->
+    <text x="215" y="52" class="tufte-label" font-size="10">고수준</text>
+    <text x="215" y="172" class="tufte-label" font-size="10">저수준</text>
+    <path d="M 202,62 L 202,162" class="flow-line" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- 하단 설명 -->
+  <!-- <g transform="translate(30, 262)">
+    <text x="0" y="0" class="tufte-text" font-size="11" font-weight="bold">핵심:</text>
+    <text x="40" y="0" class="tufte-text" font-size="11">socket으로 저수준 제어, urllib로 간편한 HTTP, BeautifulSoup으로 HTML 데이터 추출</text>
+  </g> -->
+</svg>

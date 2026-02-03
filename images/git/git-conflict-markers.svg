@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 320">
+  <defs>
+    <style>
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-mono { font-family: 'SF Mono', Consolas, monospace; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #666; }
+    </style>
+  </defs>
+
+  <!-- White background -->
+  <rect x="0" y="0" width="650" height="320" fill="#ffffff"/>
+
+  <!-- 파일 내용 박스 -->
+  <rect x="30" y="20" width="350" height="280" fill="#f8f8f8" stroke="#999" stroke-width="1" rx="4"/>
+  <text x="45" y="45" class="tufte-mono" font-size="11" fill="#666">mars.txt</text>
+
+  <!-- 공통 내용 (충돌 전) -->
+  <text x="45" y="70" class="tufte-mono" font-size="10" fill="#333">Cold and dry, but everything...</text>
+  <text x="45" y="85" class="tufte-mono" font-size="10" fill="#333">The two moons may be a problem...</text>
+  <text x="45" y="100" class="tufte-mono" font-size="10" fill="#333">But the Mummy will appreciate...</text>
+
+  <!-- 충돌 시작 표시자 -->
+  <rect x="40" y="115" width="330" height="20" fill="#e8e8e8" stroke="#888" stroke-width="1"/>
+  <text x="45" y="130" class="tufte-mono" font-size="11" fill="#555" font-weight="bold">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</text>
+
+  <!-- 로컬 변경 내용 -->
+  <rect x="40" y="135" width="330" height="35" fill="#f0f0f0" stroke="#999" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="45" y="155" class="tufte-mono" font-size="10" fill="#333">We added a different line in the other copy</text>
+
+  <!-- 구분선 -->
+  <rect x="40" y="170" width="330" height="20" fill="#d8d8d8" stroke="#888" stroke-width="1"/>
+  <text x="45" y="185" class="tufte-mono" font-size="11" fill="#555" font-weight="bold">=======</text>
+
+  <!-- 원격 변경 내용 -->
+  <rect x="40" y="190" width="330" height="35" fill="#e8e8e8" stroke="#999" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="45" y="210" class="tufte-mono" font-size="10" fill="#333">This line added to Wolfman's copy</text>
+
+  <!-- 충돌 종료 표시자 -->
+  <rect x="40" y="225" width="330" height="20" fill="#e8e8e8" stroke="#888" stroke-width="1"/>
+  <text x="45" y="240" class="tufte-mono" font-size="11" fill="#555" font-weight="bold">&gt;&gt;&gt;&gt;&gt;&gt;&gt; dabb4c8...</text>
+
+  <!-- 공통 내용 (충돌 후) -->
+  <text x="45" y="270" class="tufte-mono" font-size="10" fill="#999">(이후 내용 계속...)</text>
+
+  <!-- ========== 오른쪽 설명 영역 ========== -->
+
+  <!-- HEAD 설명 -->
+  <line x1="375" y1="125" x2="410" y2="125" stroke="#666" stroke-width="1.5"/>
+  <rect x="415" y="108" width="220" height="40" fill="#f5f5f5" stroke="#888" stroke-width="1" rx="3"/>
+  <text x="425" y="125" class="tufte-text" font-size="11" font-weight="bold" fill="#333">HEAD (로컬)</text>
+  <text x="425" y="140" class="tufte-label" font-size="10">현재 브랜치의 내 변경 사항</text>
+
+  <!-- 구분선 설명 -->
+  <line x1="375" y1="180" x2="410" y2="180" stroke="#666" stroke-width="1.5"/>
+  <rect x="415" y="163" width="220" height="40" fill="#f5f5f5" stroke="#888" stroke-width="1" rx="3"/>
+  <text x="425" y="180" class="tufte-text" font-size="11" font-weight="bold" fill="#333">======= (구분선)</text>
+  <text x="425" y="195" class="tufte-label" font-size="10">로컬과 원격 변경의 경계</text>
+
+  <!-- 원격 설명 -->
+  <line x1="375" y1="232" x2="410" y2="232" stroke="#666" stroke-width="1.5"/>
+  <rect x="415" y="215" width="220" height="40" fill="#f5f5f5" stroke="#888" stroke-width="1" rx="3"/>
+  <text x="425" y="232" class="tufte-text" font-size="11" font-weight="bold" fill="#333">커밋 ID (원격)</text>
+  <text x="425" y="247" class="tufte-label" font-size="10">pull로 가져온 원격 변경 사항</text>
+
+  <!-- 해결 방법 안내 -->
+  <rect x="415" y="268" width="220" height="35" fill="#e0e0e0" stroke="#666" stroke-width="1.5" rx="3"/>
+  <text x="425" y="285" class="tufte-text" font-size="10" fill="#333">해결: 표시자 삭제 후 원하는</text>
+  <text x="425" y="298" class="tufte-text" font-size="10" fill="#333">내용만 남기고 저장</text>
+
+</svg>

@@ -1,0 +1,2417 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" xml:lang="ko-KR"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.16">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="이광춘(Openai)">
+<title>28&nbsp; 데이터 과학과 R – 챗GPT 코딩(개정판)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./tool-auto.html" rel="next">
+<link href="./tool-database.html" rel="prev">
+<link href="./images/logo.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-8ee146c0b749343448e797d10b61a7f9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-55f79cb6abf2a16ff6075165a9063c3c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "일치 없음",
+    "search-matching-documents-text": "일치된 문서",
+    "search-copy-link-title": "검색 링크 복사",
+    "search-hide-matches-text": "추가 검색 결과 숨기기",
+    "search-more-match-text": "추가 검색결과",
+    "search-more-matches-text": "추가 검색결과",
+    "search-clear-button-title": "제거",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "취소",
+    "search-submit-button-title": "검색",
+    "search-label": "검색"
+  }
+}</script><script type="text/javascript">
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-229551680-1', 'auto');
+
+ga('send', {
+  hitType: 'pageview',
+  'anonymizeIp': true,
+});
+</script>
+</head>
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tool-intro.html"><strong>4부</strong> 분야별 코딩</a></li><li class="breadcrumb-item"><a href="./tool-ds.html"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">데이터 과학과 R</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="검색" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">챗GPT 코딩(개정판)</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/bit2r/gpt-coding/" title="소스 코드" class="quarto-navigation-tool px-1" aria-label="소스 코드"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="리더 모드 전환">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="검색"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">서문</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>1부</strong> 전통 프로그래밍</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">프로그래밍 시작하기</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-var.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">변수, 표현식, 문장</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-cont.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">조건부 실행</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-func.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">함수</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-loop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">반복문</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>2부</strong> 자료구조</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-data-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">데이터, AI 식량</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-string.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">문자열</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-file.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">파일</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-list.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">리스트</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-dictionaries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">딕셔너리</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-tuples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">튜플</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-dataframe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">데이터프레임</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-json.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">JSON</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18-tensor.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">텐서</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-embedding.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">벡터와 임베딩</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-graph.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">그래프</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>3부</strong> 버전제어와 협업</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Git 시작하기</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-tracking.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">변경사항 추적</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-history.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">히스토리와 파일 관리</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-remote.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">GitHub와 원격 저장소</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-collab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">협업과 충돌 해결</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">오픈 사이언스</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>4부</strong> 분야별 코딩</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">특화 도구 입문</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-regex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">정규 표현식</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-network.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-web.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">웹서비스</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-database.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">데이터베이스와 SQL</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-ds.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">데이터 과학과 R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-auto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">파일 자동화</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-make.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">빌드 자동화: make</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>5부</strong> 프로그래밍 패러다임</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-paradigm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">패러다임의 이해</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-imperative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">명령형과 절차적 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-oop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">객체지향 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-fp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">함수형 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-declarative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">선언형 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-reactive.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">반응형 프로그래밍</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>6부</strong> 소프트웨어 설계와 아키텍처</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-reuse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">재사용 명령</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-stack.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">소프트웨어 스택</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">소프트웨어 아키텍처</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-pattern.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">살아남은 패턴</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>7부</strong> 기계학습 패러다임</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-paradigm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">소프트웨어 2.0</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">신경망 아키텍처</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">43</span>&nbsp; <span class="chapter-title">학습과 추론</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-to-llm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">44</span>&nbsp; <span class="chapter-title">트랜스포머에서 거대 언어모형으로</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>부록</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">용어사전</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">참고문헌</span></a>
+  </div>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">목차</h2>
+   
+  <ul>
+<li><a href="#sec-ds-r-as-dsl" id="toc-sec-ds-r-as-dsl" class="nav-link active" data-scroll-target="#sec-ds-r-as-dsl"><span class="header-section-number">28.1</span> 데이터 과학 DSL 언어 R</a></li>
+  <li>
+<a href="#sec-ds-dplyr" id="toc-sec-ds-dplyr" class="nav-link" data-scroll-target="#sec-ds-dplyr"><span class="header-section-number">28.2</span> 데이터 문법: dplyr</a>
+  <ul class="collapse">
+<li><a href="#sec-ds-dplyr-verbs" id="toc-sec-ds-dplyr-verbs" class="nav-link" data-scroll-target="#sec-ds-dplyr-verbs"><span class="header-section-number">28.2.1</span> 핵심 동사</a></li>
+  <li><a href="#sec-ds-dplyr-group" id="toc-sec-ds-dplyr-group" class="nav-link" data-scroll-target="#sec-ds-dplyr-group"><span class="header-section-number">28.2.2</span> 그룹 연산</a></li>
+  <li><a href="#sec-ds-dplyr-join" id="toc-sec-ds-dplyr-join" class="nav-link" data-scroll-target="#sec-ds-dplyr-join"><span class="header-section-number">28.2.3</span> 조인 연산</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-ds-ggplot" id="toc-sec-ds-ggplot" class="nav-link" data-scroll-target="#sec-ds-ggplot"><span class="header-section-number">28.3</span> 그래프 문법: ggplot2</a>
+  <ul class="collapse">
+<li><a href="#sec-ds-ggplot-layers" id="toc-sec-ds-ggplot-layers" class="nav-link" data-scroll-target="#sec-ds-ggplot-layers"><span class="header-section-number">28.3.1</span> 레이어 구조</a></li>
+  <li><a href="#sec-ds-ggplot-geoms" id="toc-sec-ds-ggplot-geoms" class="nav-link" data-scroll-target="#sec-ds-ggplot-geoms"><span class="header-section-number">28.3.2</span> 다양한 geom</a></li>
+  <li><a href="#sec-ds-ggplot-facet" id="toc-sec-ds-ggplot-facet" class="nav-link" data-scroll-target="#sec-ds-ggplot-facet"><span class="header-section-number">28.3.3</span> 분할: facet</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-ds-gt" id="toc-sec-ds-gt" class="nav-link" data-scroll-target="#sec-ds-gt"><span class="header-section-number">28.4</span> 표 문법: gt</a>
+  <ul class="collapse">
+<li><a href="#sec-ds-gt-structure" id="toc-sec-ds-gt-structure" class="nav-link" data-scroll-target="#sec-ds-gt-structure"><span class="header-section-number">28.4.1</span> 표 구조</a></li>
+  <li><a href="#sec-ds-gt-basic" id="toc-sec-ds-gt-basic" class="nav-link" data-scroll-target="#sec-ds-gt-basic"><span class="header-section-number">28.4.2</span> 기본 표 생성</a></li>
+  <li><a href="#sec-ds-gt-conditional" id="toc-sec-ds-gt-conditional" class="nav-link" data-scroll-target="#sec-ds-gt-conditional"><span class="header-section-number">28.4.3</span> 조건부 서식</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-ds-debugging" id="toc-sec-ds-debugging" class="nav-link" data-scroll-target="#sec-ds-debugging"><span class="header-section-number">28.5</span> 디버깅</a>
+  <ul class="collapse">
+<li><a href="#sec-ds-debug-pipe" id="toc-sec-ds-debug-pipe" class="nav-link" data-scroll-target="#sec-ds-debug-pipe"><span class="header-section-number">28.5.1</span> 파이프 끊어서 실행</a></li>
+  <li><a href="#sec-ds-debug-glimpse" id="toc-sec-ds-debug-glimpse" class="nav-link" data-scroll-target="#sec-ds-debug-glimpse"><span class="header-section-number">28.5.2</span> glimpse()로 구조 확인</a></li>
+  <li><a href="#sec-ds-debug-message" id="toc-sec-ds-debug-message" class="nav-link" data-scroll-target="#sec-ds-debug-message"><span class="header-section-number">28.5.3</span> 에러 메시지 읽기</a></li>
+  </ul>
+</li>
+  <li><a href="#%EC%83%9D%EA%B0%81%ED%95%B4%EB%B3%BC-%EC%A0%90" id="toc-생각해볼-점" class="nav-link" data-scroll-target="#%EC%83%9D%EA%B0%81%ED%95%B4%EB%B3%BC-%EC%A0%90">💡 생각해볼 점</a></li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/tool-ds.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tool-intro.html"><strong>4부</strong> 분야별 코딩</a></li><li class="breadcrumb-item"><a href="./tool-ds.html"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">데이터 과학과 R</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-ds" class="quarto-section-identifier"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">데이터 과학과 R</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><p>앞선 장들에서 정규표현식으로 텍스트를 다루고, 소켓으로 네트워크 통신을 하고, SQL로 데이터베이스를 조작하는 법을 배웠다. 정규표현식, 소켓, SQL 모두 파이썬 안에서 라이브러리 형태로 사용되지만, 각각의 영역에 특화된 <strong>도메인 특화 언어 (DSL, Domain-Specific Language)</strong>다. 정규표현식은 패턴 매칭을, SQL은 관계형 데이터 조작을 위해 수십 년간 다듬어진 언어다. 범용 언어인 파이썬으로도 같은 작업이 가능하지만, 해당 영역에서는 DSL이 훨씬 간결하고 표현력이 높다.</p>
+<p> </p>
+<p>데이터 과학 역시 마찬가지다. 데이터를 불러오고, 정제하고, 변형하고, 시각화하고, 모형을 개발하고, 분석결과를 보고서로 만드는 일련의 과정은 매우 전문화된 작업이다. 파이썬 pandas, matplotlib, scikit-learn 조합으로도 데이터 과학 작업이 가능하지만, <strong>R과 tidyverse 생태계</strong>는 분석 전체 흐름을 하나의 일관된 문법 체계로 통합한다. 정규표현식이 텍스트 처리의 DSL이고 SQL이 관계형 데이터의 DSL이라면, R tidyverse는 <strong>데이터 과학의 DSL</strong>이라 할 수 있다.</p>
+<p><a href="#fig-ds-dsl-landscape" class="quarto-xref">그림&nbsp;<span>28.1</span></a> 는 파이썬 생태계와 R tidyverse의 근본적인 차이를 보여준다. 파이썬에서는 정규표현식, 소켓, SQL, pandas가 각각 독립된 라이브러리로 존재하며, 서로 다른 문법과 관례를 따른다. 반면 R tidyverse는 dplyr, ggplot2, gt가 파이프 연산자와 동사 체계라는 <strong>공통 문법</strong>을 공유하여, 데이터 조작부터 시각화, 표 제작까지 하나의 일관된 흐름으로 연결된다.</p>
+<div id="fig-ds-dsl-landscape" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-ds-dsl-landscape-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/tool/ds-dsl-landscape.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ds-dsl-landscape-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;28.1: 데이터 과학 DSL 지형도: 파이썬과 R 접근법 비교
+</figcaption></figure>
+</div>
+<section id="sec-ds-r-as-dsl" class="level2" data-number="28.1"><h2 data-number="28.1" class="anchored" data-anchor-id="sec-ds-r-as-dsl">
+<span class="header-section-number">28.1</span> 데이터 과학 DSL 언어 R</h2>
+<p>R은 1993년 뉴질랜드 오클랜드 대학에서 통계학자 로스 이하카(Ross Ihaka)와 로버트 젠틀맨(Robert Gentleman)이 만든 언어다. 태생부터 <strong>통계 분석과 데이터 시각화</strong>를 위해 설계되었다. 벡터 연산이 기본이고, 데이터프레임이 내장 자료구조이며, 통계 함수와 그래프 기능이 언어 핵심에 포함되어 있다.</p>
+<p>파이썬이 범용 프로그래밍의 스위스 군용 칼이라면, R은 데이터 과학에 특화된 정밀 도구다. 두 언어 모두 데이터 분석이 가능하지만, R은 통계학자와 데이터 과학자가 “생각하는 방식대로” 코드를 작성할 수 있도록 설계되었다. <strong>tidyverse</strong> 생태계는 데이터 조작, 시각화, 표 제작에 일관된 <strong>문법(grammar)</strong>을 제공하여, 코드가 마치 데이터를 설명하는 문장처럼 읽힌다.</p>
+<p> </p>
+<p>R tidyverse가 데이터 과학의 DSL로 자리잡은 데는 세 가지 핵심 요소가 있다. 첫째, <strong>파이프 연산자(<code>|&gt;</code>)</strong>가 데이터 흐름을 왼쪽에서 오른쪽으로 자연스럽게 표현한다. 둘째, <strong>일관된 동사(verb) 체계</strong>가 데이터 조작을 영어 문장처럼 읽히게 만든다. 셋째, <strong>문법(grammar) 개념</strong>이 시각화와 표 제작까지 확장되어, 전체 분석 과정이 하나의 언어로 통합된다.</p>
+<p><a href="#fig-ds-r-ecosystem" class="quarto-xref">그림&nbsp;<span>28.2</span></a> 은 R 데이터 과학의 핵심 구조를 보여준다. <strong>데이터 문법</strong> (dplyr), <strong>그래프 문법</strong>(ggplot2), <strong>표 문법</strong>(gt)이라는 세 기둥이 파이프(<code>|&gt;</code>)로 연결되어, 데이터에서 결과물까지 하나의 흐름으로 이어진다. 각 패키지는 독립적으로도 강력하지만, 함께 사용할 때 시너지가 극대화된다.</p>
+<div id="fig-ds-r-ecosystem" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-ds-r-ecosystem-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/tool/ds-r-ecosystem.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ds-r-ecosystem-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;28.2: R 데이터 과학 세 기둥: 문법 기반 접근
+</figcaption></figure>
+</div>
+</section><section id="sec-ds-dplyr" class="level2" data-number="28.2"><h2 data-number="28.2" class="anchored" data-anchor-id="sec-ds-dplyr">
+<span class="header-section-number">28.2</span> 데이터 문법: dplyr</h2>
+<p>R의 기본 데이터프레임 조작은 <code>df[df$x &gt; 0, c("a", "b")]</code>처럼 대괄호와 달러 기호가 중첩되어 읽기 어렵다. 해들리 위컴(Hadley Wickham)은 2014년 dplyr을 발표하며 “데이터 조작을 <strong>동사(verb)</strong>로 표현하자”는 철학을 제시했다. “행을 거른다(filter)”, “열을 고른다(select)”, “새 열을 만든다(mutate)”처럼 <strong>행동을 명시적으로 선언</strong>하면, 코드가 곧 분석 의도를 설명하는 문장이 된다.</p>
+<p><strong>dplyr</strong>은 데이터프레임을 조작하는 “동사” 모음이다. SQL의 SELECT, WHERE, GROUP BY에 해당하는 작업을 R에서 직관적으로 수행한다. 핵심은 다섯 가지 동사: <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code>(행 선택), <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code>(열 선택), <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code>(열 생성), <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> (집계), <code><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange()</a></code>(정렬)다.</p>
+<p> </p>
+<section id="sec-ds-dplyr-verbs" class="level3" data-number="28.2.1"><h3 data-number="28.2.1" class="anchored" data-anchor-id="sec-ds-dplyr-verbs">
+<span class="header-section-number">28.2.1</span> 핵심 동사</h3>
+<p><a href="#fig-ds-dplyr-verbs" class="quarto-xref">그림&nbsp;<span>28.3</span></a> 는 dplyr 핵심 동사가 데이터프레임에 어떤 변형을 가하는지 시각적으로 보여준다. <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code>는 조건에 맞는 행만 남기고, <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code>는 원하는 열만 추출한다. <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code>는 기존 열을 변형하거나 새 열을 추가하고, <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code>는 여러 행을 하나의 통계량으로 요약한다. 하단의 파이프라인 예시처럼, 동사들을 <code>|&gt;</code>로 연결하면 왼쪽에서 오른쪽으로 읽히는 자연스러운 코드가 된다.</p>
+<div id="fig-ds-dplyr-verbs" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-ds-dplyr-verbs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/tool/ds-dplyr-verbs.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ds-dplyr-verbs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;28.3: dplyr 핵심 동사: 다섯 가지 데이터 조작
+</figcaption></figure>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/">palmerpenguins</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 펭귄 데이터로 dplyr 핵심 동사 사용</span></span>
+<span><span class="va">penguins</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op">==</span> <span class="st">"Adelie"</span><span class="op">)</span> <span class="op">|&gt;</span>    <span class="co"># 아델리 펭귄만</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">bill_length_mm</span>, <span class="va">body_mass_g</span><span class="op">)</span> <span class="op">|&gt;</span>   <span class="co"># 두 열만 선택</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>bill_per_mass <span class="op">=</span> <span class="va">bill_length_mm</span> <span class="op">/</span> <span class="va">body_mass_g</span> <span class="op">*</span> <span class="fl">1000</span><span class="op">)</span> <span class="op">|&gt;</span>  <span class="co"># 새 열 생성</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span></span>
+<span>    mean_bill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">bill_length_mm</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    mean_mass <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">body_mass_g</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 1 × 2</span></span>
+<span><span class="co">#&gt;   mean_bill mean_mass</span></span>
+<span><span class="co">#&gt;       &lt;dbl&gt;     &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1      38.8     3701.</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p> </p>
+</section><section id="sec-ds-dplyr-group" class="level3" data-number="28.2.2"><h3 data-number="28.2.2" class="anchored" data-anchor-id="sec-ds-dplyr-group">
+<span class="header-section-number">28.2.2</span> 그룹 연산</h3>
+<p>데이터 분석에서 가장 흔한 질문은 “범주별로 어떻게 다른가?”다. 펭귄 종별 평균 체중, 섬별 개체 수, 연도별 매출 합계처럼 <strong>그룹을 나누고 각 그룹에 대해 통계량을 계산</strong>하는 작업이 분석의 핵심이다. SQL에서는 GROUP BY 절로 처리하는데, dplyr에서는 <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code>와 <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code>의 조합이 동일한 역할을 한다.</p>
+<p><code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code>는 데이터프레임을 보이지 않게 그룹으로 나눈다. 외관상 변화는 없지만, 이후 <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code>나 <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code>가 전체 데이터가 아닌 <strong>각 그룹 내에서만</strong> 작동한다. 아래 예시에서 <code>species</code>와 <code>island</code> 두 열로 그룹을 나누면, 종-섬 조합마다 별도로 개체 수와 평균 체중이 계산된다.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">penguins</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">species</span>, <span class="va">island</span><span class="op">)</span> <span class="op">|&gt;</span>   <span class="co"># 종과 섬으로 그룹</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span></span>
+<span>    n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>,                      <span class="co"># 개체 수</span></span>
+<span>    mean_mass <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">body_mass_g</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    .groups <span class="op">=</span> <span class="st">"drop"</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">mean_mass</span><span class="op">)</span><span class="op">)</span>       <span class="co"># 체중 내림차순 정렬</span></span>
+<span><span class="co">#&gt; # A tibble: 5 × 4</span></span>
+<span><span class="co">#&gt;   species   island        n mean_mass</span></span>
+<span><span class="co">#&gt;   &lt;fct&gt;     &lt;fct&gt;     &lt;int&gt;     &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 Gentoo    Biscoe      124     5076.</span></span>
+<span><span class="co">#&gt; 2 Chinstrap Dream        68     3733.</span></span>
+<span><span class="co">#&gt; 3 Adelie    Biscoe       44     3710.</span></span>
+<span><span class="co">#&gt; 4 Adelie    Torgersen    52     3706.</span></span>
+<span><span class="co">#&gt; 5 Adelie    Dream        56     3688.</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> 후에는 반드시 <code>.groups = "drop"</code> 옵션을 추가하거나 <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup()</a></code>을 호출하는 습관이 중요하다. 옵션 없이 진행하면 후속 연산에서 예상치 못한 그룹 효과가 남아 있을 수 있다. 예를 들어, 그룹이 남아 있는 상태에서 <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code>를 실행하면 전체 평균이 아닌 그룹별 평균이 계산되어 의도치 않은 결과가 나온다.</p>
+<p></p>
+</section><section id="sec-ds-dplyr-join" class="level3" data-number="28.2.3"><h3 data-number="28.2.3" class="anchored" data-anchor-id="sec-ds-dplyr-join">
+<span class="header-section-number">28.2.3</span> 조인 연산</h3>
+<p>실제 데이터는 여러 테이블에 나뉘어 저장되는 경우가 많다. 고객 정보와 주문 내역, 학생 명단과 수강 기록처럼 <strong>공통 키(key)를 기준으로 두 테이블을 합쳐야</strong> 의미 있는 분석이 가능하다. SQL에서 JOIN으로 처리하는 작업을 dplyr에서는 <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">full_join()</a></code> 등으로 수행한다.</p>
+<p><code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join()</a></code>은 왼쪽 테이블의 모든 행을 유지하고, 오른쪽 테이블에서 일치하는 행을 붙인다. 오른쪽에 일치하는 값이 없으면 NA로 채워진다. <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join()</a></code>은 양쪽 모두에 일치하는 행만 남기고, <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">full_join()</a></code>은 양쪽 모든 행을 포함한다. 가장 흔히 사용되는 패턴은 <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join()</a></code>으로, 기준 테이블을 유지하면서 추가 정보를 붙이는 상황에 적합하다.</p>
+<p>아래 예시에서 <code>artists</code> 테이블에는 아티스트 정보가, <code>albums</code> 테이블에는 앨범 정보가 담겨 있다. <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join()</a></code>으로 아티스트별 앨범 목록을 만들 수 있다. Beatles는 앨범이 두 장이므로 두 행으로 확장된다.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 두 테이블 예시</span></span>
+<span><span class="va">artists</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>  id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,</span>
+<span>  name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Beatles"</span>, <span class="st">"Queen"</span>, <span class="st">"Nirvana"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">albums</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>  artist_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,</span>
+<span>  title <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Abbey Road"</span>, <span class="st">"Let It Be"</span>, <span class="st">"A Night at the Opera"</span>, <span class="st">"Nevermind"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># left_join: 왼쪽 테이블 기준 합치기</span></span>
+<span><span class="va">artists</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">albums</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"id"</span> <span class="op">=</span> <span class="st">"artist_id"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 4 × 3</span></span>
+<span><span class="co">#&gt;      id name    title               </span></span>
+<span><span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;               </span></span>
+<span><span class="co">#&gt; 1     1 Beatles Abbey Road          </span></span>
+<span><span class="co">#&gt; 2     1 Beatles Let It Be           </span></span>
+<span><span class="co">#&gt; 3     2 Queen   A Night at the Opera</span></span>
+<span><span class="co">#&gt; 4     3 Nirvana Nevermind</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><code>by</code> 인자에는 조인 기준이 되는 열을 지정한다. 양쪽 테이블에서 열 이름이 다르면 <code>c("왼쪽열" = "오른쪽열")</code> 형식으로 매핑한다. 열 이름이 같으면 <code>by = "열이름"</code>만 적어도 된다. 여러 열을 기준으로 조인할 때는 <code>by = c("열1", "열2")</code> 형식을 사용한다.</p>
+<p> </p>
+</section></section><section id="sec-ds-ggplot" class="level2" data-number="28.3"><h2 data-number="28.3" class="anchored" data-anchor-id="sec-ds-ggplot">
+<span class="header-section-number">28.3</span> 그래프 문법: ggplot2</h2>
+<p>전통적인 통계 그래픽 시스템은 “막대 그래프를 그려라”, “산점도를 그려라”처럼 <strong>그래프 유형 중심</strong>으로 설계되었다. 새로운 유형이 필요하면 별도 함수를 익혀야 했다. 리랜드 윌킨슨(Leland Wilkinson)은 1999년 저서 “The Grammar of Graphics”에서 근본적으로 다른 접근을 제안했다. 모든 그래프는 <strong>데이터</strong>, <strong>미적 매핑(aesthetics)</strong>, <strong>기하 객체(geometries)</strong>라는 공통 요소로 분해된다는 것이다. 막대 그래프와 산점도는 별개의 유형이 아니라, 같은 문법의 다른 조합일 뿐이다.</p>
+<p><strong>ggplot2</strong>는 위컴이 2005년 윌킨슨의 이론을 R로 구현한 패키지다. 그래프를 데이터, 미적 매핑, 기하 객체로 분해하여 레이어처럼 쌓아 올린다. “데이터를 어떻게 시각화할까”라는 질문 대신 “어떤 매핑과 어떤 도형을 쓸까”로 사고방식이 전환된다.</p>
+<p> </p>
+<section id="sec-ds-ggplot-layers" class="level3" data-number="28.3.1"><h3 data-number="28.3.1" class="anchored" data-anchor-id="sec-ds-ggplot-layers">
+<span class="header-section-number">28.3.1</span> 레이어 구조</h3>
+<p><a href="#fig-ds-ggplot-layers" class="quarto-xref">그림&nbsp;<span>28.4</span></a> 는 ggplot2의 레이어 구조를 보여준다. 가장 아래 <code>ggplot(data)</code> 에서 시작하여, <code><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes()</a></code>로 변수를 시각적 속성에 매핑하고, <code>geom_*()</code>으로 점, 선, 막대 등 도형을 선택한다. 척도(<code>scale_*()</code>), 분할(<code>facet_*()</code>), 테마(<code><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme()</a></code>)를 순서대로 쌓으면 최종 그래프가 완성된다.</p>
+<div id="fig-ds-ggplot-layers" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-ds-ggplot-layers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/tool/ds-ggplot-layers.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ds-ggplot-layers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;28.4: ggplot2 레이어 문법: 그래프 구성 요소
+</figcaption></figure>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 산점도: 부리 길이 vs 체중, 종별 형태</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">bill_length_mm</span>, y <span class="op">=</span> <span class="va">body_mass_g</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="va">species</span>, fill <span class="op">=</span> <span class="va">species</span><span class="op">)</span>,</span>
+<span>             color <span class="op">=</span> <span class="st">"#333"</span>, alpha <span class="op">=</span> <span class="fl">0.7</span>, size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_shape_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">21</span>, <span class="fl">22</span>, <span class="fl">24</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#333"</span>, <span class="st">"#777"</span>, <span class="st">"#bbb"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"펭귄 부리 길이와 체중의 관계"</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"부리 길이 (mm)"</span>, y <span class="op">=</span> <span class="st">"체중 (g)"</span>,</span>
+<span>    shape <span class="op">=</span> <span class="st">"종"</span>, fill <span class="op">=</span> <span class="st">"종"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span>base_family <span class="op">=</span> <span class="st">"나눔고딕"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span></span>
+<span>    plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>face <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span>,</span>
+<span>    panel.grid.minor <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    panel.grid.major <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"#ddd"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="tool-ds_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<p> </p>
+</section><section id="sec-ds-ggplot-geoms" class="level3" data-number="28.3.2"><h3 data-number="28.3.2" class="anchored" data-anchor-id="sec-ds-ggplot-geoms">
+<span class="header-section-number">28.3.2</span> 다양한 geom</h3>
+<p>ggplot2는 수십 가지 기하 객체를 제공한다. 산점도를 그리는 <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code>, 선 그래프를 위한 <code><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line()</a></code>, 막대 그래프의 <code><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar()</a></code>와 <code><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col()</a></code>, 분포를 보여주는 <code><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram()</a></code>과 <code><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density()</a></code> 등이 대표적이다. 데이터 유형과 분석 목적에 따라 적절한 geom을 선택하면 된다.</p>
+<p>같은 데이터라도 geom에 따라 전혀 다른 이야기를 전달한다. 연속형 변수의 분포를 비교할 때 <code><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot()</a></code>은 중앙값, 사분위수, 이상치를 명확히 보여주고, <code><a href="https://ggplot2.tidyverse.org/reference/geom_violin.html">geom_violin()</a></code>은 분포의 모양(밀도)을 직관적으로 드러낸다. 아래 예시에서 Gentoo 펭귄의 체중이 다른 종보다 높다는 사실은 두 그래프 모두에서 확인되지만, Chinstrap 펭귄 체중이 좁은 범위에 밀집되어 있다는 점은 바이올린 플롯에서 더 선명하게 보인다.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">species</span>, y <span class="op">=</span> <span class="va">body_mass_g</span>, fill <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span>show.legend <span class="op">=</span> <span class="cn">FALSE</span>, color <span class="op">=</span> <span class="st">"#333"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#999"</span>, <span class="st">"#bbb"</span>, <span class="st">"#ddd"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Box Plot"</span>, x <span class="op">=</span> <span class="cn">NULL</span>, y <span class="op">=</span> <span class="st">"체중 (g)"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span>base_family <span class="op">=</span> <span class="st">"serif"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span></span>
+<span>    plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>face <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span>,</span>
+<span>    panel.grid.minor <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    panel.grid.major <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"#ddd"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">species</span>, y <span class="op">=</span> <span class="va">body_mass_g</span>, fill <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_violin.html">geom_violin</a></span><span class="op">(</span>show.legend <span class="op">=</span> <span class="cn">FALSE</span>, color <span class="op">=</span> <span class="st">"#333"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#999"</span>, <span class="st">"#bbb"</span>, <span class="st">"#ddd"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Violin Plot"</span>, x <span class="op">=</span> <span class="cn">NULL</span>, y <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span>base_family <span class="op">=</span> <span class="st">"나눔고딕"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span></span>
+<span>    plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>face <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span>,</span>
+<span>    panel.grid.minor <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    panel.grid.major <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"#ddd"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="va">p1</span> <span class="op">+</span> <span class="va">p2</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="tool-ds_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>상자 그림과 바이올린 플롯 비교</figcaption></figure>
+</div>
+</div>
+</div>
+<p> </p>
+</section><section id="sec-ds-ggplot-facet" class="level3" data-number="28.3.3"><h3 data-number="28.3.3" class="anchored" data-anchor-id="sec-ds-ggplot-facet">
+<span class="header-section-number">28.3.3</span> 분할: facet</h3>
+<p><code><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap()</a></code>과 <code><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid()</a></code>는 하나의 그래프를 범주별로 분할하여 작은 멀티플(small multiples)을 만든다. 범주 간 비교가 직관적으로 가능해진다.</p>
+<p><code>facet_wrap(~ species)</code>는 단일 변수(종)를 기준으로 패널을 나열한다. 패널 수가 많을 때 <code>ncol</code> 또는 <code>nrow</code> 인자로 배치를 조절한다. 반면 <code>facet_grid(sex ~ species)</code>는 두 변수를 행과 열로 교차 배치하여 2차원 격자를 만든다. 성별과 종의 조합을 한눈에 비교해야 할 때 유용하다.</p>
+<p>분할 그래프의 핵심 가치는 “비교 용이성”에 있다. 하나의 복잡한 그래프에 모든 범주를 색상이나 기호로 구분하면 오히려 읽기 어려워진다. 패널로 분리하면 각 범주의 패턴이 명확해지고, 눈을 이동하며 비교할 수 있다. 에드워드 터프티가 말한 “작은 멀티플”의 원리가 바로 facet 함수로 구현된다.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">bill_length_mm</span>, y <span class="op">=</span> <span class="va">bill_depth_mm</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="va">sex</span>, fill <span class="op">=</span> <span class="va">sex</span><span class="op">)</span>,</span>
+<span>             color <span class="op">=</span> <span class="st">"#333"</span>, alpha <span class="op">=</span> <span class="fl">0.7</span>, size <span class="op">=</span> <span class="fl">2</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_shape_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">21</span>, <span class="fl">24</span><span class="op">)</span>, na.translate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#666"</span>, <span class="st">"#bbb"</span><span class="op">)</span>, na.translate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">species</span>, ncol <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"종별 부리 길이와 깊이"</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"부리 길이 (mm)"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"부리 깊이 (mm)"</span>,</span>
+<span>    shape <span class="op">=</span> <span class="st">"성별"</span>, fill <span class="op">=</span> <span class="st">"성별"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span>base_family <span class="op">=</span> <span class="st">"나눔고딕"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span></span>
+<span>    plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>face <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span>,</span>
+<span>    panel.grid.minor <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    strip.background <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_rect</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"#f0f0f0"</span>, color <span class="op">=</span> <span class="st">"#333"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="tool-ds_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+<p> </p>
+</section></section><section id="sec-ds-gt" class="level2" data-number="28.4"><h2 data-number="28.4" class="anchored" data-anchor-id="sec-ds-gt">
+<span class="header-section-number">28.4</span> 표 문법: gt</h2>
+<p>데이터 분석 결과를 전달할 때 그래프만으로는 부족한 경우가 많다. 정확한 수치, p-value, 신뢰구간처럼 <strong>숫자 그 자체가 중요한 정보</strong>일 때 표가 필요하다. 그러나 R의 기본 출력은 콘솔용 텍스트에 불과했고, HTML이나 PDF로 내보내려면 복잡한 서식 코드를 직접 작성해야 했다. 리처드 이아넬리(Richard Iannone)는 2018년 gt 패키지를 발표하며 “표도 문법이 있다”는 철학을 제시했다.</p>
+<p><strong>gt</strong> 패키지는 데이터프레임을 출판 품질의 표로 변환한다. 그래프가 패턴을 보여준다면, 표는 정확한 수치를 전달한다. gt는 표의 구조(제목, 열 라벨, 본문, 각주)를 체계적으로 다루는 “표 문법”을 제공한다.</p>
+<p> </p>
+<section id="sec-ds-gt-structure" class="level3" data-number="28.4.1"><h3 data-number="28.4.1" class="anchored" data-anchor-id="sec-ds-gt-structure">
+<span class="header-section-number">28.4.1</span> 표 구조</h3>
+<p>gt는 표를 <strong>구조(structure)</strong>, <strong>서식(format)</strong>, <strong>스타일(style)</strong>의 세 층으로 나누어 다룬다. 구조는 표의 골격을 결정한다. 제목과 부제목은 <code><a href="https://gt.rstudio.com/reference/tab_header.html">tab_header()</a></code>로, 열 이름은 <code><a href="https://gt.rstudio.com/reference/cols_label.html">cols_label()</a></code>로, 여러 열을 묶는 상위 그룹은 <code><a href="https://gt.rstudio.com/reference/tab_spanner.html">tab_spanner()</a></code>로 정의한다. 하단의 각주(<code><a href="https://gt.rstudio.com/reference/tab_footnote.html">tab_footnote()</a></code>)와 출처(<code><a href="https://gt.rstudio.com/reference/tab_source_note.html">tab_source_note()</a></code>)도 구조에 속한다.</p>
+<p>서식은 <strong>데이터 값의 표현 방식</strong>을 바꾼다. 숫자 1234.567을 소수점 두 자리로 표시하려면 <code>fmt_number(decimals = 2)</code>, 백분율은 <code><a href="https://gt.rstudio.com/reference/fmt_percent.html">fmt_percent()</a></code>, 통화는 <code><a href="https://gt.rstudio.com/reference/fmt_currency.html">fmt_currency()</a></code>를 사용한다. 서식은 값 자체가 아니라 “어떻게 보여줄 것인가”에 관한 것이다. 스타일은 <strong>셀의 시각적 외관</strong>을 결정한다. <code><a href="https://gt.rstudio.com/reference/data_color.html">data_color()</a></code>로 배경색을, <code><a href="https://gt.rstudio.com/reference/tab_style.html">tab_style()</a></code>로 글꼴 굵기나 색상을 지정한다. 스타일은 데이터 값과 무관하게 표의 가독성과 미적 완성도를 높인다.</p>
+<p><a href="#fig-ds-gt-structure" class="quarto-xref">그림&nbsp;<span>28.5</span></a> 는 gt 표의 해부학적 구조를 보여준다. 상단에는 제목과 부제목(<code><a href="https://gt.rstudio.com/reference/tab_header.html">tab_header()</a></code>), 열 라벨(<code><a href="https://gt.rstudio.com/reference/cols_label.html">cols_label()</a></code>), 열 그룹(<code><a href="https://gt.rstudio.com/reference/tab_spanner.html">tab_spanner()</a></code>)이 위치한다. 중앙 본문에는 데이터 셀이 들어가고, 서식 함수(<code>fmt_*()</code>)와 조건부 색상(<code><a href="https://gt.rstudio.com/reference/data_color.html">data_color()</a></code>)으로 꾸밀 수 있다. 하단에는 각주(<code><a href="https://gt.rstudio.com/reference/tab_footnote.html">tab_footnote()</a></code>)와 출처(<code><a href="https://gt.rstudio.com/reference/tab_source_note.html">tab_source_note()</a></code>)가 배치된다.</p>
+<div id="fig-ds-gt-structure" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-ds-gt-structure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/tool/ds-gt-structure.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ds-gt-structure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;28.5: gt 표 문법: 표의 해부학적 구조
+</figcaption></figure>
+</div>
+</section><section id="sec-ds-gt-basic" class="level3" data-number="28.4.2"><h3 data-number="28.4.2" class="anchored" data-anchor-id="sec-ds-gt-basic">
+<span class="header-section-number">28.4.2</span> 기본 표 생성</h3>
+<p>gt 강점은 dplyr 파이프라인과 자연스럽게 연결된다는 점이다. <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code>로 만든 요약 데이터프레임 끝에 <code><a href="https://gt.rstudio.com/reference/gt.html">gt()</a></code>를 붙이면 곧바로 출판 품질의 표가 된다. <code><a href="https://gt.rstudio.com/reference/tab_header.html">tab_header()</a></code>로 제목을 붙이고, <code><a href="https://gt.rstudio.com/reference/cols_label.html">cols_label()</a></code>로 열 이름을 한글로 바꾸고, <code><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number()</a></code>로 소수점 자릿수를 맞추면 된다.</p>
+<p>아래 예시는 펭귄 종별 체중 통계를 표로 정리한다. dplyr에서 gt로 이어지는 파이프라인이 “데이터 정리 → 표 생성 → 서식 적용”이라는 흐름을 명확히 보여준다.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com">gt</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">penguins</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span></span>
+<span>    n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    mean_mass <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">body_mass_g</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    sd_mass <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">body_mass_g</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    .groups <span class="op">=</span> <span class="st">"drop"</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html">tab_header</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"펭귄 종별 체중 통계"</span>,</span>
+<span>    subtitle <span class="op">=</span> <span class="st">"Palmer Station LTER 데이터"</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html">cols_label</a></span><span class="op">(</span></span>
+<span>    species <span class="op">=</span> <span class="st">"종"</span>,</span>
+<span>    n <span class="op">=</span> <span class="st">"개체 수"</span>,</span>
+<span>    mean_mass <span class="op">=</span> <span class="st">"평균 체중"</span>,</span>
+<span>    sd_mass <span class="op">=</span> <span class="st">"표준편차"</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">mean_mass</span>, <span class="va">sd_mass</span><span class="op">)</span>, decimals <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="bvvdrasupd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#bvvdrasupd table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#bvvdrasupd thead, #bvvdrasupd tbody, #bvvdrasupd tfoot, #bvvdrasupd tr, #bvvdrasupd td, #bvvdrasupd th {
+  border-style: none;
+}
+
+#bvvdrasupd p {
+  margin: 0;
+  padding: 0;
+}
+
+#bvvdrasupd .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#bvvdrasupd .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#bvvdrasupd .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#bvvdrasupd .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#bvvdrasupd .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bvvdrasupd .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bvvdrasupd .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bvvdrasupd .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#bvvdrasupd .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#bvvdrasupd .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#bvvdrasupd .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#bvvdrasupd .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#bvvdrasupd .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#bvvdrasupd .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#bvvdrasupd .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#bvvdrasupd .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#bvvdrasupd .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#bvvdrasupd .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#bvvdrasupd .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bvvdrasupd .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#bvvdrasupd .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#bvvdrasupd .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#bvvdrasupd .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bvvdrasupd .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#bvvdrasupd .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#bvvdrasupd .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bvvdrasupd .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bvvdrasupd .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#bvvdrasupd .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bvvdrasupd .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#bvvdrasupd .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bvvdrasupd .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bvvdrasupd .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bvvdrasupd .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bvvdrasupd .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bvvdrasupd .gt_left {
+  text-align: left;
+}
+
+#bvvdrasupd .gt_center {
+  text-align: center;
+}
+
+#bvvdrasupd .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#bvvdrasupd .gt_font_normal {
+  font-weight: normal;
+}
+
+#bvvdrasupd .gt_font_bold {
+  font-weight: bold;
+}
+
+#bvvdrasupd .gt_font_italic {
+  font-style: italic;
+}
+
+#bvvdrasupd .gt_super {
+  font-size: 65%;
+}
+
+#bvvdrasupd .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#bvvdrasupd .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#bvvdrasupd .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#bvvdrasupd .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#bvvdrasupd .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#bvvdrasupd .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#bvvdrasupd .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#bvvdrasupd .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#bvvdrasupd div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading header">
+<td colspan="4" class="gt_heading gt_title gt_font_normal">펭귄 종별 체중 통계</td>
+</tr>
+<tr class="gt_heading even">
+<td colspan="4" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">Palmer Station LTER 데이터</td>
+</tr>
+<tr class="gt_col_headings header">
+<th id="species" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">종</th>
+<th id="n" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">개체 수</th>
+<th id="mean_mass" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">평균 체중</th>
+<th id="sd_mass" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">표준편차</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers="species">Adelie</td>
+<td class="gt_row gt_right" headers="n">152</td>
+<td class="gt_row gt_right" headers="mean_mass">3,700.7</td>
+<td class="gt_row gt_right" headers="sd_mass">458.6</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="species">Chinstrap</td>
+<td class="gt_row gt_right" headers="n">68</td>
+<td class="gt_row gt_right" headers="mean_mass">3,733.1</td>
+<td class="gt_row gt_right" headers="sd_mass">384.3</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="species">Gentoo</td>
+<td class="gt_row gt_right" headers="n">124</td>
+<td class="gt_row gt_right" headers="mean_mass">5,076.0</td>
+<td class="gt_row gt_right" headers="sd_mass">504.1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p> </p>
+</section><section id="sec-ds-gt-conditional" class="level3" data-number="28.4.3"><h3 data-number="28.4.3" class="anchored" data-anchor-id="sec-ds-gt-conditional">
+<span class="header-section-number">28.4.3</span> 조건부 서식</h3>
+<p>표에서 가장 강력한 기능 중 하나가 <strong>조건부 서식</strong>이다. 숫자만 나열된 표에서 최댓값, 최솟값, 이상치를 찾으려면 하나하나 비교해야 한다. 조건부 서식은 값의 크기에 따라 자동으로 색상을 입혀, 눈으로 훑는 것만으로도 패턴을 파악하게 해준다.</p>
+<p><code><a href="https://gt.rstudio.com/reference/data_color.html">data_color()</a></code>는 지정한 열의 값 범위에 따라 색상 팔레트를 적용한다. 아래 예시에서 <code>mean_bill</code> 열에 흰색에서 검은색으로 이어지는 그라데이션을 적용하면, 부리 길이가 긴 종-섬 조합이 어디인지 한눈에 들어온다. 엑셀의 조건부 서식과 같은 기능이지만, 코드로 재현 가능하다는 점이 다르다.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">penguins</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">species</span>, <span class="va">island</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span></span>
+<span>    n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    mean_bill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">bill_length_mm</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    .groups <span class="op">=</span> <span class="st">"drop"</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"종-섬별 부리 길이"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="va">mean_bill</span>, decimals <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/data_color.html">data_color</a></span><span class="op">(</span></span>
+<span>    columns <span class="op">=</span> <span class="va">mean_bill</span>,</span>
+<span>    palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#ffffff"</span>, <span class="st">"#333333"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="jghchclcsd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jghchclcsd table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#jghchclcsd thead, #jghchclcsd tbody, #jghchclcsd tfoot, #jghchclcsd tr, #jghchclcsd td, #jghchclcsd th {
+  border-style: none;
+}
+
+#jghchclcsd p {
+  margin: 0;
+  padding: 0;
+}
+
+#jghchclcsd .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#jghchclcsd .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#jghchclcsd .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#jghchclcsd .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#jghchclcsd .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jghchclcsd .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jghchclcsd .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jghchclcsd .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#jghchclcsd .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#jghchclcsd .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#jghchclcsd .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#jghchclcsd .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#jghchclcsd .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#jghchclcsd .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#jghchclcsd .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#jghchclcsd .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#jghchclcsd .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#jghchclcsd .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#jghchclcsd .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jghchclcsd .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#jghchclcsd .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#jghchclcsd .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#jghchclcsd .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jghchclcsd .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#jghchclcsd .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#jghchclcsd .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jghchclcsd .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jghchclcsd .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#jghchclcsd .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jghchclcsd .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#jghchclcsd .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jghchclcsd .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jghchclcsd .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jghchclcsd .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jghchclcsd .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jghchclcsd .gt_left {
+  text-align: left;
+}
+
+#jghchclcsd .gt_center {
+  text-align: center;
+}
+
+#jghchclcsd .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#jghchclcsd .gt_font_normal {
+  font-weight: normal;
+}
+
+#jghchclcsd .gt_font_bold {
+  font-weight: bold;
+}
+
+#jghchclcsd .gt_font_italic {
+  font-style: italic;
+}
+
+#jghchclcsd .gt_super {
+  font-size: 65%;
+}
+
+#jghchclcsd .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#jghchclcsd .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#jghchclcsd .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#jghchclcsd .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#jghchclcsd .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#jghchclcsd .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#jghchclcsd .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#jghchclcsd .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#jghchclcsd div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading header">
+<td colspan="4" class="gt_heading gt_title gt_font_normal gt_bottom_border">종-섬별 부리 길이</td>
+</tr>
+<tr class="gt_col_headings even">
+<th id="species" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">species</th>
+<th id="island" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">island</th>
+<th id="n" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">n</th>
+<th id="mean_bill" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">mean_bill</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers="species">Adelie</td>
+<td class="gt_row gt_center" headers="island">Biscoe</td>
+<td class="gt_row gt_right" headers="n">44</td>
+<td class="gt_row gt_right" headers="mean_bill" style="background-color: #F5F5F5; color: #000000">39.0</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="species">Adelie</td>
+<td class="gt_row gt_center" headers="island">Dream</td>
+<td class="gt_row gt_right" headers="n">56</td>
+<td class="gt_row gt_right" headers="mean_bill" style="background-color: #FFFFFF; color: #000000">38.5</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="species">Adelie</td>
+<td class="gt_row gt_center" headers="island">Torgersen</td>
+<td class="gt_row gt_right" headers="n">52</td>
+<td class="gt_row gt_right" headers="mean_bill" style="background-color: #F5F5F5; color: #000000">39.0</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="species">Chinstrap</td>
+<td class="gt_row gt_center" headers="island">Dream</td>
+<td class="gt_row gt_right" headers="n">68</td>
+<td class="gt_row gt_right" headers="mean_bill" style="background-color: #333333; color: #FFFFFF">48.8</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="species">Gentoo</td>
+<td class="gt_row gt_center" headers="island">Biscoe</td>
+<td class="gt_row gt_right" headers="n">124</td>
+<td class="gt_row gt_right" headers="mean_bill" style="background-color: #4A4A4A; color: #FFFFFF">47.5</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p></p>
+</section></section><section id="sec-ds-debugging" class="level2" data-number="28.5"><h2 data-number="28.5" class="anchored" data-anchor-id="sec-ds-debugging">
+<span class="header-section-number">28.5</span> 디버깅</h2>
+<p>tidyverse 파이프라인은 읽기 쉽지만, 길어지면 오류 위치를 찾기 어려워진다. <code>penguins |&gt; filter() |&gt; select() |&gt; mutate() |&gt; summarize()</code> 같은 코드에서 오류가 발생하면, 어느 단계에서 문제가 생겼는지 한눈에 파악하기 힘들다. 파이썬처럼 한 줄씩 실행하는 방식과 달리, 파이프라인은 전체가 하나의 표현식으로 평가되기 때문이다.</p>
+<p>R tidyverse 코드에서 오류는 세 가지 층에서 발생한다. <a href="#fig-ds-debugging" class="quarto-xref">그림&nbsp;<span>28.6</span></a> 은 R 문법 오류, 패키지/함수 오류, 데이터/타입 오류라는 세 가지 유형과 각각에 대응하는 디버깅 전략을 보여준다. 오류 메시지를 층별로 분류하면 해결책을 빠르게 찾을 수 있다.</p>
+<div id="fig-ds-debugging" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-ds-debugging-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/tool/ds-debugging.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ds-debugging-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;28.6: R 디버깅: 오류 유형과 해결 전략
+</figcaption></figure>
+</div>
+<p><strong>R 문법 오류</strong>는 가장 발견하기 쉽다. <code>unexpected symbol</code>, <code>unexpected ')'</code> 같은 메시지가 괄호, 쉼표, 파이프 누락을 알려준다. R은 파이프 <code>|&gt;</code> 끝에서 다음 줄로 이어지는 것을 허용하지만, 줄 끝에 <code>|&gt;</code>가 없으면 문장이 끝났다고 판단하여 오류가 발생한다.</p>
+<p><strong>패키지/함수 오류</strong>는 <code>could not find function "X"</code> 형태로 나타난다. 대부분 <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> 호출을 잊었거나, 함수 이름에 오타가 있는 경우다. tidyverse 함수들은 <code><a href="https://dplyr.tidyverse.org/reference/filter.html">dplyr::filter()</a></code>처럼 패키지명을 명시하면 library 없이도 사용 가능하다.</p>
+<p><strong>데이터/타입 오류</strong>가 가장 찾기 어렵다. <code>object 'X' not found</code>는 열 이름 오타, <code>Error in ... : non-numeric argument</code>는 숫자 연산에 문자열이 섞인 경우다. NA(결측치) 처리를 놓치면 <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code>이나 <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> 결과가 전부 NA가 되기도 한다.</p>
+<section id="sec-ds-debug-pipe" class="level3" data-number="28.5.1"><h3 data-number="28.5.1" class="anchored" data-anchor-id="sec-ds-debug-pipe">
+<span class="header-section-number">28.5.1</span> 파이프 끊어서 실행</h3>
+<p>긴 파이프라인에서 오류가 발생하면, 파이프를 한 단계씩 끊어서 중간 결과를 확인하는 것이 가장 효과적이다. 첫 번째 동사까지만 실행하고 결과를 확인한 뒤, 문제가 없으면 두 번째 동사를 추가하는 식으로 범위를 좁혀 나간다. 오류가 발생하는 정확한 단계를 찾으면, 해당 동사의 인자(열 이름, 조건식 등)를 집중적으로 검토한다.</p>
+<p>RStudio나 Positron에서는 파이프라인 일부를 드래그해서 선택한 뒤 Ctrl+Enter (또는 Cmd+Enter)로 실행할 수 있다. 전체 파이프라인을 수정하지 않고도 중간 결과를 확인할 수 있어 편리하다.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 오류가 발생하는 긴 파이프라인</span></span>
+<span><span class="va">penguins</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op">==</span> <span class="st">"Adelie"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">bill_length_mm</span>, <span class="va">body_mass</span><span class="op">)</span> <span class="op">|&gt;</span>    <span class="co"># 오타: body_mass_g가 맞음</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>ratio <span class="op">=</span> <span class="va">bill_length_mm</span> <span class="op">/</span> <span class="va">body_mass</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 디버깅: 한 단계씩 실행</span></span>
+<span><span class="va">penguins</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op">==</span> <span class="st">"Adelie"</span><span class="op">)</span>       <span class="co"># 1단계: OK</span></span>
+<span></span>
+<span><span class="va">penguins</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op">==</span> <span class="st">"Adelie"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">bill_length_mm</span>, <span class="va">body_mass</span><span class="op">)</span>        <span class="co"># 2단계: 오류 발생! → 열 이름 확인</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section><section id="sec-ds-debug-glimpse" class="level3" data-number="28.5.2"><h3 data-number="28.5.2" class="anchored" data-anchor-id="sec-ds-debug-glimpse">
+<span class="header-section-number">28.5.2</span> glimpse()로 구조 확인</h3>
+<p>데이터/타입 오류의 대부분은 <strong>데이터프레임 구조를 모르기 때문</strong>에 발생한다. 열 이름이 <code>body_mass</code>인지 <code>body_mass_g</code>인지, 숫자로 보이는 열이 실제로 <code>numeric</code>인지 <code>character</code>인지 확인하지 않으면 오류를 피할 수 없다.</p>
+<p><code><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse()</a></code>는 데이터프레임의 구조를 한눈에 보여준다. 열 이름, 타입, 첫 몇 개 값을 콘솔에 출력하여 데이터의 전체 모습을 빠르게 파악할 수 있다. 새로운 데이터를 불러왔을 때, 또는 오류가 발생했을 때 가장 먼저 실행해야 할 함수다.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Rows: 344</span></span>
+<span><span class="co">#&gt; Columns: 8</span></span>
+<span><span class="co">#&gt; $ species           &lt;fct&gt; Adelie, Adelie, Adelie, Adelie, Adelie, Adelie, Adel…</span></span>
+<span><span class="co">#&gt; $ island            &lt;fct&gt; Torgersen, Torgersen, Torgersen, Torgersen, Torgerse…</span></span>
+<span><span class="co">#&gt; $ bill_length_mm    &lt;dbl&gt; 39.1, 39.5, 40.3, NA, 36.7, 39.3, 38.9, 39.2, 34.1, …</span></span>
+<span><span class="co">#&gt; $ bill_depth_mm     &lt;dbl&gt; 18.7, 17.4, 18.0, NA, 19.3, 20.6, 17.8, 19.6, 18.1, …</span></span>
+<span><span class="co">#&gt; $ flipper_length_mm &lt;int&gt; 181, 186, 195, NA, 193, 190, 181, 195, 193, 190, 186…</span></span>
+<span><span class="co">#&gt; $ body_mass_g       &lt;int&gt; 3750, 3800, 3250, NA, 3450, 3650, 3625, 4675, 3475, …</span></span>
+<span><span class="co">#&gt; $ sex               &lt;fct&gt; male, female, female, NA, female, male, female, male…</span></span>
+<span><span class="co">#&gt; $ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007…</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>열 이름을 확인하려면 <code>names(df)</code>, 특정 열의 타입을 알려면 <code>class(df$col)</code>, 결측치 개수를 파악하려면 <code>sum(is.na(df$col))</code>을 사용한다.</p>
+</section><section id="sec-ds-debug-message" class="level3" data-number="28.5.3"><h3 data-number="28.5.3" class="anchored" data-anchor-id="sec-ds-debug-message">
+<span class="header-section-number">28.5.3</span> 에러 메시지 읽기</h3>
+<p>R 초보자들은 에러 메시지를 무시하고 코드만 들여다보는 경향이 있다. 하지만 tidyverse 패키지들은 rlang 라이브러리를 기반으로 <strong>매우 친절한 에러 메시지</strong>를 제공한다. 오타가 있으면 “Did you mean <code>species</code>?”처럼 올바른 이름을 제안하고, 열이 없으면 어떤 열이 존재하는지 목록을 보여준다.</p>
+<p>에러 메시지를 꼼꼼히 읽는 습관을 들이면 디버깅 시간이 크게 줄어든다. 특히 dplyr과 ggplot2의 에러 메시지는 문제의 원인과 해결 방향을 구체적으로 알려주므로, 메시지 내용을 그대로 따라가면 대부분 해결된다.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 오타가 있는 코드</span></span>
+<span><span class="va">penguins</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">speices</span> <span class="op">==</span> <span class="st">"Adelie"</span><span class="op">)</span>   <span class="co"># species를 speices로 잘못 씀</span></span>
+<span><span class="co">#&gt; Error in `dplyr::filter()`:</span></span>
+<span><span class="co">#&gt; ℹ In argument: `speices == "Adelie"`.</span></span>
+<span><span class="co">#&gt; Caused by error:</span></span>
+<span><span class="co">#&gt; ! 객체 'speices'를 찾을 수 없습니다</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-simple callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">경고</span>NA 처리를 잊지 말자
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>R의 <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code>, <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code>, <code><a href="https://rdrr.io/r/stats/sd.html">sd()</a></code> 등 집계 함수는 NA가 하나라도 있으면 결과가 NA가 된다. 반드시 <code>na.rm = TRUE</code> 옵션을 추가하거나, 사전에 <code><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na()</a></code>로 결측치를 제거해야 한다.</p>
+</div>
+</div>
+</section></section><section id="생각해볼-점" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="생각해볼-점">💡 생각해볼 점</h2>
+<p>tidyverse는 <strong>도메인 특화 언어(DSL)</strong>다. SQL이 관계형 데이터베이스를 위한 언어이듯, tidyverse는 테이블 형태 데이터를 다루기 위해 설계된 언어 체계다. <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code>는 R 함수이기 이전에 <strong>데이터 조작 동사</strong>다. “행을 거른다”, “열을 고른다”, “값을 바꾼다”는 사고 자체가 코드로 직접 번역된다. 범용 언어에서 데이터를 다룰 때 겪는 번역 비용—“내가 하고 싶은 작업을 어떤 문법으로 표현하지?” —이 tidyverse에서는 거의 사라진다.</p>
+<p>핵심은 <strong>선언적(declarative)</strong> 접근이다. <code>penguins |&gt; filter(species == "Adelie")</code>는 “아델리 종만 남겨라”라고 <strong>무엇을</strong> 원하는지 선언한다. 반복문을 돌며 조건을 검사하고 새 벡터에 추가하는 <strong>어떻게</strong>의 절차는 dplyr 내부에 숨겨진다. 선언적 코드는 읽기 쉽고, 의도가 명확하며, 실수할 여지가 적다. 데이터 분석에서 “분석 로직”과 “구현 세부사항”을 분리하는 것은 생산성과 재현가능성 모두에 결정적이다.</p>
+<p>dplyr, ggplot2, gt는 서로 다른 영역—조작, 시각화, 표—을 다루지만 <strong>동일한 설계 원칙</strong>을 공유한다. 첫 인자는 언제나 데이터, 파이프로 연결 가능, 함수 이름이 곧 동작 설명. 이 일관성 덕분에 하나를 익히면 나머지가 쉬워진다. tidymodels(모델링), tidytext(텍스트), sf(공간)처럼 확장 패키지들도 같은 문법을 따르므로, tidyverse를 익히는 것은 R 데이터 과학 생태계 전체로 가는 입장권을 얻는 것과 같다.</p>
+<p>R의 진짜 강점은 <strong>통계학자들이 직접 구축한 생태계</strong>에 있다. 새로운 통계 방법론은 대부분 R 패키지로 먼저 공개된다. CRAN의 20,000개 이상 패키지 중 상당수가 논문과 함께 발표된 검증된 구현체다. 분석 결과를 논문이나 보고서로 만드는 쿼토(Quarto) 역시 R 생태계에서 출발했다. 데이터 분석의 전체 흐름—수집, 정제, 분석, 시각화, 문서화—을 하나의 일관된 문법 체계 안에서 완결짓는 것, 그것이 tidyverse가 제시하는 데이터 과학의 본질이다.</p>
+<p></p>
+
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "복사완료!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "복사완료!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/r2bit\.com\/gpt-coding\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./tool-database.html" class="pagination-link" aria-label="데이터베이스와 SQL">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">데이터베이스와 SQL</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./tool-auto.html" class="pagination-link" aria-label="파일 자동화">
+        <span class="nav-page-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">파일 자동화</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+<p>챗GPT 쿼토 책은 소프트웨어 카펜트리 “Git 버전제어”를 번역한 것이 포함되어 있습니다.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/tool-ds.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>순수하게 <a href="https://quarto.org/">쿼토(Quarto)</a>로 제작되었습니다.</p>
+</div>
+  </div>
+</footer>
+
+
+</body></html>

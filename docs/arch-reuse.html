@@ -1,0 +1,4744 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" xml:lang="ko-KR"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.16">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="이광춘(Openai)">
+<title>37&nbsp; 재사용 명령 – 챗GPT 코딩(개정판)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./arch-stack.html" rel="next">
+<link href="./prog-reactive.html" rel="prev">
+<link href="./images/logo.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-8ee146c0b749343448e797d10b61a7f9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-55f79cb6abf2a16ff6075165a9063c3c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "일치 없음",
+    "search-matching-documents-text": "일치된 문서",
+    "search-copy-link-title": "검색 링크 복사",
+    "search-hide-matches-text": "추가 검색 결과 숨기기",
+    "search-more-match-text": "추가 검색결과",
+    "search-more-matches-text": "추가 검색결과",
+    "search-clear-button-title": "제거",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "취소",
+    "search-submit-button-title": "검색",
+    "search-label": "검색"
+  }
+}</script><script type="text/javascript">
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-229551680-1', 'auto');
+
+ga('send', {
+  hitType: 'pageview',
+  'anonymizeIp': true,
+});
+</script>
+</head>
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./arch-reuse.html"><strong>6부</strong> 소프트웨어 설계와 아키텍처</a></li><li class="breadcrumb-item"><a href="./arch-reuse.html"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">재사용 명령</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="검색" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">챗GPT 코딩(개정판)</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/bit2r/gpt-coding/" title="소스 코드" class="quarto-navigation-tool px-1" aria-label="소스 코드"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="리더 모드 전환">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="검색"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">서문</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>1부</strong> 전통 프로그래밍</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">프로그래밍 시작하기</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-var.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">변수, 표현식, 문장</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-cont.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">조건부 실행</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-func.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">함수</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-loop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">반복문</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>2부</strong> 자료구조</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-data-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">데이터, AI 식량</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-string.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">문자열</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-file.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">파일</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-list.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">리스트</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-dictionaries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">딕셔너리</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-tuples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">튜플</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-dataframe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">데이터프레임</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-json.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">JSON</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18-tensor.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">텐서</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-embedding.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">벡터와 임베딩</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-graph.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">그래프</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>3부</strong> 버전제어와 협업</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Git 시작하기</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-tracking.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">변경사항 추적</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-history.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">히스토리와 파일 관리</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-remote.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">GitHub와 원격 저장소</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-collab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">협업과 충돌 해결</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">오픈 사이언스</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>4부</strong> 분야별 코딩</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">특화 도구 입문</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-regex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">정규 표현식</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-network.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-web.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">웹서비스</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-database.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">데이터베이스와 SQL</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-ds.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">데이터 과학과 R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-auto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">파일 자동화</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-make.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">빌드 자동화: make</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>5부</strong> 프로그래밍 패러다임</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-paradigm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">패러다임의 이해</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-imperative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">명령형과 절차적 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-oop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">객체지향 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-fp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">함수형 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-declarative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">선언형 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-reactive.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">반응형 프로그래밍</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>6부</strong> 소프트웨어 설계와 아키텍처</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-reuse.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">재사용 명령</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-stack.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">소프트웨어 스택</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">소프트웨어 아키텍처</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-pattern.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">살아남은 패턴</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>7부</strong> 기계학습 패러다임</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-paradigm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">소프트웨어 2.0</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">신경망 아키텍처</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">43</span>&nbsp; <span class="chapter-title">학습과 추론</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-to-llm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">44</span>&nbsp; <span class="chapter-title">트랜스포머에서 거대 언어모형으로</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>부록</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">용어사전</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">참고문헌</span></a>
+  </div>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">목차</h2>
+   
+  <ul>
+<li><a href="#sec-arch-reuse-why" id="toc-sec-arch-reuse-why" class="nav-link active" data-scroll-target="#sec-arch-reuse-why"><span class="header-section-number">37.1</span> 왜 재사용인가</a></li>
+  <li>
+<a href="#sec-arch-reuse-spectrum" id="toc-sec-arch-reuse-spectrum" class="nav-link" data-scroll-target="#sec-arch-reuse-spectrum"><span class="header-section-number">37.2</span> 재사용 스펙트럼</a>
+  <ul class="collapse">
+<li><a href="#%EC%8A%A4%ED%8E%99%ED%8A%B8%EB%9F%BC%EC%9D%98-%EB%84%A4-%EC%98%81%EC%97%AD" id="toc-스펙트럼의-네-영역" class="nav-link" data-scroll-target="#%EC%8A%A4%ED%8E%99%ED%8A%B8%EB%9F%BC%EC%9D%98-%EB%84%A4-%EC%98%81%EC%97%AD"><span class="header-section-number">37.2.1</span> 스펙트럼의 네 영역</a></li>
+  <li><a href="#%EC%8A%A4%ED%8E%99%ED%8A%B8%EB%9F%BC%EC%9D%98-%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%93%9C%EC%98%A4%ED%94%84" id="toc-스펙트럼의-트레이드오프" class="nav-link" data-scroll-target="#%EC%8A%A4%ED%8E%99%ED%8A%B8%EB%9F%BC%EC%9D%98-%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%93%9C%EC%98%A4%ED%94%84"><span class="header-section-number">37.2.2</span> 스펙트럼의 트레이드오프</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-arch-reuse-evolution" id="toc-sec-arch-reuse-evolution" class="nav-link" data-scroll-target="#sec-arch-reuse-evolution"><span class="header-section-number">37.3</span> 추상화 진화</a>
+  <ul class="collapse">
+<li><a href="#%EA%B0%90%EC%B6%94%EC%A7%80%EB%A7%8C-%EC%82%AC%EB%9D%BC%EC%A7%80%EC%A7%80-%EC%95%8A%EB%8A%94%EB%8B%A4" id="toc-감추지만-사라지지-않는다" class="nav-link" data-scroll-target="#%EA%B0%90%EC%B6%94%EC%A7%80%EB%A7%8C-%EC%82%AC%EB%9D%BC%EC%A7%80%EC%A7%80-%EC%95%8A%EB%8A%94%EB%8B%A4"><span class="header-section-number">37.3.1</span> 감추지만 사라지지 않는다</a></li>
+  <li><a href="#%ED%95%99%EC%8A%B5-%EC%88%9C%EC%84%9C%EC%9D%98-%EB%94%9C%EB%A0%88%EB%A7%88" id="toc-학습-순서의-딜레마" class="nav-link" data-scroll-target="#%ED%95%99%EC%8A%B5-%EC%88%9C%EC%84%9C%EC%9D%98-%EB%94%9C%EB%A0%88%EB%A7%88"><span class="header-section-number">37.3.2</span> 학습 순서의 딜레마</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-arch-reuse-paradigm" id="toc-sec-arch-reuse-paradigm" class="nav-link" data-scroll-target="#sec-arch-reuse-paradigm"><span class="header-section-number">37.4</span> 패러다임 → 프레임워크</a>
+  <ul class="collapse">
+<li><a href="#%ED%8C%A8%EB%9F%AC%EB%8B%A4%EC%9E%84%EC%9D%B4-%EB%82%B3%EC%9D%80-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98%EC%99%80-%ED%8C%A8%ED%84%B4" id="toc-패러다임이-낳은-아키텍처와-패턴" class="nav-link" data-scroll-target="#%ED%8C%A8%EB%9F%AC%EB%8B%A4%EC%9E%84%EC%9D%B4-%EB%82%B3%EC%9D%80-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98%EC%99%80-%ED%8C%A8%ED%84%B4"><span class="header-section-number">37.4.1</span> 패러다임이 낳은 아키텍처와 패턴</a></li>
+  <li><a href="#%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98%EC%99%80-%ED%8C%A8%ED%84%B4%EC%9D%B4-%EA%B5%AC%ED%98%84%EB%90%9C-%ED%94%84%EB%A0%88%EC%9E%84%EC%9B%8C%ED%81%AC" id="toc-아키텍처와-패턴이-구현된-프레임워크" class="nav-link" data-scroll-target="#%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98%EC%99%80-%ED%8C%A8%ED%84%B4%EC%9D%B4-%EA%B5%AC%ED%98%84%EB%90%9C-%ED%94%84%EB%A0%88%EC%9E%84%EC%9B%8C%ED%81%AC"><span class="header-section-number">37.4.2</span> 아키텍처와 패턴이 구현된 프레임워크</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-arch-reuse-winners" id="toc-sec-arch-reuse-winners" class="nav-link" data-scroll-target="#sec-arch-reuse-winners"><span class="header-section-number">37.5</span> 춘추전국의 승자</a>
+  <ul class="collapse">
+<li><a href="#sec-arch-winners-abstraction" id="toc-sec-arch-winners-abstraction" class="nav-link" data-scroll-target="#sec-arch-winners-abstraction"><span class="header-section-number">37.5.1</span> 추상화 수준이 수명을 결정한다</a></li>
+  <li><a href="#sec-arch-winners-paradigm" id="toc-sec-arch-winners-paradigm" class="nav-link" data-scroll-target="#sec-arch-winners-paradigm"><span class="header-section-number">37.5.2</span> 패러다임: 공존의 승리</a></li>
+  <li><a href="#sec-arch-winners-architecture" id="toc-sec-arch-winners-architecture" class="nav-link" data-scroll-target="#sec-arch-winners-architecture"><span class="header-section-number">37.5.3</span> 아키텍처: 단순함의 승리</a></li>
+  <li><a href="#sec-arch-winners-pattern" id="toc-sec-arch-winners-pattern" class="nav-link" data-scroll-target="#sec-arch-winners-pattern"><span class="header-section-number">37.5.4</span> 디자인 패턴: 실용성의 승리</a></li>
+  <li><a href="#sec-arch-winners-framework" id="toc-sec-arch-winners-framework" class="nav-link" data-scroll-target="#sec-arch-winners-framework"><span class="header-section-number">37.5.5</span> 프레임워크와 라이브러리: 세대교체의 동력</a></li>
+  <li><a href="#sec-arch-winners-ai" id="toc-sec-arch-winners-ai" class="nav-link" data-scroll-target="#sec-arch-winners-ai"><span class="header-section-number">37.5.6</span> Software 1.0에서 2.0으로</a></li>
+  </ul>
+</li>
+  <li><a href="#%EC%83%9D%EA%B0%81%ED%95%B4%EB%B3%BC-%EC%A0%90" id="toc-생각해볼-점" class="nav-link" data-scroll-target="#%EC%83%9D%EA%B0%81%ED%95%B4%EB%B3%BC-%EC%A0%90">💡 생각해볼 점</a></li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/arch-reuse.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./arch-reuse.html"><strong>6부</strong> 소프트웨어 설계와 아키텍처</a></li><li class="breadcrumb-item"><a href="./arch-reuse.html"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">재사용 명령</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-arch-reuse" class="quarto-section-identifier"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">재사용 명령</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><p> </p>
+<p>5부에서 프로그래밍 패러다임을 배웠다. 명령형, 객체지향, 함수형, 선언형, 반응형—각 패러다임은 문제를 바라보는 <strong>세계관</strong>을 제시했다. 그렇다면 이제 무엇을 해야 하는가?</p>
+<p>6부에서는 패러다임을 실제 코드로 구현하는 <strong>설계 원칙</strong>을 다룬다. 추상적인 세계관을 구체적인 구조로 번역하는 것이다. 이 번역 과정에서 핵심 키워드는 <strong>재사용(Reuse)</strong>이다.</p>
+<section id="sec-arch-reuse-why" class="level2" data-number="37.1"><h2 data-number="37.1" class="anchored" data-anchor-id="sec-arch-reuse-why">
+<span class="header-section-number">37.1</span> 왜 재사용인가</h2>
+<p> </p>
+<p>소프트웨어 공학의 역사는 곧 <strong>재사용의 역사</strong>다. 1968년 NATO 소프트웨어 공학 컨퍼런스(가르미슈, 독일)에서 맥일로이(M. Douglas McIlroy)는 “대량 생산 가능한 소프트웨어 컴포넌트(Mass Produced Software Components)”를 제안했다<span class="citation" data-cites="McIlroy1968"><a href="references.html#ref-McIlroy1968" role="doc-biblioref">[1]</a></span>. 마치 전자 부품(Software ICs)처럼 표준화된 소프트웨어 모듈을 조립하여 시스템을 구축하자는 비전이었다. 현대의 컴포넌트 기반 개발(Component-Based Development)은 여기서 시작되었다. 4년 후 파나스(David Parnas)는 “정보 은닉(Information Hiding)” 원칙을 제시하며 모듈 분해의 기준을 명확히 했다<span class="citation" data-cites="Parnas1972"><a href="references.html#ref-Parnas1972" role="doc-biblioref">[2]</a></span>. 모듈은 내부의 설계 결정을 숨겨야 하며, 이를 통해 시스템의 변경 용이성(Changeability)과 유지보수성을 높일 수 있다는 주장이었다.</p>
+<p>코드 작성 비용이 높았기 때문이다. 1970년대 한 줄의 코드를 작성하는 데 드는 비용은 현재 가치로 수십 달러에 달했다. 숙련된 개발자가 수 시간에서 수일을 투자해야 제대로 작동하는 코드가 나왔고, 디버깅과 테스트에 더 많은 시간이 들었다.</p>
+<p>이 경제적 현실이 <strong>재사용 명령(Reusability Imperative)</strong>을 낳았다. “한 번 작성하고 여러 번 사용하라(Write Once, Use Many)”는 당연한 경제적 선택이었다<span class="citation" data-cites="Krueger1992"><a href="references.html#ref-Krueger1992" role="doc-biblioref">[3]</a></span>. DRY(Don’t Repeat Yourself) 원칙, 모듈화, 컴포넌트 기반 개발—모두 이 명령에서 비롯된 것이다.</p>
+</section><section id="sec-arch-reuse-spectrum" class="level2" data-number="37.2"><h2 data-number="37.2" class="anchored" data-anchor-id="sec-arch-reuse-spectrum">
+<span class="header-section-number">37.2</span> 재사용 스펙트럼</h2>
+<p> </p>
+<p>재사용 명령을 실현하기 위해 소프트웨어 공학은 다양한 해법을 발전시켜 왔다. 흥미로운 점은 이 해법들이 <strong>추상화 수준</strong>에 따라 뚜렷한 스펙트럼을 형성한다는 것이다. 가장 추상적인 “설계 원칙의 재사용”에서 시작하여, 점점 구체적인 “시스템의 재사용”까지 연속체를 이룬다.</p>
+<div id="fig-arch-reuse-hierarchy" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-arch-reuse-hierarchy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/pattern-reuse-hierarchy.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-arch-reuse-hierarchy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;37.1: 재사용의 스펙트럼
+</figcaption></figure>
+</div>
+<p><a href="#fig-arch-reuse-hierarchy" class="quarto-xref">그림&nbsp;<span>37.1</span></a> 는 재사용 해법들을 추상화 수준에 따라 배치한다. 맨 위의 “코드 작성 비용이 높다”는 문제에서 출발하여 “재사용 명령”이라는 원칙이 도출된다. 하단의 추상화 스펙트럼은 네 가지 접근법을 <strong>개념적</strong>(왼쪽)에서 <strong>구체적</strong>(오른쪽)으로 배열한다. 왼쪽으로 갈수록 아이디어만 빌려오고 구현은 직접 하며, 오른쪽으로 갈수록 완성된 코드나 시스템을 그대로 사용한다.</p>
+<section id="스펙트럼의-네-영역" class="level3" data-number="37.2.1"><h3 data-number="37.2.1" class="anchored" data-anchor-id="스펙트럼의-네-영역">
+<span class="header-section-number">37.2.1</span> 스펙트럼의 네 영역</h3>
+<p>스펙트럼을 따라 네 가지 재사용 영역이 배치된다. 왼쪽 끝의 아키텍처부터 오른쪽 끝의 SaaS까지, 각 영역은 “무엇을 재사용하는가”와 “얼마나 직접 구현하는가”에서 뚜렷이 구분된다. 하나씩 살펴보자.</p>
+<p><strong>아키텍처</strong>는 설계 원칙의 재사용이다. MVC, 계층형 아키텍처, 마이크로서비스는 시스템 전체를 어떻게 구조화할지에 대한 검증된 청사진이다. 가장 추상적인 수준에서 “전체 그림”을 제시하므로 스펙트럼 맨 왼쪽에 위치한다. 매번 아키텍처를 고민할 필요 없이, 문제 유형에 맞는 아키텍처를 선택하면 된다.</p>
+<p><strong>디자인 패턴</strong>은 해법의 재사용이다. GoF(Gang of Four: Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides)가 1994년 정리한 23개 패턴은 “검증된 설계 해법”을 문서화한 것이다<span class="citation" data-cites="Gamma1994"><a href="references.html#ref-Gamma1994" role="doc-biblioref">[4]</a></span>. Factory, Observer, Strategy 패턴을 알면 매번 처음부터 설계할 필요가 없다. 아키텍처보다 구체적이지만 여전히 언어에 독립적인 <strong>개념</strong>이므로, Python이든 Java든 적용할 수 있다.</p>
+<p><strong>프레임워크</strong>는 구조의 재사용이다. Django, React, Spring은 패턴과 아키텍처를 특정 언어로 구현한 <strong>구축 도구</strong>다. 수천 시간의 개발 노력이 응축된 코드를 무료로 사용할 수 있다. 개발자는 프레임워크가 제공하는 뼈대 위에 비즈니스 로직만 채우면 된다. 코드를 직접 작성하지만, 구조는 프레임워크가 강제한다.</p>
+<p><strong>SaaS/플랫폼</strong>은 시스템의 재사용이다. Salesforce, AWS, Notion은 완성된 시스템을 서비스로 제공한다. 코드를 작성하지 않고 설정만으로 기능을 사용한다. 재사용의 가장 구체적인 형태로, 스펙트럼 맨 오른쪽에 위치한다.</p>
+<div id="fig-arch-concept-impl" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-arch-concept-impl-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/pattern-concept-implementation.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-arch-concept-impl-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;37.2: 개념에서 구현체로: 패턴과 프레임워크/SaaS의 관계
+</figcaption></figure>
+</div>
+<p><a href="#fig-arch-concept-impl" class="quarto-xref">그림&nbsp;<span>37.2</span></a> 은 하나의 패턴이 어떻게 서로 다른 구현체로 분기하는지 보여준다. MVC<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>라는 <strong>개념</strong>(언어 독립적 원칙)은 두 갈래로 갈라진다. 한쪽은 <strong>프레임워크</strong>로 이어진다—Django, Spring MVC처럼 개발자가 코드를 작성하는 <strong>개발자용 도구</strong>다. 다른 쪽은 <strong>SaaS</strong>로 이어진다—Salesforce, Notion처럼 사용자가 설정만 하는 <strong>사용자용 완성품</strong>이다. 핵심은 <strong>같은 개념의 추상화 수준이 다른 표현</strong>이라는 점이다. 패턴을 이해하면 어떤 프레임워크든 빠르게 익히고, 어떤 SaaS의 제약도 정확히 파악할 수 있다. 역으로 프레임워크만 알면 기술 스택이 바뀔 때마다 처음부터 다시 배워야 한다—이것이 개념적 재사용(스펙트럼 왼쪽)을 배우는 이유다.</p>
+</section><section id="스펙트럼의-트레이드오프" class="level3" data-number="37.2.2"><h3 data-number="37.2.2" class="anchored" data-anchor-id="스펙트럼의-트레이드오프">
+<span class="header-section-number">37.2.2</span> 스펙트럼의 트레이드오프</h3>
+<p>네 영역 모두 <strong>같은 동기</strong>—코드 작성 비용 절감—에서 출발하지만, 공짜 점심은 없다. 스펙트럼의 어디에 서느냐에 따라 얻는 것과 잃는 것이 달라진다. 왼쪽(개념적)으로 갈수록 구현의 자유가 커지지만 직접 작성할 코드도 늘어나고, 오른쪽(구체적)으로 갈수록 코드량은 줄지만 도구의 규칙에 종속된다. <a href="#tbl-arch-spectrum-tradeoff" class="quarto-xref">표&nbsp;<span>37.1</span></a> 는 핵심만 요약한 것이고, 실제로 스펙트럼의 양 끝은 세 가지 축—자유도, 학습 곡선, 종속성—에서 선명하게 갈린다.</p>
+<div class="cell">
+<div id="tbl-arch-spectrum-tradeoff" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><div aria-describedby="tbl-arch-spectrum-tradeoff-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="pomvsleusb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pomvsleusb table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#pomvsleusb thead, #pomvsleusb tbody, #pomvsleusb tfoot, #pomvsleusb tr, #pomvsleusb td, #pomvsleusb th {
+  border-style: none;
+}
+
+#pomvsleusb p {
+  margin: 0;
+  padding: 0;
+}
+
+#pomvsleusb .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#pomvsleusb .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#pomvsleusb .gt_title {
+  color: #333333;
+  font-size: 16px;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#pomvsleusb .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#pomvsleusb .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pomvsleusb .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pomvsleusb .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pomvsleusb .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#pomvsleusb .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#pomvsleusb .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#pomvsleusb .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#pomvsleusb .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#pomvsleusb .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#pomvsleusb .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#pomvsleusb .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#pomvsleusb .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#pomvsleusb .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#pomvsleusb .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#pomvsleusb .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pomvsleusb .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#pomvsleusb .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#pomvsleusb .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#pomvsleusb .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pomvsleusb .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#pomvsleusb .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#pomvsleusb .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pomvsleusb .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pomvsleusb .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#pomvsleusb .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pomvsleusb .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#pomvsleusb .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pomvsleusb .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pomvsleusb .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pomvsleusb .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pomvsleusb .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pomvsleusb .gt_left {
+  text-align: left;
+}
+
+#pomvsleusb .gt_center {
+  text-align: center;
+}
+
+#pomvsleusb .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#pomvsleusb .gt_font_normal {
+  font-weight: normal;
+}
+
+#pomvsleusb .gt_font_bold {
+  font-weight: bold;
+}
+
+#pomvsleusb .gt_font_italic {
+  font-style: italic;
+}
+
+#pomvsleusb .gt_super {
+  font-size: 65%;
+}
+
+#pomvsleusb .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#pomvsleusb .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#pomvsleusb .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#pomvsleusb .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#pomvsleusb .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#pomvsleusb .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#pomvsleusb .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#pomvsleusb .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#pomvsleusb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table do-not-create-environment cell table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings header">
+<th id="a스펙트럼-위치" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">스펙트럼 위치</th>
+<th id="a자유도" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">자유도</th>
+<th id="a작성-코드량" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">작성 코드량</th>
+<th id="a학습-곡선" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">학습 곡선</th>
+<th id="a종속성" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">종속성</th>
+</tr></thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers="스펙트럼 위치">왼쪽 (개념적)</td>
+<td class="gt_row gt_center" headers="자유도">높음</td>
+<td class="gt_row gt_center" headers="작성 코드량">많음</td>
+<td class="gt_row gt_center" headers="학습 곡선">원리 이해</td>
+<td class="gt_row gt_center" headers="종속성">낮음</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="스펙트럼 위치">오른쪽 (구체적)</td>
+<td class="gt_row gt_center" headers="자유도">낮음</td>
+<td class="gt_row gt_center" headers="작성 코드량">적음</td>
+<td class="gt_row gt_center" headers="학습 곡선">도구 숙달</td>
+<td class="gt_row gt_center" headers="종속성">높음</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-tbl" id="tbl-arch-spectrum-tradeoff-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+표&nbsp;37.1: 재사용 스펙트럼의 트레이드오프
+</figcaption></figure>
+</div>
+</div>
+<p><strong>자유도와 코드량의 교환</strong>이 첫 번째 트레이드오프다. 개념적 수준(아키텍처, 패턴)에서는 아이디어만 빌려오므로 구현의 자유도가 높다. MVC 아키텍처를 Python으로 구현하든 Go로 구현하든 개발자 마음이다. 그러나 자유에는 대가가 따른다—모든 코드를 직접 작성해야 한다.</p>
+<p>구체적 수준(프레임워크, SaaS)에서는 반대다. Django를 선택하면 MTV(Model-Template-View) 구조가 강제되고, AWS Lambda를 사용하면 함수 시그니처가 정해진다. 자유도는 낮지만 작성할 코드량도 극적으로 줄어든다.</p>
+<p><strong>학습 곡선의 성격</strong>도 다르다. 왼쪽에서는 “왜 이렇게 설계하는가”라는 원리를 이해해야 한다. Observer 패턴의 의도를 모르면 잘못 적용하기 쉽다. 오른쪽에서는 “이 도구를 어떻게 사용하는가”라는 숙달이 필요하다. Django의 ORM 문법, AWS 콘솔의 설정 방법을 익혀야 한다.</p>
+<p><strong>종속성(Lock-in)</strong>은 가장 미묘한 트레이드오프다. 아키텍처나 패턴은 언어와 플랫폼에 독립적이므로 기술 스택을 바꿔도 지식이 유효하다. 반면 SaaS에 깊이 의존하면 전환 비용이 천문학적으로 올라간다. Salesforce에서 다른 CRM으로 이전하는 것은 시스템 재구축에 가깝다.</p>
+<p>어디에서 재사용할지는 단순히 “편함”의 문제가 아니다. 프로젝트의 수명, 팀의 역량, 기술 종속 허용 범위를 종합적으로 고려해야 한다. 스타트업은 SaaS로 빠르게 출발하고, 규모가 커지면 프레임워크로 내재화하며, 핵심 경쟁력은 패턴과 아키텍처 수준에서 직접 설계한다—이것이 실무에서 흔히 보는 진화 경로다.</p>
+</section></section><section id="sec-arch-reuse-evolution" class="level2" data-number="37.3"><h2 data-number="37.3" class="anchored" data-anchor-id="sec-arch-reuse-evolution">
+<span class="header-section-number">37.3</span> 추상화 진화</h2>
+<p> </p>
+<p>앞 절의 재사용 스펙트럼이 “어디서 재사용할 것인가”라는 <strong>공간적</strong> 선택이었다면, 이번 절은 “추상화가 어떻게 진화해왔는가”라는 <strong>시간적</strong> 궤적을 다룬다. 70년간 추상화 계층이 켜켜이 쌓이면서 인간의 역할도 함께 변해왔다.</p>
+<div id="fig-arch-evolution" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-arch-evolution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/pattern-evolution.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-arch-evolution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;37.3: 소프트웨어 공학의 진화
+</figcaption></figure>
+</div>
+<p><a href="#fig-arch-evolution" class="quarto-xref">그림&nbsp;<span>37.3</span></a> 상단의 타임라인은 다섯 단계를 보여준다. 1950년대 <strong>고급 언어</strong>가 하드웨어를 추상화하자, 인간은 레지스터 대신 알고리즘에 집중했다. 1980년대 <strong>패러다임</strong>이 사고방식을 추상화하자, 인간은 “OOP로 갈까, 함수형으로 갈까”를 선택했다. 1990년대 <strong>패턴과 아키텍처</strong>가 설계 문제를 추상화하자, 인간은 검증된 해법을 어디에 적용할지 고민했다. 2000년대 <strong>프레임워크</strong>가 구현을 추상화하자, 인간은 Django 위에서 비즈니스 로직만 작성했다.</p>
+<p>2020년대 <strong>AI 협업</strong>은 구현 자체를 추상화한다. “Observer 패턴으로 이벤트 시스템 만들어줘”라고 말하면 AI가 코드를 생성한다. 인간의 역할은 <strong>의도 명세와 검증</strong>으로 수렴한다—무엇을 만들 것인지 지시하고, 제대로 만들어졌는지 판단하는 것이다.</p>
+<section id="감추지만-사라지지-않는다" class="level3" data-number="37.3.1"><h3 data-number="37.3.1" class="anchored" data-anchor-id="감추지만-사라지지-않는다">
+<span class="header-section-number">37.3.1</span> 감추지만 사라지지 않는다</h3>
+<p>각 추상화 계층은 아래 계층을 <strong>감출</strong> 뿐, <strong>제거하지 않는다</strong>. Django를 쓴다고 HTTP 프로토콜이 사라지지 않고, AI가 코드를 생성한다고 알고리즘이 없어지지 않는다. 평상시에는 위 계층만 다루면 되지만, <strong>문제가 생기면 아래로 내려가야 한다</strong>.</p>
+<p>Django의 ORM이 느릴 때 “Django가 느리다”로 끝나면 막막하다. “Repository 패턴이 N+1 쿼리를 유발한다”고 진단하려면 한 계층 아래(패턴)를 알아야 한다. “인덱스 없는 풀 스캔이 발생한다”고 분석하려면 두 계층 아래(데이터베이스)까지 내려가야 한다. <strong>추상화는 복잡성을 숨기지만, 디버깅은 그 복잡성을 다시 꺼내는 작업이다.</strong></p>
+<p>AI 시대에도 마찬가지다. AI가 생성한 코드가 올바른지 검증하려면 Strategy 패턴<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>의 의도를 알아야 한다. AI에게 명확한 지시를 내리려면 “계층형 아키텍처에서 서비스 레이어에 비즈니스 로직을 구현해줘”라고 말할 수 있어야 한다. <strong>상위 계층 도구가 강력해질수록, 하위 계층 지식의 차별화 가치가 증가한다</strong>—이것이 추상화 진화의 역설이다.</p>
+</section><section id="학습-순서의-딜레마" class="level3" data-number="37.3.2"><h3 data-number="37.3.2" class="anchored" data-anchor-id="학습-순서의-딜레마">
+<span class="header-section-number">37.3.2</span> 학습 순서의 딜레마</h3>
+<p>추상화 진화는 학습 순서에 딜레마를 만든다. 실무에서는 프레임워크부터 시작하는 것이 빠르다—Django 튜토리얼을 따라 하면 당장 웹사이트가 나온다. 그러나 프레임워크만 아는 개발자는 <strong>추상화가 새는(leaky abstraction)</strong> 순간에 무력해진다.</p>
+<p>반대로, 알고리즘과 자료구조부터 차근차근 배우면 기초는 탄탄하지만 실용적인 결과물까지 멀다. 현실적인 접근은 <strong>두 방향을 번갈아 오가는 것</strong>이다. 프레임워크로 시작해서 동작하는 코드를 만들고, 문제가 생기면 한 계층 아래로 내려가서 원리를 파악한다. 그 원리를 바탕으로 다시 위로 올라와 더 나은 코드를 작성한다.</p>
+<p>AI 협업 시대에도 원칙은 같다. AI가 생성한 코드로 시작하되, 그 코드가 왜 이렇게 작성되었는지 이해하려고 노력한다. 이해하지 못하면 질문하고, 질문하려면 개념을 알아야 한다. <strong>도구가 강력해질수록 도구를 제대로 쓰기 위한 지식의 가치가 높아진다</strong>—이것이 6부에서 패턴과 아키텍처를 다루는 이유다.</p>
+</section></section><section id="sec-arch-reuse-paradigm" class="level2" data-number="37.4"><h2 data-number="37.4" class="anchored" data-anchor-id="sec-arch-reuse-paradigm">
+<span class="header-section-number">37.4</span> 패러다임 → 프레임워크</h2>
+<p> </p>
+<p>왜 같은 문제를 놓고 어떤 개발자는 클래스를 만들고, 어떤 개발자는 함수를 합성하는가? 답은 <strong>패러다임</strong>에 있다. 객체지향으로 사고하면 Factory 패턴이 자연스럽고, 함수형으로 사고하면 고차 함수가 떠오른다. 패러다임은 코드가 아니다. 그러나 모든 코드의 출발점이다.</p>
+<p><a href="#fig-arch-paradigm-link" class="quarto-xref">그림&nbsp;<span>37.4</span></a> 은 소프트웨어 설계가 구체화되는 세 단계를 보여준다. <strong>패러다임</strong>은 “어떻게 생각할 것인가”를 결정하고, <strong>패턴</strong>은 “어떻게 해결할 것인가”에 답하며, <strong>프레임워크</strong>는 “무엇으로 만들 것인가”를 제공한다. 그림 하단의 비유가 핵심을 찌른다—패러다임은 <strong>방향</strong>을, 패턴은 <strong>지도</strong>를, 프레임워크는 <strong>자동차</strong>를 제공한다. 방향 없이 지도를 펼쳐도 어디로 갈지 모르고, 지도 없이 자동차에 올라도 길을 잃는다.</p>
+<div id="fig-arch-paradigm-link" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-arch-paradigm-link-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/pattern-paradigm-link.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-arch-paradigm-link-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;37.4: 패러다임, 아키텍처, 패턴의 관계
+</figcaption></figure>
+</div>
+<section id="패러다임이-낳은-아키텍처와-패턴" class="level3" data-number="37.4.1"><h3 data-number="37.4.1" class="anchored" data-anchor-id="패러다임이-낳은-아키텍처와-패턴">
+<span class="header-section-number">37.4.1</span> 패러다임이 낳은 아키텍처와 패턴</h3>
+<p><a href="#fig-arch-paradigm-link" class="quarto-xref">그림&nbsp;<span>37.4</span></a> 에서 객체지향, 함수형 , 반응형 프로그래밍 패러다임이 각각 다른 패턴과 연결된다. 객체지향이 “객체 협력”을 핵심으로 삼으니 <strong>객체 생성</strong>(Factory)과 <strong>관심사 분리</strong>(MVC)가 자연스럽게 따라왔다. 함수형이 “불변성과 순수함수”를 강조하니 <strong>기능 확장</strong>(Decorator)과 <strong>데이터 추상화</strong>(Repository)가 함수 합성으로 재해석되었다. 반응형이 “비동기 데이터 흐름”을 다루니 <strong>상태 전파</strong>(Observer)와 <strong>이벤트 기반 구조</strong>가 핵심 패턴으로 자리 잡았다.</p>
+<p>패러다임은 단순한 코딩 스타일이 아니라 <strong>문제를 바라보는 렌즈</strong>다. 그 렌즈가 어떤 패턴을 자연스럽게 보이게 하고, 어떤 패턴을 어색하게 만드는지 이해하면 5부에서 6부로 이어지는 흐름이 선명해진다.</p>
+<p><strong>객체지향 프로그래밍</strong>은 GoF 23개 패턴의 토대다. 캡슐화, 상속, 다형성을 활용해 MVC 아키텍처가 등장했고, 그 안에서 Factory, Strategy, Observer 패턴이 발견되었다. 5부에서 배운 클래스와 상속의 심화 적용이 바로 이 패턴들이다.</p>
+<p><strong>함수형 프로그래밍</strong>은 OOP 패턴을 단순화하거나 대체한다. Strategy 패턴은 고차 함수 하나로 간결하게 구현되고, Decorator 패턴은 Python의 <code>@decorator</code> 문법과 직결된다. 5부에서 배운 함수 합성과 파이프라인은 행위 패턴의 함수형 대안이다.</p>
+<p><strong>반응형 프로그래밍</strong>은 이벤트 드리븐 아키텍처를 낳았다. 그 핵심에 Observer 패턴이 있다. 5부에서 구현한 Subject-Observer 구조가 React의 상태 관리, Vue의 반응성 시스템으로 이어진다.</p>
+<p><strong>선언형 프로그래밍</strong>은 패턴을 프레임워크 안에 감춘다. React의 선언형 UI를 작성할 때 개발자는 Observer 패턴을 의식하지 않지만, 내부에서는 상태 변화가 자동으로 전파된다. Django ORM으로 쿼리를 작성할 때 Repository 패턴을 명시하지 않지만, 프레임워크가 데이터 접근을 추상화한다.</p>
+</section><section id="아키텍처와-패턴이-구현된-프레임워크" class="level3" data-number="37.4.2"><h3 data-number="37.4.2" class="anchored" data-anchor-id="아키텍처와-패턴이-구현된-프레임워크">
+<span class="header-section-number">37.4.2</span> 아키텍처와 패턴이 구현된 프레임워크</h3>
+<p>앞 절에서 패러다임이 패턴을 “낳는다”고 했다면, 여기서는 그 패턴이 프레임워크 안에서 어떻게 “굳어지는가”를 본다. 패턴은 설계 원칙이고, 프레임워크는 그 원칙을 <strong>강제하는 구조물</strong>이다. 개발자가 패턴을 선택하는 게 아니라, 프레임워크가 이미 선택해 놓은 패턴 위에서 코드를 작성한다.</p>
+<div class="cell">
+<div id="tbl-arch-pattern-framework" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><div aria-describedby="tbl-arch-pattern-framework-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="vjxafklerb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vjxafklerb table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#vjxafklerb thead, #vjxafklerb tbody, #vjxafklerb tfoot, #vjxafklerb tr, #vjxafklerb td, #vjxafklerb th {
+  border-style: none;
+}
+
+#vjxafklerb p {
+  margin: 0;
+  padding: 0;
+}
+
+#vjxafklerb .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 13px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#vjxafklerb .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#vjxafklerb .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#vjxafklerb .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#vjxafklerb .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vjxafklerb .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vjxafklerb .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vjxafklerb .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#vjxafklerb .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#vjxafklerb .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#vjxafklerb .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#vjxafklerb .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#vjxafklerb .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#vjxafklerb .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#vjxafklerb .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#vjxafklerb .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#vjxafklerb .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#vjxafklerb .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#vjxafklerb .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vjxafklerb .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#vjxafklerb .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#vjxafklerb .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#vjxafklerb .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vjxafklerb .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#vjxafklerb .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#vjxafklerb .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vjxafklerb .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vjxafklerb .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#vjxafklerb .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vjxafklerb .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#vjxafklerb .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vjxafklerb .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vjxafklerb .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vjxafklerb .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vjxafklerb .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vjxafklerb .gt_left {
+  text-align: left;
+}
+
+#vjxafklerb .gt_center {
+  text-align: center;
+}
+
+#vjxafklerb .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#vjxafklerb .gt_font_normal {
+  font-weight: normal;
+}
+
+#vjxafklerb .gt_font_bold {
+  font-weight: bold;
+}
+
+#vjxafklerb .gt_font_italic {
+  font-style: italic;
+}
+
+#vjxafklerb .gt_super {
+  font-size: 65%;
+}
+
+#vjxafklerb .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#vjxafklerb .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#vjxafklerb .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#vjxafklerb .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#vjxafklerb .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#vjxafklerb .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#vjxafklerb .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#vjxafklerb .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#vjxafklerb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table do-not-create-environment cell table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings header">
+<th id="a패턴" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">패턴</th>
+<th id="a핵심-아이디어" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">핵심 아이디어</th>
+<th id="a프레임워크-구현" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">프레임워크 구현</th>
+</tr></thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="패턴">MVC</td>
+<td class="gt_row gt_left" headers="핵심 아이디어">Model-View-Controller 분리</td>
+<td class="gt_row gt_left" headers="프레임워크 구현">Django(MTV), Spring MVC, Rails</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="패턴">Observer</td>
+<td class="gt_row gt_left" headers="핵심 아이디어">상태 변화 자동 전파</td>
+<td class="gt_row gt_left" headers="프레임워크 구현">React(useState), Vue(reactivity), RxJS</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="패턴">Factory</td>
+<td class="gt_row gt_left" headers="핵심 아이디어">객체 생성 로직 분리</td>
+<td class="gt_row gt_left" headers="프레임워크 구현">Spring Bean Factory, Angular DI</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="패턴">Repository</td>
+<td class="gt_row gt_left" headers="핵심 아이디어">데이터 접근 추상화</td>
+<td class="gt_row gt_left" headers="프레임워크 구현">Django ORM, SQLAlchemy, JPA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="패턴">Decorator</td>
+<td class="gt_row gt_left" headers="핵심 아이디어">동적 기능 추가</td>
+<td class="gt_row gt_left" headers="프레임워크 구현">Express 미들웨어, Koa, Python @decorator</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-tbl" id="tbl-arch-pattern-framework-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+표&nbsp;37.2: 패턴과 프레임워크의 대응
+</figcaption></figure>
+</div>
+</div>
+<p>표 <a href="#tbl-arch-pattern-framework" class="quarto-xref">표&nbsp;<span>37.2</span></a> 의 핵심은 <strong>가로로 읽는 것</strong>이다. MVC를 알면 Django, Spring, Rails 세 프레임워크의 구조가 한눈에 들어온다. 언어가 다르고 문법이 달라도 <strong>뼈대가 같다</strong>—Model은 데이터, View는 표현, Controller는 흐름 제어. Django가 이를 MTV로 부르든, Rails가 convention over configuration을 외치든, 본질은 동일하다.</p>
+<p>이것이 패턴을 배우는 실용적 이유다. 프레임워크는 유행을 타지만 패턴은 남는다. React에서 Vue로, Django에서 FastAPI로, Spring에서 Quarkus로 이동할 때 패턴을 아는 개발자는 “아, 여기서도 Observer를 쓰는구나”라며 빠르게 적응한다.</p>
+<p>역으로, 패턴을 모르면 프레임워크의 규칙이 <strong>임의적인 제약</strong>처럼 느껴진다. Django가 왜 <code>models.py</code>, <code>views.py</code>, <code>urls.py</code>로 파일을 나누라고 강제하는지, Express가 왜 미들웨어를 체이닝하는지—패턴에서 답을 찾을 수 있다.</p>
+</section></section><section id="sec-arch-reuse-winners" class="level2" data-number="37.5"><h2 data-number="37.5" class="anchored" data-anchor-id="sec-arch-reuse-winners">
+<span class="header-section-number">37.5</span> 춘추전국의 승자</h2>
+<p> </p>
+<p>소프트웨어 세계에서 30년은 긴 시간이다. 1994년 GoF가 23개 패턴을 정리한 이후, 수백 개의 패턴, 수십 가지 아키텍처, 수천 개의 프레임워크가 등장했다 사라졌다. 살아남은 것은 극소수다. 패러다임부터 라이브러리까지, 각 계층에서 누가 승자가 되었고 <strong>왜</strong> 그들이 살아남았는지 살펴본다.</p>
+<div id="fig-arch-winners" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-arch-winners-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/pattern-winners-layers.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-arch-winners-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;37.5: 춘추전국의 승자: 추상화 계층별 수명과 생존자
+</figcaption></figure>
+</div>
+<section id="sec-arch-winners-abstraction" class="level3" data-number="37.5.1"><h3 data-number="37.5.1" class="anchored" data-anchor-id="sec-arch-winners-abstraction">
+<span class="header-section-number">37.5.1</span> 추상화 수준이 수명을 결정한다</h3>
+<p></p>
+<p>승자를 논하기 전에 먼저 이해해야 할 법칙이 있다. <a href="#fig-arch-winners" class="quarto-xref">그림&nbsp;<span>37.5</span></a> 왼쪽의 수명 막대가 보여주듯, <strong>추상화 수준이 높을수록 수명이 길다.</strong> 패러다임은 30년에서 50년을 버티고, 아키텍처는 15년에서 30년을 유지하며, 디자인 패턴은 10년에서 30년간 살아남는다. 반면 프레임워크는 5년에서 15년이면 세대교체를 겪고, 라이브러리는 3년에서 7년이면 구식이 된다.</p>
+<div class="cell">
+<div id="tbl-arch-abstraction-lifespan" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><div aria-describedby="tbl-arch-abstraction-lifespan-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="wdqqwaugqe" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wdqqwaugqe table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#wdqqwaugqe thead, #wdqqwaugqe tbody, #wdqqwaugqe tfoot, #wdqqwaugqe tr, #wdqqwaugqe td, #wdqqwaugqe th {
+  border-style: none;
+}
+
+#wdqqwaugqe p {
+  margin: 0;
+  padding: 0;
+}
+
+#wdqqwaugqe .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 13px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#wdqqwaugqe .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#wdqqwaugqe .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#wdqqwaugqe .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#wdqqwaugqe .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#wdqqwaugqe .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wdqqwaugqe .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#wdqqwaugqe .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#wdqqwaugqe .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#wdqqwaugqe .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#wdqqwaugqe .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#wdqqwaugqe .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#wdqqwaugqe .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#wdqqwaugqe .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#wdqqwaugqe .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#wdqqwaugqe .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#wdqqwaugqe .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#wdqqwaugqe .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#wdqqwaugqe .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wdqqwaugqe .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#wdqqwaugqe .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#wdqqwaugqe .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#wdqqwaugqe .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wdqqwaugqe .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#wdqqwaugqe .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#wdqqwaugqe .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wdqqwaugqe .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wdqqwaugqe .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#wdqqwaugqe .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wdqqwaugqe .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#wdqqwaugqe .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wdqqwaugqe .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#wdqqwaugqe .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wdqqwaugqe .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#wdqqwaugqe .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wdqqwaugqe .gt_left {
+  text-align: left;
+}
+
+#wdqqwaugqe .gt_center {
+  text-align: center;
+}
+
+#wdqqwaugqe .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#wdqqwaugqe .gt_font_normal {
+  font-weight: normal;
+}
+
+#wdqqwaugqe .gt_font_bold {
+  font-weight: bold;
+}
+
+#wdqqwaugqe .gt_font_italic {
+  font-style: italic;
+}
+
+#wdqqwaugqe .gt_super {
+  font-size: 65%;
+}
+
+#wdqqwaugqe .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#wdqqwaugqe .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#wdqqwaugqe .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#wdqqwaugqe .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#wdqqwaugqe .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#wdqqwaugqe .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#wdqqwaugqe .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#wdqqwaugqe .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#wdqqwaugqe div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table do-not-create-environment cell table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings header">
+<th id="a계층" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">계층</th>
+<th id="a예시" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">예시</th>
+<th id="a평균수명" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">평균 수명</th>
+<th id="a변화속도" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">변화 속도</th>
+</tr></thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="계층">패러다임</td>
+<td class="gt_row gt_left" headers="예시">OOP, FP, 반응형</td>
+<td class="gt_row gt_center" headers="평균수명">30-50년</td>
+<td class="gt_row gt_center" headers="변화속도">거의 불변</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="계층">아키텍처</td>
+<td class="gt_row gt_left" headers="예시">MVC, 계층형, 이벤트 드리븐</td>
+<td class="gt_row gt_center" headers="평균수명">15-30년</td>
+<td class="gt_row gt_center" headers="변화속도">느림</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="계층">디자인 패턴</td>
+<td class="gt_row gt_left" headers="예시">Factory, Observer, Strategy</td>
+<td class="gt_row gt_center" headers="평균수명">10-30년</td>
+<td class="gt_row gt_center" headers="변화속도">느림</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="계층">프레임워크</td>
+<td class="gt_row gt_left" headers="예시">Django, React, Spring</td>
+<td class="gt_row gt_center" headers="평균수명">5-15년</td>
+<td class="gt_row gt_center" headers="변화속도">중간</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="계층">라이브러리/SDK</td>
+<td class="gt_row gt_left" headers="예시">Lodash, Moment.js, jQuery</td>
+<td class="gt_row gt_center" headers="평균수명">3-7년</td>
+<td class="gt_row gt_center" headers="변화속도">빠름</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-tbl" id="tbl-arch-abstraction-lifespan-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+표&nbsp;37.3: 추상화 계층별 수명
+</figcaption></figure>
+</div>
+</div>
+<p>왜 이런 차이가 발생하는가? <strong>추상화 수준이 높을수록 구체적인 기술에 덜 의존</strong>하기 때문이다. 패러다임은 “세계를 어떻게 볼 것인가”라는 철학적 질문에 답한다. OOP가 “객체의 협력으로 세상을 모델링하자”고 말할 때, 그것은 Java든 Python이든, 메모리가 4KB든 4TB든 상관없이 적용된다. 반면 라이브러리는 구체적인 문제를 구체적인 방식으로 해결한다. Moment.js가 날짜를 다루는 방식은 JavaScript 엔진, 브라우저 API, ECMAScript 버전에 의존하므로 기반 기술이 바뀌면 라이브러리도 바뀌어야 한다.</p>
+</section><section id="sec-arch-winners-paradigm" class="level3" data-number="37.5.2"><h3 data-number="37.5.2" class="anchored" data-anchor-id="sec-arch-winners-paradigm">
+<span class="header-section-number">37.5.2</span> 패러다임: 공존의 승리</h3>
+<p></p>
+<p><a href="#fig-arch-winners" class="quarto-xref">그림&nbsp;<span>37.5</span></a> 최상단의 패러다임 계층에서는 특이한 현상이 관찰된다. <strong>단일 승자가 없다.</strong> OOP가 FP를 몰아내지도, 반응형이 명령형을 대체하지도 않았다. 대신 <strong>다중 패러다임(Multi-Paradigm)을 지원하는 언어</strong>가 승리했다. Python, JavaScript, Kotlin 같은 현대 언어들이 OOP, 함수형, 반응형, 선언형을 모두 지원하며 개발자 커뮤니티를 장악한 반면, 단일 패러다임에 충실한 언어들은 틈새 시장에 머물렀다.</p>
+<div class="cell">
+<div id="tbl-paradigm-winners" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><div aria-describedby="tbl-paradigm-winners-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="wecueokjfh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wecueokjfh table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#wecueokjfh thead, #wecueokjfh tbody, #wecueokjfh tfoot, #wecueokjfh tr, #wecueokjfh td, #wecueokjfh th {
+  border-style: none;
+}
+
+#wecueokjfh p {
+  margin: 0;
+  padding: 0;
+}
+
+#wecueokjfh .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#wecueokjfh .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#wecueokjfh .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#wecueokjfh .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#wecueokjfh .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#wecueokjfh .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wecueokjfh .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#wecueokjfh .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#wecueokjfh .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#wecueokjfh .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#wecueokjfh .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#wecueokjfh .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#wecueokjfh .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#wecueokjfh .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#wecueokjfh .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#wecueokjfh .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#wecueokjfh .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#wecueokjfh .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#wecueokjfh .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wecueokjfh .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#wecueokjfh .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#wecueokjfh .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#wecueokjfh .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wecueokjfh .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#wecueokjfh .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#wecueokjfh .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wecueokjfh .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wecueokjfh .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#wecueokjfh .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wecueokjfh .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#wecueokjfh .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wecueokjfh .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#wecueokjfh .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wecueokjfh .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#wecueokjfh .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wecueokjfh .gt_left {
+  text-align: left;
+}
+
+#wecueokjfh .gt_center {
+  text-align: center;
+}
+
+#wecueokjfh .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#wecueokjfh .gt_font_normal {
+  font-weight: normal;
+}
+
+#wecueokjfh .gt_font_bold {
+  font-weight: bold;
+}
+
+#wecueokjfh .gt_font_italic {
+  font-style: italic;
+}
+
+#wecueokjfh .gt_super {
+  font-size: 65%;
+}
+
+#wecueokjfh .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#wecueokjfh .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#wecueokjfh .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#wecueokjfh .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#wecueokjfh .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#wecueokjfh .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#wecueokjfh .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#wecueokjfh .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#wecueokjfh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table do-not-create-environment cell table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading header">
+<td colspan="6" class="gt_heading gt_title gt_font_normal gt_bottom_border">현대 언어의 패러다임 지원</td>
+</tr>
+<tr class="gt_col_headings even">
+<th id="a언어" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">언어</th>
+<th id="OOP" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">OOP<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
+</th>
+<th id="a함수형" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">함수형</th>
+<th id="a반응형" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">반응형</th>
+<th id="a선언형" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">선언형</th>
+<th id="a결과" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">결과</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="언어" style="background-color: #F0F0F0">Python</td>
+<td class="gt_row gt_center" headers="OOP" style="background-color: #F0F0F0">✓</td>
+<td class="gt_row gt_center" headers="함수형" style="background-color: #F0F0F0">✓</td>
+<td class="gt_row gt_center" headers="반응형" style="background-color: #F0F0F0">✓</td>
+<td class="gt_row gt_center" headers="선언형" style="background-color: #F0F0F0">✓</td>
+<td class="gt_row gt_center" headers="결과" style="background-color: #F0F0F0">승자</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="언어" style="background-color: #F0F0F0">JavaScript</td>
+<td class="gt_row gt_center" headers="OOP" style="background-color: #F0F0F0">✓</td>
+<td class="gt_row gt_center" headers="함수형" style="background-color: #F0F0F0">✓</td>
+<td class="gt_row gt_center" headers="반응형" style="background-color: #F0F0F0">✓</td>
+<td class="gt_row gt_center" headers="선언형" style="background-color: #F0F0F0">✓</td>
+<td class="gt_row gt_center" headers="결과" style="background-color: #F0F0F0">승자</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="언어" style="background-color: #F0F0F0">Kotlin</td>
+<td class="gt_row gt_center" headers="OOP" style="background-color: #F0F0F0">✓</td>
+<td class="gt_row gt_center" headers="함수형" style="background-color: #F0F0F0">✓</td>
+<td class="gt_row gt_center" headers="반응형" style="background-color: #F0F0F0">✓</td>
+<td class="gt_row gt_center" headers="선언형" style="background-color: #F0F0F0">✓</td>
+<td class="gt_row gt_center" headers="결과" style="background-color: #F0F0F0">승자</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="언어" style="background-color: #F0F0F0">Rust</td>
+<td class="gt_row gt_center" headers="OOP" style="background-color: #F0F0F0">✓</td>
+<td class="gt_row gt_center" headers="함수형" style="background-color: #F0F0F0">✓</td>
+<td class="gt_row gt_center" headers="반응형" style="background-color: #F0F0F0">✓</td>
+<td class="gt_row gt_center" headers="선언형" style="background-color: #F0F0F0">✓</td>
+<td class="gt_row gt_center" headers="결과" style="background-color: #F0F0F0">승자</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="언어">C++</td>
+<td class="gt_row gt_center" headers="OOP">✓</td>
+<td class="gt_row gt_center" headers="함수형">일부</td>
+<td class="gt_row gt_center" headers="반응형">✗</td>
+<td class="gt_row gt_center" headers="선언형">✗</td>
+<td class="gt_row gt_center" headers="결과">유지</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="언어">Java</td>
+<td class="gt_row gt_center" headers="OOP">✓</td>
+<td class="gt_row gt_center" headers="함수형">일부</td>
+<td class="gt_row gt_center" headers="반응형">✓</td>
+<td class="gt_row gt_center" headers="선언형">✗</td>
+<td class="gt_row gt_center" headers="결과">유지</td>
+</tr>
+</tbody>
+<tfoot><tr class="gt_footnotes odd">
+<td colspan="6" class="gt_footnote">
+<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> ✓ = 완전 지원, 일부 = 부분 지원, ✗ = 미지원</td>
+</tr></tfoot>
+</table>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-tbl" id="tbl-paradigm-winners-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+표&nbsp;37.4: 패러다임 지원 현황: 다중 패러다임 언어의 부상
+</figcaption></figure>
+</div>
+</div>
+<p>다중 패러다임이 승리한 이유는 현실 문제가 단일 패러다임으로 해결되지 않기 때문이다. 웹 서버를 만든다고 가정하면, HTTP 요청 처리는 함수형이 깔끔하고, 비즈니스 도메인은 OOP가 자연스럽고, UI 상태 관리는 반응형이 효과적이다. 한 애플리케이션 안에서 세 패러다임이 공존해야 한다.</p>
+<p>패러다임 간 트레이드오프도 공존을 촉진했다. OOP는 상태 관리에 강하지만 동시성에 약하고, FP는 동시성에 강하지만 상태 변화가 자연스러운 문제에서 어색하다. 어느 하나가 “정답”이 아니라, <strong>문맥에 따라 최선이 달라진다.</strong> 진입 장벽의 현실도 무시할 수 없다. 순수 함수형 언어인 Haskell이나 순수 OOP 언어인 Smalltalk는 학습 곡선이 가파르다. Python이 성공한 이유 중 하나는 “OOP도 되고 함수형도 되고, 필요하면 절차적으로도 작성할 수 있다”는 유연함이다. 결론적으로 OOP, FP, 반응형 모두 살아남았지만, 이들을 “선택적으로 사용할 수 있게 해주는 언어”가 진정한 승자다.</p>
+</section><section id="sec-arch-winners-architecture" class="level3" data-number="37.5.3"><h3 data-number="37.5.3" class="anchored" data-anchor-id="sec-arch-winners-architecture">
+<span class="header-section-number">37.5.3</span> 아키텍처: 단순함의 승리</h3>
+<p></p>
+<p><a href="#fig-arch-winners" class="quarto-xref">그림&nbsp;<span>37.5</span></a> 두 번째 계층인 아키텍처에서는 <strong>단순한 것이 복잡한 것을 이겼다.</strong> REST API가 SOAP과 XML-RPC를 밀어냈고, 마이크로서비스가 ESB와 CORBA를 대체했으며, 이벤트 드리븐이 동기식 RPC를 누르고 주류가 되었다.</p>
+<div class="cell">
+<div id="tbl-arch-winners" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><div aria-describedby="tbl-arch-winners-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="dzwcoevmfc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#dzwcoevmfc table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#dzwcoevmfc thead, #dzwcoevmfc tbody, #dzwcoevmfc tfoot, #dzwcoevmfc tr, #dzwcoevmfc td, #dzwcoevmfc th {
+  border-style: none;
+}
+
+#dzwcoevmfc p {
+  margin: 0;
+  padding: 0;
+}
+
+#dzwcoevmfc .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 13px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#dzwcoevmfc .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#dzwcoevmfc .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#dzwcoevmfc .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#dzwcoevmfc .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#dzwcoevmfc .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dzwcoevmfc .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#dzwcoevmfc .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#dzwcoevmfc .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#dzwcoevmfc .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#dzwcoevmfc .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#dzwcoevmfc .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#dzwcoevmfc .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#dzwcoevmfc .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#dzwcoevmfc .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#dzwcoevmfc .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#dzwcoevmfc .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#dzwcoevmfc .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#dzwcoevmfc .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dzwcoevmfc .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#dzwcoevmfc .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#dzwcoevmfc .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#dzwcoevmfc .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dzwcoevmfc .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#dzwcoevmfc .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#dzwcoevmfc .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dzwcoevmfc .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dzwcoevmfc .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#dzwcoevmfc .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dzwcoevmfc .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#dzwcoevmfc .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dzwcoevmfc .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#dzwcoevmfc .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dzwcoevmfc .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#dzwcoevmfc .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dzwcoevmfc .gt_left {
+  text-align: left;
+}
+
+#dzwcoevmfc .gt_center {
+  text-align: center;
+}
+
+#dzwcoevmfc .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#dzwcoevmfc .gt_font_normal {
+  font-weight: normal;
+}
+
+#dzwcoevmfc .gt_font_bold {
+  font-weight: bold;
+}
+
+#dzwcoevmfc .gt_font_italic {
+  font-style: italic;
+}
+
+#dzwcoevmfc .gt_super {
+  font-size: 65%;
+}
+
+#dzwcoevmfc .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#dzwcoevmfc .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#dzwcoevmfc .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#dzwcoevmfc .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#dzwcoevmfc .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#dzwcoevmfc .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#dzwcoevmfc .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#dzwcoevmfc .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#dzwcoevmfc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table do-not-create-environment cell table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings header">
+<th id="a승자" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">승자</th>
+<th id="a패자" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">패자</th>
+<th id="a이유" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">이유</th>
+</tr></thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="승자">REST API</td>
+<td class="gt_row gt_left" headers="패자">SOAP, XML-RPC</td>
+<td class="gt_row gt_left" headers="이유">HTTP 자체를 활용, 별도 프로토콜 불필요</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="승자">마이크로서비스</td>
+<td class="gt_row gt_left" headers="패자">ESB, CORBA</td>
+<td class="gt_row gt_left" headers="이유">독립 배포, 기술 다양성 허용</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="승자">이벤트 드리븐</td>
+<td class="gt_row gt_left" headers="패자">동기식 RPC</td>
+<td class="gt_row gt_left" headers="이유">느슨한 결합, 확장성</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-tbl" id="tbl-arch-winners-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+표&nbsp;37.5: 아키텍처 패턴의 승자와 패자
+</figcaption></figure>
+</div>
+</div>
+<p>단순함이 승리하는 이유는 명확하다. 이해하기 쉬운 것이 확산되기 때문이다. REST는 “HTTP 메서드 = CRUD 연산”이라는 단순한 대응으로 수백만 개발자가 API를 만들게 했다. SOAP의 WSDL을 읽어본 사람이라면 왜 REST가 이겼는지 안다. 팀 규모가 커지면 복잡함이 비용으로 전환된다. 100명의 개발자가 ESB를 통해 서비스를 연동하는 것보다, 각 팀이 독립적으로 REST API를 노출하는 것이 훨씬 빠르다. 단순한 아키텍처는 디버깅도 쉽다. CORBA에서 문제가 생기면 IDL 컴파일러, ORB, 네이밍 서비스, 보안 계층 어디서 문제가 발생했는지 추적하기 어렵지만, REST에서는 curl 한 줄로 API가 작동하는지 확인할 수 있다. 패자들의 공통점은 과도한 추상화, 거대한 명세, 중앙 집중형 통제다. Enterprise Service Bus(ESB)는 “모든 것을 통합하겠다”는 야심 때문에 무너졌다.</p>
+</section><section id="sec-arch-winners-pattern" class="level3" data-number="37.5.4"><h3 data-number="37.5.4" class="anchored" data-anchor-id="sec-arch-winners-pattern">
+<span class="header-section-number">37.5.4</span> 디자인 패턴: 실용성의 승리</h3>
+<p></p>
+<p><a href="#fig-arch-winners" class="quarto-xref">그림&nbsp;<span>37.5</span></a> 세 번째 계층인 디자인 패턴에서는 GoF의 23개 패턴 중 실무에서 반복적으로 사용되는 것이 <strong>Factory, Strategy, Observer 세 개에 불과</strong>하다. 나머지는 퇴장하거나 희석되었다.</p>
+<p>Factory 패턴은 객체 생성 로직을 분리하는 역할을 맡으며, Spring의 Bean Factory와 React의 createElement가 내부에서 활용한다. Strategy 패턴은 알고리즘을 교체 가능하게 만들어 의존성 주입(DI)의 근간이 되고 플러그인 아키텍처의 핵심이기도 하다. Observer 패턴은 상태 변화를 전파하며 이벤트 시스템, Pub/Sub, 리액티브 프로그래밍의 기반이 된다.</p>
+<p>반면 Singleton은 전역 상태, 높은 결합도, 테스트 어려움으로 안티패턴이 되었고 DI 컨테이너가 대체한다. Visitor는 함수형 패턴 매칭이 더 간결하여 람다와 고차 함수가 대안을 제공한다. <a href="#fig-arch-winners" class="quarto-xref">그림&nbsp;<span>37.5</span></a> 에서 취소선으로 표시된 패턴들이 바로 이들이다.</p>
+<div class="cell">
+<div id="tbl-pattern-survivors" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><div aria-describedby="tbl-pattern-survivors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="bwfgkrszcy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#bwfgkrszcy table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#bwfgkrszcy thead, #bwfgkrszcy tbody, #bwfgkrszcy tfoot, #bwfgkrszcy tr, #bwfgkrszcy td, #bwfgkrszcy th {
+  border-style: none;
+}
+
+#bwfgkrszcy p {
+  margin: 0;
+  padding: 0;
+}
+
+#bwfgkrszcy .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 13px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#bwfgkrszcy .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#bwfgkrszcy .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#bwfgkrszcy .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#bwfgkrszcy .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bwfgkrszcy .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bwfgkrszcy .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bwfgkrszcy .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#bwfgkrszcy .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#bwfgkrszcy .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#bwfgkrszcy .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#bwfgkrszcy .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#bwfgkrszcy .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#bwfgkrszcy .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#bwfgkrszcy .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#bwfgkrszcy .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#bwfgkrszcy .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#bwfgkrszcy .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#bwfgkrszcy .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bwfgkrszcy .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#bwfgkrszcy .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#bwfgkrszcy .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#bwfgkrszcy .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bwfgkrszcy .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#bwfgkrszcy .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#bwfgkrszcy .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bwfgkrszcy .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bwfgkrszcy .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#bwfgkrszcy .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bwfgkrszcy .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#bwfgkrszcy .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bwfgkrszcy .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bwfgkrszcy .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bwfgkrszcy .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bwfgkrszcy .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bwfgkrszcy .gt_left {
+  text-align: left;
+}
+
+#bwfgkrszcy .gt_center {
+  text-align: center;
+}
+
+#bwfgkrszcy .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#bwfgkrszcy .gt_font_normal {
+  font-weight: normal;
+}
+
+#bwfgkrszcy .gt_font_bold {
+  font-weight: bold;
+}
+
+#bwfgkrszcy .gt_font_italic {
+  font-style: italic;
+}
+
+#bwfgkrszcy .gt_super {
+  font-size: 65%;
+}
+
+#bwfgkrszcy .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#bwfgkrszcy .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#bwfgkrszcy .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#bwfgkrszcy .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#bwfgkrszcy .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#bwfgkrszcy .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#bwfgkrszcy .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#bwfgkrszcy .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#bwfgkrszcy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table do-not-create-environment cell table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings header">
+<th id="a구분" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">구분</th>
+<th id="a패턴" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">패턴</th>
+<th id="a역할" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">역할</th>
+<th id="a현재상태" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">현재 상태</th>
+</tr></thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="구분" style="background-color: #F0F0F0">승자</td>
+<td class="gt_row gt_left" headers="패턴" style="background-color: #F0F0F0">Factory</td>
+<td class="gt_row gt_left" headers="역할" style="background-color: #F0F0F0">생성</td>
+<td class="gt_row gt_left" headers="현재상태" style="background-color: #F0F0F0">프레임워크 내장</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="구분" style="background-color: #F0F0F0">승자</td>
+<td class="gt_row gt_left" headers="패턴" style="background-color: #F0F0F0">Strategy</td>
+<td class="gt_row gt_left" headers="역할" style="background-color: #F0F0F0">알고리즘</td>
+<td class="gt_row gt_left" headers="현재상태" style="background-color: #F0F0F0">DI의 근간</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="구분" style="background-color: #F0F0F0">승자</td>
+<td class="gt_row gt_left" headers="패턴" style="background-color: #F0F0F0">Observer</td>
+<td class="gt_row gt_left" headers="역할" style="background-color: #F0F0F0">상태</td>
+<td class="gt_row gt_left" headers="현재상태" style="background-color: #F0F0F0">이벤트 시스템 기반</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="구분">퇴장</td>
+<td class="gt_row gt_left" headers="패턴">Singleton</td>
+<td class="gt_row gt_left" headers="역할">전역 상태</td>
+<td class="gt_row gt_left" headers="현재상태">안티패턴화</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="구분">퇴장</td>
+<td class="gt_row gt_left" headers="패턴">Visitor</td>
+<td class="gt_row gt_left" headers="역할">순회</td>
+<td class="gt_row gt_left" headers="현재상태">함수형으로 대체</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-tbl" id="tbl-pattern-survivors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+표&nbsp;37.6: 디자인 패턴의 승자와 퇴장자
+</figcaption></figure>
+</div>
+</div>
+<p>세 개 패턴이 살아남은 이유는 매일 마주치는 문제를 해결하기 때문이다. “객체를 어떻게 만들지?”(Factory), “알고리즘을 어떻게 교체하지?”(Strategy), “상태 변화를 어떻게 전파하지?”(Observer)라는 질문은 어떤 프로젝트에서든 등장한다. 프레임워크가 패턴을 내장한 것도 생존의 비결이다. 개발자가 직접 구현할 필요가 없어졌지만, Django ORM이 Repository 패턴이고 React의 useState가 Observer 패턴이라는 것을 “알면” 프레임워크가 왜 그렇게 설계되었는지 이해할 수 있다. 세 패턴은 서로 조합되기도 한다. Factory와 Strategy, Observer와 Decorator 조합이 흔하며, 독립적으로 사용하기보다 레고 블록처럼 결합된다. 무엇보다 설명하기 쉽다는 점이 확산에 기여했다. “Observer 패턴으로 구현해”라고 말하면 팀원 모두가 무슨 의미인지 아는 반면, 복잡한 패턴은 설명하는 데만 30분이 걸린다.</p>
+</section><section id="sec-arch-winners-framework" class="level3" data-number="37.5.5"><h3 data-number="37.5.5" class="anchored" data-anchor-id="sec-arch-winners-framework">
+<span class="header-section-number">37.5.5</span> 프레임워크와 라이브러리: 세대교체의 동력</h3>
+<p> </p>
+<p><a href="#fig-arch-winners" class="quarto-xref">그림&nbsp;<span>37.5</span></a> 하단의 프레임워크와 라이브러리 계층은 가장 빠른 세대교체를 경험한다. 패러다임과 패턴이 수십 년을 버틸 때, 프레임워크와 라이브러리는 <strong>5년 주기로 세대교체</strong>가 일어난다. 프론트엔드에서 React가 Angular 1을 밀어내고, Next.js가 CRA(Create React App)를 대체한 것이 대표적이다. Python 웹 프레임워크도 Django에서 Flask를 거쳐 FastAPI로 주류가 이동했고, Java도 Spring에서 Spring Boot를 거쳐 Quarkus와 Micronaut로 변화하고 있다.</p>
+<p>프레임워크가 변덕스러운 이유는 기반 기술의 변화에 종속되기 때문이다. React는 브라우저의 Virtual DOM 성능에 의존하므로 브라우저 엔진이 바뀌면 React의 최적화 전략도 바뀌어야 한다. FastAPI가 Flask를 밀어낸 이유는 Python 3.5의 async/await와 타입 힌트 덕분이다. 언어나 런타임이 진화하면 이전 프레임워크의 설계 가정이 무너진다.</p>
+<p>커뮤니티 모멘텀도 결정적이다. 프레임워크는 생태계에 의존하므로 플러그인, 튜토리얼, Stack Overflow 답변, 취업 시장이 모두 선순환해야 한다. 어느 순간 Vue.js의 생태계가 Angular를 추월하면, 새 프로젝트는 Vue를 선택하고, Vue의 생태계는 더 커지고, Angular는 레거시가 된다. <strong>네트워크 효과가 승자 독식을 만든다.</strong> 오래된 프레임워크는 하위 호환성 때문에 설계를 바꾸기 어렵다. Angular 1.x에서 2.x로 넘어갈 때 거의 재작성이 필요했던 이유다. 새 프레임워크는 기존의 설계 실수를 보고 “처음부터 다시 하면 더 잘 만들 수 있다”며 등장한다.</p>
+<p>라이브러리는 프레임워크보다 더 빨리 교체된다. Moment.js에서 Day.js를 거쳐 date-fns로 날짜 처리 라이브러리가 바뀌었고, Lodash에서 Ramda를 거쳐 native ES6로 유틸리티 함수가 이동했으며, Request에서 Axios를 거쳐 fetch API로 HTTP 클라이언트가 변화했다. JavaScript의 날짜 API가 개선되면 Moment.js는 불필요해진다. <strong>언어 자체가 기능을 흡수하면 라이브러리는 퇴장한다.</strong></p>
+<div class="cell">
+<div id="tbl-framework-lifecycle" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><div aria-describedby="tbl-framework-lifecycle-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="xtkccfumgt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xtkccfumgt table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#xtkccfumgt thead, #xtkccfumgt tbody, #xtkccfumgt tfoot, #xtkccfumgt tr, #xtkccfumgt td, #xtkccfumgt th {
+  border-style: none;
+}
+
+#xtkccfumgt p {
+  margin: 0;
+  padding: 0;
+}
+
+#xtkccfumgt .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#xtkccfumgt .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#xtkccfumgt .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#xtkccfumgt .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#xtkccfumgt .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xtkccfumgt .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xtkccfumgt .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xtkccfumgt .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#xtkccfumgt .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#xtkccfumgt .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#xtkccfumgt .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#xtkccfumgt .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#xtkccfumgt .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#xtkccfumgt .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#xtkccfumgt .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#xtkccfumgt .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#xtkccfumgt .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#xtkccfumgt .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#xtkccfumgt .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xtkccfumgt .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#xtkccfumgt .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#xtkccfumgt .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#xtkccfumgt .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xtkccfumgt .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#xtkccfumgt .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#xtkccfumgt .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xtkccfumgt .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xtkccfumgt .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#xtkccfumgt .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xtkccfumgt .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#xtkccfumgt .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xtkccfumgt .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xtkccfumgt .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xtkccfumgt .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xtkccfumgt .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xtkccfumgt .gt_left {
+  text-align: left;
+}
+
+#xtkccfumgt .gt_center {
+  text-align: center;
+}
+
+#xtkccfumgt .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#xtkccfumgt .gt_font_normal {
+  font-weight: normal;
+}
+
+#xtkccfumgt .gt_font_bold {
+  font-weight: bold;
+}
+
+#xtkccfumgt .gt_font_italic {
+  font-style: italic;
+}
+
+#xtkccfumgt .gt_super {
+  font-size: 65%;
+}
+
+#xtkccfumgt .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#xtkccfumgt .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#xtkccfumgt .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#xtkccfumgt .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#xtkccfumgt .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#xtkccfumgt .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#xtkccfumgt .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#xtkccfumgt .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#xtkccfumgt div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table do-not-create-environment cell table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading header">
+<td colspan="4" class="gt_heading gt_title gt_font_normal gt_bottom_border">세대교체의 원동력</td>
+</tr>
+<tr class="gt_col_headings even">
+<th id="a원인" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">원인</th>
+<th id="a프레임워크" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">프레임워크</th>
+<th id="a라이브러리" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">라이브러리</th>
+<th id="a영향도" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">영향도</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="원인">기반 기술 변화</td>
+<td class="gt_row gt_left" headers="프레임워크">async/await로 Flask→FastAPI</td>
+<td class="gt_row gt_left" headers="라이브러리">ES6 모듈로 RequireJS 퇴장</td>
+<td class="gt_row gt_left" headers="영향도">높음</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="원인">커뮤니티 모멘텀</td>
+<td class="gt_row gt_left" headers="프레임워크">Vue가 Angular 추월</td>
+<td class="gt_row gt_left" headers="라이브러리">Axios가 Request 대체</td>
+<td class="gt_row gt_left" headers="영향도">높음</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="원인">호환성 부담</td>
+<td class="gt_row gt_left" headers="프레임워크">Angular 1→2 단절</td>
+<td class="gt_row gt_left" headers="라이브러리">거의 없음 (버리고 교체)</td>
+<td class="gt_row gt_left" headers="영향도">중간</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="원인">문제 영역 변화</td>
+<td class="gt_row gt_left" headers="프레임워크">SPA→SSR 전환</td>
+<td class="gt_row gt_left" headers="라이브러리">jQuery→React 상태 관리</td>
+<td class="gt_row gt_left" headers="영향도">높음</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="원인" style="background-color: #F5F5F5">언어 기능 흡수</td>
+<td class="gt_row gt_left" headers="프레임워크" style="background-color: #F5F5F5">Express 미들웨어→native fetch</td>
+<td class="gt_row gt_left" headers="라이브러리" style="background-color: #F5F5F5">Moment.js→native Intl API</td>
+<td class="gt_row gt_left" headers="영향도" style="background-color: #F5F5F5">매우 높음</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-tbl" id="tbl-framework-lifecycle-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+표&nbsp;37.7: 프레임워크/라이브러리의 세대교체 원인
+</figcaption></figure>
+</div>
+</div>
+<p>지금까지 살펴본 패러다임, 아키텍처, 패턴, 프레임워크의 승자들을 관통하는 공통점이 있다. 수십 년간 살아남은 것들, 세대교체 속에서도 주류 자리를 지킨 것들, 새로 등장해서 빠르게 시장을 점령한 것들 모두 네 가지 특성을 공유한다. 이 특성은 “무엇이 살아남을까?”를 예측하는 데도, “어떤 기술에 투자할까?”를 결정하는 데도 유용한 기준이 된다.</p>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">힌트</span>승자의 네 가지 특성
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>단순성(Simplicity)</strong> — 복잡한 것은 도태된다. REST가 SOAP을 이긴 이유, Factory가 Abstract Factory보다 많이 쓰이는 이유, Python이 Java보다 입문자에게 인기 있는 이유가 모두 단순함에 있다.</p>
+<p><strong>조합 가능성(Composability)</strong> — 승자들은 레고 블록처럼 결합된다. 다중 패러다임 언어, Factory와 Strategy 패턴 조합, 마이크로서비스 아키텍처 모두 “작은 것을 조합해 큰 것을 만드는” 철학을 따른다.</p>
+<p><strong>실용적 문제 해결</strong> — 학문적 우아함보다 실무에서 반복되는 문제를 해결하는 것이 생존의 조건이다. Observer 패턴이 살아남은 이유는 “상태 변화를 어떻게 전파하지?”라는 질문이 매일 등장하기 때문이다.</p>
+<p><strong>낮은 진입 장벽</strong> — 배우기 쉬운 것이 확산된다. Python이 Haskell보다 사용자가 많은 이유, React가 Angular보다 입문자에게 친숙한 이유는 학습 곡선이 채택을 결정하기 때문이다.</p>
+</div>
+</div>
+</section><section id="sec-arch-winners-ai" class="level3" data-number="37.5.6"><h3 data-number="37.5.6" class="anchored" data-anchor-id="sec-arch-winners-ai">
+<span class="header-section-number">37.5.6</span> Software 1.0에서 2.0으로</h3>
+<p> </p>
+<p>AI 시대에 새로운 패턴이 등장하고 있다. 흥미로운 점은 AI 패턴이 <strong>무에서 탄생하지 않았다</strong>는 것이다. 전통적인 디자인 패턴 위에 AI 특화 기능이 덧붙여진 형태다.</p>
+<div id="fig-arch-winners-ai" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-arch-winners-ai-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/pattern-winners-ai.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-arch-winners-ai-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;37.6: 패턴의 진화: 명시적 로직에서 확률적 로직으로
+</figcaption></figure>
+</div>
+<p><a href="#fig-arch-winners-ai" class="quarto-xref">그림&nbsp;<span>37.6</span></a> 은 Software 1.0(왼쪽)에서 Software 2.0(오른쪽)으로의 패턴 진화를 보여준다. 왼쪽의 전통 패턴은 사람이 명시적 로직으로 작성하는 규칙 기반 시스템이고, 오른쪽의 AI 패턴은 데이터와 AI가 확률적 로직을 학습하는 시스템이다. 중앙의 전이 영역에 표시된 것처럼, 핵심은 <strong>명시적 로직에서 확률적 로직으로의 확장</strong>이다.</p>
+<p>Factory 패턴은 LLM Factory로 진화했다. 객체 생성 로직 분리가 모델 인스턴스 생성 분리로 확장되었으며, 대상이 Instance에서 Model로 바뀌었다. LangChain의 <code>ChatOpenAI()</code>와 <code>ChatAnthropic()</code> 팩토리가 대표적이다.</p>
+<p>Strategy 패턴은 Prompt Chain으로 진화했다. 알고리즘 교체 가능성이 추론 전략 교체로 확장되었으며, 전략이 Code에서 Prompt로 바뀌었다. Chain-of-Thought, ReAct, Tree-of-Thought는 같은 문제를 다른 추론 전략으로 푸는 것이다.</p>
+<p>Observer 패턴은 Agent Loop로 진화했다. 상태 변화 전파가 관찰-생각-행동 루프로 확장되었으며, 주체성이 Reactive에서 Active로 바뀌었다. Agent가 도구 실행 결과를 받아 다음 행동을 결정하는 루프는 Observer 패턴의 능동적 변형이다.</p>
+<p>Repository 패턴은 RAG System으로 진화했다. 정형 데이터 접근 추상화가 비정형 지식 검색 추상화로 확장되었으며, 데이터가 Table에서 Vector로 바뀌었다. 벡터 DB에서 관련 문서를 검색하고 LLM에 전달하는 것은 Repository 패턴과 구조적으로 동일하다.</p>
+<p><a href="#fig-arch-winners-ai" class="quarto-xref">그림&nbsp;<span>37.6</span></a> 오른쪽에 점선으로 표시된 MCP(Model Context Protocol)는 Agent Loop와 RAG System을 연결하는 표준 인터페이스다. Anthropic이 2024년 발표한 이 프로토콜은 Agent가 외부 도구와 지식 소스에 접근하는 방식을 표준화한다. 과거의 승자 패턴을 아는 것이 AI 시대에도 중요한 이유는 <strong>프레임워크를 이해하는 열쇠</strong>이기 때문이다. LangChain이 Factory 패턴으로 LLM을 추상화하고, Agent가 Observer 패턴으로 이벤트를 처리한다는 것을 알면, 새로운 AI 프레임워크도 빠르게 파악할 수 있다. 패턴은 변하지 않고, 그것이 적용되는 영역만 확장된다.</p>
+</section></section><section id="생각해볼-점" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="생각해볼-점">💡 생각해볼 점</h2>
+<p>소프트웨어 세계의 30년 역사가 가르치는 교훈은 명확하다. <strong>추상화 수준이 높을수록 오래 살아남는다.</strong> 패러다임은 반세기를 버티고, 아키텍처는 20년을 살고, 패턴은 10년 이상 유지되지만, 프레임워크는 5년마다 세대교체를 겪고, 라이브러리는 3년이면 구식이 된다.</p>
+<p>이 사실이 학습 전략을 결정한다. 패러다임과 패턴에 투자한 시간은 30년간 복리로 돌아온다. 프레임워크에 투자한 시간은 5년 후 감가상각된다. 물론 당장 코드를 작성하려면 프레임워크를 알아야 하지만, <strong>패턴을 알면 프레임워크가 왜 그렇게 설계되었는지 이해할 수 있고, 새 프레임워크가 등장해도 빠르게 적응할 수 있다.</strong></p>
+<p>모든 계층에서 승자의 공통점은 <strong>단순함, 조합 가능성, 실용성, 낮은 진입 장벽</strong>이다. SOAP보다 REST가, Singleton보다 Factory가, Angular보다 React가 승리한 이유가 여기에 있다. 복잡한 것은 도태된다—이것은 자연 선택의 법칙과 닮았다.</p>
+<p>AI 시대에도 패턴을 배우는 이유는 분명하다. LangChain이 Factory로 LLM을 추상화하고, Agent가 Observer로 이벤트를 처리한다는 것을 알면, AI 프레임워크도 빠르게 파악할 수 있다. AI에게 “Factory 패턴으로 구현해”라고 지시하려면, Factory 패턴이 무엇인지 알아야 한다. <strong>패턴은 변하지 않고, 그것이 적용되는 영역만 확장된다.</strong></p>
+<p>다음 장에서는 이 추상적인 논의를 구체화한다. SDK, Runtime, Framework 같은 개념들이 실제로 어떻게 조합되어 하나의 애플리케이션을 구동하는지, Streamlit 대시보드를 해부하며 살펴본다.</p>
+<p> </p>
+
+
+<div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-McIlroy1968" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div>
+<div class="csl-right-inline">M. D. McIlroy, <span>“Mass Produced Software Components”</span>, in <em>Software Engineering: Report on a Conference Sponsored by the NATO Science Committee</em>, P. Naur 와/과 B. Randell, 편집자, Garmisch, Germany: Scientific Affairs Division, NATO, 1968, pp 138–155. Available at: <a href="http://www.cs.dartmouth.edu/~doug/components.txt">http://www.cs.dartmouth.edu/~doug/components.txt</a>
+</div>
+</div>
+<div id="ref-Parnas1972" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div>
+<div class="csl-right-inline">D. L. Parnas, <span>“On the Criteria to Be Used in Decomposing Systems into Modules”</span>, <em>Communications of the ACM</em>, vol 15, 호 12, pp 1053–1058, 1972, doi: <a href="https://doi.org/10.1145/361598.361623">10.1145/361598.361623</a>.</div>
+</div>
+<div id="ref-Krueger1992" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[3] </div>
+<div class="csl-right-inline">C. W. Krueger, <span>“Software Reuse”</span>, <em>ACM Computing Surveys</em>, vol 24, 호 2, pp 131–183, 1992, doi: <a href="https://doi.org/10.1145/130844.130856">10.1145/130844.130856</a>.</div>
+</div>
+<div id="ref-Gamma1994" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[4] </div>
+<div class="csl-right-inline">E. Gamma, R. Helm, R. Johnson, 와/과 J. Vlissides, <em>Design Patterns: Elements of Reusable Object-Oriented Software</em>. Addison-Wesley, 1994.</div>
+</div>
+</div>
+</section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+<ol>
+<li id="fn1"><p>Model-View-Controller: 데이터를 담는 <strong>모델(Model)</strong>, 화면을 그리는 <strong>뷰(View)</strong>, 둘 사이 흐름을 제어하는 <strong>컨트롤러(Controller)</strong>를 분리하는 설계 원칙. 1979년 Smalltalk에서 처음 등장했다.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>알고리즘을 캡슐화하여 런타임에 교체할 수 있게 만드는 행위 패턴. 정렬 방식, 결제 수단, 할인 정책 등 “어떻게 처리할 것인가”를 분리한다.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "복사완료!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "복사완료!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/r2bit\.com\/gpt-coding\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./prog-reactive.html" class="pagination-link" aria-label="반응형 프로그래밍">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">반응형 프로그래밍</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./arch-stack.html" class="pagination-link" aria-label="소프트웨어 스택">
+        <span class="nav-page-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">소프트웨어 스택</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+<p>챗GPT 쿼토 책은 소프트웨어 카펜트리 “Git 버전제어”를 번역한 것이 포함되어 있습니다.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/arch-reuse.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>순수하게 <a href="https://quarto.org/">쿼토(Quarto)</a>로 제작되었습니다.</p>
+</div>
+  </div>
+</footer>
+
+
+</body></html>

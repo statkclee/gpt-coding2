@@ -1,0 +1,160 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 70 900 390">
+  <defs>
+    <style>
+      /* Tufte Grayscale Style */
+      .label-title { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 18px; font-weight: bold; fill: #111; }
+      .label-subtitle { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 14px; fill: #666; }
+      
+      .label-head { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 14px; font-weight: bold; fill: #222; }
+      .label-body { font-family: 'SF Mono', Consolas, Menlo, monospace; font-size: 11px; fill: #444; }
+      .label-note { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 10px; fill: #666; font-style: italic; }
+      .label-tag { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 10px; font-weight: bold; fill: #fff; }
+      
+      .box-group { fill: #fcfcfc; stroke: #999; stroke-width: 1.5; rx: 6; }
+      .box-item { fill: #fff; stroke: #ccc; stroke-width: 1.5; rx: 3; }
+      .box-tag { fill: #555; rx: 2; }
+      
+      .line-connect { stroke: #666; stroke-width: 1.5; fill: none; }
+      .line-sep { stroke: #ddd; stroke-width: 1; }
+      
+      .arrow-head { fill: #666; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L0,8 L8,4 z" class="arrow-head" />
+    </marker>
+  </defs>
+
+  <rect width="900" height="520" fill="#fff" />
+
+  <!-- Title -->
+  <!-- <text x="450" y="40" text-anchor="middle" class="label-title">소프트웨어 설계의 진화: 패러다임에서 프레임워크까지</text>
+  <text x="450" y="60" text-anchor="middle" class="label-subtitle">사고(Thinking) → 해법(Solution) → 도구(Tool)</text> -->
+
+  <!-- ========================================== -->
+  <!-- 1. PARADIGM (Left) -->
+  <!-- ========================================== -->
+  <g transform="translate(30, 90)">
+    <rect x="0" y="0" width="200" height="300" class="box-group"/>
+    <text x="100" y="30" text-anchor="middle" class="label-head">1. 패러다임 (사고)</text>
+    <text x="100" y="45" text-anchor="middle" class="label-note">"어떻게 생각할 것인가"</text>
+    <line x1="20" y1="55" x2="180" y2="55" class="line-sep"/>
+
+    <g transform="translate(10, 70)">
+      <rect x="0" y="0" width="180" height="60" class="box-item"/>
+      <text x="90" y="25" text-anchor="middle" class="label-head" font-size="12">객체지향 (OOP)</text>
+      <text x="90" y="45" text-anchor="middle" class="label-note">객체 협력</text>
+    </g>
+
+    <g transform="translate(10, 150)">
+      <rect x="0" y="0" width="180" height="60" class="box-item"/>
+      <text x="90" y="25" text-anchor="middle" class="label-head" font-size="12">함수형 (FP)</text>
+      <text x="90" y="45" text-anchor="middle" class="label-note">불변성, 순수함수</text>
+    </g>
+
+    <g transform="translate(10, 230)">
+      <rect x="0" y="0" width="180" height="60" class="box-item"/>
+      <text x="90" y="25" text-anchor="middle" class="label-head" font-size="12">반응형 (Reactive)</text>
+      <text x="90" y="45" text-anchor="middle" class="label-note">비동기 데이터 흐름</text>
+    </g>
+  </g>
+
+  <!-- Arrow 1 -> 2 -->
+  <g transform="translate(230, 0)">
+    <path d="M 0 190 L 40 190" class="line-connect" marker-end="url(#arrow)"/>
+    <path d="M 0 270 L 40 270" class="line-connect" marker-end="url(#arrow)"/>
+    <path d="M 0 350 L 40 350" class="line-connect" marker-end="url(#arrow)"/>
+    <text x="20" y="180" text-anchor="middle" class="label-note">구체화</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 2. DESIGN & PATTERN (Center) -->
+  <!-- ========================================== -->
+  <g transform="translate(270, 90)">
+    <rect x="0" y="0" width="300" height="300" class="box-group"/>
+    <text x="150" y="30" text-anchor="middle" class="label-head">2. 아키텍처 &amp; 패턴 (해법)</text>
+    <text x="150" y="45" text-anchor="middle" class="label-note">"어떻게 구조화/해결할 것인가"</text>
+    <line x1="20" y1="55" x2="280" y2="55" class="line-sep"/>
+
+    <!-- Creational / Arch -->
+    <g transform="translate(10, 70)">
+      <rect x="0" y="0" width="280" height="60" class="box-item" fill="#f5f5f5"/>
+      <rect x="5" y="5" width="50" height="15" class="box-tag" fill="#d32f2f"/>
+      <text x="30" y="16" text-anchor="middle" class="label-tag">생성/구조</text>
+      <text x="150" y="25" text-anchor="middle" class="label-body" font-weight="bold">Factory / MVC</text>
+      <text x="150" y="45" text-anchor="middle" class="label-note">Why: "유연한 생성과 관심사 분리"</text>
+    </g>
+
+    <!-- Structural / Repository -->
+    <g transform="translate(10, 150)">
+      <rect x="0" y="0" width="280" height="60" class="box-item"/>
+      <rect x="5" y="5" width="50" height="15" class="box-tag" fill="#1976d2"/>
+      <text x="30" y="16" text-anchor="middle" class="label-tag">구조/저장</text>
+      <text x="150" y="25" text-anchor="middle" class="label-body" font-weight="bold">Decorator / Repository</text>
+      <text x="150" y="45" text-anchor="middle" class="label-note">Why: "기능 확장과 데이터 추상화"</text>
+    </g>
+
+    <!-- Behavioral / Stream -->
+    <g transform="translate(10, 230)">
+      <rect x="0" y="0" width="280" height="60" class="box-item"/>
+      <rect x="5" y="5" width="50" height="15" class="box-tag" fill="#388e3c"/>
+      <text x="30" y="16" text-anchor="middle" class="label-tag">행위/전파</text>
+      <text x="150" y="25" text-anchor="middle" class="label-body" font-weight="bold">Observer / Event-Driven</text>
+      <text x="150" y="45" text-anchor="middle" class="label-note">Why: "책임 분배와 자동 전파"</text>
+    </g>
+  </g>
+
+  <!-- Arrow 2 -> 3 -->
+  <g transform="translate(570, 0)">
+    <path d="M 0 190 L 40 190" class="line-connect" marker-end="url(#arrow)"/>
+    <path d="M 0 270 L 40 270" class="line-connect" marker-end="url(#arrow)"/>
+    <path d="M 0 350 L 40 350" class="line-connect" marker-end="url(#arrow)"/>
+    <text x="20" y="180" text-anchor="middle" class="label-note">도구화</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 3. FRAMEWORK (Right) -->
+  <!-- ========================================== -->
+  <g transform="translate(610, 90)">
+    <rect x="0" y="0" width="260" height="300" class="box-group"/>
+    <text x="130" y="30" text-anchor="middle" class="label-head">3. 프레임워크 (도구)</text>
+    <text x="130" y="45" text-anchor="middle" class="label-note">"무엇으로 만들 것인가"</text>
+    <line x1="20" y1="55" x2="240" y2="55" class="line-sep"/>
+
+    <g transform="translate(10, 70)">
+      <rect x="0" y="0" width="240" height="60" class="box-item"/>
+      <rect x="5" y="5" width="60" height="15" class="box-tag" fill="#555"/>
+      <text x="35" y="16" text-anchor="middle" class="label-tag">Framework</text>
+      <text x="140" y="25" text-anchor="middle" class="label-body" font-weight="bold">Django, Spring</text>
+      <text x="140" y="45" text-anchor="middle" class="label-note">Role: "골조 (Skeleton)"</text>
+    </g>
+
+    <g transform="translate(10, 150)">
+      <rect x="0" y="0" width="240" height="60" class="box-item"/>
+      <rect x="5" y="5" width="50" height="15" class="box-tag" fill="#777"/>
+      <text x="30" y="16" text-anchor="middle" class="label-tag">Library</text>
+      <text x="140" y="25" text-anchor="middle" class="label-body" font-weight="bold">Pandas, Scikit-learn</text>
+      <text x="140" y="45" text-anchor="middle" class="label-note">Role: "부품 (Parts)"</text>
+    </g>
+
+    <g transform="translate(10, 230)">
+      <rect x="0" y="0" width="240" height="60" class="box-item"/>
+      <rect x="5" y="5" width="40" height="15" class="box-tag" fill="#999"/>
+      <text x="25" y="16" text-anchor="middle" class="label-tag">SDK</text>
+      <text x="140" y="25" text-anchor="middle" class="label-body" font-weight="bold">AWS SDK</text>
+      <text x="140" y="45" text-anchor="middle" class="label-note">Role: "공구함 (Toolkit)"</text>
+    </g>
+  </g>
+
+  <!-- Bottom Insight -->
+  <g transform="translate(50, 400)">
+      <rect x="0" y="0" width="840" height="50" fill="#f8f8f8" stroke="#ccc" rx="4"/>
+      <rect x="0" y="0" width="4" height="50" fill="#333" />
+      <text x="20" y="22" class="label-body" font-size="13" fill="#111">
+          <tspan font-weight="bold">패러다임은 <tspan font-style="italic">사고의 틀(방향)</tspan>을, 아키텍처와 패턴은 <tspan font-style="italic">해법의 지도(설계)</tspan>를, 프레임워크는 <tspan font-style="italic">구현의 도구(자동차)</tspan>를 제공한다.</tspan> 
+      </text>
+      <text x="20" y="40" class="label-note" font-size="11" fill="#555">
+          방향 없이 지도를 펼쳐도 어디로 갈지 모르고, 지도 없이 자동차에 올라타도 결국 길을 잃는다.
+      </text>
+  </g>
+
+</svg>

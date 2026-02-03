@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 380">
+  <defs>
+    <style>
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 16px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 13px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-desc {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 11px;
+        fill: #666;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Menlo, Monaco, monospace;
+        font-size: 10px;
+        fill: #666;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #999;
+      }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- White background -->
+  <rect x="0" y="0" width="800" height="380" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="400" y="30" class="tufte-title" text-anchor="middle">계층형 아키텍처</text>
+
+  <!-- Layer 1: Presentation -->
+  <rect x="100" y="60" width="400" height="60" fill="#f5f5f5" stroke="#666" stroke-width="1.5" rx="3"/>
+  <text x="200" y="85" class="tufte-label">Presentation Layer</text>
+  <text x="200" y="105" class="tufte-code">CLI, REST API, Web UI</text>
+  <text x="420" y="95" class="tufte-small">사용자 인터페이스</text>
+
+  <!-- Arrow down -->
+  <line x1="300" y1="120" x2="300" y2="138" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Layer 2: Application -->
+  <rect x="100" y="150" width="400" height="60" fill="#fff" stroke="#666" stroke-width="1.5" rx="3"/>
+  <text x="200" y="175" class="tufte-label">Application Layer</text>
+  <text x="200" y="195" class="tufte-code">Service, Use Case, Transaction</text>
+  <text x="420" y="185" class="tufte-small">유스케이스 조율</text>
+
+  <!-- Arrow down -->
+  <line x1="300" y1="210" x2="300" y2="228" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Layer 3: Domain -->
+  <rect x="100" y="240" width="400" height="60" fill="#fff" stroke="#333" stroke-width="2" rx="3"/>
+  <text x="200" y="265" class="tufte-label">Domain Layer</text>
+  <text x="200" y="285" class="tufte-code">Entity, Value Object, Domain Service</text>
+  <text x="420" y="275" class="tufte-small">핵심 비즈니스 로직</text>
+
+  <!-- Layer 4: Infrastructure -->
+  <rect x="100" y="330" width="400" height="40" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="200" y="355" class="tufte-label">Infrastructure Layer</text>
+  <text x="420" y="355" class="tufte-code">DB, File, External API</text>
+
+  <!-- Arrow from Infrastructure to Domain (DIP) -->
+  <line x1="300" y1="330" x2="300" y2="302" stroke="#999" stroke-width="1" stroke-dasharray="4,2" marker-end="url(#arrow)"/>
+
+  <!-- Dependency Rule -->
+  <rect x="540" y="60" width="220" height="140" fill="#fff" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="650" y="85" class="tufte-label" text-anchor="middle">의존성 규칙</text>
+  <line x1="555" y1="95" x2="745" y2="95" stroke="#ccc" stroke-width="1"/>
+  <text x="650" y="120" class="tufte-desc" text-anchor="middle">바깥 → 안쪽만 허용</text>
+  <text x="650" y="145" class="tufte-code" text-anchor="middle">Presentation → App</text>
+  <text x="650" y="160" class="tufte-code" text-anchor="middle">Application → Domain</text>
+  <text x="650" y="175" class="tufte-code" text-anchor="middle">Infrastructure → Domain</text>
+  <text x="650" y="195" class="tufte-small" text-anchor="middle">(인터페이스 구현)</text>
+
+  <!-- Key principle -->
+  <rect x="540" y="220" width="220" height="80" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="650" y="245" class="tufte-label" text-anchor="middle">핵심 원칙</text>
+  <line x1="555" y1="255" x2="745" y2="255" stroke="#ccc" stroke-width="1"/>
+  <text x="650" y="275" class="tufte-small" text-anchor="middle">Domain Layer는</text>
+  <text x="650" y="290" class="tufte-small" text-anchor="middle">어떤 것에도 의존하지 않음</text>
+
+  <!-- Bottom note -->
+  <text x="400" y="375" class="tufte-small" text-anchor="middle">각 계층은 바로 아래 계층에만 의존 (건너뛰기 금지)</text>
+</svg>

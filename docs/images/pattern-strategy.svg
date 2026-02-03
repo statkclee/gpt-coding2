@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 320">
+  <defs>
+    <style>
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 16px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 13px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-desc {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 11px;
+        fill: #666;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Menlo, Monaco, monospace;
+        font-size: 10px;
+        fill: #666;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #999;
+      }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- White background -->
+  <rect x="0" y="0" width="750" height="320" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="375" y="30" class="tufte-title" text-anchor="middle">Strategy 패턴</text>
+
+  <!-- Context -->
+  <rect x="40" y="80" width="180" height="100" fill="#f5f5f5" stroke="#333" stroke-width="2" rx="3"/>
+  <text x="130" y="105" class="tufte-label" text-anchor="middle">PriceCalculator</text>
+  <text x="130" y="120" class="tufte-small" text-anchor="middle">(Context)</text>
+  <line x1="55" y1="130" x2="205" y2="130" stroke="#ccc" stroke-width="1"/>
+  <text x="130" y="150" class="tufte-code" text-anchor="middle">_strategy: DiscountStrategy</text>
+  <text x="130" y="170" class="tufte-code" text-anchor="middle">calculate_final_price()</text>
+
+  <!-- Arrow to Strategy interface -->
+  <line x1="220" y1="130" x2="288" y2="130" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="254" y="120" class="tufte-small">사용</text>
+
+  <!-- Strategy Interface -->
+  <rect x="300" y="70" width="160" height="70" fill="#fff" stroke="#666" stroke-width="1" stroke-dasharray="4" rx="3"/>
+  <text x="380" y="95" class="tufte-small" text-anchor="middle">«interface»</text>
+  <text x="380" y="110" class="tufte-label" text-anchor="middle">DiscountStrategy</text>
+  <line x1="315" y1="120" x2="445" y2="120" stroke="#ccc" stroke-width="1"/>
+  <text x="380" y="135" class="tufte-code" text-anchor="middle">calculate(price) → float</text>
+
+  <!-- Concrete Strategies -->
+  <rect x="500" y="55" width="130" height="50" fill="#fff" stroke="#666" stroke-width="1" rx="3"/>
+  <text x="565" y="77" class="tufte-label" text-anchor="middle">VIPDiscount</text>
+  <text x="565" y="95" class="tufte-code" text-anchor="middle">price × 0.8</text>
+
+  <rect x="500" y="115" width="130" height="50" fill="#fff" stroke="#666" stroke-width="1" rx="3"/>
+  <text x="565" y="137" class="tufte-label" text-anchor="middle">MemberDiscount</text>
+  <text x="565" y="155" class="tufte-code" text-anchor="middle">price × 0.9</text>
+
+  <rect x="500" y="175" width="130" height="50" fill="#fff" stroke="#666" stroke-width="1" rx="3"/>
+  <text x="565" y="197" class="tufte-label" text-anchor="middle">NewCustomer</text>
+  <text x="565" y="215" class="tufte-code" text-anchor="middle">price × 0.95</text>
+
+  <!-- Implements arrows -->
+  <line x1="460" y1="105" x2="500" y2="80" stroke="#999" stroke-width="1" stroke-dasharray="3"/>
+  <line x1="460" y1="105" x2="500" y2="140" stroke="#999" stroke-width="1" stroke-dasharray="3"/>
+  <line x1="460" y1="105" x2="500" y2="200" stroke="#999" stroke-width="1" stroke-dasharray="3"/>
+
+  <!-- Python alternative -->
+  <rect x="40" y="210" width="330" height="90" fill="#fff" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="205" y="235" class="tufte-label" text-anchor="middle">Python 함수형 대안</text>
+  <line x1="55" y1="245" x2="355" y2="245" stroke="#ccc" stroke-width="1"/>
+  <text x="205" y="265" class="tufte-code" text-anchor="middle">def vip_discount(price): return price * 0.8</text>
+  <text x="205" y="285" class="tufte-code" text-anchor="middle">calculate(10000, vip_discount)  # 함수를 전달</text>
+
+  <!-- Note -->
+  <text x="520" y="270" class="tufte-small" text-anchor="middle">런타임에 전략 교체:</text>
+  <text x="520" y="290" class="tufte-code" text-anchor="middle">calc.set_strategy(MemberDiscount())</text>
+</svg>

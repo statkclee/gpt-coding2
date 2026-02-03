@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 80 800 280">
+  <defs>
+    <style>
+      .tufte-title { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif; font-size: 20px; font-weight: bold; fill: #111; }
+      .tufte-subtitle { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif; font-size: 16px; font-weight: bold; fill: #222; }
+      .tufte-label { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif; font-size: 13px; font-weight: bold; fill: #333; }
+      .tufte-text { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif; font-size: 12px; fill: #444; }
+      .tufte-small { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif; font-size: 11px; fill: #666; }
+      .tufte-math { font-family: "Times New Roman", Times, serif; font-style: italic; font-size: 14px; fill: #444; }
+      
+      /* Boxes */
+      .box-process { fill: #fff; stroke: #333; stroke-width: 2; rx: 5; }
+      .box-data { fill: #f9f9f9; stroke: #999; stroke-width: 1; stroke-dasharray: 2,2; }
+      .box-highlight { fill: #f0f0f0; stroke: #333; stroke-width: 1.5; }
+      
+      /* Arrows */
+      .arrow-main { stroke: #333; stroke-width: 2; fill: none; }
+      .arrow-feedback { stroke: #333; stroke-width: 2; stroke-dasharray: 4,3; fill: none; }
+      
+      /* Sparkline */
+      .spark-line { fill: none; stroke: #333; stroke-width: 1.5; }
+      .spark-axis { stroke: #999; stroke-width: 1; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#333" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="800" height="450" fill="#ffffff"/>
+
+  <!-- Title -->
+  <!-- <text x="400" y="40" class="tufte-title" text-anchor="middle">학습 루프: 오차를 통한 개선</text>
+  <text x="400" y="65" class="tufte-text" text-anchor="middle" font-style="italic">순전파 → 손실 계산 → 역전파 → 가중치 갱신의 반복</text> -->
+
+  <!-- Divider -->
+  <!-- <line x1="50" y1="80" x2="750" y2="80" stroke="#ddd" stroke-width="2"/> -->
+
+  <!-- Main Loop Diagram -->
+  <g transform="translate(50, 100)">
+    
+    <!-- 1. Model (Central Hub) -->
+    <g transform="translate(60, 50)">
+      <rect x="0" y="0" width="120" height="80" class="box-process"/>
+      <text x="60" y="35" class="tufte-subtitle" text-anchor="middle">모델</text>
+      <text x="60" y="60" class="tufte-math" text-anchor="middle">f(x; θ)</text>
+    </g>
+
+    <!-- Data Inputs (Left) -->
+    <g transform="translate(-10, 90)">
+      <rect x="0" y="-15" width="40" height="30" class="box-data" rx="3"/>
+      <text x="20" y="4" class="tufte-small" text-anchor="middle">입력 x</text>
+      <line x1="40" y1="0" x2="70" y2="0" class="arrow-main" marker-end="url(#arrow)"/>
+    </g>
+
+    <!-- Arrow: Forward -->
+    <path d="M180,90 L270,90" class="arrow-main" marker-end="url(#arrow)"/>
+    <text x="225" y="80" class="tufte-small" text-anchor="middle">1. 순전파</text>
+    <text x="225" y="105" class="tufte-math" text-anchor="middle">ŷ = f(x)</text>
+
+    <!-- 2. Loss Function -->
+    <g transform="translate(270, 50)">
+      <rect x="0" y="0" width="120" height="80" class="box-process"/>
+      <text x="60" y="35" class="tufte-subtitle" text-anchor="middle">손실</text>
+      <text x="60" y="60" class="tufte-math" text-anchor="middle">L(ŷ, y)</text>
+    </g>
+
+    <!-- Target Input (Top Right) -->
+    <g transform="translate(330, 20)">
+      <text x="0" y="-5" class="tufte-small" text-anchor="middle">정답 (y)</text>
+      <line x1="0" y1="0" x2="0" y2="30" class="arrow-main" marker-end="url(#arrow)"/>
+    </g>
+
+    <!-- Arrow: Loss to Optimizer (Down) -->
+    <path d="M390,90 L440,90 L440,200 L410,200" class="arrow-main" marker-end="url(#arrow)"/>
+    <text x="450" y="150" class="tufte-small" text-anchor="middle" transform="rotate(90, 450, 150)">2. 오차 계산</text>
+
+    <!-- 3. Optimizer / Backward -->
+    <g transform="translate(270, 160)">
+      <rect x="0" y="0" width="120" height="80" class="box-highlight"/>
+      <text x="60" y="35" class="tufte-subtitle" text-anchor="middle">옵티마이저</text>
+      <text x="60" y="60" class="tufte-text" text-anchor="middle">SGD / Adam</text>
+    </g>
+
+    <!-- Arrow: Gradients (Left) -->
+    <path d="M270,200 L120,200" class="arrow-feedback" marker-end="url(#arrow)"/>
+    <text x="210" y="190" class="tufte-small" text-anchor="middle">3. 역전파</text>
+    <text x="210" y="220" class="tufte-math" text-anchor="middle">∇θ = ∂L/∂θ</text>
+
+    <!-- 4. Update (Up) -->
+    <path d="M120,200 L120,132" class="arrow-feedback" marker-end="url(#arrow)"/>
+    <text x="110" y="170" class="tufte-small" text-anchor="end">4. 가중치 갱신</text>
+    <text x="125" y="170" class="tufte-math" text-anchor="start">θ ← θ - α∇θ</text>
+
+  </g>
+
+  <!-- Insight: Loss Curve -->
+  <g transform="translate(550, 150)">
+    <text x="75" y="-20" class="tufte-label" text-anchor="middle">학습 목표: 손실 감소</text>
+
+    <!-- Axes -->
+    <line x1="0" y1="0" x2="0" y2="100" class="spark-axis"/>
+    <line x1="0" y1="100" x2="150" y2="100" class="spark-axis"/>
+    <text x="-20" y="10" class="tufte-small">손실</text>
+    <text x="140" y="115" class="tufte-small">에폭</text>
+
+        <!-- Curve -->
+        <path d="M0,10 Q50,90 150,90" class="spark-line" stroke="#333" fill="none"/>
+        
+        <!-- Current Point -->
+        <circle cx="100" cy="83" r="4" fill="#333"/>
+        <text x="100" y="75" class="tufte-small" text-anchor="middle">현재 단계</text>
+      </g>
+  <!-- Bottom Annotation -->
+  <!-- <g transform="translate(50, 360)">
+    <rect x="0" y="0" width="700" height="60" fill="#f5f5f5" stroke="#ccc" stroke-width="1" rx="5"/>
+    <text x="20" y="25" class="tufte-label">핵심 흐름:</text>
+    <text x="20" y="45" class="tufte-text">데이터 입력 ➔ 정답과 비교 ➔ 개선 방향 탐색 ➔ 모델 수정</text>
+    <text x="680" y="45" class="tufte-text" text-anchor="end" font-style="italic">수만 번 반복!</text>
+  </g> -->
+
+</svg>

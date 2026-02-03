@@ -1,0 +1,169 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 40 850 320">
+  <defs>
+    <style>
+      /* Tufte Grayscale Style - Korean */
+      .label-title { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 16px; font-weight: bold; fill: #111; }
+      .label-head { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 14px; font-weight: bold; fill: #222; }
+      .label-body { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 12px; fill: #333; }
+      .label-note { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 11px; fill: #555; font-style: italic; }
+      .label-mono { font-family: 'SF Mono', Consolas, Menlo, monospace; font-size: 10px; fill: #444; }
+
+      .box-main { fill: #fff; stroke: #333; stroke-width: 2; rx: 6; }
+      .box-secondary { fill: #f8f8f8; stroke: #999; stroke-width: 1.5; rx: 4; }
+      .box-inner { fill: #fafafa; stroke: #ccc; stroke-width: 1; rx: 3; }
+
+      .line-flow { stroke: #333; stroke-width: 2; fill: none; }
+      .line-sep { stroke: #ddd; stroke-width: 1; }
+
+      .arrow-head { fill: #333; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L0,8 L8,4 z" class="arrow-head" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="850" height="400" fill="#fff" />
+
+  <!-- ========================================== -->
+  <!-- TOP ROW: Three Main Techniques -->
+  <!-- ========================================== -->
+
+  <!-- 1. Time-Travel Debugging -->
+  <g transform="translate(30, 60)">
+    <rect x="0" y="0" width="250" height="170" class="box-main"/>
+    <text x="125" y="25" text-anchor="middle" class="label-head">1. 타임 트래블 디버깅</text>
+    <text x="125" y="42" text-anchor="middle" class="label-note">Redux DevTools</text>
+    <line x1="20" y1="52" x2="230" y2="52" class="line-sep"/>
+
+    <!-- State history visualization -->
+    <g transform="translate(20, 65)">
+      <rect x="0" y="0" width="210" height="85" class="box-inner"/>
+
+      <!-- Timeline -->
+      <text x="10" y="18" class="label-mono" fill="#666">액션 이력</text>
+      <line x1="10" y1="30" x2="190" y2="30" stroke="#999" stroke-width="1.5"/>
+
+      <!-- Action points -->
+      <circle cx="30" cy="30" r="6" fill="#999"/>
+      <text x="30" y="50" text-anchor="middle" class="label-mono">ADD</text>
+
+      <circle cx="80" cy="30" r="6" fill="#999"/>
+      <text x="80" y="50" text-anchor="middle" class="label-mono">UPDATE</text>
+
+      <circle cx="130" cy="30" r="6" fill="#333"/>
+      <text x="130" y="50" text-anchor="middle" class="label-mono">DELETE</text>
+      <text x="130" y="65" text-anchor="middle" class="label-note" fill="#c00">버그!</text>
+
+      <circle cx="180" cy="30" r="6" fill="#ccc"/>
+
+      <!-- Rewind arrow -->
+      <path d="M 160 30 L 100 30" stroke="#666" stroke-width="1.5" stroke-dasharray="4 2" marker-end="url(#arrow)"/>
+      <text x="130" y="80" text-anchor="middle" class="label-note">되감기</text>
+    </g>
+  </g>
+
+  <!-- 2. Marble Diagrams -->
+  <g transform="translate(300, 60)">
+    <rect x="0" y="0" width="250" height="170" class="box-main"/>
+    <text x="125" y="25" text-anchor="middle" class="label-head">2. 마블 다이어그램</text>
+    <text x="125" y="42" text-anchor="middle" class="label-note">RxJS / RxPY</text>
+    <line x1="20" y1="52" x2="230" y2="52" class="line-sep"/>
+
+    <!-- Marble diagram visualization -->
+    <g transform="translate(20, 65)">
+      <rect x="0" y="0" width="210" height="85" class="box-inner"/>
+
+      <!-- Source stream -->
+      <text x="10" y="15" class="label-mono" fill="#666">source$</text>
+      <line x1="10" y1="28" x2="180" y2="28" stroke="#666" stroke-width="1.5"/>
+      <circle cx="30" cy="28" r="5" fill="#333"/>
+      <text x="30" y="24" text-anchor="middle" class="label-mono">1</text>
+      <circle cx="70" cy="28" r="5" fill="#333"/>
+      <text x="70" y="24" text-anchor="middle" class="label-mono">2</text>
+      <circle cx="110" cy="28" r="5" fill="#333"/>
+      <text x="110" y="24" text-anchor="middle" class="label-mono">3</text>
+      <circle cx="150" cy="28" r="5" fill="#333"/>
+      <text x="150" y="24" text-anchor="middle" class="label-mono">4</text>
+      <text x="195" y="32" class="label-mono">|</text>
+
+      <!-- Operator -->
+      <text x="105" y="48" text-anchor="middle" class="label-mono" fill="#555">filter(x > 2)</text>
+
+      <!-- Result stream -->
+      <text x="10" y="62" class="label-mono" fill="#666">result$</text>
+      <line x1="10" y1="75" x2="180" y2="75" stroke="#666" stroke-width="1.5"/>
+      <circle cx="110" cy="75" r="5" fill="#333"/>
+      <text x="110" y="71" text-anchor="middle" class="label-mono">3</text>
+      <circle cx="150" cy="75" r="5" fill="#333"/>
+      <text x="150" y="71" text-anchor="middle" class="label-mono">4</text>
+      <text x="195" y="79" class="label-mono">|</text>
+    </g>
+  </g>
+
+  <!-- 3. Dependency Graph -->
+  <g transform="translate(570, 60)">
+    <rect x="0" y="0" width="250" height="170" class="box-main"/>
+    <text x="125" y="25" text-anchor="middle" class="label-head">3. 의존성 그래프</text>
+    <text x="125" y="42" text-anchor="middle" class="label-note">Shiny reactlog</text>
+    <line x1="20" y1="52" x2="230" y2="52" class="line-sep"/>
+
+    <!-- Dependency graph visualization -->
+    <g transform="translate(20, 65)">
+      <rect x="0" y="0" width="210" height="85" class="box-inner"/>
+
+      <!-- Input nodes -->
+      <circle cx="40" cy="20" r="15" fill="none" stroke="#666" stroke-width="1.5"/>
+      <text x="40" y="24" text-anchor="middle" class="label-mono">입력A</text>
+
+      <circle cx="120" cy="20" r="15" fill="none" stroke="#666" stroke-width="1.5"/>
+      <text x="120" y="24" text-anchor="middle" class="label-mono">입력B</text>
+
+      <!-- Reactive node -->
+      <circle cx="80" cy="50" r="15" fill="#f0f0f0" stroke="#333" stroke-width="2"/>
+      <text x="80" y="54" text-anchor="middle" class="label-mono">계산</text>
+
+      <!-- Output node -->
+      <circle cx="80" cy="80" r="12" fill="none" stroke="#999" stroke-width="1.5"/>
+      <text x="80" y="84" text-anchor="middle" class="label-mono">출력</text>
+
+      <!-- Arrows -->
+      <path d="M 50 32 L 68 42" stroke="#666" stroke-width="1" marker-end="url(#arrow)"/>
+      <path d="M 110 32 L 92 42" stroke="#666" stroke-width="1" marker-end="url(#arrow)"/>
+      <path d="M 80 65 L 80 68" stroke="#666" stroke-width="1" marker-end="url(#arrow)"/>
+
+      <!-- Question mark -->
+      <text x="170" y="50" class="label-head" fill="#666">?</text>
+      <text x="150" y="70" class="label-note">왜 안 갱신?</text>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- BOTTOM ROW: Two Secondary Techniques -->
+  <!-- ========================================== -->
+
+  <!-- 4. Subscription Leak Detection -->
+  <g transform="translate(300, 260)">
+    <rect x="0" y="0" width="200" height="80" class="box-secondary"/>
+    <text x="100" y="22" text-anchor="middle" class="label-head" fill="#555">4. 구독 누수 탐지</text>
+    <line x1="15" y1="32" x2="180" y2="32" class="line-sep"/>
+    <text x="100" y="50" text-anchor="middle" class="label-body" fill="#666">unsubscribe() 누락 감지</text>
+    <text x="100" y="68" text-anchor="middle" class="label-note">메모리 누수 방지</text>
+  </g>
+
+  <!-- 5. Backpressure Monitoring -->
+  <g transform="translate(560, 260)">
+    <rect x="0" y="0" width="230" height="80" class="box-secondary"/>
+    <text x="115" y="22" text-anchor="middle" class="label-head" fill="#555">5. 백프레셔 모니터링</text>
+    <line x1="15" y1="32" x2="215" y2="32" class="line-sep"/>
+    <text x="115" y="50" text-anchor="middle" class="label-body" fill="#666">생산 속도 > 소비 속도</text>
+    <text x="115" y="68" text-anchor="middle" class="label-note">버퍼 오버플로우 감지</text>
+  </g>
+
+  <!-- Legend / Context -->
+  <g transform="translate(30, 280)">
+    <text x="0" y="0" class="label-note" fill="#777">전통적 디버깅: 브레이크포인트 → 현재 상태 확인</text>
+    <text x="0" y="18" class="label-note" fill="#777">반응형 디버깅: 이벤트 이력 + 상태 변화 + 의존성 추적</text>
+  </g>
+
+</svg>

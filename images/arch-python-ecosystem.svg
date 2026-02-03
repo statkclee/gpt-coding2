@@ -1,0 +1,196 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 18px; fill: #333; font-weight: bold; }
+      .tufte-subtitle { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 14px; fill: #666; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 12px; fill: #333; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 10px; fill: #666; }
+      .tufte-category { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 13px; fill: #333; font-weight: bold; }
+      .box-main { fill: #f5f5f5; stroke: #333; stroke-width: 1.5; }
+      .box-sub { fill: #ffffff; stroke: #999; stroke-width: 1; }
+      .arrow { stroke: #666; stroke-width: 1; fill: none; marker-end: url(#arrowhead); }
+      .line-dashed { stroke: #999; stroke-width: 1; stroke-dasharray: 4,3; }
+    </style>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="800" height="520" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" class="tufte-title">파이썬 생태계 지도</text>
+  <text x="400" y="50" text-anchor="middle" class="tufte-subtitle">분야별 핵심 라이브러리와 프레임워크</text>
+
+  <!-- Data Science Section -->
+  <rect x="30" y="70" width="360" height="200" rx="4" class="box-main"/>
+  <text x="210" y="92" text-anchor="middle" class="tufte-category">데이터 과학</text>
+
+  <!-- Data processing chain -->
+  <rect x="50" y="110" width="70" height="35" rx="3" class="box-sub"/>
+  <text x="85" y="132" text-anchor="middle" class="tufte-label">NumPy</text>
+  <text x="85" y="142" text-anchor="middle" class="tufte-small">배열 연산</text>
+
+  <path d="M 120 127 L 140 127" class="arrow"/>
+
+  <rect x="145" y="110" width="70" height="35" rx="3" class="box-sub"/>
+  <text x="180" y="132" text-anchor="middle" class="tufte-label">pandas</text>
+  <text x="180" y="142" text-anchor="middle" class="tufte-small">데이터프레임</text>
+
+  <path d="M 215 127 L 235 127" class="arrow"/>
+
+  <rect x="240" y="110" width="80" height="35" rx="3" class="box-sub"/>
+  <text x="280" y="132" text-anchor="middle" class="tufte-label">scikit-learn</text>
+  <text x="280" y="142" text-anchor="middle" class="tufte-small">머신러닝</text>
+
+  <!-- Visualization chain -->
+  <rect x="50" y="160" width="80" height="35" rx="3" class="box-sub"/>
+  <text x="90" y="182" text-anchor="middle" class="tufte-label">matplotlib</text>
+  <text x="90" y="192" text-anchor="middle" class="tufte-small">정적 시각화</text>
+
+  <path d="M 130 177 L 150 177" class="arrow"/>
+
+  <rect x="155" y="160" width="70" height="35" rx="3" class="box-sub"/>
+  <text x="190" y="182" text-anchor="middle" class="tufte-label">seaborn</text>
+  <text x="190" y="192" text-anchor="middle" class="tufte-small">통계 시각화</text>
+
+  <path d="M 225 177 L 245 177" class="arrow"/>
+
+  <rect x="250" y="160" width="70" height="35" rx="3" class="box-sub"/>
+  <text x="285" y="182" text-anchor="middle" class="tufte-label">plotly</text>
+  <text x="285" y="192" text-anchor="middle" class="tufte-small">인터랙티브</text>
+
+  <!-- Boosting -->
+  <rect x="50" y="210" width="80" height="35" rx="3" class="box-sub"/>
+  <text x="90" y="232" text-anchor="middle" class="tufte-label">XGBoost</text>
+  <text x="90" y="242" text-anchor="middle" class="tufte-small">그래디언트 부스팅</text>
+
+  <rect x="145" y="210" width="80" height="35" rx="3" class="box-sub"/>
+  <text x="185" y="232" text-anchor="middle" class="tufte-label">LightGBM</text>
+  <text x="185" y="242" text-anchor="middle" class="tufte-small">경량 부스팅</text>
+
+  <!-- Web Development Section -->
+  <rect x="410" y="70" width="360" height="100" rx="4" class="box-main"/>
+  <text x="590" y="92" text-anchor="middle" class="tufte-category">웹 개발</text>
+
+  <rect x="430" y="110" width="70" height="40" rx="3" class="box-sub"/>
+  <text x="465" y="132" text-anchor="middle" class="tufte-label">Flask</text>
+  <text x="465" y="144" text-anchor="middle" class="tufte-small">마이크로</text>
+
+  <rect x="520" y="110" width="80" height="40" rx="3" class="box-sub"/>
+  <text x="560" y="132" text-anchor="middle" class="tufte-label">Django</text>
+  <text x="560" y="144" text-anchor="middle" class="tufte-small">풀스택</text>
+
+  <rect x="620" y="110" width="80" height="40" rx="3" class="box-sub"/>
+  <text x="660" y="132" text-anchor="middle" class="tufte-label">FastAPI</text>
+  <text x="660" y="144" text-anchor="middle" class="tufte-small">현대적 API</text>
+
+  <!-- AI/ML Section -->
+  <rect x="410" y="185" width="360" height="170" rx="4" class="box-main"/>
+  <text x="590" y="207" text-anchor="middle" class="tufte-category">AI / ML</text>
+
+  <!-- PyTorch chain -->
+  <text x="430" y="230" class="tufte-small" fill="#666">연구용</text>
+  <rect x="470" y="218" width="70" height="35" rx="3" class="box-sub"/>
+  <text x="505" y="238" text-anchor="middle" class="tufte-label">PyTorch</text>
+
+  <path d="M 540 235 L 560 235" class="arrow"/>
+
+  <rect x="565" y="218" width="90" height="35" rx="3" class="box-sub"/>
+  <text x="610" y="238" text-anchor="middle" class="tufte-label">Hugging Face</text>
+  <text x="610" y="248" text-anchor="middle" class="tufte-small">Transformers</text>
+
+  <path d="M 655 235 L 675 235" class="arrow"/>
+
+  <rect x="680" y="218" width="70" height="35" rx="3" class="box-sub"/>
+  <text x="715" y="238" text-anchor="middle" class="tufte-label">LangChain</text>
+  <text x="715" y="248" text-anchor="middle" class="tufte-small">LLM 앱</text>
+
+  <!-- TensorFlow chain -->
+  <text x="430" y="285" class="tufte-small" fill="#666">프로덕션</text>
+  <rect x="470" y="270" width="85" height="35" rx="3" class="box-sub"/>
+  <text x="512" y="290" text-anchor="middle" class="tufte-label">TensorFlow</text>
+
+  <path d="M 555 287 L 575 287" class="arrow"/>
+
+  <rect x="580" y="270" width="65" height="35" rx="3" class="box-sub"/>
+  <text x="612" y="290" text-anchor="middle" class="tufte-label">Keras</text>
+  <text x="612" y="300" text-anchor="middle" class="tufte-small">고수준 API</text>
+
+  <path d="M 645 287 L 665 287" class="arrow"/>
+
+  <rect x="670" y="270" width="80" height="35" rx="3" class="box-sub"/>
+  <text x="710" y="290" text-anchor="middle" class="tufte-label">TF Serving</text>
+  <text x="710" y="300" text-anchor="middle" class="tufte-small">모델 서빙</text>
+
+  <!-- Streamlit/Shiny -->
+  <rect x="470" y="315" width="80" height="30" rx="3" class="box-sub"/>
+  <text x="510" y="335" text-anchor="middle" class="tufte-label">Streamlit</text>
+
+  <rect x="565" y="315" width="100" height="30" rx="3" class="box-sub"/>
+  <text x="615" y="335" text-anchor="middle" class="tufte-label">Shiny for Python</text>
+
+  <!-- CLI Tools Section -->
+  <rect x="30" y="285" width="360" height="85" rx="4" class="box-main"/>
+  <text x="210" y="307" text-anchor="middle" class="tufte-category">CLI 도구</text>
+
+  <rect x="50" y="320" width="70" height="35" rx="3" class="box-sub"/>
+  <text x="85" y="340" text-anchor="middle" class="tufte-label">argparse</text>
+  <text x="85" y="350" text-anchor="middle" class="tufte-small">표준 라이브러리</text>
+
+  <path d="M 120 337 L 140 337" class="arrow"/>
+
+  <rect x="145" y="320" width="60" height="35" rx="3" class="box-sub"/>
+  <text x="175" y="340" text-anchor="middle" class="tufte-label">click</text>
+  <text x="175" y="350" text-anchor="middle" class="tufte-small">데코레이터</text>
+
+  <path d="M 205 337 L 225 337" class="arrow"/>
+
+  <rect x="230" y="320" width="60" height="35" rx="3" class="box-sub"/>
+  <text x="260" y="340" text-anchor="middle" class="tufte-label">typer</text>
+  <text x="260" y="350" text-anchor="middle" class="tufte-small">타입 힌트</text>
+
+  <rect x="305" y="320" width="60" height="35" rx="3" class="box-sub"/>
+  <text x="335" y="340" text-anchor="middle" class="tufte-label">rich</text>
+  <text x="335" y="350" text-anchor="middle" class="tufte-small">터미널 출력</text>
+
+  <!-- Core Runtime Section -->
+  <rect x="30" y="385" width="740" height="60" rx="4" class="box-main"/>
+  <text x="400" y="407" text-anchor="middle" class="tufte-category">기반 환경</text>
+
+  <rect x="60" y="420" width="100" height="20" rx="2" class="box-sub"/>
+  <text x="110" y="434" text-anchor="middle" class="tufte-label">CPython 런타임</text>
+
+  <rect x="180" y="420" width="70" height="20" rx="2" class="box-sub"/>
+  <text x="215" y="434" text-anchor="middle" class="tufte-label">pip / uv</text>
+
+  <rect x="270" y="420" width="70" height="20" rx="2" class="box-sub"/>
+  <text x="305" y="434" text-anchor="middle" class="tufte-label">poetry</text>
+
+  <rect x="360" y="420" width="80" height="20" rx="2" class="box-sub"/>
+  <text x="400" y="434" text-anchor="middle" class="tufte-label">virtualenv</text>
+
+  <rect x="460" y="420" width="70" height="20" rx="2" class="box-sub"/>
+  <text x="495" y="434" text-anchor="middle" class="tufte-label">conda</text>
+
+  <rect x="550" y="420" width="80" height="20" rx="2" class="box-sub"/>
+  <text x="590" y="434" text-anchor="middle" class="tufte-label">Docker</text>
+
+  <rect x="650" y="420" width="100" height="20" rx="2" class="box-sub"/>
+  <text x="700" y="434" text-anchor="middle" class="tufte-label">Jupyter Notebook</text>
+
+  <!-- Legend -->
+  <text x="30" y="475" class="tufte-small">범례:</text>
+  <path d="M 60 472 L 90 472" class="arrow"/>
+  <text x="95" y="475" class="tufte-small">의존/발전 관계</text>
+
+  <rect x="180" y="465" width="40" height="14" rx="2" class="box-main"/>
+  <text x="225" y="475" class="tufte-small">분야 영역</text>
+
+  <rect x="300" y="465" width="40" height="14" rx="2" class="box-sub"/>
+  <text x="345" y="475" class="tufte-small">도구/라이브러리</text>
+
+  <!-- Footer note -->
+  <text x="400" y="505" text-anchor="middle" class="tufte-small" fill="#999">화살표는 일반적인 학습/사용 순서를 나타냄. 실제 프로젝트에서는 필요에 따라 선택적으로 조합</text>
+</svg>

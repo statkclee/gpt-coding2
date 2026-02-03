@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 140">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 13px; fill: #333; font-weight: bold; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 11px; fill: #333; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 9px; fill: #666; }
+      .box { fill: #f5f5f5; stroke: #666; stroke-width: 1; }
+      .arrow { stroke: #999; stroke-width: 1; fill: none; marker-end: url(#arrowhead); }
+    </style>
+    <marker id="arrowhead" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto">
+      <polygon points="0 0, 6 2.5, 0 5" fill="#999"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="750" height="140" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="20" y="22" class="tufte-title">AI / ML 스택</text>
+
+  <!-- Research Chain (PyTorch) -->
+  <text x="20" y="52" class="tufte-small" fill="#666">연구용</text>
+
+  <rect x="75" y="38" width="75" height="28" rx="3" class="box"/>
+  <text x="112" y="55" text-anchor="middle" class="tufte-label">PyTorch</text>
+  <text x="112" y="64" text-anchor="middle" class="tufte-small">동적 그래프</text>
+
+  <path d="M 150 52 L 170 52" class="arrow"/>
+
+  <rect x="175" y="38" width="115" height="28" rx="3" class="box"/>
+  <text x="232" y="55" text-anchor="middle" class="tufte-label">Hugging Face</text>
+  <text x="232" y="64" text-anchor="middle" class="tufte-small">Transformers</text>
+
+  <path d="M 290 52 L 310 52" class="arrow"/>
+
+  <rect x="315" y="38" width="85" height="28" rx="3" class="box"/>
+  <text x="357" y="55" text-anchor="middle" class="tufte-label">LangChain</text>
+  <text x="357" y="64" text-anchor="middle" class="tufte-small">LLM 앱</text>
+
+  <!-- Production Chain (TensorFlow) -->
+  <text x="20" y="102" class="tufte-small" fill="#666">프로덕션</text>
+
+  <rect x="75" y="88" width="90" height="28" rx="3" class="box"/>
+  <text x="120" y="105" text-anchor="middle" class="tufte-label">TensorFlow</text>
+  <text x="120" y="114" text-anchor="middle" class="tufte-small">정적 그래프</text>
+
+  <path d="M 165 102 L 185 102" class="arrow"/>
+
+  <rect x="190" y="88" width="70" height="28" rx="3" class="box"/>
+  <text x="225" y="105" text-anchor="middle" class="tufte-label">Keras</text>
+  <text x="225" y="114" text-anchor="middle" class="tufte-small">고수준 API</text>
+
+  <path d="M 260 102 L 280 102" class="arrow"/>
+
+  <rect x="285" y="88" width="90" height="28" rx="3" class="box"/>
+  <text x="330" y="105" text-anchor="middle" class="tufte-label">TF Serving</text>
+  <text x="330" y="114" text-anchor="middle" class="tufte-small">모델 서빙</text>
+
+  <!-- Dashboard Tools -->
+  <text x="480" y="52" class="tufte-small" fill="#666">대시보드</text>
+
+  <rect x="545" y="38" width="85" height="28" rx="3" class="box"/>
+  <text x="587" y="55" text-anchor="middle" class="tufte-label">Streamlit</text>
+  <text x="587" y="64" text-anchor="middle" class="tufte-small">빠른 프로토타입</text>
+
+  <rect x="645" y="38" width="90" height="28" rx="3" class="box"/>
+  <text x="690" y="55" text-anchor="middle" class="tufte-label">Gradio</text>
+  <text x="690" y="64" text-anchor="middle" class="tufte-small">ML 데모</text>
+
+  <!-- Experiment Tracking -->
+  <text x="480" y="102" class="tufte-small" fill="#666">실험 추적</text>
+
+  <rect x="545" y="88" width="70" height="28" rx="3" class="box"/>
+  <text x="580" y="105" text-anchor="middle" class="tufte-label">W&amp;B</text>
+  <text x="580" y="114" text-anchor="middle" class="tufte-small">실험 관리</text>
+
+  <rect x="625" y="88" width="80" height="28" rx="3" class="box"/>
+  <text x="665" y="105" text-anchor="middle" class="tufte-label">MLflow</text>
+  <text x="665" y="114" text-anchor="middle" class="tufte-small">모델 레지스트리</text>
+</svg>

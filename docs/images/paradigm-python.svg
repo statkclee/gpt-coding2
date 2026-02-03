@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 70 750 330">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 16px; fill: #333; font-weight: bold; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 13px; fill: #333; font-weight: bold; }
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 12px; fill: #333; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 11px; fill: #666; }
+      .tufte-code { font-family: 'Consolas', 'Monaco', monospace; font-size: 10px; fill: #333; }
+      .tufte-box { fill: #f5f5f5; stroke: #999; stroke-width: 1; }
+      .tufte-box-strong { fill: #e8e8e8; stroke: #666; stroke-width: 1.5; }
+      .tufte-box-weak { fill: #fafafa; stroke: #ccc; stroke-width: 1; stroke-dasharray: 3,2; }
+    </style>
+    <marker id="arrow-strong" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#666" />
+    </marker>
+    <marker id="arrow-medium" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#999" />
+    </marker>
+    <marker id="arrow-weak" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#ccc" />
+    </marker>
+  </defs>
+
+  <!-- White background -->
+  <rect x="0" y="0" width="750" height="400" fill="#ffffff"/>
+
+  <!-- Title -->
+  <!-- <text x="375" y="30" text-anchor="middle" class="tufte-title">파이썬: 멀티패러다임 언어</text> -->
+
+  <!-- Python center -->
+  <circle cx="375" cy="200" r="50" fill="#e8e8e8" stroke="#666" stroke-width="2"/>
+  <text x="375" y="195" text-anchor="middle" class="tufte-label">파이썬</text>
+  <text x="375" y="212" text-anchor="middle" class="tufte-small">멀티패러다임</text>
+
+  <!-- Connections -->
+  <!-- Left boxes end at x=80+150=230 -->
+  <line x1="230" y1="145" x2="330" y2="185" stroke="#666" stroke-width="1.5" marker-end="url(#arrow-strong)"/>
+  <line x1="230" y1="265" x2="330" y2="215" stroke="#666" stroke-width="1.5" marker-end="url(#arrow-strong)"/>
+  
+  <!-- Right boxes start at x=520 -->
+  <line x1="520" y1="145" x2="420" y2="185" stroke="#999" stroke-width="1.5" marker-end="url(#arrow-medium)"/>
+  <line x1="520" y1="265" x2="420" y2="215" stroke="#999" stroke-width="1.5" marker-end="url(#arrow-medium)"/>
+  
+  <!-- Bottom box centered at 375 -->
+  <line x1="375" y1="320" x2="375" y2="255" stroke="#ccc" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#arrow-weak)"/>
+
+  <!-- Paradigm 1: Imperative (Strong) -->
+  <g transform="translate(80, 100)">
+    <rect x="0" y="0" width="150" height="90" class="tufte-box-strong" rx="5"/>
+    <text x="75" y="22" text-anchor="middle" class="tufte-label">명령형</text>
+    <line x1="10" y1="30" x2="140" y2="30" stroke="#ccc"/>
+    <text x="10" y="48" text-anchor="start" class="tufte-code">x = x + 1</text>
+    <text x="10" y="62" text-anchor="start" class="tufte-code">for i in range(n):</text>
+    <text x="10" y="76" text-anchor="start" class="tufte-code" xml:space="preserve">    print(i)</text>
+  </g>
+
+  <!-- Paradigm 2: OOP (Strong) -->
+  <g transform="translate(80, 220)">
+    <rect x="0" y="0" width="150" height="90" class="tufte-box-strong" rx="5"/>
+    <text x="75" y="22" text-anchor="middle" class="tufte-label">객체지향</text>
+    <line x1="10" y1="30" x2="140" y2="30" stroke="#ccc"/>
+    <text x="10" y="48" text-anchor="start" class="tufte-code">class Dog:</text>
+    <text x="10" y="62" text-anchor="start" class="tufte-code" xml:space="preserve">  def __init__(self):</text>
+    <text x="10" y="76" text-anchor="start" class="tufte-code" xml:space="preserve">    self.name = "Baduk"</text>
+  </g>
+
+  <!-- Paradigm 3: Functional (Medium) -->
+  <g transform="translate(520, 100)">
+    <rect x="0" y="0" width="150" height="90" class="tufte-box" rx="5"/>
+    <text x="75" y="22" text-anchor="middle" class="tufte-label">함수형</text>
+    <line x1="10" y1="30" x2="140" y2="30" stroke="#ccc"/>
+    <text x="10" y="48" text-anchor="start" class="tufte-code">map(func, lst)</text>
+    <text x="10" y="62" text-anchor="start" class="tufte-code">filter(pred, lst)</text>
+    <text x="10" y="76" text-anchor="start" class="tufte-code">lambda x: x*2</text>
+  </g>
+
+  <!-- Paradigm 4: Declarative (Medium) -->
+  <g transform="translate(520, 220)">
+    <rect x="0" y="0" width="150" height="90" class="tufte-box" rx="5"/>
+    <text x="75" y="22" text-anchor="middle" class="tufte-label">선언형</text>
+    <line x1="10" y1="30" x2="140" y2="30" stroke="#ccc"/>
+    <text x="10" y="48" text-anchor="start" class="tufte-code">[x**2 for x in lst]</text>
+    <text x="10" y="62" text-anchor="start" class="tufte-code">@decorator</text>
+    <text x="10" y="76" text-anchor="start" class="tufte-code">def f(x: int) -&gt; str:</text>
+  </g>
+
+  <!-- Paradigm 5: Reactive (Weak) -->
+  <g transform="translate(300, 320)">
+    <rect x="0" y="0" width="150" height="60" class="tufte-box-weak" rx="5"/>
+    <text x="75" y="20" text-anchor="middle" class="tufte-label">반응형/동시성</text>
+    <line x1="10" y1="28" x2="140" y2="28" stroke="#ddd"/>
+    <text x="10" y="44" text-anchor="start" class="tufte-code">async def main():</text>
+    <text x="10" y="56" text-anchor="start" class="tufte-code" xml:space="preserve">  await task()</text>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(30, 360)">
+    <rect x="0" y="0" width="15" height="15" class="tufte-box-strong" rx="2"/>
+    <text x="22" y="12" class="tufte-small">강력 지원</text>
+
+    <rect x="80" y="0" width="15" height="15" class="tufte-box" rx="2"/>
+    <text x="102" y="12" class="tufte-small">부분 지원</text>
+
+    <rect x="160" y="0" width="15" height="15" class="tufte-box-weak" rx="2"/>
+    <text x="182" y="12" class="tufte-small">라이브러리 의존</text>
+  </g>
+
+</svg>

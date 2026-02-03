@@ -1,0 +1,202 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 70 850 520">
+  <defs>
+    <!-- Tufte Styles -->
+    <style>
+      .tufte-title { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif; font-size: 22px; font-weight: bold; fill: #111; }
+      .tufte-subtitle { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif; font-size: 16px; font-weight: bold; fill: #222; }
+      .tufte-label { font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif; font-size: 11px; font-weight: bold; fill: #333; }
+      .tufte-text { font-family: "Malgun Gothic", "Apple SD Gothic Neo", serif; font-size: 12px; fill: #444; }
+      .tufte-small { font-family: "Malgun Gothic", "Apple SD Gothic Neo", serif; font-size: 10px; fill: #666; font-style: italic; }
+      .tufte-code { font-family: 'SF Mono', Menlo, Monaco, monospace; font-size: 11px; fill: #333; }
+
+      .box-block { fill: #fff; stroke: #333; stroke-width: 1.5; }
+      .box-internal { fill: #f9f9f9; stroke: #999; stroke-width: 1; }
+      .box-token { fill: #fff; stroke: #333; stroke-width: 1; rx: 3; }
+      .box-prob { fill: #eee; stroke: none; }
+      .bar-prob { fill: #666; }
+      .bar-prob-high { fill: #111; }
+
+      .arrow { stroke: #333; stroke-width: 1.5; fill: none; marker-end: url(#arrowhead); }
+      .arrow-dashed { stroke: #999; stroke-width: 1.5; fill: none; stroke-dasharray: 4,4; marker-end: url(#arrowhead-light); }
+      .arrow-light { stroke: #999; stroke-width: 1; fill: none; marker-end: url(#arrowhead-light); }
+      .conn-line { stroke: #ccc; stroke-width: 1; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+    </marker>
+    <marker id="arrowhead-light" markerWidth="8" markerHeight="5" refX="7" refY="2.5" orient="auto">
+      <polygon points="0 0, 8 2.5, 0 5" fill="#999" />
+    </marker>
+  </defs>
+
+  <rect width="850" height="580" fill="#fff" />
+
+  <!-- Main Title -->
+  <!-- <text x="425" y="40" class="tufte-title" text-anchor="middle">GPT 아키텍처: 디코더 전용 구조</text>
+  <text x="425" y="65" class="tufte-text" text-anchor="middle">단방향 어텐션으로 과거를 "읽고" 미래를 "생성"한다</text> -->
+
+  <!-- Section 1: Attention Paradigm Shift (Top) -->
+  <g transform="translate(60, 100)"> <!-- Centered better -->
+    
+    <!-- 1.1 Bidirectional (Encoder) -->
+    <g transform="translate(0, 0)">
+      <text x="125" y="0" class="tufte-subtitle" text-anchor="middle">A. 양방향 어텐션 (Encoder)</text>
+      <text x="125" y="20" class="tufte-small" text-anchor="middle">문맥 전체를 참조 (BERT 등)</text>
+
+      <!-- Tokens -->
+      <g transform="translate(25, 45)">
+        <rect x="0" y="0" width="50" height="28" class="box-token" /> <text x="25" y="18" class="tufte-code" text-anchor="middle">The</text>
+        <rect x="60" y="0" width="50" height="28" class="box-token" /> <text x="85" y="18" class="tufte-code" text-anchor="middle">quick</text>
+        <rect x="120" y="0" width="50" height="28" class="box-token" /> <text x="145" y="18" class="tufte-code" text-anchor="middle">brown</text>
+      </g>
+
+      <!-- Attention Lines (All to All) -->
+      <!-- The <-> quick -->
+      <path d="M50,45 Q80,20 110,45" class="arrow-light" />
+      <path d="M110,45 Q80,30 50,45" class="arrow-light" />
+      <!-- quick <-> brown -->
+      <path d="M110,45 Q140,20 170,45" class="arrow-light" />
+      <path d="M170,45 Q140,30 110,45" class="arrow-light" />
+      
+      <text x="125" y="100" class="tufte-text" text-anchor="middle">모든 토큰이 서로 참조</text>
+      <text x="125" y="118" class="tufte-text" text-anchor="middle" font-weight="bold">이해(Understanding)에 최적화</text>
+    </g>
+
+    <!-- 1.2 Unidirectional (GPT) -->
+    <g transform="translate(400, 0)"> <!-- Shifted right for balance -->
+      <text x="125" y="0" class="tufte-subtitle" text-anchor="middle">B. 마스크드 어텐션 (Decoder)</text>
+      <text x="125" y="20" class="tufte-small" text-anchor="middle">과거 토큰만 참조 (GPT)</text>
+
+       <!-- Tokens -->
+      <g transform="translate(25, 45)">
+        <rect x="0" y="0" width="50" height="28" class="box-token" /> <text x="25" y="18" class="tufte-code" text-anchor="middle">The</text>
+        <rect x="60" y="0" width="50" height="28" class="box-token" /> <text x="85" y="18" class="tufte-code" text-anchor="middle">quick</text>
+        <rect x="120" y="0" width="50" height="28" class="box-token" /> <text x="145" y="18" class="tufte-code" text-anchor="middle">brown</text>
+        <!-- Future token ghost -->
+        <rect x="180" y="0" width="50" height="28" class="box-token" style="stroke-dasharray: 2,2; opacity: 0.5" /> <text x="205" y="18" class="tufte-code" text-anchor="middle" opacity="0.5">fox</text>
+      </g>
+
+      <!-- Attention Lines (Forward Only) -->
+      <path d="M50,45 Q80,20 110,45" class="arrow" />  <!-- The -> quick -->
+      <path d="M110,45 Q140,20 170,45" class="arrow" /> <!-- quick -> brown -->
+
+      <!-- Blocked Backward (Future to Past) -->
+      <!-- fox trying to affect brown -->
+      <path d="M205,45 Q172,70 145,45" class="arrow-dashed" />
+      <circle cx="175" cy="58" r="8" fill="#fff" stroke="#999" stroke-width="1"/>
+      <text x="175" y="61" font-size="10" fill="#999" text-anchor="middle" font-weight="bold">✕</text>
+
+      <text x="125" y="100" class="tufte-text" text-anchor="middle">미래 정보(fox) 참조 불가</text>
+      <text x="125" y="118" class="tufte-text" text-anchor="middle" font-weight="bold">생성(Generation)에 필수</text>
+    </g>
+  </g>
+
+  <line x1="30" y1="230" x2="820" y2="230" stroke="#ddd" stroke-width="1" />
+
+  <!-- Section 2: Deep Dive into GPT Block (Bottom) -->
+  <g transform="translate(70, 250)">
+    <text x="0" y="15" class="tufte-subtitle">C. GPT 블록 내부 구조</text>
+
+    <!-- Input Sequence -->
+    <g transform="translate(60, 270)">
+      <text x="-45" y="18" class="tufte-label">입력:</text>
+      <rect x="0" y="0" width="50" height="30" class="box-token" /> <text x="25" y="19" class="tufte-code" text-anchor="middle">The</text>
+      <rect x="60" y="0" width="50" height="30" class="box-token" /> <text x="85" y="19" class="tufte-code" text-anchor="middle">quick</text>
+      <rect x="120" y="0" width="50" height="30" class="box-token" /> <text x="145" y="19" class="tufte-code" text-anchor="middle">brown</text>
+    </g>
+
+    <!-- 1. Input to Block Arrows -->
+    <path d="M85,270 L85,240" class="arrow-light" />
+    <path d="M145,270 L145,240" class="arrow-light" />
+    <path d="M205,270 L205,240" class="arrow-light" />
+
+    <!-- The Block -->
+    <!-- Adjusted width to match tokens roughly: 3 tokens * 60 width approx 180 + margins = 200~250 -->
+    <rect x="40" y="50" width="280" height="190" class="box-block" rx="5" />
+    <text x="250" y="70" class="tufte-label" text-anchor="middle">디코더 레이어</text>
+
+    <!-- Masked Self Attention Visual -->
+    <g transform="translate(60, 145)">
+      <rect x="0" y="0" width="240" height="55" class="box-internal" />
+      <text x="80" y="32" class="tufte-label" text-anchor="middle">마스크드 셀프 어텐션</text>
+      
+      <!-- Matrix Visualization -->
+      <g transform="translate(170, 8) scale(0.55)">
+        <rect x="0" y="0" width="15" height="15" fill="#333" />
+        <rect x="18" y="0" width="15" height="15" fill="#ddd" />
+        <rect x="36" y="0" width="15" height="15" fill="#ddd" />
+        <rect x="0" y="18" width="15" height="15" fill="#666" />
+        <rect x="18" y="18" width="15" height="15" fill="#333" />
+        <rect x="36" y="18" width="15" height="15" fill="#ddd" />
+        <rect x="0" y="36" width="15" height="15" fill="#999" />
+        <rect x="18" y="36" width="15" height="15" fill="#666" />
+        <rect x="36" y="36" width="15" height="15" fill="#333" />
+      </g>
+      <text x="205" y="50" class="tufte-small" text-anchor="middle">인과 마스크</text>
+    </g>
+
+    <!-- 2. Block Bottom to Attention Arrows -->
+    <path d="M85,240 L85,200" class="arrow" />
+    <path d="M145,240 L145,200" class="arrow" />
+    <path d="M205,240 L205,200" class="arrow" />
+
+    <!-- 3. Attention to FFN Arrows -->
+    <path d="M85,145 L85,120" class="arrow" />
+    <path d="M145,145 L145,120" class="arrow" />
+    <path d="M205,145 L205,120" class="arrow" />
+
+    <!-- FFN -->
+    <rect x="60" y="85" width="240" height="35" class="box-internal" />
+    <text x="180" y="108" class="tufte-label" text-anchor="middle">피드포워드 네트워크 (MLP)</text>
+
+    <!-- 4. FFN to Output Arrows -->
+    <path d="M85,85 L85,50" class="arrow" />
+    <path d="M145,85 L145,50" class="arrow" />
+    <path d="M205,85 L205,50" class="arrow" />
+
+    <!-- Next Token Prediction (Right Side) -->
+    <g transform="translate(420, 30)">
+        <text x="0" y="0" class="tufte-subtitle">D. 다음 토큰 예측 (Prediction)</text>
+
+        <!-- Logic Flow -->
+        <path d="M-100,20 L0,55" class="arrow-light" stroke-dasharray="3,3" />
+
+        <!-- Softmax -->
+        <rect x="20" y="45" width="140" height="32" class="box-internal" rx="3" />
+        <text x="90" y="66" class="tufte-label" text-anchor="middle">소프트맥스 레이어</text>
+
+        <path d="M90,77 L90,100" class="arrow" />
+
+        <!-- Distribution -->
+        <g transform="translate(20, 110)">
+             <!-- Bar 1 -->
+            <rect x="0" y="22" width="25" height="10" class="bar-prob" />
+            <text x="12" y="48" class="tufte-code" text-anchor="middle" font-size="9">sky</text>
+
+            <!-- Bar 2 (Target) -->
+            <rect x="35" y="7" width="25" height="25" class="bar-prob-high" />
+            <text x="47" y="48" class="tufte-code" text-anchor="middle" font-size="9">fox</text>
+            <text x="47" y="0" class="tufte-label" text-anchor="middle" font-size="10">85%</text>
+
+            <!-- Bar 3 -->
+            <rect x="70" y="27" width="25" height="5" class="bar-prob" />
+            <text x="82" y="48" class="tufte-code" text-anchor="middle" font-size="9">dog</text>
+
+            <!-- Bar 4 -->
+            <rect x="105" y="29" width="25" height="3" class="bar-prob" />
+            <text x="117" y="48" class="tufte-code" text-anchor="middle" font-size="9">...</text>
+        </g>
+
+        <!-- Selection -->
+        <path d="M90,165 L90,185" class="arrow" />
+        <rect x="55" y="185" width="70" height="32" class="box-token" stroke-width="2" />
+        <text x="90" y="206" class="tufte-code" text-anchor="middle" font-weight="bold">fox</text>
+
+        <!-- Loop back -->
+        <path d="M125,200 L200,200 L200,290 L-130,290 L-130,270" class="arrow-light" stroke-dasharray="4,4" fill="none" />
+        <text x="210" y="245" class="tufte-small" text-anchor="start">자기회귀 (Autoregressive):</text>
+        <text x="210" y="258" class="tufte-small" text-anchor="start">현재 출력이 다음 입력으로</text>
+
+    </g>
+  </g>
+</svg>

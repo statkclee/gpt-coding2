@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 380">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 14px; fill: #333; font-weight: bold; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 11px; fill: #333; font-weight: bold; }
+      .tufte-desc { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 9px; fill: #666; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 8px; fill: #999; }
+      .tufte-code { font-family: 'SF Mono', Menlo, Monaco, monospace; font-size: 8px; fill: #666; }
+      .box-pattern { fill: #f5f5f5; stroke: #666; stroke-width: 1; }
+      .box-ds { fill: #f0f5f0; stroke: #333; stroke-width: 1.5; }
+      .arrow { stroke: #666; stroke-width: 1.5; fill: none; marker-end: url(#arrowhead); }
+    </style>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#666"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="380" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="400" y="22" text-anchor="middle" class="tufte-title">살아남은 패턴의 데이터 과학 적용</text>
+  <text x="400" y="36" text-anchor="middle" class="tufte-small">동일한 아이디어, 새로운 맥락</text>
+
+  <!-- Header -->
+  <text x="140" y="60" text-anchor="middle" class="tufte-label">전통 패턴</text>
+  <text x="400" y="60" text-anchor="middle" class="tufte-label">핵심 아이디어</text>
+  <text x="650" y="60" text-anchor="middle" class="tufte-label">데이터 과학 적용</text>
+
+  <line x1="20" y1="70" x2="780" y2="70" stroke="#ccc" stroke-width="0.5"/>
+
+  <!-- Row 1: Factory -->
+  <rect x="40" y="85" width="200" height="40" rx="3" class="box-pattern"/>
+  <text x="140" y="105" text-anchor="middle" class="tufte-label">Factory</text>
+  <text x="140" y="118" text-anchor="middle" class="tufte-code">객체 생성 분리</text>
+
+  <path d="M 240 105 L 270 105" class="arrow"/>
+  <text x="400" y="105" text-anchor="middle" class="tufte-desc">"무엇을 만들 것인가" 결정 위임</text>
+
+  <path d="M 530 105 L 560 105" class="arrow"/>
+  <rect x="560" y="85" width="200" height="40" rx="3" class="box-ds"/>
+  <text x="660" y="102" text-anchor="middle" class="tufte-label">모델 팩토리</text>
+  <text x="660" y="118" text-anchor="middle" class="tufte-code">sklearn.get_model("rf")</text>
+
+  <!-- Row 2: Strategy -->
+  <rect x="40" y="135" width="200" height="40" rx="3" class="box-pattern"/>
+  <text x="140" y="155" text-anchor="middle" class="tufte-label">Strategy</text>
+  <text x="140" y="168" text-anchor="middle" class="tufte-code">알고리즘 교체</text>
+
+  <path d="M 240 155 L 270 155" class="arrow"/>
+  <text x="400" y="155" text-anchor="middle" class="tufte-desc">"어떻게 처리할 것인가" 선택</text>
+
+  <path d="M 530 155 L 560 155" class="arrow"/>
+  <rect x="560" y="135" width="200" height="40" rx="3" class="box-ds"/>
+  <text x="660" y="152" text-anchor="middle" class="tufte-label">알고리즘 선택기</text>
+  <text x="660" y="168" text-anchor="middle" class="tufte-code">model.fit(strategy="gbm")</text>
+
+  <!-- Row 3: Observer -->
+  <rect x="40" y="185" width="200" height="40" rx="3" class="box-pattern"/>
+  <text x="140" y="205" text-anchor="middle" class="tufte-label">Observer</text>
+  <text x="140" y="218" text-anchor="middle" class="tufte-code">상태 변화 통지</text>
+
+  <path d="M 240 205 L 270 205" class="arrow"/>
+  <text x="400" y="205" text-anchor="middle" class="tufte-desc">"누구에게 알릴 것인가" 관리</text>
+
+  <path d="M 530 205 L 560 205" class="arrow"/>
+  <rect x="560" y="185" width="200" height="40" rx="3" class="box-ds"/>
+  <text x="660" y="202" text-anchor="middle" class="tufte-label">실험 추적</text>
+  <text x="660" y="218" text-anchor="middle" class="tufte-code">mlflow.log_metrics()</text>
+
+  <!-- Row 4: Decorator -->
+  <rect x="40" y="235" width="200" height="40" rx="3" class="box-pattern"/>
+  <text x="140" y="255" text-anchor="middle" class="tufte-label">Decorator</text>
+  <text x="140" y="268" text-anchor="middle" class="tufte-code">동적 기능 추가</text>
+
+  <path d="M 240 255 L 270 255" class="arrow"/>
+  <text x="400" y="255" text-anchor="middle" class="tufte-desc">"무엇을 추가할 것인가" 조합</text>
+
+  <path d="M 530 255 L 560 255" class="arrow"/>
+  <rect x="560" y="235" width="200" height="40" rx="3" class="box-ds"/>
+  <text x="660" y="252" text-anchor="middle" class="tufte-label">전처리 체인</text>
+  <text x="660" y="268" text-anchor="middle" class="tufte-code">@normalize @impute</text>
+
+  <!-- Row 5: Pipeline -->
+  <rect x="40" y="285" width="200" height="40" rx="3" class="box-pattern"/>
+  <text x="140" y="305" text-anchor="middle" class="tufte-label">Pipeline</text>
+  <text x="140" y="318" text-anchor="middle" class="tufte-code">변환 함수 연결</text>
+
+  <path d="M 240 305 L 270 305" class="arrow"/>
+  <text x="400" y="305" text-anchor="middle" class="tufte-desc">"어떤 순서로 처리할 것인가"</text>
+
+  <path d="M 530 305 L 560 305" class="arrow"/>
+  <rect x="560" y="285" width="200" height="40" rx="3" class="box-ds"/>
+  <text x="660" y="302" text-anchor="middle" class="tufte-label">ML 파이프라인</text>
+  <text x="660" y="318" text-anchor="middle" class="tufte-code">sklearn.Pipeline</text>
+
+  <!-- Bottom note -->
+  <rect x="40" y="340" width="720" height="30" rx="3" fill="#fafafa" stroke="#ccc" stroke-width="0.5"/>
+  <text x="400" y="360" text-anchor="middle" class="tufte-small">핵심: 언어와 도메인이 바뀌어도 문제와 해법의 구조는 동일하다</text>
+</svg>

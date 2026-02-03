@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 60 850 430">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #111; font-weight: bold; }
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-mono { font-family: 'SF Mono', Consolas, monospace; fill: #222; font-weight: bold; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #555; font-style: italic; }
+      .tufte-desc { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #444; font-size: 11px; }
+      .guide-line { stroke: #ccc; stroke-width: 1; stroke-dasharray: 4,2; }
+      .box-bg { fill: #fdfdfd; stroke: #999; stroke-width: 1; }
+      .header-bg { fill: #eee; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#666" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="850" height="520" fill="#ffffff"/>
+
+  <!-- <text x="425" y="35" text-anchor="middle" class="tufte-title" font-size="20">오픈 라이선스 전략 매트릭스</text>
+  <text x="425" y="55" text-anchor="middle" class="tufte-text" font-size="12">"무엇을 보호하고, 무엇을 개방할 것인가?" : 의도에 따른 라이선스 선택 가이드</text> -->
+
+  <g transform="translate(20, 85)">
+    <text x="20" y="0" transform="rotate(-90) translate(-100, 0)" text-anchor="middle" class="tufte-label" font-size="11">
+      확산 (Permissive) →
+    </text>
+    <text x="-20" y="0" transform="rotate(-90) translate(-200, 0)" text-anchor="middle" class="tufte-label" font-size="11">
+      ← 보호 (Restrictive) 
+    </text>
+    <line x1="15" y1="15" x2="15" y2="290" stroke="#999" stroke-width="1.5" marker-end="url(#arrow)"/>
+  </g>
+
+  <g transform="translate(150, 80)">
+
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="210" height="26" fill="#e0e0e0" rx="3"/>
+      <text x="105" y="18" text-anchor="middle" class="tufte-text" font-weight="bold" font-size="12">💻 소프트웨어</text>
+
+      <rect x="230" y="0" width="210" height="26" fill="#e0e0e0" rx="3"/>
+      <text x="335" y="18" text-anchor="middle" class="tufte-text" font-weight="bold" font-size="12">📄 콘텐츠</text>
+
+      <rect x="460" y="0" width="210" height="26" fill="#e0e0e0" rx="3"/>
+      <text x="565" y="18" text-anchor="middle" class="tufte-text" font-weight="bold" font-size="12">📊 데이터</text>
+    </g>
+
+    <g transform="translate(0, 38)">
+      <text x="-25" y="28" text-anchor="end" class="tufte-text" font-size="12" font-weight="bold">최대 확산</text>
+      <text x="-25" y="42" text-anchor="end" class="tufte-label" font-size="10">"제약 최소화"</text>
+      <line x1="0" y1="68" x2="670" y2="68" class="guide-line"/>
+
+      <rect x="0" y="0" width="210" height="62" class="box-bg" rx="4"/>
+      <text x="12" y="20" class="tufte-mono" font-size="12">MIT / Apache 2.0</text>
+      <text x="12" y="36" class="tufte-desc">특허/사용권 허용</text>
+      <text x="12" y="50" class="tufte-desc">가장 널리 쓰임 (React, TF 등)</text>
+
+      <g transform="translate(230, 0)">
+        <rect x="0" y="0" width="210" height="62" class="box-bg" rx="4"/>
+        <text x="12" y="20" class="tufte-mono" font-size="12">CC BY</text>
+        <text x="12" y="36" class="tufte-desc">저작자 표시만 하면 OK</text>
+        <text x="12" y="50" class="tufte-desc">학술 논문, 공공 보고서 표준</text>
+      </g>
+
+      <g transform="translate(460, 0)">
+        <rect x="0" y="0" width="210" height="62" class="box-bg" rx="4"/>
+        <text x="12" y="20" class="tufte-mono" font-size="12">CC0 (No Rights)</text>
+        <text x="12" y="36" class="tufte-desc">공유 저작물 헌정</text>
+        <text x="12" y="50" class="tufte-desc" font-weight="bold">과학 데이터의 글로벌 표준</text>
+      </g>
+    </g>
+
+    <g transform="translate(0, 118)">
+      <text x="-25" y="28" text-anchor="end" class="tufte-text" font-size="12" font-weight="bold">공유 유지</text>
+      <text x="-25" y="42" text-anchor="end" class="tufte-label" font-size="10">"수정 시 공개"</text>
+      <line x1="0" y1="68" x2="670" y2="68" class="guide-line"/>
+
+      <rect x="0" y="0" width="210" height="62" class="box-bg" rx="4"/>
+      <text x="12" y="20" class="tufte-mono" font-size="12">MPL / EPL</text>
+      <text x="12" y="36" class="tufte-desc">수정한 파일만 공개</text>
+      <text x="12" y="50" class="tufte-desc">기업 친화적 오픈소스</text>
+
+      <g transform="translate(230, 0)">
+        <rect x="0" y="0" width="210" height="62" class="box-bg" rx="4"/>
+        <text x="12" y="20" class="tufte-mono" font-size="12">CC BY-SA</text>
+        <text x="12" y="36" class="tufte-desc">동일 조건 변경 허락</text>
+        <text x="12" y="50" class="tufte-desc">위키백과(Wikipedia) 모델</text>
+      </g>
+
+      <g transform="translate(460, 0)">
+        <rect x="0" y="0" width="210" height="62" class="box-bg" rx="4"/>
+        <text x="12" y="20" class="tufte-mono" font-size="12">ODbL</text>
+        <text x="12" y="36" class="tufte-desc">DB 수정 시 공유 필수</text>
+        <text x="12" y="50" class="tufte-desc">오픈스트리트맵(OSM) 모델</text>
+      </g>
+    </g>
+
+    <g transform="translate(0, 198)">
+      <text x="-25" y="28" text-anchor="end" class="tufte-text" font-size="12" font-weight="bold">강한 보호</text>
+      <text x="-25" y="42" text-anchor="end" class="tufte-label" font-size="10">"전염성/영리금지"</text>
+
+      <rect x="0" y="0" width="210" height="62" class="box-bg" rx="4"/>
+      <text x="12" y="20" class="tufte-mono" font-size="12">GPL v3 / AGPL</text>
+      <text x="12" y="36" class="tufte-desc">강한 전염성 (Viral)</text>
+      <text x="12" y="50" class="tufte-desc">연결된 모든 코드 공개 의무</text>
+
+      <g transform="translate(230, 0)">
+        <rect x="0" y="0" width="210" height="62" class="box-bg" stroke-dasharray="2,2" rx="4"/>
+        <text x="12" y="20" class="tufte-mono" font-size="12">CC BY-NC-ND</text>
+        <text x="12" y="36" class="tufte-desc">비영리 / 변경 금지</text>
+        <text x="12" y="50" class="tufte-desc">단순 배포용 (오픈소스 아님)</text>
+      </g>
+
+      <g transform="translate(460, 0)">
+        <rect x="0" y="0" width="210" height="62" fill="#f0f0f0" stroke="#ccc" rx="4"/>
+        <text x="105" y="26" text-anchor="middle" class="tufte-text" font-size="10" fill="#777">데이터는 사실(Fact)이므로</text>
+        <text x="105" y="42" text-anchor="middle" class="tufte-text" font-size="10" fill="#777">저작권법상 '변경금지' 적용 난해</text>
+      </g>
+    </g>
+  </g>
+
+  <g transform="translate(150, 370)">
+    <line x1="0" y1="0" x2="670" y2="0" stroke="#333" stroke-width="2"/>
+    <text x="0" y="-8" class="tufte-title" font-size="13">💡 실전 권장 조합</text>
+
+    <g transform="translate(0, 15)">
+      <rect x="0" y="0" width="210" height="85" fill="#f9f9f9" stroke="#999" stroke-width="1" rx="5"/>
+      <text x="105" y="17" text-anchor="middle" class="tufte-text" font-weight="bold" font-size="11">현대적 오픈 사이언스</text>
+      <line x1="15" y1="25" x2="195" y2="25" stroke="#ccc"/>
+
+      <text x="15" y="42" class="tufte-text" font-size="10">1. 코드: <tspan class="tufte-mono">MIT</tspan> (재사용성↑)</text>
+      <text x="15" y="57" class="tufte-text" font-size="10">2. 논문: <tspan class="tufte-mono">CC BY</tspan> (인용 필수)</text>
+      <text x="15" y="72" class="tufte-text" font-size="10">3. 데이터: <tspan class="tufte-mono">CC0</tspan> (장벽 제거)</text>
+    </g>
+
+    <g transform="translate(230, 15)">
+      <rect x="0" y="0" width="210" height="85" fill="#f9f9f9" stroke="#999" stroke-width="1" rx="5"/>
+      <text x="105" y="17" text-anchor="middle" class="tufte-text" font-weight="bold" font-size="11">커뮤니티 중심 프로젝트</text>
+      <line x1="15" y1="25" x2="195" y2="25" stroke="#ccc"/>
+
+      <text x="15" y="42" class="tufte-text" font-size="10">1. 코드: <tspan class="tufte-mono">GPL</tspan> (독점 방지)</text>
+      <text x="15" y="57" class="tufte-text" font-size="10">2. 위키: <tspan class="tufte-mono">CC BY-SA</tspan> (기여 순환)</text>
+      <text x="15" y="72" class="tufte-text" font-size="10">3. 데이터: <tspan class="tufte-mono">ODbL</tspan> (DB 보호)</text>
+    </g>
+
+    <g transform="translate(460, 15)">
+      <rect x="0" y="0" width="210" height="85" fill="#f9f9f9" stroke="#999" stroke-width="1" rx="5"/>
+      <text x="105" y="17" text-anchor="middle" class="tufte-text" font-weight="bold" font-size="11">교육 및 문서 자료</text>
+      <line x1="15" y1="25" x2="195" y2="25" stroke="#ccc"/>
+
+      <text x="15" y="42" class="tufte-text" font-size="10">1. 예제코드: <tspan class="tufte-mono">CC0/MIT</tspan></text>
+      <text x="15" y="57" class="tufte-text" font-size="10">2. 교재: <tspan class="tufte-mono">CC BY-NC</tspan></text>
+      <text x="15" y="72" class="tufte-text" font-size="10">3. 실습데이터: <tspan class="tufte-mono">CC0</tspan></text>
+    </g>
+  </g>
+
+</svg>

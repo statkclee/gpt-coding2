@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 40 800 220">
+  <defs>
+    <style>
+      /* Tufte Grayscale Style */
+      .label-title { font-family: Palatino, serif; font-size: 16px; font-weight: bold; fill: #111; }
+      .label-head { font-family: Palatino, serif; font-size: 14px; font-weight: bold; fill: #222; }
+      .label-body { font-family: Palatino, serif; font-size: 12px; fill: #333; }
+      .label-note { font-family: Palatino, serif; font-size: 11px; fill: #555; font-style: italic; }
+      .label-mono { font-family: 'SF Mono', Consolas, Menlo, monospace; font-size: 10px; fill: #444; }
+
+      .box-input { fill: #fff; stroke: #333; stroke-width: 2; rx: 6; }
+      .box-reactive { fill: #f5f5f5; stroke: #666; stroke-width: 2; rx: 6; stroke-dasharray: 4 2; }
+      .box-output { fill: #fff; stroke: #333; stroke-width: 2; rx: 6; }
+      .box-code { fill: #fafafa; stroke: #ccc; stroke-width: 1; rx: 3; }
+
+      .line-flow { stroke: #333; stroke-width: 1.5; fill: none; }
+      .line-auto { stroke: #666; stroke-width: 1.5; fill: none; stroke-dasharray: 6 3; }
+      .line-sep { stroke: #ddd; stroke-width: 1; }
+
+      .arrow-head { fill: #333; }
+      .arrow-auto { fill: #666; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L0,8 L8,4 z" class="arrow-head" />
+    </marker>
+    <marker id="arrow-auto" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L0,8 L8,4 z" class="arrow-auto" />
+    </marker>
+  </defs>
+
+  <rect width="800" height="350" fill="#fff" />
+
+  <!-- ========================================== -->
+  <!-- 1. Input (사용자 입력) -->
+  <!-- ========================================== -->
+  <g transform="translate(50, 60)">
+    <rect x="0" y="0" width="180" height="180" class="box-input"/>
+    <text x="90" y="25" text-anchor="middle" class="label-head">1. 입력</text>
+    <text x="90" y="42" text-anchor="middle" class="label-note">(Input Widgets)</text>
+    <line x1="15" y1="52" x2="165" y2="52" class="line-sep"/>
+
+    <!-- Widget examples -->
+    <g transform="translate(15, 65)">
+      <rect x="0" y="0" width="150" height="25" class="box-code"/>
+      <text x="10" y="17" class="label-mono">슬라이더: [●━━━━] 75</text>
+    </g>
+
+    <g transform="translate(15, 100)">
+      <rect x="0" y="0" width="150" height="25" class="box-code"/>
+      <text x="10" y="17" class="label-mono">선택: ☑ 평균 ☐ 표준편차</text>
+    </g>
+
+    <g transform="translate(15, 135)">
+      <rect x="0" y="0" width="150" height="25" class="box-code"/>
+      <text x="10" y="17" class="label-mono">텍스트: [김철수____]</text>
+    </g>
+  </g>
+
+  <!-- Arrow: Input → Reactive -->
+  <g transform="translate(230, 150)">
+    <path d="M 0 0 L 50 0" class="line-flow" marker-end="url(#arrow)"/>
+    <text x="25" y="-10" text-anchor="middle" class="label-note">변경 감지</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 2. Reactive Engine (자동 전파) -->
+  <!-- ========================================== -->
+  <g transform="translate(300, 60)">
+    <rect x="0" y="0" width="180" height="180" class="box-reactive"/>
+    <text x="90" y="25" text-anchor="middle" class="label-head" fill="#555">2. 반응형 엔진</text>
+    <text x="90" y="42" text-anchor="middle" class="label-note" fill="#666">(자동 의존성 추적)</text>
+    <line x1="15" y1="52" x2="165" y2="52" class="line-sep"/>
+
+    <!-- Reactive graph representation -->
+    <g transform="translate(20, 55)">
+      <circle cx="30" cy="20" r="12" fill="none" stroke="#888" stroke-width="1.5"/>
+      <text x="30" y="24" text-anchor="middle" class="label-mono" fill="#666">A</text>
+
+      <circle cx="110" cy="20" r="12" fill="none" stroke="#888" stroke-width="1.5"/>
+      <text x="110" y="24" text-anchor="middle" class="label-mono" fill="#666">B</text>
+
+      <circle cx="70" cy="70" r="12" fill="none" stroke="#666" stroke-width="2"/>
+      <text x="70" y="74" text-anchor="middle" class="label-mono" fill="#444">C</text>
+
+      <path d="M 42 28 L 58 58" stroke="#999" stroke-width="1" marker-end="url(#arrow-auto)"/>
+      <path d="M 98 28 L 82 58" stroke="#999" stroke-width="1" marker-end="url(#arrow-auto)"/>
+    </g>
+
+    <text x="90" y="155" text-anchor="middle" class="label-note" fill="#666">A나 B가 바뀌면</text>
+    <text x="90" y="170" text-anchor="middle" class="label-note" fill="#666">C가 자동으로 재계산</text>
+  </g>
+
+  <!-- Arrow: Reactive → Output -->
+  <g transform="translate(480, 150)">
+    <path d="M 0 0 L 50 0" class="line-auto" marker-end="url(#arrow-auto)"/>
+    <text x="25" y="-10" text-anchor="middle" class="label-note" fill="#666">자동 갱신</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 3. Output (결과 표시) -->
+  <!-- ========================================== -->
+  <g transform="translate(550, 60)">
+    <rect x="0" y="0" width="180" height="180" class="box-output"/>
+    <text x="90" y="25" text-anchor="middle" class="label-head">3. 출력</text>
+    <text x="90" y="42" text-anchor="middle" class="label-note">(Output Renders)</text>
+    <line x1="15" y1="52" x2="165" y2="52" class="line-sep"/>
+
+    <!-- Output examples -->
+    <g transform="translate(15, 65)">
+      <rect x="0" y="0" width="150" height="40" class="box-code"/>
+      <text x="10" y="15" class="label-mono">평균: 82.5점</text>
+      <text x="10" y="32" class="label-mono">표준편차: 12.3</text>
+    </g>
+
+    <g transform="translate(15, 115)">
+      <rect x="0" y="0" width="150" height="50" class="box-code"/>
+      <!-- Simple bar chart representation -->
+      <rect x="10" y="10" width="40" height="8" fill="#999"/>
+      <rect x="10" y="22" width="60" height="8" fill="#666"/>
+      <rect x="10" y="34" width="35" height="8" fill="#bbb"/>
+      <text x="80" y="30" class="label-mono" fill="#666">차트</text>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- Bottom: Key Message -->
+  <!-- ========================================== -->
+  <!-- <g transform="translate(50, 270)">
+    <text x="350" y="0" text-anchor="middle" class="label-body" fill="#333">
+      입력이 바뀌면 출력이 자동으로 갱신된다 — 개발자는 "무엇을" 표시할지만 선언
+    </text>
+    <text x="350" y="20" text-anchor="middle" class="label-note" fill="#555">
+      Shiny(2012) → Streamlit(2019) → Shiny for Python(2022)
+    </text>
+  </g> -->
+
+</svg>

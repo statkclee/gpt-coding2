@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 340">
+  <defs>
+    <style>
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 16px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 13px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-desc {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 11px;
+        fill: #666;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Menlo, Monaco, monospace;
+        font-size: 10px;
+        fill: #666;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #999;
+      }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- White background -->
+  <rect x="0" y="0" width="800" height="340" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="400" y="30" class="tufte-title" text-anchor="middle">Currying과 Partial Application</text>
+
+  <!-- Original function -->
+  <rect x="40" y="60" width="200" height="80" fill="#f5f5f5" stroke="#666" stroke-width="1.5" rx="3"/>
+  <text x="140" y="85" class="tufte-label" text-anchor="middle">원본 함수</text>
+  <line x1="55" y1="95" x2="225" y2="95" stroke="#ccc" stroke-width="1"/>
+  <text x="140" y="120" class="tufte-code" text-anchor="middle">multiply(x, y, z)</text>
+
+  <!-- Currying path -->
+  <line x1="240" y1="85" x2="278" y2="85" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="260" y="75" class="tufte-small">커링</text>
+
+  <rect x="290" y="55" width="180" height="100" fill="#fff" stroke="#333" stroke-width="2" rx="3"/>
+  <text x="380" y="80" class="tufte-label" text-anchor="middle">Currying</text>
+  <line x1="305" y1="90" x2="455" y2="90" stroke="#ccc" stroke-width="1"/>
+  <text x="380" y="110" class="tufte-code" text-anchor="middle">f(x) → g(y) → h(z)</text>
+  <text x="380" y="130" class="tufte-small" text-anchor="middle">한 번에 하나씩 인자 적용</text>
+  <text x="380" y="145" class="tufte-small" text-anchor="middle">매 단계마다 새 함수 반환</text>
+
+  <!-- Partial path -->
+  <line x1="240" y1="115" x2="278" y2="140" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Partial Application -->
+  <rect x="290" y="170" width="180" height="100" fill="#fff" stroke="#333" stroke-width="2" rx="3"/>
+  <text x="380" y="195" class="tufte-label" text-anchor="middle">Partial Application</text>
+  <line x1="305" y1="205" x2="455" y2="205" stroke="#ccc" stroke-width="1"/>
+  <text x="380" y="225" class="tufte-code" text-anchor="middle">f(x, _, _) → g(y, z)</text>
+  <text x="380" y="245" class="tufte-small" text-anchor="middle">일부 인자만 미리 고정</text>
+  <text x="380" y="260" class="tufte-small" text-anchor="middle">나머지 인자로 호출</text>
+
+  <!-- Arrows to specialized functions -->
+  <line x1="470" y1="120" x2="508" y2="120" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="470" y1="220" x2="508" y2="220" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Specialized functions -->
+  <rect x="520" y="60" width="240" height="220" fill="#fff" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="640" y="85" class="tufte-label" text-anchor="middle">특화된 함수들</text>
+  <line x1="535" y1="95" x2="745" y2="95" stroke="#ccc" stroke-width="1"/>
+
+  <rect x="540" y="110" width="200" height="35" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="2"/>
+  <text x="640" y="132" class="tufte-code" text-anchor="middle">double = partial(multiply, 2)</text>
+
+  <rect x="540" y="155" width="200" height="35" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="2"/>
+  <text x="640" y="177" class="tufte-code" text-anchor="middle">triple = partial(multiply, 3)</text>
+
+  <rect x="540" y="200" width="200" height="35" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="2"/>
+  <text x="640" y="222" class="tufte-code" text-anchor="middle">add_10 = partial(add, 10)</text>
+
+  <text x="640" y="260" class="tufte-small" text-anchor="middle">재사용 가능한 함수 생성</text>
+
+  <!-- Python example -->
+  <rect x="40" y="290" width="720" height="40" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="400" y="315" class="tufte-code" text-anchor="middle">from functools import partial; double = partial(multiply, 2); double(5) # → 10</text>
+</svg>

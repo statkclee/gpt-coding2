@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 50 700 370">
+  <defs>
+    <style>
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 18px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-subtitle {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 14px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-text {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 13px;
+        fill: #333;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 11px;
+        fill: #666;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 10px;
+        fill: #333;
+      }
+      .tufte-number {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 16px;
+        font-weight: bold;
+        fill: #fff;
+      }
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 12px;
+        font-weight: bold;
+        fill: #333;
+      }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="700" height="420" fill="#ffffff"/>
+
+  <!-- Title -->
+  <!-- <text x="350" y="30" text-anchor="middle" class="tufte-title">AI에게 데이터 작업 요청: 명세 작성의 3요소</text> -->
+
+  <!-- Three Elements Section -->
+  <!-- Element 1: 입력 구조 -->
+  <circle cx="120" cy="90" r="22" fill="#333"/>
+  <text x="120" y="96" text-anchor="middle" class="tufte-number">1</text>
+  <text x="120" y="130" text-anchor="middle" class="tufte-subtitle">입력 구조</text>
+  <text x="120" y="148" text-anchor="middle" class="tufte-small">데이터가 현재</text>
+  <text x="120" y="163" text-anchor="middle" class="tufte-small">어떤 형태인가?</text>
+
+  <!-- Arrow 1→2 -->
+  <line x1="175" y1="90" x2="275" y2="90" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- Element 2: 변환 작업 -->
+  <circle cx="350" cy="90" r="22" fill="#666"/>
+  <text x="350" y="96" text-anchor="middle" class="tufte-number">2</text>
+  <text x="350" y="130" text-anchor="middle" class="tufte-subtitle">변환 작업</text>
+  <text x="350" y="148" text-anchor="middle" class="tufte-small">어떤 처리가</text>
+  <text x="350" y="163" text-anchor="middle" class="tufte-small">필요한가?</text>
+
+  <!-- Arrow 2→3 -->
+  <line x1="405" y1="90" x2="505" y2="90" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- Element 3: 출력 형태 -->
+  <circle cx="580" cy="90" r="22" fill="#999"/>
+  <text x="580" y="96" text-anchor="middle" class="tufte-number">3</text>
+  <text x="580" y="130" text-anchor="middle" class="tufte-subtitle">출력 형태</text>
+  <text x="580" y="148" text-anchor="middle" class="tufte-small">결과가 어떤</text>
+  <text x="580" y="163" text-anchor="middle" class="tufte-small">모습이어야 하는가?</text>
+
+  <!-- Divider -->
+  <line x1="50" y1="190" x2="650" y2="190" stroke="#ccc" stroke-width="1"/>
+
+  <!-- Example Section Title -->
+  <text x="350" y="220" text-anchor="middle" class="tufte-subtitle">예시: 로그 파일 분석 요청</text>
+
+  <!-- Request Box -->
+  <rect x="50" y="240" width="600" height="40" fill="#f5f5f5" stroke="#ccc" stroke-width="1" rx="4"/>
+  <text x="350" y="265" text-anchor="middle" class="tufte-text">"서버 로그에서 ERROR가 포함된 라인만 추출해서 날짜별로 그룹화해줘"</text>
+
+  <!-- Three columns for input/transform/output -->
+  <!-- Input Column -->
+  <rect x="50" y="300" width="190" height="100" fill="#fff" stroke="#333" stroke-width="2" rx="4"/>
+  <text x="145" y="320" text-anchor="middle" class="tufte-label">입력</text>
+  <line x1="60" y1="330" x2="230" y2="330" stroke="#ccc" stroke-width="1"/>
+  <text x="145" y="350" text-anchor="middle" class="tufte-small">텍스트 파일 (server.log)</text>
+  <text x="60" y="375" class="tufte-code">[2024-01-15 10:30:45]</text>
+  <text x="60" y="390" class="tufte-code">ERROR: 메시지...</text>
+
+  <!-- Arrow Input → Transform -->
+  <line x1="250" y1="350" x2="300" y2="350" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- Transform Column -->
+  <rect x="305" y="300" width="90" height="100" fill="#f5f5f5" stroke="#666" stroke-width="2" rx="4"/>
+  <text x="350" y="320" text-anchor="middle" class="tufte-label">변환</text>
+  <line x1="315" y1="330" x2="385" y2="330" stroke="#ccc" stroke-width="1"/>
+  <text x="350" y="355" text-anchor="middle" class="tufte-small">ERROR</text>
+  <text x="350" y="372" text-anchor="middle" class="tufte-small">필터링</text>
+  <text x="350" y="392" text-anchor="middle" class="tufte-small">날짜별 그룹화</text>
+
+  <!-- Arrow Transform → Output -->
+  <line x1="405" y1="350" x2="455" y2="350" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- Output Column -->
+  <rect x="460" y="300" width="190" height="100" fill="#fff" stroke="#999" stroke-width="2" rx="4"/>
+  <text x="555" y="320" text-anchor="middle" class="tufte-label">출력</text>
+  <line x1="470" y1="330" x2="640" y2="330" stroke="#ccc" stroke-width="1"/>
+  <text x="555" y="350" text-anchor="middle" class="tufte-small">딕셔너리 (dict)</text>
+  <text x="470" y="372" class="tufte-code">{"2024-01-15": ["에러1",</text>
+  <text x="470" y="387" class="tufte-code">  "에러2"], ...}</text>
+
+</svg>

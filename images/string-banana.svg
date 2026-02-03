@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 100">
+  <defs>
+    <style>
+      .tufte-char {
+        font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 28px;
+        fill: #333;
+      }
+      .tufte-index {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 14px;
+        fill: #666;
+      }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="420" height="100" fill="#ffffff"/>
+
+  <!-- Character boxes -->
+  <!-- Box 1: b -->
+  <rect x="30" y="15" width="50" height="50" fill="#fff" stroke="#333" stroke-width="2"/>
+  <text x="55" y="50" text-anchor="middle" class="tufte-char">b</text>
+  <text x="55" y="85" text-anchor="middle" class="tufte-index">[0]</text>
+
+  <!-- Box 2: a -->
+  <rect x="90" y="15" width="50" height="50" fill="#fff" stroke="#333" stroke-width="2"/>
+  <text x="115" y="50" text-anchor="middle" class="tufte-char">a</text>
+  <text x="115" y="85" text-anchor="middle" class="tufte-index">[1]</text>
+
+  <!-- Box 3: n -->
+  <rect x="150" y="15" width="50" height="50" fill="#fff" stroke="#333" stroke-width="2"/>
+  <text x="175" y="50" text-anchor="middle" class="tufte-char">n</text>
+  <text x="175" y="85" text-anchor="middle" class="tufte-index">[2]</text>
+
+  <!-- Box 4: a -->
+  <rect x="210" y="15" width="50" height="50" fill="#fff" stroke="#333" stroke-width="2"/>
+  <text x="235" y="50" text-anchor="middle" class="tufte-char">a</text>
+  <text x="235" y="85" text-anchor="middle" class="tufte-index">[3]</text>
+
+  <!-- Box 5: n -->
+  <rect x="270" y="15" width="50" height="50" fill="#fff" stroke="#333" stroke-width="2"/>
+  <text x="295" y="50" text-anchor="middle" class="tufte-char">n</text>
+  <text x="295" y="85" text-anchor="middle" class="tufte-index">[4]</text>
+
+  <!-- Box 6: a -->
+  <rect x="330" y="15" width="50" height="50" fill="#fff" stroke="#333" stroke-width="2"/>
+  <text x="355" y="50" text-anchor="middle" class="tufte-char">a</text>
+  <text x="355" y="85" text-anchor="middle" class="tufte-index">[5]</text>
+
+</svg>

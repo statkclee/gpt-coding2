@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 40 800 240">
+  <defs>
+    <style>
+      /* Tufte Grayscale Style */
+      .label-title { font-family: Palatino, serif; font-size: 16px; font-weight: bold; fill: #111; }
+      .label-head { font-family: Palatino, serif; font-size: 14px; font-weight: bold; fill: #222; }
+      .label-body { font-family: Palatino, serif; font-size: 12px; fill: #333; }
+      .label-note { font-family: Palatino, serif; font-size: 11px; fill: #555; font-style: italic; }
+      .label-mono { font-family: 'SF Mono', Consolas, Menlo, monospace; font-size: 10px; fill: #444; }
+      
+      .box-declarative { fill: #fff; stroke: #333; stroke-width: 2; rx: 6; }
+      .box-imperative { fill: #f9f9f9; stroke: #666; stroke-width: 1.5; stroke-dasharray: 4 2; rx: 6; }
+      .box-code { fill: #f5f5f5; stroke: #ccc; stroke-width: 1; rx: 3; }
+      
+      .line-flow { stroke: #333; stroke-width: 1.5; fill: none; }
+      .line-sep { stroke: #ddd; stroke-width: 1; }
+      
+      .arrow-head { fill: #333; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L0,8 L8,4 z" class="arrow-head" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="380" fill="#fff" />
+
+  <!-- Title -->
+  <!-- <text x="400" y="30" text-anchor="middle" class="label-title">하이브리드 아키텍처: 선언형과 명령형의 샌드위치</text> -->
+
+  <!-- ========================================== -->
+  <!-- Layer 1: Data Access (Declarative) -->
+  <!-- ========================================== -->
+  <g transform="translate(100, 60)">
+    <rect x="0" y="0" width="180" height="200" class="box-declarative"/>
+    <text x="90" y="25" text-anchor="middle" class="label-head">1. 데이터 추출</text>
+    <text x="90" y="42" text-anchor="middle" class="label-note">(Declarative)</text>
+    <line x1="15" y1="50" x2="165" y2="50" class="line-sep"/>
+    
+    <g transform="translate(15, 65)">
+      <text x="0" y="0" class="label-body" font-weight="bold">SQL</text>
+      <rect x="0" y="5" width="150" height="40" class="box-code"/>
+      <text x="10" y="20" class="label-mono">SELECT * FROM Sales</text>
+      <text x="10" y="32" class="label-mono">WHERE year = 2024</text>
+    </g>
+    
+    <g transform="translate(15, 130)">
+      <text x="0" y="0" class="label-body" font-weight="bold">Why?</text>
+      <text x="0" y="20" class="label-mono">• 최적화는 DB에 위임</text>
+      <text x="0" y="35" class="label-mono">• 대량 데이터 필터링 효율적</text>
+    </g>
+  </g>
+
+  <!-- Arrow 1 -->
+  <path d="M 280 160 L 320 160" class="line-flow" marker-end="url(#arrow)"/>
+
+  <!-- ========================================== -->
+  <!-- Layer 2: Business Logic (Imperative) -->
+  <!-- ========================================== -->
+  <g transform="translate(320, 60)">
+    <rect x="0" y="0" width="180" height="200" class="box-imperative"/>
+    <text x="90" y="25" text-anchor="middle" class="label-head" fill="#555">2. 비즈니스 로직</text>
+    <text x="90" y="42" text-anchor="middle" class="label-note" fill="#666">(Imperative)</text>
+    <line x1="15" y1="50" x2="165" y2="50" class="line-sep"/>
+    
+    <g transform="translate(15, 65)">
+      <text x="0" y="0" class="label-body" font-weight="bold" fill="#555">Python/Java</text>
+      <rect x="0" y="5" width="150" height="40" class="box-code"/>
+      <text x="10" y="20" class="label-mono">for item in items:</text>
+      <text x="10" y="32" class="label-mono">  if complex_rule(item): ...</text>
+    </g>
+    
+    <g transform="translate(15, 130)">
+      <text x="0" y="0" class="label-body" font-weight="bold" fill="#555">Why?</text>
+      <text x="0" y="20" class="label-mono" fill="#555">• 복잡한 조건 분기</text>
+      <text x="0" y="35" class="label-mono" fill="#555">• 외부 API 호출, 상태 제어</text>
+    </g>
+  </g>
+
+  <!-- Arrow 2 -->
+  <path d="M 500 160 L 540 160" class="line-flow" marker-end="url(#arrow)"/>
+
+  <!-- ========================================== -->
+  <!-- Layer 3: Presentation (Declarative) -->
+  <!-- ========================================== -->
+  <g transform="translate(540, 60)">
+    <rect x="0" y="0" width="180" height="200" class="box-declarative"/>
+    <text x="90" y="25" text-anchor="middle" class="label-head">3. 결과 표현</text>
+    <text x="90" y="42" text-anchor="middle" class="label-note">(Declarative)</text>
+    <line x1="15" y1="50" x2="165" y2="50" class="line-sep"/>
+    
+    <g transform="translate(15, 65)">
+      <text x="0" y="0" class="label-body" font-weight="bold">HTML/React</text>
+      <rect x="0" y="5" width="150" height="40" class="box-code"/>
+      <text x="10" y="20" class="label-mono">&lt;div class="report"&gt;</text>
+      <text x="10" y="32" class="label-mono">  {processed_data}</text>
+    </g>
+    
+    <g transform="translate(15, 130)">
+      <text x="0" y="0" class="label-body" font-weight="bold">Why?</text>
+      <text x="0" y="20" class="label-mono">• UI 구조 표현에 최적</text>
+      <text x="0" y="35" class="label-mono">• 렌더링은 브라우저 위임</text>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- Bottom Insight Callout -->
+  <!-- ========================================== -->
+  <!-- <g transform="translate(50, 300)">
+      <rect x="0" y="0" width="700" height="40" fill="#f8f8f8" />
+      <rect x="0" y="0" width="4" height="40" fill="#333" />
+      <text x="20" y="25" class="label-body" font-size="13" fill="#222">
+          <tspan font-weight="bold">Insight:</tspan> 현실의 애플리케이션은 <tspan font-style="italic">"선언형(Input/Output) 샌드위치"</tspan> 사이에 <tspan font-style="italic">"명령형(Logic) 속"</tspan>을 채운 구조다.
+      </text>
+  </g> -->
+
+</svg>

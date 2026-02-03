@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 20 700 300">
+  <defs>
+    <style>
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 16px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 13px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-text {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 11px;
+        fill: #444;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #666;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Menlo, Monaco, monospace;
+        font-size: 10px;
+        fill: #333;
+      }
+      .box-main {
+        fill: #f5f5f5;
+        stroke: #333;
+        stroke-width: 1.5;
+      }
+      .box-secondary {
+        fill: #ffffff;
+        stroke: #666;
+        stroke-width: 1;
+      }
+      .box-highlight {
+        fill: #f0f0f0;
+        stroke: #333;
+        stroke-width: 1.5;
+      }
+      .arrow {
+        fill: none;
+        stroke: #666;
+        stroke-width: 1.5;
+        marker-end: url(#arrowhead);
+      }
+    </style>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="700" height="320" fill="#ffffff"/>
+
+  <!-- Command line input at top -->
+  <rect x="30" y="30" width="640" height="45" rx="5" class="box-main"/>
+  <text x="50" y="48" class="tufte-small">터미널</text>
+  <text x="50" y="65" class="tufte-code">$ python analyze.py data.csv --top 10 --verbose</text>
+
+  <!-- Shell parsing -->
+  <rect x="30" y="100" width="120" height="75" rx="5" class="box-secondary"/>
+  <text x="90" y="125" class="tufte-label" text-anchor="middle">쉘 파싱</text>
+  <text x="90" y="145" class="tufte-small" text-anchor="middle">공백 기준 분리</text>
+  <text x="90" y="160" class="tufte-small" text-anchor="middle">→ 문자열 리스트</text>
+
+  <!-- Arrow -->
+  <path d="M150,135 L180,135" class="arrow"/>
+
+  <!-- sys.argv list -->
+  <rect x="190" y="100" width="160" height="75" rx="5" class="box-highlight"/>
+  <text x="270" y="120" class="tufte-label" text-anchor="middle">sys.argv</text>
+  <text x="200" y="140" class="tufte-code">['analyze.py',</text>
+  <text x="200" y="154" class="tufte-code"> 'data.csv', '--top',</text>
+  <text x="200" y="168" class="tufte-code"> '10', '--verbose']</text>
+
+  <!-- Arrow -->
+  <path d="M350,135 L380,135" class="arrow"/>
+
+  <!-- argparse -->
+  <rect x="390" y="100" width="130" height="75" rx="5" class="box-secondary"/>
+  <text x="455" y="125" class="tufte-label" text-anchor="middle">argparse</text>
+  <text x="455" y="145" class="tufte-small" text-anchor="middle">옵션 파싱</text>
+  <text x="455" y="160" class="tufte-small" text-anchor="middle">타입 변환</text>
+
+  <!-- Arrow -->
+  <path d="M520,135 L550,135" class="arrow"/>
+
+  <!-- args object -->
+  <rect x="560" y="100" width="120" height="75" rx="5" class="box-highlight"/>
+  <text x="620" y="120" class="tufte-label" text-anchor="middle">args 객체</text>
+  <text x="570" y="140" class="tufte-code">.file = 'data.csv'</text>
+  <text x="570" y="154" class="tufte-code">.top = 10</text>
+  <text x="570" y="168" class="tufte-code">.verbose = True</text>
+
+  <!-- Comparison section below -->
+  <line x1="30" y1="195" x2="670" y2="195" stroke="#ccc" stroke-width="1"/>
+
+  <!-- sys.argv direct use -->
+  <rect x="30" y="215" width="200" height="90" rx="5" class="box-secondary"/>
+  <text x="130" y="238" class="tufte-label" text-anchor="middle">sys.argv 직접 사용</text>
+  <text x="40" y="260" class="tufte-text">• 인자 1~2개</text>
+  <text x="40" y="277" class="tufte-text">• 타입 변환 불필요</text>
+  <text x="40" y="294" class="tufte-text">• 일회성 스크립트</text>
+
+  <!-- argparse use -->
+  <rect x="250" y="215" width="200" height="90" rx="5" class="box-secondary"/>
+  <text x="350" y="238" class="tufte-label" text-anchor="middle">argparse 사용</text>
+  <text x="260" y="260" class="tufte-text">• 옵션 플래그 (-v, --out)</text>
+  <text x="260" y="277" class="tufte-text">• 타입 변환/검증 필요</text>
+  <text x="260" y="294" class="tufte-text">• --help 자동 생성</text>
+
+  <!-- Key benefit -->
+  <rect x="470" y="215" width="200" height="90" rx="5" class="box-main"/>
+  <text x="570" y="238" class="tufte-label" text-anchor="middle">인자화 이점</text>
+  <text x="480" y="260" class="tufte-text">• 코드 수정 없이 재사용</text>
+  <text x="480" y="277" class="tufte-text">• 파이프라인 연결 가능</text>
+  <text x="480" y="294" class="tufte-text">• 자동화 스크립트 호출</text>
+
+</svg>

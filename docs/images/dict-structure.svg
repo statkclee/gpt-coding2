@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 30 700 250">
+  <defs>
+    <style>
+      .tufte-text {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+      }
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 14px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 12px;
+        fill: #333;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 11px;
+        fill: #333;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #666;
+      }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="700" height="280" fill="#ffffff"/>
+
+  <!-- Title -->
+  <!-- <text x="350" y="25" text-anchor="middle" class="tufte-title">딕셔너리: 키-값 매핑 구조</text> -->
+
+  <!-- List comparison (left) -->
+  <text x="120" y="55" text-anchor="middle" class="tufte-label" font-weight="bold">리스트: 인덱스로 접근</text>
+  <text x="40" y="80" class="tufte-code">fruits = ['사과', '바나나', '체리']</text>
+
+  <g transform="translate(40, 105)">
+    <rect x="0" y="0" width="65" height="35" fill="#e8e8e8" stroke="#666"/>
+    <rect x="65" y="0" width="65" height="35" fill="#e8e8e8" stroke="#666"/>
+    <rect x="130" y="0" width="65" height="35" fill="#e8e8e8" stroke="#666"/>
+    <text x="32" y="23" text-anchor="middle" class="tufte-code">'사과'</text>
+    <text x="97" y="23" text-anchor="middle" class="tufte-code">'바나나'</text>
+    <text x="162" y="23" text-anchor="middle" class="tufte-code">'체리'</text>
+    <text x="32" y="-5" text-anchor="middle" class="tufte-small">[0]</text>
+    <text x="97" y="-5" text-anchor="middle" class="tufte-small">[1]</text>
+    <text x="162" y="-5" text-anchor="middle" class="tufte-small">[2]</text>
+  </g>
+
+  <text x="120" y="160" text-anchor="middle" class="tufte-code">fruits[1] → '바나나'</text>
+  <text x="120" y="180" text-anchor="middle" class="tufte-small">정수 인덱스로 접근</text>
+
+  <!-- Vertical divider -->
+  <line x1="250" y1="45" x2="250" y2="260" stroke="#ccc" stroke-width="1"/>
+
+  <!-- Dictionary (right) -->
+  <text x="475" y="55" text-anchor="middle" class="tufte-label" font-weight="bold">딕셔너리: 키로 접근</text>
+  <text x="295" y="80" class="tufte-code">prices = {'사과': 1000, '바나나': 500, '체리': 2000}</text>
+
+  <!-- Key-value pairs visualization -->
+  <g transform="translate(295, 105)">
+    <!-- Key column -->
+    <rect x="0" y="0" width="70" height="30" fill="#ccc" stroke="#666"/>
+    <rect x="0" y="30" width="70" height="30" fill="#ccc" stroke="#666"/>
+    <rect x="0" y="60" width="70" height="30" fill="#ccc" stroke="#666"/>
+    <text x="35" y="20" text-anchor="middle" class="tufte-code">'사과'</text>
+    <text x="35" y="50" text-anchor="middle" class="tufte-code">'바나나'</text>
+    <text x="35" y="80" text-anchor="middle" class="tufte-code">'체리'</text>
+    <text x="35" y="-8" text-anchor="middle" class="tufte-small">키(key)</text>
+
+    <!-- Arrows -->
+    <line x1="70" y1="15" x2="95" y2="15" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+    <line x1="70" y1="45" x2="95" y2="45" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+    <line x1="70" y1="75" x2="95" y2="75" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+    <!-- Value column -->
+    <rect x="105" y="0" width="70" height="30" fill="#e8e8e8" stroke="#666"/>
+    <rect x="105" y="30" width="70" height="30" fill="#e8e8e8" stroke="#666"/>
+    <rect x="105" y="60" width="70" height="30" fill="#e8e8e8" stroke="#666"/>
+    <text x="140" y="20" text-anchor="middle" class="tufte-code">1000</text>
+    <text x="140" y="50" text-anchor="middle" class="tufte-code">500</text>
+    <text x="140" y="80" text-anchor="middle" class="tufte-code">2000</text>
+    <text x="140" y="-8" text-anchor="middle" class="tufte-small">값(value)</text>
+  </g>
+
+  <text x="475" y="210" text-anchor="middle" class="tufte-code">prices['바나나'] → 500</text>
+  <text x="475" y="230" text-anchor="middle" class="tufte-small">문자열 키로 접근</text>
+
+  <!-- Bottom comparison -->
+  <line x1="30" y1="250" x2="670" y2="250" stroke="#ccc" stroke-width="1"/>
+  <text x="120" y="270" text-anchor="middle" class="tufte-small">순서 있음, 정수 인덱스</text>
+  <text x="475" y="270" text-anchor="middle" class="tufte-small">키-값 매핑, 임의 키 사용 가능</text>
+</svg>

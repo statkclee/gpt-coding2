@@ -1,0 +1,2225 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" xml:lang="ko-KR"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.16">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="이광춘(Openai)">
+<title>41&nbsp; 소프트웨어 2.0 – 챗GPT 코딩(개정판)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./ml-architecture.html" rel="next">
+<link href="./arch-pattern.html" rel="prev">
+<link href="./images/logo.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-8ee146c0b749343448e797d10b61a7f9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-55f79cb6abf2a16ff6075165a9063c3c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "일치 없음",
+    "search-matching-documents-text": "일치된 문서",
+    "search-copy-link-title": "검색 링크 복사",
+    "search-hide-matches-text": "추가 검색 결과 숨기기",
+    "search-more-match-text": "추가 검색결과",
+    "search-more-matches-text": "추가 검색결과",
+    "search-clear-button-title": "제거",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "취소",
+    "search-submit-button-title": "검색",
+    "search-label": "검색"
+  }
+}</script><script type="text/javascript">
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-229551680-1', 'auto');
+
+ga('send', {
+  hitType: 'pageview',
+  'anonymizeIp': true,
+});
+</script>
+</head>
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ml-paradigm.html"><strong>7부</strong> 기계학습 패러다임</a></li><li class="breadcrumb-item"><a href="./ml-paradigm.html"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">소프트웨어 2.0</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="검색" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">챗GPT 코딩(개정판)</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/bit2r/gpt-coding/" title="소스 코드" class="quarto-navigation-tool px-1" aria-label="소스 코드"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="리더 모드 전환">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="검색"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">서문</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>1부</strong> 전통 프로그래밍</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">프로그래밍 시작하기</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-var.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">변수, 표현식, 문장</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-cont.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">조건부 실행</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-func.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">함수</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-loop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">반복문</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>2부</strong> 자료구조</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-data-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">데이터, AI 식량</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-string.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">문자열</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-file.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">파일</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-list.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">리스트</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-dictionaries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">딕셔너리</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-tuples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">튜플</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-dataframe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">데이터프레임</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-json.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">JSON</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18-tensor.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">텐서</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-embedding.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">벡터와 임베딩</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-graph.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">그래프</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>3부</strong> 버전제어와 협업</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Git 시작하기</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-tracking.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">변경사항 추적</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-history.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">히스토리와 파일 관리</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-remote.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">GitHub와 원격 저장소</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-collab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">협업과 충돌 해결</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">오픈 사이언스</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>4부</strong> 분야별 코딩</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">특화 도구 입문</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-regex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">정규 표현식</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-network.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-web.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">웹서비스</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-database.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">데이터베이스와 SQL</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-ds.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">데이터 과학과 R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-auto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">파일 자동화</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-make.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">빌드 자동화: make</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>5부</strong> 프로그래밍 패러다임</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-paradigm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">패러다임의 이해</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-imperative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">명령형과 절차적 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-oop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">객체지향 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-fp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">함수형 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-declarative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">선언형 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-reactive.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">반응형 프로그래밍</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>6부</strong> 소프트웨어 설계와 아키텍처</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-reuse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">재사용 명령</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-stack.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">소프트웨어 스택</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">소프트웨어 아키텍처</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-pattern.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">살아남은 패턴</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>7부</strong> 기계학습 패러다임</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-paradigm.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">소프트웨어 2.0</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">신경망 아키텍처</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">43</span>&nbsp; <span class="chapter-title">학습과 추론</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-to-llm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">44</span>&nbsp; <span class="chapter-title">트랜스포머에서 거대 언어모형으로</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>부록</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">용어사전</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">참고문헌</span></a>
+  </div>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">목차</h2>
+   
+  <ul>
+<li><a href="#sec-ml-paradigm-limits" id="toc-sec-ml-paradigm-limits" class="nav-link active" data-scroll-target="#sec-ml-paradigm-limits"><span class="header-section-number">41.1</span> 전통 프로그래밍 한계</a></li>
+  <li><a href="#sec-ml-paradigm-learning" id="toc-sec-ml-paradigm-learning" class="nav-link" data-scroll-target="#sec-ml-paradigm-learning"><span class="header-section-number">41.2</span> 데이터에서 배우는 프로그램</a></li>
+  <li>
+<a href="#sec-ml-paradigm-code-data" id="toc-sec-ml-paradigm-code-data" class="nav-link" data-scroll-target="#sec-ml-paradigm-code-data"><span class="header-section-number">41.3</span> 코드 vs 데이터</a>
+  <ul class="collapse">
+<li><a href="#%ED%95%99%EC%8A%B5-%EA%B0%80%EB%8A%A5%ED%95%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%A7%8C%EB%93%A4%EA%B8%B0" id="toc-학습-가능한-데이터-만들기" class="nav-link" data-scroll-target="#%ED%95%99%EC%8A%B5-%EA%B0%80%EB%8A%A5%ED%95%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%A7%8C%EB%93%A4%EA%B8%B0"><span class="header-section-number">41.3.1</span> 학습 가능한 데이터 만들기</a></li>
+  <li><a href="#%EC%9D%BC%EB%B0%98%ED%99%94%EB%A5%BC-%EC%9C%84%ED%95%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%B5%9C%EC%A0%81%ED%99%94" id="toc-일반화를-위한-데이터-최적화" class="nav-link" data-scroll-target="#%EC%9D%BC%EB%B0%98%ED%99%94%EB%A5%BC-%EC%9C%84%ED%95%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%B5%9C%EC%A0%81%ED%99%94"><span class="header-section-number">41.3.2</span> 일반화를 위한 데이터 최적화</a></li>
+  </ul>
+</li>
+  <li><a href="#sec-ml-paradigm-coexist" id="toc-sec-ml-paradigm-coexist" class="nav-link" data-scroll-target="#sec-ml-paradigm-coexist"><span class="header-section-number">41.4</span> 두 패러다임 공존</a></li>
+  <li><a href="#%EC%83%9D%EA%B0%81%ED%95%B4%EB%B3%BC-%EC%A0%90" id="toc-생각해볼-점" class="nav-link" data-scroll-target="#%EC%83%9D%EA%B0%81%ED%95%B4%EB%B3%BC-%EC%A0%90">💡 생각해볼 점</a></li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/ml-paradigm.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ml-paradigm.html"><strong>7부</strong> 기계학습 패러다임</a></li><li class="breadcrumb-item"><a href="./ml-paradigm.html"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">소프트웨어 2.0</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-ml-paradigm" class="quarto-section-identifier"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">소프트웨어 2.0</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><p>2017년 테슬라의 AI 총괄이었던 안드레이 카파시(Andrej Karpathy)는 “소프트웨어 2.0”이라는 개념을 제시했다. 전통적인 프로그래밍이 개발자가 규칙을 명시적으로 코드로 작성하는 방식이라면, 기계학습은 데이터에서 규칙을 자동으로 학습하는 완전히 다른 패러다임이다. 단순히 새로운 도구가 추가된 것이 아니라, 소프트웨어를 “작성하는 방식” 자체가 바뀌었다. 이 전환은 소프트웨어 개발 방법론뿐만 아니라 하드웨어 측면에서도 근본적인 변화를 가져왔다. 전통적 프로그래밍이 CPU의 순차적 명령 처리에 최적화되어 있다면, 기계학습은 GPU의 병렬 연산 능력을 활용하여 대규모 행렬 계산을 수행한다. CPU에서 GPU로의 이동은 단순한 하드웨어 교체가 아니라, 계산 패러다임 자체의 전환을 의미한다.</p>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">노트</span>안드레이 카파시와 소프트웨어 2.0
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>카파시는 스탠포드 박사 과정에서 컴퓨터 비전을 연구했고, 이후 테슬라 자율주행 AI를 이끌었다. 2017년 그의 블로그 포스트 “소프트웨어 2.0”은 기계학습이 단순한 기술이 아닌 프로그래밍 패러다임 자체의 전환임을 설득력 있게 주장하며 업계에 큰 반향을 일으켰다.</p>
+</div>
+</div>
+<div id="fig-ml-paradigm-shift" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-ml-paradigm-shift-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ml-paradigm-shift.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ml-paradigm-shift-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;41.1: 소프트웨어 1.0 vs 2.0 패러다임 비교
+</figcaption></figure>
+</div>
+<section id="sec-ml-paradigm-limits" class="level2" data-number="41.1"><h2 data-number="41.1" class="anchored" data-anchor-id="sec-ml-paradigm-limits">
+<span class="header-section-number">41.1</span> 전통 프로그래밍 한계</h2>
+<p>전통적인 프로그래밍 방식(소프트웨어 1.0)은 명시적 규칙(explicit rules)에 기반한다. 개발자가 모든 조건과 로직을 코드로 작성하면, 컴퓨터는 그 규칙을 정확히 실행한다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 소프트웨어 1.0: 명시적 규칙</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> classify_email(email):</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    spam_keywords <span class="op">=</span> [<span class="st">"무료"</span>, <span class="st">"할인"</span>, <span class="st">"당첨"</span>, <span class="st">"클릭하세요"</span>]</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> keyword <span class="kw">in</span> spam_keywords:</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> keyword <span class="kw">in</span> email.lower():</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="st">"스팸"</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> email.count(<span class="st">"!"</span>) <span class="op">&gt;</span> <span class="dv">5</span>:</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"스팸"</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="st">"정상"</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>규칙 기반 접근법은 도메인이 명확하고 규칙이 유한할 때 효과적이다. 그러나 현실 세계의 많은 문제는 명시적 규칙으로 포착하기 어렵다. 특히 자연어 처리는 규칙 기반 접근의 한계를 명확히 드러낸다. 스팸 이메일 분류를 예로 들면, 초기 필터는 “무료”, “당첨”, “클릭하세요” 같은 키워드 목록에 의존했다. 그러나 스패머는 “무ㄹㅛ”, “당-첨”, “클릭 하세요” 등으로 우회했고, 필터는 이에 대응하기 위해 정규표현식과 예외 규칙을 추가해야 했다. 결국 수천 줄의 규칙이 쌓였지만, 새로운 우회 전략에는 여전히 취약했다.</p>
+<div class="cell">
+<div id="tbl-rule-based-limits" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><div aria-describedby="tbl-rule-based-limits-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="nkdbwrffvi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#nkdbwrffvi table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#nkdbwrffvi thead, #nkdbwrffvi tbody, #nkdbwrffvi tfoot, #nkdbwrffvi tr, #nkdbwrffvi td, #nkdbwrffvi th {
+  border-style: none;
+}
+
+#nkdbwrffvi p {
+  margin: 0;
+  padding: 0;
+}
+
+#nkdbwrffvi .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 11px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#nkdbwrffvi .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#nkdbwrffvi .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#nkdbwrffvi .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#nkdbwrffvi .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#nkdbwrffvi .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nkdbwrffvi .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#nkdbwrffvi .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#nkdbwrffvi .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#nkdbwrffvi .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#nkdbwrffvi .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#nkdbwrffvi .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#nkdbwrffvi .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#nkdbwrffvi .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#nkdbwrffvi .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#nkdbwrffvi .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#nkdbwrffvi .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#nkdbwrffvi .gt_row {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#nkdbwrffvi .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nkdbwrffvi .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#nkdbwrffvi .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#nkdbwrffvi .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#nkdbwrffvi .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nkdbwrffvi .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#nkdbwrffvi .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#nkdbwrffvi .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nkdbwrffvi .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nkdbwrffvi .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#nkdbwrffvi .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nkdbwrffvi .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#nkdbwrffvi .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nkdbwrffvi .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#nkdbwrffvi .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nkdbwrffvi .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#nkdbwrffvi .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nkdbwrffvi .gt_left {
+  text-align: left;
+}
+
+#nkdbwrffvi .gt_center {
+  text-align: center;
+}
+
+#nkdbwrffvi .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#nkdbwrffvi .gt_font_normal {
+  font-weight: normal;
+}
+
+#nkdbwrffvi .gt_font_bold {
+  font-weight: bold;
+}
+
+#nkdbwrffvi .gt_font_italic {
+  font-style: italic;
+}
+
+#nkdbwrffvi .gt_super {
+  font-size: 65%;
+}
+
+#nkdbwrffvi .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#nkdbwrffvi .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#nkdbwrffvi .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#nkdbwrffvi .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#nkdbwrffvi .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#nkdbwrffvi .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#nkdbwrffvi .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#nkdbwrffvi .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#nkdbwrffvi div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table do-not-create-environment cell table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings header">
+<th id="a구분" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">구분</th>
+<th id="a자연어-처리" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">자연어 처리</th>
+<th id="a컴퓨터-비전" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">컴퓨터 비전</th>
+<th id="a음성" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">음성</th>
+<th id="a추천/진단" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">추천/진단</th>
+</tr></thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="구분" style="font-weight: bold">문제</td>
+<td class="gt_row gt_left" headers="자연어 처리">스팸 필터, 기계번역</td>
+<td class="gt_row gt_left" headers="컴퓨터 비전">이미지 분류, 얼굴/필기 인식</td>
+<td class="gt_row gt_left" headers="음성">음성-텍스트, 화자 식별</td>
+<td class="gt_row gt_left" headers="추천/진단">영화 추천, 질병 진단</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="구분" style="font-weight: bold">규칙 기반</td>
+<td class="gt_row gt_left" headers="자연어 처리">키워드 목록, 문법 규칙</td>
+<td class="gt_row gt_left" headers="컴퓨터 비전">픽셀 패턴, 특징점 측정</td>
+<td class="gt_row gt_left" headers="음성">음소 매핑, 주파수 규칙</td>
+<td class="gt_row gt_left" headers="추천/진단">장르 필터, 증상-질병 룰</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="구분" style="font-weight: bold">한계</td>
+<td class="gt_row gt_left" headers="자연어 처리">우회 표현, 맥락 처리 실패</td>
+<td class="gt_row gt_left" headers="컴퓨터 비전">조명/각도 변화, 필체 변형에 취약</td>
+<td class="gt_row gt_left" headers="음성">억양/사투리, 감정 변화에 민감</td>
+<td class="gt_row gt_left" headers="추천/진단">개인 취향, 복합 증상 처리 한계</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-tbl" id="tbl-rule-based-limits-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+표&nbsp;41.1: 규칙 기반 접근법의 한계
+</figcaption></figure>
+</div>
+</div>
+<p>규칙을 더 정교하게 만들수록 시스템은 복잡해지고, 예외 처리가 기하급수적으로 늘어난다. 이른바 “규칙 폭발(rule explosion)” 문제가 발생한다.</p>
+</section><section id="sec-ml-paradigm-learning" class="level2" data-number="41.2"><h2 data-number="41.2" class="anchored" data-anchor-id="sec-ml-paradigm-learning">
+<span class="header-section-number">41.2</span> 데이터에서 배우는 프로그램</h2>
+<p>소프트웨어 2.0은 규칙을 명시적으로 작성하지 않는다. 대신 데이터와 정답(레이블)을 제공하면, 알고리즘이 패턴을 스스로 학습한다. 스팸 이메일 분류를 기계학습으로 다시 구현하면 접근 방식이 완전히 달라진다.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 소프트웨어 2.0: 데이터에서 학습</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 설치: pip install scikit-learn</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.naive_bayes <span class="im">import</span> MultinomialNB</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.feature_extraction.text <span class="im">import</span> CountVectorizer</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 학습 데이터: 실제로는 수천~수만 개 필요</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>emails <span class="op">=</span> [</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"무료 할인 이벤트 지금 클릭"</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"회의 일정 안내 - 내일 오전 10시"</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"당첨되셨습니다! 지금 확인하세요"</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"프로젝트 마감일 연장 공지"</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"특별 무료 경품 클릭"</span>,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"내일 회의실 예약 완료"</span>,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"축하합니다 당첨 확인하세요"</span>,</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"분기 보고서 제출 안내"</span>,</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> [<span class="st">"스팸"</span>, <span class="st">"정상"</span>, <span class="st">"스팸"</span>, <span class="st">"정상"</span>, <span class="st">"스팸"</span>, <span class="st">"정상"</span>, <span class="st">"스팸"</span>, <span class="st">"정상"</span>]</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co"># 모델 학습: 텍스트를 숫자 벡터로 변환 후 패턴 학습</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>vectorizer <span class="op">=</span> CountVectorizer()  <span class="co"># 단어 빈도 벡터화</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> vectorizer.fit_transform(emails)  <span class="co"># "무료"→[1,0,0,...], "할인"→[0,1,0,...]</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> MultinomialNB()  <span class="co"># 나이브 베이즈 분류기</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>model.fit(X, labels)  <span class="co"># 데이터에서 확률 패턴 학습</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co"># 예측: 학습된 패턴으로 새 이메일 분류</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>new_email <span class="op">=</span> [<span class="st">"특별 ㅁㅜㄹㅛ 이벤트"</span>]  <span class="co"># 오타나 우회 표현</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>prediction <span class="op">=</span> model.predict(vectorizer.transform(new_email))</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"예측 결과: </span><span class="sc">{</span>prediction[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">"</span>)  <span class="co"># 출력: 예측 결과: 스팸</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>실행 결과 예시:</p>
+<pre><code>예측 결과: 스팸</code></pre>
+<p>기계학습 모델은 “ㅁㅜㄹㅛ”처럼 의도적으로 변형된 표현도 주변 단어(“특별”, “이벤트”)와의 조합 패턴으로 스팸을 판별할 수 있다. 규칙 기반에서는 정규표현식을 수십 개 추가해야 했을 상황이 데이터 학습만으로 해결된다.</p>
+<p>두 패러다임의 핵심 차이는 “규칙을 누가 만드는가”에 있다. 소프트웨어 1.0에서는 개발자가 <code>if "무료" in email</code>처럼 명시적 조건문으로 규칙을 직접 작성한다. 반면 소프트웨어 2.0에서는 데이터에서 규칙이 자동으로 생성된다. 모델은 학습 과정에서 <code>P(스팸|"무료") = 0.85</code>와 같은 확률 패턴을 발견하고, 이를 내부 가중치로 저장한다. 개발자가 작성한 코드는 학습 파이프라인일 뿐, 실제 분류 로직은 데이터로부터 만들어진다.</p>
+<p>기계학습 모델은 명시적 키워드 대신 단어 조합의 <strong>확률 패턴</strong>을 학습한다. “무료”와 “할인”이 함께 나올 확률, “회의”와 “일정”이 정상 메일에서 자주 나오는 패턴 등을 수치화한다. 새로운 우회 전략이 나와도 재학습만 하면 되며, 규칙을 일일이 수정할 필요가 없다.</p>
+<p>개발자의 역할도 변한다. 코드를 작성하는 대신, 데이터를 수집하고 레이블링하며, 모델 아키텍처를 선택하고, 학습 결과를 평가한다. 프로그래밍의 초점이 “어떻게 해결하는가(how)”에서 “무엇을 해결할 것인가(what)”로 이동한다.</p>
+</section><section id="sec-ml-paradigm-code-data" class="level2" data-number="41.3"><h2 data-number="41.3" class="anchored" data-anchor-id="sec-ml-paradigm-code-data">
+<span class="header-section-number">41.3</span> 코드 vs 데이터</h2>
+<p>소프트웨어 2.0 패러다임에서는 데이터가 코드보다 중요해진다. 전통 프로그래밍에서 성능을 개선하려면 알고리즘을 최적화하고 코드를 리팩토링한다. 반면 기계학습에서는 같은 알고리즘이라도 더 많고 좋은 데이터를 제공하면 성능이 극적으로 향상된다. 코드는 학습 파이프라인을 정의할 뿐, 실제 “지능”은 데이터에서 나온다.</p>
+<p>여기서 말하는 “데이터 중심”은 기존의 데이터베이스 중심 아키텍처(Database-Driven Architecture)와 근본적으로 다르다. 데이터베이스 중심 개발에서 데이터는 <strong>저장되고 조회되는 대상</strong>이다. CRUD(생성, 읽기, 수정, 삭제) 연산을 효율적으로 수행하기 위한 스키마 설계가 핵심이다. 반면 기계학습에서 데이터는 <strong>학습 원자재</strong>다. 레이블이 붙은 데이터에서 패턴을 추출하여 모델의 가중치를 만든다. 데이터베이스는 데이터를 “보관”하지만, 기계학습은 데이터를 “소비”하여 지식을 생성한다.</p>
+<div class="cell">
+<div id="tbl-code-vs-data" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><div aria-describedby="tbl-code-vs-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="rrttcxfubl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rrttcxfubl table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#rrttcxfubl thead, #rrttcxfubl tbody, #rrttcxfubl tfoot, #rrttcxfubl tr, #rrttcxfubl td, #rrttcxfubl th {
+  border-style: none;
+}
+
+#rrttcxfubl p {
+  margin: 0;
+  padding: 0;
+}
+
+#rrttcxfubl .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 11px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#rrttcxfubl .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#rrttcxfubl .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#rrttcxfubl .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#rrttcxfubl .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rrttcxfubl .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rrttcxfubl .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rrttcxfubl .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#rrttcxfubl .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#rrttcxfubl .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#rrttcxfubl .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#rrttcxfubl .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#rrttcxfubl .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#rrttcxfubl .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#rrttcxfubl .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#rrttcxfubl .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#rrttcxfubl .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#rrttcxfubl .gt_row {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#rrttcxfubl .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rrttcxfubl .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#rrttcxfubl .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#rrttcxfubl .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#rrttcxfubl .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rrttcxfubl .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#rrttcxfubl .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#rrttcxfubl .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rrttcxfubl .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rrttcxfubl .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#rrttcxfubl .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rrttcxfubl .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#rrttcxfubl .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rrttcxfubl .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rrttcxfubl .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rrttcxfubl .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rrttcxfubl .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rrttcxfubl .gt_left {
+  text-align: left;
+}
+
+#rrttcxfubl .gt_center {
+  text-align: center;
+}
+
+#rrttcxfubl .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#rrttcxfubl .gt_font_normal {
+  font-weight: normal;
+}
+
+#rrttcxfubl .gt_font_bold {
+  font-weight: bold;
+}
+
+#rrttcxfubl .gt_font_italic {
+  font-style: italic;
+}
+
+#rrttcxfubl .gt_super {
+  font-size: 65%;
+}
+
+#rrttcxfubl .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#rrttcxfubl .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#rrttcxfubl .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#rrttcxfubl .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#rrttcxfubl .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#rrttcxfubl .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#rrttcxfubl .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#rrttcxfubl .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#rrttcxfubl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table do-not-create-environment cell table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings header">
+<th id="a패러다임" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">패러다임</th>
+<th id="a핵심-자산" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">핵심 자산</th>
+<th id="a성능-개선" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">성능 개선</th>
+<th id="a버그-수정" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">버그 수정</th>
+<th id="a확장" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">확장</th>
+<th id="a지적재산권" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">지적재산권</th>
+</tr></thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="패러다임" style="font-weight: bold">소프트웨어 1.0</td>
+<td class="gt_row gt_left" headers="핵심 자산">소스 코드</td>
+<td class="gt_row gt_left" headers="성능 개선">알고리즘 개선</td>
+<td class="gt_row gt_left" headers="버그 수정">코드 디버깅</td>
+<td class="gt_row gt_left" headers="확장">코드 리팩토링</td>
+<td class="gt_row gt_left" headers="지적재산권">코드 라이선스</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="패러다임" style="font-weight: bold">소프트웨어 2.0</td>
+<td class="gt_row gt_left" headers="핵심 자산">학습 데이터셋</td>
+<td class="gt_row gt_left" headers="성능 개선">더 많은/좋은 데이터</td>
+<td class="gt_row gt_left" headers="버그 수정">데이터 정제, 레이블 수정</td>
+<td class="gt_row gt_left" headers="확장">데이터 확장, 증강</td>
+<td class="gt_row gt_left" headers="지적재산권">데이터 소유권</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-tbl" id="tbl-code-vs-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+표&nbsp;41.2: 소프트웨어 1.0 vs 2.0의 핵심 자산 비교
+</figcaption></figure>
+</div>
+</div>
+<section id="학습-가능한-데이터-만들기" class="level3" data-number="41.3.1"><h3 data-number="41.3.1" class="anchored" data-anchor-id="학습-가능한-데이터-만들기">
+<span class="header-section-number">41.3.1</span> 학습 가능한 데이터 만들기</h3>
+<p>원시 데이터(raw data)를 모델이 학습할 수 있는 형태로 바꾸는 과정은 소프트웨어 2.0 개발의 핵심이다. <a href="#fig-ml-data-pipeline" class="quarto-xref">그림&nbsp;<span>41.2</span></a> 은 인간 세상의 비정형 데이터가 엔지니어링 파이프라인을 거쳐 기계가 처리 가능한 수치 텐서로 변환되는 전체 흐름을 보여준다. 왼쪽의 혼돈스러운 파일들(.txt, .jpg, .wav, .csv)은 높은 엔트로피 상태다. 사람은 이메일을 읽고 의미를 파악하지만, 컴퓨터는 문자열을 숫자로만 본다. 중앙의 파이프라인(정제→라벨링→벡터화)을 통과하면서 데이터는 낮은 엔트로피의 정형 구조를 갖춘다. 오른쪽의 텐서 X(입력)와 벡터 y(레이블)는 GPU가 직접 연산할 수 있는 형태다. 이 변환이 없으면 아무리 좋은 알고리즘도 무용지물이다.</p>
+<div id="fig-ml-data-pipeline" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-ml-data-pipeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ml-data-pipeline.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ml-data-pipeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;41.2: 데이터 준비 파이프라인
+</figcaption></figure>
+</div>
+<p><a href="#fig-ml-data-pipeline" class="quarto-xref">그림&nbsp;<span>41.2</span></a> 의 세 단계를 구체적으로 살펴보자. 첫 번째 “인간 세상”에서는 이메일 텍스트, 이미지 파일, 음성 녹음, CSV 로그 등 형식이 제각각이다. 레이블도 없고 노이즈도 많다. 두 번째 “엔지니어링 파이프라인”에서 정제(Cleaning) 단계는 HTML 태그 제거, 특수문자 정리, 중복 제거 등을 수행한다. 이어지는 라벨링(Labeling)에서 사람이 정답을 붙인다. 스팸 필터라면 수만 개 이메일을 하나씩 읽고 “스팸” 또는 “정상” 태그를 달아야 한다. 이 과정이 가장 비용이 많이 들지만, 여기서 품질이 결정된다. 마지막 벡터화(Vectorization)에서 “무료”→[1,0,0,…]처럼 단어를 숫자 인덱스로 바꾼다. 세 번째 “기계 세상”에 도달하면 모든 데이터가 행렬 X와 벡터 y로 정리되어 <code>model.fit(X, y)</code> 한 줄로 학습을 시작할 수 있다.</p>
+<p>“쓰레기가 들어가면 쓰레기가 나온다(Garbage In, Garbage Out)”는 격언은 기계학습에서 더욱 절실하다. 파이프라인 어느 단계에서든 품질이 떨어지면 모델 성능도 떨어진다. 레이블 오류가 5%만 섞여도 모델은 잘못된 패턴을 학습한다.</p>
+</section><section id="일반화를-위한-데이터-최적화" class="level3" data-number="41.3.2"><h3 data-number="41.3.2" class="anchored" data-anchor-id="일반화를-위한-데이터-최적화">
+<span class="header-section-number">41.3.2</span> 일반화를 위한 데이터 최적화</h3>
+<p>레이블 데이터가 준비되었다고 끝이 아니다. 모델이 훈련 데이터에만 과도하게 적응하지 않고(과적합), 실전에서도 잘 작동하도록(일반화) 데이터를 최적화해야 한다. <a href="#fig-ml-data-optimization" class="quarto-xref">그림&nbsp;<span>41.3</span></a> 는 일반화를 달성하기 위한 핵심 전략을 보여준다. 가장 중요한 원칙은 “먼저 분할(Split First!)”이다. 전체 데이터를 학습(Train)과 테스트(Test)로 나눈 후, 테스트 세트는 즉시 봉인한다. 학습 데이터만 최적화 과정을 거친다. 테스트 세트가 학습이나 최적화에 조금이라도 노출되면 “데이터 누수(Data Leakage)”가 발생하고, 실전 성능을 과대평가하게 된다.</p>
+<div id="fig-ml-data-optimization" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-ml-data-optimization-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ml-data-optimization.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ml-data-optimization-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;41.3: 데이터 최적화 및 학습 워크플로우
+</figcaption></figure>
+</div>
+<p><a href="#fig-ml-data-optimization" class="quarto-xref">그림&nbsp;<span>41.3</span></a> 의 왼쪽은 불균형 데이터를 보여준다. 클래스 A가 클래스 B보다 훨씬 많은 상태에서 바로 학습하면 모델은 A에 편향된다. 중앙의 최적화 영역(색상 배경)에서는 학습 데이터만 변형한다. 균형 조정(Balancing)에서 오버샘플링으로 소수 클래스를 늘리고, 증강(Augmentation)에서 원본 이미지를 회전/반전하여 데이터를 확장한다. 스케일링(Scaling)에서 픽셀 값 [0,255]를 [0,1]로 정규화하고, 검증 분할(Validation Split)에서 학습 데이터를 다시 Train/Val로 나눈다. 오른쪽의 학습 및 평가 영역에서는 최적화된 학습 데이터로 모델을 학습하고, 검증 세트로 하이퍼파라미터를 튜닝한다. 모든 튜닝이 끝난 후에야 봉인되었던 테스트 세트가 등장한다(굵은 점선). 테스트 성능이 곧 실전 성능이다. 만약 테스트 세트를 튜닝에 사용했다면 모델은 테스트에 과적합되어 실전에서 실패한다.</p>
+<p>불균형 데이터는 모델 편향의 주범이다. <a href="#fig-ml-data-optimization" class="quarto-xref">그림&nbsp;<span>41.3</span></a> 의 1단계에서 보듯 스팸 메일이 10%밖에 없다면, 모델은 “무조건 정상”이라고 답해도 90% 정확도를 얻는다. 학습은 되지만 쓸모없는 모델이 만들어진다. 2단계 최적화 영역의 균형 조정(Balancing)에서 이를 해결한다. 오버샘플링은 소수 클래스(스팸)를 복제하거나 SMOTE로 기존 샘플 사이를 보간하여 합성 샘플을 생성한다. 언더샘플링은 다수 클래스(정상)를 무작위로 제거한다. 클래스 가중치 방법은 손실 함수에서 소수 클래스 오류에 더 높은 페널티를 부여하여 모델이 균형있게 학습하도록 유도한다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 불균형 데이터 처리 예시</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> imblearn.over_sampling <span class="im">import</span> SMOTE</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 원본: 스팸 100개, 정상 1000개 (1:10 비율)</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>smote <span class="op">=</span> SMOTE(sampling_strategy<span class="op">=</span><span class="fl">0.5</span>)  <span class="co"># 스팸을 정상의 50%까지 늘림</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>X_balanced, y_balanced <span class="op">=</span> smote.fit_resample(X, y)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 결과: 스팸 500개, 정상 1000개 (1:2 비율로 개선)</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p><a href="#fig-ml-data-optimization" class="quarto-xref">그림&nbsp;<span>41.3</span></a> 의 2단계에서 증강(Augmentation)은 데이터를 “인공적으로” 늘리는 기법이다. 원본 고양이 사진 1장을 15도 회전, 좌우 반전, 밝기 조절하면 3장이 된다. 레이블은 모두 “고양이”로 동일하다. 모델은 정면 고양이만 보고 학습한 것이 아니라 여러 각도의 고양이를 경험한 셈이다. 실전에서 약간 기울어진 고양이를 만나도 인식할 가능성이 높아진다. 텍스트 데이터도 마찬가지다. “할인 이벤트”를 “이벤트 할인”으로 순서를 바꾸거나, “할인”을 “특가”로 동의어 치환해도 의미는 유지된다. 증강은 다이어그램에서 원(1개)이 점선 원 2개로 늘어나는 모습으로 표현되어 있다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 이미지 데이터 증강 예시</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torchvision <span class="im">import</span> transforms</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>augmentation <span class="op">=</span> transforms.Compose([</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    transforms.RandomRotation(<span class="dv">15</span>),      <span class="co"># ±15도 회전</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    transforms.RandomHorizontalFlip(),  <span class="co"># 좌우 반전</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    transforms.ColorJitter(<span class="fl">0.2</span>, <span class="fl">0.2</span>),   <span class="co"># 밝기/대비 조절</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 원본 이미지 100장 → 증강으로 10,000장 효과</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p><a href="#fig-ml-data-optimization" class="quarto-xref">그림&nbsp;<span>41.3</span></a> 의 3단계 학습 및 평가 흐름에서 핵심은 테스트 세트의 격리다. 전체 데이터를 학습 80%, 테스트 20%로 나눈 직후, 테스트 세트는 즉시 봉인된다. 학습 데이터만 최적화를 거쳐 모델 학습에 투입된다. 검증 세트는 학습 데이터를 한번 더 나눠서(Train 85%, Val 15%) 만든다. 검증 세트로 여러 하이퍼파라미터를 시도하고(다이어그램의 회색 점선 루프), 가장 좋은 설정을 찾는다. 모든 튜닝이 끝난 최종 단계에서만 봉인된 테스트 세트가 등장한다(붉은 점선 화살표). 테스트 성능이 85%라면 실전에서도 약 85% 성능을 기대할 수 있다. 만약 테스트 세트로 튜닝까지 했다면 테스트 성능 95%, 실전 성능 70%처럼 큰 격차가 발생한다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1단계: 먼저 테스트 세트 분리 (80:20)</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, stratify<span class="op">=</span>y  <span class="co"># stratify: 클래스 비율 유지</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># X_test, y_test는 즉시 봉인!</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 2단계: 학습 데이터를 Train/Val로 분할 (85:15)</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>X_train, X_val, y_train, y_val <span class="op">=</span> train_test_split(</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    X_train, y_train, test_size<span class="op">=</span><span class="fl">0.15</span>, stratify<span class="op">=</span>y_train</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 최종: 훈련 68%, 검증 12%, 테스트 20%</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-simple callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">경고</span>데이터 품질과 경쟁력
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>“Garbage in, garbage out”이라는 격언은 기계학습에서 더욱 절실하다. 편향된 데이터로 학습하면 편향된 모델이 만들어진다. 2016년 마이크로소프트의 챗봇 Tay가 악의적인 사용자 데이터를 학습하여 인종차별적 발언을 하게 된 사례가 대표적이다. 2023년에는 한 채용 AI가 남성 중심 데이터로 학습되어 여성 지원자를 차별하는 문제가 발견되었다.</p>
+<p>데이터 품질이 곧 경쟁력이다. 실리콘밸리 기업들이 사용자 데이터 확보에 집중하는 이유가 여기에 있다. 구글은 수십억 건의 검색 기록으로, 메타(페이스북)는 수조 개의 사용자 행동 데이터로 경쟁사보다 우수한 모델을 만든다. 같은 알고리즘을 쓰더라도 데이터가 많고 좋으면 이긴다. 데이터는 “새로운 석유”가 아니라 “새로운 소스 코드”다. 데이터 품질 관리와 편향 검출은 이제 기계학습 개발의 필수 과정이다.</p>
+</div>
+</div>
+</section></section><section id="sec-ml-paradigm-coexist" class="level2" data-number="41.4"><h2 data-number="41.4" class="anchored" data-anchor-id="sec-ml-paradigm-coexist">
+<span class="header-section-number">41.4</span> 두 패러다임 공존</h2>
+<p>소프트웨어 2.0이 모든 것을 대체하는 것은 아니다. 2015년 구글이 발표한 “Hidden Technical Debt in Machine Learning Systems” 논문<span class="citation" data-cites="Sculley2015"><a href="references.html#ref-Sculley2015" role="doc-biblioref">[1]</a></span>은 충격적인 사실을 보여준다. 실제 ML 시스템에서 순수 ML 코드(모델 학습 알고리즘)는 전체의 5%에 불과하다. 나머지 95%는 데이터 수집, 특징 추출, 데이터 검증, 모델 서빙 인프라, 모니터링, 설정 관리 등 <strong>전통적인 소프트웨어 1.0 영역</strong>이다. 작고 귀여운 ML 코드 한 조각을 실전에서 돌리려면 그 주변에 거대하고 복잡한 인프라를 구축해야 한다.</p>
+<div id="fig-ml-hidden-debt" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-ml-hidden-debt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ml-hidden-debt.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ml-hidden-debt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;41.4: ML 시스템 숨겨진 기술 부채
+</figcaption></figure>
+</div>
+<p><a href="#fig-ml-hidden-debt" class="quarto-xref">그림&nbsp;<span>41.4</span></a> 가 보여주듯, 중앙의 작은 검은 박스(ML 코드)를 둘러싼 회색/흰색 박스들이 전체 시스템의 대부분을 차지한다. 설정 관리(Configuration)에서 하이퍼파라미터와 환경 설정을 관리하고, 데이터 수집(Data Collection)에서 크롤링·API·로그를 처리한다. 데이터 검증(Data Verification)은 품질 체크와 이상치 탐지를, 특징 추출(Feature Extraction)은 전처리와 벡터화를 담당한다. 자원 관리(Resource Management)는 GPU/CPU 할당을, 분석 도구(Analysis Tools)는 성능 분석을, 프로세스 관리(Process Management)는 워크플로우 스케줄링을, 서빙 인프라(Serving Infrastructure)는 API와 로드밸런싱을, 모니터링(Monitoring)은 성능 추적과 알림을 수행한다. ML 모델이 아무리 정교해도 이 중 하나라도 망가지면 시스템 전체가 무너진다. 결국 소프트웨어 2.0은 소프트웨어 1.0 위에서 동작한다.</p>
+<p>두 패러다임의 역할 분담은 명확하다. 소프트웨어 1.0은 규칙이 명확하고 감사 추적이 필요한 비즈니스 로직, OS·컴파일러·데이터베이스 같은 시스템 프로그래밍, 동일 입력에 동일 출력이 보장되어야 하는 결정론적 처리, 왜 그런 결정을 내렸는지 설명이 필요한 상황에 강하다. 반면 소프트웨어 2.0은 이미지·음성·자연어 같은 인식(Perception) 작업, 패턴이 복잡하고 암묵적인 경우, 데이터가 풍부하고 명확한 정답이 있는 경우, 근사적 정답이 허용되는 상황에 우위를 보인다.</p>
+<p>실제 시스템은 두 패러다임을 계층적으로 결합한다. 다음 코드는 고객 요청 처리 시스템이다. 자연어 이해 부분은 ML 모델이, 비즈니스 규칙 판단은 전통 코드가 담당한다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 실제 시스템: 두 패러다임의 조합</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> process_customer_request(request):</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 소프트웨어 2.0: 자연어 이해 (복잡한 패턴)</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    intent <span class="op">=</span> ml_model.classify_intent(request)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    entities <span class="op">=</span> ml_model.extract_entities(request)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 소프트웨어 1.0: 비즈니스 로직 (명확한 규칙)</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> intent <span class="op">==</span> <span class="st">"환불요청"</span>:</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> entities[<span class="st">"days_since_purchase"</span>] <span class="op">&gt;</span> <span class="dv">30</span>:</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="st">"환불 기간이 지났습니다"</span>  <span class="co"># 명시적 규칙</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> entities[<span class="st">"amount"</span>] <span class="op">&gt;</span> <span class="dv">100000</span>:</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> escalate_to_human(request)  <span class="co"># 사람에게 에스컬레이션</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> process_refund(entities)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ...</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ML 모델은 “환불 요청인지 문의인지”를 판단하는 미묘한 자연어 이해를 수행한다. 전통 코드는 30일 환불 규칙, 10만원 이상 수동 처리 같은 비즈니스 정책을 집행한다. 둘은 서로를 보완한다. ML이 없으면 “환불 해주세요”와 “환불 가능한가요?”를 구분하는 규칙을 무한히 작성해야 한다. 전통 코드가 없으면 법적으로 엄격해야 하는 환불 정책을 ML 모델에 학습시켜야 하는데, 이는 설명 불가능하고 감사 추적도 어렵다. 현대 소프트웨어 개발자는 “언제 ML을 쓰고 언제 전통 코드를 쓸지” 판단하는 능력이 필요하다<span class="citation" data-cites="Sculley2015"><a href="references.html#ref-Sculley2015" role="doc-biblioref">[1]</a></span>.</p>
+</section><section id="생각해볼-점" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="생각해볼-점">💡 생각해볼 점</h2>
+<p>소프트웨어 2.0 패러다임은 개발자에게 근본적인 정체성 질문을 던진다. “나는 코드를 작성하는 사람인가, 데이터를 큐레이션하는 사람인가?” 전통적 개발자는 알고리즘 교과서를 읽고 자료구조를 최적화하며 실력을 키웠다. 논리적 사고가 핵심이었고, 같은 문제를 O(n²)에서 O(n log n)으로 개선하는 것이 자부심이었다. 그러나 기계학습 시대의 개발자는 데이터 품질을 평가하고, 레이블 오류를 찾아내며, 데이터 편향을 검출한다. 통계적 지식과 도메인 이해가 알고리즘 지식만큼 중요해졌다.</p>
+<p>더 흥미로운 변화는 “실패의 의미”가 달라진다는 점이다. 전통 프로그래밍에서 버그는 코드 논리 오류다. 디버거로 추적하고, 조건문을 수정하면 해결된다. 결정론적이고 재현 가능하다. 반면 ML 모델의 오류는 종종 데이터에 숨어 있다. 특정 입력에서만 실패하는데, 그 입력이 훈련 데이터에 없었기 때문이다. 수정 방법도 다르다. 코드를 고치는 게 아니라 그 유형의 데이터를 추가하고 재학습한다. 디버깅이 아니라 “데이터 디버깅”이다. 모델이 여성 얼굴 인식률이 낮다면, 여성 얼굴 데이터를 더 모아야 한다. 코드는 바뀌지 않는다.</p>
+<p>구글 논문<span class="citation" data-cites="Sculley2015"><a href="references.html#ref-Sculley2015" role="doc-biblioref">[1]</a></span>이 지적한 5% vs 95% 비율은 개발자의 시간 배분에도 적용된다. ML 엔지니어는 하루 중 5%만 모델 아키텍처를 고민하고, 95%는 데이터 파이프라인 디버깅, 모델 배포 자동화, A/B 테스트 설계, 성능 모니터링 대시보드 구축에 쓴다. 이 모든 것이 여전히 소프트웨어 1.0 스킬이다. 소프트웨어 2.0 시대가 왔다고 소프트웨어 1.0이 쓸모없어진 것이 아니다. 오히려 ML을 지탱하는 인프라로서 더 중요해졌다. 결국 “좋은 개발자”의 정의가 “알고리즘을 잘 짜는 사람”에서 “문제 해결에 적절한 도구(ML vs 전통 코드)를 선택하고 조합할 줄 아는 사람”으로 진화하고 있다.</p>
+<p>앞으로 살펴볼 신경망 아키텍처, 학습/추론 워크플로우, Transformer는 모두 소프트웨어 2.0의 기술적 기반이다. 이 위에서 LLM이 탄생했고, 2023년 이후 또 다른 전환이 시작되었다. 프롬프트로 지시하는 “소프트웨어 3.0” 시대에는 개발자가 데이터조차 준비하지 않고, LLM에게 자연어로 요구사항을 전달한다. 패러다임은 계속 진화하지만, 한 가지 변하지 않는 진실이 있다. 어떤 시대든 “문제를 정확히 정의하고, 적절한 도구를 선택하며, 결과를 비판적으로 평가하는” 능력이 핵심이다.</p>
+
+
+<div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-Sculley2015" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div>
+<div class="csl-right-inline">D. Sculley <em>기타</em>, <span>“Hidden Technical Debt in Machine Learning Systems”</span>, in <em>Advances in Neural Information Processing Systems 28 (NIPS 2015)</em>, C. Cortes, N. D. Lawrence, D. D. Lee, M. Sugiyama, 와/과 R. Garnett, 편집자, Curran Associates, Inc., 2015, pp 2503–2511. Available at: <a href="https://proceedings.neurips.cc/paper/2015/hash/86df7dcfd896fcaf2674f757a2463eba-Abstract.html">https://proceedings.neurips.cc/paper/2015/hash/86df7dcfd896fcaf2674f757a2463eba-Abstract.html</a>
+</div>
+</div>
+</div>
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "복사완료!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "복사완료!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/r2bit\.com\/gpt-coding\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./arch-pattern.html" class="pagination-link" aria-label="살아남은 패턴">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">살아남은 패턴</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./ml-architecture.html" class="pagination-link" aria-label="신경망 아키텍처">
+        <span class="nav-page-text"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">신경망 아키텍처</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+<p>챗GPT 쿼토 책은 소프트웨어 카펜트리 “Git 버전제어”를 번역한 것이 포함되어 있습니다.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/ml-paradigm.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>순수하게 <a href="https://quarto.org/">쿼토(Quarto)</a>로 제작되었습니다.</p>
+</div>
+  </div>
+</footer>
+
+
+</body></html>

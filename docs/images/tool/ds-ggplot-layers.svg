@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 30 800 270">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #111; font-weight: bold; }
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-mono { font-family: 'SF Mono', Consolas, monospace; fill: #444; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #666; font-style: italic; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #777; font-size: 10px; }
+      .layer-box { fill: #f8f8f8; stroke: #333; stroke-width: 1.5; }
+      .component-box { fill: #e8e8e8; stroke: #666; stroke-width: 1; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="2.5" orient="auto">
+      <path d="M0,0 L0,5 L7,2.5 z" fill="#555" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="300" fill="#ffffff"/>
+
+  <!-- 상단 제목 -->
+  <!-- <text x="400" y="25" text-anchor="middle" class="tufte-title" font-size="13">ggplot2 레이어 문법: 그래프 = 데이터 + 미적 매핑 + 기하 객체</text>
+  <line x1="100" y1="35" x2="700" y2="35" stroke="#ddd" stroke-width="1"/> -->
+
+  <!-- 왼쪽: 레이어 스택 -->
+  <g transform="translate(40, 55)">
+    <text x="100" y="0" text-anchor="middle" class="tufte-title" font-size="11">레이어 구조</text>
+
+    <!-- 레이어 5: theme -->
+    <g transform="translate(0, 15)">
+      <rect x="0" y="0" width="200" height="35" fill="#f0f0f0" stroke="#999" stroke-width="1" rx="4"/>
+      <text x="100" y="22" text-anchor="middle" class="tufte-mono" font-size="10">theme()</text>
+    </g>
+
+    <!-- 레이어 4: facet -->
+    <g transform="translate(10, 45)">
+      <rect x="0" y="0" width="180" height="35" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="4"/>
+      <text x="90" y="22" text-anchor="middle" class="tufte-mono" font-size="10">facet_wrap()</text>
+    </g>
+
+    <!-- 레이어 3: scale -->
+    <g transform="translate(20, 75)">
+      <rect x="0" y="0" width="160" height="35" fill="#e0e0e0" stroke="#999" stroke-width="1" rx="4"/>
+      <text x="80" y="22" text-anchor="middle" class="tufte-mono" font-size="10">scale_*_*()</text>
+    </g>
+
+    <!-- 레이어 2: geom -->
+    <g transform="translate(30, 105)">
+      <rect x="0" y="0" width="140" height="35" fill="#d0d0d0" stroke="#666" stroke-width="1.5" rx="4"/>
+      <text x="70" y="22" text-anchor="middle" class="tufte-mono" font-size="10">geom_*()</text>
+    </g>
+
+    <!-- 레이어 1: aes -->
+    <g transform="translate(40, 135)">
+      <rect x="0" y="0" width="120" height="35" fill="#c0c0c0" stroke="#666" stroke-width="1.5" rx="4"/>
+      <text x="60" y="22" text-anchor="middle" class="tufte-mono" font-size="10">aes()</text>
+    </g>
+
+    <!-- 레이어 0: data -->
+    <g transform="translate(50, 165)">
+      <rect x="0" y="0" width="100" height="35" fill="#a0a0a0" stroke="#333" stroke-width="2" rx="4"/>
+      <text x="50" y="22" text-anchor="middle" class="tufte-mono" font-size="10" fill="#fff">ggplot(data)</text>
+    </g>
+
+    <!-- 라벨 -->
+    <text x="220" y="35" text-anchor="start" class="tufte-small">스타일</text>
+    <text x="200" y="65" text-anchor="start" class="tufte-small">분할</text>
+    <text x="190" y="95" text-anchor="start" class="tufte-small">척도</text>
+    <text x="180" y="125" text-anchor="start" class="tufte-small">기하객체</text>
+    <text x="170" y="155" text-anchor="start" class="tufte-small">매핑</text>
+    <text x="160" y="185" text-anchor="start" class="tufte-small">데이터</text>
+  </g>
+
+  <!-- 중앙: + 연산자 -->
+  <g transform="translate(300, 120)">
+    <text x="0" y="30" text-anchor="middle" class="tufte-title" font-size="24">+</text>
+    <text x="0" y="55" text-anchor="middle" class="tufte-label" font-size="10">레이어 추가</text>
+  </g>
+
+  <!-- 오른쪽: 핵심 3요소 설명 -->
+  <g transform="translate(340, 55)">
+    <rect x="0" y="0" width="420" height="200" fill="#fafafa" stroke="#999" stroke-width="1" rx="6"/>
+    <text x="210" y="22" text-anchor="middle" class="tufte-title" font-size="12">핵심 3요소</text>
+    <line x1="20" y1="32" x2="400" y2="32" stroke="#ddd" stroke-width="1"/>
+
+    <!-- Data -->
+    <g transform="translate(20, 45)">
+      <rect x="0" y="0" width="115" height="65" class="layer-box" rx="4"/>
+      <text x="57" y="18" text-anchor="middle" class="tufte-title" font-size="10">1. Data</text>
+      <line x1="10" y1="25" x2="105" y2="25" stroke="#ddd" stroke-width="1"/>
+      <text x="57" y="42" text-anchor="middle" class="tufte-mono" font-size="9">ggplot(penguins)</text>
+      <text x="57" y="58" text-anchor="middle" class="tufte-small">"무엇을 그릴까"</text>
+    </g>
+
+    <!-- Aesthetics -->
+    <g transform="translate(150, 45)">
+      <rect x="0" y="0" width="115" height="65" class="layer-box" rx="4"/>
+      <text x="57" y="18" text-anchor="middle" class="tufte-title" font-size="10">2. Aesthetics</text>
+      <line x1="10" y1="25" x2="105" y2="25" stroke="#ddd" stroke-width="1"/>
+      <text x="57" y="42" text-anchor="middle" class="tufte-mono" font-size="9">aes(x, y, color)</text>
+      <text x="57" y="58" text-anchor="middle" class="tufte-small">"어떻게 매핑할까"</text>
+    </g>
+
+    <!-- Geometries -->
+    <g transform="translate(280, 45)">
+      <rect x="0" y="0" width="115" height="65" class="layer-box" rx="4"/>
+      <text x="57" y="18" text-anchor="middle" class="tufte-title" font-size="10">3. Geometries</text>
+      <line x1="10" y1="25" x2="105" y2="25" stroke="#ddd" stroke-width="1"/>
+      <text x="57" y="42" text-anchor="middle" class="tufte-mono" font-size="9">geom_point()</text>
+      <text x="57" y="58" text-anchor="middle" class="tufte-small">"어떤 형태로"</text>
+    </g>
+
+    <!-- 코드 예시 -->
+    <g transform="translate(20, 125)">
+      <rect x="0" y="0" width="375" height="55" fill="#fff" stroke="#666" stroke-width="1" rx="4"/>
+      <text x="187" y="18" text-anchor="middle" class="tufte-mono" font-size="9">ggplot(penguins, aes(x = bill_length_mm, y = body_mass_g)) +</text>
+      <text x="187" y="33" text-anchor="middle" class="tufte-mono" font-size="9">  geom_point(aes(color = species)) +</text>
+      <text x="187" y="48" text-anchor="middle" class="tufte-mono" font-size="9">  theme_minimal()</text>
+    </g>
+  </g>
+
+  <!-- 하단: 핵심 메시지 -->
+  <text x="400" y="285" text-anchor="middle" class="tufte-label" font-size="11">"데이터 → 시각적 속성 매핑 → 기하 객체 선택 → 레이어 쌓기"</text>
+
+</svg>

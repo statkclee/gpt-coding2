@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 10 800 280">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #111; font-weight: bold; }
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-mono { font-family: 'SF Mono', Consolas, monospace; fill: #444; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #666; font-style: italic; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #777; font-size: 10px; }
+      .flow-line { fill: none; stroke: #555; stroke-width: 1.5; }
+      .flow-dashed { fill: none; stroke: #888; stroke-width: 1.5; stroke-dasharray: 5,3; }
+      .node-box { fill: #fff; stroke: #333; stroke-width: 1.5; }
+      .node-header { fill: #f0f0f0; }
+      .step-circle { fill: #e8e8e8; stroke: #333; stroke-width: 1.5; }
+    </style>
+    <marker id="arrow-right" markerWidth="8" markerHeight="8" refX="6" refY="2.5" orient="auto">
+      <path d="M0,0 L0,5 L7,2.5 z" fill="#555" />
+    </marker>
+    <marker id="arrow-left" markerWidth="8" markerHeight="8" refX="1" refY="2.5" orient="auto">
+      <path d="M7,0 L7,5 L0,2.5 z" fill="#555" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="320" fill="#ffffff"/>
+
+  <!-- 클라이언트 박스 -->
+  <g transform="translate(40, 30)">
+    <rect x="0" y="0" width="180" height="240" class="node-box" rx="4"/>
+    <rect x="1" y="1" width="178" height="24" class="node-header" rx="3"/>
+    <text x="90" y="18" text-anchor="middle" class="tufte-title" font-size="13">클라이언트 (파이썬)</text>
+
+    <!-- 단계들 -->
+    <g transform="translate(15, 40)">
+      <circle cx="12" cy="12" r="12" class="step-circle"/>
+      <text x="12" y="16" text-anchor="middle" class="tufte-text" font-size="11" font-weight="bold">1</text>
+      <text x="32" y="16" class="tufte-mono" font-size="10">socket.socket()</text>
+      <text x="32" y="30" class="tufte-small">소켓 생성</text>
+    </g>
+
+    <g transform="translate(15, 80)">
+      <circle cx="12" cy="12" r="12" class="step-circle"/>
+      <text x="12" y="16" text-anchor="middle" class="tufte-text" font-size="11" font-weight="bold">2</text>
+      <text x="32" y="16" class="tufte-mono" font-size="10">connect(host, 80)</text>
+      <text x="32" y="30" class="tufte-small">서버 연결</text>
+    </g>
+
+    <g transform="translate(15, 120)">
+      <circle cx="12" cy="12" r="12" class="step-circle"/>
+      <text x="12" y="16" text-anchor="middle" class="tufte-text" font-size="11" font-weight="bold">3</text>
+      <text x="32" y="16" class="tufte-mono" font-size="10">send(GET ...)</text>
+      <text x="32" y="30" class="tufte-small">요청 전송</text>
+    </g>
+
+    <g transform="translate(15, 160)">
+      <circle cx="12" cy="12" r="12" class="step-circle"/>
+      <text x="12" y="16" text-anchor="middle" class="tufte-text" font-size="11" font-weight="bold">4</text>
+      <text x="32" y="16" class="tufte-mono" font-size="10">recv(512)</text>
+      <text x="32" y="30" class="tufte-small">데이터 수신 (루프)</text>
+    </g>
+
+    <g transform="translate(15, 200)">
+      <circle cx="12" cy="12" r="12" class="step-circle"/>
+      <text x="12" y="16" text-anchor="middle" class="tufte-text" font-size="11" font-weight="bold">5</text>
+      <text x="32" y="16" class="tufte-mono" font-size="10">close()</text>
+      <text x="32" y="30" class="tufte-small">연결 종료</text>
+    </g>
+  </g>
+
+  <!-- 서버 박스 -->
+  <g transform="translate(580, 30)">
+    <rect x="0" y="0" width="180" height="240" class="node-box" rx="4"/>
+    <rect x="1" y="1" width="178" height="24" class="node-header" rx="3"/>
+    <text x="90" y="18" text-anchor="middle" class="tufte-title" font-size="13">웹 서버</text>
+    <text x="90" y="55" text-anchor="middle" class="tufte-mono" font-size="11">data.pr4e.org:80</text>
+
+    <!-- 서버 동작 -->
+    <rect x="15" y="75" width="150" height="45" class="node-box" rx="3" fill="#f8f8f8"/>
+    <text x="90" y="95" text-anchor="middle" class="tufte-text" font-size="11">연결 대기</text>
+    <text x="90" y="110" text-anchor="middle" class="tufte-small">포트 80 리스닝</text>
+
+    <rect x="15" y="130" width="150" height="45" class="node-box" rx="3" fill="#f8f8f8"/>
+    <text x="90" y="150" text-anchor="middle" class="tufte-text" font-size="11">요청 처리</text>
+    <text x="90" y="165" text-anchor="middle" class="tufte-small">GET → 파일 탐색</text>
+
+    <rect x="15" y="185" width="150" height="45" class="node-box" rx="3" fill="#f8f8f8"/>
+    <text x="90" y="205" text-anchor="middle" class="tufte-text" font-size="11">응답 전송</text>
+    <text x="90" y="220" text-anchor="middle" class="tufte-small">헤더 + 본문</text>
+  </g>
+
+  <!-- 통신 화살표들 -->
+  <!-- 연결 -->
+  <path d="M 225,120 L 575,95" class="flow-line" marker-end="url(#arrow-right)"/>
+  <text x="400" y="95" text-anchor="middle" class="tufte-mono" font-size="11">TCP 연결 수립</text>
+
+  <!-- 요청 -->
+  <path d="M 225,155 L 575,152" class="flow-line" marker-end="url(#arrow-right)"/>
+  <rect x="280" y="140" width="240" height="28" fill="#fff" stroke="#ccc" stroke-width="1" rx="3"/>
+  <text x="400" y="160" text-anchor="middle" class="tufte-mono" font-size="10">GET /romeo.txt HTTP/1.0\r\n\r\n</text>
+
+  <!-- 응답 -->
+  <path d="M 575,207 L 225,195" class="flow-line" marker-end="url(#arrow-right)"/>
+  <rect x="270" y="195" width="260" height="55" fill="#fff" stroke="#ccc" stroke-width="1" rx="3"/>
+  <text x="400" y="212" text-anchor="middle" class="tufte-mono" font-size="10">HTTP/1.1 200 OK</text>
+  <text x="400" y="226" text-anchor="middle" class="tufte-mono" font-size="10">Content-Type: text/plain</text>
+  <text x="400" y="240" text-anchor="middle" class="tufte-mono" font-size="10">\r\n But soft what light...</text>
+
+  <!-- 하단 핵심 -->
+  <!-- <g transform="translate(40, 285)">
+    <rect x="0" y="0" width="720" height="28" fill="#f5f5f5" stroke="#ccc" stroke-width="1" rx="4"/>
+    <text x="15" y="18" class="tufte-text" font-size="11" font-weight="bold">흐름 제어:</text>
+    <text x="85" y="18" class="tufte-text" font-size="11">send()/recv() 속도 차이 → 버퍼에 데이터 축적 → 송신측 또는 수신측 일시 정지</text>
+  </g> -->
+</svg>

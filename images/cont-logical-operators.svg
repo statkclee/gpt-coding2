@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 160">
+  <defs>
+    <style>
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-label { font-size: 12px; }
+      .tufte-small { font-size: 11px; }
+      .tufte-code { font-family: 'Consolas', 'Monaco', monospace; font-size: 10px; }
+      .header-cell { fill: #e8e8e8; }
+      .data-cell { fill: #fafafa; }
+      .alt-cell { fill: #f5f5f5; }
+      .true-val { fill: #2d5016; }
+      .false-val { fill: #8b0000; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="480" height="160" fill="#ffffff"/>
+
+  <!-- Header row -->
+  <rect x="15" y="15" width="165" height="28" class="header-cell" stroke="#333" stroke-width="1"/>
+  <rect x="180" y="15" width="75" height="28" class="header-cell" stroke="#333" stroke-width="1"/>
+  <rect x="255" y="15" width="75" height="28" class="header-cell" stroke="#333" stroke-width="1"/>
+  <rect x="330" y="15" width="75" height="28" class="header-cell" stroke="#333" stroke-width="1"/>
+
+  <text x="97" y="34" text-anchor="middle" class="tufte-text tufte-label" font-weight="bold">표현식</text>
+  <text x="217" y="34" text-anchor="middle" class="tufte-text tufte-label" font-weight="bold">x=1</text>
+  <text x="292" y="34" text-anchor="middle" class="tufte-text tufte-label" font-weight="bold">x=5</text>
+  <text x="367" y="34" text-anchor="middle" class="tufte-text tufte-label" font-weight="bold">x=15</text>
+
+  <!-- Row 1: and -->
+  <rect x="15" y="43" width="165" height="28" class="data-cell" stroke="#333" stroke-width="1"/>
+  <rect x="180" y="43" width="75" height="28" class="data-cell" stroke="#333" stroke-width="1"/>
+  <rect x="255" y="43" width="75" height="28" class="data-cell" stroke="#333" stroke-width="1"/>
+  <rect x="330" y="43" width="75" height="28" class="data-cell" stroke="#333" stroke-width="1"/>
+
+  <text x="97" y="62" text-anchor="middle" class="tufte-text tufte-code">x > 0 and x &lt; 10</text>
+  <text x="217" y="62" text-anchor="middle" class="tufte-text tufte-code true-val">True</text>
+  <text x="292" y="62" text-anchor="middle" class="tufte-text tufte-code true-val">True</text>
+  <text x="367" y="62" text-anchor="middle" class="tufte-text tufte-code false-val">False</text>
+
+  <!-- Row 2: or -->
+  <rect x="15" y="71" width="165" height="28" class="alt-cell" stroke="#333" stroke-width="1"/>
+  <rect x="180" y="71" width="75" height="28" class="alt-cell" stroke="#333" stroke-width="1"/>
+  <rect x="255" y="71" width="75" height="28" class="alt-cell" stroke="#333" stroke-width="1"/>
+  <rect x="330" y="71" width="75" height="28" class="alt-cell" stroke="#333" stroke-width="1"/>
+
+  <text x="97" y="90" text-anchor="middle" class="tufte-text tufte-code">x &lt; 0 or x > 10</text>
+  <text x="217" y="90" text-anchor="middle" class="tufte-text tufte-code false-val">False</text>
+  <text x="292" y="90" text-anchor="middle" class="tufte-text tufte-code false-val">False</text>
+  <text x="367" y="90" text-anchor="middle" class="tufte-text tufte-code true-val">True</text>
+
+  <!-- Row 3: not -->
+  <rect x="15" y="99" width="165" height="28" class="data-cell" stroke="#333" stroke-width="1"/>
+  <rect x="180" y="99" width="75" height="28" class="data-cell" stroke="#333" stroke-width="1"/>
+  <rect x="255" y="99" width="75" height="28" class="data-cell" stroke="#333" stroke-width="1"/>
+  <rect x="330" y="99" width="75" height="28" class="data-cell" stroke="#333" stroke-width="1"/>
+
+  <text x="97" y="118" text-anchor="middle" class="tufte-text tufte-code">not (x == 5)</text>
+  <text x="217" y="118" text-anchor="middle" class="tufte-text tufte-code true-val">True</text>
+  <text x="292" y="118" text-anchor="middle" class="tufte-text tufte-code false-val">False</text>
+  <text x="367" y="118" text-anchor="middle" class="tufte-text tufte-code true-val">True</text>
+
+  <!-- Caption -->
+  <text x="240" y="148" text-anchor="middle" class="tufte-text tufte-small" fill="#666">x 값에 따른 논리 연산 결과</text>
+
+</svg>

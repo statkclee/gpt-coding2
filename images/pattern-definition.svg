@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 280">
+  <defs>
+    <style>
+      .label-title { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 16px; font-weight: bold; fill: #111; }
+      .label-head { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 13px; font-weight: bold; fill: #222; }
+      .label-body { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 11px; fill: #333; }
+      .label-note { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 10px; fill: #666; font-style: italic; }
+      .label-mono { font-family: 'SF Mono', Consolas, Menlo, monospace; font-size: 10px; fill: #444; }
+
+      .box-problem { fill: #f5f5f5; stroke: #666; stroke-width: 1.5; rx: 6; }
+      .box-solution { fill: #fff; stroke: #333; stroke-width: 2; rx: 6; }
+      .box-context { fill: #eee; stroke: #999; stroke-width: 1; rx: 4; }
+
+      .line-flow { stroke: #333; stroke-width: 1.5; fill: none; }
+      .arrow-head { fill: #333; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L0,8 L8,4 z" class="arrow-head" />
+    </marker>
+  </defs>
+
+  <rect width="850" height="280" fill="#fff" />
+
+  <!-- LEFT: Problem (반복되는 문제) -->
+  <g transform="translate(50, 50)">
+    <rect x="0" y="0" width="200" height="160" class="box-problem"/>
+    <text x="100" y="25" text-anchor="middle" class="label-head">반복되는 문제</text>
+    <text x="100" y="42" text-anchor="middle" class="label-note">Recurring Problem</text>
+    <line x1="20" y1="52" x2="180" y2="52" stroke="#ccc" stroke-width="1"/>
+
+    <text x="100" y="75" text-anchor="middle" class="label-body">"객체 생성이 복잡해졌다"</text>
+    <text x="100" y="95" text-anchor="middle" class="label-body">"상태 변화를 전파해야 한다"</text>
+    <text x="100" y="115" text-anchor="middle" class="label-body">"알고리즘을 교체해야 한다"</text>
+    <text x="100" y="145" text-anchor="middle" class="label-note">프로젝트마다 반복됨</text>
+  </g>
+
+  <!-- CENTER: Pattern (패턴 = 문제 + 해법 쌍) -->
+  <g transform="translate(325, 30)">
+    <rect x="0" y="0" width="200" height="200" class="box-solution"/>
+    <text x="100" y="25" text-anchor="middle" class="label-head" font-size="14">패턴</text>
+    <text x="100" y="42" text-anchor="middle" class="label-note">Pattern = 문제 + 해법</text>
+    <line x1="20" y1="52" x2="180" y2="52" stroke="#ccc" stroke-width="1"/>
+
+    <!-- Context -->
+    <g transform="translate(15, 62)">
+      <rect x="0" y="0" width="170" height="40" class="box-context"/>
+      <text x="85" y="16" text-anchor="middle" class="label-body" font-weight="bold">맥락 (Context)</text>
+      <text x="85" y="32" text-anchor="middle" class="label-mono">"언제 적용하는가"</text>
+    </g>
+
+    <!-- Core Solution -->
+    <g transform="translate(15, 112)">
+      <rect x="0" y="0" width="170" height="40" class="box-context"/>
+      <text x="85" y="16" text-anchor="middle" class="label-body" font-weight="bold">핵심 해법 (Solution)</text>
+      <text x="85" y="32" text-anchor="middle" class="label-mono">"어떻게 해결하는가"</text>
+    </g>
+
+    <text x="100" y="175" text-anchor="middle" class="label-note">언어 독립적 설계 원칙</text>
+    <text x="100" y="190" text-anchor="middle" class="label-mono">Factory, Observer, Strategy...</text>
+  </g>
+
+  <!-- RIGHT: Implementation (언어별 구현) -->
+  <g transform="translate(600, 50)">
+    <rect x="0" y="0" width="200" height="160" class="box-problem"/>
+    <text x="100" y="25" text-anchor="middle" class="label-head">언어별 구현</text>
+    <text x="100" y="42" text-anchor="middle" class="label-note">Language-specific Code</text>
+    <line x1="20" y1="52" x2="180" y2="52" stroke="#ccc" stroke-width="1"/>
+
+    <text x="100" y="75" text-anchor="middle" class="label-mono">Python: @decorator</text>
+    <text x="100" y="95" text-anchor="middle" class="label-mono">Java: interface + class</text>
+    <text x="100" y="115" text-anchor="middle" class="label-mono">JavaScript: closure</text>
+    <text x="100" y="145" text-anchor="middle" class="label-note">같은 패턴, 다른 문법</text>
+  </g>
+
+  <!-- Arrows -->
+  <path d="M 250 130 L 325 130" class="line-flow" marker-end="url(#arrow)"/>
+  <text x="287" y="120" text-anchor="middle" class="label-mono">추상화</text>
+
+  <path d="M 525 130 L 600 130" class="line-flow" marker-end="url(#arrow)"/>
+  <text x="562" y="120" text-anchor="middle" class="label-mono">구체화</text>
+
+</svg>

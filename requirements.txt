@@ -1,0 +1,12 @@
+pandas
+numpy
+requests
+pytest
+streamlit
+toml
+pyyaml
+jupyter
+nbformat
+nbclient
+ipykernel
+great-tables

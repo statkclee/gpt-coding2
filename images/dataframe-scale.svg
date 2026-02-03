@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 270">
+  <defs>
+    <style>
+      .label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 13px;
+        fill: #333;
+      }
+      .code {
+        font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 11px;
+        fill: #333;
+      }
+      .small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #666;
+      }
+      .example {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #888;
+      }
+    </style>
+    <marker id="arr" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto">
+      <polygon points="0 0, 6 2.5, 0 5" fill="#999"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="720" height="300" fill="#fff"/>
+
+  <!-- 헤더 -->
+  <text x="140" y="25" text-anchor="middle" class="label" font-weight="bold">측정 척도</text>
+  <text x="340" y="25" text-anchor="middle" class="label" font-weight="bold">특성</text>
+  <text x="560" y="25" text-anchor="middle" class="label" font-weight="bold">판다스 dtype</text>
+  <line x1="30" y1="35" x2="690" y2="35" stroke="#ccc" stroke-width="1"/>
+
+  <!-- Row 1: 비율척도 -->
+  <g transform="translate(0, 45)">
+    <!-- 척도명 -->
+    <rect x="30" y="0" width="220" height="45" fill="none" stroke="#333" stroke-width="2" rx="3"/>
+    <text x="140" y="20" text-anchor="middle" class="label" font-weight="bold">비율척도 (Ratio)</text>
+    <text x="140" y="36" text-anchor="middle" class="example">키, 몸무게, 연령, 소득</text>
+
+    <!-- 특성 -->
+    <text x="280" y="20" class="small">분류 + 순서 + 간격 + 절대 0</text>
+    <text x="280" y="36" class="small" font-weight="bold">→ 비율 비교 가능 (2배, 3배...)</text>
+
+    <!-- dtype -->
+    <rect x="470" y="0" width="200" height="45" fill="#f8f8f8" stroke="#999" rx="3"/>
+    <text x="570" y="20" text-anchor="middle" class="code">int64, float64</text>
+    <text x="570" y="36" text-anchor="middle" class="small">모든 수치 연산</text>
+  </g>
+
+  <!-- 포함 화살표 1 -->
+  <path d="M 30 100 L 30 110 L 50 110" fill="none" stroke="#bbb" stroke-width="1"/>
+
+  <!-- Row 2: 등간척도 -->
+  <g transform="translate(0, 100)">
+    <rect x="50" y="0" width="200" height="45" fill="none" stroke="#555" stroke-width="1.5" rx="3"/>
+    <text x="150" y="20" text-anchor="middle" class="label" font-weight="bold">등간척도 (Interval)</text>
+    <text x="150" y="36" text-anchor="middle" class="example">온도(℃), IQ, 물가지수</text>
+
+    <text x="280" y="20" class="small">분류 + 순서 + 등간격</text>
+    <text x="280" y="36" class="small">→ 0 은 임의값 (20℃ ≠ 10℃ 2배)</text>
+
+    <rect x="470" y="0" width="200" height="45" fill="#f8f8f8" stroke="#999" rx="3"/>
+    <text x="570" y="20" text-anchor="middle" class="code">int64, float64</text>
+    <text x="570" y="36" text-anchor="middle" class="small">덧셈, 뺄셈, 평균</text>
+  </g>
+
+  <!-- 포함 화살표 2 -->
+  <path d="M 50 155 L 50 165 L 70 165" fill="none" stroke="#bbb" stroke-width="1"/>
+
+  <!-- Row 3: 서열척도 -->
+  <g transform="translate(0, 155)">
+    <rect x="70" y="0" width="180" height="45" fill="none" stroke="#777" stroke-width="1.5" rx="3"/>
+    <text x="160" y="20" text-anchor="middle" class="label" font-weight="bold">서열척도 (Ordinal)</text>
+    <text x="160" y="36" text-anchor="middle" class="example">학력, 만족도, 순위</text>
+
+    <text x="280" y="20" class="small">분류 + 순서</text>
+    <text x="280" y="36" class="small">→ 간격 정보 없음 (1위-2위 ≠ 2위-3위)</text>
+
+    <rect x="470" y="0" width="200" height="45" fill="#f8f8f8" stroke="#999" rx="3"/>
+    <text x="570" y="20" text-anchor="middle" class="code">Categorical(ordered)</text>
+    <text x="570" y="36" text-anchor="middle" class="small">순서 비교 (&gt;, &lt;)</text>
+  </g>
+
+  <!-- 포함 화살표 3 -->
+  <path d="M 70 210 L 70 220 L 90 220" fill="none" stroke="#bbb" stroke-width="1"/>
+
+  <!-- Row 4: 명목척도 -->
+  <g transform="translate(0, 210)">
+    <rect x="90" y="0" width="160" height="45" fill="none" stroke="#999" stroke-width="1.5" rx="3"/>
+    <text x="170" y="20" text-anchor="middle" class="label" font-weight="bold">명목척도 (Nominal)</text>
+    <text x="170" y="36" text-anchor="middle" class="example">성별, 혈액형, 지역</text>
+
+    <text x="280" y="20" class="small">분류만</text>
+    <text x="280" y="36" class="small">→ 숫자에 의미 없음 (M=1, F=2는 임의)</text>
+
+    <rect x="470" y="0" width="200" height="45" fill="#f8f8f8" stroke="#999" rx="3"/>
+    <text x="570" y="20" text-anchor="middle" class="code">category, object</text>
+    <text x="570" y="36" text-anchor="middle" class="small">빈도, 최빈값</text>
+  </g>
+
+  <!-- 왼쪽 계층 표시 -->
+  <line x1="20" y1="55" x2="20" y2="250" stroke="#ddd" stroke-width="2"/>
+  <polygon points="20,50 15,60 25,60" fill="#ddd"/>
+  <text x="12" y="155" class="small" transform="rotate(-90, 12, 155)">포함 관계</text>
+
+</svg>

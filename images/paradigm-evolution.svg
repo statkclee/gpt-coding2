@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 30 800 260">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 16px; fill: #333; font-weight: bold; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 12px; fill: #333; font-weight: bold; }
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 11px; fill: #333; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 10px; fill: #666; }
+      .tufte-driver { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 12px; fill: #444; font-weight: bold; }
+      .tufte-year { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 10px; fill: #999; font-style: italic; }
+      .tufte-box { fill: #f5f5f5; stroke: #999; stroke-width: 1; }
+      .tufte-box-active { fill: #e8e8e8; stroke: #666; stroke-width: 1.5; }
+      .tufte-arrow { fill: none; stroke: #999; stroke-width: 1.5; }
+      .tufte-timeline { stroke: #ccc; stroke-width: 2; }
+    </style>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#999"/>
+    </marker>
+  </defs>
+
+  <!-- White background -->
+  <rect x="0" y="0" width="800" height="350" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="400" y="28" text-anchor="middle" class="tufte-title">패러다임 진화: 위기와 해결</text>
+
+
+  <g transform="translate(0, -50)">
+    <!-- Timeline base -->
+    <line x1="60" y1="310" x2="740" y2="310" class="tufte-timeline"/>
+
+    <!-- Timeline markers -->
+    <line x1="120" y1="305" x2="120" y2="315" stroke="#999" stroke-width="1.5"/>
+    <text x="120" y="330" text-anchor="middle" class="tufte-year">1950s</text>
+
+    <line x1="280" y1="305" x2="280" y2="315" stroke="#999" stroke-width="1.5"/>
+    <text x="280" y="330" text-anchor="middle" class="tufte-year">1970s</text>
+
+    <line x1="440" y1="305" x2="440" y2="315" stroke="#999" stroke-width="1.5"/>
+    <text x="440" y="330" text-anchor="middle" class="tufte-year">1990s</text>
+
+    <line x1="600" y1="305" x2="600" y2="315" stroke="#999" stroke-width="1.5"/>
+    <text x="600" y="330" text-anchor="middle" class="tufte-year">2010s</text>
+  </g>
+
+  <!-- Era 1: Machine → Imperative -->
+  <g transform="translate(60, 50)">
+    <rect x="0" y="0" width="130" height="95" class="tufte-box" rx="4"/>
+    <text x="65" y="18" text-anchor="middle" class="tufte-label">기계어 → 명령형</text>
+    <line x1="10" y1="26" x2="120" y2="26" stroke="#ddd"/>
+    <text x="65" y="42" text-anchor="middle" class="tufte-driver">동인: 생산성 한계</text>
+    <text x="65" y="56" text-anchor="middle" class="tufte-small">위기: 수개월 개발, 1비트 오류</text>
+    <text x="65" y="70" text-anchor="middle" class="tufte-small">해결: 컴파일러 자동 번역</text>
+    <text x="65" y="87" text-anchor="middle" class="tufte-text">FORTRAN, COBOL</text>
+  </g>
+
+  <!-- Arrow 1→2 -->
+  <path d="M195,95 L215,95" class="tufte-arrow" marker-end="url(#arrowhead)"/>
+
+  <!-- Era 2: Spaghetti → Structured -->
+  <g transform="translate(220, 50)">
+    <rect x="0" y="0" width="130" height="95" class="tufte-box" rx="4"/>
+    <text x="65" y="18" text-anchor="middle" class="tufte-label">스파게티 → 구조적</text>
+    <line x1="10" y1="26" x2="120" y2="26" stroke="#ddd"/>
+    <text x="65" y="42" text-anchor="middle" class="tufte-driver">동인: 유지보수 불가</text>
+    <text x="65" y="56" text-anchor="middle" class="tufte-small">위기: GOTO 난도질, 스파게티</text>
+    <text x="65" y="70" text-anchor="middle" class="tufte-small">해결: 순차·선택·반복</text>
+    <text x="65" y="87" text-anchor="middle" class="tufte-text">Pascal, C</text>
+  </g>
+
+  <!-- Arrow 2→3 -->
+  <path d="M355,95 L375,95" class="tufte-arrow" marker-end="url(#arrowhead)"/>
+
+  <!-- Era 3: Procedural → OOP -->
+  <g transform="translate(380, 50)">
+    <rect x="0" y="0" width="130" height="95" class="tufte-box-active" rx="4"/>
+    <text x="65" y="18" text-anchor="middle" class="tufte-label">절차적 → 객체지향</text>
+    <line x1="10" y1="26" x2="120" y2="26" stroke="#bbb"/>
+    <text x="65" y="42" text-anchor="middle" class="tufte-driver">동인: 규모의 한계</text>
+    <text x="65" y="56" text-anchor="middle" class="tufte-small">위기: 대형 프로젝트 실패</text>
+    <text x="65" y="70" text-anchor="middle" class="tufte-small">해결: 객체로 캡슐화</text>
+    <text x="65" y="87" text-anchor="middle" class="tufte-text">C++, Java</text>
+  </g>
+
+  <!-- Arrow 3→4 -->
+  <path d="M515,95 L535,95" class="tufte-arrow" marker-end="url(#arrowhead)"/>
+
+  <!-- Era 4: Sequential → Functional -->
+  <g transform="translate(540, 50)">
+    <rect x="0" y="0" width="130" height="95" class="tufte-box-active" rx="4"/>
+    <text x="65" y="18" text-anchor="middle" class="tufte-label">OOP → 함수형</text>
+    <line x1="10" y1="26" x2="120" y2="26" stroke="#bbb"/>
+    <text x="65" y="42" text-anchor="middle" class="tufte-driver">동인: 멀티코어 저주</text>
+    <text x="65" y="56" text-anchor="middle" class="tufte-small">위기: 경쟁 조건, 교착 상태</text>
+    <text x="65" y="70" text-anchor="middle" class="tufte-small">해결: 불변성, 순수 함수</text>
+    <text x="65" y="87" text-anchor="middle" class="tufte-text">Scala, Spark</text>
+  </g>
+
+  <!-- Vertical connectors to timeline -->
+  <line x1="120" y1="145" x2="120" y2="270" stroke="#ddd" stroke-dasharray="4,3"/>
+  <line x1="280" y1="145" x2="280" y2="270" stroke="#ddd" stroke-dasharray="4,3"/>
+  <line x1="440" y1="145" x2="440" y2="270" stroke="#ddd" stroke-dasharray="4,3"/>
+  <line x1="600" y1="145" x2="600" y2="270" stroke="#ddd" stroke-dasharray="4,3"/>
+
+  <!-- Accumulation note -->
+  <g transform="translate(60, 170)">
+    <rect x="0" y="0" width="680" height="55" fill="#fafafa" stroke="#ccc" rx="4"/>
+    <text x="340" y="20" text-anchor="middle" class="tufte-label">패러다임 누적: 이전 패러다임은 사라지지 않는다</text>
+    <text x="340" y="40" text-anchor="middle" class="tufte-small">어셈블리(임베디드) + C(시스템) + Java(엔터프라이즈) + Python(데이터) → 공존</text>
+  </g>
+
+</svg>

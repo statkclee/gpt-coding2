@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 500">
+  <defs>
+    <style>
+      /* Tufte Grayscale Style */
+      .label-title { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 18px; font-weight: bold; fill: #111; }
+      .label-subtitle { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 14px; fill: #666; }
+      
+      .label-head { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 15px; font-weight: bold; fill: #333; }
+      .label-subhead { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 12px; font-weight: bold; fill: #555; }
+      .label-body { font-family: 'SF Mono', Consolas, Menlo, monospace; font-size: 11px; fill: #444; }
+      .label-note { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 10px; fill: #666; font-style: italic; }
+
+      .box-group { fill: #fcfcfc; stroke: #999; stroke-width: 1; rx: 6; }
+      .box-pattern { fill: #fff; stroke: #ccc; stroke-width: 1; rx: 3; }
+      
+      .line-sep { stroke: #ddd; stroke-width: 1; }
+      .icon-path { fill: none; stroke: #555; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    </style>
+  </defs>
+
+  <rect width="850" height="500" fill="#fff" />
+
+  <!-- Title -->
+  <text x="425" y="40" text-anchor="middle" class="label-title">디자인 패턴의 3가지 세계관</text>
+  <text x="425" y="65" text-anchor="middle" class="label-subtitle">객체의 생명주기: 탄생(Creation) → 조립(Structure) → 활동(Behavior)</text>
+
+  <!-- 1. CREATIONAL (Left) -->
+  <g transform="translate(50, 100)">
+    <rect x="0" y="0" width="230" height="360" class="box-group"/>
+    <text x="115" y="30" text-anchor="middle" class="label-head">생성 (Creational)</text>
+    <text x="115" y="50" text-anchor="middle" class="label-subhead" fill="#d32f2f">"Who creates What?"</text>
+    <line x1="20" y1="60" x2="210" y2="60" class="line-sep"/>
+    <g transform="translate(115, 85)">
+       <rect x="-10" y="-15" width="20" height="20" class="icon-path" fill="#fff"/>
+       <line x1="-25" y1="10" x2="25" y2="10" class="icon-path"/>
+       <circle cx="-15" cy="10" r="3" fill="#fff" stroke="#555" stroke-width="1.5"/>
+       <circle cx="15" cy="10" r="3" fill="#fff" stroke="#555" stroke-width="1.5"/>
+    </g>
+    <text x="115" y="115" text-anchor="middle" class="label-note">객체 생성의 유연성 확보</text>
+    <g transform="translate(25, 135)">
+      <rect x="0" y="0" width="180" height="30" class="box-pattern"/>
+      <text x="10" y="20" class="label-body" font-weight="bold">Factory Method</text>
+      <rect x="0" y="40" width="180" height="30" class="box-pattern"/>
+      <text x="10" y="60" class="label-body" font-weight="bold">Singleton</text>
+      <rect x="0" y="80" width="180" height="30" class="box-pattern"/>
+      <text x="10" y="100" class="label-body" font-weight="bold">Builder</text>
+    </g>
+    <text x="115" y="340" text-anchor="middle" class="label-note" fill="#555">핵심: new 키워드 감추기</text>
+  </g>
+
+  <!-- 2. STRUCTURAL (Center) -->
+  <g transform="translate(310, 100)">
+    <rect x="0" y="0" width="230" height="360" class="box-group"/>
+    <text x="115" y="30" text-anchor="middle" class="label-head">구조 (Structural)</text>
+    <text x="115" y="50" text-anchor="middle" class="label-subhead" fill="#1976d2">"How to Compose?"</text>
+    <line x1="20" y1="60" x2="210" y2="60" class="line-sep"/>
+    <g transform="translate(115, 85)">
+       <path d="M -20 -10 L -5 -10 L -5 10 L -20 10 Z" class="icon-path"/>
+       <path d="M 5 -10 L 20 -10 L 20 10 L 5 10 Z" class="icon-path"/>
+       <rect x="-5" y="-5" width="10" height="10" class="icon-path" fill="#ddd"/>
+    </g>
+    <text x="115" y="115" text-anchor="middle" class="label-note">조합하여 더 큰 구조로</text>
+    <g transform="translate(25, 135)">
+      <rect x="0" y="0" width="180" height="30" class="box-pattern"/>
+      <text x="10" y="20" class="label-body" font-weight="bold">Adapter</text>
+      <rect x="0" y="40" width="180" height="30" class="box-pattern"/>
+      <text x="10" y="60" class="label-body" font-weight="bold">Decorator</text>
+      <rect x="0" y="80" width="180" height="30" class="box-pattern"/>
+      <text x="10" y="100" class="label-body" font-weight="bold">Facade</text>
+    </g>
+    <text x="115" y="340" text-anchor="middle" class="label-note" fill="#555">핵심: 인터페이스 일치와 확장</text>
+  </g>
+
+  <!-- 3. BEHAVIORAL (Right) -->
+  <g transform="translate(570, 100)">
+    <rect x="0" y="0" width="230" height="360" class="box-group"/>
+    <text x="115" y="30" text-anchor="middle" class="label-head">행위 (Behavioral)</text>
+    <text x="115" y="50" text-anchor="middle" class="label-subhead" fill="#388e3c">"Who does What?"</text>
+    <line x1="20" y1="60" x2="210" y2="60" class="line-sep"/>
+    <g transform="translate(115, 85)">
+       <circle cx="0" cy="0" r="4" fill="#555"/>
+       <circle cx="-15" cy="-10" r="3" class="icon-path"/>
+       <circle cx="15" cy="-10" r="3" class="icon-path"/>
+       <path d="M -3 -2 L -10 -7" class="icon-path" stroke-dasharray="1 1"/>
+       <path d="M 3 -2 L 10 -7" class="icon-path" stroke-dasharray="1 1"/>
+    </g>
+    <text x="115" y="115" text-anchor="middle" class="label-note">책임 분배와 통신</text>
+    <g transform="translate(25, 135)">
+      <rect x="0" y="0" width="180" height="30" class="box-pattern"/>
+      <text x="10" y="20" class="label-body" font-weight="bold">Observer</text>
+      <rect x="0" y="40" width="180" height="30" class="box-pattern"/>
+      <text x="10" y="60" class="label-body" font-weight="bold">Strategy</text>
+      <rect x="0" y="80" width="180" height="30" class="box-pattern"/>
+      <text x="10" y="100" class="label-body" font-weight="bold">Command</text>
+    </g>
+    <text x="115" y="340" text-anchor="middle" class="label-note" fill="#555">핵심: 결합도 낮추고 유연함 ↑</text>
+  </g>
+</svg>

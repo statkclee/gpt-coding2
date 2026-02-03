@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 25 650 250">
+  <defs>
+    <style>
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-mono { font-family: 'SF Mono', Consolas, monospace; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #666; font-size: 12px; }
+    </style>
+  </defs>
+
+  <!-- White background -->
+  <rect x="0" y="0" width="650" height="300" fill="#ffffff"/>
+
+  <!-- Local Repository Section -->
+  <rect x="30" y="40" width="220" height="175" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="6"/>
+  <text x="140" y="62" text-anchor="middle" class="tufte-text" font-size="13" font-weight="bold">로컬 저장소</text>
+  <text x="140" y="78" text-anchor="middle" class="tufte-mono" font-size="9" fill="#666">~/project</text>
+
+  <!-- Working Directory -->
+  <rect x="45" y="92" width="85" height="55" fill="#fff" stroke="#666" stroke-width="1.5" rx="4"/>
+  <text x="87" y="115" text-anchor="middle" class="tufte-label" font-size="10">작업</text>
+  <text x="87" y="130" text-anchor="middle" class="tufte-label" font-size="10">디렉터리</text>
+
+  <!-- Local .git -->
+  <rect x="145" y="92" width="90" height="55" fill="#e0e0e0" stroke="#666" stroke-width="1.5" rx="4"/>
+  <text x="190" y="117" text-anchor="middle" class="tufte-mono" font-size="11" fill="#333">.git</text>
+  <text x="190" y="133" text-anchor="middle" class="tufte-label" font-size="9">로컬 커밋</text>
+
+  <!-- git add/commit arrow -->
+  <line x1="130" y1="120" x2="140" y2="120" stroke="#888" stroke-width="1.5"/>
+  <polygon points="140,116 148,120 140,124" fill="#888"/>
+  <text x="87" y="165" text-anchor="middle" class="tufte-mono" font-size="8" fill="#666">git add</text>
+  <text x="87" y="177" text-anchor="middle" class="tufte-mono" font-size="8" fill="#666">git commit</text>
+
+  <!-- HEAD indicator -->
+  <rect x="155" y="155" width="70" height="20" fill="#f8f8f8" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="190" y="169" text-anchor="middle" class="tufte-mono" font-size="9" fill="#333">HEAD</text>
+
+  <!-- Remote Repository Section -->
+  <rect x="400" y="40" width="220" height="175" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="6"/>
+  <text x="510" y="62" text-anchor="middle" class="tufte-text" font-size="13" font-weight="bold">원격 저장소</text>
+  <text x="510" y="78" text-anchor="middle" class="tufte-mono" font-size="9" fill="#666">github.com/user/repo</text>
+
+  <!-- Remote .git -->
+  <rect x="430" y="92" width="160" height="75" fill="#e0e0e0" stroke="#666" stroke-width="1.5" rx="4"/>
+  <text x="510" y="122" text-anchor="middle" class="tufte-mono" font-size="11" fill="#333">.git</text>
+  <text x="510" y="140" text-anchor="middle" class="tufte-label" font-size="9">원격 커밋</text>
+
+  <!-- origin/main indicator -->
+  <rect x="450" y="155" width="120" height="20" fill="#f8f8f8" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="510" y="169" text-anchor="middle" class="tufte-mono" font-size="9" fill="#333">origin/main</text>
+
+  <!-- ===== git push: 로컬 → 원격 (상단) ===== -->
+  <line x1="250" y1="105" x2="415" y2="105" stroke="#555" stroke-width="2"/>
+  <polygon points="415,101 427,105 415,109" fill="#555"/>
+  <rect x="300" y="92" width="75" height="22" fill="#666" rx="3"/>
+  <text x="337" y="107" text-anchor="middle" font-family="SF Mono, Consolas, monospace" font-size="10" fill="#ffffff">git push</text>
+
+  <!-- ===== git pull: 원격 → 로컬 (하단) ===== -->
+  <line x1="415" y1="145" x2="260" y2="145" stroke="#555" stroke-width="2"/>
+  <polygon points="260,141 248,145 260,149" fill="#555"/>
+  <rect x="300" y="132" width="75" height="22" fill="#666" rx="3"/>
+  <text x="337" y="147" text-anchor="middle" font-family="SF Mono, Consolas, monospace" font-size="10" fill="#ffffff">git pull</text>
+
+  <!-- ===== git fetch: 원격 → 로컬 (점선, pull 아래) ===== -->
+  <line x1="415" y1="180" x2="260" y2="180" stroke="#999" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <polygon points="260,177 250,180 260,183" fill="#999"/>
+  <g transform="translate(0, 5)">
+    <rect x="300" y="168" width="75" height="18" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="3"/>
+    <text x="337" y="181" text-anchor="middle" font-family="SF Mono, Consolas, monospace" font-size="9" fill="#666">git fetch</text>
+  </g>
+
+  <!-- Bottom explanation boxes -->
+  <rect x="30" y="232" width="185" height="28" fill="#f8f8f8" stroke="#ccc" stroke-width="1" rx="3"/>
+  <text x="122" y="251" text-anchor="middle" class="tufte-label" font-size="10">push: 로컬 → 원격 업로드</text>
+
+  <rect x="232" y="232" width="185" height="28" fill="#f8f8f8" stroke="#ccc" stroke-width="1" rx="3"/>
+  <text x="324" y="251" text-anchor="middle" class="tufte-label" font-size="10">pull: 원격 → 로컬 다운로드</text>
+
+  <rect x="434" y="232" width="185" height="28" fill="#f8f8f8" stroke="#ccc" stroke-width="1" rx="3"/>
+  <text x="526" y="251" text-anchor="middle" class="tufte-label" font-size="10">fetch: 확인만 (병합 안함)</text>
+</svg>

@@ -1,0 +1,177 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 20 730 340">
+  <defs>
+    <style>
+      .tufte-text {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+      }
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 16px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 13px;
+        fill: #333;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 12px;
+        fill: #333;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 11px;
+        fill: #666;
+      }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="730" height="360" fill="#ffffff"/>
+
+  <!-- Title -->
+  <!-- <text x="350" y="25" text-anchor="middle" class="tufte-title">에일리어싱(Aliasing): 참조와 복사</text> -->
+
+  <!-- Section 1: Different objects (==) -->
+  <text x="30" y="55" class="tufte-label" font-weight="bold">동등(Equivalent): 같은 값, 다른 객체</text>
+  <text x="30" y="75" class="tufte-code">a = [1, 2, 3]</text>
+  <text x="30" y="92" class="tufte-code">b = [1, 2, 3]</text>
+
+  <!-- Variable a -->
+  <rect x="30" y="105" width="40" height="25" fill="#f5f5f5" stroke="#999"/>
+  <text x="50" y="122" text-anchor="middle" class="tufte-code">a</text>
+
+  <!-- Arrow from a -->
+  <line x1="70" y1="117" x2="115" y2="117" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+  <!-- List object 1 -->
+  <g transform="translate(125, 100)">
+    <rect x="0" y="0" width="35" height="35" fill="#e8e8e8" stroke="#666"/>
+    <rect x="35" y="0" width="35" height="35" fill="#e8e8e8" stroke="#666"/>
+    <rect x="70" y="0" width="35" height="35" fill="#e8e8e8" stroke="#666"/>
+    <text x="17" y="23" text-anchor="middle" class="tufte-code">1</text>
+    <text x="52" y="23" text-anchor="middle" class="tufte-code">2</text>
+    <text x="87" y="23" text-anchor="middle" class="tufte-code">3</text>
+  </g>
+
+  <!-- Variable b -->
+  <rect x="30" y="150" width="40" height="25" fill="#f5f5f5" stroke="#999"/>
+  <text x="50" y="167" text-anchor="middle" class="tufte-code">b</text>
+
+  <!-- Arrow from b -->
+  <line x1="70" y1="162" x2="115" y2="162" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+  <!-- List object 2 -->
+  <g transform="translate(125, 145)">
+    <rect x="0" y="0" width="35" height="35" fill="#e8e8e8" stroke="#666"/>
+    <rect x="35" y="0" width="35" height="35" fill="#e8e8e8" stroke="#666"/>
+    <rect x="70" y="0" width="35" height="35" fill="#e8e8e8" stroke="#666"/>
+    <text x="17" y="23" text-anchor="middle" class="tufte-code">1</text>
+    <text x="52" y="23" text-anchor="middle" class="tufte-code">2</text>
+    <text x="87" y="23" text-anchor="middle" class="tufte-code">3</text>
+  </g>
+
+  <!-- Result -->
+  <text x="250" y="130" class="tufte-code">a == b → True</text>
+  <text x="250" y="150" class="tufte-code">a is b → False</text>
+  <text x="250" y="170" class="tufte-small">별개의 객체</text>
+
+  <!-- Section 2: Same object (aliasing) -->
+  <text x="390" y="55" class="tufte-label" font-weight="bold">동일(Identical): 같은 객체 참조 = 에일리어싱</text>
+  <text x="390" y="75" class="tufte-code">a = [1, 2, 3]</text>
+  <text x="390" y="92" class="tufte-code">b = a</text>
+
+  <!-- Variable a -->
+  <rect x="390" y="105" width="40" height="25" fill="#f5f5f5" stroke="#999"/>
+  <text x="410" y="122" text-anchor="middle" class="tufte-code">a</text>
+
+  <!-- Variable b -->
+  <rect x="390" y="150" width="40" height="25" fill="#f5f5f5" stroke="#999"/>
+  <text x="410" y="167" text-anchor="middle" class="tufte-code">b</text>
+
+  <!-- Arrows converging to same object -->
+  <line x1="430" y1="117" x2="485" y2="135" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <line x1="430" y1="162" x2="485" y2="145" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+  <!-- Shared list object -->
+  <g transform="translate(495, 120)">
+    <rect x="0" y="0" width="35" height="35" fill="#ccc" stroke="#333" stroke-width="2"/>
+    <rect x="35" y="0" width="35" height="35" fill="#ccc" stroke="#333" stroke-width="2"/>
+    <rect x="70" y="0" width="35" height="35" fill="#ccc" stroke="#333" stroke-width="2"/>
+    <text x="17" y="23" text-anchor="middle" class="tufte-code">1</text>
+    <text x="52" y="23" text-anchor="middle" class="tufte-code">2</text>
+    <text x="87" y="23" text-anchor="middle" class="tufte-code">3</text>
+  </g>
+
+  <!-- Result -->
+  <text x="610" y="130" class="tufte-code">a == b → True</text>
+  <text x="610" y="150" class="tufte-code">a is b → True</text>
+  <text x="610" y="170" class="tufte-small">동일 객체</text>
+
+  <!-- Divider -->
+  <line x1="30" y1="200" x2="670" y2="200" stroke="#ccc" stroke-width="1"/>
+
+  <!-- Section 3: Aliasing danger -->
+  <text x="30" y="225" class="tufte-label" font-weight="bold">에일리어싱의 위험: 한쪽 변경 → 양쪽 영향</text>
+
+  <!-- Before -->
+  <text x="30" y="250" class="tufte-code">b[0] = 99</text>
+
+  <rect x="30" y="265" width="40" height="25" fill="#f5f5f5" stroke="#999"/>
+  <text x="50" y="282" text-anchor="middle" class="tufte-code">a</text>
+  <rect x="30" y="300" width="40" height="25" fill="#f5f5f5" stroke="#999"/>
+  <text x="50" y="317" text-anchor="middle" class="tufte-code">b</text>
+
+  <line x1="70" y1="277" x2="115" y2="287" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <line x1="70" y1="312" x2="115" y2="302" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+  <g transform="translate(125, 275)">
+    <rect x="0" y="0" width="40" height="35" fill="#999" stroke="#333" stroke-width="2"/>
+    <rect x="40" y="0" width="35" height="35" fill="#ccc" stroke="#333"/>
+    <rect x="75" y="0" width="35" height="35" fill="#ccc" stroke="#333"/>
+    <text x="20" y="23" text-anchor="middle" class="tufte-code" fill="#fff">99</text>
+    <text x="57" y="23" text-anchor="middle" class="tufte-code">2</text>
+    <text x="92" y="23" text-anchor="middle" class="tufte-code">3</text>
+  </g>
+
+  <text x="250" y="295" class="tufte-code">print(a) → [99, 2, 3]</text>
+  <text x="250" y="315" class="tufte-small" fill="#333">b만 변경했는데 a도 변경됨!</text>
+
+  <!-- Section 4: Safe copy -->
+  <text x="420" y="225" class="tufte-label" font-weight="bold">안전한 복사: 슬라이스 [:]</text>
+  <text x="420" y="250" class="tufte-code">a = [1, 2, 3]</text>
+  <text x="420" y="267" class="tufte-code">b = a[:]  # 복사본 생성</text>
+
+  <rect x="420" y="280" width="40" height="25" fill="#f5f5f5" stroke="#999"/>
+  <text x="440" y="297" text-anchor="middle" class="tufte-code">a</text>
+  <line x1="460" y1="292" x2="500" y2="292" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <g transform="translate(510, 275)">
+    <rect x="0" y="0" width="30" height="35" fill="#e8e8e8" stroke="#666"/>
+    <rect x="30" y="0" width="30" height="35" fill="#e8e8e8" stroke="#666"/>
+    <rect x="60" y="0" width="30" height="35" fill="#e8e8e8" stroke="#666"/>
+    <text x="15" y="23" text-anchor="middle" class="tufte-code">1</text>
+    <text x="45" y="23" text-anchor="middle" class="tufte-code">2</text>
+    <text x="75" y="23" text-anchor="middle" class="tufte-code">3</text>
+  </g>
+
+  <rect x="420" y="315" width="40" height="25" fill="#f5f5f5" stroke="#999"/>
+  <text x="440" y="332" text-anchor="middle" class="tufte-code">b</text>
+  <line x1="460" y1="327" x2="500" y2="327" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <g transform="translate(510, 310)">
+    <rect x="0" y="0" width="30" height="35" fill="#e8e8e8" stroke="#666"/>
+    <rect x="30" y="0" width="30" height="35" fill="#e8e8e8" stroke="#666"/>
+    <rect x="60" y="0" width="30" height="35" fill="#e8e8e8" stroke="#666"/>
+    <text x="15" y="23" text-anchor="middle" class="tufte-code">1</text>
+    <text x="45" y="23" text-anchor="middle" class="tufte-code">2</text>
+    <text x="75" y="23" text-anchor="middle" class="tufte-code">3</text>
+  </g>
+
+  <text x="620" y="307" class="tufte-small">별개 객체</text>
+  <text x="620" y="322" class="tufte-small">→ 안전</text>
+</svg>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 170">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #111; font-weight: bold; }
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-mono { font-family: 'SF Mono', Consolas, monospace; fill: #444; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #111; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #777; font-size: 11px; }
+      .outer-box { fill: none; stroke: #111; stroke-width: 2.5; }
+      .inner-line { stroke: #111; stroke-width: 1; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="950" height="170" fill="#ffffff"/>
+
+  <!-- ===== 왼쪽: 일반 용어 (테이블) ===== -->
+  <g transform="translate(40, 15)">
+    <!-- 열 라벨 -->
+    <text x="120" y="8" text-anchor="middle" class="tufte-label" font-size="13">열</text>
+
+    <!-- 행 라벨 -->
+    <text x="-8" y="80" text-anchor="end" class="tufte-label" font-size="13">행</text>
+
+    <!-- 테이블 외곽 -->
+    <rect x="0" y="20" width="170" height="95" class="outer-box"/>
+
+    <!-- 내부 가로선 -->
+    <line x1="0" y1="65" x2="170" y2="65" class="inner-line"/>
+    <line x1="0" y1="90" x2="170" y2="90" class="inner-line"/>
+
+    <!-- 내부 세로선 -->
+    <line x1="100" y1="20" x2="100" y2="115" class="inner-line"/>
+    <line x1="135" y1="20" x2="135" y2="115" class="inner-line"/>
+
+    <!-- 테이블 텍스트 -->
+    <text x="50" y="48" text-anchor="middle" class="tufte-title" font-size="14">테이블</text>
+
+    <!-- 2.3 값 -->
+    <text x="117" y="82" text-anchor="middle" class="tufte-mono" font-size="12">2.3</text>
+  </g>
+
+  <!-- 첫 번째 등호 -->
+  <text x="270" y="80" text-anchor="middle" class="tufte-title" font-size="28">=</text>
+
+  <!-- ===== 중앙: 학술 용어 (관계) ===== -->
+  <g transform="translate(330, 15)">
+    <!-- 속성 라벨 -->
+    <text x="120" y="8" text-anchor="middle" class="tufte-label" font-size="13">속성</text>
+
+    <!-- 튜플 라벨 -->
+    <text x="-8" y="80" text-anchor="end" class="tufte-label" font-size="13">튜플</text>
+
+    <!-- 관계 외곽 -->
+    <rect x="0" y="20" width="170" height="95" class="outer-box"/>
+
+    <!-- 내부 가로선 -->
+    <line x1="0" y1="65" x2="170" y2="65" class="inner-line"/>
+    <line x1="0" y1="90" x2="170" y2="90" class="inner-line"/>
+
+    <!-- 내부 세로선 -->
+    <line x1="100" y1="20" x2="100" y2="115" class="inner-line"/>
+    <line x1="135" y1="20" x2="135" y2="115" class="inner-line"/>
+
+    <!-- 관계 텍스트 -->
+    <text x="50" y="48" text-anchor="middle" class="tufte-title" font-size="14">관계</text>
+
+    <!-- 2.3 값 -->
+    <text x="117" y="82" text-anchor="middle" class="tufte-mono" font-size="12">2.3</text>
+  </g>
+
+  <!-- 두 번째 등호 -->
+  <text x="560" y="80" text-anchor="middle" class="tufte-title" font-size="28">=</text>
+
+  <!-- ===== 오른쪽: 파이썬 용어 (데이터프레임) ===== -->
+  <g transform="translate(620, 15)">
+    <!-- 변수 라벨 -->
+    <text x="120" y="8" text-anchor="middle" class="tufte-label" font-size="13">변수</text>
+
+    <!-- 관측값 라벨 -->
+    <text x="-8" y="80" text-anchor="end" class="tufte-label" font-size="12">관측값</text>
+
+    <!-- 데이터프레임 외곽 -->
+    <rect x="0" y="20" width="170" height="95" class="outer-box"/>
+
+    <!-- 내부 가로선 -->
+    <line x1="0" y1="65" x2="170" y2="65" class="inner-line"/>
+    <line x1="0" y1="90" x2="170" y2="90" class="inner-line"/>
+
+    <!-- 내부 세로선 -->
+    <line x1="100" y1="20" x2="100" y2="115" class="inner-line"/>
+    <line x1="135" y1="20" x2="135" y2="115" class="inner-line"/>
+
+    <!-- 데이터프레임 텍스트 -->
+    <text x="50" y="47" text-anchor="middle" class="tufte-title" font-size="13">데이터프레임</text>
+
+    <!-- 2.3 값 -->
+    <text x="117" y="82" text-anchor="middle" class="tufte-mono" font-size="12">2.3</text>
+  </g>
+
+  <!-- 하단 설명 -->
+  <text x="475" y="155" text-anchor="middle" class="tufte-small">같은 구조, 다른 이름: 테이블=관계=데이터프레임, 행=튜플=관측값, 열=속성=변수</text>
+</svg>

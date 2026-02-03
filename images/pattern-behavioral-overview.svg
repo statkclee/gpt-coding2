@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 350">
+  <defs>
+    <style>
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 18px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-subtitle {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 13px;
+        fill: #666;
+      }
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 14px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-desc {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 11px;
+        fill: #666;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #999;
+      }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- White background -->
+  <rect x="0" y="0" width="800" height="350" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="400" y="30" class="tufte-title" text-anchor="middle">행위 패턴 개요</text>
+  <text x="400" y="50" class="tufte-subtitle" text-anchor="middle">객체 간 상호작용과 책임 분배</text>
+
+  <!-- Problem -->
+  <rect x="50" y="80" width="200" height="90" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="150" y="105" class="tufte-label" text-anchor="middle">문제</text>
+  <line x1="70" y1="115" x2="230" y2="115" stroke="#ccc" stroke-width="1"/>
+  <text x="150" y="135" class="tufte-desc" text-anchor="middle">조건문 분기 난립</text>
+  <text x="150" y="155" class="tufte-desc" text-anchor="middle">if-elif-elif-elif...</text>
+
+  <!-- Arrow -->
+  <line x1="250" y1="125" x2="300" y2="125" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Solution -->
+  <rect x="310" y="80" width="200" height="90" fill="#f5f5f5" stroke="#666" stroke-width="2" rx="3"/>
+  <text x="410" y="105" class="tufte-label" text-anchor="middle">행위 패턴</text>
+  <line x1="330" y1="115" x2="490" y2="115" stroke="#ccc" stroke-width="1"/>
+  <text x="410" y="135" class="tufte-desc" text-anchor="middle">알고리즘/책임을</text>
+  <text x="410" y="155" class="tufte-desc" text-anchor="middle">객체로 캡슐화</text>
+
+  <!-- Arrow -->
+  <line x1="510" y1="125" x2="560" y2="125" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Result -->
+  <rect x="570" y="80" width="180" height="90" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="660" y="105" class="tufte-label" text-anchor="middle">결과</text>
+  <line x1="590" y1="115" x2="730" y2="115" stroke="#ccc" stroke-width="1"/>
+  <text x="660" y="135" class="tufte-desc" text-anchor="middle">교체/확장 용이</text>
+  <text x="660" y="155" class="tufte-desc" text-anchor="middle">테스트 용이</text>
+
+  <!-- Three patterns -->
+  <rect x="100" y="200" width="180" height="120" fill="#fff" stroke="#666" stroke-width="1" rx="3"/>
+  <text x="190" y="225" class="tufte-label" text-anchor="middle">Strategy</text>
+  <line x1="120" y1="235" x2="260" y2="235" stroke="#ccc" stroke-width="1"/>
+  <text x="190" y="255" class="tufte-desc" text-anchor="middle">알고리즘을 객체로 캡슐화</text>
+  <text x="190" y="270" class="tufte-desc" text-anchor="middle">런타임 교체 가능</text>
+  <text x="190" y="305" class="tufte-small" text-anchor="middle">할인, 정렬, 압축 전략</text>
+
+  <rect x="310" y="200" width="180" height="120" fill="#fff" stroke="#666" stroke-width="1" rx="3"/>
+  <text x="400" y="225" class="tufte-label" text-anchor="middle">Observer</text>
+  <line x1="330" y1="235" x2="470" y2="235" stroke="#ccc" stroke-width="1"/>
+  <text x="400" y="255" class="tufte-desc" text-anchor="middle">상태 변화를</text>
+  <text x="400" y="270" class="tufte-desc" text-anchor="middle">구독자에게 자동 통지</text>
+  <text x="400" y="305" class="tufte-small" text-anchor="middle">이벤트 시스템, 알림</text>
+
+  <rect x="520" y="200" width="180" height="120" fill="#fff" stroke="#666" stroke-width="1" rx="3"/>
+  <text x="610" y="225" class="tufte-label" text-anchor="middle">Iterator</text>
+  <line x1="540" y1="235" x2="680" y2="235" stroke="#ccc" stroke-width="1"/>
+  <text x="610" y="255" class="tufte-desc" text-anchor="middle">컬렉션 순회를 추상화</text>
+  <text x="610" y="270" class="tufte-desc" text-anchor="middle">내부 구조 노출 안 함</text>
+  <text x="610" y="305" class="tufte-small" text-anchor="middle">for 문, 제너레이터</text>
+</svg>

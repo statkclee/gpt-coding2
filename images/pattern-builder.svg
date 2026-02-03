@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320">
+  <defs>
+    <style>
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 16px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 13px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-desc {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 11px;
+        fill: #666;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Menlo, Monaco, monospace;
+        font-size: 10px;
+        fill: #666;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #999;
+      }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- White background -->
+  <rect x="0" y="0" width="800" height="320" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="400" y="30" class="tufte-title" text-anchor="middle">Builder 패턴</text>
+
+  <!-- Builder class -->
+  <rect x="40" y="60" width="180" height="140" fill="#f5f5f5" stroke="#333" stroke-width="2" rx="3"/>
+  <text x="130" y="85" class="tufte-label" text-anchor="middle">EmailBuilder</text>
+  <line x1="55" y1="95" x2="205" y2="95" stroke="#ccc" stroke-width="1"/>
+  <text x="130" y="115" class="tufte-code" text-anchor="middle">.sender(addr)</text>
+  <text x="130" y="130" class="tufte-code" text-anchor="middle">.to(*addrs)</text>
+  <text x="130" y="145" class="tufte-code" text-anchor="middle">.subject(text)</text>
+  <text x="130" y="160" class="tufte-code" text-anchor="middle">.body(text)</text>
+  <text x="130" y="175" class="tufte-code" text-anchor="middle">.priority(level)</text>
+  <text x="130" y="190" class="tufte-code" text-anchor="middle">.build() → Email</text>
+
+  <!-- Method chaining flow -->
+  <rect x="260" y="70" width="300" height="120" fill="#fff" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="410" y="95" class="tufte-label" text-anchor="middle">메서드 체이닝</text>
+  <line x1="275" y1="105" x2="545" y2="105" stroke="#ccc" stroke-width="1"/>
+
+  <text x="280" y="125" class="tufte-code">EmailBuilder()</text>
+  <text x="295" y="140" class="tufte-code">.sender("alice@...")</text>
+  <text x="295" y="155" class="tufte-code">.to("bob@...", "charlie@...")</text>
+  <text x="295" y="170" class="tufte-code">.subject("회의 안건")</text>
+  <text x="295" y="185" class="tufte-code">.build()</text>
+
+  <!-- Arrow -->
+  <line x1="220" y1="130" x2="258" y2="130" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Arrow to product -->
+  <line x1="560" y1="130" x2="610" y2="130" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Product -->
+  <rect x="620" y="70" width="150" height="120" fill="#fff" stroke="#666" stroke-width="2" rx="3"/>
+  <text x="695" y="95" class="tufte-label" text-anchor="middle">Email</text>
+  <line x1="635" y1="105" x2="755" y2="105" stroke="#ccc" stroke-width="1"/>
+  <text x="695" y="125" class="tufte-code" text-anchor="middle">sender: "alice@..."</text>
+  <text x="695" y="140" class="tufte-code" text-anchor="middle">recipients: [...]</text>
+  <text x="695" y="155" class="tufte-code" text-anchor="middle">subject: "회의 안건"</text>
+  <text x="695" y="170" class="tufte-code" text-anchor="middle">body: "..."</text>
+
+  <!-- Comparison -->
+  <rect x="40" y="220" width="340" height="80" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="210" y="245" class="tufte-label" text-anchor="middle">❌ 직접 생성자 호출</text>
+  <text x="210" y="265" class="tufte-code" text-anchor="middle">Email(sender, recipients, cc, bcc,</text>
+  <text x="210" y="280" class="tufte-code" text-anchor="middle">     subject, body, attachments, ...)</text>
+
+  <rect x="420" y="220" width="340" height="80" fill="#fff" stroke="#666" stroke-width="2" rx="3"/>
+  <text x="590" y="245" class="tufte-label" text-anchor="middle">✓ Builder 사용</text>
+  <text x="590" y="265" class="tufte-code" text-anchor="middle">각 속성이 명확하게 드러남</text>
+  <text x="590" y="280" class="tufte-code" text-anchor="middle">선택적 속성은 생략 가능</text>
+</svg>

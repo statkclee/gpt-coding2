@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 30 800 450">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #111; font-weight: bold; }
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-mono { font-family: 'SF Mono', Consolas, monospace; fill: #444; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #666; font-style: italic; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #777; font-size: 10px; }
+      .tufte-caption { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #555; font-size: 9px; font-style: italic; }
+      .main-box { fill: #fff; stroke: #333; stroke-width: 1.5; }
+      .db-cylinder { fill: #f8f8f8; stroke: #333; stroke-width: 2; }
+      .table-box { fill: #fff; stroke: #666; stroke-width: 1; }
+      .memory-box { fill: #fafafa; stroke: #999; stroke-width: 1; stroke-dasharray: 4,2; }
+      .disk-box { fill: #f0f0f0; stroke: #333; stroke-width: 1.5; }
+      .flow-line { fill: none; stroke: #555; stroke-width: 1.5; }
+      .data-flow { fill: none; stroke: #666; stroke-width: 1; stroke-dasharray: 5,3; }
+      .highlight { fill: #e8e8e8; stroke: #444; stroke-width: 1; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="2.5" orient="auto">
+      <path d="M0,0 L0,5 L7,2.5 z" fill="#555" />
+    </marker>
+    <marker id="arrow-dash" markerWidth="8" markerHeight="8" refX="6" refY="2.5" orient="auto">
+      <path d="M0,0 L0,5 L7,2.5 z" fill="#666" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="480" fill="#ffffff"/>
+
+  <!-- 상단 제목 -->
+  <!-- <text x="400" y="28" text-anchor="middle" class="tufte-title" font-size="15">파이썬 ↔ 데이터베이스: 두 세계의 연결</text>
+  <line x1="50" y1="40" x2="750" y2="40" stroke="#ccc" stroke-width="1"/> -->
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- 좌측: 휘발성 메모리 영역 (RAM) -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g transform="translate(30, 55)">
+    <rect x="0" y="0" width="320" height="200" class="memory-box" rx="8"/>
+    <text x="160" y="20" text-anchor="middle" class="tufte-label" font-size="11">휘발성 메모리 (RAM)</text>
+
+    <!-- Python 프로그램 -->
+    <g transform="translate(20, 35)">
+      <rect x="0" y="0" width="120" height="75" class="main-box" rx="4"/>
+      <text x="60" y="18" text-anchor="middle" class="tufte-title" font-size="11">Python</text>
+      <text x="60" y="38" text-anchor="middle" class="tufte-mono" font-size="9">변수, 리스트</text>
+      <text x="60" y="52" text-anchor="middle" class="tufte-mono" font-size="9">딕셔너리</text>
+      <text x="60" y="66" text-anchor="middle" class="tufte-caption">프로그램 종료 시 소멸</text>
+    </g>
+
+    <!-- 커서 객체 -->
+    <g transform="translate(170, 35)">
+      <rect x="0" y="0" width="130" height="75" class="main-box" rx="4"/>
+      <text x="65" y="18" text-anchor="middle" class="tufte-title" font-size="11">커서 (Cursor)</text>
+      <line x1="10" y1="26" x2="120" y2="26" stroke="#ddd" stroke-width="1"/>
+      <text x="65" y="42" text-anchor="middle" class="tufte-small">SQL 명령 전송</text>
+      <text x="65" y="56" text-anchor="middle" class="tufte-small">결과 → 튜플 변환</text>
+      <text x="65" y="70" text-anchor="middle" class="tufte-caption">통역사 역할</text>
+    </g>
+
+    <!-- 결과 데이터 -->
+    <g transform="translate(60, 125)">
+      <rect x="0" y="0" width="200" height="55" class="highlight" rx="3"/>
+      <text x="100" y="16" text-anchor="middle" class="tufte-title" font-size="10">fetchall() 결과</text>
+      <text x="100" y="34" text-anchor="middle" class="tufte-mono" font-size="9">[('Frank Sinatra', 'My Way', 15),</text>
+      <text x="100" y="48" text-anchor="middle" class="tufte-mono" font-size="9"> ('Beatles', 'Yesterday', 28)]</text>
+    </g>
+  </g>
+
+  <!-- 중앙 연결선 및 설명 -->
+  <g transform="translate(350, 100)">
+    <!-- 양방향 화살표 -->
+    <path d="M 0,50 L 90,50" class="flow-line" marker-end="url(#arrow)"/>
+    <path d="M 90,85 L 0,85" class="flow-line" marker-end="url(#arrow)"/>
+
+    <text x="45" y="42" text-anchor="middle" class="tufte-mono" font-size="9">SQL 쿼리</text>
+    <text x="45" y="100" text-anchor="middle" class="tufte-mono" font-size="9">행(Row) 데이터</text>
+
+    <!-- sqlite3 라이브러리 표시 -->
+    <rect x="10" y="55" width="70" height="20" fill="#fff" stroke="#999" stroke-width="1" rx="2"/>
+    <text x="45" y="69" text-anchor="middle" class="tufte-mono" font-size="8">sqlite3</text>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- 우측: 영구 저장소 (디스크) -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g transform="translate(450, 55)">
+    <rect x="0" y="0" width="320" height="200" class="disk-box" rx="8"/>
+    <text x="160" y="20" text-anchor="middle" class="tufte-label" font-size="11">영구 저장소 (디스크)</text>
+
+    <!-- 데이터베이스 파일 -->
+    <g transform="translate(20, 35)">
+      <!-- 실린더 모양 (상단 타원) -->
+      <ellipse cx="140" cy="10" rx="130" ry="12" fill="#f8f8f8" stroke="#333" stroke-width="1.5"/>
+      <rect x="10" y="10" width="260" height="140" fill="#f8f8f8" stroke="#333" stroke-width="1.5"/>
+      <ellipse cx="140" cy="150" rx="130" ry="12" fill="#f8f8f8" stroke="#333" stroke-width="1.5"/>
+      <!-- 실린더 양쪽 선 지우기 -->
+      <rect x="11" y="10" width="258" height="140" fill="#f8f8f8"/>
+      <line x1="10" y1="10" x2="10" y2="150" stroke="#333" stroke-width="1.5"/>
+      <line x1="270" y1="10" x2="270" y2="150" stroke="#333" stroke-width="1.5"/>
+
+      <text x="140" y="35" text-anchor="middle" class="tufte-title" font-size="11">music.sqlite</text>
+
+      <!-- Artist 테이블 -->
+      <g transform="translate(15, 45)">
+        <rect x="0" y="0" width="110" height="55" class="table-box" rx="2"/>
+        <rect x="0" y="0" width="110" height="16" fill="#e8e8e8" stroke="#666" stroke-width="1"/>
+        <text x="55" y="12" text-anchor="middle" class="tufte-title" font-size="9">Artist</text>
+        <text x="8" y="30" class="tufte-mono" font-size="8">id │ name</text>
+        <text x="8" y="43" class="tufte-mono" font-size="8">1  │ Sinatra</text>
+      </g>
+
+      <!-- Track 테이블 -->
+      <g transform="translate(140, 45)">
+        <rect x="0" y="0" width="120" height="55" class="table-box" rx="2"/>
+        <rect x="0" y="0" width="120" height="16" fill="#e8e8e8" stroke="#666" stroke-width="1"/>
+        <text x="60" y="12" text-anchor="middle" class="tufte-title" font-size="9">Track</text>
+        <text x="8" y="30" class="tufte-mono" font-size="8">title │ artist_id</text>
+        <text x="8" y="43" class="tufte-mono" font-size="8">My Way │ 1</text>
+      </g>
+
+      <!-- FK 관계선 -->
+      <path d="M 125,85 C 133,85 133,85 140,85" stroke="#666" stroke-width="1" fill="none" marker-end="url(#arrow)"/>
+      <text x="132" y="98" text-anchor="middle" class="tufte-caption">FK</text>
+
+      <!-- 인덱스 표시 -->
+      <g transform="translate(15, 110)">
+        <rect x="0" y="0" width="245" height="28" fill="#f0f0f0" stroke="#888" stroke-width="1" rx="2"/>
+        <text x="8" y="12" class="tufte-label" font-size="8">INDEX</text>
+        <text x="60" y="12" class="tufte-mono" font-size="8">artist_id → [위치: 0x3A2F...]</text>
+        <text x="122" y="23" text-anchor="middle" class="tufte-caption">B-tree 구조로 O(log n) 검색</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- 하단: 핵심 통찰 (3가지 비교) -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <g transform="translate(30, 275)">
+    <rect x="0" y="0" width="740" height="190" fill="#fafafa" stroke="#bbb" stroke-width="1" rx="6"/>
+
+    <text x="370" y="22" text-anchor="middle" class="tufte-title" font-size="12">왜 데이터베이스인가? — 파이썬 자료구조와의 비교</text>
+    <line x1="20" y1="32" x2="720" y2="32" stroke="#ddd" stroke-width="1"/>
+
+    <!-- 비교 테이블 헤더 -->
+    <g transform="translate(20, 45)">
+      <rect x="0" y="0" width="700" height="25" fill="#e8e8e8" rx="3"/>
+      <text x="120" y="17" text-anchor="middle" class="tufte-title" font-size="10">특성</text>
+      <text x="350" y="17" text-anchor="middle" class="tufte-title" font-size="10">파이썬 (딕셔너리/리스트)</text>
+      <text x="580" y="17" text-anchor="middle" class="tufte-title" font-size="10">SQLite 데이터베이스</text>
+      <line x1="230" y1="0" x2="230" y2="25" stroke="#ccc" stroke-width="1"/>
+      <line x1="470" y1="0" x2="470" y2="25" stroke="#ccc" stroke-width="1"/>
+    </g>
+
+    <!-- 행 1: 데이터 수명 -->
+    <g transform="translate(20, 75)">
+      <rect x="0" y="0" width="700" height="30" fill="#fff" stroke="#ddd" stroke-width="1"/>
+      <text x="120" y="20" text-anchor="middle" class="tufte-text" font-size="10">데이터 수명</text>
+      <text x="350" y="20" text-anchor="middle" class="tufte-mono" font-size="9">프로그램 종료 시 소멸</text>
+      <text x="580" y="20" text-anchor="middle" class="tufte-mono" font-size="9">영구 보존 (파일 저장)</text>
+      <line x1="230" y1="0" x2="230" y2="30" stroke="#ddd" stroke-width="1"/>
+      <line x1="470" y1="0" x2="470" y2="30" stroke="#ddd" stroke-width="1"/>
+    </g>
+
+    <!-- 행 2: 데이터 용량 -->
+    <g transform="translate(20, 105)">
+      <rect x="0" y="0" width="700" height="30" fill="#f8f8f8" stroke="#ddd" stroke-width="1"/>
+      <text x="120" y="20" text-anchor="middle" class="tufte-text" font-size="10">처리 용량</text>
+      <text x="350" y="20" text-anchor="middle" class="tufte-mono" font-size="9">RAM 한계 (수 GB)</text>
+      <text x="580" y="20" text-anchor="middle" class="tufte-mono" font-size="9">디스크 한계 (수 TB)</text>
+      <line x1="230" y1="0" x2="230" y2="30" stroke="#ddd" stroke-width="1"/>
+      <line x1="470" y1="0" x2="470" y2="30" stroke="#ddd" stroke-width="1"/>
+    </g>
+
+    <!-- 행 3: 검색 속도 -->
+    <g transform="translate(20, 135)">
+      <rect x="0" y="0" width="700" height="30" fill="#fff" stroke="#ddd" stroke-width="1"/>
+      <text x="120" y="20" text-anchor="middle" class="tufte-text" font-size="10">100만 건 검색</text>
+      <text x="350" y="20" text-anchor="middle" class="tufte-mono" font-size="9">O(n) — 전체 순회 필요</text>
+      <text x="580" y="20" text-anchor="middle" class="tufte-mono" font-size="9">O(log n) — 인덱스 활용</text>
+      <line x1="230" y1="0" x2="230" y2="30" stroke="#ddd" stroke-width="1"/>
+      <line x1="470" y1="0" x2="470" y2="30" stroke="#ddd" stroke-width="1"/>
+    </g>
+
+    <!-- 핵심 메시지 -->
+    <text x="370" y="182" text-anchor="middle" class="tufte-label" font-size="10">"데이터베이스는 대용량 데이터를 영구 저장하면서도 빠르게 검색할 수 있는 시스템이다"</text>
+  </g>
+</svg>

@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 60 1000 300">
+  <defs>
+    <style>
+      /* Tufte Style: Strictly Grayscale, Serif, Minimal */
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #111; }
+      .title { font-size: 20px; font-weight: bold; }
+      .subtitle { font-size: 13px; fill: #555; }
+      .year { font-size: 16px; font-weight: bold; fill: #333; }
+      .tool-name { font-size: 14px; font-weight: bold; fill: #111; }
+      .desc { font-size: 11px; fill: #666; }
+      .category { font-size: 10px; fill: #888; text-transform: uppercase; letter-spacing: 1px; }
+
+      /* Timeline */
+      .timeline-line { stroke: #999; stroke-width: 2; }
+      .timeline-dot { fill: #333; }
+      .timeline-dot-highlight { fill: #666; }
+
+      /* Boxes */
+      .box { fill: #fafafa; stroke: #999; stroke-width: 1; }
+      .box-highlight { fill: #f0f0f0; stroke: #666; stroke-width: 1.5; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1000" height="400" fill="#ffffff"/>
+
+  <!-- Title -->
+  <!-- <text x="500" y="35" text-anchor="middle" class="tufte-text title">워크플로우 자동화 도구의 진화</text>
+  <text x="500" y="55" text-anchor="middle" class="tufte-text subtitle">Make에서 현대 데이터 과학 도구까지 (1976-2020)</text> -->
+
+  <!-- Timeline horizontal line -->
+  <line x1="80" y1="200" x2="920" y2="200" class="timeline-line"/>
+
+  <!-- 1976: make -->
+  <circle cx="120" cy="200" r="6" class="timeline-dot-highlight"/>
+  <line x1="120" y1="200" x2="120" y2="120" stroke="#999" stroke-width="1" stroke-dasharray="2,2"/>
+
+  <rect x="60" y="80" width="120" height="35" rx="2" class="box-highlight"/>
+  <text x="120" y="102" text-anchor="middle" class="tufte-text year">1976</text>
+
+  <text x="120" y="140" text-anchor="middle" class="tufte-text tool-name">make</text>
+  <text x="120" y="155" text-anchor="middle" class="tufte-text desc">빌드 자동화 원조</text>
+  <text x="120" y="168" text-anchor="middle" class="tufte-text category">Unix/C/System</text>
+
+  <!-- 2012: Snakemake -->
+  <circle cx="350" cy="200" r="6" class="timeline-dot"/>
+  <line x1="350" y1="200" x2="350" y2="240" stroke="#999" stroke-width="1" stroke-dasharray="2,2"/>
+
+  <rect x="290" y="250" width="120" height="35" rx="2" class="box"/>
+  <text x="350" y="272" text-anchor="middle" class="tufte-text year">2012</text>
+
+  <text x="350" y="310" text-anchor="middle" class="tufte-text tool-name">Snakemake</text>
+  <text x="350" y="325" text-anchor="middle" class="tufte-text desc">생물정보학 파이프라인</text>
+  <text x="350" y="338" text-anchor="middle" class="tufte-text category">Python/Science</text>
+
+  <!-- 2017: Task -->
+  <circle cx="560" cy="200" r="6" class="timeline-dot"/>
+  <line x1="560" y1="200" x2="560" y2="120" stroke="#999" stroke-width="1" stroke-dasharray="2,2"/>
+
+  <rect x="500" y="80" width="120" height="35" rx="2" class="box"/>
+  <text x="560" y="102" text-anchor="middle" class="tufte-text year">2017</text>
+
+  <text x="560" y="140" text-anchor="middle" class="tufte-text tool-name">Task</text>
+  <text x="560" y="155" text-anchor="middle" class="tufte-text desc">YAML 기반 빌드</text>
+  <text x="560" y="168" text-anchor="middle" class="tufte-text category">Go/Cross-platform</text>
+
+  <!-- 2018: Just -->
+  <circle cx="700" cy="200" r="6" class="timeline-dot"/>
+  <line x1="700" y1="200" x2="700" y2="240" stroke="#999" stroke-width="1" stroke-dasharray="2,2"/>
+
+  <rect x="640" y="250" width="120" height="35" rx="2" class="box"/>
+  <text x="700" y="272" text-anchor="middle" class="tufte-text year">2018</text>
+
+  <text x="700" y="310" text-anchor="middle" class="tufte-text tool-name">Just</text>
+  <text x="700" y="325" text-anchor="middle" class="tufte-text desc">간단한 커맨드 러너</text>
+  <text x="700" y="338" text-anchor="middle" class="tufte-text category">Rust/Minimal</text>
+
+  <!-- 2020: targets -->
+  <circle cx="860" cy="200" r="6" class="timeline-dot-highlight"/>
+  <line x1="860" y1="200" x2="860" y2="120" stroke="#999" stroke-width="1" stroke-dasharray="2,2"/>
+
+  <rect x="800" y="80" width="120" height="35" rx="2" class="box-highlight"/>
+  <text x="860" y="102" text-anchor="middle" class="tufte-text year">2020</text>
+
+  <text x="860" y="140" text-anchor="middle" class="tufte-text tool-name">targets</text>
+  <text x="860" y="155" text-anchor="middle" class="tufte-text desc">R 데이터 과학 표준</text>
+  <text x="860" y="168" text-anchor="middle" class="tufte-text category">R/Data Science</text>
+
+</svg>

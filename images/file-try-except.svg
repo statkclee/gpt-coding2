@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 280">
+  <defs>
+    <style>
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 14px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-subtitle {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 13px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-text {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 12px;
+        fill: #333;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #666;
+      }
+      .tufte-code {
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 11px;
+        fill: #333;
+      }
+      .success-path {
+        stroke: #333;
+        stroke-width: 2;
+        fill: none;
+      }
+      .error-path {
+        stroke: #666;
+        stroke-width: 2;
+        stroke-dasharray: 5,3;
+        fill: none;
+      }
+    </style>
+    <marker id="arrow-success" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+    </marker>
+    <marker id="arrow-error" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="650" height="280" fill="#ffffff"/>
+
+  <!-- Start -->
+  <rect x="270" y="15" width="110" height="35" fill="#f5f5f5" stroke="#333" stroke-width="2" rx="4"/>
+  <text x="325" y="38" text-anchor="middle" class="tufte-code">open(fname)</text>
+
+  <!-- Decision diamond -->
+  <polygon points="325,70 395,105 325,140 255,105" fill="#f5f5f5" stroke="#333" stroke-width="1.5"/>
+  <text x="325" y="108" text-anchor="middle" class="tufte-small">파일 존재?</text>
+
+  <!-- Success path -->
+  <line x1="395" y1="105" x2="500" y2="105" class="success-path" marker-end="url(#arrow-success)"/>
+  <text x="445" y="95" class="tufte-small">성공</text>
+
+  <rect x="510" y="80" width="120" height="50" fill="#e8e8e8" stroke="#333" stroke-width="1.5" rx="4"/>
+  <text x="570" y="100" text-anchor="middle" class="tufte-code">fhand 반환</text>
+  <text x="570" y="118" text-anchor="middle" class="tufte-small">파일 처리 계속</text>
+
+  <!-- Error path -->
+  <line x1="255" y1="105" x2="150" y2="105" class="error-path" marker-end="url(#arrow-error)"/>
+  <text x="200" y="95" class="tufte-small">실패</text>
+
+  <rect x="20" y="80" width="120" height="50" fill="#f5f5f5" stroke="#666" stroke-width="1.5" stroke-dasharray="4,2" rx="4"/>
+  <text x="80" y="100" text-anchor="middle" class="tufte-code">except:</text>
+  <text x="80" y="118" text-anchor="middle" class="tufte-small">오류 처리</text>
+
+  <!-- Code example -->
+  <rect x="20" y="160" width="295" height="105" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="4"/>
+  <text x="167" y="180" text-anchor="middle" class="tufte-subtitle">try-except 패턴</text>
+  <line x1="30" y1="188" x2="305" y2="188" stroke="#ccc" stroke-width="1"/>
+
+  <text x="35" y="208" class="tufte-code">try:</text>
+  <text x="55" y="225" class="tufte-code">fhand = open(fname)</text>
+  <text x="35" y="242" class="tufte-code">except:</text>
+  <text x="55" y="259" class="tufte-code">print('열기 실패'); exit()</text>
+
+  <!-- Error types -->
+  <rect x="335" y="160" width="295" height="105" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="4"/>
+  <text x="482" y="180" text-anchor="middle" class="tufte-subtitle">발생 가능한 오류</text>
+  <line x1="345" y1="188" x2="620" y2="188" stroke="#ccc" stroke-width="1"/>
+
+  <text x="350" y="210" class="tufte-code">FileNotFoundError</text>
+  <text x="500" y="210" class="tufte-small">파일 없음</text>
+
+  <text x="350" y="230" class="tufte-code">PermissionError</text>
+  <text x="500" y="230" class="tufte-small">권한 부족</text>
+
+  <text x="350" y="250" class="tufte-code">IsADirectoryError</text>
+  <text x="500" y="250" class="tufte-small">디렉토리임</text>
+
+</svg>

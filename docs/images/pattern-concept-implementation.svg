@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 30 850 370">
+  <defs>
+    <style>
+      /* Tufte Grayscale Style */
+      .label-title { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 16px; font-weight: bold; fill: #111; }
+      .label-head { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 14px; font-weight: bold; fill: #222; }
+      .label-body { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 12px; fill: #333; }
+      .label-note { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 11px; fill: #666; font-style: italic; }
+      .label-mono { font-family: 'SF Mono', Consolas, Menlo, monospace; font-size: 10px; fill: #444; }
+
+      .box-concept { fill: #fff; stroke: #333; stroke-width: 2.5; rx: 6; }
+      .box-impl { fill: #fcfcfc; stroke: #666; stroke-width: 1.5; rx: 4; }
+      .box-tool { fill: #f5f5f5; stroke: #999; stroke-width: 1; rx: 3; }
+      
+      .line-flow { stroke: #666; stroke-width: 1.5; fill: none; }
+      .line-branch { stroke: #999; stroke-width: 1.5; fill: none; stroke-dasharray: 4 2; }
+      
+      .arrow-head { fill: #666; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L0,8 L8,4 z" class="arrow-head" />
+    </marker>
+  </defs>
+
+  <rect width="850" height="450" fill="#fff" />
+
+  <!-- Title -->
+  <!-- <text x="425" y="30" text-anchor="middle" class="label-title">패턴의 구현: 프레임워크 vs SaaS</text> -->
+
+  <!-- ========================================== -->
+  <!-- ROOT: Concept (Pattern) -->
+  <!-- ========================================== -->
+  <g transform="translate(325, 60)">
+    <rect x="0" y="0" width="200" height="70" class="box-concept"/>
+    <text x="100" y="30" text-anchor="middle" class="label-head">MVC 패턴 (개념)</text>
+    <text x="100" y="50" text-anchor="middle" class="label-note">"설계 원칙 &amp; 청사진"</text>
+  </g>
+
+  <!-- Split Arrow -->
+  <g transform="translate(425, 130)">
+    <line x1="0" y1="0" x2="0" y2="30" class="line-flow"/>
+    <path d="M 0 30 L -180 60 L -180 80" class="line-flow" marker-end="url(#arrow)"/>
+    <path d="M 0 30 L 180 60 L 180 80" class="line-flow" marker-end="url(#arrow)"/>
+    
+    <text x="0" y="55" text-anchor="middle" class="label-body" fill="#555" font-weight="bold">구현 방식 분기</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- LEFT: Framework (Coding) -->
+  <!-- ========================================== -->
+  <g transform="translate(145, 210)">
+    <rect x="0" y="0" width="200" height="80" class="box-impl"/>
+    <text x="100" y="30" text-anchor="middle" class="label-head">프레임워크</text>
+    <text x="100" y="55" text-anchor="middle" class="label-body">"코드로 구현"</text>
+    
+    <!-- Examples -->
+    <g transform="translate(0, 100)">
+        <line x1="100" y1="-20" x2="100" y2="10" class="line-branch"/>
+        <line x1="20" y1="10" x2="180" y2="10" class="line-branch"/>
+        
+        <!-- Django -->
+        <g transform="translate(-30, 25)">
+            <rect x="0" y="0" width="100" height="40" class="box-tool"/>
+            <text x="50" y="18" text-anchor="middle" class="label-mono" font-weight="bold">Django</text>
+            <text x="50" y="32" text-anchor="middle" class="label-note">(Python)</text>
+        </g>
+        
+        <!-- Spring -->
+        <g transform="translate(130, 25)">
+            <rect x="0" y="0" width="100" height="40" class="box-tool"/>
+            <text x="50" y="18" text-anchor="middle" class="label-mono" font-weight="bold">Spring MVC</text>
+            <text x="50" y="32" text-anchor="middle" class="label-note">(Java)</text>
+        </g>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- RIGHT: SaaS (Config) -->
+  <!-- ========================================== -->
+  <g transform="translate(505, 210)">
+    <rect x="0" y="0" width="200" height="80" class="box-impl"/>
+    <text x="100" y="30" text-anchor="middle" class="label-head">SaaS / 플랫폼</text>
+    <text x="100" y="55" text-anchor="middle" class="label-body">"설정으로 사용"</text>
+    
+    <!-- Examples -->
+    <g transform="translate(0, 100)">
+        <line x1="100" y1="-20" x2="100" y2="10" class="line-branch"/>
+        <line x1="20" y1="10" x2="180" y2="10" class="line-branch"/>
+        
+        <!-- Salesforce -->
+        <g transform="translate(-30, 25)">
+            <rect x="0" y="0" width="100" height="40" class="box-tool"/>
+            <text x="50" y="18" text-anchor="middle" class="label-mono" font-weight="bold">Salesforce</text>
+            <text x="50" y="32" text-anchor="middle" class="label-note">(CRM)</text>
+        </g>
+        
+        <!-- Notion -->
+        <g transform="translate(130, 25)">
+            <rect x="0" y="0" width="100" height="40" class="box-tool"/>
+            <text x="50" y="18" text-anchor="middle" class="label-mono" font-weight="bold">Notion</text>
+            <text x="50" y="32" text-anchor="middle" class="label-note">(Database)</text>
+        </g>
+    </g>
+  </g>
+
+  <!-- Tufte-style Insight (top right margin note) -->
+  <g transform="translate(620, 50)">
+    <!-- Accent bar on left -->
+    <rect x="0" y="0" width="4" height="70" fill="#333" rx="2"/>
+    <!-- Background -->
+    <rect x="8" y="0" width="210" height="70" fill="#fafafa" stroke="none"/>
+    <!-- Large quotation mark -->
+    <text x="18" y="28" font-family="Georgia, serif" font-size="32" fill="#ddd" font-style="italic">"</text>
+    <!-- Content -->
+    <text x="42" y="22" class="label-body" font-size="10px" fill="#333">프레임워크 = 개발자용 도구</text>
+    <text x="42" y="38" class="label-body" font-size="10px" fill="#333">SaaS = 사용자용 완성품</text>
+    <text x="42" y="58" class="label-body" font-size="10px" fill="#555" font-style="italic">둘 다 <tspan font-weight="bold">패턴 구현체</tspan></text>
+  </g>
+
+</svg>

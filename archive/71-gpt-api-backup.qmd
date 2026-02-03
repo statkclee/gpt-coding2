@@ -1,0 +1,274 @@
+---
+title: "AI API 프로그래밍 (백업)"
+---
+
+## AI API 활용 {#sec-gpt-api}
+
+\index{AI API} \index{OpenAI} \index{Anthropic}
+
+OpenAI 챗GPT, 구글 Gemini, 앤트로픽 클로드 등을 사용하여 코드를 생성시킬 수 있다.
+GUI 챗팅 인터페이스를 사용하면 직관적으로 코드를 생성할 수 있지만, 자동화를 할 수 없다는 문제와 함께 재사용도 매번 복사하여 붙여넣기를 해야한다는 문제가 있다.
+챗GPT를 비롯한 대규모 언어모형은 API도 제공하고 있어서 챗 인터페이스가 불편한 경우 API를 통해 개발하고 있는 프로그램에 직접 적용할 수 있다.
+
+### OpenAI API {#sec-gpt-openai}
+
+\index{OpenAI API} \index{gpt-4o-mini}
+
+OpenAI API는 GPT-4, GPT-4o 등의 모델에 접근하는 인터페이스다. `openai` 파이썬 패키지를 설치하면 간단하게 사용할 수 있다.
+
+```bash
+pip install openai python-dotenv
+```
+
+API 키를 코드에 직접 작성하면 안 된다. GitHub에 코드를 올렸다가 API 키가 노출되면 악용될 수 있다. **환경 변수**에 저장하고 코드에서 불러오는 것이 안전하다. `.env` 파일에 `OPENAI_API_KEY=sk-...` 형식으로 저장한다.
+
+```{python}
+#| label: py-openai-basic
+#| eval: false
+from openai import OpenAI
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+
+response = client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=[
+        {"role": "system", "content": "당신은 친절한 파이썬 튜터입니다."},
+        {"role": "user", "content": "리스트 컴프리헨션을 설명해주세요."}
+    ],
+    max_tokens=500
+)
+
+print(response.choices[0].message.content)
+```
+
+`messages` 파라미터는 대화 히스토리를 담는 리스트다. `role`은 발화자를 나타내며, `system`은 AI의 역할 설정, `user`는 사용자 입력, `assistant`는 AI 응답이다. 이전 대화를 포함시키면 맥락을 유지한 멀티턴 대화가 가능하다.
+
+```{python}
+#| label: py-openai-multiturn
+#| eval: false
+messages = [
+    {"role": "system", "content": "당신은 파이썬 전문가입니다."},
+    {"role": "user", "content": "파이썬에서 리스트를 정렬하는 방법은?"},
+    {"role": "assistant", "content": "sort() 메서드나 sorted() 함수를 사용합니다..."},
+    {"role": "user", "content": "역순으로 정렬하려면?"}  # 이전 맥락 유지
+]
+
+response = client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=messages
+)
+```
+
+### Anthropic Claude API {#sec-gpt-anthropic}
+
+\index{Claude API} \index{클로드} \index{앤트로픽}
+
+Anthropic의 Claude API도 유사한 방식으로 동작한다. `anthropic` 패키지를 설치하고 API 키를 설정한다.
+
+```bash
+pip install anthropic
+```
+
+```{python}
+#| label: py-anthropic-basic
+#| eval: false
+import anthropic
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
+
+message = client.messages.create(
+    model="claude-sonnet-4-20250514",
+    max_tokens=1024,
+    messages=[
+        {"role": "user", "content": "파이썬 데코레이터를 설명해주세요."}
+    ]
+)
+
+print(message.content[0].text)
+```
+
+OpenAI와 Anthropic API의 구조는 유사하지만 세부 사항이 다르다. OpenAI는 `system` 역할을 `messages` 리스트에 포함시키고, Anthropic은 `system` 파라미터를 별도로 받는다. 어떤 API를 사용하든 핵심 개념—메시지 히스토리, 토큰 제한, 온도(temperature) 조절—은 동일하다.
+
+### 스트리밍 응답 {#sec-gpt-streaming}
+
+\index{스트리밍}
+
+긴 응답을 생성할 때 전체가 완료될 때까지 기다리면 사용자 경험이 나빠진다.
+**스트리밍**을 사용하면 응답이 생성되는 대로 조금씩 받아볼 수 있다. 챗GPT 웹 인터페이스에서 글자가 하나씩 나타나는 효과가 바로 스트리밍이다.
+
+```{python}
+#| label: py-openai-stream
+#| eval: false
+from openai import OpenAI
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+
+stream = client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=[{"role": "user", "content": "파이썬의 역사를 설명해주세요."}],
+    stream=True  # 스트리밍 활성화
+)
+
+for chunk in stream:
+    if chunk.choices[0].delta.content:
+        print(chunk.choices[0].delta.content, end="", flush=True)
+```
+
+`stream=True`로 설정하면 응답이 청크(chunk) 단위로 전달된다. 각 청크에서 `delta.content`를 추출하여 출력하면 실시간으로 텍스트가 나타난다.
+
+
+## 코드 생성 실습 {#sec-gpt-code-generation}
+
+\index{코드 생성}
+
+프롬프트를 통해 실제 코드를 생성하는 예제를 살펴보자. 텍스트에서 단어 빈도수를 계산하는 파이썬 코드를 생성해본다.
+
+```{python}
+#| label: py-code-generation
+#| eval: false
+from openai import OpenAI
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+
+code_prompt = """
+다음 텍스트에서 가장 빈도가 높은 단어 5개를 추출하는 파이썬 코드를 작성해주세요.
+
+텍스트:
+But soft what light through yonder window breaks
+It is the east and Juliet is the sun
+Arise fair sun and kill the envious moon
+Who is already sick and pale with grief
+
+코드만 작성하고 설명은 생략해주세요.
+"""
+
+response = client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=[
+        {"role": "system", "content": "당신은 파이썬 전문가입니다. 코드만 작성합니다."},
+        {"role": "user", "content": code_prompt}
+    ]
+)
+
+print(response.choices[0].message.content)
+```
+
+언어모델이 생성한 코드 예시는 다음과 같다. 프롬프트에 명시한 요구사항대로 주어진 텍스트를 소문자로 변환하고, 단어로 분리한 후, 각 단어의 빈도수를 계산하여 상위 5개 단어를 출력한다.
+
+```{python}
+#| label: py-word-frequency
+from collections import Counter
+
+text = """But soft what light through yonder window breaks
+It is the east and Juliet is the sun
+Arise fair sun and kill the envious moon
+Who is already sick and pale with grief"""
+
+# 텍스트를 소문자로 변환하고 단어로 분리
+words = text.lower().split()
+
+# 단어 빈도수 계산
+word_counts = Counter(words)
+
+# 상위 5개 단어 출력
+for word, count in word_counts.most_common(5):
+    print(f"{word}: {count}")
+```
+
+GPT 모형은 범용 언어모형이지만, 제시된 텍스트에서 가장 빈도수가 많은 단어를 추출하는 작업을 수행하는 파이썬 코드를 정확하게 생성했다.
+
+
+## API 호출 패턴 {#sec-gpt-patterns}
+
+\index{Rate Limit} \index{재시도}
+
+실제 서비스에서 API를 사용할 때는 단순 호출을 넘어 **안정적이고 효율적인 패턴**이 필요하다. 네트워크 오류, 요청 한도 초과, 서버 장애 등 다양한 상황에 대비해야 한다.
+
+### Rate Limiting 대응 {#sec-gpt-rate-limit}
+
+대부분의 API는 **요청 횟수 제한(Rate Limit)**이 있다. 분당 요청 수, 토큰 수 등의 제한을 초과하면 429 상태 코드가 반환된다. 대량 요청을 보낼 때는 요청 간격을 조절해야 한다.
+
+```{python}
+#| label: py-rate-limit
+#| eval: false
+import time
+from openai import OpenAI, RateLimitError
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+
+def call_with_rate_limit(prompt, max_retries=3):
+    """Rate Limit 대응 API 호출"""
+    for attempt in range(max_retries):
+        try:
+            response = client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[{"role": "user", "content": prompt}]
+            )
+            return response.choices[0].message.content
+        except RateLimitError:
+            wait_time = 2 ** attempt  # 지수 백오프
+            print(f"Rate Limit 초과, {wait_time}초 대기...")
+            time.sleep(wait_time)
+    return None
+```
+
+`RateLimitError` 예외를 잡아서 지수 백오프(exponential backoff) 전략으로 재시도한다. 첫 번째 재시도는 1초, 두 번째는 2초, 세 번째는 4초 간격으로 대기한다.
+
+### 에러 처리 {#sec-gpt-error-handling}
+
+네트워크 연결이 불안정하거나 서버가 일시적으로 과부하 상태일 수 있다. 한 번 실패했다고 포기하지 말고 **재시도 로직**을 구현한다.
+
+```{python}
+#| label: py-error-handling
+#| eval: false
+from openai import OpenAI, APIError, APIConnectionError
+import time
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+
+def robust_api_call(prompt, max_retries=3, backoff_factor=2):
+    """견고한 API 호출"""
+    for attempt in range(max_retries):
+        try:
+            response = client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[{"role": "user", "content": prompt}],
+                timeout=30  # 30초 타임아웃
+            )
+            return response.choices[0].message.content
+        except APIConnectionError as e:
+            print(f"연결 오류: {e}")
+        except APIError as e:
+            print(f"API 오류: {e}")
+
+        if attempt < max_retries - 1:
+            wait_time = backoff_factor ** attempt
+            print(f"{wait_time}초 후 재시도...")
+            time.sleep(wait_time)
+
+    raise Exception("최대 재시도 횟수 초과")
+```

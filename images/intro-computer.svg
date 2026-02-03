@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 230">
+  <defs>
+    <style>
+      .tufte-title {
+        font-family: 'Noto Sans KR', Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .tufte-label {
+        font-family: 'Noto Sans KR', Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #444;
+        font-size: 11px;
+      }
+      .tufte-small {
+        font-family: 'Noto Sans KR', Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #666;
+        font-size: 10px;
+      }
+      .tufte-new {
+        font-family: 'Noto Sans KR', Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #555;
+        font-size: 10px;
+        font-style: italic;
+      }
+      .tufte-question {
+        font-family: 'Noto Sans KR', Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+        font-size: 11px;
+        font-style: italic;
+      }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <polygon points="0 0, 8 4, 0 8" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- White background -->
+  <rect x="0" y="0" width="540" height="240" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="270" y="22" class="tufte-title" text-anchor="middle">컴퓨터가 하는 일</text>
+
+  <!-- Input section -->
+  <g transform="translate(70, 75)">
+    <rect x="-50" y="-30" width="100" height="100" rx="4" fill="#f8f8f8" stroke="#999" stroke-width="1"/>
+    <text x="0" y="-10" class="tufte-label" text-anchor="middle">입력</text>
+    <text x="0" y="8" class="tufte-small" text-anchor="middle">텍스트</text>
+    <text x="0" y="22" class="tufte-small" text-anchor="middle">클릭</text>
+    <line x1="-35" y1="32" x2="35" y2="32" stroke="#ddd" stroke-width="1"/>
+    <text x="0" y="46" class="tufte-new" text-anchor="middle">음성</text>
+    <text x="0" y="60" class="tufte-new" text-anchor="middle">이미지</text>
+  </g>
+
+  <!-- Arrow: Input → Process -->
+  <line x1="130" y1="100" x2="175" y2="100" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Process section (center, emphasized) -->
+  <g transform="translate(270, 75)">
+    <rect x="-75" y="-40" width="150" height="110" rx="5" fill="#f0f0f0" stroke="#555" stroke-width="1.5"/>
+    <text x="0" y="-18" class="tufte-title" text-anchor="middle">처리</text>
+    <text x="0" y="2" class="tufte-question" text-anchor="middle">"다음에 무엇을 할까요?"</text>
+    <line x1="-55" y1="14" x2="55" y2="14" stroke="#ddd" stroke-width="1"/>
+    <text x="0" y="32" class="tufte-small" text-anchor="middle">계산 · 저장 · 검색</text>
+    <text x="0" y="48" class="tufte-new" text-anchor="middle">이해 · 추론 · 생성</text>
+    <text x="0" y="62" class="tufte-small" text-anchor="middle">(초당 수십억 번)</text>
+  </g>
+
+  <!-- Arrow: Process → Output -->
+  <line x1="355" y1="100" x2="400" y2="100" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Output section -->
+  <g transform="translate(470, 75)">
+    <rect x="-50" y="-30" width="100" height="100" rx="4" fill="#f8f8f8" stroke="#999" stroke-width="1"/>
+    <text x="0" y="-10" class="tufte-label" text-anchor="middle">출력</text>
+    <text x="0" y="8" class="tufte-small" text-anchor="middle">화면</text>
+    <text x="0" y="22" class="tufte-small" text-anchor="middle">파일</text>
+    <line x1="-35" y1="32" x2="35" y2="32" stroke="#ddd" stroke-width="1"/>
+    <text x="0" y="46" class="tufte-new" text-anchor="middle">음성</text>
+    <text x="0" y="60" class="tufte-new" text-anchor="middle">이미지</text>
+  </g>
+
+  <!-- Feedback loop arrow (curved, below) -->
+  <path d="M 460 175 Q 270 210 80 175" fill="none" stroke="#999" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="270" y="185" class="tufte-small" text-anchor="middle">반복</text>
+
+  <!-- Bottom caption -->
+  <text x="270" y="215" class="tufte-label" text-anchor="middle">프로그래머는 "다음에 무엇을 할까?"에 대한 답을 미리 작성한다</text>
+
+</svg>

@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 40 900 370">
+  <defs>
+    <style>
+      .tufte-title { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif; font-size: 20px; font-weight: bold; fill: #111; }
+      .tufte-subtitle { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif; font-size: 14px; font-weight: bold; fill: #222; }
+      .tufte-label { font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif; font-size: 11px; font-weight: bold; fill: #333; }
+      .tufte-text { font-family: "Malgun Gothic", "Apple SD Gothic Neo", serif; font-size: 11px; fill: #444; }
+      .tufte-small { font-family: "Malgun Gothic", "Apple SD Gothic Neo", serif; font-size: 10px; fill: #666; font-style: italic; }
+      .tufte-code { font-family: 'SF Mono', Menlo, Monaco, monospace; font-size: 10px; fill: #333; }
+
+      .panel { fill: #fff; stroke: #ccc; stroke-width: 1; rx: 5; }
+      .panel-ml { fill: #f9f9f9; stroke: #666; stroke-width: 1.5; rx: 5; }
+      .panel-llm { fill: #fff; stroke: #333; stroke-width: 1.5; rx: 5; }
+      .box-item { fill: #fff; stroke: #999; stroke-width: 1; rx: 3; }
+      .box-highlight { fill: #f5f5f5; stroke: #333; stroke-width: 1.5; rx: 3; }
+
+      .arrow { stroke: #333; stroke-width: 1.5; fill: none; marker-end: url(#arrowhead); }
+      .arrow-dashed { stroke: #666; stroke-width: 1; fill: none; stroke-dasharray: 4,3; }
+      .connector { stroke: #999; stroke-width: 1; fill: none; }
+    </style>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#333" />
+    </marker>
+  </defs>
+
+  <rect width="900" height="420" fill="#fff" />
+
+  <!-- Title -->
+  <!-- <text x="450" y="30" class="tufte-title" text-anchor="middle">하이브리드 AI 시스템: Software 2.0과 3.0의 협업</text> -->
+
+  <!-- Left: Software 2.0 (Traditional ML) -->
+  <g transform="translate(30, 55)">
+    <rect x="0" y="0" width="250" height="340" class="panel-ml" />
+    <text x="125" y="25" class="tufte-subtitle" text-anchor="middle">소프트웨어 2.0</text>
+    <text x="125" y="42" class="tufte-small" text-anchor="middle">(전통적 ML)</text>
+
+    <!-- Strengths -->
+    <g transform="translate(15, 60)">
+      <text x="0" y="0" class="tufte-label">강점</text>
+
+      <rect x="0" y="10" width="220" height="28" class="box-item" />
+      <text x="10" y="28" class="tufte-text">• 빠른 추론 (~5ms)</text>
+
+      <rect x="0" y="45" width="220" height="28" class="box-item" />
+      <text x="10" y="63" class="tufte-text">• 저렴한 비용 (~$0.0001/요청)</text>
+
+      <rect x="0" y="80" width="220" height="28" class="box-item" />
+      <text x="10" y="98" class="tufte-text">• 정형 데이터에 최적화</text>
+
+      <rect x="0" y="115" width="220" height="28" class="box-item" />
+      <text x="10" y="133" class="tufte-text">• 해석 가능 (규제 준수)</text>
+    </g>
+
+    <!-- Use Cases -->
+    <g transform="translate(15, 220)">
+      <text x="0" y="0" class="tufte-label">적용 분야</text>
+
+      <text x="10" y="20" class="tufte-text">• 실시간 추천/사기 탐지</text>
+      <text x="10" y="38" class="tufte-text">• 신용 점수/이탈 예측</text>
+      <text x="10" y="56" class="tufte-text">• 의료 영상 분석 (CNN)</text>
+      <text x="10" y="74" class="tufte-text">• 음성 인식 (Whisper)</text>
+      <text x="10" y="92" class="tufte-text">• 엣지/IoT 디바이스</text>
+    </g>
+  </g>
+
+  <!-- Right: Software 3.0 (LLM) -->
+  <g transform="translate(620, 55)">
+    <rect x="0" y="0" width="250" height="340" class="panel-llm" />
+    <text x="125" y="25" class="tufte-subtitle" text-anchor="middle">소프트웨어 3.0</text>
+    <text x="125" y="42" class="tufte-small" text-anchor="middle">(LLM)</text>
+
+    <!-- Strengths -->
+    <g transform="translate(15, 60)">
+      <text x="0" y="0" class="tufte-label">강점</text>
+
+      <rect x="0" y="10" width="220" height="28" class="box-item" />
+      <text x="10" y="28" class="tufte-text">• 범용 지능 (다양한 작업)</text>
+
+      <rect x="0" y="45" width="220" height="28" class="box-item" />
+      <text x="10" y="63" class="tufte-text">• 자연어 이해/생성</text>
+
+      <rect x="0" y="80" width="220" height="28" class="box-item" />
+      <text x="10" y="98" class="tufte-text">• Few-shot 학습 (즉시 적응)</text>
+
+      <rect x="0" y="115" width="220" height="28" class="box-item" />
+      <text x="10" y="133" class="tufte-text">• 복잡한 추론/생성</text>
+    </g>
+
+    <!-- Use Cases -->
+    <g transform="translate(15, 220)">
+      <text x="0" y="0" class="tufte-label">적용 분야</text>
+
+      <text x="10" y="20" class="tufte-text">• 대화형 AI 어시스턴트</text>
+      <text x="10" y="38" class="tufte-text">• 코드 생성/리뷰</text>
+      <text x="10" y="56" class="tufte-text">• 문서 요약/번역</text>
+      <text x="10" y="74" class="tufte-text">• 복잡한 질의응답</text>
+      <text x="10" y="92" class="tufte-text">• 창작/콘텐츠 생성</text>
+    </g>
+  </g>
+
+  <!-- Center: Hybrid System -->
+  <g transform="translate(310, 80)">
+    <rect x="0" y="0" width="280" height="290" class="box-highlight" stroke-width="2" />
+    <text x="140" y="25" class="tufte-subtitle" text-anchor="middle">하이브리드 파이프라인</text>
+
+    <!-- Flow diagram -->
+    <g transform="translate(20, 45)">
+      <!-- Input -->
+      <rect x="70" y="0" width="100" height="30" class="box-item" />
+      <text x="120" y="20" class="tufte-code" text-anchor="middle">사용자 요청</text>
+
+      <path d="M120,30 L120,50" class="arrow" />
+
+      <!-- ML Classifier -->
+      <rect x="50" y="50" width="140" height="35" fill="#f0f0f0" stroke="#666" rx="3" />
+      <text x="120" y="72" class="tufte-label" text-anchor="middle">ML 분류기 (5ms)</text>
+
+      <!-- Branch -->
+      <path d="M120,85 L120,105" class="connector" />
+      <path d="M120,105 L60,105 L60,125" class="arrow" />
+      <path d="M120,105 L180,105 L180,125" class="arrow" />
+
+      <text x="40" y="115" class="tufte-small">단순</text>
+      <text x="185" y="115" class="tufte-small">복잡</text>
+
+      <!-- Simple path: Rule/ML -->
+      <rect x="10" y="125" width="100" height="35" fill="#f0f0f0" stroke="#666" rx="3" />
+      <text x="60" y="147" class="tufte-label" text-anchor="middle">규칙/ML 처리</text>
+
+      <!-- Complex path: LLM -->
+      <rect x="130" y="125" width="100" height="35" fill="#fff" stroke="#333" stroke-width="1.5" rx="3" />
+      <text x="180" y="147" class="tufte-label" text-anchor="middle">LLM 생성</text>
+
+      <!-- Merge -->
+      <path d="M60,160 L60,180 L120,180" class="connector" />
+      <path d="M180,160 L180,180 L120,180" class="connector" />
+      <path d="M120,180 L120,195" class="arrow" />
+
+      <!-- Output -->
+      <rect x="70" y="195" width="100" height="30" class="box-item" />
+      <text x="120" y="215" class="tufte-code" text-anchor="middle">응답 반환</text>
+    </g>
+  </g>
+
+  <!-- Connecting arrows -->
+  <path d="M280,225 L310,225" class="arrow-dashed" />
+  <path d="M590,225 L620,225" class="arrow-dashed" />
+
+  <!-- Bottom insight -->
+  <!-- <g transform="translate(450, 405)">
+    <text x="0" y="0" class="tufte-text" text-anchor="middle">
+      <tspan font-weight="bold">핵심:</tspan> 빠른 분류는 ML로, 복잡한 생성은 LLM으로 — 문제에 맞는 도구 선택이 엔지니어링
+    </text>
+  </g> -->
+
+</svg>

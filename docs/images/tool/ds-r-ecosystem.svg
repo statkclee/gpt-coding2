@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 40 800 280">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #111; font-weight: bold; }
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-mono { font-family: 'SF Mono', Consolas, monospace; fill: #444; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #666; font-style: italic; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #777; font-size: 10px; }
+      .grammar-box { fill: #f8f8f8; stroke: #333; stroke-width: 2; }
+      .core-box { fill: #e8e8e8; stroke: #333; stroke-width: 1.5; }
+      .flow-line { fill: none; stroke: #555; stroke-width: 1.5; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="2.5" orient="auto">
+      <path d="M0,0 L0,5 L7,2.5 z" fill="#555" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="320" fill="#ffffff"/>
+
+  <!-- 상단: R 데이터 과학 세 기둥 -->
+  <!-- <text x="400" y="28" text-anchor="middle" class="tufte-title" font-size="14">R 데이터 과학의 세 기둥: 문법 기반 접근</text>
+  <line x1="100" y1="40" x2="700" y2="40" stroke="#ddd" stroke-width="1"/> -->
+
+  <!-- 데이터 문법 (dplyr) -->
+  <g transform="translate(60, 60)">
+    <rect x="0" y="0" width="200" height="120" class="grammar-box" rx="6"/>
+    <text x="100" y="25" text-anchor="middle" class="tufte-title" font-size="12">데이터 문법</text>
+    <line x1="15" y1="35" x2="185" y2="35" stroke="#ddd" stroke-width="1"/>
+
+    <rect x="20" y="50" width="70" height="25" class="core-box" rx="3"/>
+    <text x="55" y="67" text-anchor="middle" class="tufte-mono" font-size="10">dplyr</text>
+
+    <rect x="110" y="50" width="70" height="25" class="core-box" rx="3"/>
+    <text x="145" y="67" text-anchor="middle" class="tufte-mono" font-size="10">tidyr</text>
+
+    <text x="100" y="100" text-anchor="middle" class="tufte-label" font-size="9">동사로 데이터 조작</text>
+    <text x="100" y="113" text-anchor="middle" class="tufte-small">filter, select, mutate, summarize</text>
+  </g>
+
+  <!-- 그래프 문법 (ggplot2) -->
+  <g transform="translate(300, 60)">
+    <rect x="0" y="0" width="200" height="120" class="grammar-box" rx="6"/>
+    <text x="100" y="25" text-anchor="middle" class="tufte-title" font-size="12">그래프 문법</text>
+    <line x1="15" y1="35" x2="185" y2="35" stroke="#ddd" stroke-width="1"/>
+
+    <rect x="65" y="50" width="70" height="25" class="core-box" rx="3"/>
+    <text x="100" y="67" text-anchor="middle" class="tufte-mono" font-size="10">ggplot2</text>
+
+    <text x="100" y="100" text-anchor="middle" class="tufte-label" font-size="9">레이어로 시각화 구성</text>
+    <text x="100" y="113" text-anchor="middle" class="tufte-small">data + aes + geom + facet</text>
+  </g>
+
+  <!-- 표 문법 (gt) -->
+  <g transform="translate(540, 60)">
+    <rect x="0" y="0" width="200" height="120" class="grammar-box" rx="6"/>
+    <text x="100" y="25" text-anchor="middle" class="tufte-title" font-size="12">표 문법</text>
+    <line x1="15" y1="35" x2="185" y2="35" stroke="#ddd" stroke-width="1"/>
+
+    <rect x="35" y="50" width="50" height="25" class="core-box" rx="3"/>
+    <text x="60" y="67" text-anchor="middle" class="tufte-mono" font-size="10">gt</text>
+
+    <rect x="115" y="50" width="50" height="25" class="core-box" rx="3"/>
+    <text x="140" y="67" text-anchor="middle" class="tufte-mono" font-size="10">gtsummary</text>
+
+    <text x="100" y="100" text-anchor="middle" class="tufte-label" font-size="9">구성요소로 표 구축</text>
+    <text x="100" y="113" text-anchor="middle" class="tufte-small">header + body + footer</text>
+  </g>
+
+  <!-- 화살표 연결 -->
+  <path d="M 160,180 L 160,210 L 400,210" class="flow-line" marker-end="url(#arrow)"/>
+  <path d="M 400,180 L 400,200" class="flow-line"/>
+  <path d="M 640,180 L 640,210 L 410,210" class="flow-line"/>
+
+  <!-- 하단: 통합 워크플로우 -->
+  <g transform="translate(200, 220)">
+    <rect x="0" y="0" width="400" height="85" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="6"/>
+    <text x="200" y="22" text-anchor="middle" class="tufte-title" font-size="12">tidyverse: 일관된 문법 체계</text>
+    <line x1="20" y1="32" x2="380" y2="32" stroke="#ddd" stroke-width="1"/>
+
+    <!-- 파이프 흐름 -->
+    <text x="30" y="55" text-anchor="start" class="tufte-mono" font-size="10">데이터</text>
+    <path d="M 70,52 L 100,52" class="flow-line" marker-end="url(#arrow)"/>
+    <text x="110" y="55" text-anchor="start" class="tufte-mono" font-size="10">|></text>
+    <text x="130" y="55" text-anchor="start" class="tufte-mono" font-size="10">dplyr</text>
+    <path d="M 170,52 L 200,52" class="flow-line" marker-end="url(#arrow)"/>
+    <text x="210" y="55" text-anchor="start" class="tufte-mono" font-size="10">|></text>
+    <text x="230" y="55" text-anchor="start" class="tufte-mono" font-size="10">ggplot2</text>
+    <path d="M 290,52 L 310,52" class="flow-line" marker-end="url(#arrow)"/>
+    <text x="315" y="55" text-anchor="start" class="tufte-mono" font-size="10">/ gt</text>
+    <path d="M 340,52 L 360,52" class="flow-line" marker-end="url(#arrow)"/>
+    <text x="365" y="55" text-anchor="start" class="tufte-mono" font-size="10">결과</text>
+
+    <text x="200" y="75" text-anchor="middle" class="tufte-label" font-size="10">"데이터를 문장처럼 읽고 쓴다"</text>
+  </g>
+
+</svg>

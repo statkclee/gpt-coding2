@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 622 218">
+  <defs>
+    <style>
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-mono { font-family: 'SF Mono', Consolas, monospace; fill: #333; }
+    </style>
+    <linearGradient id="cylinderGrad1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="10%" style="stop-color:#c4c4c4"/>
+      <stop offset="53%" style="stop-color:#686868"/>
+      <stop offset="100%" style="stop-color:#333"/>
+    </linearGradient>
+    <linearGradient id="cylinderGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="10%" style="stop-color:#c4c4c4"/>
+      <stop offset="53%" style="stop-color:#686868"/>
+      <stop offset="100%" style="stop-color:#333"/>
+    </linearGradient>
+  </defs>
+
+  <!-- White background -->
+  <rect x="0" y="0" width="622" height="218" fill="#ffffff"/>
+
+  <!-- .git container -->
+  <path fill="#b5b5b5" stroke="#ffffff" stroke-miterlimit="10" d="M598,23c0-8.284-6.716-15-15-15H198c-8.284,0-15,6.716-15,15v167c0,8.284,6.716,15,15,15h385c8.284,0,15-6.716,15-15V23z"/>
+  <text x="197" y="31.42" class="tufte-mono" font-size="18">.git</text>
+
+  <!-- Staging Area Cylinder -->
+  <g>
+    <!-- Cylinder body with gradient -->
+    <path fill="url(#cylinderGrad1)" stroke="#333" stroke-miterlimit="10" d="M253.453,138.206c0-9.264,22.404-16.778,50.047-16.778s50.045,7.514,50.045,16.778v1.028c0,0,0-2.115,0-3.117c0-1.006,0-35.744,0-35.744v0.394c0-9.27-22.402-16.78-50.045-16.78s-50.047,7.51-50.047,16.78v-0.394c0,0,0,34.519,0,35.733c0,1.205,0,3.128,0,3.128V138.206z"/>
+    <!-- Cylinder bottom (white) -->
+    <path fill="#ffffff" stroke="#333" stroke-miterlimit="10" d="M353.545,100.373c0,0,0,34.738,0,35.744c0,1.002,0.355,3.117,0.355,3.117c0,9.271-22.758,16.78-50.4,16.78s-50.4-7.509-50.4-16.78c0,0,0.354-1.923,0.354-3.128c0-1.214,0-35.733,0-35.733c0,9.274,22.404,16.785,50.047,16.785S353.545,109.647,353.545,100.373z"/>
+    <!-- File on top -->
+    <polygon fill="#ffffff" stroke="#333" stroke-miterlimit="10" points="341.719,94.965 282.411,94.965 269.235,109.459 328.542,109.459"/>
+    <line fill="none" stroke="#666" stroke-width="2" x1="282.411" y1="100.894" x2="331.165" y2="100.894"/>
+  </g>
+
+  <!-- Repository Cylinders (3 stacked) -->
+  <g>
+    <!-- Bottom cylinder gradient part -->
+    <path fill="url(#cylinderGrad2)" stroke="#333" stroke-miterlimit="10" d="M487.13,71.882c0-9.268,22.407-16.781,50.047-16.781c27.641,0,50.047,7.513,50.047,16.781v1.03c0,0,0-2.118,0-3.121s0-35.739,0-35.739v0.388c0-9.268-22.406-16.781-50.047-16.781c-27.64,0-50.047,7.513-50.047,16.781v-0.388c0,0,0,34.519,0,35.728s0,3.132,0,3.132V71.882z"/>
+
+    <!-- Third (bottom) white section -->
+    <path fill="#ffffff" stroke="#333" stroke-miterlimit="10" d="M587.021,111.284c0,0,0,34.737,0,35.739c0,1.003,0.354,3.122,0.354,3.122c0,9.268-22.76,16.779-50.4,16.779c-27.64,0-50.399-7.512-50.399-16.779c0,0,0.353-1.923,0.353-3.132s0-35.729,0-35.729c0,9.268,22.407,16.78,50.047,16.78C564.614,128.064,587.021,120.551,587.021,111.284z"/>
+
+    <!-- Second white section -->
+    <path fill="#ffffff" stroke="#333" stroke-miterlimit="10" d="M587.021,72.601c0,0,0,34.736,0,35.739c0,1.002,0.354,3.12,0.354,3.12c0,9.268-22.76,16.78-50.4,16.78c-27.64,0-50.399-7.513-50.399-16.78c0,0,0.353-1.923,0.353-3.132s0-35.728,0-35.728c0,9.268,22.407,16.78,50.047,16.78C564.614,89.381,587.021,81.869,587.021,72.601z"/>
+
+    <!-- First (top) white section -->
+    <path fill="#ffffff" stroke="#333" stroke-miterlimit="10" d="M587.021,33.628c0,0,0,34.737,0,35.739s0.354,3.12,0.354,3.12c0,9.269-22.76,16.781-50.4,16.781c-27.64,0-50.399-7.513-50.399-16.781c0,0,0.353-1.922,0.353-3.131s0-35.728,0-35.728c0,9.268,22.407,16.78,50.047,16.78C564.614,50.409,587.021,42.896,587.021,33.628z"/>
+
+    <!-- File on top of repository -->
+    <polygon fill="#ffffff" stroke="#333" stroke-miterlimit="10" points="573.216,26.381 513.908,26.381 500.732,40.875 560.039,40.875"/>
+    <line fill="none" stroke="#666" stroke-width="2" x1="513.908" y1="32.311" x2="562.662" y2="32.311"/>
+  </g>
+
+  <!-- Working Directory (File) -->
+  <g>
+    <rect x="24" y="45" fill="#dcdee0" width="100" height="128"/>
+    <rect x="24" y="45" fill="none" stroke="#666" stroke-width="2" width="100" height="128"/>
+    <line fill="none" stroke="#333" stroke-width="2" x1="37" y1="65" x2="111" y2="65"/>
+    <line fill="none" stroke="#333" stroke-width="2" x1="37" y1="71" x2="111" y2="71"/>
+    <line fill="none" stroke="#333" stroke-width="2" x1="37" y1="77" x2="111" y2="77"/>
+    <line fill="none" stroke="#999" stroke-width="2" x1="37" y1="89" x2="111" y2="89"/>
+  </g>
+
+  <!-- Arrow 1: git add (grayscale) -->
+  <g>
+    <rect x="150.871" y="96.768" fill="#888" width="45.956" height="30.604"/>
+    <polygon fill="#888" points="193.467,81.571 193.467,141.696 234.02,111.163"/>
+  </g>
+  <text x="164" y="114.35" class="tufte-mono" font-size="12" fill="#fff">git add</text>
+
+  <!-- Arrow 2: git commit (grayscale) -->
+  <g>
+    <rect x="381.251" y="96.768" fill="#888" width="45.956" height="30.604"/>
+    <polygon fill="#888" points="423.847,81.571 423.847,141.696 464.399,111.163"/>
+  </g>
+  <text x="386.76" y="114.35" class="tufte-mono" font-size="12" fill="#fff">git commit</text>
+
+  <!-- Labels -->
+  <text x="269.48" y="174.63" class="tufte-text" font-size="12">스테이징 영역</text>
+  <text x="511.94" y="187.63" class="tufte-text" font-size="12">저장소</text>
+</svg>

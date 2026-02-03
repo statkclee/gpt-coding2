@@ -1,0 +1,1632 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" xml:lang="ko-KR"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.16">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="이광춘(Openai)">
+
+<title>29&nbsp; 파일 자동화 – 챗GPT 코딩(개정판)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./tool-make.html" rel="next">
+<link href="./tool-ds.html" rel="prev">
+<link href="./images/logo.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-8ee146c0b749343448e797d10b61a7f9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-55f79cb6abf2a16ff6075165a9063c3c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "일치 없음",
+    "search-matching-documents-text": "일치된 문서",
+    "search-copy-link-title": "검색 링크 복사",
+    "search-hide-matches-text": "추가 검색 결과 숨기기",
+    "search-more-match-text": "추가 검색결과",
+    "search-more-matches-text": "추가 검색결과",
+    "search-clear-button-title": "제거",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "취소",
+    "search-submit-button-title": "검색",
+    "search-label": "검색"
+  }
+}</script>
+
+<script type="text/javascript">
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-229551680-1', 'auto');
+
+ga('send', {
+  hitType: 'pageview',
+  'anonymizeIp': true,
+});
+</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tool-intro.html"><strong>4부</strong> 분야별 코딩</a></li><li class="breadcrumb-item"><a href="./tool-auto.html"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">파일 자동화</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="검색" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">챗GPT 코딩(개정판)</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/bit2r/gpt-coding/" title="소스 코드" class="quarto-navigation-tool px-1" aria-label="소스 코드"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="리더 모드 전환">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="검색"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">서문</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>1부</strong> 전통 프로그래밍</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">프로그래밍 시작하기</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-var.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">변수, 표현식, 문장</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-cont.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">조건부 실행</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-func.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">함수</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-loop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">반복문</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>2부</strong> 자료구조</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-data-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">데이터, AI 식량</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-string.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">문자열</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-file.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">파일</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-list.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">리스트</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-dictionaries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">딕셔너리</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-tuples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">튜플</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-dataframe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">데이터프레임</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-json.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">JSON</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18-tensor.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">텐서</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-embedding.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">벡터와 임베딩</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-graph.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">그래프</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>3부</strong> 버전제어와 협업</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Git 시작하기</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-tracking.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">변경사항 추적</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-history.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">히스토리와 파일 관리</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-remote.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">GitHub와 원격 저장소</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-collab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">협업과 충돌 해결</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">오픈 사이언스</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>4부</strong> 분야별 코딩</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">특화 도구 입문</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-regex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">정규 표현식</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-network.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-web.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">웹서비스</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-database.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">데이터베이스와 SQL</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-ds.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">데이터 과학과 R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-auto.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">파일 자동화</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-make.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">빌드 자동화: make</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>5부</strong> 프로그래밍 패러다임</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-paradigm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">패러다임의 이해</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-imperative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">명령형과 절차적 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-oop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">객체지향 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-fp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">함수형 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-declarative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">선언형 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-reactive.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">반응형 프로그래밍</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>6부</strong> 소프트웨어 설계와 아키텍처</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-reuse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">재사용 명령</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-stack.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">소프트웨어 스택</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">소프트웨어 아키텍처</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-pattern.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">살아남은 패턴</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>7부</strong> 기계학습 패러다임</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-paradigm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">소프트웨어 2.0</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">신경망 아키텍처</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">43</span>&nbsp; <span class="chapter-title">학습과 추론</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-to-llm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">44</span>&nbsp; <span class="chapter-title">트랜스포머에서 거대 언어모형으로</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>부록</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">용어사전</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">참고문헌</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">목차</h2>
+   
+  <ul>
+  <li><a href="#sec-make-paths" id="toc-sec-make-paths" class="nav-link active" data-scroll-target="#sec-make-paths"><span class="header-section-number">29.1</span> 파일 이름과 경로</a></li>
+  <li><a href="#sec-make-directory" id="toc-sec-make-directory" class="nav-link" data-scroll-target="#sec-make-directory"><span class="header-section-number">29.2</span> 디렉터리 탐색</a>
+  <ul class="collapse">
+  <li><a href="#sec-make-bbc" id="toc-sec-make-bbc" class="nav-link" data-scroll-target="#sec-make-bbc"><span class="header-section-number">29.2.1</span> BBC 뉴스 사례</a></li>
+  <li><a href="#sec-make-largest" id="toc-sec-make-largest" class="nav-link" data-scroll-target="#sec-make-largest"><span class="header-section-number">29.2.2</span> 가장 큰 파일 찾기</a></li>
+  </ul></li>
+  <li><a href="#sec-make-shell" id="toc-sec-make-shell" class="nav-link" data-scroll-target="#sec-make-shell"><span class="header-section-number">29.3</span> 쉘과 파이프</a>
+  <ul class="collapse">
+  <li><a href="#sec-make-pipe-concept" id="toc-sec-make-pipe-concept" class="nav-link" data-scroll-target="#sec-make-pipe-concept"><span class="header-section-number">29.3.1</span> 파이프: 작은 도구의 조합</a></li>
+  <li><a href="#sec-make-subprocess" id="toc-sec-make-subprocess" class="nav-link" data-scroll-target="#sec-make-subprocess"><span class="header-section-number">29.3.2</span> 파이썬에서 쉘 명령 실행</a></li>
+  <li><a href="#sec-make-unix" id="toc-sec-make-unix" class="nav-link" data-scroll-target="#sec-make-unix"><span class="header-section-number">29.3.3</span> 유닉스 철학</a></li>
+  </ul></li>
+  <li><a href="#sec-make-args" id="toc-sec-make-args" class="nav-link" data-scroll-target="#sec-make-args"><span class="header-section-number">29.4</span> 명령줄 인자</a>
+  <ul class="collapse">
+  <li><a href="#sec-make-argv-choice" id="toc-sec-make-argv-choice" class="nav-link" data-scroll-target="#sec-make-argv-choice"><span class="header-section-number">29.4.1</span> sys.argv와 argparse 선택</a></li>
+  </ul></li>
+  <li><a href="#sec-make-batch" id="toc-sec-make-batch" class="nav-link" data-scroll-target="#sec-make-batch"><span class="header-section-number">29.5</span> 파일 일괄 처리</a></li>
+  <li><a href="#sec-make-debugging" id="toc-sec-make-debugging" class="nav-link" data-scroll-target="#sec-make-debugging"><span class="header-section-number">29.6</span> 디버깅</a>
+  <ul class="collapse">
+  <li><a href="#sec-make-debug-path" id="toc-sec-make-debug-path" class="nav-link" data-scroll-target="#sec-make-debug-path"><span class="header-section-number">29.6.1</span> 경로 문제</a></li>
+  <li><a href="#sec-make-debug-hidden" id="toc-sec-make-debug-hidden" class="nav-link" data-scroll-target="#sec-make-debug-hidden"><span class="header-section-number">29.6.2</span> 숨겨진 문자</a></li>
+  <li><a href="#sec-make-debug-encoding" id="toc-sec-make-debug-encoding" class="nav-link" data-scroll-target="#sec-make-debug-encoding"><span class="header-section-number">29.6.3</span> 인코딩</a></li>
+  <li><a href="#sec-make-debug-memory" id="toc-sec-make-debug-memory" class="nav-link" data-scroll-target="#sec-make-debug-memory"><span class="header-section-number">29.6.4</span> 대용량 처리</a></li>
+  <li><a href="#sec-make-debug-race" id="toc-sec-make-debug-race" class="nav-link" data-scroll-target="#sec-make-debug-race"><span class="header-section-number">29.6.5</span> 경쟁 조건</a></li>
+  </ul></li>
+  <li><a href="#생각해볼-점" id="toc-생각해볼-점" class="nav-link" data-scroll-target="#생각해볼-점">💡 생각해볼 점</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/tool-auto.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tool-intro.html"><strong>4부</strong> 분야별 코딩</a></li><li class="breadcrumb-item"><a href="./tool-auto.html"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">파일 자동화</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-file-automation" class="quarto-section-identifier"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">파일 자동화</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p> </p>
+<p>파일, 네트워크, 서비스, 데이터베이스에서 데이터를 읽어왔다. 이제 로컬 컴퓨터의 디렉터리와 폴더를 탐색하여 파일을 처리하는 프로그램을 작성한다. 파일은 디렉터리(또는 “폴더”)에 정리되어 저장되며, 파이썬 스크립트 하나로 수백 수천 개 파일에 대한 반복 작업을 자동화할 수 있다.</p>
+<div id="fig-make-overview" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-make-overview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/tool/make-overview.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-make-overview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;29.1: 작업 자동화: 파일 시스템 탐색부터 일괄 처리까지
+</figcaption>
+</figure>
+</div>
+<p>왜 자동화인가? 같은 작업을 세 번 이상 반복한다면 스크립트로 만들 가치가 있다. 사진 1,000장의 이름을 규칙에 맞게 바꾸거나, 로그 파일에서 특정 패턴을 찾거나, 백업 폴더의 중복 파일을 정리하는 일은 손으로 하면 지루하고 실수하기 쉽다. 파이썬 스크립트는 반복 작업을 몇 초 만에 처리하고, 언제든 동일한 결과를 재현할 수 있다. 디렉터리 트리를 탐색하기 위해 <code>os</code> 모듈의 <code>listdir()</code>, <code>walk()</code> 함수와 <code>for</code> 루프를 조합하고, 파일 경로를 다루는 <code>os.path</code> 모듈과 더 현대적인 <code>pathlib</code> 모듈을 함께 활용하면, 운영체제에 상관없이 일관된 방식으로 파일 시스템을 조작할 수 있다.</p>
+<section id="sec-make-paths" class="level2" data-number="29.1">
+<h2 data-number="29.1" class="anchored" data-anchor-id="sec-make-paths"><span class="header-section-number">29.1</span> 파일 이름과 경로</h2>
+<p> </p>
+<p>파일 시스템을 다루려면 먼저 <strong>경로(path)</strong>라는 개념을 이해해야 한다. 경로는 파일이나 디렉터리의 위치를 나타내는 문자열이다. 윈도우에서는 <code>C:\Users\Documents\file.txt</code>, 유닉스/맥에서는 <code>/home/user/documents/file.txt</code> 형식을 사용한다. 운영체제마다 구분자가 다르다는 점(<code>\</code> vs <code>/</code>)이 크로스 플랫폼 스크립트 작성 시 주요 골칫거리였고, 구분자 차이 문제를 해결하기 위해 <code>os.path</code> 모듈이 등장했다.</p>
+<p>모든 실행 프로그램은 “현재 디렉터리(current working directory)”를 가지고 있다. 파일을 열 때 경로를 명시하지 않으면, 파이썬은 현재 디렉터리에서 해당 파일을 찾는다. <code>os.getcwd()</code> 함수는 현재 작업 디렉터리를 반환한다.</p>
+<div id="py-getcwd" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>cwd <span class="op">=</span> os.getcwd()</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cwd)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">/Users/swc/gpt-coding2</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>cwd</code>는 <strong>current working directory</strong>의 약자다. 파일 위치를 나타내는 문자열을 <strong>경로(path)</strong>라고 부른다. <strong>상대경로(relative path)</strong>는 현재 디렉터리 기준으로 위치를 표현하고, <strong>절대경로(absolute path)</strong>는 파일 시스템 최상위부터 전체 경로를 표현한다.</p>
+<p> </p>
+<div id="py-abspath" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 상대경로를 절대경로로 변환</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>relative_path <span class="op">=</span> <span class="st">"data/romeo.txt"</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>absolute_path <span class="op">=</span> os.path.abspath(relative_path)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(absolute_path)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<pre><code>/Users/swc/gpt-coding2/data/romeo.txt</code></pre>
+<p><code>os.path</code> 모듈은 경로 조작에 필요한 함수들을 제공한다. 경로에서 디렉터리명만 추출하거나, 파일명과 확장자를 분리하거나, 여러 조각을 결합하여 새 경로를 만드는 작업이 빈번하기 때문이다. 특히 <code>os.path.join()</code>은 운영체제에 맞는 구분자를 자동으로 적용해주므로, 윈도우와 리눅스에서 모두 동작하는 스크립트를 작성할 때 필수다.</p>
+<div id="py-path-functions" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 파일/디렉터리 존재 여부 확인</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>os.path.exists(<span class="st">"data/romeo.txt"</span>)    <span class="co"># True/False</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>os.path.isfile(<span class="st">"data/romeo.txt"</span>)    <span class="co"># 파일인지 확인</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>os.path.isdir(<span class="st">"data"</span>)               <span class="co"># 디렉터리인지 확인</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 경로 분해</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>os.path.dirname(<span class="st">"/home/user/data/file.txt"</span>)   <span class="co"># '/home/user/data'</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>os.path.basename(<span class="st">"/home/user/data/file.txt"</span>)  <span class="co"># 'file.txt'</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>os.path.splitext(<span class="st">"file.txt"</span>)                  <span class="co"># ('file', '.txt')</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 경로 결합 (운영체제에 맞는 구분자 자동 적용)</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>os.path.join(<span class="st">"data"</span>, <span class="st">"bbc"</span>, <span class="st">"sport"</span>, <span class="st">"001.txt"</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><code>os.path</code>는 오랫동안 파이썬의 표준 경로 처리 방식이었다. 하지만 함수를 중첩해서 호출해야 하는 불편함이 있었다. 예를 들어 파일의 확장자를 바꾸려면 <code>os.path.join(os.path.dirname(path), os.path.splitext(os.path.basename(path))[0] + ".md")</code> 처럼 복잡한 코드가 필요했다. 파이썬 3.4에서 도입된 <code>pathlib</code>은 경로를 객체로 다루어 함수 중첩 문제를 해소했다.</p>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">노트</span>pathlib: 현대적 경로 처리
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p></p>
+<p>파이썬 3.4부터 도입된 <code>pathlib</code> 모듈은 경로를 객체로 다룬다. 문자열 조작 대신 메서드 체이닝으로 경로를 처리하여 코드가 더 읽기 쉬워진다.</p>
+<div id="fig-make-pathlib" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-make-pathlib-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/tool/make-pathlib.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-make-pathlib-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;29.2: os.path에서 pathlib으로: 경로 처리의 진화
+</figcaption>
+</figure>
+</div>
+<table class="table">
+<thead>
+<tr class="header">
+<th>os.path (문자열 기반)</th>
+<th>pathlib (객체 기반)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>os.path.join("data", "bbc")</code></td>
+<td><code>Path("data") / "bbc"</code></td>
+</tr>
+<tr class="even">
+<td><code>os.path.dirname(path)</code></td>
+<td><code>path.parent</code></td>
+</tr>
+<tr class="odd">
+<td><code>os.path.basename(path)</code></td>
+<td><code>path.name</code></td>
+</tr>
+<tr class="even">
+<td><code>os.path.splitext(name)[1]</code></td>
+<td><code>path.suffix</code></td>
+</tr>
+<tr class="odd">
+<td><code>os.path.exists(path)</code></td>
+<td><code>path.exists()</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>Path</code> 객체는 <code>/</code> 연산자로 경로를 결합하고, <code>.parent</code>, <code>.name</code>, <code>.suffix</code> 같은 속성으로 경로 구성 요소에 접근한다. 운영체제별 구분자(<code>/</code> vs <code>\</code>) 차이도 자동으로 처리된다.</p>
+</div>
+</div>
+</section>
+<section id="sec-make-directory" class="level2" data-number="29.2">
+<h2 data-number="29.2" class="anchored" data-anchor-id="sec-make-directory"><span class="header-section-number">29.2</span> 디렉터리 탐색</h2>
+<p> </p>
+<p>경로를 다루는 법을 알았으니, 이제 디렉터리 구조를 탐색할 차례다. 실제 자동화 작업에서는 “특정 폴더 아래 모든 <code>.txt</code> 파일을 찾아라”, “하위 디렉터리까지 포함해서 이미지 파일을 수집하라” 같은 요구가 빈번하다. <code>os.listdir()</code>는 지정한 디렉터리의 파일과 하위 디렉터리 목록을 반환하지만, 딱 한 단계만 살펴본다. 하위 디렉터리 내용까지 재귀적으로 탐색하려면 <code>os.walk()</code>를 사용한다.</p>
+<div id="py-listdir" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 현재 디렉터리 내용</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>items <span class="op">=</span> os.listdir(<span class="st">"."</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(items[:<span class="dv">5</span>])  <span class="co"># 처음 5개만 출력</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['15-tuples.html', '17-json.qmd', '19-embedding.quarto_ipynb', 'tool-network.html', '.Renviron']</code></pre>
+</div>
+</div>
+<p><code>os.walk()</code>는 디렉터리 트리를 순회하며 각 디렉터리에 대해 <code>(경로, 하위디렉터리들, 파일들)</code> 튜플을 반환한다. <code>os.walk()</code>가 강력한 이유는 <strong>깊이에 상관없이</strong> 모든 하위 디렉터리를 자동으로 탐색하기 때문이다. 복잡한 재귀 함수를 직접 작성할 필요가 없다.</p>
+<div id="py-walk" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 디렉터리 트리 순회</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> root, dirs, files <span class="kw">in</span> os.walk(<span class="st">"data/bbc"</span>):</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"디렉터리: </span><span class="sc">{</span>root<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"  하위 디렉터리: </span><span class="sc">{</span>dirs<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"  파일 수: </span><span class="sc">{</span><span class="bu">len</span>(files)<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>디렉터리: data/bbc
+  하위 디렉터리: ['entertainment', 'business', 'sport', 'politics', 'tech']
+  파일 수: 1
+디렉터리: data/bbc/entertainment
+  하위 디렉터리: []
+  파일 수: 386
+디렉터리: data/bbc/business
+  하위 디렉터리: []
+  파일 수: 510
+디렉터리: data/bbc/sport
+  하위 디렉터리: []
+  파일 수: 511
+디렉터리: data/bbc/politics
+  하위 디렉터리: []
+  파일 수: 417
+디렉터리: data/bbc/tech
+  하위 디렉터리: []
+  파일 수: 401</code></pre>
+</div>
+</div>
+<p><code>root</code>는 현재 탐색 중인 디렉터리 경로, <code>dirs</code>는 그 안의 하위 디렉터리 이름 목록, <code>files</code>는 파일 이름 목록이다. <code>os.walk()</code>가 한 번 호출될 때마다 트리의 다음 단계로 이동하면서 정보를 반환한다. 위 패턴을 익히면 수천 개 파일이 중첩된 복잡한 폴더 구조도 쉽게 처리할 수 있다.</p>
+<section id="sec-make-bbc" class="level3" data-number="29.2.1">
+<h3 data-number="29.2.1" class="anchored" data-anchor-id="sec-make-bbc"><span class="header-section-number">29.2.1</span> BBC 뉴스 사례</h3>
+<p></p>
+<p><a href="http://mlg.ucd.ie/datasets/bbc.html">BBC 뉴스 데이터셋</a>으로 실제 자동화를 연습해보자. 5개 뉴스 범주(business, entertainment, politics, sport, tech) 폴더에 <code>001.txt</code>, <code>002.txt</code> 형식으로 2,225개 기사가 저장되어 있다. 2,225개 파일을 손으로 분류하거나 통계를 내는 건 사실상 불가능하지만, <code>os.walk()</code>와 <code>Counter</code>를 조합하면 몇 줄 코드로 범주별 기사 수를 파악할 수 있다.</p>
+<div id="py-bbc-count" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 범주별 파일 수 계산</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>category_counts <span class="op">=</span> Counter()</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> root, dirs, files <span class="kw">in</span> os.walk(<span class="st">"data/bbc"</span>):</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># root에서 범주명 추출 (예: data/bbc/sport → sport)</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    parts <span class="op">=</span> root.split(os.sep)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(parts) <span class="op">&gt;=</span> <span class="dv">3</span>:</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>        category <span class="op">=</span> parts[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>        txt_files <span class="op">=</span> [f <span class="cf">for</span> f <span class="kw">in</span> files <span class="cf">if</span> f.endswith(<span class="st">".txt"</span>)]</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>        category_counts[category] <span class="op">+=</span> <span class="bu">len</span>(txt_files)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> category, count <span class="kw">in</span> category_counts.most_common():</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>category<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>count<span class="sc">}</span><span class="ss">개"</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>sport: 511개
+business: 510개
+politics: 417개
+tech: 401개
+entertainment: 386개</code></pre>
+</div>
+</div>
+<p>위 코드는 <code>os.walk()</code>와 문자열 조작으로 작업을 완료했다. 동작은 하지만 <code>root.split(os.sep)</code>처럼 경로를 문자열로 다루는 부분이 다소 번거롭다. 앞서 callout에서 소개한 <code>pathlib</code>을 사용하면 같은 작업을 더 직관적으로 처리할 수 있다. 다음 예제에서 <code>pathlib</code>의 <code>rglob()</code> 메서드를 활용해보자.</p>
+</section>
+<section id="sec-make-largest" class="level3" data-number="29.2.2">
+<h3 data-number="29.2.2" class="anchored" data-anchor-id="sec-make-largest"><span class="header-section-number">29.2.2</span> 가장 큰 파일 찾기</h3>
+<p><code>pathlib</code>의 <code>rglob()</code> 메서드는 <strong>재귀적 glob(recursive glob)</strong>을 수행한다. <code>bbc_path.rglob("*.txt")</code>는 <code>data/bbc</code> 아래 모든 하위 디렉터리에서 <code>.txt</code> 파일을 찾아 <code>Path</code> 객체로 반환한다. 파일 크기는 <code>Path.stat().st_size</code>로 얻을 수 있다. BBC 뉴스 데이터셋에서 가장 긴 기사를 찾아보자.</p>
+<div id="py-largest-file" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>bbc_path <span class="op">=</span> Path(<span class="st">"data/bbc"</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>largest_file <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>largest_size <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> txt_file <span class="kw">in</span> bbc_path.rglob(<span class="st">"*.txt"</span>):</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    size <span class="op">=</span> txt_file.stat().st_size</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> size <span class="op">&gt;</span> largest_size:</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>        largest_size <span class="op">=</span> size</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>        largest_file <span class="op">=</span> txt_file</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> largest_file:</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"가장 큰 파일: </span><span class="sc">{</span>largest_file<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"크기: </span><span class="sc">{</span>largest_size<span class="sc">:,}</span><span class="ss"> 바이트"</span>)</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"범주: </span><span class="sc">{</span>largest_file<span class="sc">.</span>parent<span class="sc">.</span>name<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>가장 큰 파일: data/bbc/politics/290.txt
+크기: 25,485 바이트
+범주: politics</code></pre>
+</div>
+</div>
+<p>for 루프로 하나씩 비교하며 최댓값을 찾는 방식 대신, 파이썬 내장 함수 <code>max()</code>에 <code>key</code> 인자를 전달하면 더 간결하게 작성할 수 있다. <code>key=lambda f: f.stat().st_size</code>는 “각 파일의 크기를 기준으로 비교하라”는 뜻이다. 함수형 스타일에 익숙해지면 코드가 짧아지고 의도가 명확해진다.</p>
+<div id="py-largest-file-max" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>bbc_path <span class="op">=</span> Path(<span class="st">"data/bbc"</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>txt_files <span class="op">=</span> <span class="bu">list</span>(bbc_path.rglob(<span class="st">"*.txt"</span>))</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>largest <span class="op">=</span> <span class="bu">max</span>(txt_files, key<span class="op">=</span><span class="kw">lambda</span> f: f.stat().st_size)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"가장 큰 파일: </span><span class="sc">{</span>largest<span class="sc">.</span>name<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span>largest<span class="sc">.</span>stat()<span class="sc">.</span>st_size<span class="sc">:,}</span><span class="ss"> 바이트)"</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>가장 큰 파일: 290.txt (25,485 바이트)</code></pre>
+</div>
+</div>
+<p><code>pathlib</code>의 장점이 드러난다. <code>largest.parent.name</code>으로 상위 디렉터리(범주)를, <code>largest.name</code>으로 파일명을, <code>largest.suffix</code>로 확장자를 바로 꺼낼 수 있다. 문자열 슬라이싱이나 <code>os.path</code> 함수 호출 없이도 경로의 각 부분에 직관적으로 접근할 수 있어 코드 가독성이 높아진다.</p>
+</section>
+</section>
+<section id="sec-make-shell" class="level2" data-number="29.3">
+<h2 data-number="29.3" class="anchored" data-anchor-id="sec-make-shell"><span class="header-section-number">29.3</span> 쉘과 파이프</h2>
+<p> </p>
+<p>파이썬으로 파일 자동화를 구현하다 보면 자연스럽게 한 가지 질문에 도달한다. “쉘 명령어 한 줄이면 끝나는 작업인데 굳이 파이썬 코드로 작성해야 하나?” 수십 년간 축적된 유닉스 도구들—<code>grep</code>, <code>sort</code>, <code>awk</code>, <code>sed</code>—은 각자의 영역에서 탁월한 성능을 발휘한다. 파이썬 프로그래머라면 쉘 도구를 <strong>언제 활용하고, 언제 순수 파이썬으로 구현해야 하는지</strong> 판단할 수 있어야 한다.</p>
+<div id="fig-shell-pipe" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-shell-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/tool/make-shell-pipe.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-shell-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;29.3: 유닉스 파이프라인: 작은 도구들의 조합
+</figcaption>
+</figure>
+</div>
+<section id="sec-make-pipe-concept" class="level3" data-number="29.3.1">
+<h3 data-number="29.3.1" class="anchored" data-anchor-id="sec-make-pipe-concept"><span class="header-section-number">29.3.1</span> 파이프: 작은 도구의 조합</h3>
+<p><strong>쉘(shell)</strong>은 운영체제와 사용자 사이의 명령어 기반 인터페이스다. 유닉스/리눅스에서 <code>ls</code>로 디렉터리 내용을 보고, <code>cd</code>로 이동하며, <strong>파이프(<code>|</code>)</strong>로 명령어를 연결한다. 파이프는 한 프로그램의 출력을 다른 프로그램의 입력으로 바로 전달하는 메커니즘이다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 로그 파일에서 에러 라인만 추출하여 정렬 후 중복 제거</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cat server.log <span class="kw">|</span> <span class="fu">grep</span> <span class="st">"ERROR"</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> <span class="at">-c</span> <span class="op">&gt;</span> errors.txt</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>위 한 줄 명령은 네 개의 작은 프로그램이 협력한 결과다. <code>cat</code>은 파일을 읽고, <code>grep</code>은 패턴을 필터링하며, <code>sort</code>는 정렬하고, <code>uniq</code>는 중복을 제거한다. 각 도구는 <strong>한 가지 일만 잘 수행</strong>하며, 파이프를 통해 텍스트 스트림으로 연결된다. 바로 유닉스 철학의 핵심이다.</p>
+</section>
+<section id="sec-make-subprocess" class="level3" data-number="29.3.2">
+<h3 data-number="29.3.2" class="anchored" data-anchor-id="sec-make-subprocess"><span class="header-section-number">29.3.2</span> 파이썬에서 쉘 명령 실행</h3>
+<p><code>subprocess</code> 모듈은 파이썬에서 외부 프로그램을 실행하는 표준 방법이다. 쉘 명령의 강력함을 파이썬 스크립트 안에서 활용할 수 있다.</p>
+<div id="py-subprocess" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> subprocess</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ls -l 실행 (유닉스/맥)</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> subprocess.run([<span class="st">"ls"</span>, <span class="st">"-l"</span>, <span class="st">"data"</span>],</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>                        capture_output<span class="op">=</span><span class="va">True</span>, text<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result.stdout)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="py-subprocess-win" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 윈도우에서는 dir 명령 사용</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> subprocess.run([<span class="st">"dir"</span>, <span class="st">"data"</span>],</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>                        shell<span class="op">=</span><span class="va">True</span>, capture_output<span class="op">=</span><span class="va">True</span>, text<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result.stdout)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>쉘 파이프라인을 통째로 실행할 수도 있다. <code>shell=True</code> 옵션을 사용하면 쉘 문법 그대로 명령어를 전달할 수 있다.</p>
+<div id="py-subprocess-pipe" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 쉘 파이프라인을 그대로 실행</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> subprocess.run(</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"grep ERROR server.log | sort | uniq -c"</span>,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    shell<span class="op">=</span><span class="va">True</span>, capture_output<span class="op">=</span><span class="va">True</span>, text<span class="op">=</span><span class="va">True</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result.stdout)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="sec-make-unix" class="level3" data-number="29.3.3">
+<h3 data-number="29.3.3" class="anchored" data-anchor-id="sec-make-unix"><span class="header-section-number">29.3.3</span> 유닉스 철학</h3>
+<p></p>
+<p>유닉스 철학은 작업 자동화의 근간이다. 1978년 더그 맥일로이(Doug McIlroy)가 정립한 원칙은 40년이 지난 지금도 소프트웨어 설계의 황금률로 남아 있다.</p>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">힌트</span>유닉스 철학
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<blockquote class="blockquote">
+<p>Write programs that do one thing and do it well. Write programs to work together. Write programs to handle text streams, because that is a universal interface. – Doug McIlroy</p>
+</blockquote>
+<ul>
+<li>한 가지 작업만 매우 잘하는 프로그램을 작성한다.</li>
+<li>프로그램이 함께 동작하도록 작성한다.</li>
+<li>텍스트를 다루는 프로그램을 작성한다. 텍스트는 보편적 인터페이스다.</li>
+</ul>
+</div>
+</div>
+<p>파이썬 스크립트도 유닉스 철학을 따를 수 있다. 표준 입력(<code>stdin</code>)에서 읽고 표준 출력(<code>stdout</code>)으로 쓰는 스크립트는 쉘 파이프라인의 일부가 된다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 파이썬 스크립트를 파이프라인에 끼워넣기</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cat data.txt <span class="kw">|</span> <span class="ex">python</span> preprocess.py <span class="kw">|</span> <span class="ex">python</span> analyze.py <span class="op">&gt;</span> output.txt</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p></p>
+<p>쉘 명령을 활용할지, 순수 파이썬으로 구현할지는 상황에 따라 달라진다. <code>subprocess</code>는 개발 속도가 빠르다. <code>grep</code>, <code>awk</code> 같은 검증된 도구를 그대로 재사용하면 몇 줄 코드로 복잡한 텍스트 처리를 끝낼 수 있다. 수 기가바이트 로그 파일을 필터링할 때 <code>grep</code>의 성능은 파이썬 순수 구현보다 훨씬 빠르다. 일회성 스크립트나 프로토타입 단계에서는 쉘 명령을 호출하는 편이 효율적이고, 리눅스 서버 환경에서만 돌아가는 스크립트라면 이식성 걱정도 없다.</p>
+<p>반면 순수 파이썬 구현은 크로스 플랫폼 호환성이 강점이다. 윈도우, 맥, 리눅스 어디서든 동일하게 동작해야 하는 도구라면 외부 명령 의존을 피해야 한다. <code>subprocess</code>로 쉘 명령을 실행하면 에러 메시지가 텍스트로 반환되어 파싱이 번거롭지만, 파이썬 코드는 <code>try-except</code>로 예외를 세밀하게 처리할 수 있다. JSON이나 객체 같은 구조화된 데이터를 다룰 때도 파이썬 코드가 자연스럽고, 단위 테스트 작성도 쉽다. 배포 환경에서 <code>grep</code>이나 <code>awk</code> 설치를 보장할 수 없다면 표준 라이브러리만으로 동작하는 순수 파이썬이 안전한 선택이다.</p>
+<p>실무에서는 두 접근법을 혼합한다. 무거운 텍스트 처리는 <code>grep</code>이나 <code>awk</code>에 맡기고, 그 결과를 파이썬에서 파싱하여 구조화된 처리를 수행하는 식이다. “쉘로 빠르게 필터링하고, 파이썬으로 정교하게 가공한다”는 전략이 효과적이다.</p>
+</section>
+</section>
+<section id="sec-make-args" class="level2" data-number="29.4">
+<h2 data-number="29.4" class="anchored" data-anchor-id="sec-make-args"><span class="header-section-number">29.4</span> 명령줄 인자</h2>
+<p> </p>
+<p>스크립트를 한 번 작성하면 끝이 아니다. 같은 로직을 다른 파일에 적용하거나, 옵션을 바꿔가며 실행해야 하는 상황이 반복된다. 파일 경로나 설정값을 코드에 직접 적으면(하드코딩) 매번 소스를 열어 수정해야 한다. <strong>명령줄 인자</strong>는 코드를 건드리지 않고 실행 시점에 값을 전달하는 방법이다.</p>
+<div id="fig-cli-args" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cli-args-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/tool/make-cli-args.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cli-args-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;29.4: 명령줄 인자 흐름: 쉘에서 프로그램까지
+</figcaption>
+</figure>
+</div>
+<p>명령줄 인자가 중요한 이유는 <strong>재사용성</strong>과 <strong>자동화 연결</strong>에 있다. 스크립트가 인자를 받으면 쉘 스크립트, 크론, CI/CD 파이프라인에서 바로 호출할 수 있다. <code>python analyze.py data1.csv</code>와 <code>python analyze.py data2.csv</code>처럼 같은 스크립트를 다른 데이터에 적용할 수 있고, <code>--verbose</code> 플래그로 디버그 출력을 켜고 끌 수 있다. 유닉스 철학에서 강조하는 “작은 도구의 조합”은 명령줄 인자가 있어야 가능하다.</p>
+<section id="sec-make-argv-choice" class="level3" data-number="29.4.1">
+<h3 data-number="29.4.1" class="anchored" data-anchor-id="sec-make-argv-choice"><span class="header-section-number">29.4.1</span> sys.argv와 argparse 선택</h3>
+<p> </p>
+<p>파이썬은 명령줄 인자를 처리하는 두 가지 방법을 제공한다. <code>sys.argv</code>는 인자를 문자열 리스트로 그대로 전달하고, <code>argparse</code>는 인자를 파싱하여 구조화된 객체로 변환한다. 선택 기준은 명확하다.</p>
+<p><strong>sys.argv가 적합한 경우</strong>: 인자가 1~2개이고 형식이 단순할 때. 파일 경로 하나만 받는 스크립트라면 <code>sys.argv[1]</code>로 충분하다. 타입 검증이나 도움말이 필요 없는 일회성 스크립트에 적합하다.</p>
+<p><strong>argparse가 필요한 경우</strong>: 옵션 플래그(<code>-v</code>, <code>--output</code>)가 있거나, 인자 타입 변환(문자열→정수)이 필요하거나, <code>--help</code> 도움말을 자동 생성하고 싶을 때. 다른 사람이 사용할 도구라면 <code>argparse</code>가 표준이다.</p>
+<div id="py-argv-simple" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sys.argv: 단순한 경우</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>filepath <span class="op">=</span> sys.argv[<span class="dv">1</span>]  <span class="co"># 첫 번째 인자</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="py-argparse-pattern" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># argparse: 구조화된 인자 처리</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> argparse</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>parser <span class="op">=</span> argparse.ArgumentParser(description<span class="op">=</span><span class="st">"파일 분석 도구"</span>)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>parser.add_argument(<span class="st">"file"</span>, <span class="bu">help</span><span class="op">=</span><span class="st">"분석할 파일"</span>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>parser.add_argument(<span class="st">"-n"</span>, <span class="st">"--top"</span>, <span class="bu">type</span><span class="op">=</span><span class="bu">int</span>, default<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>parser.add_argument(<span class="st">"-v"</span>, <span class="st">"--verbose"</span>, action<span class="op">=</span><span class="st">"store_true"</span>)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>args <span class="op">=</span> parser.parse_args()</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co"># args.file, args.top, args.verbose로 접근</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><code>argparse</code>의 핵심 패턴은 세 단계다. 파서 생성(<code>ArgumentParser</code>), 인자 정의 (<code>add_argument</code>), 파싱 실행(<code>parse_args</code>). <code>add_argument</code>에서 <code>type=int</code>로 타입 변환을, <code>default=5</code>로 기본값을, <code>action="store_true"</code>로 불리언 플래그를 지정한다. <code>--help</code> 옵션은 자동으로 생성된다.</p>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">힌트</span>CLI 설계 원칙
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p></p>
+<p>좋은 CLI 도구는 몇 가지 원칙을 따른다.</p>
+<ul>
+<li><strong>합리적 기본값</strong>: 필수 옵션을 최소화하고, 대부분의 경우 기본값으로 동작하게 한다</li>
+<li><strong>–help 필수</strong>: 사용법을 기억할 필요 없이 <code>--help</code>로 확인할 수 있어야 한다</li>
+<li><strong>단일 책임</strong>: 한 스크립트는 한 가지 작업에 집중한다. 복잡한 워크플로우는 여러 스크립트를 파이프로 연결한다</li>
+<li><strong>종료 코드</strong>: 성공 시 0, 실패 시 1을 반환하여 쉘 스크립트에서 조건 분기할 수 있게 한다</li>
+</ul>
+<p>앞서 작성한 <code>search_files()</code> 함수에 <code>argparse</code> 인터페이스를 붙이면 바로 CLI 도구가 된다. 로직(함수)과 인터페이스(argparse)를 분리하면 같은 함수를 스크립트, 노트북, 웹 API 등 다양한 환경에서 재사용할 수 있다.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-make-batch" class="level2" data-number="29.5">
+<h2 data-number="29.5" class="anchored" data-anchor-id="sec-make-batch"><span class="header-section-number">29.5</span> 파일 일괄 처리</h2>
+<p></p>
+<p>작업 자동화의 핵심은 <strong>대량 파일을 일괄 처리</strong>하는 것이다. 수천 개 파일의 이름을 바꾸거나, 특정 키워드가 포함된 파일을 찾거나, 중복 파일을 정리하는 작업을 스크립트 하나로 해결할 수 있다.</p>
+<div id="fig-make-batch" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-make-batch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/tool/make-batch.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-make-batch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;29.5: 파일 일괄 처리: 검색, 이름 변경, 이동, 중복 제거
+</figcaption>
+</figure>
+</div>
+<p>파일 검색은 <code>rglob()</code>과 <code>read_text()</code>의 조합으로 구현한다. 디렉터리를 재귀적으로 탐색하면서 파일 내용을 읽고, 키워드가 포함되었는지 확인한다. 대소문자를 구분하지 않으려면 <code>.lower()</code>로 통일한 뒤 비교하면 된다.</p>
+<div id="py-file-search" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> search_files(directory, keyword, extension<span class="op">=</span><span class="st">".txt"</span>):</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""디렉터리에서 키워드가 포함된 파일 찾기"""</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    results <span class="op">=</span> []</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> filepath <span class="kw">in</span> Path(directory).rglob(<span class="ss">f"*</span><span class="sc">{</span>extension<span class="sc">}</span><span class="ss">"</span>):</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>        content <span class="op">=</span> filepath.read_text(encoding<span class="op">=</span><span class="st">"utf-8"</span>, errors<span class="op">=</span><span class="st">"ignore"</span>)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> keyword.lower() <span class="kw">in</span> content.lower():</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>            results.append(filepath)</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> results</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>matches <span class="op">=</span> search_files(<span class="st">"data/bbc"</span>, <span class="st">"football"</span>)</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"'football' 포함 파일: </span><span class="sc">{</span><span class="bu">len</span>(matches)<span class="sc">}</span><span class="ss">개"</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'football' 포함 파일: 120개</code></pre>
+</div>
+</div>
+<p>파일 이름 변경과 이동은 <code>pathlib</code>의 <code>with_suffix()</code>, <code>rename()</code>과 <code>shutil.move()</code>로 처리한다. 확장자를 바꾸려면 <code>filepath.with_suffix(".md")</code>로 새 경로를 만들고 <code>rename()</code>을 호출한다. 다른 드라이브나 파일 시스템으로 이동해야 한다면 <code>shutil.move()</code>를 사용한다.</p>
+<p>중복 파일 탐지는 2단계로 진행한다. 먼저 파일 크기로 후보군을 좁힌 뒤, <code>hashlib.md5()</code>로 체크섬을 계산하여 내용이 동일한 파일을 식별한다. 크기가 다르면 내용도 다르므로, 해시 계산 대상을 크기가 같은 파일로 한정하면 성능이 크게 향상된다.</p>
+<div class="callout callout-style-simple callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">경고</span>파일 조작 안전 원칙
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p></p>
+<p>파일 이름 변경, 삭제, 이동은 되돌릴 수 없다. 실무에서는 <code>dry_run=True</code> 매개변수를 두어 실제 작업 전에 시뮬레이션 결과를 확인한다. “무엇이 바뀔지” 먼저 출력하고, 결과가 예상과 일치하면 <code>dry_run=False</code>로 실행한다. 중요한 데이터는 반드시 백업 후 작업한다.</p>
+</div>
+</div>
+<p></p>
+</section>
+<section id="sec-make-debugging" class="level2" data-number="29.6">
+<h2 data-number="29.6" class="anchored" data-anchor-id="sec-make-debugging"><span class="header-section-number">29.6</span> 디버깅</h2>
+<p></p>
+<p>파일 자동화 스크립트가 실패하면 원인을 빠르게 파악하기 어렵다. 수천 개 파일 중 어디서 문제가 발생했는지, 경로가 잘못된 건지 인코딩 문제인지 구분해야 한다. 기초적인 예외 처리 문법보다 중요한 건 <strong>“왜 이 오류가 발생하는가”</strong>에 대한 깊은 이해다.</p>
+<div id="fig-make-debugging" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-make-debugging-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/tool/make-debugging.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-make-debugging-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;29.6: 파일 자동화 디버깅: 경로, 권한, 인코딩의 삼각관계
+</figcaption>
+</figure>
+</div>
+<section id="sec-make-debug-path" class="level3" data-number="29.6.1">
+<h3 data-number="29.6.1" class="anchored" data-anchor-id="sec-make-debug-path"><span class="header-section-number">29.6.1</span> 경로 문제</h3>
+<p> </p>
+<p>파일 자동화에서 가장 흔한 실패 원인은 <strong>경로</strong>다. 스크립트가 개발 환경에서는 잘 동작하다가 서버에 배포하면 실패하는 경우가 많다. 핵심은 <strong>현재 작업 디렉터리(cwd)</strong>가 어디인지 정확히 파악하는 것이다.</p>
+<p>상대경로 <code>data/romeo.txt</code>는 cwd가 <code>/home/user/project</code>일 때 <code>/home/user/project/data/romeo.txt</code>를 가리킨다. 하지만 크론(cron)이나 시스템 서비스로 스크립트를 실행하면 cwd가 <code>/</code>나 <code>/home/user</code>로 바뀌어 같은 상대경로가 전혀 다른 위치를 가리킨다. 이 문제를 방지하는 방법은 <strong>스크립트 파일 위치를 기준으로 경로를 구성</strong>하는 것이다.</p>
+<div id="py-script-relative" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 스크립트 파일이 있는 디렉터리</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>SCRIPT_DIR <span class="op">=</span> Path(<span class="va">__file__</span>).parent</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 스크립트 위치 기준으로 데이터 경로 설정</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>DATA_DIR <span class="op">=</span> SCRIPT_DIR <span class="op">/</span> <span class="st">"data"</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>CONFIG_FILE <span class="op">=</span> SCRIPT_DIR <span class="op">/</span> <span class="st">"config.yaml"</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><code>__file__</code>은 현재 실행 중인 스크립트의 경로를 담고 있다. <code>.parent</code>로 디렉터리를 추출하면 cwd에 상관없이 항상 올바른 위치를 참조한다. 주피터 노트북에서는 <code>__file__</code>이 정의되지 않으므로, 노트북과 스크립트를 모두 지원하려면 조건 분기가 필요하다.</p>
+<div class="callout callout-style-simple callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">경고</span>심볼릭 링크의 함정
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p></p>
+<p>심볼릭 링크를 통해 스크립트를 실행하면 <code>__file__</code>이 링크 경로를 반환한다. 원본 파일 위치가 필요하면 <code>Path(__file__).resolve()</code>로 심볼릭 링크를 해석해야 한다. 배포 환경에서 심볼릭 링크를 사용한다면 이 차이를 반드시 인지해야 한다.</p>
+</div>
+</div>
+</section>
+<section id="sec-make-debug-hidden" class="level3" data-number="29.6.2">
+<h3 data-number="29.6.2" class="anchored" data-anchor-id="sec-make-debug-hidden"><span class="header-section-number">29.6.2</span> 숨겨진 문자</h3>
+<p> </p>
+<p>화면에 똑같이 보이는 두 파일명이 실제로는 다른 바이트열일 수 있다. 한글 파일명은 특히 위험하다. “한글.txt”는 <strong>NFC</strong>(Composed) 형식과 <strong>NFD</strong>(Decomposed) 형식으로 저장될 수 있는데, 두 형식은 화면에서 동일하게 보이지만 바이트 수준에서 다르다.</p>
+<p>macOS는 기본적으로 NFD 형식을 사용하고, 윈도우와 리눅스는 NFC를 선호한다. macOS에서 생성한 파일을 윈도우로 복사했을 때 한글 파일명이 깨지거나, <code>Path.exists()</code>가 <code>False</code>를 반환하는 이유가 여기에 있다.</p>
+<div id="py-unicode-normalize" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> unicodedata</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> normalize_path(filepath):</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""경로명을 NFC로 정규화"""</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> Path(unicodedata.normalize(<span class="st">"NFC"</span>, <span class="bu">str</span>(filepath)))</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 검색 대상도 정규화해야 일치함</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>target_name <span class="op">=</span> unicodedata.normalize(<span class="st">"NFC"</span>, <span class="st">"한글파일.txt"</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>이 문제가 의심되면 파일명의 바이트를 직접 확인한다.</p>
+<div id="py-check-bytes" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>filename <span class="op">=</span> <span class="st">"한글.txt"</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(filename.encode(<span class="st">"utf-8"</span>))  <span class="co"># NFC vs NFD 바이트 비교</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(filename))             <span class="co"># NFC: 6, NFD: 8 (자모 분리)</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="sec-make-debug-encoding" class="level3" data-number="29.6.3">
+<h3 data-number="29.6.3" class="anchored" data-anchor-id="sec-make-debug-encoding"><span class="header-section-number">29.6.3</span> 인코딩</h3>
+<p> </p>
+<p>한국어 텍스트 파일은 UTF-8, EUC-KR, CP949 등 여러 인코딩으로 저장될 수 있다. 잘못된 인코딩으로 읽으면 <code>UnicodeDecodeError</code>가 발생하거나, 오류 없이 깨진 문자가 반환된다. 후자가 더 위험하다—오류 없이 진행되어 나중에야 문제를 발견하기 때문이다.</p>
+<p>레거시 시스템에서 생성된 파일이나 출처가 불분명한 데이터를 다룰 때는 인코딩을 <strong>탐지</strong>해야 한다. <code>chardet</code> 라이브러리가 대표적이다.</p>
+<div id="py-chardet" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> chardet</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> read_with_detection(filepath):</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""인코딩을 자동 탐지하여 텍스트 읽기"""</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    raw_bytes <span class="op">=</span> Path(filepath).read_bytes()</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    detected <span class="op">=</span> chardet.detect(raw_bytes)</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>    encoding <span class="op">=</span> detected[<span class="st">"encoding"</span>]</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    confidence <span class="op">=</span> detected[<span class="st">"confidence"</span>]</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> confidence <span class="op">&lt;</span> <span class="fl">0.7</span>:</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"경고: 인코딩 신뢰도 낮음 (</span><span class="sc">{</span>encoding<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>confidence<span class="sc">:.0%}</span><span class="ss">)"</span>)</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> raw_bytes.decode(encoding)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><code>chardet.detect()</code>는 바이트열을 분석하여 인코딩을 추정하고 신뢰도를 함께 반환한다. 신뢰도가 낮으면 수동 확인이 필요하다. 대량 파일 처리 시에는 샘플 파일로 먼저 인코딩을 확인한 뒤, 확정된 인코딩을 일괄 적용하는 편이 안전하다.</p>
+</section>
+<section id="sec-make-debug-memory" class="level3" data-number="29.6.4">
+<h3 data-number="29.6.4" class="anchored" data-anchor-id="sec-make-debug-memory"><span class="header-section-number">29.6.4</span> 대용량 처리</h3>
+<p> </p>
+<p><code>Path.read_text()</code>는 파일 전체를 메모리에 올린다. 수 메가바이트 파일은 문제없지만, 수 기가바이트 로그 파일을 이 방식으로 처리하면 <code>MemoryError</code>가 발생하거나 시스템이 느려진다. 대용량 파일은 <strong>줄 단위로 스트리밍</strong> 처리해야 한다.</p>
+<div id="py-streaming" class="cell" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> count_lines_streaming(filepath, keyword):</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""대용량 파일을 줄 단위로 처리"""</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    count <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(filepath, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> f:</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> line <span class="kw">in</span> f:  <span class="co"># 한 줄씩 읽음, 메모리 효율적</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> keyword <span class="kw">in</span> line:</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>                count <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> count</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><code>for line in f</code> 패턴은 파일 객체를 이터레이터로 사용한다. 파이썬이 내부적으로 버퍼링하며 한 줄씩 반환하므로, 파일 크기에 관계없이 메모리 사용량이 일정하다. BBC 뉴스 2,225개 파일 같은 규모는 <code>read_text()</code>로 충분하지만, 서버 로그나 센서 데이터처럼 기가바이트 단위 파일을 다룬다면 스트리밍이 필수다.</p>
+</section>
+<section id="sec-make-debug-race" class="level3" data-number="29.6.5">
+<h3 data-number="29.6.5" class="anchored" data-anchor-id="sec-make-debug-race"><span class="header-section-number">29.6.5</span> 경쟁 조건</h3>
+<p> </p>
+<p>파일 존재 여부를 확인한 뒤 사용하는 패턴에는 <strong>경쟁 조건(race condition)</strong>이 숨어 있다. <code>if filepath.exists():</code>를 통과한 직후, 다른 프로세스가 파일을 삭제하면 <code>read_text()</code>에서 <code>FileNotFoundError</code>가 발생한다. 이를 <strong>TOCTOU(Time-Of-Check to Time-Of-Use)</strong> 문제라고 부른다.</p>
+<div id="py-toctou-bad" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 취약한 패턴: 확인과 사용 사이에 틈이 있음</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> filepath.exists():</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    content <span class="op">=</span> filepath.read_text()  <span class="co"># 여기서 실패할 수 있음</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="py-toctou-good" class="cell" data-execution_count="23">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 안전한 패턴: 일단 시도하고 예외 처리</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    content <span class="op">=</span> filepath.read_text()</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">FileNotFoundError</span>:</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    content <span class="op">=</span> <span class="va">None</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>EAFP(Easier to Ask Forgiveness than Permission) 원칙에 따라, 조건 검사보다 예외 처리를 우선하는 편이 안전하다. 특히 여러 프로세스가 동시에 같은 디렉터리를 처리하는 파이프라인에서는 이 패턴이 필수다.</p>
+</section>
+</section>
+<section id="생각해볼-점" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="생각해볼-점">💡 생각해볼 점</h2>
+<p>작업 자동화의 본질은 <strong>반복을 코드로 대체하는 것</strong>이다. 수백 개 파일의 이름을 하나씩 바꾸는 대신 스크립트 한 번 실행으로 끝내고, 매일 반복되는 데이터 수집은 크론(cron)이나 태스크 스케줄러에 맡긴다. 자동화는 시간을 절약할 뿐 아니라 <strong>재현가능성</strong>을 확보한다. 손으로 클릭하며 처리한 작업은 기록이 남지 않지만, 스크립트는 “어떤 파일을 어떻게 처리했는지”를 코드 자체로 문서화한다. 6개월 후 같은 작업을 반복해야 할 때, 스크립트 하나면 몇 분 만에 끝난다.</p>
+<p>유닉스 철학—“한 가지를 잘하는 작은 프로그램”—은 50년이 지난 지금도 유효하다. <code>grep</code>으로 검색하고, <code>sort</code>로 정렬하고, <code>uniq</code>로 중복을 제거하듯, 파이썬 스크립트도 각각 단일 기능에 집중하고 파이프(<code>|</code>)로 연결하면 복잡한 작업을 처리할 수 있다. BBC 뉴스 데이터셋을 다룬 예제에서 봤듯이, 검색·분류·통계를 각각 별도 함수로 분리하면 테스트하기 쉽고 조합하기 쉽다. 하나의 거대한 스크립트보다 작은 스크립트 여러 개가 낫다는 원칙은 현대 데이터 파이프라인에서도 그대로 적용된다.</p>
+<p><code>pathlib</code>은 경로 처리를 문자열 조작에서 객체 지향 방식으로 전환했다. 코드가 간결해지면 버그가 줄고, 가독성이 높아지면 협업이 쉬워진다.</p>
+<p><code>argparse</code>로 CLI 인터페이스를 만들면 스크립트의 활용 범위가 넓어진다. 파일 경로, 검색 키워드, 옵션 플래그를 명령줄 인자로 받으면, 코드를 수정하지 않고도 다양한 작업에 같은 스크립트를 재사용할 수 있다. <code>--dry-run</code> 옵션으로 실행 전 시뮬레이션을 하고, <code>--verbose</code>로 상세 로그를 출력하는 패턴은 실무에서 거의 필수다. 작은 CLI 도구들을 쌓아가다 보면 어느새 자신만의 자동화 도구 모음이 완성된다.</p>
+<p>파이썬 스크립트로 개별 작업을 자동화하는 데는 한계가 있다. 여러 스크립트가 서로 의존하는 복잡한 파이프라인—데이터 전처리 → 분석 → 시각화 → 보고서 생성—을 쉘 스크립트로 묶으면 매번 전체를 재실행해야 한다. 원본 데이터만 바뀌었는데 시각화까지 다시 돌리는 건 낭비다. <strong>의존성 기반 빌드 자동화</strong> 도구인 Make는 “무엇이 바뀌었는지” 추적하여 필요한 단계만 재실행한다. 다음 장에서 Make의 핵심 개념과 실전 활용법을 다룬다.</p>
+<p> </p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "복사완료!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "복사완료!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/r2bit\.com\/gpt-coding\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./tool-ds.html" class="pagination-link" aria-label="데이터 과학과 R">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">데이터 과학과 R</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./tool-make.html" class="pagination-link" aria-label="빌드 자동화: make">
+        <span class="nav-page-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">빌드 자동화: make</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>챗GPT 쿼토 책은 소프트웨어 카펜트리 “Git 버전제어”를 번역한 것이 포함되어 있습니다.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/tool-auto.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>순수하게 <a href="https://quarto.org/">쿼토(Quarto)</a>로 제작되었습니다.</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

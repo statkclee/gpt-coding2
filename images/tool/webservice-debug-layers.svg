@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 60 800 360">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #111; font-weight: bold; }
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-mono { font-family: 'SF Mono', Consolas, monospace; fill: #444; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #666; font-style: italic; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #777; font-size: 10px; }
+      .layer-box { fill: #fff; stroke: #333; stroke-width: 1.5; }
+      .fail-box { fill: #f8f8f8; stroke: #666; stroke-width: 1; stroke-dasharray: 4,2; }
+      .flow-line { fill: none; stroke: #555; stroke-width: 1.5; }
+      .fail-line { fill: none; stroke: #999; stroke-width: 1; stroke-dasharray: 3,2; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="2.5" orient="auto">
+      <path d="M0,0 L0,5 L7,2.5 z" fill="#555" />
+    </marker>
+    <marker id="fail-arrow" markerWidth="6" markerHeight="6" refX="5" refY="2" orient="auto">
+      <path d="M0,0 L0,4 L5,2 z" fill="#999" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="420" fill="#ffffff"/>
+
+  <!-- 상단: 핵심 인사이트 -->
+  <!-- <text x="400" y="28" text-anchor="middle" class="tufte-title" font-size="14">API 디버깅 = 실패 지점 찾기</text>
+  <text x="400" y="48" text-anchor="middle" class="tufte-label" font-size="11">요청은 여러 계층을 통과한다. 어느 계층에서 멈췄는가?</text> -->
+
+  <!-- 메인 플로우 (좌→우) -->
+
+  <!-- 1. 클라이언트 -->
+  <g transform="translate(30, 80)">
+    <rect x="0" y="0" width="90" height="60" class="layer-box" rx="4"/>
+    <text x="45" y="25" text-anchor="middle" class="tufte-title" font-size="11">클라이언트</text>
+    <text x="45" y="42" text-anchor="middle" class="tufte-mono" font-size="9">Python</text>
+    <text x="45" y="55" text-anchor="middle" class="tufte-mono" font-size="9">requests</text>
+  </g>
+
+  <!-- 화살표 1 -->
+  <path d="M 125,110 L 165,110" class="flow-line" marker-end="url(#arrow)"/>
+
+  <!-- 2. DNS -->
+  <g transform="translate(170, 80)">
+    <rect x="0" y="0" width="90" height="60" class="layer-box" rx="4"/>
+    <text x="45" y="22" text-anchor="middle" class="tufte-title" font-size="11">① DNS</text>
+    <text x="45" y="40" text-anchor="middle" class="tufte-small">호스트명</text>
+    <text x="45" y="53" text-anchor="middle" class="tufte-small">→ IP 변환</text>
+  </g>
+
+  <!-- 화살표 2 -->
+  <path d="M 265,110 L 305,110" class="flow-line" marker-end="url(#arrow)"/>
+
+  <!-- 3. TCP 연결 -->
+  <g transform="translate(310, 80)">
+    <rect x="0" y="0" width="90" height="60" class="layer-box" rx="4"/>
+    <text x="45" y="22" text-anchor="middle" class="tufte-title" font-size="11">② 연결</text>
+    <text x="45" y="40" text-anchor="middle" class="tufte-small">TCP 핸드셰이크</text>
+    <text x="45" y="53" text-anchor="middle" class="tufte-small">포트 443/80</text>
+  </g>
+
+  <!-- 화살표 3 -->
+  <path d="M 405,110 L 445,110" class="flow-line" marker-end="url(#arrow)"/>
+
+  <!-- 4. HTTP 요청/응답 -->
+  <g transform="translate(450, 80)">
+    <rect x="0" y="0" width="90" height="60" class="layer-box" rx="4"/>
+    <text x="45" y="22" text-anchor="middle" class="tufte-title" font-size="11">③ HTTP</text>
+    <text x="45" y="40" text-anchor="middle" class="tufte-small">요청 전송</text>
+    <text x="45" y="53" text-anchor="middle" class="tufte-small">응답 수신</text>
+  </g>
+
+  <!-- 화살표 4 -->
+  <path d="M 545,110 L 585,110" class="flow-line" marker-end="url(#arrow)"/>
+
+  <!-- 5. 파싱 -->
+  <g transform="translate(590, 80)">
+    <rect x="0" y="0" width="90" height="60" class="layer-box" rx="4"/>
+    <text x="45" y="22" text-anchor="middle" class="tufte-title" font-size="11">④ 파싱</text>
+    <text x="45" y="40" text-anchor="middle" class="tufte-small">JSON 디코딩</text>
+    <text x="45" y="53" text-anchor="middle" class="tufte-small">데이터 추출</text>
+  </g>
+
+  <!-- 화살표 5 -->
+  <path d="M 685,110 L 725,110" class="flow-line" marker-end="url(#arrow)"/>
+
+  <!-- 6. 성공 -->
+  <g transform="translate(730, 90)">
+    <text x="20" y="25" text-anchor="middle" class="tufte-title" font-size="37">✓</text>
+  </g>
+
+  <!-- 하단: 계층별 실패 유형과 진단 -->
+  <g transform="translate(30, 170)">
+    <rect x="0" y="0" width="740" height="230" fill="#fafafa" stroke="#ccc" stroke-width="1" rx="6"/>
+
+    <!-- 헤더 -->
+    <rect x="0" y="0" width="740" height="30" fill="#f0f0f0" stroke="#ccc" stroke-width="1" rx="6"/>
+    <text x="80" y="20" text-anchor="middle" class="tufte-title" font-size="11">실패 지점</text>
+    <text x="240" y="20" text-anchor="middle" class="tufte-title" font-size="11">증상</text>
+    <text x="440" y="20" text-anchor="middle" class="tufte-title" font-size="11">진단 도구</text>
+    <text x="640" y="20" text-anchor="middle" class="tufte-title" font-size="11">해결책</text>
+
+    <!-- 구분선 -->
+    <line x1="160" y1="0" x2="160" y2="230" stroke="#ddd" stroke-width="1"/>
+    <line x1="340" y1="0" x2="340" y2="230" stroke="#ddd" stroke-width="1"/>
+    <line x1="540" y1="0" x2="540" y2="230" stroke="#ddd" stroke-width="1"/>
+
+    <!-- Row 1: DNS -->
+    <rect x="0" y="30" width="740" height="50" fill="#fff" stroke="#eee" stroke-width="1"/>
+    <text x="80" y="50" text-anchor="middle" class="tufte-mono" font-size="11" font-weight="bold">① DNS 실패</text>
+    <text x="80" y="68" text-anchor="middle" class="tufte-small">호스트를 찾을 수 없음</text>
+    <text x="240" y="55" text-anchor="middle" class="tufte-mono" font-size="10">ConnectionError:</text>
+    <text x="240" y="70" text-anchor="middle" class="tufte-mono" font-size="9">Name resolution failed</text>
+    <text x="440" y="50" text-anchor="middle" class="tufte-mono" font-size="10">ping 호스트명</text>
+    <text x="440" y="68" text-anchor="middle" class="tufte-mono" font-size="10">nslookup 호스트명</text>
+    <text x="640" y="55" text-anchor="middle" class="tufte-text" font-size="10">호스트명 오타 확인</text>
+    <text x="640" y="70" text-anchor="middle" class="tufte-text" font-size="10">인터넷 연결 확인</text>
+
+    <!-- Row 2: Connection -->
+    <rect x="0" y="80" width="740" height="50" fill="#f8f8f8" stroke="#eee" stroke-width="1"/>
+    <text x="80" y="100" text-anchor="middle" class="tufte-mono" font-size="11" font-weight="bold">② 연결 거부</text>
+    <text x="80" y="118" text-anchor="middle" class="tufte-small">서버가 응답 안 함</text>
+    <text x="240" y="105" text-anchor="middle" class="tufte-mono" font-size="10">ConnectionRefused</text>
+    <text x="240" y="120" text-anchor="middle" class="tufte-mono" font-size="9">또는 Timeout</text>
+    <text x="440" y="100" text-anchor="middle" class="tufte-mono" font-size="10">telnet 호스트 포트</text>
+    <text x="440" y="118" text-anchor="middle" class="tufte-mono" font-size="10">nc -zv 호스트 포트</text>
+    <text x="640" y="105" text-anchor="middle" class="tufte-text" font-size="10">포트 번호 확인</text>
+    <text x="640" y="120" text-anchor="middle" class="tufte-text" font-size="10">방화벽/VPN 점검</text>
+
+    <!-- Row 3: HTTP -->
+    <rect x="0" y="130" width="740" height="50" fill="#fff" stroke="#eee" stroke-width="1"/>
+    <text x="80" y="150" text-anchor="middle" class="tufte-mono" font-size="11" font-weight="bold">③ HTTP 오류</text>
+    <text x="80" y="168" text-anchor="middle" class="tufte-small">4xx, 5xx 응답</text>
+    <text x="240" y="150" text-anchor="middle" class="tufte-mono" font-size="10">401 Unauthorized</text>
+    <text x="240" y="165" text-anchor="middle" class="tufte-mono" font-size="10">404 Not Found</text>
+    <text x="440" y="150" text-anchor="middle" class="tufte-mono" font-size="10">curl -v URL</text>
+    <text x="440" y="168" text-anchor="middle" class="tufte-mono" font-size="10">response.headers</text>
+    <text x="640" y="150" text-anchor="middle" class="tufte-text" font-size="10">API 문서 재확인</text>
+    <text x="640" y="165" text-anchor="middle" class="tufte-text" font-size="10">인증 헤더 확인</text>
+
+    <!-- Row 4: Parse -->
+    <rect x="0" y="180" width="740" height="50" fill="#f8f8f8" stroke="#eee" stroke-width="1"/>
+    <text x="80" y="200" text-anchor="middle" class="tufte-mono" font-size="11" font-weight="bold">④ 파싱 실패</text>
+    <text x="80" y="218" text-anchor="middle" class="tufte-small">JSON 구조 불일치</text>
+    <text x="240" y="205" text-anchor="middle" class="tufte-mono" font-size="10">JSONDecodeError</text>
+    <text x="240" y="220" text-anchor="middle" class="tufte-mono" font-size="10">KeyError</text>
+    <text x="440" y="200" text-anchor="middle" class="tufte-mono" font-size="10">print(response.text)</text>
+    <text x="440" y="218" text-anchor="middle" class="tufte-mono" font-size="10">json.loads() 직접</text>
+    <text x="640" y="205" text-anchor="middle" class="tufte-text" font-size="10">응답 구조 확인</text>
+    <text x="640" y="220" text-anchor="middle" class="tufte-text" font-size="10">.get() 안전 접근</text>
+  </g>
+
+</svg>

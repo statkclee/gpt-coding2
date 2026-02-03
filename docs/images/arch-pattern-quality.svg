@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 14px; fill: #333; font-weight: bold; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 11px; fill: #333; font-weight: bold; }
+      .tufte-desc { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 9px; fill: #666; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 8px; fill: #999; }
+      .positive { fill: #f0f5f0; stroke: #666; stroke-width: 1; }
+      .negative { fill: #fff5f5; stroke: #999; stroke-width: 1; }
+      .pattern-box { fill: #f5f5f5; stroke: #333; stroke-width: 1.5; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="320" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="400" y="22" text-anchor="middle" class="tufte-title">주요 아키텍처별 품질 속성 영향</text>
+  <text x="400" y="36" text-anchor="middle" class="tufte-small">강화(↑)와 약화(↓) 속성의 트레이드오프</text>
+
+  <!-- Legend -->
+  <rect x="580" y="48" width="12" height="12" rx="2" class="positive"/>
+  <text x="596" y="58" class="tufte-small">강화되는 속성</text>
+  <rect x="680" y="48" width="12" height="12" rx="2" class="negative"/>
+  <text x="696" y="58" class="tufte-small">약화될 수 있는 속성</text>
+
+  <!-- MVC Pattern -->
+  <rect x="20" y="70" width="180" height="115" rx="3" class="pattern-box"/>
+  <text x="110" y="90" text-anchor="middle" class="tufte-label">MVC 패턴</text>
+  <line x1="35" y1="97" x2="185" y2="97" stroke="#ccc" stroke-width="0.5"/>
+
+  <rect x="30" y="105" width="160" height="30" rx="2" class="positive"/>
+  <text x="110" y="118" text-anchor="middle" class="tufte-desc">↑ 유지보수성</text>
+  <text x="110" y="130" text-anchor="middle" class="tufte-small">UI/비즈니스 분리</text>
+
+  <rect x="30" y="140" width="160" height="30" rx="2" class="positive"/>
+  <text x="110" y="153" text-anchor="middle" class="tufte-desc">↑ 테스트 용이성</text>
+  <text x="110" y="165" text-anchor="middle" class="tufte-small">컴포넌트별 독립 테스트</text>
+
+  <rect x="30" y="175" width="160" height="22" rx="2" class="negative"/>
+  <text x="110" y="189" text-anchor="middle" class="tufte-desc">↓ 성능 (호출 오버헤드)</text>
+
+  <!-- Repository Pattern -->
+  <rect x="215" y="70" width="180" height="115" rx="3" class="pattern-box"/>
+  <text x="305" y="90" text-anchor="middle" class="tufte-label">Repository 패턴</text>
+  <line x1="230" y1="97" x2="380" y2="97" stroke="#ccc" stroke-width="0.5"/>
+
+  <rect x="225" y="105" width="160" height="30" rx="2" class="positive"/>
+  <text x="305" y="118" text-anchor="middle" class="tufte-desc">↑ 테스트 용이성</text>
+  <text x="305" y="130" text-anchor="middle" class="tufte-small">Mock Repository 활용</text>
+
+  <rect x="225" y="140" width="160" height="30" rx="2" class="positive"/>
+  <text x="305" y="153" text-anchor="middle" class="tufte-desc">↑ 변경 용이성</text>
+  <text x="305" y="165" text-anchor="middle" class="tufte-small">DB 교체 시 영향 최소화</text>
+
+  <rect x="225" y="175" width="160" height="22" rx="2" class="negative"/>
+  <text x="305" y="189" text-anchor="middle" class="tufte-desc">↑ 복잡성</text>
+
+  <!-- Layered Architecture -->
+  <rect x="410" y="70" width="180" height="115" rx="3" class="pattern-box"/>
+  <text x="500" y="90" text-anchor="middle" class="tufte-label">계층형 아키텍처</text>
+  <line x1="425" y1="97" x2="575" y2="97" stroke="#ccc" stroke-width="0.5"/>
+
+  <rect x="420" y="105" width="160" height="30" rx="2" class="positive"/>
+  <text x="500" y="118" text-anchor="middle" class="tufte-desc">↑ 유지보수성</text>
+  <text x="500" y="130" text-anchor="middle" class="tufte-small">계층별 책임 분리</text>
+
+  <rect x="420" y="140" width="160" height="30" rx="2" class="positive"/>
+  <text x="500" y="153" text-anchor="middle" class="tufte-desc">↑ 관심사 분리</text>
+  <text x="500" y="165" text-anchor="middle" class="tufte-small">코드 위치 명확</text>
+
+  <rect x="420" y="175" width="160" height="22" rx="2" class="negative"/>
+  <text x="500" y="189" text-anchor="middle" class="tufte-desc">↓ 성능, 개발 속도</text>
+
+  <!-- Microservices -->
+  <rect x="605" y="70" width="180" height="115" rx="3" class="pattern-box"/>
+  <text x="695" y="90" text-anchor="middle" class="tufte-label">마이크로서비스</text>
+  <line x1="620" y1="97" x2="770" y2="97" stroke="#ccc" stroke-width="0.5"/>
+
+  <rect x="615" y="105" width="160" height="30" rx="2" class="positive"/>
+  <text x="695" y="118" text-anchor="middle" class="tufte-desc">↑ 확장성</text>
+  <text x="695" y="130" text-anchor="middle" class="tufte-small">서비스별 독립 스케일링</text>
+
+  <rect x="615" y="140" width="160" height="30" rx="2" class="positive"/>
+  <text x="695" y="153" text-anchor="middle" class="tufte-desc">↑ 독립 배포</text>
+  <text x="695" y="165" text-anchor="middle" class="tufte-small">팀별 자율 배포</text>
+
+  <rect x="615" y="175" width="160" height="22" rx="2" class="negative"/>
+  <text x="695" y="189" text-anchor="middle" class="tufte-desc">↑ 운영 복잡성</text>
+
+  <!-- Common Principle -->
+  <rect x="20" y="205" width="765" height="50" rx="3" fill="#f5f5f5" stroke="#ccc" stroke-width="1"/>
+  <text x="400" y="225" text-anchor="middle" class="tufte-label">공통 원칙: 관심사 분리(Separation of Concerns)</text>
+  <text x="400" y="242" text-anchor="middle" class="tufte-desc">모든 패턴은 책임을 명확히 나눠 유지보수성과 테스트 용이성을 높이는 것이 목표</text>
+
+  <!-- DS-specific note -->
+  <rect x="20" y="265" width="765" height="45" rx="3" fill="#fafafa" stroke="#999" stroke-width="1"/>
+  <text x="400" y="283" text-anchor="middle" class="tufte-label">데이터 과학 적용</text>
+  <text x="400" y="300" text-anchor="middle" class="tufte-small">MVC → 노트북(View) + 피처(Model) + 학습(Controller)  |  Repository → Feature Store  |  계층형 → 파이프라인 단계 분리</text>
+</svg>

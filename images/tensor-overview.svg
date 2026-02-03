@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320">
+  <defs>
+    <style>
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 12px;
+        fill: #333;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 10px;
+        fill: #333;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #666;
+      }
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 14px;
+        font-weight: bold;
+        fill: #333;
+      }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="720" height="320" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="360" y="25" text-anchor="middle" class="tufte-title">텐서: AI 시대의 핵심 자료구조</text>
+
+  <!-- Central Tensor box -->
+  <g transform="translate(280, 45)">
+    <rect x="0" y="0" width="160" height="50" fill="#e8e8e8" stroke="#333" stroke-width="2" rx="5"/>
+    <text x="80" y="22" text-anchor="middle" class="tufte-label" font-weight="bold">텐서 / ndarray</text>
+    <text x="80" y="38" text-anchor="middle" class="tufte-small">다차원 수치 배열</text>
+  </g>
+
+  <!-- 4 Usage areas -->
+  <!-- 이미지 처리 -->
+  <line x1="280" y1="70" x2="120" y2="120" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <g transform="translate(30, 120)">
+    <rect x="0" y="0" width="180" height="70" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="90" y="20" text-anchor="middle" class="tufte-label" font-weight="bold">이미지 처리</text>
+    <text x="90" y="38" text-anchor="middle" class="tufte-small">높이 × 너비 × 채널</text>
+    <text x="90" y="52" text-anchor="middle" class="tufte-code">(224, 224, 3)</text>
+  </g>
+
+  <!-- 자연어 처리 -->
+  <line x1="440" y1="70" x2="600" y2="120" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <g transform="translate(510, 120)">
+    <rect x="0" y="0" width="180" height="70" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="90" y="20" text-anchor="middle" class="tufte-label" font-weight="bold">자연어 처리</text>
+    <text x="90" y="38" text-anchor="middle" class="tufte-small">토큰 × 임베딩 차원</text>
+    <text x="90" y="52" text-anchor="middle" class="tufte-code">(128, 768)</text>
+  </g>
+
+  <!-- 딥러닝 -->
+  <line x1="320" y1="95" x2="200" y2="200" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <g transform="translate(30, 200)">
+    <rect x="0" y="0" width="180" height="70" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="90" y="20" text-anchor="middle" class="tufte-label" font-weight="bold">딥러닝</text>
+    <text x="90" y="38" text-anchor="middle" class="tufte-small">PyTorch, TensorFlow</text>
+    <text x="90" y="52" text-anchor="middle" class="tufte-code">torch.Tensor</text>
+  </g>
+
+  <!-- 수치 계산 -->
+  <line x1="400" y1="95" x2="520" y2="200" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <g transform="translate(510, 200)">
+    <rect x="0" y="0" width="180" height="70" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="90" y="20" text-anchor="middle" class="tufte-label" font-weight="bold">수치 계산</text>
+    <text x="90" y="38" text-anchor="middle" class="tufte-small">벡터화 연산, 선형대수</text>
+    <text x="90" y="52" text-anchor="middle" class="tufte-code">np.dot, np.matmul</text>
+  </g>
+
+  <!-- Learning flow at bottom -->
+  <g transform="translate(120, 285)">
+    <rect x="0" y="0" width="480" height="30" fill="#e8e8e8" stroke="#999" rx="3"/>
+    <text x="60" y="18" text-anchor="middle" class="tufte-small">기초/형태</text>
+    <text x="120" y="18" text-anchor="middle" class="tufte-small">→</text>
+    <text x="180" y="18" text-anchor="middle" class="tufte-small">생성/인덱싱</text>
+    <text x="240" y="18" text-anchor="middle" class="tufte-small">→</text>
+    <text x="300" y="18" text-anchor="middle" class="tufte-small">연산</text>
+    <text x="360" y="18" text-anchor="middle" class="tufte-small">→</text>
+    <text x="420" y="18" text-anchor="middle" class="tufte-small">형태 변환</text>
+  </g>
+
+</svg>

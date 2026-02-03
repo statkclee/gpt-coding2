@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" xml:lang="ko-KR"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.16">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="이광춘(Openai)">
+
+<title>26&nbsp; 웹서비스 – 챗GPT 코딩(개정판)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./tool-database.html" rel="next">
+<link href="./tool-network.html" rel="prev">
+<link href="./images/logo.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-8ee146c0b749343448e797d10b61a7f9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-55f79cb6abf2a16ff6075165a9063c3c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "일치 없음",
+    "search-matching-documents-text": "일치된 문서",
+    "search-copy-link-title": "검색 링크 복사",
+    "search-hide-matches-text": "추가 검색 결과 숨기기",
+    "search-more-match-text": "추가 검색결과",
+    "search-more-matches-text": "추가 검색결과",
+    "search-clear-button-title": "제거",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "취소",
+    "search-submit-button-title": "검색",
+    "search-label": "검색"
+  }
+}</script>
+
+<script type="text/javascript">
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-229551680-1', 'auto');
+
+ga('send', {
+  hitType: 'pageview',
+  'anonymizeIp': true,
+});
+</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tool-intro.html"><strong>4부</strong> 분야별 코딩</a></li><li class="breadcrumb-item"><a href="./tool-web.html"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">웹서비스</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="검색" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">챗GPT 코딩(개정판)</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/bit2r/gpt-coding/" title="소스 코드" class="quarto-navigation-tool px-1" aria-label="소스 코드"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="리더 모드 전환">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="검색"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">서문</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>1부</strong> 전통 프로그래밍</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">프로그래밍 시작하기</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-var.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">변수, 표현식, 문장</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-cont.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">조건부 실행</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-func.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">함수</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-loop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">반복문</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>2부</strong> 자료구조</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-data-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">데이터, AI 식량</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-string.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">문자열</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-file.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">파일</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-list.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">리스트</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-dictionaries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">딕셔너리</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-tuples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">튜플</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-dataframe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">데이터프레임</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-json.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">JSON</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18-tensor.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">텐서</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-embedding.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">벡터와 임베딩</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-graph.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">그래프</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>3부</strong> 버전제어와 협업</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Git 시작하기</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-tracking.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">변경사항 추적</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-history.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">히스토리와 파일 관리</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-remote.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">GitHub와 원격 저장소</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-collab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">협업과 충돌 해결</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">오픈 사이언스</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>4부</strong> 분야별 코딩</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">특화 도구 입문</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-regex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">정규 표현식</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-network.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-web.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">웹서비스</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-database.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">데이터베이스와 SQL</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-ds.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">데이터 과학과 R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-auto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">파일 자동화</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-make.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">빌드 자동화: make</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>5부</strong> 프로그래밍 패러다임</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-paradigm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">패러다임의 이해</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-imperative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">명령형과 절차적 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-oop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">객체지향 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-fp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">함수형 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-declarative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">선언형 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-reactive.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">반응형 프로그래밍</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>6부</strong> 소프트웨어 설계와 아키텍처</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-reuse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">재사용 명령</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-stack.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">소프트웨어 스택</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">소프트웨어 아키텍처</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-pattern.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">살아남은 패턴</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>7부</strong> 기계학습 패러다임</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-paradigm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">소프트웨어 2.0</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">신경망 아키텍처</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">43</span>&nbsp; <span class="chapter-title">학습과 추론</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-to-llm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">44</span>&nbsp; <span class="chapter-title">트랜스포머에서 거대 언어모형으로</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>부록</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">용어사전</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">참고문헌</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">목차</h2>
+   
+  <ul>
+  <li><a href="#sec-webservice-format" id="toc-sec-webservice-format" class="nav-link active" data-scroll-target="#sec-webservice-format"><span class="header-section-number">26.1</span> 데이터 교환 형식</a>
+  <ul class="collapse">
+  <li><a href="#sec-webservice-json" id="toc-sec-webservice-json" class="nav-link" data-scroll-target="#sec-webservice-json"><span class="header-section-number">26.1.1</span> JSON: 프로그램을 위한 데이터 형식</a></li>
+  <li><a href="#sec-webservice-xml" id="toc-sec-webservice-xml" class="nav-link" data-scroll-target="#sec-webservice-xml"><span class="header-section-number">26.1.2</span> XML 파싱</a></li>
+  </ul></li>
+  <li><a href="#sec-webservice-rest" id="toc-sec-webservice-rest" class="nav-link" data-scroll-target="#sec-webservice-rest"><span class="header-section-number">26.2</span> REST API: 웹의 공용 문법</a></li>
+  <li><a href="#sec-webservice-public-api" id="toc-sec-webservice-public-api" class="nav-link" data-scroll-target="#sec-webservice-public-api"><span class="header-section-number">26.3</span> 공공 API 활용</a>
+  <ul class="collapse">
+  <li><a href="#sec-webservice-query" id="toc-sec-webservice-query" class="nav-link" data-scroll-target="#sec-webservice-query"><span class="header-section-number">26.3.1</span> 쿼리 파라미터로 필터링</a></li>
+  <li><a href="#sec-webservice-post" id="toc-sec-webservice-post" class="nav-link" data-scroll-target="#sec-webservice-post"><span class="header-section-number">26.3.2</span> POST 데이터 전송</a></li>
+  </ul></li>
+  <li><a href="#sec-webservice-auth" id="toc-sec-webservice-auth" class="nav-link" data-scroll-target="#sec-webservice-auth"><span class="header-section-number">26.4</span> API 인증</a>
+  <ul class="collapse">
+  <li><a href="#sec-webservice-api-key" id="toc-sec-webservice-api-key" class="nav-link" data-scroll-target="#sec-webservice-api-key"><span class="header-section-number">26.4.1</span> API 키 인증</a></li>
+  <li><a href="#sec-webservice-oauth" id="toc-sec-webservice-oauth" class="nav-link" data-scroll-target="#sec-webservice-oauth"><span class="header-section-number">26.4.2</span> OAuth 인증</a></li>
+  </ul></li>
+  <li><a href="#sec-webservice-geocoding" id="toc-sec-webservice-geocoding" class="nav-link" data-scroll-target="#sec-webservice-geocoding"><span class="header-section-number">26.5</span> 지오코딩 API 실습</a>
+  <ul class="collapse">
+  <li><a href="#sec-geocoding-apikey" id="toc-sec-geocoding-apikey" class="nav-link" data-scroll-target="#sec-geocoding-apikey"><span class="header-section-number">26.5.1</span> API 키 발급</a></li>
+  <li><a href="#sec-geocoding-forward" id="toc-sec-geocoding-forward" class="nav-link" data-scroll-target="#sec-geocoding-forward"><span class="header-section-number">26.5.2</span> 주소 → 좌표 변환</a></li>
+  </ul></li>
+  <li><a href="#sec-webservice-debug" id="toc-sec-webservice-debug" class="nav-link" data-scroll-target="#sec-webservice-debug"><span class="header-section-number">26.6</span> 디버깅</a>
+  <ul class="collapse">
+  <li><a href="#sec-webservice-robust" id="toc-sec-webservice-robust" class="nav-link" data-scroll-target="#sec-webservice-robust"><span class="header-section-number">26.6.1</span> 견고한 코드</a></li>
+  </ul></li>
+  <li><a href="#생각해볼-점" id="toc-생각해볼-점" class="nav-link" data-scroll-target="#생각해볼-점">💡 생각해볼 점</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/tool-web.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tool-intro.html"><strong>4부</strong> 분야별 코딩</a></li><li class="breadcrumb-item"><a href="./tool-web.html"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">웹서비스</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-webservice" class="quarto-section-identifier"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">웹서비스</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p></p>
+<p>같은 서버에 요청을 보내도 <strong>누가 요청하느냐에 따라 응답 형식이 달라진다</strong>. 웹 브라우저로 쇼핑몰에 접속하면 화려한 HTML 페이지가 뜨지만, 파이썬 프로그램이 같은 서버의 API에 접속하면 깔끔한 JSON 데이터가 온다. 똑같은 “상품 목록” 정보인데 왜 형식이 다를까?</p>
+<p>사람과 프로그램은 정보를 소비하는 방식이 완전히 다르기 때문이다. 사람은 화면을 <strong>읽고, 클릭하고, 스크롤</strong>한다. 예쁜 레이아웃, 이미지, 버튼이 필요하다. 반면 프로그램은 데이터를 <strong>파싱하고, 저장하고, 분석</strong>한다. 장식은 오히려 방해가 되고, 구조화된 형식만 있으면 된다.</p>
+<div id="fig-webservice-overview" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-webservice-overview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/tool/webservice-overview.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-webservice-overview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;26.1: 웹서비스 - 같은 서버, 다른 응답
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-webservice-overview" class="quarto-xref">그림&nbsp;<span>26.1</span></a> 는 이 핵심 차이를 보여준다. 왼쪽의 사람은 웹 브라우저를 통해 <code>GET /page</code> 요청을 보내고 <strong>HTML</strong>을 받는다. 태그로 꾸며진 문서다. 오른쪽의 프로그램은 <code>GET /api/data</code> 요청을 보내고 <strong>JSON</strong>을 받는다. 중괄호와 따옴표로 이루어진 구조화된 데이터다. 서버 입장에서는 같은 데이터베이스에서 같은 데이터를 꺼내지만, 요청자에 맞게 포장을 달리할 뿐이다.</p>
+<p><strong>웹서비스(Web Service)</strong>는 이렇게 프로그램을 위해 설계된 웹이다. HTTP 프로토콜은 동일하게 사용하되, 응답 형식을 프로그램이 처리하기 쉬운 JSON이나 XML로 제공한다. 웹서비스 덕분에 파이썬 코드 몇 줄로 날씨 정보, 환율, 주가, 지도 좌표, 번역 결과 등 인터넷에 공개된 거의 모든 데이터에 접근할 수 있다.</p>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">노트</span>왜 웹서비스가 광범위하게 사용되는가?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>웹서비스가 폭발적으로 성장한 이유는 <strong>기존 웹 인프라를 그대로 활용</strong>하기 때문이다. 새로운 프로토콜을 만들 필요 없이 HTTP를 쓰고, 방화벽도 80/443 포트만 열어두면 된다. 웹 브라우저를 위해 구축된 서버, 로드밸런서, CDN, 캐시 시스템이 API 서비스에도 그대로 적용된다.</p>
+<p>동시에 <strong>언어 독립적</strong>이다. 파이썬 클라이언트가 자바 서버와 통신하고, 자바스크립트 프론트엔드가 Go 백엔드와 대화한다. JSON이라는 범용 형식 덕분에 어떤 언어든 데이터를 주고받을 수 있다. 한 회사의 서비스가 다른 회사의 앱에 데이터를 제공하고, 그 앱이 또 다른 서비스에 결과를 전달하는 <strong>서비스 생태계</strong>가 가능해진 것이다.</p>
+</div>
+</div>
+<section id="sec-webservice-format" class="level2" data-number="26.1">
+<h2 data-number="26.1" class="anchored" data-anchor-id="sec-webservice-format"><span class="header-section-number">26.1</span> 데이터 교환 형식</h2>
+<p> </p>
+<p>프로그램이 처리하기 좋은 “구조화된 데이터”란 구체적으로 무엇일까? HTML도 태그가 있으니 구조화되어 있는 것 아닌가? 차이는 <strong>목적</strong>에 있다. HTML은 “어떻게 보여줄 것인가”를 정의하고, JSON/XML은 “어떤 데이터인가”를 정의한다. <code>&lt;h1&gt;상품명&lt;/h1&gt;</code>은 “크게 표시하라”는 뜻이지만, <code>{"name": "상품명"}</code>은 “이것이 이름 필드다”라는 뜻이다.</p>
+<p>웹서비스에서 두 가지 형식이 주로 사용된다. <strong>XML</strong>(eXtensible Markup Language)은 1990년대부터 사용된 마크업 언어로, 복잡한 문서 구조와 메타데이터를 표현하는 데 강하다. <strong>JSON</strong>(JavaScript Object Notation)은 2000년대 초반에 등장했으며, 간결함과 파이썬 자료구조로 직접 변환되는 장점 덕분에 현재 웹 API의 사실상 표준이 되었다.</p>
+<div id="fig-webservice-json-xml" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-webservice-json-xml-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/tool/webservice-json-xml.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-webservice-json-xml-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;26.2: JSON과 XML 비교
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-webservice-json-xml" class="quarto-xref">그림&nbsp;<span>26.2</span></a> 은 동일한 사용자 정보를 JSON과 XML로 표현한 것이다. JSON은 6줄로 끝나는 반면, XML은 태그 이름이 시작과 끝에 반복되어 9줄 이상이 된다. 더 중요한 차이는 파이썬 코드에 있다. JSON은 <code>json.loads()</code> 한 줄로 딕셔너리가 되지만, XML은 트리를 탐색하는 파싱 코드가 필요하다.</p>
+<section id="sec-webservice-json" class="level3" data-number="26.1.1">
+<h3 data-number="26.1.1" class="anchored" data-anchor-id="sec-webservice-json"><span class="header-section-number">26.1.1</span> JSON: 프로그램을 위한 데이터 형식</h3>
+<p>JSON은 중괄호 <code>{}</code>로 객체(딕셔너리)를, 대괄호 <code>[]</code>로 배열(리스트)을 표현한다. 파이썬의 <code>json</code> 모듈로 문자열과 파이썬 객체 사이를 자유롭게 변환할 수 있다.</p>
+<div id="py-json-basic" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># JSON 문자열 → 파이썬 객체</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>json_str <span class="op">=</span> <span class="st">'''</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="st">{</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="st">  "name": "김철수",</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="st">  "age": 28,</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="st">  "skills": ["Python", "SQL", "Docker"]</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="st">'''</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> json.loads(json_str)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"이름: </span><span class="sc">{</span>data[<span class="st">'name'</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"첫 번째 스킬: </span><span class="sc">{</span>data[<span class="st">'skills'</span>][<span class="dv">0</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 파이썬 객체 → JSON 문자열</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>new_data <span class="op">=</span> {<span class="st">"status"</span>: <span class="st">"success"</span>, <span class="st">"count"</span>: <span class="dv">42</span>}</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(json.dumps(new_data, ensure_ascii<span class="op">=</span><span class="va">False</span>))</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>이름: 김철수
+첫 번째 스킬: Python
+{"status": "success", "count": 42}</code></pre>
+</div>
+</div>
+<p><code>json.loads()</code>는 JSON 문자열을 파이썬 객체로 파싱하고, <code>json.dumps()</code>는 파이썬 객체를 JSON 문자열로 변환한다. <code>ensure_ascii=False</code>를 지정하면 한글이 유니코드 이스케이프 없이 그대로 출력된다.</p>
+</section>
+<section id="sec-webservice-xml" class="level3" data-number="26.1.2">
+<h3 data-number="26.1.2" class="anchored" data-anchor-id="sec-webservice-xml"><span class="header-section-number">26.1.2</span> XML 파싱</h3>
+<p> </p>
+<p>XML은 계층적 트리 구조로 데이터를 표현한다. 파이썬 표준 라이브러리의 <code>xml.etree.ElementTree</code>로 XML을 파싱하고 데이터를 추출한다.</p>
+<div id="py-xml-parsing" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xml.etree.ElementTree <span class="im">as</span> ET</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>xml_data <span class="op">=</span> <span class="st">'''</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;users&gt;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;user id="001"&gt;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="st">        &lt;name&gt;Chuck&lt;/name&gt;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="st">        &lt;email&gt;chuck@example.com&lt;/email&gt;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;/user&gt;</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;user id="009"&gt;</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="st">        &lt;name&gt;Brent&lt;/name&gt;</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="st">        &lt;email&gt;brent@example.com&lt;/email&gt;</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="st">    &lt;/user&gt;</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;/users&gt;</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="st">'''</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>root <span class="op">=</span> ET.fromstring(xml_data)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> user <span class="kw">in</span> root.findall(<span class="st">'user'</span>):</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    user_id <span class="op">=</span> user.get(<span class="st">'id'</span>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    name <span class="op">=</span> user.find(<span class="st">'name'</span>).text</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    email <span class="op">=</span> user.find(<span class="st">'email'</span>).text</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"ID: </span><span class="sc">{</span>user_id<span class="sc">}</span><span class="ss">, 이름: </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">, 이메일: </span><span class="sc">{</span>email<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>ID: 001, 이름: Chuck, 이메일: chuck@example.com
+ID: 009, 이름: Brent, 이메일: brent@example.com</code></pre>
+</div>
+</div>
+<p><code>ET.fromstring()</code>으로 XML 문자열을 파싱하면 최상위 요소(root)를 반환한다. <code>findall()</code>로 특정 태그의 모든 자식을 찾고, <code>find()</code>로 첫 번째 자식을 찾는다. <code>get()</code>은 태그의 속성값을, <code>.text</code>는 태그 내부 텍스트를 가져온다.</p>
+<p>JSON과 XML 코드를 나란히 놓으면 차이가 분명해진다. JSON은 <code>json.loads()</code> 한 줄로 파이썬 딕셔너리가 되고, 이후로는 <code>data['name']</code>처럼 일반적인 딕셔너리 접근 문법을 그대로 쓴다. 반면 XML은 트리 구조를 탐색하는 별도의 API를 익혀야 한다. <code>findall()</code>, <code>find()</code>, <code>get()</code>, <code>.text</code> 같은 메서드를 조합해서 원하는 데이터에 도달한다. 같은 정보를 추출하는데 코드 양이 2~3배 늘어나는 셈이다.</p>
+<p>그렇다면 XML은 왜 아직도 쓰이는가? 역사적 이유가 크다. 2000년대 초반 웹서비스가 처음 등장했을 때 XML이 사실상 유일한 선택지였고, 금융, 의료, 정부 시스템처럼 변화가 느린 분야에서는 그 당시 구축된 시스템이 여전히 운영 중이다. SOAP 기반 엔터프라이즈 시스템, RSS 피드, 마이크로소프트 오피스 파일 포맷(<code>.docx</code>는 XML 압축 파일이다) 등이 대표적이다. 신규 프로젝트라면 JSON을 선택하는 것이 현명하지만, 기존 시스템과 통합해야 할 때는 XML 파싱 능력이 여전히 필요하다.</p>
+<p>JSON이든 XML이든, 데이터 형식은 결국 “상자”에 불과하다. 진짜 문제는 그 상자를 어떻게 주고받을 것인가다. 수천 개의 서로 다른 웹서비스가 각자의 방식으로 API를 설계한다면, 개발자는 매번 새로운 규칙을 익혀야 한다. 이 혼란을 정리한 것이 바로 REST 아키텍처다.</p>
+</section>
+</section>
+<section id="sec-webservice-rest" class="level2" data-number="26.2">
+<h2 data-number="26.2" class="anchored" data-anchor-id="sec-webservice-rest"><span class="header-section-number">26.2</span> REST API: 웹의 공용 문법</h2>
+<p> </p>
+<p><strong>REST</strong>(REpresentational State Transfer)는 단순한 API 설계 규칙이 아니라, 웹 전체를 관통하는 <strong>아키텍처 스타일</strong>이다. 2000년 로이 필딩(Roy Fielding)이 박사 논문에서 제시한 REST는 웹이 왜 성공했는지를 분석하고, 그 원칙을 API 설계에 적용한 것이다. 핵심은 단순하다. HTTP 메서드를 <strong>동사</strong>로, URL을 <strong>명사</strong>로 사용하면, API 호출 자체가 읽을 수 있는 문장이 된다.</p>
+<div id="fig-webservice-rest" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-webservice-rest-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/tool/webservice-rest.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-webservice-rest-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;26.3: REST API: API 호출을 문장처럼 읽는다
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-webservice-rest" class="quarto-xref">그림&nbsp;<span>26.3</span></a> 는 REST의 핵심 통찰을 보여준다. <code>GET /users</code>는 “사용자 목록을 <strong>가져와라</strong>”가 되고, <code>POST /users</code>는 “새 사용자를 <strong>생성해라</strong>”가 되며, <code>DELETE /users/123</code>은 “123번 사용자를 <strong>삭제해라</strong>”가 된다. 개발자가 처음 보는 API라도 URL과 메서드만 보면 무슨 동작인지 즉시 파악할 수 있다. 문서를 읽기 전에 API를 이해할 수 있다는 점이 REST가 사실상 표준이 된 이유다.</p>
+<p>REST 이전의 RPC(Remote Procedure Call) 스타일 API는 <code>POST /api/createUser</code>, <code>POST /api/deleteUser</code>, <code>POST /api/getAllUsers</code>처럼 동작을 URL에 숨겼다. 메서드는 무조건 POST였고, URL을 읽어야만 의도를 파악할 수 있었다. 반면 REST는 HTTP가 이미 제공하는 동사(GET, POST, PUT, DELETE)를 그대로 활용하고, URL은 오직 자원의 위치만 나타낸다. 웹의 기존 인프라를 재활용하면서도 일관된 인터페이스를 제공하는 것이다.</p>
+<p>REST가 웹서비스의 표준으로 자리잡은 데는 실용적인 이유도 있다. 상태를 서버에 저장하지 않는 무상태(stateless) 설계 덕분에 서버 확장이 쉽고, 캐싱을 적용하기도 간편하다. 오늘날 트위터, 구글, 깃허브 등 거의 모든 주요 서비스가 REST 기반 API를 제공하며, 새로운 서비스도 대부분 REST를 따른다. 대부분의 공개 API는 데이터 조회용으로 GET 메서드만 제공하고, POST, PUT, DELETE는 인증된 사용자만 사용할 수 있도록 제한한다.</p>
+</section>
+<section id="sec-webservice-public-api" class="level2" data-number="26.3">
+<h2 data-number="26.3" class="anchored" data-anchor-id="sec-webservice-public-api"><span class="header-section-number">26.3</span> 공공 API 활용</h2>
+<p> </p>
+<p><strong>공공 API</strong>(Public API 또는 Open API)란 외부 개발자가 자유롭게 호출할 수 있도록 공개된 웹서비스 인터페이스다. 정부 기관이 공개하는 공공데이터 API, 기업이 파트너나 일반 개발자에게 제공하는 상용 API, 그리고 학습용으로 만들어진 테스트 API까지 다양한 종류가 있다. 공통점은 <strong>인증 절차를 거치면 누구나 데이터를 요청할 수 있다</strong>는 것이다. 날씨, 환율, 지도, 번역, 주식 시세 등 직접 수집하기 어려운 데이터를 API 한 줄 호출로 가져올 수 있어, 현대 소프트웨어 개발에서 공공 API 활용 능력은 필수 역량이 되었다.</p>
+<p>실습에는 <strong>JSONPlaceholder</strong>를 사용한다. 페이스북, 트위터 같은 소셜 네트워크 서비스를 모방한 가상의 REST API로, 사용자(users), 게시글(posts), 댓글(comments), 할 일(todos) 등의 가짜 데이터를 제공한다. 실제 데이터는 아니지만 API 응답 구조가 실무에서 마주치는 형태와 동일하여, 인증 없이 REST API 호출 패턴을 익히기에 적합하다.</p>
+<div id="fig-webservice-api-flow" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-webservice-api-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/tool/webservice-api-flow.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-webservice-api-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;26.4: 공공 API 데이터 변환 흐름
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-webservice-api-flow" class="quarto-xref">그림&nbsp;<span>26.4</span></a> 는 API 호출부터 데이터 활용까지의 전체 흐름을 보여준다. API 서버는 데이터베이스에서 정보를 꺼내 JSON 문자열로 변환하여 네트워크로 전송한다. 파이썬 프로그램은 <code>requests.get()</code>으로 응답을 받고, <code>response.json()</code> 한 줄로 JSON 문자열을 파이썬 딕셔너리나 리스트로 변환한다. 변환된 데이터는 <code>data['name']</code>처럼 일반적인 파이썬 문법으로 접근할 수 있다. 가장 기본적인 조회(GET) 요청부터 시작해보자.</p>
+<div id="py-jsonplaceholder" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 사용자 목록 조회</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(<span class="st">'https://jsonplaceholder.typicode.com/users'</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>users <span class="op">=</span> response.json()</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"총 </span><span class="sc">{</span><span class="bu">len</span>(users)<span class="sc">}</span><span class="ss">명의 사용자"</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> user <span class="kw">in</span> users[:<span class="dv">3</span>]:  <span class="co"># 처음 3명만 출력</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>user[<span class="st">'name'</span>]<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span>user[<span class="st">'email'</span>]<span class="sc">}</span><span class="ss">)"</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>총 10명의 사용자
+  Leanne Graham (Sincere@april.biz)
+  Ervin Howell (Shanna@melissa.tv)
+  Clementine Bauch (Nathan@yesenia.net)</code></pre>
+</div>
+</div>
+<p><code>requests.get()</code> 함수는 지정한 URL로 HTTP GET 요청을 보내고, 서버의 응답을 <code>Response</code> 객체로 반환한다. <code>response.json()</code> 메서드는 응답 본문을 JSON으로 파싱하여 파이썬 객체(딕셔너리 또는 리스트)로 변환한다. <code>json.loads(response.text)</code>와 동일한 결과지만, 응답의 <code>Content-Type</code> 헤더를 확인하고 인코딩을 자동 처리하므로 더 안전하다. 한 번의 API 호출로 10명의 사용자 정보가 담긴 리스트를 받았고, 각 사용자는 이름, 이메일, 주소, 회사 정보 등을 포함한 딕셔너리다.</p>
+<section id="sec-webservice-query" class="level3" data-number="26.3.1">
+<h3 data-number="26.3.1" class="anchored" data-anchor-id="sec-webservice-query"><span class="header-section-number">26.3.1</span> 쿼리 파라미터로 필터링</h3>
+<p></p>
+<p>실제 API를 사용하다 보면 전체 데이터가 아니라 특정 조건에 맞는 데이터만 필요한 경우가 대부분이다. 수천 명의 사용자 중 특정 지역 사용자만, 수만 개의 게시글 중 특정 작성자의 글만 가져오고 싶을 때 <strong>쿼리 파라미터(query parameter)</strong>를 사용한다. URL 끝에 <code>?key=value</code> 형식으로 조건을 붙이면 서버가 해당 조건에 맞는 데이터만 필터링해서 응답한다. <code>requests</code> 라이브러리는 <code>params</code> 매개변수로 이 과정을 자동화한다.</p>
+<div id="py-query-params" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 특정 사용자의 게시글만 조회</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> {<span class="st">'userId'</span>: <span class="dv">1</span>}</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'https://jsonplaceholder.typicode.com/posts'</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    params<span class="op">=</span>params</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>posts <span class="op">=</span> response.json()</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"사용자 1의 게시글: </span><span class="sc">{</span><span class="bu">len</span>(posts)<span class="sc">}</span><span class="ss">개"</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"첫 번째 게시글: </span><span class="sc">{</span>posts[<span class="dv">0</span>][<span class="st">'title'</span>][:<span class="dv">30</span>]<span class="sc">}</span><span class="ss">..."</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>사용자 1의 게시글: 10개
+첫 번째 게시글: sunt aut facere repellat provi...</code></pre>
+</div>
+</div>
+<p><code>params</code> 딕셔너리를 전달하면 <code>requests</code>가 자동으로 URL 인코딩을 수행하여 <code>?userId=1</code> 형태로 URL에 붙인다. 공백은 <code>%20</code>으로, 한글은 UTF-8 바이트로 변환되어 안전하게 전송된다. 위 코드에서 100개의 전체 게시글 중 사용자 1이 작성한 10개만 필터링되어 반환되었다. 대용량 API에서는 <code>limit</code>, <code>offset</code>, <code>page</code> 같은 파라미터로 페이지네이션을 지원하여 한 번에 가져오는 데이터 양을 조절할 수 있다.</p>
+</section>
+<section id="sec-webservice-post" class="level3" data-number="26.3.2">
+<h3 data-number="26.3.2" class="anchored" data-anchor-id="sec-webservice-post"><span class="header-section-number">26.3.2</span> POST 데이터 전송</h3>
+<p> </p>
+<p>GET이 서버에서 데이터를 <strong>읽어오는</strong> 동작이라면, POST는 서버에 새로운 데이터를 <strong>보내는</strong> 동작이다. 회원가입 폼을 제출하거나, 블로그에 새 글을 작성하거나, 쇼핑몰에서 주문을 생성할 때 브라우저가 보내는 것이 바로 POST 요청이다. GET 요청은 URL에 모든 정보가 담기지만, POST 요청은 <strong>요청 본문(body)</strong>에 데이터를 담아 전송한다. URL에 노출되지 않으므로 민감한 정보(비밀번호, 결제 정보 등)를 전송할 때도 POST를 사용한다.</p>
+<div id="py-post-request" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 새 게시글 생성 (테스트 API라서 실제로 저장되지는 않음)</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>new_post <span class="op">=</span> {</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'title'</span>: <span class="st">'웹서비스 테스트'</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'body'</span>: <span class="st">'requests 라이브러리로 POST 요청을 보냅니다.'</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'userId'</span>: <span class="dv">1</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.post(</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'https://jsonplaceholder.typicode.com/posts'</span>,</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    json<span class="op">=</span>new_post</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"상태 코드: </span><span class="sc">{</span>response<span class="sc">.</span>status_code<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"생성된 게시글 ID: </span><span class="sc">{</span>response<span class="sc">.</span>json()[<span class="st">'id'</span>]<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>상태 코드: 201
+생성된 게시글 ID: 101</code></pre>
+</div>
+</div>
+<p><code>requests.post()</code> 함수에 <code>json=</code> 매개변수를 전달하면 세 가지 작업이 자동으로 처리된다. 파이썬 딕셔너리가 JSON 문자열로 변환되고, <code>Content-Type: application/json</code> 헤더가 설정되며, 인코딩까지 알아서 처리된다. 과거에는 <code>data=json.dumps(new_post)</code>처럼 수동으로 변환해야 했지만, <code>json=</code> 매개변수가 도입되면서 코드가 훨씬 간결해졌다. 위 코드에서 상태 코드 201(Created)은 새 리소스가 성공적으로 생성되었음을 의미한다. JSONPlaceholder는 테스트용 API이므로 실제로 데이터가 저장되지는 않지만, 실제 서버에서는 데이터베이스에 새 레코드가 추가되고 생성된 리소스의 ID가 반환된다.</p>
+</section>
+</section>
+<section id="sec-webservice-auth" class="level2" data-number="26.4">
+<h2 data-number="26.4" class="anchored" data-anchor-id="sec-webservice-auth"><span class="header-section-number">26.4</span> API 인증</h2>
+<p> </p>
+<p>API 인증의 본질은 단 하나의 질문으로 요약된다. <strong>“누구의 요청인가?”</strong> 인증 없이 들어오는 요청은 모두 익명이다. 서버 입장에서 익명의 요청자는 추적할 수도, 요금을 청구할 수도, 사용량을 제한할 수도 없는 존재다. 반면 API 키가 포함된 요청은 신원이 명확하다. 서버는 “김개발, Premium 플랜”처럼 요청자가 누구인지 즉시 파악하고, 사용량을 기록하며, 플랜에 맞는 기능과 한도를 적용한다.</p>
+<div id="fig-webservice-api-auth" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-webservice-api-auth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/tool/webservice-api-auth.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-webservice-api-auth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;26.5: API 인증 - 익명을 신원으로 바꾸다
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-webservice-api-auth" class="quarto-xref">그림&nbsp;<span>26.5</span></a> 는 인증의 핵심 역할을 보여준다. 왼쪽의 익명 요청은 점선으로 표시되어 있고, 서버는 “누군지 모른다”고 답한다. 오른쪽의 인증된 요청은 <code>Authorization: Bearer sk_live_abc123...</code> 헤더를 포함하고 있어, 서버가 요청자를 정확히 식별할 수 있다. API 키는 디지털 세계 <strong>신분증</strong>이다. 신분증이 있어야 추적, 과금, 권한 제어가 가능해진다. 카카오, 네이버, 구글 같은 대형 플랫폼이 무료 API조차 인증을 요구하는 이유가 바로 여기에 있다.</p>
+<section id="sec-webservice-api-key" class="level3" data-number="26.4.1">
+<h3 data-number="26.4.1" class="anchored" data-anchor-id="sec-webservice-api-key"><span class="header-section-number">26.4.1</span> API 키 인증</h3>
+<p>가장 널리 사용되는 인증 방식은 <strong>API 키</strong>다. 서비스에 가입하고 개발자 콘솔에서 키를 발급받으면, 이후 모든 API 요청에 키를 포함시켜 보내면 된다. 서버는 키를 확인하여 요청자를 식별하고, 해당 계정의 사용량을 기록하며, 권한에 따라 응답을 제공한다. API 키는 HTTP 헤더, URL 쿼리 파라미터, 또는 요청 본문에 포함될 수 있는데, 헤더 방식이 가장 안전하고 권장된다. URL에 키를 포함하면 서버 로그나 브라우저 히스토리에 키가 남을 수 있기 때문이다.</p>
+<div id="py-api-key-example" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 환경변수에서 API 키 로드 (코드에 직접 쓰지 않음)</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>api_key <span class="op">=</span> os.environ.get(<span class="st">'WEATHER_API_KEY'</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 헤더에 API 키 포함</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>headers <span class="op">=</span> {<span class="st">'Authorization'</span>: <span class="ss">f'Bearer </span><span class="sc">{</span>api_key<span class="sc">}</span><span class="ss">'</span>}</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'https://api.example.com/weather'</span>,</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    headers<span class="op">=</span>headers,</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    params<span class="op">=</span>{<span class="st">'city'</span>: <span class="st">'Seoul'</span>}</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>위 코드에서 <code>os.environ.get()</code>을 사용하는 이유는 API 키를 코드와 분리하기 위해서다. 환경변수에 저장된 키를 읽어오면 코드에 민감 정보가 포함되지 않으므로, GitHub에 푸시해도 키가 유출되지 않는다.</p>
+<div class="callout callout-style-simple callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">경고</span>API 키 보안: 반드시 지켜야 할 원칙
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>API 키는 비밀번호와 동일하게 취급해야 한다. 유출되면 금전적 피해, 데이터 유출, 계정 정지까지 이어질 수 있다. 다음 보안 수칙을 반드시 준수한다.</p>
+<p><strong>코드와 키의 분리</strong>: <code>.env</code> 파일에 키를 저장하고, <code>.gitignore</code>에 <code>.env</code>를 추가하여 저장소에 포함되지 않도록 한다. <code>python-dotenv</code> 패키지를 사용하면 <code>.env</code> 파일의 내용을 환경변수로 자동 로드할 수 있다.</p>
+<p><strong>최소 권한 원칙</strong>: API 키 발급 시 필요한 권한만 선택한다. 읽기만 필요하다면 쓰기 권한을 부여하지 않는다. 대부분의 API 서비스는 키별로 권한 범위를 설정할 수 있다.</p>
+<p><strong>정기적 키 순환</strong>: 90일마다 새 키를 발급하고 기존 키를 폐기한다. 키가 유출되었을 가능성이 있다면 즉시 폐기하고 새 키로 교체한다.</p>
+<p><strong>사용량 모니터링</strong>: 비정상적인 API 호출 패턴을 감지할 수 있도록 알림을 설정한다. 새벽 시간에 대량 호출이 발생하면 유출 징후일 수 있다.</p>
+</div>
+</div>
+</section>
+<section id="sec-webservice-oauth" class="level3" data-number="26.4.2">
+<h3 data-number="26.4.2" class="anchored" data-anchor-id="sec-webservice-oauth"><span class="header-section-number">26.4.2</span> OAuth 인증</h3>
+<p></p>
+<p><strong>OAuth</strong>의 핵심은 단순하다. <strong>비밀번호를 공유하지 않고 권한을 위임하는 것</strong>이다. 캘린더 앱이 구글 캘린더에 접근하려면 예전에는 구글 비밀번호를 앱에 알려줘야 했다. 앱이 비밀번호를 알면 캘린더뿐 아니라 이메일, 드라이브, 결제 정보까지 모든 권한을 갖게 된다. 접근을 취소하려면 비밀번호 자체를 변경해야 한다. OAuth는 이 문제를 해결한다.</p>
+<div id="fig-webservice-oauth" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-webservice-oauth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/tool/webservice-oauth.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-webservice-oauth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;26.6: OAuth: 비밀번호 없이 권한을 위임하다
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-webservice-oauth" class="quarto-xref">그림&nbsp;<span>26.6</span></a> 는 위험한 방식과 OAuth 방식을 대비하여 보여준다. 왼쪽의 비밀번호 공유 방식은 점선으로 표시되어 있다. 사용자가 제3자 앱에 비밀번호를 직접 전달하면, 앱은 모든 권한에 접근할 수 있고, 취소하려면 비밀번호를 변경해야 한다. 오른쪽의 OAuth 방식은 세 주체 간의 신뢰 관계로 이루어진다. 사용자는 구글에 <strong>직접 로그인</strong>하고, 구글이 “앱에 캘린더 접근을 허용할까요?”라고 묻는다. 사용자가 승인하면 구글이 제3자 앱에 <strong>토큰</strong>을 발급한다. 앱은 비밀번호를 절대 알 수 없고, 허용된 권한만 사용할 수 있으며, 토큰만 취소하면 접근이 차단된다.</p>
+<p>OAuth는 자동차 <strong>발렛 키</strong>와 같다. 일부 고급 차량에는 발렛 파킹용 별도 키가 있는데, 시동과 주행만 가능하고 트렁크나 글로브박스는 열 수 없다. 차 전체를 맡기는 것이 아니라 필요한 기능만 허용하는 것이다. OAuth 토큰도 마찬가지다. 캘린더 읽기 권한만 부여하면 이메일은 볼 수 없다. 권한 범위(scope)를 세밀하게 제어할 수 있어, 사용자는 최소한의 접근만 허용하고 언제든 취소할 수 있다.</p>
+<p>OAuth 구현은 복잡하므로 직접 작성하지 않는다. <code>requests-oauthlib</code>, <code>authlib</code> 같은 검증된 라이브러리가 인증 흐름을 처리해준다. X(트위터), 구글, 페이스북, 카카오 등 대형 서비스 API는 대부분 OAuth 2.0을 채택하고 있으며, 각 서비스의 개발자 문서에 상세한 연동 가이드가 제공된다.</p>
+</section>
+</section>
+<section id="sec-webservice-geocoding" class="level2" data-number="26.5">
+<h2 data-number="26.5" class="anchored" data-anchor-id="sec-webservice-geocoding"><span class="header-section-number">26.5</span> 지오코딩 API 실습</h2>
+<p> </p>
+<p>지금까지 배운 REST API, 인증, JSON 파싱을 실제 서비스에 적용해보자. <strong>지오코딩(Geocoding)</strong>은 “서울특별시 강남구 테헤란로 152”와 같은 주소를 위도/경도 좌표(37.5000, 127.0365)로 변환하는 서비스다. 반대로 좌표를 주소로 변환하는 것은 <strong>역지오코딩(Reverse Geocoding)</strong>이라 한다. 배달 앱에서 현재 위치의 주소를 표시하거나, 부동산 사이트에서 매물 위치를 지도에 찍을 때 이 기술이 사용된다.</p>
+<p>한국에서는 카카오, 네이버, 구글 등이 지오코딩 API를 제공한다. 카카오 지도 API는 한국 주소 인식률이 높고, 무료 사용량(일 30만 건)이 넉넉하며, 한글 문서가 잘 정리되어 있어 입문용으로 적합하다.</p>
+<section id="sec-geocoding-apikey" class="level3" data-number="26.5.1">
+<h3 data-number="26.5.1" class="anchored" data-anchor-id="sec-geocoding-apikey"><span class="header-section-number">26.5.1</span> API 키 발급</h3>
+<p>카카오 지도 API를 사용하려면 먼저 API 키를 발급받아야 한다.</p>
+<ol type="1">
+<li><a href="https://developers.kakao.com/">카카오 개발자 사이트</a>에 카카오 계정으로 로그인</li>
+<li><strong>내 애플리케이션</strong> → <strong>애플리케이션 추가하기</strong> 클릭</li>
+<li>앱 이름(예: “지오코딩 테스트”)과 사업자명 입력 후 저장</li>
+<li>생성된 앱 선택 → <strong>앱 키</strong> 탭에서 <strong>REST API 키</strong> 복사</li>
+<li>환경변수에 저장: <code>export KAKAO_MAP_API_KEY="발급받은키"</code></li>
+</ol>
+<div class="callout callout-style-simple callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">경고</span>API 키 보안
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>API 키를 코드에 직접 쓰면 GitHub에 푸시할 때 유출된다. 반드시 환경변수나 <code>.env</code> 파일로 분리하고, <code>.gitignore</code>에 <code>.env</code>를 추가해야 한다.</p>
+</div>
+</div>
+</section>
+<section id="sec-geocoding-forward" class="level3" data-number="26.5.2">
+<h3 data-number="26.5.2" class="anchored" data-anchor-id="sec-geocoding-forward"><span class="header-section-number">26.5.2</span> 주소 → 좌표 변환</h3>
+<p>주소를 좌표로 변환하는 지오코딩 요청을 보내보자.</p>
+<div id="py-kakao-geocoding" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>api_key <span class="op">=</span> os.environ.get(<span class="st">'KAKAO_MAP_API_KEY'</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>address <span class="op">=</span> <span class="st">'서울특별시 강남구 테헤란로 152'</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'https://dapi.kakao.com/v2/local/search/address.json'</span>,</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    headers<span class="op">=</span>{<span class="st">'Authorization'</span>: <span class="ss">f'KakaoAK </span><span class="sc">{</span>api_key<span class="sc">}</span><span class="ss">'</span>},</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    params<span class="op">=</span>{<span class="st">'query'</span>: address}</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> response.status_code <span class="op">==</span> <span class="dv">200</span>:</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> response.json()</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> result[<span class="st">'documents'</span>]:</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>        doc <span class="op">=</span> result[<span class="st">'documents'</span>][<span class="dv">0</span>]</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"주소: </span><span class="sc">{</span>doc[<span class="st">'address_name'</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"위도: </span><span class="sc">{</span>doc[<span class="st">'y'</span>]<span class="sc">}</span><span class="ss">, 경도: </span><span class="sc">{</span>doc[<span class="st">'x'</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"오류: </span><span class="sc">{</span>response<span class="sc">.</span>status_code<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<pre><code>주소: 서울 강남구 테헤란로 152
+위도: 37.5000242405515, 경도: 127.036508620542</code></pre>
+<p>카카오 API는 <code>Authorization</code> 헤더에 <code>KakaoAK</code> 접두사와 함께 REST API 키를 전달하는 방식을 사용한다. 응답 JSON의 <code>documents</code> 배열에 검색 결과가 담기며, 각 문서에는 정제된 주소(<code>address_name</code>)와 좌표(<code>x</code>, <code>y</code>)가 포함된다. <code>x</code>가 경도(longitude), <code>y</code>가 위도(latitude)임에 주의한다. 카카오 외에도 네이버 지도 API, 구글 Maps API 등이 있으며, 한국 주소라면 카카오나 네이버가 인식률이 높다.</p>
+</section>
+</section>
+<section id="sec-webservice-debug" class="level2" data-number="26.6">
+<h2 data-number="26.6" class="anchored" data-anchor-id="sec-webservice-debug"><span class="header-section-number">26.6</span> 디버깅</h2>
+<p> </p>
+<p>API 호출 실패의 원인은 다양하다. 오타, 네트워크 문제, 인증 오류, 서버 장애 등 가능성이 많아서 막막해 보이지만, <strong>실패 지점을 찾는 것</strong>이 핵심이다. 요청은 클라이언트에서 서버까지 여러 계층을 통과한다. 어느 계층에서 멈췄는지 파악하면 문제가 좁혀진다.</p>
+<div id="fig-webservice-debug-layers" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-webservice-debug-layers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/tool/webservice-debug-layers.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-webservice-debug-layers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;26.7: API 디버깅 - 실패 지점 찾기
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-webservice-debug-layers" class="quarto-xref">그림&nbsp;<span>26.7</span></a> 는 API 요청이 통과하는 네 단계를 보여준다. DNS가 호스트명을 IP로 변환하고, TCP 연결을 맺고, HTTP 요청을 주고받고, 응답을 파싱한다. 각 단계마다 실패 유형이 다르고, 진단 도구도 다르다. “안 돼요”라는 증상만으로는 원인을 알 수 없다. <strong>어느 계층에서 실패했는가</strong>를 먼저 확인해야 한다.</p>
+<p><strong>① DNS 실패</strong>: <code>ConnectionError: Name resolution failed</code> 메시지가 나오면 호스트명을 IP로 변환하지 못한 것이다. 호스트명에 오타가 있거나(<code>api.exampl.com</code>), 인터넷 연결이 끊겼거나, DNS 서버에 문제가 있다. 터미널에서 <code>ping api.example.com</code>이나 <code>nslookup api.example.com</code>으로 확인한다.</p>
+<p><strong>② 연결 거부</strong>: IP는 찾았지만 서버가 응답하지 않는다. <code>ConnectionRefused</code>나 <code>Timeout</code> 오류가 발생한다. 서버가 꺼져 있거나, 포트가 잘못됐거나, 방화벽이 차단하고 있다. <code>telnet api.example.com 443</code>이나 <code>nc -zv api.example.com 443</code>으로 포트가 열려 있는지 확인한다.</p>
+<p><strong>③ HTTP 오류</strong>: 연결은 됐지만 서버가 오류 응답을 반환한다. 상태 코드가 힌트다.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>코드</th>
+<th>의미</th>
+<th>흔한 원인</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>400</td>
+<td>Bad Request</td>
+<td>잘못된 파라미터, JSON 형식 오류</td>
+</tr>
+<tr class="even">
+<td>401</td>
+<td>Unauthorized</td>
+<td>API 키 누락, 만료된 토큰</td>
+</tr>
+<tr class="odd">
+<td>403</td>
+<td>Forbidden</td>
+<td>권한 부족, IP 차단</td>
+</tr>
+<tr class="even">
+<td>404</td>
+<td>Not Found</td>
+<td>URL 경로 오류, 리소스 삭제됨</td>
+</tr>
+<tr class="odd">
+<td>429</td>
+<td>Too Many Requests</td>
+<td>요청 제한 초과</td>
+</tr>
+<tr class="even">
+<td>500</td>
+<td>Internal Server Error</td>
+<td>서버 버그 (내 잘못 아님)</td>
+</tr>
+<tr class="odd">
+<td>503</td>
+<td>Service Unavailable</td>
+<td>서버 과부하, 점검 중</td>
+</tr>
+</tbody>
+</table>
+<p><strong>④ 파싱 실패</strong>: 응답은 왔지만 JSON 디코딩이나 데이터 추출에서 오류가 난다. <code>JSONDecodeError</code>는 응답이 JSON이 아닐 때(HTML 에러 페이지 등), <code>KeyError</code>는 예상한 필드가 없을 때 발생한다.</p>
+<section id="sec-webservice-robust" class="level3" data-number="26.6.1">
+<h3 data-number="26.6.1" class="anchored" data-anchor-id="sec-webservice-robust"><span class="header-section-number">26.6.1</span> 견고한 코드</h3>
+<p> </p>
+<p>네트워크는 본질적으로 불안정하다. 인터넷 연결이 끊길 수 있고, 서버가 과부하로 응답하지 않을 수 있으며, API 제공자가 서비스를 변경할 수도 있다. 이런 상황에서 프로그램이 갑자기 멈추면 사용자 경험이 나빠지고, 데이터가 손실될 수 있다. 견고한 코드는 <strong>실패를 예상하고 대비</strong>한다.</p>
+<p><code>requests</code> 라이브러리는 네트워크 오류를 예외(exception)로 알려준다. <code>ConnectionError</code>는 네트워크 문제, <code>Timeout</code>은 응답 지연, <code>HTTPError</code>는 서버의 오류 응답을 의미한다. 다양한 예외들을 잡아서 처리하면 프로그램이 멈추는 대신 사용자에게 의미 있는 메시지를 보여주거나, 대안을 시도할 수 있다.</p>
+<div id="py-error-handling" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fetch_user(user_id):</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""사용자 정보를 조회하고 에러를 처리한다."""</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    url <span class="op">=</span> <span class="ss">f'https://jsonplaceholder.typicode.com/users/</span><span class="sc">{</span>user_id<span class="sc">}</span><span class="ss">'</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>        response <span class="op">=</span> requests.get(url, timeout<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>        response.raise_for_status()  <span class="co"># 4xx, 5xx → 예외 발생</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> response.json()</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> requests.exceptions.HTTPError <span class="im">as</span> e:</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"HTTP 오류: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> requests.exceptions.<span class="pp">ConnectionError</span>:</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"연결 실패: 네트워크를 확인하세요"</span>)</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> requests.exceptions.Timeout:</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"타임아웃: 서버가 응답하지 않습니다"</span>)</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> requests.exceptions.RequestException <span class="im">as</span> e:</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"요청 실패: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">None</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="co"># 정상 요청</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>user <span class="op">=</span> fetch_user(<span class="dv">1</span>)</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> user:</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"사용자: </span><span class="sc">{</span>user[<span class="st">'name'</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a><span class="co"># 404 오류 (존재하지 않는 사용자)</span></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>user <span class="op">=</span> fetch_user(<span class="dv">9999</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>사용자: Leanne Graham
+HTTP 오류: 404 Client Error: Not Found for url: https://jsonplaceholder.typicode.com/users/9999</code></pre>
+</div>
+</div>
+<p><code>raise_for_status()</code> 메서드는 상태 코드가 4xx나 5xx일 때 <code>HTTPError</code> 예외를 발생시킨다. 상태 코드를 직접 확인하는 것보다 예외를 사용하면 <strong>정상 흐름과 오류 처리가 분리</strong>되어 코드 의도가 명확해진다. <code>timeout=5</code>는 5초 안에 응답이 없으면 포기하라는 뜻이다. 타임아웃을 설정하지 않으면 서버가 응답할 때까지 프로그램이 무한정 기다릴 수 있다.</p>
+<p>일시적 오류는 재시도로 해결되기도 한다. 서버 과부하(503), 네트워크 중단, 일시적 타임아웃 같은 상황이다. 단, 즉시 재시도하면 오히려 서버에 부담을 주어 상황이 악화된다. <strong>지수 백오프(exponential backoff)</strong>는 재시도 간격을 점점 늘리는 전략이다. 1초 후 재시도, 실패하면 2초 후, 또 실패하면 4초 후—이렇게 간격을 늘리면 서버가 회복할 시간을 벌 수 있다.</p>
+<div id="py-retry-logic" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fetch_with_retry(url, max_retries<span class="op">=</span><span class="dv">3</span>, delay<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""지수 백오프 재시도"""</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> attempt <span class="kw">in</span> <span class="bu">range</span>(max_retries):</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>            response <span class="op">=</span> requests.get(url, timeout<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>            response.raise_for_status()</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> response.json()</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> requests.exceptions.RequestException <span class="im">as</span> e:</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> attempt <span class="op">&lt;</span> max_retries <span class="op">-</span> <span class="dv">1</span>:</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(<span class="ss">f"시도 </span><span class="sc">{</span>attempt <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss"> 실패, </span><span class="sc">{</span>delay<span class="sc">}</span><span class="ss">초 후 재시도..."</span>)</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>                time.sleep(delay)</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>                delay <span class="op">*=</span> <span class="dv">2</span>  <span class="co"># 간격 2배 증가</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>                <span class="cf">raise</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>실무에서는 <code>tenacity</code>나 <code>urllib3.util.Retry</code> 같은 라이브러리를 사용하면 재시도 로직을 더 간결하게 작성할 수 있다. 어떤 방식을 쓰든 핵심은 같다. <strong>네트워크는 실패할 수 있다고 가정하고, 실패했을 때 어떻게 할지 미리 정해두는 것</strong>이다.</p>
+</section>
+</section>
+<section id="생각해볼-점" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="생각해볼-점">💡 생각해볼 점</h2>
+<p>웹서비스 프로그래밍의 본질은 <strong>신뢰의 설계</strong>다. 내 코드가 아닌 외부 시스템에 의존할 때, 세 가지 신뢰 문제가 발생한다. 첫째, 네트워크는 언제든 끊길 수 있다. 둘째, 상대 서버가 항상 정상일 거라 보장할 수 없다. 셋째, API 제공자가 서비스를 변경하거나 중단할 수 있다. 견고한 코드는 이러한 불확실성을 인정하고 대비한다.</p>
+<p>OAuth가 보여주는 교훈도 같은 맥락이다. 비밀번호를 공유하면 편하지만 위험하다. 토큰 기반 인증은 복잡하지만 안전하다. <strong>편의성과 보안은 트레이드오프</strong> 관계이며, 좋은 설계는 둘 사이에서 균형을 찾는다. API 키를 환경변수로 분리하고, 권한 범위를 최소화하고, 만료 시간을 설정하는 것—모두 “최악의 경우”를 상정한 방어적 사고의 산물이다.</p>
+<p>디버깅 역시 마찬가지다. “안 돼요”는 진단이 아니다. DNS 실패인지, 연결 거부인지, HTTP 오류인지, 파싱 문제인지—<strong>실패 지점을 특정</strong>해야 해결책이 보인다. 네트워크 프로그래밍에서 막연한 불안감을 느끼는 이유는 통제할 수 없는 변수가 많기 때문이다. 하지만 계층별로 문제를 분리하면 복잡성이 관리 가능해진다. 결국 웹서비스 코딩은 <strong>외부 세계와 협력하면서도 노출된 불확실성으로부터 본인 시스템을 보호하는 기술</strong>이다.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "복사완료!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "복사완료!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/r2bit\.com\/gpt-coding\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./tool-network.html" class="pagination-link" aria-label="네트워크 프로그램">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./tool-database.html" class="pagination-link" aria-label="데이터베이스와 SQL">
+        <span class="nav-page-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">데이터베이스와 SQL</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>챗GPT 쿼토 책은 소프트웨어 카펜트리 “Git 버전제어”를 번역한 것이 포함되어 있습니다.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/tool-web.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>순수하게 <a href="https://quarto.org/">쿼토(Quarto)</a>로 제작되었습니다.</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

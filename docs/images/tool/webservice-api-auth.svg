@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 50 800 270">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #111; font-weight: bold; }
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-mono { font-family: 'SF Mono', Consolas, monospace; fill: #444; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #666; font-style: italic; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #777; font-size: 10px; }
+      .main-box { fill: #fff; stroke: #333; stroke-width: 1.5; }
+      .anon-box { fill: #f5f5f5; stroke: #999; stroke-width: 1; stroke-dasharray: 4,2; }
+      .auth-box { fill: #fff; stroke: #333; stroke-width: 2; }
+      .flow-line { fill: none; stroke: #555; stroke-width: 1.5; }
+      .dim-line { fill: none; stroke: #999; stroke-width: 1; stroke-dasharray: 4,2; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="2.5" orient="auto">
+      <path d="M0,0 L0,5 L7,2.5 z" fill="#555" />
+    </marker>
+    <marker id="arrow-dim" markerWidth="8" markerHeight="8" refX="6" refY="2.5" orient="auto">
+      <path d="M0,0 L0,5 L7,2.5 z" fill="#999" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="320" fill="#ffffff"/>
+
+  <!-- 상단: 핵심 질문 -->
+  <!-- <text x="400" y="30" text-anchor="middle" class="tufte-title" font-size="15">API 인증의 본질: "누구의 요청인가?"</text> -->
+
+  <!-- 좌측: 익명 요청 (문제) -->
+  <g transform="translate(40, 60)">
+    <text x="140" y="15" text-anchor="middle" class="tufte-label" font-size="12">인증 없음</text>
+
+    <!-- 익명의 요청자들 -->
+    <g transform="translate(0, 30)">
+      <rect x="0" y="0" width="80" height="40" class="anon-box" rx="4"/>
+      <text x="40" y="25" text-anchor="middle" class="tufte-text" font-size="11">요청자 ?</text>
+    </g>
+    <g transform="translate(90, 30)">
+      <rect x="0" y="0" width="80" height="40" class="anon-box" rx="4"/>
+      <text x="40" y="25" text-anchor="middle" class="tufte-text" font-size="11">요청자 ?</text>
+    </g>
+    <g transform="translate(180, 30)">
+      <rect x="0" y="0" width="80" height="40" class="anon-box" rx="4"/>
+      <text x="40" y="25" text-anchor="middle" class="tufte-text" font-size="11">요청자 ?</text>
+    </g>
+
+    <!-- 화살표들 -->
+    <path d="M 130,80 L 130,115" class="dim-line" marker-end="url(#arrow-dim)"/>
+
+    <!-- 서버 -->
+    <rect x="60" y="125" width="140" height="55" class="anon-box" rx="6"/>
+    <text x="130" y="150" text-anchor="middle" class="tufte-text" font-size="12">서버</text>
+    <text x="130" y="168" text-anchor="middle" class="tufte-label" font-size="10">"누군지 모른다"</text>
+
+    <!-- 결과 -->
+    <text x="130" y="210" text-anchor="middle" class="tufte-text" font-size="11">→ 추적 불가</text>
+    <text x="130" y="228" text-anchor="middle" class="tufte-text" font-size="11">→ 과금 불가</text>
+    <text x="130" y="246" text-anchor="middle" class="tufte-text" font-size="11">→ 제한 불가</text>
+  </g>
+
+  <!-- 중앙: 핵심 인사이트 -->
+  <g transform="translate(350, 100)">
+    <rect x="0" y="0" width="160" height="140" fill="#f8f8f8" stroke="#333" stroke-width="1.5" rx="8"/>
+    <text x="80" y="30" text-anchor="middle" class="tufte-title" font-size="13">API 키</text>
+    <text x="80" y="50" text-anchor="middle" class="tufte-label" font-size="11">= 신분증</text>
+
+    <line x1="20" y1="65" x2="140" y2="65" stroke="#ddd" stroke-width="1"/>
+
+    <text x="80" y="90" text-anchor="middle" class="tufte-mono" font-size="10">sk_live_abc123...</text>
+
+    <text x="80" y="115" text-anchor="middle" class="tufte-text" font-size="10">"나는 김개발이고</text>
+    <text x="80" y="130" text-anchor="middle" class="tufte-text" font-size="10">Premium 플랜이다"</text>
+  </g>
+
+  <!-- 우측: 인증된 요청 (해결) -->
+  <g transform="translate(520, 60)">
+    <text x="130" y="15" text-anchor="middle" class="tufte-label" font-size="12">인증 있음</text>
+
+    <!-- 식별된 요청자 -->
+    <g transform="translate(50, 30)">
+      <rect x="0" y="0" width="160" height="40" class="auth-box" rx="4"/>
+      <text x="80" y="18" text-anchor="middle" class="tufte-mono" font-size="10">Authorization: Bearer</text>
+      <text x="80" y="33" text-anchor="middle" class="tufte-mono" font-size="10">sk_live_abc123...</text>
+    </g>
+
+    <!-- 화살표 -->
+    <path d="M 130,80 L 130,115" class="flow-line" marker-end="url(#arrow)"/>
+
+    <!-- 서버 -->
+    <rect x="50" y="125" width="160" height="55" class="auth-box" rx="6"/>
+    <text x="130" y="150" text-anchor="middle" class="tufte-text" font-size="12">서버</text>
+    <text x="130" y="168" text-anchor="middle" class="tufte-label" font-size="10">"김개발, Premium"</text>
+
+    <!-- 결과 -->
+    <text x="130" y="210" text-anchor="middle" class="tufte-text" font-size="11">→ 사용량 추적</text>
+    <text x="130" y="228" text-anchor="middle" class="tufte-text" font-size="11">→ 요금 청구</text>
+    <text x="130" y="246" text-anchor="middle" class="tufte-text" font-size="11">→ 권한별 기능</text>
+  </g>
+
+  <!-- 하단: 본질 요약 -->
+  <g transform="translate(40, 275)">
+    <rect x="0" y="0" width="720" height="40" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="4"/>
+    <text x="360" y="26" text-anchor="middle" class="tufte-text" font-size="12">
+      인증은 <tspan font-weight="bold">익명</tspan>을 <tspan font-weight="bold">신원</tspan>으로 바꾼다.
+      신원이 있어야 추적, 과금, 제한이 가능하다.
+    </text>
+  </g>
+</svg>

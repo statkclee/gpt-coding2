@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 280">
+  <defs>
+    <style>
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 12px;
+        fill: #333;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 10px;
+        fill: #333;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #666;
+      }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="720" height="280" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="360" y="22" text-anchor="middle" class="tufte-label" font-weight="bold">배열 생성 방법</text>
+
+  <!-- Row 1: Basic creation -->
+  <g transform="translate(30, 40)">
+    <rect x="0" y="0" width="200" height="70" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="100" y="20" text-anchor="middle" class="tufte-label" font-weight="bold">리스트에서 생성</text>
+    <text x="100" y="40" text-anchor="middle" class="tufte-code">np.array([1, 2, 3])</text>
+    <text x="100" y="55" text-anchor="middle" class="tufte-small">파이썬 리스트 → ndarray</text>
+  </g>
+
+  <g transform="translate(260, 40)">
+    <rect x="0" y="0" width="200" height="70" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="100" y="20" text-anchor="middle" class="tufte-label" font-weight="bold">0으로 채운 배열</text>
+    <text x="100" y="40" text-anchor="middle" class="tufte-code">np.zeros((3, 4))</text>
+    <text x="100" y="55" text-anchor="middle" class="tufte-small">지정 형태, 모든 값 0</text>
+  </g>
+
+  <g transform="translate(490, 40)">
+    <rect x="0" y="0" width="200" height="70" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="100" y="20" text-anchor="middle" class="tufte-label" font-weight="bold">1로 채운 배열</text>
+    <text x="100" y="40" text-anchor="middle" class="tufte-code">np.ones((2, 3))</text>
+    <text x="100" y="55" text-anchor="middle" class="tufte-small">지정 형태, 모든 값 1</text>
+  </g>
+
+  <!-- Row 2: Range and special -->
+  <g transform="translate(30, 125)">
+    <rect x="0" y="0" width="200" height="70" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="100" y="20" text-anchor="middle" class="tufte-label" font-weight="bold">범위로 생성</text>
+    <text x="100" y="40" text-anchor="middle" class="tufte-code">np.arange(0, 10, 2)</text>
+    <text x="100" y="55" text-anchor="middle" class="tufte-small">시작, 끝, 간격</text>
+  </g>
+
+  <g transform="translate(260, 125)">
+    <rect x="0" y="0" width="200" height="70" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="100" y="20" text-anchor="middle" class="tufte-label" font-weight="bold">등간격 분할</text>
+    <text x="100" y="40" text-anchor="middle" class="tufte-code">np.linspace(0, 1, 5)</text>
+    <text x="100" y="55" text-anchor="middle" class="tufte-small">시작, 끝, 개수</text>
+  </g>
+
+  <g transform="translate(490, 125)">
+    <rect x="0" y="0" width="200" height="70" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="100" y="20" text-anchor="middle" class="tufte-label" font-weight="bold">단위 행렬</text>
+    <text x="100" y="40" text-anchor="middle" class="tufte-code">np.eye(3)</text>
+    <text x="100" y="55" text-anchor="middle" class="tufte-small">대각선 1, 나머지 0</text>
+  </g>
+
+  <!-- Row 3: Random -->
+  <g transform="translate(30, 210)">
+    <rect x="0" y="0" width="200" height="60" fill="#e8e8e8" stroke="#999" rx="3"/>
+    <text x="100" y="18" text-anchor="middle" class="tufte-label" font-weight="bold">균일 난수</text>
+    <text x="100" y="36" text-anchor="middle" class="tufte-code">np.random.rand(3, 4)</text>
+    <text x="100" y="50" text-anchor="middle" class="tufte-small">[0, 1) 균일 분포</text>
+  </g>
+
+  <g transform="translate(260, 210)">
+    <rect x="0" y="0" width="200" height="60" fill="#e8e8e8" stroke="#999" rx="3"/>
+    <text x="100" y="18" text-anchor="middle" class="tufte-label" font-weight="bold">정규 난수</text>
+    <text x="100" y="36" text-anchor="middle" class="tufte-code">np.random.randn(3, 4)</text>
+    <text x="100" y="50" text-anchor="middle" class="tufte-small">평균 0, 표준편차 1</text>
+  </g>
+
+  <g transform="translate(490, 210)">
+    <rect x="0" y="0" width="200" height="60" fill="#e8e8e8" stroke="#999" rx="3"/>
+    <text x="100" y="18" text-anchor="middle" class="tufte-label" font-weight="bold">정수 난수</text>
+    <text x="100" y="36" text-anchor="middle" class="tufte-code">np.random.randint(0,10,(3,4))</text>
+    <text x="100" y="50" text-anchor="middle" class="tufte-small">범위 내 정수</text>
+  </g>
+
+</svg>

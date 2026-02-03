@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 70 900 370">
+  <defs>
+    <style>
+      .tufte-title { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif; font-size: 22px; font-weight: bold; fill: #111; }
+      .tufte-subtitle { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif; font-size: 16px; font-weight: bold; fill: #222; }
+      .tufte-label { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif; font-size: 13px; font-weight: bold; fill: #333; }
+      .tufte-text { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif; font-size: 12px; fill: #444; }
+      .tufte-small { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif; font-size: 11px; fill: #666; }
+      .tufte-code { font-family: 'SF Mono', Menlo, Monaco, monospace; font-size: 11px; fill: #555; }
+
+      .box-concept { fill: #fff; stroke: #ccc; stroke-width: 1; rx: 4; }
+      .box-highlight { fill: #f9f9f9; stroke: #333; stroke-width: 1.5; rx: 4; }
+
+      .axis { stroke: #333; stroke-width: 1.5; }
+      .grid { stroke: #eee; stroke-width: 1; stroke-dasharray: 4,4; }
+      
+      .curve-1 { stroke: #999; stroke-width: 2.5; fill: none; }
+      .curve-2 { stroke: #666; stroke-width: 2.5; fill: none; }
+      .curve-3 { stroke: #333; stroke-width: 4; fill: none; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#333" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="900" height="600" fill="#ffffff"/>
+
+  <!-- Title -->
+  <!-- <text x="450" y="40" class="tufte-title" text-anchor="middle">창발 능력 (Emergent Abilities)</text>
+  <text x="450" y="65" class="tufte-text" text-anchor="middle" font-style="italic">"More Is Different": 양적 축적이 질적 전환을 가져온다</text> -->
+
+  <!-- <line x1="50" y1="80" x2="850" y2="80" stroke="#ddd" stroke-width="2"/> -->
+
+  <!-- Main Graph: Sigmoid Curves -->
+  <g transform="translate(50, 120)">
+    <text x="0" y="-10" class="tufte-subtitle">1. 능력 출현의 임계점</text>
+
+    <!-- Graph Area -->
+    <rect x="0" y="10" width="550" height="300" fill="#fff"/>
+
+    <!-- Grid -->
+    <line x1="40" y1="280" x2="520" y2="280" class="axis"/> <!-- X -->
+    <line x1="40" y1="280" x2="40" y2="20" class="axis"/> <!-- Y -->
+
+    <!-- Y Labels -->
+    <text x="30" y="280" class="tufte-small" text-anchor="end">0%</text>
+    <text x="30" y="150" class="tufte-small" text-anchor="end">성능</text>
+    <text x="30" y="30" class="tufte-small" text-anchor="end">100%</text>
+
+    <!-- X Labels (Log Scale) -->
+    <text x="40" y="300" class="tufte-small" text-anchor="middle">작음</text>
+    <text x="280" y="300" class="tufte-small" text-anchor="middle">중간 (10B)</text>
+    <text x="520" y="300" class="tufte-small" text-anchor="middle">큼 (100B+)</text>
+    <text x="630" y="305" class="tufte-label" text-anchor="middle">모델 규모 (파라미터 수)</text>
+
+    <!-- Random Guess Baseline -->
+    <line x1="40" y1="260" x2="520" y2="260" stroke="#ddd" stroke-width="1.5" stroke-dasharray="4,4"/>
+    <text x="530" y="265" class="tufte-small" fill="#999">무작위</text>
+
+    <!-- Curve 1: Grammar/Facts (Early) -->
+    <path d="M40,260 Q100,260 150,150 T300,50" class="curve-1"/>
+    <text x="305" y="50" class="tufte-text" fill="#999">문법, 단순 지식</text>
+
+    <!-- Curve 2: Coding/Translation (Mid) -->
+    <path d="M40,265 L180,265 Q250,265 300,150 T450,60" class="curve-2"/>
+    <text x="400" y="50" class="tufte-text" fill="#666">코드 생성, 번역</text>
+
+    <!-- Curve 3: Reasoning/Math (Late) -->
+    <path d="M40,270 L300,270 Q380,270 420,160 T510,60" class="curve-3"/>
+    <text x="520" y="60" class="tufte-text" fill="#333" font-weight="bold">수학, 복잡한 추론</text>
+
+    <!-- Threshold Annotation -->
+    <line x1="380" y1="20" x2="380" y2="280" stroke="#333" stroke-width="1" stroke-dasharray="2,2"/>
+    <text x="380" y="15" class="tufte-small" text-anchor="middle" fill="#333">임계점 돌파</text>
+    <circle cx="380" cy="270" r="4" fill="#333"/>
+  </g>
+
+  <!-- Right Side: The Table -->
+  <g transform="translate(660, 120)">
+    <text x="0" y="-10" class="tufte-subtitle">2. 규모별 능력표</text>
+
+    <g transform="translate(0, 10)">
+      <!-- Row 1: Small -->
+      <rect x="0" y="0" width="220" height="60" class="box-concept"/>
+      <text x="10" y="20" class="tufte-label">소규모 (~1B)</text>
+      <text x="10" y="45" class="tufte-small">• 문법 교정</text>
+      <text x="110" y="45" class="tufte-small">• 간단한 문장 완성</text>
+    </g>
+
+    <g transform="translate(0, 80)">
+      <!-- Row 2: Medium -->
+      <rect x="0" y="0" width="220" height="60" class="box-concept"/>
+      <text x="10" y="20" class="tufte-label">중규모 (~10B)</text>
+      <text x="10" y="45" class="tufte-small">• 번역</text>
+      <text x="80" y="45" class="tufte-small">• 요약</text>
+      <text x="140" y="45" class="tufte-small">• 정보 추출</text>
+    </g>
+
+    <g transform="translate(0, 160)">
+      <!-- Row 3: Large -->
+      <rect x="0" y="0" width="220" height="80" class="box-highlight"/>
+      <text x="10" y="20" class="tufte-label">대규모 (100B+)</text>
+      <text x="10" y="45" class="tufte-text" font-weight="bold">• 맥락 내 학습</text>
+      <text x="10" y="65" class="tufte-text" font-weight="bold">• 논리적 추론</text>
+      <text x="120" y="45" class="tufte-text" font-weight="bold">• 코딩</text>
+    </g>
+  </g>
+
+  <!-- Bottom Insight Box -->
+  <!-- <g transform="translate(50, 480)">
+    <rect x="0" y="0" width="800" height="80" class="box-highlight" stroke="#666"/>
+    <text x="30" y="30" class="tufte-subtitle">왜 중요한가?</text>
+    <text x="30" y="55" class="tufte-text">작은 모델에서 보이지 않던 능력이 모델을 키우는 것만으로 갑자기 나타난다.</text>
+    <text x="30" y="70" class="tufte-text">이는 AI 개발 방식을 <tspan font-weight="bold">"알고리즘 설계"</tspan>에서 <tspan font-weight="bold">"규모 확장과 데이터 확보"</tspan>로 변화시켰다.</text>
+  </g> -->
+
+</svg>

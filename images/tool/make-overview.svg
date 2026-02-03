@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #111; font-weight: bold; }
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-mono { font-family: 'SF Mono', Consolas, monospace; fill: #444; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #666; font-style: italic; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #777; font-size: 10px; }
+      .main-box { fill: #f8f8f8; stroke: #333; stroke-width: 2; }
+      .sub-box { fill: #fff; stroke: #666; stroke-width: 1; }
+      .flow-line { fill: none; stroke: #555; stroke-width: 1.5; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="2.5" orient="auto">
+      <path d="M0,0 L0,5 L7,2.5 z" fill="#555" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="320" fill="#ffffff"/>
+
+  <!-- 왼쪽: 파일 시스템 -->
+  <g transform="translate(30, 30)">
+    <rect x="0" y="0" width="200" height="250" class="main-box" rx="6"/>
+    <text x="100" y="28" text-anchor="middle" class="tufte-title" font-size="14">파일 시스템</text>
+    <line x1="15" y1="40" x2="185" y2="40" stroke="#ccc" stroke-width="1"/>
+
+    <!-- 디렉터리 구조 -->
+    <g transform="translate(20, 55)">
+      <rect x="0" y="0" width="160" height="180" class="sub-box" rx="4"/>
+      <text x="10" y="22" class="tufte-mono" font-size="11">data/</text>
+      <text x="25" y="42" class="tufte-mono" font-size="11">bbc/</text>
+      <text x="40" y="62" class="tufte-mono" font-size="10">business/</text>
+      <text x="55" y="80" class="tufte-mono" font-size="9">001.txt</text>
+      <text x="55" y="95" class="tufte-mono" font-size="9">002.txt</text>
+      <text x="40" y="115" class="tufte-mono" font-size="10">sport/</text>
+      <text x="55" y="133" class="tufte-mono" font-size="9">001.txt</text>
+      <text x="55" y="148" class="tufte-mono" font-size="9">...</text>
+      <text x="40" y="168" class="tufte-mono" font-size="10">tech/</text>
+    </g>
+  </g>
+
+  <!-- 중앙: 파이썬 자동화 -->
+  <g transform="translate(280, 30)">
+    <rect x="0" y="0" width="240" height="250" class="main-box" rx="6"/>
+    <text x="120" y="28" text-anchor="middle" class="tufte-title" font-size="14">파이썬 자동화</text>
+    <line x1="15" y1="40" x2="225" y2="40" stroke="#ccc" stroke-width="1"/>
+
+    <!-- 도구들 -->
+    <g transform="translate(20, 55)">
+      <rect x="0" y="0" width="95" height="40" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="4"/>
+      <text x="47" y="18" text-anchor="middle" class="tufte-mono" font-size="10">os.walk()</text>
+      <text x="47" y="32" text-anchor="middle" class="tufte-small">디렉터리 탐색</text>
+    </g>
+
+    <g transform="translate(125, 55)">
+      <rect x="0" y="0" width="95" height="40" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="4"/>
+      <text x="47" y="18" text-anchor="middle" class="tufte-mono" font-size="10">pathlib</text>
+      <text x="47" y="32" text-anchor="middle" class="tufte-small">경로 처리</text>
+    </g>
+
+    <g transform="translate(20, 105)">
+      <rect x="0" y="0" width="95" height="40" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="4"/>
+      <text x="47" y="18" text-anchor="middle" class="tufte-mono" font-size="10">subprocess</text>
+      <text x="47" y="32" text-anchor="middle" class="tufte-small">쉘 명령 실행</text>
+    </g>
+
+    <g transform="translate(125, 105)">
+      <rect x="0" y="0" width="95" height="40" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="4"/>
+      <text x="47" y="18" text-anchor="middle" class="tufte-mono" font-size="10">argparse</text>
+      <text x="47" y="32" text-anchor="middle" class="tufte-small">CLI 인터페이스</text>
+    </g>
+
+    <g transform="translate(20, 155)">
+      <rect x="0" y="0" width="95" height="40" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="4"/>
+      <text x="47" y="18" text-anchor="middle" class="tufte-mono" font-size="10">shutil</text>
+      <text x="47" y="32" text-anchor="middle" class="tufte-small">파일 복사/이동</text>
+    </g>
+
+    <g transform="translate(125, 155)">
+      <rect x="0" y="0" width="95" height="40" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="4"/>
+      <text x="47" y="18" text-anchor="middle" class="tufte-mono" font-size="10">hashlib</text>
+      <text x="47" y="32" text-anchor="middle" class="tufte-small">체크섬 계산</text>
+    </g>
+
+    <!-- 하단 메시지 -->
+    <text x="120" y="225" text-anchor="middle" class="tufte-label" font-size="11">"반복을 코드로 대체"</text>
+  </g>
+
+  <!-- 오른쪽: 출력 결과 -->
+  <g transform="translate(570, 30)">
+    <rect x="0" y="0" width="200" height="250" class="main-box" rx="6"/>
+    <text x="100" y="28" text-anchor="middle" class="tufte-title" font-size="14">자동화 결과</text>
+    <line x1="15" y1="40" x2="185" y2="40" stroke="#ccc" stroke-width="1"/>
+
+    <g transform="translate(20, 55)">
+      <rect x="0" y="0" width="160" height="40" class="sub-box" rx="4"/>
+      <text x="80" y="18" text-anchor="middle" class="tufte-text" font-size="11">일괄 파일 처리</text>
+      <text x="80" y="32" text-anchor="middle" class="tufte-small">2,225개 파일 분류</text>
+    </g>
+
+    <g transform="translate(20, 105)">
+      <rect x="0" y="0" width="160" height="40" class="sub-box" rx="4"/>
+      <text x="80" y="18" text-anchor="middle" class="tufte-text" font-size="11">키워드 검색</text>
+      <text x="80" y="32" text-anchor="middle" class="tufte-small">전체 데이터셋 탐색</text>
+    </g>
+
+    <g transform="translate(20, 155)">
+      <rect x="0" y="0" width="160" height="40" class="sub-box" rx="4"/>
+      <text x="80" y="18" text-anchor="middle" class="tufte-text" font-size="11">중복 파일 정리</text>
+      <text x="80" y="32" text-anchor="middle" class="tufte-small">저장 공간 절약</text>
+    </g>
+
+    <g transform="translate(20, 205)">
+      <rect x="0" y="0" width="160" height="30" class="sub-box" rx="4"/>
+      <text x="80" y="20" text-anchor="middle" class="tufte-text" font-size="11">재현가능한 워크플로우</text>
+    </g>
+  </g>
+
+  <!-- 화살표 연결 -->
+  <path d="M 230,155 L 270,155" class="flow-line" marker-end="url(#arrow)"/>
+  <path d="M 520,155 L 560,155" class="flow-line" marker-end="url(#arrow)"/>
+
+  <!-- 라벨 -->
+  <text x="250" y="145" text-anchor="middle" class="tufte-small">탐색</text>
+  <text x="540" y="145" text-anchor="middle" class="tufte-small">처리</text>
+
+  <!-- 하단 메시지 -->
+  <text x="400" y="305" text-anchor="middle" class="tufte-label" font-size="12">"수작업 → 스크립트 → 재사용 가능한 도구"</text>
+
+</svg>

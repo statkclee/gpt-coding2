@@ -1,0 +1,185 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 30 850 360">
+  <defs>
+    <style>
+      .label-head { font-family: Palatino, serif; font-size: 13px; font-weight: bold; fill: #222; }
+      .label-body { font-family: Palatino, serif; font-size: 11px; fill: #333; }
+      .label-note { font-family: Palatino, serif; font-size: 10px; fill: #555; font-style: italic; }
+      .label-mono { font-family: 'SF Mono', Consolas, Menlo, monospace; font-size: 9px; fill: #444; }
+      .label-result { font-family: 'SF Mono', Consolas, Menlo, monospace; font-size: 11px; fill: #333; font-weight: bold; }
+
+      .box-ok { fill: #fff; stroke: #333; stroke-width: 1.5; rx: 4; }
+      .box-bad { fill: #f8f8f8; stroke: #666; stroke-width: 1; stroke-dasharray: 3 2; rx: 4; }
+      .box-good { fill: #fff; stroke: #333; stroke-width: 2; rx: 4; }
+      .box-step { fill: #f5f5f5; stroke: #999; stroke-width: 1; rx: 2; }
+      .box-state { fill: #eee; stroke: #333; stroke-width: 1; rx: 2; }
+
+      .line-flow { stroke: #666; stroke-width: 1.2; fill: none; }
+      .line-sep { stroke: #ddd; stroke-width: 1; }
+      .arrow-head { fill: #666; }
+    </style>
+    <marker id="arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L6,3 z" class="arrow-head" />
+    </marker>
+  </defs>
+
+  <rect width="850" height="400" fill="#fff" />
+
+  <!-- ========================================== -->
+  <!-- COLUMN 1: Sequential (OK) -->
+  <!-- ========================================== -->
+  <g transform="translate(30, 55)">
+    <text x="120" y="0" text-anchor="middle" class="label-head">순차 실행</text>
+    <rect x="0" y="15" width="240" height="280" class="box-ok"/>
+
+    <text x="120" y="35" text-anchor="middle" class="label-note">A 완료 후 B 실행</text>
+
+    <!-- Initial State -->
+    <g transform="translate(70, 50)">
+      <rect x="0" y="0" width="100" height="25" class="box-state"/>
+      <text x="50" y="16" text-anchor="middle" class="label-mono">balance = 100</text>
+    </g>
+
+    <!-- Step A -->
+    <g transform="translate(20, 90)">
+      <rect x="0" y="0" width="200" height="70" class="box-step"/>
+      <text x="100" y="15" text-anchor="middle" class="label-mono" font-weight="bold">작업자 A</text>
+      <text x="10" y="32" class="label-mono">1. 읽기: 100</text>
+      <text x="10" y="46" class="label-mono">2. 계산: 100 + 50 = 150</text>
+      <text x="10" y="60" class="label-mono">3. 쓰기: 150</text>
+    </g>
+
+    <path d="M 120 160 L 120 175" class="line-flow" marker-end="url(#arrow)"/>
+
+    <!-- Step B -->
+    <g transform="translate(20, 180)">
+      <rect x="0" y="0" width="200" height="70" class="box-step"/>
+      <text x="100" y="15" text-anchor="middle" class="label-mono" font-weight="bold">작업자 B</text>
+      <text x="10" y="32" class="label-mono">1. 읽기: 150</text>
+      <text x="10" y="46" class="label-mono">2. 계산: 150 + 30 = 180</text>
+      <text x="10" y="60" class="label-mono">3. 쓰기: 180</text>
+    </g>
+
+    <!-- Result -->
+    <g transform="translate(50, 255)">
+      <rect x="0" y="0" width="140" height="25" fill="#fff" stroke="#999" stroke-width="1" rx="2"/>
+      <text x="70" y="17" text-anchor="middle" class="label-result" fill="#666">최종: 180원</text>
+    </g>
+
+    <!-- Drawback -->
+    <g transform="translate(-70, 10)">
+      <text x="120" y="300" text-anchor="middle" class="label-note" fill="#666">단점: 코어 1개만 사용</text>
+      <text x="120" y="315" text-anchor="middle" class="label-note" fill="#666">(병렬화 불가, 느림)</text>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- COLUMN 2: Concurrent (Race Condition) -->
+  <!-- ========================================== -->
+  <g transform="translate(300, 55)">
+    <text x="120" y="0" text-anchor="middle" class="label-head" fill="#555">동시 실행 (경쟁 조건)</text>
+    <rect x="0" y="15" width="240" height="280" class="box-bad"/>
+
+    <text x="120" y="35" text-anchor="middle" class="label-note">A와 B가 동시에 읽기</text>
+
+    <!-- Initial State -->
+    <g transform="translate(70, 50)">
+      <rect x="0" y="0" width="100" height="25" class="box-state"/>
+      <text x="50" y="16" text-anchor="middle" class="label-mono">balance = 100</text>
+    </g>
+
+    <!-- Parallel Read -->
+    <g transform="translate(10, 85)">
+      <path d="M 110 -5 L 55 10" class="line-flow" marker-end="url(#arrow)"/>
+      <path d="M 110 -5 L 165 10" class="line-flow" marker-end="url(#arrow)"/>
+    </g>
+
+    <!-- Step A (left) -->
+    <g transform="translate(10, 95)">
+      <rect x="0" y="0" width="105" height="55" class="box-step"/>
+      <text x="52" y="13" text-anchor="middle" class="label-mono" font-weight="bold">A</text>
+      <text x="5" y="28" class="label-mono">읽기: 100</text>
+      <text x="5" y="42" class="label-mono">계산: 150</text>
+    </g>
+
+    <!-- Step B (right) -->
+    <g transform="translate(125, 95)">
+      <rect x="0" y="0" width="105" height="55" class="box-step"/>
+      <text x="52" y="13" text-anchor="middle" class="label-mono" font-weight="bold">B</text>
+      <text x="5" y="28" class="label-mono">읽기: 100</text>
+      <text x="5" y="42" class="label-mono">계산: 130</text>
+    </g>
+
+    <!-- Write sequence -->
+    <g transform="translate(10, 160)">
+      <path d="M 55 0 L 110 20" class="line-flow" marker-end="url(#arrow)"/>
+      <path d="M 175 0 L 130 20" class="line-flow" marker-end="url(#arrow)"/>
+
+      <rect x="60" y="25" width="100" height="40" class="box-step"/>
+      <text x="110" y="40" text-anchor="middle" class="label-mono">A 쓰기: 150</text>
+      <text x="110" y="55" text-anchor="middle" class="label-mono" fill="#333">B 쓰기: 130 (덮어씀!)</text>
+    </g>
+
+    <!-- Result -->
+    <g transform="translate(50, 265)">
+      <rect x="0" y="0" width="140" height="25" fill="#f5f5f5" stroke="#666" stroke-width="1" stroke-dasharray="3 2" rx="2"/>
+      <text x="70" y="17" text-anchor="middle" class="label-result" fill="#555">최종: 130원 ✗</text>
+    </g>
+
+    <g transform="translate(0, -60)">
+      <text x="120" y="305" text-anchor="middle" class="label-note" font-weight="bold" fill="#333">예상: 180원 → 실제: 130원</text>
+      <text x="120" y="320" text-anchor="middle" class="label-note" fill="#333">(50원 손실, 원인 추적 어려움)</text>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- COLUMN 3: Functional (reduce) -->
+  <!-- ========================================== -->
+  <g transform="translate(570, 55)">
+    <text x="120" y="0" text-anchor="middle" class="label-head">함수형 (reduce)</text>
+    <rect x="0" y="15" width="240" height="280" class="box-good"/>
+
+    <text x="120" y="35" text-anchor="middle" class="label-note">상태 변경 없이 새 값 생성</text>
+
+    <!-- Data -->
+    <g transform="translate(20, 55)">
+      <rect x="0" y="0" width="200" height="35" class="box-state"/>
+      <text x="100" y="14" text-anchor="middle" class="label-mono" font-weight="bold">불변 데이터</text>
+      <text x="100" y="28" text-anchor="middle" class="label-mono">initial=100, deposits=[50, 30]</text>
+    </g>
+
+    <path d="M 120 95 L 120 110" class="line-flow" marker-end="url(#arrow)"/>
+
+    <!-- Pure Function -->
+    <g transform="translate(40, 115)">
+      <rect x="0" y="0" width="160" height="35" fill="#fff" stroke="#333" stroke-width="1.5" rx="2"/>
+      <text x="80" y="14" text-anchor="middle" class="label-mono" font-weight="bold">순수 함수</text>
+      <text x="80" y="28" text-anchor="middle" class="label-mono">deposit(bal, amt) → bal + amt</text>
+    </g>
+
+    <path d="M 120 155 L 120 170" class="line-flow" marker-end="url(#arrow)"/>
+
+    <!-- Reduce steps -->
+    <g transform="translate(30, 175)">
+      <rect x="0" y="0" width="180" height="70" class="box-step"/>
+      <text x="90" y="15" text-anchor="middle" class="label-mono" font-weight="bold">reduce 적용</text>
+      <text x="10" y="35" class="label-mono">deposit(100, 50) → 150</text>
+      <text x="10" y="50" class="label-mono">deposit(150, 30) → 180</text>
+      <text x="90" y="65" text-anchor="middle" class="label-note">원본 100 그대로 보존</text>
+    </g>
+
+    <!-- Result -->
+    <g transform="translate(50, 265)">
+      <rect x="0" y="0" width="140" height="25" fill="#fff" stroke="#333" stroke-width="2" rx="2"/>
+      <text x="70" y="17" text-anchor="middle" class="label-result">최종: 180원 ✓</text>
+    </g>
+  </g>
+
+  <!-- Bottom comparison -->
+  <g transform="translate(30, 350)">
+    <line x1="0" y1="0" x2="790" y2="0" class="line-sep"/>
+    <text x="150" y="18" text-anchor="middle" class="label-note" fill="#666">안전하지만 느림</text>
+    <text x="420" y="18" text-anchor="middle" class="label-note" fill="#333" font-weight="bold">⚠ 데이터 손실 위험</text>
+    <text x="690" y="18" text-anchor="middle" class="label-note" fill="#333" font-weight="bold">✓ 안전 + 병렬화 가능</text>
+  </g>
+
+</svg>

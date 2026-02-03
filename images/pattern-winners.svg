@@ -1,0 +1,193 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
+  <defs>
+    <style>
+      .tufte-title {
+        font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', serif;
+        font-size: 16px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-subtitle {
+        font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', serif;
+        font-size: 13px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-label {
+        font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', serif;
+        font-size: 11px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-desc {
+        font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', serif;
+        font-size: 10px;
+        fill: #666;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Consolas, Menlo, monospace;
+        font-size: 9px;
+        fill: #666;
+      }
+      .tufte-small {
+        font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', serif;
+        font-size: 9px;
+        fill: #999;
+      }
+      .tufte-fade {
+        font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', serif;
+        font-size: 9px;
+        fill: #bbb;
+      }
+      .winner {
+        fill: #333;
+        font-weight: bold;
+      }
+      .loser {
+        fill: #ccc;
+        text-decoration: line-through;
+      }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- White background -->
+  <rect x="0" y="0" width="800" height="520" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="400" y="28" class="tufte-title" text-anchor="middle">춘추전국의 승자: 살아남은 패턴과 아키텍처</text>
+  <text x="400" y="46" class="tufte-small" text-anchor="middle">수십 개의 패턴 중 실무에서 반복 사용되는 핵심 패턴</text>
+
+  <!-- Timeline arrow -->
+  <line x1="50" y1="75" x2="750" y2="75" stroke="#999" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="100" y="90" class="tufte-small">1994 GoF</text>
+  <text x="300" y="90" class="tufte-small">2000s 웹 시대</text>
+  <text x="500" y="90" class="tufte-small">2010s 클라우드</text>
+  <text x="680" y="90" class="tufte-small">2020s AI</text>
+
+  <!-- Design Patterns Section -->
+  <rect x="40" y="105" width="350" height="185" fill="#fff" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="215" y="125" class="tufte-subtitle" text-anchor="middle">디자인 패턴 (GoF 23개 → 실무 5개)</text>
+  <line x1="55" y1="133" x2="375" y2="133" stroke="#ccc" stroke-width="1"/>
+
+  <!-- Winners -->
+  <rect x="55" y="145" width="160" height="135" fill="#f5f5f5" stroke="#666" stroke-width="1.5" rx="2"/>
+  <text x="135" y="163" class="tufte-label" text-anchor="middle">승자</text>
+
+  <text x="65" y="182" class="tufte-desc winner">Factory</text>
+  <text x="145" y="182" class="tufte-code">객체 생성 위임</text>
+
+  <text x="65" y="200" class="tufte-desc winner">Strategy</text>
+  <text x="145" y="200" class="tufte-code">DI, 플러그인</text>
+
+  <text x="65" y="218" class="tufte-desc winner">Observer</text>
+  <text x="145" y="218" class="tufte-code">이벤트, Pub/Sub</text>
+
+  <text x="65" y="236" class="tufte-desc winner">Decorator</text>
+  <text x="145" y="236" class="tufte-code">미들웨어, 래퍼</text>
+
+  <text x="65" y="254" class="tufte-desc winner">Repository</text>
+  <text x="145" y="254" class="tufte-code">데이터 접근 추상화</text>
+
+  <text x="135" y="275" class="tufte-small" text-anchor="middle">= 프레임워크에 내장됨</text>
+
+  <!-- Faded out -->
+  <rect x="225" y="145" width="155" height="135" fill="#fff" stroke="#ccc" stroke-width="1" rx="2"/>
+  <text x="302" y="163" class="tufte-fade" text-anchor="middle">퇴장/희석</text>
+
+  <text x="235" y="182" class="tufte-fade">Singleton → 안티패턴化</text>
+  <text x="235" y="200" class="tufte-fade">Visitor → 함수형으로 대체</text>
+  <text x="235" y="218" class="tufte-fade">Bridge → 덕 타이핑</text>
+  <text x="235" y="236" class="tufte-fade">Flyweight → 메모리 저렴</text>
+  <text x="235" y="254" class="tufte-fade">Memento → 불변 자료구조</text>
+  <text x="302" y="275" class="tufte-small" text-anchor="middle">= 언어/환경이 해결</text>
+
+  <!-- Architecture Section -->
+  <rect x="410" y="105" width="350" height="185" fill="#fff" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="585" y="125" class="tufte-subtitle" text-anchor="middle">아키텍처 패턴</text>
+  <line x1="425" y1="133" x2="745" y2="133" stroke="#ccc" stroke-width="1"/>
+
+  <!-- Architecture Winners -->
+  <rect x="425" y="145" width="160" height="135" fill="#f5f5f5" stroke="#666" stroke-width="1.5" rx="2"/>
+  <text x="505" y="163" class="tufte-label" text-anchor="middle">승자</text>
+
+  <text x="435" y="182" class="tufte-desc winner">REST API</text>
+  <text x="520" y="182" class="tufte-code">SOAP 완승</text>
+
+  <text x="435" y="200" class="tufte-desc winner">컴포넌트 UI</text>
+  <text x="520" y="200" class="tufte-code">MVC 진화형</text>
+
+  <text x="435" y="218" class="tufte-desc winner">마이크로서비스</text>
+  <text x="520" y="218" class="tufte-code">대규모 분산</text>
+
+  <text x="435" y="236" class="tufte-desc winner">이벤트 드리븐</text>
+  <text x="520" y="236" class="tufte-code">비동기, 반응형</text>
+
+  <text x="435" y="254" class="tufte-desc winner">계층형+DI</text>
+  <text x="520" y="254" class="tufte-code">Clean Arch</text>
+
+  <text x="505" y="275" class="tufte-small" text-anchor="middle">= 클라우드 네이티브</text>
+
+  <!-- Architecture Losers -->
+  <rect x="595" y="145" width="155" height="135" fill="#fff" stroke="#ccc" stroke-width="1" rx="2"/>
+  <text x="672" y="163" class="tufte-fade" text-anchor="middle">퇴장/특수용도</text>
+
+  <text x="605" y="182" class="tufte-fade">SOAP → 레거시만</text>
+  <text x="605" y="200" class="tufte-fade">ESB → 과도기 유물</text>
+  <text x="605" y="218" class="tufte-fade">CORBA → 사멸</text>
+  <text x="605" y="236" class="tufte-fade">RPC → gRPC로 부활</text>
+  <text x="605" y="254" class="tufte-fade">모놀리스 → 스타트업만</text>
+
+  <!-- AI Era Patterns -->
+  <rect x="40" y="305" width="720" height="100" fill="#f5f5f5" stroke="#333" stroke-width="2" rx="3"/>
+  <text x="400" y="328" class="tufte-subtitle" text-anchor="middle">AI 시대의 새로운 승자 (2023-)</text>
+  <line x1="55" y1="338" x2="745" y2="338" stroke="#ccc" stroke-width="1"/>
+
+  <!-- Connection arrows (Evolution) -->
+  <line x1="135" y1="280" x2="135" y2="350" stroke="#666" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arrow)"/>
+  <text x="145" y="315" class="tufte-small" fill="#666">진화</text>
+  <line x1="505" y1="280" x2="505" y2="350" stroke="#666" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arrow)"/>
+  <text x="515" y="315" class="tufte-small" fill="#666">진화</text>
+
+  <!-- New AI patterns -->
+  <g transform="translate(0, 0)">
+      <!-- Left: From Design Patterns -->
+      <rect x="60" y="350" width="150" height="45" fill="#fff" stroke="#666" stroke-width="1.5" rx="2"/>
+      <text x="135" y="368" class="tufte-label" text-anchor="middle">Prompt Chain</text>
+      <text x="135" y="385" class="tufte-code" text-anchor="middle">CoT, ReAct (←Strategy)</text>
+
+      <rect x="230" y="350" width="150" height="45" fill="#fff" stroke="#666" stroke-width="1.5" rx="2"/>
+      <text x="305" y="368" class="tufte-label" text-anchor="middle">Agent 아키텍처</text>
+      <text x="305" y="385" class="tufte-code" text-anchor="middle">LLM + Tools (←Command)</text>
+  </g>
+
+  <g transform="translate(0, 0)">
+      <!-- Right: From Architecture -->
+      <rect x="430" y="350" width="150" height="45" fill="#fff" stroke="#666" stroke-width="1.5" rx="2"/>
+      <text x="505" y="368" class="tufte-label" text-anchor="middle">RAG 패턴</text>
+      <text x="505" y="385" class="tufte-code" text-anchor="middle">검색 증강 (←Repository)</text>
+
+      <rect x="600" y="350" width="150" height="45" fill="#fff" stroke="#666" stroke-width="1.5" rx="2"/>
+      <text x="675" y="368" class="tufte-label" text-anchor="middle">MCP</text>
+      <text x="675" y="385" class="tufte-code" text-anchor="middle">도구 표준 (←Interface)</text>
+  </g>
+
+  <!-- Why they won -->
+  <rect x="40" y="420" width="720" height="85" fill="#fff" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="400" y="442" class="tufte-subtitle" text-anchor="middle">승리의 공통점</text>
+  <line x1="55" y1="450" x2="745" y2="450" stroke="#ccc" stroke-width="1"/>
+
+  <text x="145" y="472" class="tufte-label" text-anchor="middle">단순성</text>
+  <text x="145" y="490" class="tufte-desc" text-anchor="middle">복잡한 것은 도태</text>
+
+  <text x="305" y="472" class="tufte-label" text-anchor="middle">조합 가능성</text>
+  <text x="305" y="490" class="tufte-desc" text-anchor="middle">다른 패턴과 결합</text>
+
+  <text x="475" y="472" class="tufte-label" text-anchor="middle">프레임워크 내장</text>
+  <text x="475" y="490" class="tufte-desc" text-anchor="middle">자동으로 적용됨</text>
+
+  <text x="645" y="472" class="tufte-label" text-anchor="middle">실용적 문제 해결</text>
+  <text x="645" y="490" class="tufte-desc" text-anchor="middle">학문적 ≠ 실무적</text>
+</svg>

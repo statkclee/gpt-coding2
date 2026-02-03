@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 340">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #111; font-weight: bold; }
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-mono { font-family: 'SF Mono', Consolas, monospace; fill: #444; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #666; font-style: italic; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #777; font-size: 10px; }
+      .layer-box { fill: #fff; stroke: #333; stroke-width: 1.5; }
+      .layer-header { fill: #f0f0f0; }
+      .arrow-line { fill: none; stroke: #555; stroke-width: 1.5; }
+      .era-bg { fill: #fafafa; stroke: #ddd; stroke-width: 1; stroke-dasharray: 4,4; }
+    </style>
+    <marker id="arrow-up" markerWidth="10" markerHeight="10" refX="5" refY="10" orient="auto">
+      <path d="M0,10 L5,0 L10,10 z" fill="#555" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="340" fill="#ffffff"/>
+
+  <!-- 왼쪽: 추상화 피라미드 -->
+  <g transform="translate(30, 20)">
+    <text x="130" y="15" text-anchor="middle" class="tufte-title" font-size="13">추상화 계층</text>
+
+    <!-- Layer 4: 데이터 추출 (최상위) -->
+    <rect x="40" y="35" width="180" height="50" class="layer-box" rx="4"/>
+    <rect x="41" y="36" width="178" height="18" class="layer-header" rx="3"/>
+    <text x="130" y="50" text-anchor="middle" class="tufte-text" font-size="11" font-weight="bold">데이터 추출</text>
+    <text x="130" y="70" text-anchor="middle" class="tufte-mono" font-size="11">BeautifulSoup</text>
+    <text x="130" y="82" text-anchor="middle" class="tufte-small">HTML → 파이썬 객체</text>
+
+    <!-- Layer 3: 편의성 -->
+    <rect x="20" y="95" width="220" height="50" class="layer-box" rx="4"/>
+    <rect x="21" y="96" width="218" height="18" class="layer-header" rx="3"/>
+    <text x="130" y="110" text-anchor="middle" class="tufte-text" font-size="11" font-weight="bold">편의성 라이브러리</text>
+    <text x="130" y="130" text-anchor="middle" class="tufte-mono" font-size="11">requests</text>
+    <text x="130" y="142" text-anchor="middle" class="tufte-small">직관적 API, JSON 자동 처리</text>
+
+    <!-- Layer 2: 표준 라이브러리 -->
+    <rect x="0" y="155" width="260" height="50" class="layer-box" rx="4"/>
+    <rect x="1" y="156" width="258" height="18" class="layer-header" rx="3"/>
+    <text x="130" y="170" text-anchor="middle" class="tufte-text" font-size="11" font-weight="bold">표준 라이브러리</text>
+    <text x="130" y="190" text-anchor="middle" class="tufte-mono" font-size="11">urllib</text>
+    <text x="130" y="202" text-anchor="middle" class="tufte-small">HTTP 자동화, 헤더 처리</text>
+
+    <!-- Layer 1: 저수준 (최하위) -->
+    <rect x="0" y="215" width="260" height="50" class="layer-box" rx="4" stroke-width="2"/>
+    <rect x="1" y="216" width="258" height="18" class="layer-header" rx="3"/>
+    <text x="130" y="230" text-anchor="middle" class="tufte-text" font-size="11" font-weight="bold">저수준 네트워크</text>
+    <text x="130" y="250" text-anchor="middle" class="tufte-mono" font-size="11">socket</text>
+    <text x="130" y="262" text-anchor="middle" class="tufte-small">TCP/IP 직접 제어</text>
+
+    <!-- 화살표: 추상화 방향 (아래에서 위로) -->
+    <path d="M 270,250 L 270,55" class="arrow-line" marker-end="url(#arrow-up)"/>
+    <text x="290" y="150" class="tufte-label" font-size="10">추상화</text>
+    <text x="290" y="163" class="tufte-label" font-size="10">수준</text>
+  </g>
+
+  <!-- 오른쪽: 시대별 발전 (아래에서 위로) -->
+  <g transform="translate(340, 20)">
+    <text x="210" y="15" text-anchor="middle" class="tufte-title" font-size="13">역사적 발전</text>
+
+    <!-- 2011년~ requests (최상위, 가장 최신) -->
+    <g transform="translate(0, 30)">
+      <rect x="0" y="0" width="420" height="55" class="era-bg" rx="4"/>
+      <text x="15" y="18" class="tufte-label" font-size="11">2011년~</text>
+      <rect x="100" y="8" width="100" height="38" class="layer-box" rx="3"/>
+      <text x="150" y="28" text-anchor="middle" class="tufte-mono" font-size="11">requests</text>
+      <text x="150" y="42" text-anchor="middle" class="tufte-small">서드파티</text>
+      <text x="220" y="32" class="tufte-text" font-size="10">→ 사람을 위한 HTTP</text>
+    </g>
+
+    <!-- 2004년~ BeautifulSoup -->
+    <g transform="translate(0, 95)">
+      <rect x="0" y="0" width="420" height="55" class="era-bg" rx="4"/>
+      <text x="15" y="18" class="tufte-label" font-size="11">2004년~</text>
+      <rect x="100" y="8" width="120" height="38" class="layer-box" rx="3"/>
+      <text x="160" y="28" text-anchor="middle" class="tufte-mono" font-size="11">BeautifulSoup</text>
+      <text x="160" y="42" text-anchor="middle" class="tufte-small">HTML 파싱 특화</text>
+      <text x="240" y="32" class="tufte-text" font-size="10">→ 망가진 HTML도 처리</text>
+    </g>
+
+    <!-- 2000년대 urllib -->
+    <g transform="translate(0, 160)">
+      <rect x="0" y="0" width="420" height="55" class="era-bg" rx="4"/>
+      <text x="15" y="18" class="tufte-label" font-size="11">2000년대</text>
+      <rect x="100" y="8" width="100" height="38" class="layer-box" rx="3"/>
+      <text x="150" y="28" text-anchor="middle" class="tufte-mono" font-size="11">urllib</text>
+      <text x="150" y="42" text-anchor="middle" class="tufte-small">파이썬 표준</text>
+      <text x="220" y="32" class="tufte-text" font-size="10">→ HTTP 프로토콜 자동화</text>
+    </g>
+
+    <!-- 1990년대 socket (최하위) -->
+    <g transform="translate(0, 225)">
+      <rect x="0" y="0" width="420" height="55" class="era-bg" rx="4"/>
+      <text x="15" y="18" class="tufte-label" font-size="11">1990년대</text>
+      <rect x="100" y="8" width="100" height="38" class="layer-box" rx="3"/>
+      <text x="150" y="28" text-anchor="middle" class="tufte-mono" font-size="11">socket</text>
+      <text x="150" y="42" text-anchor="middle" class="tufte-small">C언어 API 계승</text>
+      <text x="220" y="32" class="tufte-text" font-size="10">→ 모든 네트워크의 기반</text>
+    </g>
+  </g>
+
+  <!-- 하단: 핵심 인사이트 -->
+  <g transform="translate(30, 300)">
+    <rect x="0" y="0" width="740" height="32" fill="#f5f5f5" stroke="#ccc" stroke-width="1" rx="4"/>
+    <text x="15" y="20" class="tufte-text" font-size="11" font-weight="bold">핵심:</text>
+    <text x="55" y="20" class="tufte-text" font-size="11">각 도구는 이전 도구의 복잡함을 숨기고 더 편리한 인터페이스를 제공한다. 목적에 맞는 추상화 수준을 선택하면 된다.</text>
+  </g>
+</svg>

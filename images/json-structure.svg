@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300">
+  <defs>
+    <style>
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 12px;
+        fill: #333;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 11px;
+        fill: #333;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #666;
+      }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="720" height="300" fill="#ffffff"/>
+
+  <!-- Object structure -->
+  <g transform="translate(30, 20)">
+    <text x="100" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">객체 (Object)</text>
+
+    <rect x="0" y="15" width="200" height="120" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="3"/>
+
+    <text x="10" y="40" class="tufte-code">{</text>
+    <text x="20" y="60" class="tufte-code">"name": "Alice",</text>
+    <text x="20" y="80" class="tufte-code">"age": 25,</text>
+    <text x="20" y="100" class="tufte-code">"active": true</text>
+    <text x="10" y="120" class="tufte-code">}</text>
+
+    <text x="100" y="150" text-anchor="middle" class="tufte-small">키-값 쌍, 중괄호 {}</text>
+  </g>
+
+  <!-- Array structure -->
+  <g transform="translate(260, 20)">
+    <text x="100" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">배열 (Array)</text>
+
+    <rect x="0" y="15" width="200" height="120" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="3"/>
+
+    <text x="10" y="40" class="tufte-code">[</text>
+    <text x="20" y="60" class="tufte-code">"apple",</text>
+    <text x="20" y="80" class="tufte-code">"banana",</text>
+    <text x="20" y="100" class="tufte-code">"cherry"</text>
+    <text x="10" y="120" class="tufte-code">]</text>
+
+    <text x="100" y="150" text-anchor="middle" class="tufte-small">순서 있는 값, 대괄호 []</text>
+  </g>
+
+  <!-- Value types -->
+  <g transform="translate(490, 20)">
+    <text x="100" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">값 타입 (Value)</text>
+
+    <rect x="0" y="15" width="200" height="150" fill="#f5f5f5" stroke="#999" rx="3"/>
+
+    <text x="15" y="38" class="tufte-code">"text"</text>
+    <text x="100" y="38" class="tufte-small">문자열</text>
+
+    <text x="15" y="58" class="tufte-code">42, 3.14</text>
+    <text x="100" y="58" class="tufte-small">숫자</text>
+
+    <text x="15" y="78" class="tufte-code">true, false</text>
+    <text x="100" y="78" class="tufte-small">불리언</text>
+
+    <text x="15" y="98" class="tufte-code">null</text>
+    <text x="100" y="98" class="tufte-small">null</text>
+
+    <text x="15" y="118" class="tufte-code">{...}</text>
+    <text x="100" y="118" class="tufte-small">객체</text>
+
+    <text x="15" y="138" class="tufte-code">[...]</text>
+    <text x="100" y="138" class="tufte-small">배열</text>
+  </g>
+
+  <!-- Syntax rules -->
+  <g transform="translate(30, 195)">
+    <rect x="0" y="0" width="660" height="95" fill="#e8e8e8" stroke="#666" rx="3"/>
+    <text x="330" y="20" text-anchor="middle" class="tufte-label" font-weight="bold">JSON 문법 규칙</text>
+    <line x1="20" y1="28" x2="640" y2="28" stroke="#ccc"/>
+
+    <text x="30" y="48" class="tufte-code">"큰따옴표만"</text>
+    <text x="130" y="48" class="tufte-small">문자열과 키는 반드시 큰따옴표</text>
+
+    <text x="30" y="68" class="tufte-code">trailing comma 불가</text>
+    <text x="180" y="68" class="tufte-small">마지막 요소 뒤에 쉼표 금지</text>
+
+    <text x="380" y="48" class="tufte-code">true / false / null</text>
+    <text x="520" y="48" class="tufte-small">소문자만 사용</text>
+
+    <text x="380" y="68" class="tufte-code">/* 주석 */</text>
+    <text x="460" y="68" class="tufte-small">주석 지원 안 함</text>
+  </g>
+
+</svg>

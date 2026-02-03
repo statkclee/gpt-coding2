@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 220">
+  <defs>
+    <style>
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-title { font-size: 14px; font-weight: bold; }
+      .tufte-label { font-size: 13px; font-weight: bold; } /* Updated */
+      .tufte-small { font-size: 12px; fill: #666; } /* Updated */
+      .tufte-code { font-family: 'Consolas', 'Monaco', monospace; font-size: 13px; fill: #333; } /* Updated */
+      .tufte-code-bold { font-family: 'Consolas', 'Monaco', monospace; font-size: 13px; fill: #333; font-weight: bold; } /* Updated */
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"> /* Updated */
+      <path d="M0,0 L0,6 L9,3 z" fill="#666"/> /* Updated fill from #555 to #666 for consistency */
+    </marker>
+    <!-- Removed marker id="arrow-light" for consistency -->
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="700" height="220" fill="#ffffff"/>
+
+  <!-- Title -->
+  <!-- <text x="350" y="22" text-anchor="middle" class="tufte-text tufte-title">while 루프의 실행 흐름</text>
+  <line x1="100" y1="32" x2="600" y2="32" stroke="#ddd" stroke-width="1"/> -->
+
+  <!-- Step 1: 초기화 -->
+  <g transform="translate(50, 75)">
+    <rect x="0" y="0" width="100" height="45" fill="#f8f8f8" stroke="#333" stroke-width="1.5" rx="4"/>
+    <text x="50" y="20" text-anchor="middle" class="tufte-text tufte-label">초기화</text>
+    <text x="50" y="36" text-anchor="middle" class="tufte-code">n = 5</text>
+  </g>
+
+  <!-- Arrow 1→2 -->
+  <path d="M 150 97 L 195 97" fill="none" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/> /* Fixed end point */
+
+  <!-- Step 2: 조건 검사 (다이아몬드) -->
+  <g transform="translate(195, 52)">
+    <polygon points="55,0 110,45 55,90 0,45" fill="#f0f0f0" stroke="#333" stroke-width="1.5"/>
+    <text x="55" y="40" text-anchor="middle" class="tufte-text tufte-label">조건</text>
+    <text x="55" y="56" text-anchor="middle" class="tufte-code-bold">n > 0 ?</text>
+  </g>
+
+  <!-- True branch (아래로) -->
+  <path d="M 250 142 L 250 175 L 375 175" fill="none" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/> /* Fixed end point */
+  <rect x="232" y="148" width="36" height="16" fill="#ffffff" stroke="none"/>
+  <text x="250" y="160" text-anchor="middle" class="tufte-text tufte-small" font-weight="bold">참</text>
+
+  <!-- Step 3: 루프 몸통 -->
+  <g transform="translate(375, 145)">
+    <rect x="0" y="0" width="140" height="60" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="4"/>
+    <text x="70" y="18" text-anchor="middle" class="tufte-text tufte-label">루프 몸통</text>
+    <line x1="10" y1="26" x2="130" y2="26" stroke="#ccc" stroke-width="1"/>
+    <text x="70" y="42" text-anchor="middle" class="tufte-code">print(n)</text>
+    <text x="70" y="55" text-anchor="middle" class="tufte-code">n = n - 1</text>
+  </g>
+
+  <!-- Loop back arrow (우 → 상 → 좌 → 상단 다이아몬드) -->
+  <path d="M 515 175 L 600 175 L 600 15 L 250 15 L 250 52" fill="none" stroke="#555" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrow)"/> /* Fixed end path */
+
+  <!-- 반복 라벨 -->
+  <rect x="392" y="45" width="60" height="20" fill="#ffffff" stroke="none"/>
+  <text x="360" y="37" text-anchor="middle" class="tufte-text tufte-small" font-style="italic">다음 반복</text>
+
+  <!-- False branch (오른쪽으로) -->
+  <path d="M 305 97 L 555 97" fill="none" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/> /* Fixed end point */
+  <rect x="315" y="82" width="36" height="16" fill="#ffffff" stroke="none"/>
+  <text x="333" y="100" text-anchor="middle" class="tufte-text tufte-small" font-weight="bold">거짓</text>
+
+  <!-- Step 4: 종료 -->
+  <g transform="translate(555, 70)">
+    <rect x="0" y="0" width="120" height="55" fill="#e8e8e8" stroke="#333" stroke-width="1.5" rx="4"/>
+    <text x="60" y="24" text-anchor="middle" class="tufte-text tufte-label">루프 종료</text>
+    <line x1="20" y1="32" x2="100" y2="32" stroke="#bbb" stroke-width="1"/>
+    <text x="60" y="47" text-anchor="middle" class="tufte-code">print("발사!")</text>
+  </g>
+
+  <!-- 실행 순서 표시 (작은 숫자) -->
+  <circle cx="70" cy="75" r="10" fill="#333" stroke="none"/>
+  <text x="70" y="79" text-anchor="middle" class="tufte-text" style="font-size: 13px; fill: #fff; font-weight: bold;">1</text> /* Updated font size */
+
+  <circle cx="315" cy="32" r="10" fill="#333" stroke="none"/>
+  <text x="315" y="35" text-anchor="middle" class="tufte-text" style="font-size: 13px; fill: #fff; font-weight: bold;">2</text> /* Updated font size */
+
+  <circle cx="395" cy="142" r="10" fill="#333" stroke="none"/>
+  <text x="395" y="146" text-anchor="middle" class="tufte-text" style="font-size: 13px; fill: #fff; font-weight: bold;">3</text> /* Updated font size */
+
+  <circle cx="605" cy="67" r="10" fill="#333" stroke="none"/>
+  <text x="605" y="71" text-anchor="middle" class="tufte-text" style="font-size: 13px; fill: #fff; font-weight: bold;">4</text> /* Updated font size */
+
+</svg>

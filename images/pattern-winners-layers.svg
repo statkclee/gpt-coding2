@@ -1,0 +1,207 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 70 850 520">
+  <defs>
+    <style>
+      /* Tufte Grayscale Style */
+      .label-title { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 18px; font-weight: bold; fill: #111; }
+      .label-subtitle { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 14px; fill: #666; }
+      
+      .label-head { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 13px; font-weight: bold; fill: #fff; }
+      .label-body { font-family: 'SF Mono', Consolas, Menlo, monospace; font-size: 11px; fill: #333; }
+      .label-note { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 10px; fill: #666; font-style: italic; }
+      .label-fade { font-family: 'SF Mono', Consolas, Menlo, monospace; font-size: 10px; fill: #aaa; text-decoration: line-through; }
+      
+      .box-layer { stroke: #999; stroke-width: 1.5; rx: 4; }
+      .box-winner { fill: #fff; stroke: #666; stroke-width: 1.5; rx: 3; }
+      .box-loser { fill: #f9f9f9; stroke: #ccc; stroke-width: 1; stroke-dasharray: 4 2; rx: 3; }
+      
+      .line-sep { stroke: #ddd; stroke-width: 1; }
+      .arrow-down { fill: #666; }
+    </style>
+    <linearGradient id="grad-lifespan" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#333;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ccc;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <rect width="850" height="680" fill="#fff" />
+
+  <!-- Title -->
+  <!-- <text x="425" y="40" text-anchor="middle" class="label-title">춘추전국의 승자: 추상화 계층별 수명과 생존자</text>
+  <text x="425" y="65" text-anchor="middle" class="label-subtitle">"추상화 수준이 높을수록 오래 살아남는다"</text> -->
+
+  <!-- Lifespan Bar (Left) -->
+  <g transform="translate(35, 90)">
+    <rect x="0" y="0" width="10" height="480" fill="url(#grad-lifespan)" rx="5"/>
+    <text x="20" y="15" class="label-note" font-weight="bold">수명</text>
+    <text x="20" y="40" class="label-note">50년+</text>
+    <text x="20" y="480" class="label-note">3년</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- Layer 1: Paradigm (Highest Abstraction) -->
+  <!-- ========================================== -->
+  <g transform="translate(100, 90)">
+    <rect x="0" y="0" width="700" height="80" class="box-layer" fill="#f0f0f0"/>
+    <rect x="0" y="0" width="100" height="80" fill="#333" rx="4"/>
+    <rect x="96" y="0" width="4" height="80" fill="#333"/>
+    
+    <text x="50" y="35" text-anchor="middle" class="label-head">패러다임</text>
+    <text x="50" y="55" text-anchor="middle" class="label-note" fill="#ccc" style="fill:#ccc">30-50년</text>
+
+    <!-- Winners -->
+    <g transform="translate(130, 20)">
+      <rect x="0" y="0" width="120" height="40" class="box-winner"/>
+      <text x="60" y="25" text-anchor="middle" class="label-body" font-weight="bold">다중 패러다임</text>
+    </g>
+    
+    <g transform="translate(270, 20)">
+      <text x="0" y="15" class="label-body">OOP</text>
+      <text x="0" y="35" class="label-body">Functional</text>
+    </g>
+    
+    <text x="400" y="45" class="label-note" font-size="12">"단일 승자는 없다. 공존하는 언어가 승리했다." (Python, JS, Kotlin)</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- Layer 2: Architecture -->
+  <!-- ========================================== -->
+  <g transform="translate(100, 190)">
+    <rect x="0" y="0" width="700" height="80" class="box-layer" fill="#f4f4f4"/>
+    <rect x="0" y="0" width="100" height="80" fill="#555" rx="4"/>
+    <rect x="96" y="0" width="4" height="80" fill="#555"/>
+    
+    <text x="50" y="35" text-anchor="middle" class="label-head">아키텍처</text>
+    <text x="50" y="55" text-anchor="middle" class="label-note" fill="#ccc" style="fill:#ccc">15-30년</text>
+
+    <!-- Winners -->
+    <g transform="translate(130, 15)">
+      <rect x="0" y="0" width="90" height="50" class="box-winner"/>
+      <text x="45" y="20" text-anchor="middle" class="label-body" font-weight="bold">REST API</text>
+      <text x="45" y="40" text-anchor="middle" class="label-fade">SOAP</text>
+    </g>
+
+    <g transform="translate(240, 15)">
+      <rect x="0" y="0" width="100" height="50" class="box-winner"/>
+      <text x="50" y="20" text-anchor="middle" class="label-body" font-weight="bold">Microservice</text>
+      <text x="50" y="40" text-anchor="middle" class="label-fade">ESB / CORBA</text>
+    </g>
+    
+    <g transform="translate(360, 15)">
+      <rect x="0" y="0" width="100" height="50" class="box-winner"/>
+      <text x="50" y="20" text-anchor="middle" class="label-body" font-weight="bold">Event Driven</text>
+      <text x="50" y="40" text-anchor="middle" class="label-fade">Sync RPC</text>
+    </g>
+    
+    <text x="500" y="45" class="label-note">"단순함이 복잡함을 이겼다."</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- Layer 3: Design Pattern -->
+  <!-- ========================================== -->
+  <g transform="translate(100, 290)">
+    <rect x="0" y="0" width="700" height="80" class="box-layer" fill="#f8f8f8"/>
+    <rect x="0" y="0" width="100" height="80" fill="#777" rx="4"/>
+    <rect x="96" y="0" width="4" height="80" fill="#777"/>
+    
+    <text x="50" y="35" text-anchor="middle" class="label-head">디자인 패턴</text>
+    <text x="50" y="55" text-anchor="middle" class="label-note" fill="#ccc" style="fill:#ccc">10-30년</text>
+
+    <!-- Winners -->
+    <g transform="translate(130, 15)">
+      <rect x="0" y="0" width="80" height="50" class="box-winner"/>
+      <text x="40" y="20" text-anchor="middle" class="label-body" font-weight="bold">Factory</text>
+      <text x="40" y="40" text-anchor="middle" class="label-note">생성</text>
+    </g>
+
+    <g transform="translate(220, 15)">
+      <rect x="0" y="0" width="80" height="50" class="box-winner"/>
+      <text x="40" y="20" text-anchor="middle" class="label-body" font-weight="bold">Strategy</text>
+      <text x="40" y="40" text-anchor="middle" class="label-note">알고리즘</text>
+    </g>
+    
+    <g transform="translate(310, 15)">
+      <rect x="0" y="0" width="80" height="50" class="box-winner"/>
+      <text x="40" y="20" text-anchor="middle" class="label-body" font-weight="bold">Observer</text>
+      <text x="40" y="40" text-anchor="middle" class="label-note">상태</text>
+    </g>
+    
+    <!-- Losers -->
+    <g transform="translate(420, 15)">
+      <rect x="0" y="0" width="120" height="50" class="box-loser"/>
+      <text x="60" y="20" text-anchor="middle" class="label-fade">Singleton (Anti-pattern)</text>
+      <text x="60" y="40" text-anchor="middle" class="label-fade">Visitor (Functional)</text>
+    </g>
+    
+    <text x="560" y="45" class="label-note">"실무적 문제 해결사만 생존"</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- Layer 4: Framework -->
+  <!-- ========================================== -->
+  <g transform="translate(100, 390)">
+    <rect x="0" y="0" width="700" height="80" class="box-layer" fill="#fbfbfb"/>
+    <rect x="0" y="0" width="100" height="80" fill="#999" rx="4"/>
+    <rect x="96" y="0" width="4" height="80" fill="#999"/>
+    
+    <text x="50" y="35" text-anchor="middle" class="label-head">프레임워크</text>
+    <text x="50" y="55" text-anchor="middle" class="label-note" fill="#ccc" style="fill:#ccc">5-15년</text>
+
+    <!-- Winners -->
+    <g transform="translate(130, 15)">
+      <rect x="0" y="0" width="80" height="50" class="box-winner"/>
+      <text x="40" y="20" text-anchor="middle" class="label-body" font-weight="bold">React</text>
+      <text x="40" y="40" class="label-fade" text-anchor="middle">Angular 1</text>
+    </g>
+
+    <g transform="translate(220, 15)">
+      <rect x="0" y="0" width="80" height="50" class="box-winner"/>
+      <text x="40" y="20" text-anchor="middle" class="label-body" font-weight="bold">FastAPI</text>
+      <text x="40" y="40" class="label-fade" text-anchor="middle">Flask</text>
+    </g>
+    
+    <g transform="translate(310, 15)">
+      <rect x="0" y="0" width="80" height="50" class="box-winner"/>
+      <text x="40" y="20" text-anchor="middle" class="label-body" font-weight="bold">Next.js</text>
+      <text x="40" y="40" class="label-fade" text-anchor="middle">CRA</text>
+    </g>
+    
+    <text x="420" y="45" class="label-note">"커뮤니티 모멘텀과 기반 기술 변화에 민감"</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- Layer 5: Library (Lowest Abstraction) -->
+  <!-- ========================================== -->
+  <g transform="translate(100, 490)">
+    <rect x="0" y="0" width="700" height="80" class="box-layer" fill="#ffffff"/>
+    <rect x="0" y="0" width="100" height="80" fill="#bbb" rx="4"/>
+    <rect x="96" y="0" width="4" height="80" fill="#bbb"/>
+    
+    <text x="50" y="35" text-anchor="middle" class="label-head">라이브러리</text>
+    <text x="50" y="55" text-anchor="middle" class="label-note" fill="#eee" style="fill:#eee">3-7년</text>
+
+    <!-- Winners -->
+    <g transform="translate(130, 15)">
+      <rect x="0" y="0" width="80" height="50" class="box-winner"/>
+      <text x="40" y="20" text-anchor="middle" class="label-body" font-weight="bold">Axios</text>
+      <text x="40" y="40" class="label-fade" text-anchor="middle">Request</text>
+    </g>
+
+    <g transform="translate(220, 15)">
+      <rect x="0" y="0" width="80" height="50" class="box-winner"/>
+      <text x="40" y="20" text-anchor="middle" class="label-body" font-weight="bold">date-fns</text>
+      <text x="40" y="40" class="label-fade" text-anchor="middle">Moment.js</text>
+    </g>
+    
+    <text x="350" y="45" class="label-note">"언어 기능 흡수 시 퇴장 (예: native fetch, Intl API)"</text>
+  </g>
+
+  <!-- Bottom Insight -->
+  <!-- <g transform="translate(50, 600)">
+      <rect x="0" y="0" width="800" height="40" fill="#f8f8f8" stroke="#ccc" rx="4"/>
+      <rect x="0" y="0" width="4" height="40" fill="#333" />
+      <text x="20" y="25" class="label-body" font-size="13" fill="#222">
+          <tspan font-weight="bold">Insight:</tspan> 기술은 변하지만 <tspan font-style="italic">추상화 수준</tspan>이 높을수록 그 지식의 수명은 길어진다. (패턴 학습의 ROI가 높은 이유)
+      </text>
+  </g> -->
+
+</svg>

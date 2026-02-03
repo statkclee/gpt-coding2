@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 260">
+  <defs>
+    <style>
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 12px;
+        fill: #333;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 10px;
+        fill: #333;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #666;
+      }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="720" height="260" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="360" y="22" text-anchor="middle" class="tufte-label" font-weight="bold">임베딩 API 흐름</text>
+
+  <!-- Python Code -->
+  <g transform="translate(30, 45)">
+    <text x="70" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">Python</text>
+    <rect x="0" y="10" width="140" height="80" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="70" y="35" text-anchor="middle" class="tufte-code">"오늘 날씨가</text>
+    <text x="70" y="50" text-anchor="middle" class="tufte-code">좋다"</text>
+    <text x="70" y="75" text-anchor="middle" class="tufte-small">텍스트 문자열</text>
+  </g>
+
+  <!-- Arrow 1 -->
+  <g transform="translate(180, 75)">
+    <line x1="0" y1="0" x2="50" y2="0" stroke="#666" stroke-width="2"/>
+    <polygon points="50,0 42,-5 42,5" fill="#666"/>
+    <text x="25" y="-8" text-anchor="middle" class="tufte-small">API 요청</text>
+  </g>
+
+  <!-- OpenAI API -->
+  <g transform="translate(240, 45)">
+    <text x="75" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">OpenAI API</text>
+    <rect x="0" y="10" width="150" height="80" fill="#e8e8e8" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="75" y="35" text-anchor="middle" class="tufte-code">text-embedding</text>
+    <text x="75" y="50" text-anchor="middle" class="tufte-code">-3-small</text>
+    <text x="75" y="75" text-anchor="middle" class="tufte-small">1536차원 모델</text>
+  </g>
+
+  <!-- Arrow 2 -->
+  <g transform="translate(400, 75)">
+    <line x1="0" y1="0" x2="50" y2="0" stroke="#666" stroke-width="2"/>
+    <polygon points="50,0 42,-5 42,5" fill="#666"/>
+    <text x="25" y="-8" text-anchor="middle" class="tufte-small">JSON 응답</text>
+  </g>
+
+  <!-- Result Vector -->
+  <g transform="translate(460, 45)">
+    <text x="115" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">임베딩 벡터</text>
+    <rect x="0" y="10" width="230" height="80" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="115" y="32" text-anchor="middle" class="tufte-code">[0.023, -0.041, 0.018, ...]</text>
+    <text x="115" y="52" text-anchor="middle" class="tufte-small">1536개 실수</text>
+    <text x="115" y="75" text-anchor="middle" class="tufte-code">np.array(shape=(1536,))</text>
+  </g>
+
+  <!-- Model Comparison -->
+  <g transform="translate(30, 150)">
+    <rect x="0" y="0" width="660" height="100" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="330" y="20" text-anchor="middle" class="tufte-label" font-weight="bold">임베딩 모델 비교</text>
+    <line x1="20" y1="28" x2="640" y2="28" stroke="#ccc"/>
+
+    <!-- Headers -->
+    <text x="60" y="48" text-anchor="middle" class="tufte-small" font-weight="bold">모델</text>
+    <text x="180" y="48" text-anchor="middle" class="tufte-small" font-weight="bold">차원</text>
+    <text x="280" y="48" text-anchor="middle" class="tufte-small" font-weight="bold">특징</text>
+    <text x="450" y="48" text-anchor="middle" class="tufte-small" font-weight="bold">비용</text>
+
+    <line x1="20" y1="55" x2="640" y2="55" stroke="#eee"/>
+
+    <!-- OpenAI small -->
+    <text x="60" y="70" text-anchor="middle" class="tufte-code">3-small</text>
+    <text x="180" y="70" text-anchor="middle" class="tufte-code">1536</text>
+    <text x="280" y="70" text-anchor="middle" class="tufte-small">빠름, 저렴</text>
+    <text x="450" y="70" text-anchor="middle" class="tufte-code">$0.02/1M tok</text>
+
+    <!-- OpenAI large -->
+    <text x="60" y="88" text-anchor="middle" class="tufte-code">3-large</text>
+    <text x="180" y="88" text-anchor="middle" class="tufte-code">3072</text>
+    <text x="280" y="88" text-anchor="middle" class="tufte-small">고품질</text>
+    <text x="450" y="88" text-anchor="middle" class="tufte-code">$0.13/1M tok</text>
+
+    <!-- Local -->
+    <text x="580" y="70" text-anchor="middle" class="tufte-small">로컬 모델:</text>
+    <text x="580" y="88" text-anchor="middle" class="tufte-code">all-MiniLM-L6-v2</text>
+  </g>
+
+</svg>

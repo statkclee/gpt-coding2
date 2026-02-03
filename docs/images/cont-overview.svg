@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 280">
+  <defs>
+    <style>
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-title { font-size: 15px; font-weight: bold; }
+      .tufte-label { font-size: 13px; }
+      .tufte-small { font-size: 11px; }
+      .tufte-code { font-family: 'Consolas', 'Monaco', monospace; font-size: 11px; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L8,3 z" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="650" height="280" fill="#ffffff"/>
+
+  <!-- Central concept: 조건부 실행 -->
+  <rect x="245" y="25" width="160" height="45" fill="#e8e8e8" stroke="#333" stroke-width="2" rx="6"/>
+  <text x="325" y="52" text-anchor="middle" class="tufte-text tufte-title">조건부 실행</text>
+
+  <!-- Arrow down from center -->
+  <path d="M 325 70 L 325 95" fill="none" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 부울 표현식 box -->
+  <rect x="235" y="100" width="180" height="35" fill="#f0f0f0" stroke="#333" stroke-width="1.5" rx="4"/>
+  <text x="325" y="123" text-anchor="middle" class="tufte-text tufte-label">부울 표현식 (True/False)</text>
+
+  <!-- Arrow down -->
+  <path d="M 325 135 L 325 160" fill="none" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Three branches -->
+  <!-- Left: if -->
+  <g transform="translate(85, 165)">
+    <rect x="0" y="0" width="130" height="70" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="4"/>
+    <text x="65" y="25" text-anchor="middle" class="tufte-text tufte-label" font-weight="bold">if</text>
+    <text x="65" y="45" text-anchor="middle" class="tufte-text tufte-small" fill="#666">단순 조건</text>
+    <text x="65" y="60" text-anchor="middle" class="tufte-text tufte-code" fill="#666">if x > 0:</text>
+  </g>
+
+  <!-- Middle: if-else -->
+  <g transform="translate(260, 165)">
+    <rect x="0" y="0" width="130" height="70" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="4"/>
+    <text x="65" y="25" text-anchor="middle" class="tufte-text tufte-label" font-weight="bold">if-else</text>
+    <text x="65" y="45" text-anchor="middle" class="tufte-text tufte-small" fill="#666">대안 실행</text>
+    <text x="65" y="60" text-anchor="middle" class="tufte-text tufte-code" fill="#666">else:</text>
+  </g>
+
+  <!-- Right: if-elif-else -->
+  <g transform="translate(435, 165)">
+    <rect x="0" y="0" width="130" height="70" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="4"/>
+    <text x="65" y="25" text-anchor="middle" class="tufte-text tufte-label" font-weight="bold">if-elif-else</text>
+    <text x="65" y="45" text-anchor="middle" class="tufte-text tufte-small" fill="#666">연쇄 조건</text>
+    <text x="65" y="60" text-anchor="middle" class="tufte-text tufte-code" fill="#666">elif x == 0:</text>
+  </g>
+
+  <!-- Connecting lines to branches -->
+  <path d="M 325 160 L 150 165" fill="none" stroke="#666" stroke-width="1"/>
+  <path d="M 325 160 L 325 165" fill="none" stroke="#666" stroke-width="1"/>
+  <path d="M 325 160 L 500 165" fill="none" stroke="#666" stroke-width="1"/>
+
+  <!-- Bottom: 예외 처리 -->
+  <rect x="200" y="250" width="250" height="25" fill="#fafafa" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="325" y="267" text-anchor="middle" class="tufte-text tufte-small" fill="#666">try-except로 오류 상황 대비</text>
+
+  <!-- Arrow to exception -->
+  <path d="M 325 235 L 325 248" fill="none" stroke="#999" stroke-width="1" stroke-dasharray="3,2"/>
+
+</svg>

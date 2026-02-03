@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 20 800 315">
+  <defs>
+    <style>
+      /* Tufte Grayscale Style */
+      .label-title { font-family: Palatino, serif; font-size: 16px; font-weight: bold; fill: #111; }
+      .label-head { font-family: Palatino, serif; font-size: 14px; font-weight: bold; fill: #222; }
+      .label-body { font-family: Palatino, serif; font-size: 12px; fill: #333; }
+      .label-note { font-family: Palatino, serif; font-size: 11px; fill: #555; font-style: italic; }
+      .label-mono { font-family: 'SF Mono', Consolas, Menlo, monospace; font-size: 10px; fill: #444; }
+
+      .box-pipeline { fill: #fff; stroke: #333; stroke-width: 1.5; rx: 4; }
+      .box-func { fill: #f9f9f9; stroke: #666; stroke-width: 1.5; rx: 3; }
+      .box-data { fill: #fff; stroke: #999; stroke-width: 1; rx: 2; }
+      .box-debug { fill: #f5f5f5; stroke: #333; stroke-width: 1.5; rx: 3; }
+      .box-benefit { fill: #fcfcfc; stroke: #ccc; stroke-width: 1; rx: 4; }
+
+      .line-flow { stroke: #333; stroke-width: 1.5; fill: none; }
+      .line-inspect { stroke: #666; stroke-width: 1.2; stroke-dasharray: 3 2; fill: none; }
+      .line-sep { stroke: #ddd; stroke-width: 1; }
+
+      .arrow-head { fill: #333; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L0,8 L8,4 z" class="arrow-head" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="340" fill="#fff" />
+
+  <!-- ========================================== -->
+  <!-- PIPELINE FLOW -->
+  <!-- ========================================== -->
+  <g transform="translate(40, 50)">
+    <text x="0" y="0" class="label-head">파이프라인 추적</text>
+
+    <!-- Input -->
+    <g transform="translate(0, 25)">
+      <rect x="0" y="0" width="90" height="50" class="box-data" stroke="#333" stroke-width="1.5"/>
+      <text x="45" y="20" text-anchor="middle" class="label-mono" font-weight="bold">입력</text>
+      <text x="45" y="38" text-anchor="middle" class="label-mono">[1, 2, 3, 4, 5]</text>
+    </g>
+
+    <!-- Arrow 1 -->
+    <path d="M 95 50 L 125 50" class="line-flow" marker-end="url(#arrow)"/>
+
+    <!-- Step 1: Filter -->
+    <g transform="translate(130, 15)">
+      <rect x="0" y="0" width="110" height="70" class="box-func"/>
+      <text x="55" y="22" text-anchor="middle" class="label-head" font-size="12">filter</text>
+      <line x1="10" y1="30" x2="100" y2="30" class="line-sep"/>
+      <text x="55" y="48" text-anchor="middle" class="label-mono">x % 2 == 0</text>
+      <text x="55" y="62" text-anchor="middle" class="label-note">술어 함수</text>
+    </g>
+
+    <!-- Arrow 2 -->
+    <path d="M 245 50 L 275 50" class="line-flow" marker-end="url(#arrow)"/>
+
+    <!-- Step 2: Map -->
+    <g transform="translate(280, 15)">
+      <rect x="0" y="0" width="110" height="70" class="box-func"/>
+      <text x="55" y="22" text-anchor="middle" class="label-head" font-size="12">map</text>
+      <line x1="10" y1="30" x2="100" y2="30" class="line-sep"/>
+      <text x="55" y="48" text-anchor="middle" class="label-mono">x ** 2</text>
+      <text x="55" y="62" text-anchor="middle" class="label-note">변환 함수</text>
+    </g>
+
+    <!-- Arrow 3 -->
+    <path d="M 395 50 L 425 50" class="line-flow" marker-end="url(#arrow)"/>
+
+    <!-- Step 3: Reduce -->
+    <g transform="translate(430, 15)">
+      <rect x="0" y="0" width="110" height="70" class="box-func"/>
+      <text x="55" y="22" text-anchor="middle" class="label-head" font-size="12">reduce</text>
+      <line x1="10" y1="30" x2="100" y2="30" class="line-sep"/>
+      <text x="55" y="48" text-anchor="middle" class="label-mono">acc + x</text>
+      <text x="55" y="62" text-anchor="middle" class="label-note">집계 함수</text>
+    </g>
+
+    <!-- Arrow 4 -->
+    <path d="M 545 50 L 575 50" class="line-flow" marker-end="url(#arrow)"/>
+
+    <!-- Output -->
+    <g transform="translate(580, 25)">
+      <rect x="0" y="0" width="90" height="50" class="box-data" stroke="#333" stroke-width="2"/>
+      <text x="45" y="20" text-anchor="middle" class="label-mono" font-weight="bold">출력</text>
+      <text x="45" y="38" text-anchor="middle" class="label-mono" font-weight="bold">20</text>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- INSPECTION POINTS -->
+  <!-- ========================================== -->
+  <g transform="translate(40, 140)">
+    <!-- Inspection lines from pipeline -->
+    <path d="M 185 -5 L 185 15" class="line-inspect"/>
+    <path d="M 335 -5 L 335 15" class="line-inspect"/>
+    <path d="M 485 -5 L 485 15" class="line-inspect"/>
+
+    <!-- Debug boxes -->
+    <g transform="translate(130, 15)">
+      <rect x="0" y="0" width="110" height="45" class="box-debug"/>
+      <text x="55" y="18" text-anchor="middle" class="label-mono" font-weight="bold">중간값 1</text>
+      <text x="55" y="35" text-anchor="middle" class="label-mono">[2, 4] ✓</text>
+    </g>
+
+    <g transform="translate(280, 15)">
+      <rect x="0" y="0" width="110" height="45" class="box-debug"/>
+      <text x="55" y="18" text-anchor="middle" class="label-mono" font-weight="bold">중간값 2</text>
+      <text x="55" y="35" text-anchor="middle" class="label-mono">[4, 16] ✓</text>
+    </g>
+
+    <g transform="translate(430, 15)">
+      <rect x="0" y="0" width="110" height="45" class="box-debug"/>
+      <text x="55" y="18" text-anchor="middle" class="label-mono" font-weight="bold">최종값</text>
+      <text x="55" y="35" text-anchor="middle" class="label-mono">20 ✓</text>
+    </g>
+
+    <text x="550" y="45" class="label-note">각 단계의 출력을 독립적으로 검증 가능</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- THREE BENEFITS -->
+  <!-- ========================================== -->
+  <g transform="translate(40, 220)">
+    <text x="0" y="0" class="label-head">디버깅 3대 장점</text>
+    <line x1="0" y1="10" x2="720" y2="10" class="line-sep"/>
+
+    <!-- Benefit 1: Reproducibility -->
+    <g transform="translate(0, 25)">
+      <rect x="0" y="0" width="230" height="80" class="box-benefit"/>
+      <text x="15" y="22" class="label-body" font-weight="bold">① 재현성</text>
+      <text x="15" y="42" class="label-mono">buggy_input = [1, 2, None]</text>
+      <text x="15" y="57" class="label-mono">result = f(buggy_input)</text>
+      <text x="15" y="72" class="label-note">→ 입력만 저장하면 100% 재현</text>
+    </g>
+
+    <!-- Benefit 2: Isolation -->
+    <g transform="translate(245, 25)">
+      <rect x="0" y="0" width="230" height="80" class="box-benefit"/>
+      <text x="15" y="22" class="label-body" font-weight="bold">② 격리 테스트</text>
+      <text x="15" y="42" class="label-mono">filter_even([1,2,3,4])</text>
+      <text x="15" y="57" class="label-mono">→ [2, 4]  # 항상 동일</text>
+      <text x="15" y="72" class="label-note">→ 함수 단독 호출로 검증</text>
+    </g>
+
+    <!-- Benefit 3: Time Travel -->
+    <g transform="translate(490, 25)">
+      <rect x="0" y="0" width="230" height="80" class="box-benefit"/>
+      <text x="15" y="22" class="label-body" font-weight="bold">③ 시간 여행</text>
+      <text x="15" y="42" class="label-mono">step1 = [2, 4]</text>
+      <text x="15" y="57" class="label-mono">step2 = [4, 16]  # 보존됨</text>
+      <text x="15" y="72" class="label-note">→ 모든 중간 상태 접근 가능</text>
+    </g>
+  </g>
+
+</svg>

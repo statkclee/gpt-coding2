@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 70 900 380">
+  <defs>
+    <style>
+      .tufte-title { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif; font-size: 22px; font-weight: bold; fill: #111; }
+      .tufte-subtitle { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif; font-size: 16px; font-weight: bold; fill: #222; }
+      .tufte-label { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif; font-size: 13px; font-weight: bold; fill: #333; }
+      .tufte-text { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif; font-size: 12px; fill: #444; }
+      .tufte-small { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif; font-size: 11px; fill: #666; }
+      .tufte-code { font-family: 'SF Mono', Menlo, Monaco, monospace; font-size: 11px; fill: #555; }
+
+      .box-concept { fill: #fff; stroke: #ccc; stroke-width: 1; rx: 4; }
+      .box-highlight { fill: #f9f9f9; stroke: #333; stroke-width: 1.5; rx: 4; }
+      .box-insight { fill: #f0f0f0; stroke: #111; stroke-width: 2; rx: 4; }
+
+      .graph-line { stroke: #333; stroke-width: 2; fill: none; }
+      .axis { stroke: #333; stroke-width: 1.5; }
+      .grid { stroke: #eee; stroke-width: 1; stroke-dasharray: 4,4; }
+      .trend-line { stroke: #666; stroke-width: 1; stroke-dasharray: 4,4; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#333" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="900" height="550" fill="#ffffff"/>
+
+  <!-- Title -->
+  <!-- <text x="450" y="40" class="tufte-title" text-anchor="middle">스케일링 법칙 (Scaling Laws)</text>
+  <text x="450" y="65" class="tufte-text" text-anchor="middle" font-style="italic">"성능(Loss)은 규모(N, D, C)에 따라 예측 가능하게 향상된다"</text> -->
+
+  <!-- <line x1="50" y1="80" x2="850" y2="80" stroke="#ddd" stroke-width="2"/> -->
+
+  <!-- Main Graph: Log-Log Plot -->
+  <g transform="translate(50, 120)">
+    <text x="0" y="-10" class="tufte-subtitle">1. 멱법칙의 예측 가능성 (로그-로그 척도)</text>
+
+    <!-- Graph Area -->
+    <rect x="0" y="10" width="500" height="300" fill="#fff"/>
+
+    <!-- Grid lines (Log scale appearance) -->
+    <line x1="40" y1="280" x2="480" y2="280" class="axis"/> <!-- X axis -->
+    <line x1="40" y1="280" x2="40" y2="20" class="axis"/> <!-- Y axis -->
+
+    <!-- Y-axis ticks (Loss) -->
+    <text x="30" y="35" class="tufte-small" text-anchor="end">높음</text>
+    <text x="30" y="280" class="tufte-small" text-anchor="end">낮음</text>
+    <text x="25" y="150" class="tufte-label" text-anchor="middle" transform="rotate(-90, 25, 150)">손실 (Loss)</text>
+
+    <!-- X-axis ticks (Compute/Params) -->
+    <text x="60" y="300" class="tufte-small" text-anchor="middle">작음</text>
+    <text x="460" y="300" class="tufte-small" text-anchor="middle">큼</text>
+    <text x="260" y="315" class="tufte-label" text-anchor="middle">연산량/파라미터 규모 →</text>
+
+    <!-- The Power Law Curve (Correct direction: 왼쪽 상단 → 오른쪽 하단) -->
+    <line x1="60" y1="50" x2="460" y2="250" class="trend-line"/> <!-- Kaplan slope -->
+    <path d="M60,50 L120,80 L200,120 L350,195 L460,250" class="graph-line" stroke="#111"/>
+
+    <!-- Data Points (높은 손실 → 낮은 손실) -->
+    <circle cx="120" cy="80" r="5" fill="#ccc" stroke="#333"/>
+    <text x="120" y="65" class="tufte-small" text-anchor="middle">GPT-1</text>
+
+    <circle cx="200" cy="120" r="5" fill="#999" stroke="#333"/>
+    <text x="200" y="105" class="tufte-small" text-anchor="middle">GPT-2</text>
+
+    <circle cx="350" cy="195" r="6" fill="#666" stroke="#333"/>
+    <text x="370" y="200" class="tufte-label">GPT-3</text>
+
+    <circle cx="460" cy="250" r="7" fill="#333" stroke="#333"/>
+    <text x="480" y="255" class="tufte-label">GPT-4</text>
+
+    <!-- Annotation: Predictability -->
+    <text x="250" y="140" class="tufte-text" fill="#333" font-style="italic">규모 ↑ → 손실 ↓</text>
+  </g>
+
+  <!-- Right Side: Key Factors & Chinchilla -->
+  <g transform="translate(580, 120)">
+    
+    <!-- Formula Box -->
+    <g transform="translate(0, -30)">
+      <rect x="0" y="0" width="280" height="100" class="box-insight"/>
+      <text x="140" y="25" class="tufte-subtitle" text-anchor="middle">멱법칙 공식</text>
+
+      <!-- Main formula with proper subscript/superscript -->
+      <text x="70" y="53" class="tufte-text" font-style="italic" font-size="14px">L</text>
+      <text x="80" y="53" class="tufte-text" font-size="14px">(</text>
+      <text x="86" y="53" class="tufte-text" font-style="italic" font-size="14px">N</text>
+      <text x="95" y="53" class="tufte-text" font-size="14px">) ≈ (</text>
+      <text x="120" y="53" class="tufte-text" font-style="italic" font-size="14px">N</text>
+      <text x="128" y="58" class="tufte-small" font-size="9px">c</text>
+      <text x="136" y="53" class="tufte-text" font-size="14px"> / </text>
+      <text x="151" y="53" class="tufte-text" font-style="italic" font-size="14px">N</text>
+      <text x="160" y="53" class="tufte-text" font-size="14px">)</text>
+      <text x="165" y="47" class="tufte-text" font-style="italic" font-size="11px">α</text>
+
+      <text x="140" y="75" class="tufte-small" text-anchor="middle">α ≈ 0.076 (파라미터)</text>
+      <text x="140" y="90" class="tufte-small" text-anchor="middle" fill="#666">규모 ↑ → 손실 ↓</text>
+    </g>
+
+    <!-- 3 Pillars -->
+    <g transform="translate(0, 100)">
+      <text x="0" y="0" class="tufte-subtitle">2. 핵심 변수 (3가지 기둥)</text>
+
+      <!-- N: Parameters -->
+      <g transform="translate(0, 20)">
+        <rect x="0" y="0" width="280" height="50" class="box-concept"/>
+        <text x="15" y="20" class="tufte-label">N (파라미터 수)</text>
+        <text x="15" y="38" class="tufte-small">모델의 크기 (뇌 용량)</text>
+        <text x="260" y="30" class="tufte-text" text-anchor="end" font-weight="bold">↑</text>
+      </g>
+
+      <!-- D: Data -->
+      <g transform="translate(0, 80)">
+        <rect x="0" y="0" width="280" height="50" class="box-concept"/>
+        <text x="15" y="20" class="tufte-label">D (데이터 크기)</text>
+        <text x="15" y="38" class="tufte-small">학습 토큰 수 (지식의 양)</text>
+        <text x="260" y="30" class="tufte-text" text-anchor="end" font-weight="bold">↑</text>
+      </g>
+
+      <!-- C: Compute -->
+      <g transform="translate(0, 140)">
+        <rect x="0" y="0" width="280" height="50" class="box-concept"/>
+        <text x="15" y="20" class="tufte-label">C (연산량)</text>
+        <text x="15" y="38" class="tufte-small">학습 연산량 (학습 시간 × GPU)</text>
+        <text x="260" y="30" class="tufte-text" text-anchor="end" font-weight="bold">↑</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Bottom Insight: Chinchilla -->
+  <!-- <g transform="translate(50, 450)">
+    <rect x="0" y="0" width="810" height="70" class="box-highlight" stroke="#666"/>
+    <text x="20" y="25" class="tufte-label">최신 동향: 친칠라(Chinchilla) 법칙 (DeepMind, 2022)</text>
+    <text x="20" y="50" class="tufte-text">단순히 모델만 키우는 것은 비효율적이다. 최적의 성능을 위해서는 <tspan font-weight="bold">파라미터(N)와 데이터(D)를 1:20 비율</tspan>로 함께 늘려야 한다.</text>
+    <text x="790" y="50" class="tufte-small" text-anchor="end">"연산 최적화"</text>
+  </g> -->
+
+</svg>

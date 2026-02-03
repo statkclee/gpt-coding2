@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 340">
+  <defs>
+    <style>
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-mono { font-family: 'SF Mono', Consolas, monospace; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #666; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- White background -->
+  <rect x="0" y="0" width="700" height="340" fill="#ffffff"/>
+
+  <!-- ========== 상단: 협업 구조 ========== -->
+
+  <!-- 소유자 (Owner) -->
+  <g transform="translate(50, 30)">
+    <rect x="0" y="0" width="140" height="90" fill="#f5f5f5" stroke="#666" stroke-width="1.5" rx="5"/>
+    <text x="70" y="25" text-anchor="middle" class="tufte-text" font-size="13" font-weight="bold">소유자</text>
+    <text x="70" y="45" text-anchor="middle" class="tufte-mono" font-size="10" fill="#666">~/vlad/planets</text>
+    <rect x="20" y="55" width="100" height="25" fill="#e0e0e0" stroke="#888" stroke-width="1" rx="3"/>
+    <text x="70" y="72" text-anchor="middle" class="tufte-mono" font-size="9">.git</text>
+  </g>
+
+  <!-- GitHub (중앙) -->
+  <g transform="translate(280, 30)">
+    <rect x="0" y="0" width="140" height="90" fill="#e8e8e8" stroke="#555" stroke-width="2" rx="5"/>
+    <text x="70" y="25" text-anchor="middle" class="tufte-text" font-size="13" font-weight="bold">GitHub</text>
+    <text x="70" y="45" text-anchor="middle" class="tufte-mono" font-size="9" fill="#666">github.com/vlad/planets</text>
+    <rect x="20" y="55" width="100" height="25" fill="#d0d0d0" stroke="#888" stroke-width="1" rx="3"/>
+    <text x="70" y="72" text-anchor="middle" class="tufte-mono" font-size="9">원격 저장소</text>
+  </g>
+
+  <!-- 협력자 (Collaborator) -->
+  <g transform="translate(510, 30)">
+    <rect x="0" y="0" width="140" height="90" fill="#f5f5f5" stroke="#666" stroke-width="1.5" rx="5"/>
+    <text x="70" y="25" text-anchor="middle" class="tufte-text" font-size="13" font-weight="bold">협력자</text>
+    <text x="70" y="45" text-anchor="middle" class="tufte-mono" font-size="10" fill="#666">~/wolfman/planets</text>
+    <rect x="20" y="55" width="100" height="25" fill="#e0e0e0" stroke="#888" stroke-width="1" rx="3"/>
+    <text x="70" y="72" text-anchor="middle" class="tufte-mono" font-size="9">.git</text>
+  </g>
+
+  <!-- 화살표: 소유자 → GitHub (push) -->
+  <line x1="190" y1="60" x2="275" y2="60" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <text x="232" y="52" text-anchor="middle" class="tufte-mono" font-size="9" fill="#666">push</text>
+
+  <!-- 화살표: GitHub → 소유자 (pull) -->
+  <line x1="275" y1="85" x2="195" y2="85" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <text x="232" y="100" text-anchor="middle" class="tufte-mono" font-size="9" fill="#666">pull</text>
+
+  <!-- 화살표: GitHub → 협력자 (clone/pull) -->
+  <line x1="420" y1="60" x2="505" y2="60" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <text x="462" y="52" text-anchor="middle" class="tufte-mono" font-size="9" fill="#666">clone</text>
+
+  <!-- 화살표: 협력자 → GitHub (push) -->
+  <line x1="505" y1="85" x2="425" y2="85" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <text x="462" y="100" text-anchor="middle" class="tufte-mono" font-size="9" fill="#666">push</text>
+
+  <!-- ========== 하단: 충돌 해결 흐름 ========== -->
+
+  <rect x="30" y="140" width="640" height="180" fill="#fafafa" stroke="#ccc" stroke-width="1" rx="5"/>
+  <text x="50" y="165" class="tufte-text" font-size="13" font-weight="bold">충돌 발생 시 해결 흐름</text>
+
+  <!-- Step 1: 동시 수정 -->
+  <g transform="translate(50, 185)">
+    <rect x="0" y="0" width="120" height="55" fill="#f0f0f0" stroke="#999" stroke-width="1" rx="4"/>
+    <text x="60" y="20" text-anchor="middle" class="tufte-label" font-size="10">① 동시 수정</text>
+    <text x="60" y="38" text-anchor="middle" class="tufte-mono" font-size="9" fill="#666">같은 파일</text>
+    <text x="60" y="50" text-anchor="middle" class="tufte-mono" font-size="9" fill="#666">같은 위치</text>
+  </g>
+
+  <!-- Arrow -->
+  <line x1="175" y1="212" x2="195" y2="212" stroke="#888" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+  <!-- Step 2: push 거부 -->
+  <g transform="translate(200, 185)">
+    <rect x="0" y="0" width="120" height="55" fill="#f0f0f0" stroke="#999" stroke-width="1" rx="4"/>
+    <text x="60" y="20" text-anchor="middle" class="tufte-label" font-size="10">② push 거부</text>
+    <text x="60" y="38" text-anchor="middle" class="tufte-mono" font-size="9" fill="#888">rejected</text>
+    <text x="60" y="50" text-anchor="middle" class="tufte-mono" font-size="9" fill="#888">non-fast-forward</text>
+  </g>
+
+  <!-- Arrow -->
+  <line x1="325" y1="212" x2="345" y2="212" stroke="#888" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+  <!-- Step 3: pull & 충돌 표시 -->
+  <g transform="translate(350, 185)">
+    <rect x="0" y="0" width="120" height="55" fill="#e8e8e8" stroke="#666" stroke-width="1.5" rx="4"/>
+    <text x="60" y="20" text-anchor="middle" class="tufte-label" font-size="10">③ pull → 충돌</text>
+    <text x="60" y="38" text-anchor="middle" class="tufte-mono" font-size="9" fill="#555">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</text>
+    <text x="60" y="50" text-anchor="middle" class="tufte-mono" font-size="9" fill="#555">&gt;&gt;&gt;&gt;&gt;&gt;&gt; remote</text>
+  </g>
+
+  <!-- Arrow -->
+  <line x1="475" y1="212" x2="495" y2="212" stroke="#888" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+  <!-- Step 4: 수동 해결 & 커밋 -->
+  <g transform="translate(500, 185)">
+    <rect x="0" y="0" width="150" height="55" fill="#e0e0e0" stroke="#555" stroke-width="1.5" rx="4"/>
+    <text x="75" y="20" text-anchor="middle" class="tufte-label" font-size="10">④ 해결 → 커밋 → push</text>
+    <text x="75" y="38" text-anchor="middle" class="tufte-mono" font-size="9" fill="#555">편집 후 add/commit</text>
+    <text x="75" y="50" text-anchor="middle" class="tufte-mono" font-size="9" fill="#555">push 성공</text>
+  </g>
+
+  <!-- 핵심 명령어 박스 -->
+  <g transform="translate(50, 260)">
+    <rect x="0" y="0" width="600" height="45" fill="#f8f8f8" stroke="#ccc" stroke-width="1" rx="3"/>
+    <text x="15" y="18" class="tufte-label" font-size="11">핵심 명령어:</text>
+    <text x="110" y="18" class="tufte-mono" font-size="10" fill="#333">git clone</text>
+    <text x="200" y="18" class="tufte-mono" font-size="10" fill="#333">git push</text>
+    <text x="280" y="18" class="tufte-mono" font-size="10" fill="#333">git pull</text>
+    <text x="360" y="18" class="tufte-mono" font-size="10" fill="#333">git fetch</text>
+    <text x="15" y="36" class="tufte-label" font-size="11">충돌 해결:</text>
+    <text x="110" y="36" class="tufte-mono" font-size="10" fill="#333">충돌 표시자 확인 → 파일 편집 → git add → git commit</text>
+  </g>
+
+</svg>

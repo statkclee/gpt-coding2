@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 30 800 320">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 14px; fill: #333; font-weight: bold; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 12px; fill: #333; font-weight: bold; }
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 11px; fill: #333; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 10px; fill: #666; }
+      .tufte-code { font-family: 'SF Mono', Consolas, Monaco, monospace; font-size: 10px; fill: #333; }
+      .label-mono { font-family: 'SF Mono', Consolas, Monaco, monospace; font-size: 10px; fill: #333; }
+      .label-note { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 11px; fill: #555; }
+
+      .box-class { fill: #fff; stroke: #333; stroke-width: 1.5; }
+      .box-header { fill: #eee; stroke: #333; stroke-width: 1.5; }
+      .box-function { fill: #f9f9f9; stroke: #666; stroke-width: 1; }
+      .box-question { fill: #fff; stroke: #999; stroke-width: 1; stroke-dasharray: 4 2; }
+
+      .line-arrow { fill: none; stroke: #666; stroke-width: 1.5; }
+      .line-check { fill: none; stroke: #333; stroke-width: 1; stroke-dasharray: 3 2; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#666"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="380" fill="#ffffff"/>
+
+  <!-- Title -->
+  <!-- <text x="400" y="25" text-anchor="middle" class="tufte-title">덕 타이핑: 타입이 아닌 행동으로 판단</text> -->
+
+  <!-- ========================================== -->
+  <!-- LEFT SIDE: Three unrelated classes -->
+  <!-- ========================================== -->
+
+  <!-- Duck class -->
+  <g transform="translate(40, 55)">
+    <rect x="0" y="0" width="140" height="70" class="box-class" rx="4"/>
+    <rect x="0" y="0" width="140" height="22" class="box-header" rx="4" ry="0"/>
+    <text x="70" y="15" text-anchor="middle" class="tufte-label">Duck</text>
+    <text x="10" y="40" class="tufte-code">def quack(self):</text>
+    <text x="20" y="55" class="tufte-code">return "꽥꽥"</text>
+  </g>
+
+  <!-- Person class -->
+  <g transform="translate(40, 145)">
+    <rect x="0" y="0" width="140" height="70" class="box-class" rx="4"/>
+    <rect x="0" y="0" width="140" height="22" class="box-header" rx="4" ry="0"/>
+    <text x="70" y="15" text-anchor="middle" class="tufte-label">Person</text>
+    <text x="10" y="40" class="tufte-code">def quack(self):</text>
+    <text x="20" y="55" class="tufte-code">return "오리 흉내"</text>
+  </g>
+
+  <!-- RubberDuck class -->
+  <g transform="translate(40, 235)">
+    <rect x="0" y="0" width="140" height="70" class="box-class" rx="4"/>
+    <rect x="0" y="0" width="140" height="22" class="box-header" rx="4" ry="0"/>
+    <text x="70" y="15" text-anchor="middle" class="tufte-label">RubberDuck</text>
+    <text x="10" y="40" class="tufte-code">def quack(self):</text>
+    <text x="20" y="55" class="tufte-code">return "삑삑"</text>
+  </g>
+
+  <!-- No inheritance indicator -->
+  <g transform="translate(55, 320)">
+    <text x="55" y="10" text-anchor="middle" class="tufte-small" font-style="italic">상속 관계 없음</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- CENTER: The Question (Duck Test) -->
+  <!-- ========================================== -->
+  <g transform="translate(230, 120)">
+    <rect x="0" y="0" width="170" height="110" class="box-question" rx="6"/>
+    <text x="85" y="25" text-anchor="middle" class="tufte-label">파이썬의 질문</text>
+    <line x1="10" y1="35" x2="160" y2="35" stroke="#ccc"/>
+    <text x="85" y="55" text-anchor="middle" class="tufte-text">"quack() 메서드가</text>
+    <text x="85" y="72" text-anchor="middle" class="tufte-text">있는가?"</text>
+    <text x="85" y="98" text-anchor="middle" class="tufte-small" font-style="italic">타입은 묻지 않음</text>
+  </g>
+
+  <!-- Arrows from classes to question -->
+  <path d="M 180 90 L 230 155" class="line-check" marker-end="url(#arrow)"/>
+  <path d="M 180 180 L 230 175" class="line-check" marker-end="url(#arrow)"/>
+  <path d="M 180 270 L 230 195" class="line-check" marker-end="url(#arrow)"/>
+
+  <!-- ========================================== -->
+  <!-- RIGHT SIDE: Function that uses duck typing -->
+  <!-- ========================================== -->
+  <g transform="translate(450, 55)">
+    <rect x="0" y="0" width="300" height="200" class="box-function" rx="4"/>
+    <text x="150" y="20" text-anchor="middle" class="tufte-label">호출 코드</text>
+    <line x1="10" y1="30" x2="290" y2="30" stroke="#ccc"/>
+
+    <text x="15" y="52" class="label-mono" font-weight="bold">def make_sound(thing):</text>
+    <text x="25" y="70" class="label-mono">"""thing의 타입을 모른다"""</text>
+    <text x="25" y="88" class="label-mono">return thing.quack()</text>
+
+    <line x1="10" y1="102" x2="290" y2="102" stroke="#ddd"/>
+
+    <text x="15" y="122" class="label-mono"># 모두 동일하게 동작</text>
+    <text x="15" y="140" class="label-mono">make_sound(Duck())       # "꽥꽥"</text>
+    <text x="15" y="158" class="label-mono">make_sound(Person())     # "오리 흉내"</text>
+    <text x="15" y="176" class="label-mono">make_sound(RubberDuck()) # "삑삑"</text>
+  </g>
+
+  <!-- Arrow from question to function -->
+  <path d="M 400 175 L 450 145" class="line-arrow" marker-end="url(#arrow)"/>
+
+  <!-- ========================================== -->
+  <!-- BOTTOM: Key insight -->
+  <!-- ========================================== -->
+  <g transform="translate(450, 275)">
+    <rect x="0" y="0" width="300" height="55" fill="#f5f5f5" stroke="#999" rx="4"/>
+    <text x="150" y="22" text-anchor="middle" class="tufte-text" font-weight="bold">"오리처럼 걷고 꽥꽥거리면, 오리다"</text>
+    <text x="150" y="42" text-anchor="middle" class="tufte-small">상속도, 인터페이스 선언도 필요 없다</text>
+  </g>
+
+</svg>

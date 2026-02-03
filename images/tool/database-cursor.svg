@@ -1,0 +1,60 @@
+<svg width="500" height="300" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+  <rect width="500" height="300" fill="white" />
+
+  <rect x="20" y="30" width="140" height="245" fill="none" stroke="black" stroke-width="1.2" />
+  <text x="90" y="240" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">파이썬</text>
+  <text x="90" y="262" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">프로그램</text>
+
+  <g transform="translate(55, 45)">
+    <rect x="0" y="0" width="90" height="35" fill="white" stroke="black" />
+    <text x="45" y="23" font-family="Arial" font-size="14" text-anchor="middle">execute</text>
+    <rect x="0" y="35" width="90" height="35" fill="white" stroke="black" />
+    <text x="45" y="58" font-family="Arial" font-size="14" text-anchor="middle">fetchone</text>
+    <rect x="0" y="70" width="90" height="35" fill="white" stroke="black" />
+    <text x="45" y="93" font-family="Arial" font-size="14" text-anchor="middle">fetchall</text>
+    <rect x="0" y="105" width="90" height="35" fill="white" stroke="black" />
+    <text x="45" y="128" font-family="Arial" font-size="14" text-anchor="middle">close</text>
+
+    <rect x="90" y="0" width="22" height="140" fill="#c8c8c8" stroke="black" />
+    <text x="101" y="20" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle">C</text>
+    <text x="101" y="42" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle">U</text>
+    <text x="101" y="64" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle">R</text>
+    <text x="101" y="86" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle">S</text>
+    <text x="101" y="108" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle">O</text>
+    <text x="101" y="130" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle">R</text>
+  </g>
+
+  <line x1="170" y1="115" x2="215" y2="115" stroke="black" stroke-width="1.5" />
+  <polygon points="170,115 178,110 178,120" fill="black" />
+  <polygon points="215,115 207,110 207,120" fill="black" />
+
+  <ellipse cx="350" cy="40" rx="130" ry="25" fill="none" stroke="gray" stroke-width="1" />
+  <path d="M220,40 L220,190 A 130 25 0 0 0 480,190 L480,40" fill="none" stroke="gray" stroke-width="1" />
+
+  <g transform="translate(250, 80)">
+    <rect x="0" y="0" width="70" height="35" fill="white" stroke="black" />
+    <text x="35" y="23" font-family="Arial" font-size="13" text-anchor="middle">Users</text>
+    
+    <rect x="130" y="0" width="70" height="35" fill="white" stroke="black" />
+    <text x="165" y="23" font-family="Arial" font-size="13" text-anchor="middle">Courses</text>
+
+    <rect x="65" y="75" width="70" height="35" fill="white" stroke="black" />
+    <text x="100" y="98" font-family="Arial" font-size="13" text-anchor="middle">Members</text>
+
+    <!-- Users → Members (1:N) -->
+    <path d="M35,35 L35,55 L35,90 L65,90" fill="none" stroke="black" stroke-width="1" />
+    <!-- 1측: 세로선을 가로지르는 선 -->
+    <line x1="29" y1="50" x2="41" y2="50" stroke="black" stroke-width="1" />
+    <!-- N측: 까마귀 발 (왼쪽으로 벌어짐) - Members 왼쪽 -->
+    <path d="M55,90 L65,95" fill="none" stroke="black" stroke-width="1" />
+    <path d="M55,90 L65,85" fill="none" stroke="black" stroke-width="1" />
+
+    <!-- Courses → Members (1:N) -->
+    <path d="M165,35 L165,90 L135,90" fill="none" stroke="black" stroke-width="1" />
+    <!-- 1측: 세로선을 가로지르는 선 -->
+    <line x1="159" y1="50" x2="171" y2="50" stroke="black" stroke-width="1" />
+    <!-- N측: 까마귀 발 (오른쪽으로 벌어짐) - Members 오른쪽 -->
+    <path d="M145,90 L135,95" fill="none" stroke="black" stroke-width="1" />
+    <path d="M145,90 L135,85" fill="none" stroke="black" stroke-width="1" />
+  </g>
+</svg>

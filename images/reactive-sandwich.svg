@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 50 850 320">
+  <defs>
+    <style>
+      /* Tufte Grayscale Style - Korean */
+      .label-title { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 16px; font-weight: bold; fill: #111; }
+      .label-head { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 14px; font-weight: bold; fill: #222; }
+      .label-body { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 12px; fill: #333; }
+      .label-note { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 11px; fill: #555; font-style: italic; }
+      .label-mono { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 10px; fill: #444; }
+
+      .box-layer { fill: #fff; stroke: #333; stroke-width: 2; rx: 6; }
+      .box-example { fill: #fcfcfc; stroke: #999; stroke-width: 1; rx: 4; }
+
+      .line-flow { stroke: #333; stroke-width: 2; fill: none; }
+      .line-sep { stroke: #ccc; stroke-width: 1; }
+
+      .arrow-head { fill: #333; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L0,8 L8,4 z" class="arrow-head" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="850" height="400" fill="#fff" />
+
+  <!-- Title -->
+  <!-- <text x="425" y="30" text-anchor="middle" class="label-title">반응형 샌드위치: 공통 아키텍처 패턴</text> -->
+
+  <!-- ========================================== -->
+  <!-- MAIN FLOW: Event -> State -> View -->
+  <!-- ========================================== -->
+  <g transform="translate(50, 70)">
+
+    <!-- 1. Event (Input) -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="180" height="100" class="box-layer"/>
+      <text x="90" y="25" text-anchor="middle" class="label-head">1. 이벤트</text>
+      <text x="90" y="42" text-anchor="middle" class="label-note">트리거 / 액션</text>
+      <line x1="20" y1="50" x2="160" y2="50" class="line-sep"/>
+      <text x="90" y="70" text-anchor="middle" class="label-body">"무엇이 발생했는가?"</text>
+      <text x="90" y="85" text-anchor="middle" class="label-mono">클릭, API, 센서</text>
+    </g>
+
+    <!-- Arrow 1 -->
+    <path d="M 180 50 L 285 50" class="line-flow" marker-end="url(#arrow)"/>
+    <text x="232" y="40" text-anchor="middle" class="label-mono">전달</text>
+
+    <!-- 2. State (Logic) -->
+    <g transform="translate(285, 0)">
+      <rect x="0" y="0" width="180" height="100" class="box-layer" fill="#f5f5f5"/>
+      <text x="90" y="25" text-anchor="middle" class="label-head">2. 상태</text>
+      <text x="90" y="42" text-anchor="middle" class="label-note">저장소 / 로직</text>
+      <line x1="20" y1="50" x2="160" y2="50" class="line-sep"/>
+      <text x="90" y="70" text-anchor="middle" class="label-body">"데이터는 어떻게 변하나?"</text>
+      <text x="90" y="85" text-anchor="middle" class="label-mono">축약, 집계</text>
+    </g>
+
+    <!-- Arrow 2 -->
+    <path d="M 465 50 L 570 50" class="line-flow" marker-end="url(#arrow)"/>
+    <text x="517" y="40" text-anchor="middle" class="label-mono">알림 / 구독</text>
+
+    <!-- 3. View (Output) -->
+    <g transform="translate(570, 0)">
+      <rect x="0" y="0" width="180" height="100" class="box-layer"/>
+      <text x="90" y="25" text-anchor="middle" class="label-head">3. 뷰</text>
+      <text x="90" y="42" text-anchor="middle" class="label-note">렌더링 / 효과</text>
+      <line x1="20" y1="50" x2="160" y2="50" class="line-sep"/>
+      <text x="90" y="70" text-anchor="middle" class="label-body">"사용자에게 보여질 결과"</text>
+      <text x="90" y="85" text-anchor="middle" class="label-mono">UI 갱신, 차트</text>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- DOMAIN MAPPING (Table-like structure) -->
+  <!-- ========================================== -->
+  <g transform="translate(50, 200)">
+    <text x="0" y="0" class="label-head" fill="#555">도메인별 구현 매핑</text>
+
+    <!-- Row 1: Frontend -->
+    <g transform="translate(0, 10)">
+      <rect x="0" y="0" width="750" height="40" class="box-example"/>
+      <text x="15" y="25" class="label-body" font-weight="bold">프론트엔드 (Redux)</text>
+
+      <text x="200" y="25" class="label-mono">버튼 클릭 (액션)</text>
+      <path d="M 310 22 L 330 22" class="line-sep" stroke="#999"/>
+      <text x="380" y="25" class="label-mono">리듀서 → 새 저장소</text>
+      <path d="M 490 22 L 510 22" class="line-sep" stroke="#999"/>
+      <text x="600" y="25" class="label-mono">React 컴포넌트 렌더링</text>
+    </g>
+
+    <!-- Row 2: Data Science -->
+    <g transform="translate(0, 60)">
+      <rect x="0" y="0" width="750" height="40" class="box-example"/>
+      <text x="15" y="25" class="label-body" font-weight="bold">데이터 과학 (Shiny/Streamlit)</text>
+
+      <text x="200" y="25" class="label-mono">슬라이더 변경 (입력)</text>
+      <path d="M 320 22 L 340 22" class="line-sep" stroke="#999"/>
+      <text x="390" y="25" class="label-mono">반응형 계산 (서버)</text>
+      <path d="M 500 22 L 520 22" class="line-sep" stroke="#999"/>
+      <text x="600" y="25" class="label-mono">차트/테이블 갱신</text>
+    </g>
+
+    <!-- Row 3: Backend -->
+    <g transform="translate(0, 110)">
+      <rect x="0" y="0" width="750" height="40" class="box-example"/>
+      <text x="15" y="25" class="label-body" font-weight="bold">백엔드 (Kafka)</text>
+
+      <text x="200" y="25" class="label-mono">센서 데이터 (토픽)</text>
+      <path d="M 320 22 L 340 22" class="line-sep" stroke="#999"/>
+      <text x="390" y="25" class="label-mono">스트림 처리 (Flink)</text>
+      <path d="M 500 22 L 520 22" class="line-sep" stroke="#999"/>
+      <text x="600" y="25" class="label-mono">대시보드 / 알림</text>
+    </g>
+  </g>
+
+  <!-- Bottom Insight -->
+  <!-- <g transform="translate(50, 360)">
+      <rect x="0" y="0" width="750" height="30" fill="#f8f8f8" />
+      <rect x="0" y="0" width="4" height="30" fill="#333" />
+      <text x="20" y="20" class="label-body">
+          <tspan font-weight="bold">핵심:</tspan> 분야는 다르지만 <tspan font-style="italic">"단방향 데이터 흐름"</tspan>이라는 본질은 동일하다.
+      </text>
+  </g> -->
+
+</svg>

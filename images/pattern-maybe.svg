@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 350">
+  <defs>
+    <style>
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 16px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 13px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-desc {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 11px;
+        fill: #666;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Menlo, Monaco, monospace;
+        font-size: 10px;
+        fill: #666;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #999;
+      }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+    <marker id="arrow-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#999"/>
+    </marker>
+  </defs>
+
+  <!-- White background -->
+  <rect x="0" y="0" width="800" height="350" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="400" y="30" class="tufte-title" text-anchor="middle">Maybe / Result 패턴</text>
+
+  <!-- Maybe type -->
+  <rect x="40" y="60" width="340" height="130" fill="#fff" stroke="#333" stroke-width="2" rx="3"/>
+  <text x="210" y="85" class="tufte-label" text-anchor="middle">Maybe[T]</text>
+  <line x1="55" y1="95" x2="365" y2="95" stroke="#ccc" stroke-width="1"/>
+
+  <!-- Some branch -->
+  <rect x="60" y="110" width="140" height="60" fill="#f5f5f5" stroke="#666" stroke-width="1" rx="2"/>
+  <text x="130" y="135" class="tufte-label" text-anchor="middle">Some(value)</text>
+  <text x="130" y="155" class="tufte-code" text-anchor="middle">값이 존재</text>
+
+  <!-- None branch -->
+  <rect x="220" y="110" width="140" height="60" fill="#f5f5f5" stroke="#666" stroke-width="1" rx="2"/>
+  <text x="290" y="135" class="tufte-label" text-anchor="middle">Nothing</text>
+  <text x="290" y="155" class="tufte-code" text-anchor="middle">값 없음</text>
+
+  <!-- Result type -->
+  <rect x="420" y="60" width="340" height="130" fill="#fff" stroke="#333" stroke-width="2" rx="3"/>
+  <text x="590" y="85" class="tufte-label" text-anchor="middle">Result[T, E]</text>
+  <line x1="435" y1="95" x2="745" y2="95" stroke="#ccc" stroke-width="1"/>
+
+  <!-- Ok branch -->
+  <rect x="440" y="110" width="140" height="60" fill="#f5f5f5" stroke="#666" stroke-width="1" rx="2"/>
+  <text x="510" y="135" class="tufte-label" text-anchor="middle">Ok(value)</text>
+  <text x="510" y="155" class="tufte-code" text-anchor="middle">성공</text>
+
+  <!-- Error branch -->
+  <rect x="600" y="110" width="140" height="60" fill="#f5f5f5" stroke="#666" stroke-width="1" rx="2"/>
+  <text x="670" y="135" class="tufte-label" text-anchor="middle">Err(error)</text>
+  <text x="670" y="155" class="tufte-code" text-anchor="middle">실패 (이유 포함)</text>
+
+  <!-- Chaining flow -->
+  <rect x="40" y="210" width="720" height="100" fill="#fff" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="400" y="235" class="tufte-label" text-anchor="middle">체이닝: 안전한 연속 처리</text>
+  <line x1="55" y1="245" x2="745" y2="245" stroke="#ccc" stroke-width="1"/>
+
+  <!-- Chain steps -->
+  <rect x="70" y="260" width="80" height="35" fill="#f5f5f5" stroke="#666" stroke-width="1" rx="2"/>
+  <text x="110" y="282" class="tufte-code" text-anchor="middle">Some(5)</text>
+
+  <line x1="150" y1="277" x2="178" y2="277" stroke="#666" stroke-width="1" marker-end="url(#arrow)"/>
+  <text x="165" y="270" class="tufte-small">map</text>
+
+  <rect x="190" y="260" width="100" height="35" fill="#f5f5f5" stroke="#666" stroke-width="1" rx="2"/>
+  <text x="240" y="282" class="tufte-code" text-anchor="middle">Some(10)</text>
+
+  <line x1="290" y1="277" x2="318" y2="277" stroke="#666" stroke-width="1" marker-end="url(#arrow)"/>
+  <text x="305" y="270" class="tufte-small">map</text>
+
+  <rect x="330" y="260" width="100" height="35" fill="#f5f5f5" stroke="#666" stroke-width="1" rx="2"/>
+  <text x="380" y="282" class="tufte-code" text-anchor="middle">Some(100)</text>
+
+  <!-- Nothing path -->
+  <text x="480" y="277" class="tufte-small">vs</text>
+
+  <rect x="520" y="260" width="80" height="35" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="2"/>
+  <text x="560" y="282" class="tufte-code" text-anchor="middle">Nothing</text>
+
+  <line x1="600" y1="277" x2="628" y2="277" stroke="#999" stroke-width="1" stroke-dasharray="4,2" marker-end="url(#arrow-red)"/>
+  <text x="615" y="270" class="tufte-small">skip</text>
+
+  <rect x="640" y="260" width="80" height="35" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="2"/>
+  <text x="680" y="282" class="tufte-code" text-anchor="middle">Nothing</text>
+
+  <!-- Bottom note -->
+  <text x="400" y="335" class="tufte-small" text-anchor="middle">None 값은 자동으로 전파되어 if 검사 없이 안전한 체이닝 가능</text>
+</svg>

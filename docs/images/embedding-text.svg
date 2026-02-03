@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300">
+  <defs>
+    <style>
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 12px;
+        fill: #333;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 10px;
+        fill: #333;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #666;
+      }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="720" height="300" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="360" y="22" text-anchor="middle" class="tufte-label" font-weight="bold">텍스트 임베딩: 원-핫 vs 밀집</text>
+
+  <!-- One-Hot Encoding -->
+  <g transform="translate(30, 45)">
+    <text x="150" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">원-핫 인코딩</text>
+    <rect x="0" y="10" width="300" height="120" fill="#f5f5f5" stroke="#999" rx="3"/>
+
+    <!-- Vocab -->
+    <text x="15" y="35" class="tufte-small">어휘: [고양이, 강아지, 사과, 바나나]</text>
+
+    <!-- Vectors -->
+    <text x="15" y="55" class="tufte-code">고양이 → [1, 0, 0, 0]</text>
+    <text x="15" y="70" class="tufte-code">강아지 → [0, 1, 0, 0]</text>
+    <text x="15" y="85" class="tufte-code">사과   → [0, 0, 1, 0]</text>
+    <text x="15" y="100" class="tufte-code">바나나 → [0, 0, 0, 1]</text>
+
+    <text x="15" y="120" class="tufte-small">유사도(고양이, 강아지) = 0</text>
+
+    <!-- Problems -->
+    <g transform="translate(0, 140)">
+      <text x="150" y="0" text-anchor="middle" class="tufte-small" fill="#666">문제점</text>
+      <text x="15" y="18" class="tufte-small">• 희소 벡터 (대부분 0)</text>
+      <text x="15" y="33" class="tufte-small">• 의미 관계 표현 불가</text>
+      <text x="15" y="48" class="tufte-small">• 어휘 크기 = 차원 수</text>
+    </g>
+  </g>
+
+  <!-- Arrow -->
+  <g transform="translate(340, 110)">
+    <line x1="0" y1="0" x2="40" y2="0" stroke="#666" stroke-width="2"/>
+    <polygon points="40,0 32,-5 32,5" fill="#666"/>
+  </g>
+
+  <!-- Dense Embedding -->
+  <g transform="translate(390, 45)">
+    <text x="150" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">밀집 임베딩</text>
+    <rect x="0" y="10" width="300" height="120" fill="#e8e8e8" stroke="#333" stroke-width="1.5" rx="3"/>
+
+    <!-- Vocab -->
+    <text x="15" y="35" class="tufte-small">차원: 4 (실제: 256~1536)</text>
+
+    <!-- Vectors -->
+    <text x="15" y="55" class="tufte-code">고양이 → [0.8, 0.2, -0.1, 0.5]</text>
+    <text x="15" y="70" class="tufte-code">강아지 → [0.7, 0.3, -0.2, 0.6]</text>
+    <text x="15" y="85" class="tufte-code">사과   → [-0.3, 0.9, 0.4, -0.1]</text>
+    <text x="15" y="100" class="tufte-code">바나나 → [-0.2, 0.8, 0.5, -0.2]</text>
+
+    <text x="15" y="120" class="tufte-small" font-weight="bold">유사도(고양이, 강아지) = 0.98</text>
+
+    <!-- Advantages -->
+    <g transform="translate(0, 140)">
+      <text x="150" y="0" text-anchor="middle" class="tufte-small" fill="#333">장점</text>
+      <text x="15" y="18" class="tufte-small">• 밀집 벡터 (모든 값 의미)</text>
+      <text x="15" y="33" class="tufte-small">• 의미적 유사도 표현</text>
+      <text x="15" y="48" class="tufte-small">• 고정 차원</text>
+    </g>
+  </g>
+
+  <!-- Vector Space Visualization -->
+  <g transform="translate(200, 235)">
+    <rect x="0" y="0" width="320" height="55" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="160" y="18" text-anchor="middle" class="tufte-label" font-weight="bold">벡터 공간에서의 거리</text>
+
+    <!-- Points -->
+    <circle cx="50" cy="38" r="5" fill="#333"/>
+    <text x="50" y="52" text-anchor="middle" class="tufte-code">고양이</text>
+    <circle cx="80" cy="35" r="5" fill="#333"/>
+    <text x="80" y="52" text-anchor="middle" class="tufte-code">강아지</text>
+
+    <circle cx="240" cy="38" r="5" fill="#666"/>
+    <text x="240" y="52" text-anchor="middle" class="tufte-code">사과</text>
+    <circle cx="270" cy="35" r="5" fill="#666"/>
+    <text x="270" y="52" text-anchor="middle" class="tufte-code">바나나</text>
+
+    <!-- Distance indicators -->
+    <line x1="50" y1="30" x2="80" y2="30" stroke="#333" stroke-width="1"/>
+    <text x="65" y="25" text-anchor="middle" class="tufte-small">가까움</text>
+
+    <line x1="240" y1="30" x2="270" y2="30" stroke="#666" stroke-width="1"/>
+    <text x="255" y="25" text-anchor="middle" class="tufte-small">가까움</text>
+  </g>
+
+</svg>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 30 800 220">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #111; font-weight: bold; }
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-mono { font-family: 'SF Mono', Consolas, monospace; fill: #444; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #666; font-style: italic; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #777; font-size: 10px; }
+      .main-box { fill: #f8f8f8; stroke: #333; stroke-width: 2; }
+      .op-box { fill: #fff; stroke: #666; stroke-width: 1.5; }
+      .warn-box { fill: #f5f5f5; stroke: #999; stroke-width: 1; stroke-dasharray: 4,2; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="2.5" orient="auto">
+      <path d="M0,0 L0,5 L7,2.5 z" fill="#555" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="300" fill="#ffffff"/>
+
+  <!-- 입력: 파일 시스템 -->
+  <g transform="translate(30, 50)">
+    <rect x="0" y="0" width="140" height="180" class="main-box" rx="6"/>
+    <text x="70" y="25" text-anchor="middle" class="tufte-text" font-size="12" font-weight="bold">파일 시스템</text>
+    <line x1="10" y1="35" x2="130" y2="35" stroke="#ccc" stroke-width="1"/>
+
+    <text x="15" y="55" class="tufte-mono" font-size="10">data/</text>
+    <text x="25" y="75" class="tufte-mono" font-size="9">report_01.txt</text>
+    <text x="25" y="90" class="tufte-mono" font-size="9">report_02.txt</text>
+    <text x="25" y="105" class="tufte-mono" font-size="9">image_01.png</text>
+    <text x="25" y="120" class="tufte-mono" font-size="9">backup/</text>
+    <text x="35" y="135" class="tufte-mono" font-size="9">old_data.txt</text>
+    <text x="25" y="150" class="tufte-mono" font-size="9">...</text>
+    <text x="70" y="172" text-anchor="middle" class="tufte-small">수백~수천 개 파일</text>
+  </g>
+
+  <!-- 화살표 1 -->
+  <path d="M 180,140 L 220,140" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- 중앙: 일괄 처리 작업들 -->
+  <g transform="translate(230, 50)">
+    <rect x="0" y="0" width="340" height="180" class="main-box" rx="6"/>
+    <text x="170" y="25" text-anchor="middle" class="tufte-text" font-size="12" font-weight="bold">일괄 처리 작업</text>
+    <line x1="15" y1="35" x2="325" y2="35" stroke="#ccc" stroke-width="1"/>
+
+    <!-- 검색 -->
+    <g transform="translate(15, 45)">
+      <rect x="0" y="0" width="95" height="55" class="op-box" rx="4"/>
+      <text x="47" y="18" text-anchor="middle" class="tufte-mono" font-size="10">검색</text>
+      <text x="47" y="33" text-anchor="middle" class="tufte-small">rglob() +</text>
+      <text x="47" y="46" text-anchor="middle" class="tufte-small">read_text()</text>
+    </g>
+
+    <!-- 이름 변경 -->
+    <g transform="translate(120, 45)">
+      <rect x="0" y="0" width="95" height="55" class="op-box" rx="4"/>
+      <text x="47" y="18" text-anchor="middle" class="tufte-mono" font-size="10">이름 변경</text>
+      <text x="47" y="33" text-anchor="middle" class="tufte-small">with_suffix()</text>
+      <text x="47" y="46" text-anchor="middle" class="tufte-small">rename()</text>
+    </g>
+
+    <!-- 이동/복사 -->
+    <g transform="translate(225, 45)">
+      <rect x="0" y="0" width="95" height="55" class="op-box" rx="4"/>
+      <text x="47" y="18" text-anchor="middle" class="tufte-mono" font-size="10">이동/복사</text>
+      <text x="47" y="33" text-anchor="middle" class="tufte-small">shutil.move()</text>
+      <text x="47" y="46" text-anchor="middle" class="tufte-small">shutil.copy()</text>
+    </g>
+
+    <!-- 중복 찾기 -->
+    <g transform="translate(15, 110)">
+      <rect x="0" y="0" width="145" height="55" class="op-box" rx="4"/>
+      <text x="72" y="18" text-anchor="middle" class="tufte-mono" font-size="10">중복 찾기</text>
+      <text x="72" y="33" text-anchor="middle" class="tufte-small">크기 비교 → MD5 해시</text>
+      <text x="72" y="46" text-anchor="middle" class="tufte-small">hashlib.md5()</text>
+    </g>
+
+    <!-- dry_run 경고 -->
+    <g transform="translate(170, 110)">
+      <rect x="0" y="0" width="150" height="55" class="warn-box" rx="4"/>
+      <text x="75" y="18" text-anchor="middle" class="tufte-text" font-size="10" font-weight="bold">⚠ 안전 원칙</text>
+      <text x="75" y="35" text-anchor="middle" class="tufte-small">1. dry_run=True 먼저</text>
+      <text x="75" y="48" text-anchor="middle" class="tufte-small">2. 백업 후 실행</text>
+    </g>
+  </g>
+
+  <!-- 화살표 2 -->
+  <path d="M 580,140 L 620,140" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- 출력: 결과 -->
+  <g transform="translate(630, 50)">
+    <rect x="0" y="0" width="140" height="180" class="main-box" rx="6"/>
+    <text x="70" y="25" text-anchor="middle" class="tufte-text" font-size="12" font-weight="bold">처리 결과</text>
+    <line x1="10" y1="35" x2="130" y2="35" stroke="#ccc" stroke-width="1"/>
+
+    <text x="70" y="60" text-anchor="middle" class="tufte-text" font-size="10">✓ 파일 정리</text>
+    <text x="70" y="85" text-anchor="middle" class="tufte-text" font-size="10">✓ 이름 통일</text>
+    <text x="70" y="110" text-anchor="middle" class="tufte-text" font-size="10">✓ 중복 제거</text>
+    <text x="70" y="135" text-anchor="middle" class="tufte-text" font-size="10">✓ 공간 절약</text>
+    <text x="70" y="172" text-anchor="middle" class="tufte-small">재현가능한 스크립트</text>
+  </g>
+
+  <!-- 하단 메시지 -->
+  <!-- <text x="400" y="285" text-anchor="middle" class="tufte-label" font-size="12">"한 번의 스크립트로 수천 개 파일을 일관되게 처리"</text> -->
+
+</svg>

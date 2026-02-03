@@ -1,0 +1,1919 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" xml:lang="ko-KR"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.16">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="이광춘(Openai)">
+
+<title>12&nbsp; 데이터프레임 – 챗GPT 코딩(개정판)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./17-json.html" rel="next">
+<link href="./15-tuples.html" rel="prev">
+<link href="./images/logo.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-8ee146c0b749343448e797d10b61a7f9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-55f79cb6abf2a16ff6075165a9063c3c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "일치 없음",
+    "search-matching-documents-text": "일치된 문서",
+    "search-copy-link-title": "검색 링크 복사",
+    "search-hide-matches-text": "추가 검색 결과 숨기기",
+    "search-more-match-text": "추가 검색결과",
+    "search-more-matches-text": "추가 검색결과",
+    "search-clear-button-title": "제거",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "취소",
+    "search-submit-button-title": "검색",
+    "search-label": "검색"
+  }
+}</script>
+
+<script type="text/javascript">
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-229551680-1', 'auto');
+
+ga('send', {
+  hitType: 'pageview',
+  'anonymizeIp': true,
+});
+</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-data-intro.html"><strong>2부</strong> 자료구조</a></li><li class="breadcrumb-item"><a href="./16-dataframe.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">데이터프레임</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="검색" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">챗GPT 코딩(개정판)</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/bit2r/gpt-coding/" title="소스 코드" class="quarto-navigation-tool px-1" aria-label="소스 코드"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="리더 모드 전환">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="검색"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">서문</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>1부</strong> 전통 프로그래밍</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">프로그래밍 시작하기</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-var.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">변수, 표현식, 문장</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-cont.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">조건부 실행</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-func.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">함수</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-loop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">반복문</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>2부</strong> 자료구조</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-data-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">데이터, AI 식량</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-string.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">문자열</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-file.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">파일</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-list.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">리스트</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-dictionaries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">딕셔너리</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-tuples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">튜플</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-dataframe.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">데이터프레임</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-json.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">JSON</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18-tensor.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">텐서</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-embedding.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">벡터와 임베딩</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-graph.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">그래프</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>3부</strong> 버전제어와 협업</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Git 시작하기</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-tracking.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">변경사항 추적</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-history.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">히스토리와 파일 관리</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-remote.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">GitHub와 원격 저장소</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-collab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">협업과 충돌 해결</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">오픈 사이언스</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>4부</strong> 분야별 코딩</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">특화 도구 입문</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-regex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">정규 표현식</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-network.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-web.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">웹서비스</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-database.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">데이터베이스와 SQL</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-ds.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">데이터 과학과 R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-auto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">파일 자동화</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-make.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">빌드 자동화: make</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>5부</strong> 프로그래밍 패러다임</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-paradigm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">패러다임의 이해</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-imperative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">명령형과 절차적 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-oop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">객체지향 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-fp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">함수형 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-declarative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">선언형 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-reactive.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">반응형 프로그래밍</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>6부</strong> 소프트웨어 설계와 아키텍처</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-reuse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">재사용 명령</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-stack.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">소프트웨어 스택</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">소프트웨어 아키텍처</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-pattern.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">살아남은 패턴</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>7부</strong> 기계학습 패러다임</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-paradigm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">소프트웨어 2.0</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">신경망 아키텍처</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">43</span>&nbsp; <span class="chapter-title">학습과 추론</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-to-llm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">44</span>&nbsp; <span class="chapter-title">트랜스포머에서 거대 언어모형으로</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>부록</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">용어사전</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">참고문헌</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">목차</h2>
+   
+  <ul>
+  <li><a href="#sec-dataframe-scale" id="toc-sec-dataframe-scale" class="nav-link active" data-scroll-target="#sec-dataframe-scale"><span class="header-section-number">12.1</span> 측정 변수의 구분</a></li>
+  <li><a href="#sec-dataframe-evolution" id="toc-sec-dataframe-evolution" class="nav-link" data-scroll-target="#sec-dataframe-evolution"><span class="header-section-number">12.2</span> 리스트에서 데이터프레임까지</a>
+  <ul class="collapse">
+  <li><a href="#리스트와-딕셔너리-한계" id="toc-리스트와-딕셔너리-한계" class="nav-link" data-scroll-target="#리스트와-딕셔너리-한계"><span class="header-section-number">12.2.1</span> 리스트와 딕셔너리 한계</a></li>
+  <li><a href="#판다스-series" id="toc-판다스-series" class="nav-link" data-scroll-target="#판다스-series"><span class="header-section-number">12.2.2</span> 판다스 Series</a></li>
+  <li><a href="#판다스-데이터프레임" id="toc-판다스-데이터프레임" class="nav-link" data-scroll-target="#판다스-데이터프레임"><span class="header-section-number">12.2.3</span> 판다스 데이터프레임</a></li>
+  </ul></li>
+  <li><a href="#sec-dataframe-create" id="toc-sec-dataframe-create" class="nav-link" data-scroll-target="#sec-dataframe-create"><span class="header-section-number">12.3</span> 데이터프레임 생성</a>
+  <ul class="collapse">
+  <li><a href="#딕셔너리로-생성" id="toc-딕셔너리로-생성" class="nav-link" data-scroll-target="#딕셔너리로-생성"><span class="header-section-number">12.3.1</span> 딕셔너리로 생성</a></li>
+  <li><a href="#리스트의-리스트로-생성" id="toc-리스트의-리스트로-생성" class="nav-link" data-scroll-target="#리스트의-리스트로-생성"><span class="header-section-number">12.3.2</span> 리스트의 리스트로 생성</a></li>
+  <li><a href="#csv-파일-읽기" id="toc-csv-파일-읽기" class="nav-link" data-scroll-target="#csv-파일-읽기"><span class="header-section-number">12.3.3</span> CSV 파일 읽기</a></li>
+  <li><a href="#기본-속성-확인" id="toc-기본-속성-확인" class="nav-link" data-scroll-target="#기본-속성-확인"><span class="header-section-number">12.3.4</span> 기본 속성 확인</a></li>
+  </ul></li>
+  <li><a href="#sec-dataframe-select" id="toc-sec-dataframe-select" class="nav-link" data-scroll-target="#sec-dataframe-select"><span class="header-section-number">12.4</span> 데이터 선택과 필터링</a>
+  <ul class="collapse">
+  <li><a href="#열-선택" id="toc-열-선택" class="nav-link" data-scroll-target="#열-선택"><span class="header-section-number">12.4.1</span> 열 선택</a></li>
+  <li><a href="#행-선택-loc과-iloc" id="toc-행-선택-loc과-iloc" class="nav-link" data-scroll-target="#행-선택-loc과-iloc"><span class="header-section-number">12.4.2</span> 행 선택: loc과 iloc</a></li>
+  <li><a href="#조건-필터링" id="toc-조건-필터링" class="nav-link" data-scroll-target="#조건-필터링"><span class="header-section-number">12.4.3</span> 조건 필터링</a></li>
+  </ul></li>
+  <li><a href="#sec-dataframe-dtype" id="toc-sec-dataframe-dtype" class="nav-link" data-scroll-target="#sec-dataframe-dtype"><span class="header-section-number">12.5</span> 자료형과 형변환</a>
+  <ul class="collapse">
+  <li><a href="#판다스-dtype-종류" id="toc-판다스-dtype-종류" class="nav-link" data-scroll-target="#판다스-dtype-종류"><span class="header-section-number">12.5.1</span> 판다스 dtype 종류</a></li>
+  <li><a href="#astype으로-형변환" id="toc-astype으로-형변환" class="nav-link" data-scroll-target="#astype으로-형변환"><span class="header-section-number">12.5.2</span> astype()으로 형변환</a></li>
+  <li><a href="#범주형-데이터" id="toc-범주형-데이터" class="nav-link" data-scroll-target="#범주형-데이터"><span class="header-section-number">12.5.3</span> 범주형 데이터</a></li>
+  </ul></li>
+  <li><a href="#sec-dataframe-missing" id="toc-sec-dataframe-missing" class="nav-link" data-scroll-target="#sec-dataframe-missing"><span class="header-section-number">12.6</span> 결측치 처리</a>
+  <ul class="collapse">
+  <li><a href="#결측치-종류" id="toc-결측치-종류" class="nav-link" data-scroll-target="#결측치-종류"><span class="header-section-number">12.6.1</span> 결측치 종류</a></li>
+  <li><a href="#결측치-확인" id="toc-결측치-확인" class="nav-link" data-scroll-target="#결측치-확인"><span class="header-section-number">12.6.2</span> 결측치 확인</a></li>
+  <li><a href="#결측치-제거" id="toc-결측치-제거" class="nav-link" data-scroll-target="#결측치-제거"><span class="header-section-number">12.6.3</span> 결측치 제거</a></li>
+  <li><a href="#결측치-대체" id="toc-결측치-대체" class="nav-link" data-scroll-target="#결측치-대체"><span class="header-section-number">12.6.4</span> 결측치 대체</a></li>
+  </ul></li>
+  <li><a href="#sec-dataframe-summary" id="toc-sec-dataframe-summary" class="nav-link" data-scroll-target="#sec-dataframe-summary"><span class="header-section-number">12.7</span> 데이터프레임 요약</a>
+  <ul class="collapse">
+  <li><a href="#describe" id="toc-describe" class="nav-link" data-scroll-target="#describe"><span class="header-section-number">12.7.1</span> describe()</a></li>
+  <li><a href="#집계-함수" id="toc-집계-함수" class="nav-link" data-scroll-target="#집계-함수"><span class="header-section-number">12.7.2</span> 집계 함수</a></li>
+  <li><a href="#groupby" id="toc-groupby" class="nav-link" data-scroll-target="#groupby"><span class="header-section-number">12.7.3</span> groupby()</a></li>
+  </ul></li>
+  <li><a href="#sec-dataframe-debug" id="toc-sec-dataframe-debug" class="nav-link" data-scroll-target="#sec-dataframe-debug"><span class="header-section-number">12.8</span> 디버깅</a>
+  <ul class="collapse">
+  <li><a href="#keyerror-열-이름-오류" id="toc-keyerror-열-이름-오류" class="nav-link" data-scroll-target="#keyerror-열-이름-오류"><span class="header-section-number">12.8.1</span> KeyError: 열 이름 오류</a></li>
+  <li><a href="#settingwithcopywarning" id="toc-settingwithcopywarning" class="nav-link" data-scroll-target="#settingwithcopywarning"><span class="header-section-number">12.8.2</span> SettingWithCopyWarning</a></li>
+  <li><a href="#자료형-관련-오류" id="toc-자료형-관련-오류" class="nav-link" data-scroll-target="#자료형-관련-오류"><span class="header-section-number">12.8.3</span> 자료형 관련 오류</a></li>
+  <li><a href="#디버깅-전략" id="toc-디버깅-전략" class="nav-link" data-scroll-target="#디버깅-전략"><span class="header-section-number">12.8.4</span> 디버깅 전략</a></li>
+  </ul></li>
+  <li><a href="#sec-dataframe-ai" id="toc-sec-dataframe-ai" class="nav-link" data-scroll-target="#sec-dataframe-ai"><span class="header-section-number">12.9</span> AI와 함께하는 데이터프레임 처리</a></li>
+  <li><a href="#생각해볼-점-1" id="toc-생각해볼-점-1" class="nav-link" data-scroll-target="#생각해볼-점-1">💡 생각해볼 점</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/16-dataframe.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-data-intro.html"><strong>2부</strong> 자료구조</a></li><li class="breadcrumb-item"><a href="./16-dataframe.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">데이터프레임</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="dataframe" class="quarto-section-identifier"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">데이터프레임</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p></p>
+<p>데이터 분석에서 가장 중요한 자료구조가 데이터프레임이다. CSV 파일, 데이터베이스 쿼리 결과, 엑셀 시트 등 거의 모든 표 형식 데이터가 데이터프레임으로 표현된다. 판다스(pandas) 라이브러리의 <code>DataFrame</code>은 파이썬 데이터 분석의 핵심 도구로, 행과 열로 구성된 2차원 표 형식 데이터를 효율적으로 다룬다.</p>
+<p>앞선 장에서 리스트로 순서 있는 데이터를, 딕셔너리로 키-값 매핑을 다루는 방법을 배웠다. 데이터프레임은 두 자료구조의 장점을 결합한다. 열은 딕셔너리처럼 이름으로 접근하고, 행은 리스트처럼 순서가 있다. 여러 자료형을 하나의 표에 담을 수 있어, 실제 데이터 분석 작업에서 필수적으로 사용된다. 데이터프레임의 구조와 조작 방법을 이해하면, AI에게 “특정 조건을 만족하는 행을 필터링해줘”, “그룹별 평균을 계산해줘”, “두 데이터프레임을 조인해줘”와 같은 데이터 처리 요청을 명확하게 전달할 수 있다. <a href="#fig-dataframe-chapter-overview" class="quarto-xref">그림&nbsp;<span>12.1</span></a> 는 이번 장에서 다룰 핵심 내용을 보여준다.</p>
+<div id="fig-dataframe-chapter-overview" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dataframe-chapter-overview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/dataframe-chapter-overview.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dataframe-chapter-overview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;12.1: 데이터프레임 개요
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-dataframe-chapter-overview" class="quarto-xref">그림&nbsp;<span>12.1</span></a> 에서 보듯이, 데이터프레임 작업은 크게 다섯 단계로 나뉜다. 먼저 딕셔너리나 CSV 파일에서 <strong>데이터를 입력</strong>받아 데이터프레임을 생성한다. 생성된 데이터프레임의 <strong>구조를 탐색</strong>하여 행과 열의 수, 각 열의 자료형, 결측치 현황을 파악한다. 분석에 필요한 부분만 <strong>선택하고 필터링</strong>한 뒤, <strong>자료형을 변환</strong>하거나 <strong>결측치를 처리</strong>한다. 마지막으로 <strong>집계와 요약</strong> 통계를 계산하여 데이터에서 의미 있는 정보를 추출한다. 각 단계마다 판다스가 제공하는 메서드와 속성을 활용하면 수백만 행의 데이터도 몇 줄의 코드로 처리할 수 있다.</p>
+<p>데이터프레임을 제대로 다루려면 먼저 데이터의 본질을 이해해야 한다. 같은 숫자라도 성별을 나타내는 1과 2는 키를 나타내는 170과 180과 근본적으로 다르다. 전자는 단순 분류 코드이고 후자는 비율 비교가 가능한 측정값이다. 측정 척도에 따라 적용할 수 있는 연산과 통계 기법이 달라지므로, 데이터프레임의 각 열에 적합한 자료형을 설정하는 것이 분석의 첫걸음이다.</p>
+<section id="sec-dataframe-scale" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="sec-dataframe-scale"><span class="header-section-number">12.1</span> 측정 변수의 구분</h2>
+<p></p>
+<p>데이터 분석의 첫 단계는 데이터가 어떤 종류인지 파악하는 것이다. 현실 세계의 사건과 현상을 관찰하고 측정하면 숫자나 범주 형태의 데이터가 만들어진다. 측정 방식에 따라 데이터는 서로 다른 특성을 가지며, 적용할 수 있는 연산과 통계 기법도 달라진다. 측정 척도를 이해하면 판다스에서 적절한 자료형을 선택하고, 올바른 분석 방법을 적용할 수 있다. <a href="#fig-dataframe-scale" class="quarto-xref">그림&nbsp;<span>12.2</span></a> 은 4가지 측정 척도가 계층적으로 쌓이는 구조와 각 척도에 대응하는 판다스 dtype을 보여준다.</p>
+<div id="fig-dataframe-scale" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dataframe-scale-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/dataframe-scale.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dataframe-scale-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;12.2: 측정 척도의 계층 구조와 판다스 dtype 매핑
+</figcaption>
+</figure>
+</div>
+<p>자료의 고유 특성을 수치화하는 측정 척도는 명목형, 순서형, 구간형, 비율형 4가지 유형으로 분류된다. 각 척도는 이전 척도의 특성을 포함하면서 새로운 정보를 추가하는 계층 구조를 이룬다. </p>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">노트</span>측정 척도 4가지 유형
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>명목척도(Nominal)</strong>: 단순히 개체 특성 분류를 위해 숫자나 부호를 부여한 척도로 숫자는 의미가 없다.
+<ul>
+<li>예: 남자(M), 여자(F), 요일(월화수목금토일)</li>
+</ul></li>
+<li><strong>서열척도(Ordinal)</strong>: 명목척도에 “순서(서열)” 정보가 추가된 척도로 측정대상 간 차이 정보는 없다.
+<ul>
+<li>예: 군대계급(사병, 장교, 장군), 소득계층(1분위, 2분위, 3분위)</li>
+</ul></li>
+<li><strong>등간척도(Interval)</strong>: 서열척도에 “등간격” 정보가 추가된 척도. 0은 상대적인 위치로, 서울 10도와 제주 20도에서 제주가 2배 따뜻한 것은 아니다.
+<ul>
+<li>예: 온도, 시력, IQ 지수, 물가지수</li>
+</ul></li>
+<li><strong>비율척도(Ratio)</strong>: 등간척도에 “비율” 비교특성이 추가된 척도로 절대 0이 존재한다. 100m는 200m의 절반이다.
+<ul>
+<li>예: 키, 몸무게, 연령, 월소득</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<p>측정 척도를 올바르게 파악하는 것이 중요한 이유는 척도에 따라 적용할 수 있는 분석 방법이 달라지기 때문이다. 명목척도 데이터에는 평균을 구할 수 없고, 등간척도 데이터에는 비율을 계산할 수 없다. 예를 들어 성별 데이터에서 평균은 의미가 없고, 섭씨 온도에서 “20도는 10도의 2배”라는 표현은 틀렸다. 반면 비율척도인 키나 몸무게는 “A가 B의 2배”라는 비교가 가능하다.</p>
+<p>판다스에서 dtype을 올바르게 설정하면 이러한 실수를 예방할 수 있다. 명목척도 데이터를 <code>category</code> 타입으로 저장하면 실수로 평균을 구하려 할 때 오류가 발생한다. 서열척도는 <code>pd.Categorical(..., ordered=True)</code>로 생성하면 순서 비교(<code>&gt;</code>, <code>&lt;</code>)가 가능해진다. 등간척도와 비율척도는 <code>int64</code>나 <code>float64</code>로 저장하여 산술 연산을 수행한다.</p>
+</section>
+<section id="sec-dataframe-evolution" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="sec-dataframe-evolution"><span class="header-section-number">12.2</span> 리스트에서 데이터프레임까지</h2>
+<p></p>
+<p>파이썬 기본 자료형인 리스트와 딕셔너리는 간단한 데이터를 다루기에 충분하다. 하지만 행과 열이 있는 표 형식 데이터를 다루려면 한계가 있다. 리스트의 리스트로 표를 표현할 수 있지만, 열 이름으로 데이터에 접근하거나 특정 조건으로 행을 필터링하려면 복잡한 코드가 필요하다. 판다스는 이러한 문제를 해결하기 위해 <code>Series</code>와 <code>DataFrame</code>이라는 자료구조를 제공한다.</p>
+<div id="fig-dataframe-overview" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dataframe-overview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/dataframe-overview.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dataframe-overview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;12.3: 파이썬 자료형에서 판다스 데이터프레임으로
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-dataframe-overview" class="quarto-xref">그림&nbsp;<span>12.3</span></a> 는 파이썬 기본 자료형에서 판다스 데이터프레임으로 발전하는 과정을 보여준다. 리스트는 순서 있는 값의 모음이고, 딕셔너리는 키-값 쌍의 모음이다. 두 자료형을 조합하면 표 형식 데이터를 표현할 수 있지만, 열 단위 접근이나 조건 필터링에는 한계가 있다. 판다스의 Series는 인덱스가 붙은 1차원 배열로 딕셔너리와 리스트의 장점을 결합하고, 데이터프레임은 여러 Series를 열로 묶어 완전한 표 구조를 제공한다. 각 열은 서로 다른 자료형을 가질 수 있으면서도 행 단위로 정렬된 대응 관계를 유지한다.</p>
+<section id="리스트와-딕셔너리-한계" class="level3" data-number="12.2.1">
+<h3 data-number="12.2.1" class="anchored" data-anchor-id="리스트와-딕셔너리-한계"><span class="header-section-number">12.2.1</span> 리스트와 딕셔너리 한계</h3>
+<p>파이썬 기본 자료형만으로 표 형식 데이터를 다루면 곧 한계에 부딪힌다. 리스트의 리스트로 표를 표현하면 행 접근은 간단하지만 열 접근은 번거롭다. <code>data[0]</code>으로 첫 번째 행 전체를 가져올 수 있지만, 두 번째 열의 모든 값을 가져오려면 리스트 컴프리헨션이나 반복문이 필요하다. 열 이름도 없어서 <code>data[1]</code>이 무엇을 의미하는지 코드만 봐서는 알 수 없다.</p>
+<div id="1d1ccc18" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 리스트의 리스트로 표 표현</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> [</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    [<span class="st">'Mercury'</span>, <span class="fl">0.382</span>, <span class="va">False</span>],</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    [<span class="st">'Venus'</span>, <span class="fl">0.949</span>, <span class="va">False</span>],</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    [<span class="st">'Earth'</span>, <span class="fl">1.0</span>, <span class="va">False</span>],</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    [<span class="st">'Jupiter'</span>, <span class="fl">11.209</span>, <span class="va">True</span>]</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 첫 번째 행 접근은 쉽다</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data[<span class="dv">0</span>])</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 두 번째 열(지름) 접근은 루프가 필요하다</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>diameters <span class="op">=</span> [row[<span class="dv">1</span>] <span class="cf">for</span> row <span class="kw">in</span> data]</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(diameters)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['Mercury', 0.382, False]
+[0.382, 0.949, 1.0, 11.209]</code></pre>
+</div>
+</div>
+<p>딕셔너리의 리스트로 표현하면 열 이름 문제는 해결된다. 각 행이 딕셔너리이므로 <code>planet['diameter']</code>처럼 의미 있는 이름으로 값에 접근할 수 있다. 하지만 열 전체를 대상으로 연산하려면 여전히 반복문이 필요하다. 모든 행성의 지름 평균을 구하려면 제너레이터 표현식으로 각 딕셔너리에서 값을 추출한 뒤 직접 계산해야 한다. 데이터가 수천, 수만 행이라면 이런 방식은 코드가 복잡해지고 성능도 떨어진다.</p>
+<div id="8a631f4a" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 딕셔너리의 리스트</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>planets <span class="op">=</span> [</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    {<span class="st">'name'</span>: <span class="st">'Mercury'</span>, <span class="st">'diameter'</span>: <span class="fl">0.382</span>, <span class="st">'rings'</span>: <span class="va">False</span>},</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    {<span class="st">'name'</span>: <span class="st">'Venus'</span>, <span class="st">'diameter'</span>: <span class="fl">0.949</span>, <span class="st">'rings'</span>: <span class="va">False</span>},</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    {<span class="st">'name'</span>: <span class="st">'Earth'</span>, <span class="st">'diameter'</span>: <span class="fl">1.0</span>, <span class="st">'rings'</span>: <span class="va">False</span>}</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 모든 지름의 평균을 구하려면</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>avg <span class="op">=</span> <span class="bu">sum</span>(p[<span class="st">'diameter'</span>] <span class="cf">for</span> p <span class="kw">in</span> planets) <span class="op">/</span> <span class="bu">len</span>(planets)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"평균 지름: </span><span class="sc">{</span>avg<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>평균 지름: 0.777</code></pre>
+</div>
+</div>
+</section>
+<section id="판다스-series" class="level3" data-number="12.2.2">
+<h3 data-number="12.2.2" class="anchored" data-anchor-id="판다스-series"><span class="header-section-number">12.2.2</span> 판다스 Series</h3>
+<p>판다스의 <code>Series</code>는 리스트와 딕셔너리의 장점을 결합한 1차원 자료구조다. 리스트처럼 순서가 있으면서 딕셔너리처럼 각 요소에 레이블(인덱스)이 붙어 있다. 정수 위치로도, 레이블 이름으로도 데이터에 접근할 수 있어 유연하다. 또한 넘파이(NumPy) 배열을 기반으로 하여 벡터화 연산이 가능하므로, 반복문 없이도 전체 데이터에 대한 산술 연산이나 조건 필터링을 한 줄로 수행할 수 있다. </p>
+<div id="e9b41abd" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 리스트로 Series 생성</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>diameters <span class="op">=</span> pd.Series([<span class="fl">0.382</span>, <span class="fl">0.949</span>, <span class="fl">1.0</span>, <span class="fl">11.209</span>])</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(diameters)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0     0.382
+1     0.949
+2     1.000
+3    11.209
+dtype: float64</code></pre>
+</div>
+</div>
+<p>Series 생성 시 인덱스를 직접 지정하면 데이터에 의미를 부여할 수 있다. 행성 이름을 인덱스로 사용하면 <code>diameters['Earth']</code>처럼 직관적인 코드로 값을 조회할 수 있고, <code>diameters[diameters &gt; 1]</code>처럼 조건을 만족하는 요소만 필터링하는 것도 간단하다.</p>
+<div id="97ea6561" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 인덱스 지정</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>diameters <span class="op">=</span> pd.Series(</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">0.382</span>, <span class="fl">0.949</span>, <span class="fl">1.0</span>, <span class="fl">11.209</span>],</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span>[<span class="st">'Mercury'</span>, <span class="st">'Venus'</span>, <span class="st">'Earth'</span>, <span class="st">'Jupiter'</span>]</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(diameters[<span class="st">'Earth'</span>])</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(diameters[diameters <span class="op">&gt;</span> <span class="dv">1</span>])  <span class="co"># 조건 필터링</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1.0
+Jupiter    11.209
+dtype: float64</code></pre>
+</div>
+</div>
+</section>
+<section id="판다스-데이터프레임" class="level3" data-number="12.2.3">
+<h3 data-number="12.2.3" class="anchored" data-anchor-id="판다스-데이터프레임"><span class="header-section-number">12.2.3</span> 판다스 데이터프레임</h3>
+<p>Series가 1차원이라면 데이터프레임은 여러 Series를 열로 묶은 2차원 표다. 엑셀 스프레드시트나 데이터베이스 테이블과 유사한 구조로, 행과 열로 데이터를 조직한다. 각 열은 하나의 Series이며 서로 다른 자료형을 가질 수 있다. 이름, 나이, 급여처럼 문자열, 정수, 실수가 하나의 표에 공존할 수 있다는 뜻이다. 다만 <strong>모든 열의 길이는 반드시 같아야 한다</strong>. 이 제약 덕분에 행 단위로 데이터를 정렬하거나 필터링할 때 열 간의 대응 관계가 항상 유지된다. </p>
+<p>데이터프레임의 강력함은 열 단위 연산과 행 단위 필터링을 간결하게 수행할 수 있다는 점에 있다. <code>df['salary'].mean()</code>처럼 열 전체의 평균을 한 줄로 계산하고, <code>df[df['age'] &gt; 30]</code>처럼 조건을 만족하는 행만 추출할 수 있다. 딕셔너리의 리스트로는 수십 줄이 필요했던 작업이 데이터프레임에서는 직관적인 한 줄 표현으로 가능해진다.</p>
+<div id="92dd890b" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 딕셔너리로 데이터프레임 생성</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>planets <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'name'</span>: [<span class="st">'Mercury'</span>, <span class="st">'Venus'</span>, <span class="st">'Earth'</span>, <span class="st">'Jupiter'</span>],</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'diameter'</span>: [<span class="fl">0.382</span>, <span class="fl">0.949</span>, <span class="fl">1.0</span>, <span class="fl">11.209</span>],</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'rings'</span>: [<span class="va">False</span>, <span class="va">False</span>, <span class="va">False</span>, <span class="va">True</span>]</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(planets)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      name  diameter  rings
+0  Mercury     0.382  False
+1    Venus     0.949  False
+2    Earth     1.000  False
+3  Jupiter    11.209   True</code></pre>
+</div>
+</div>
+<p>데이터프레임의 각 열은 Series다. 대괄호에 열 이름을 넣어 개별 열에 접근하면 Series 객체가 반환되고, Series가 제공하는 모든 메서드를 그대로 사용할 수 있다. 아래 코드에서 <code>planets['diameter']</code>는 Series를 반환하며, <code>mean()</code> 메서드로 평균을 계산한다.</p>
+<div id="bbad2653" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(planets[<span class="st">'diameter'</span>]))</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(planets[<span class="st">'diameter'</span>].mean())</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.core.series.Series'&gt;
+3.385</code></pre>
+</div>
+</div>
+<p>여러 열을 동시에 선택하면 데이터프레임이 반환된다. 열 이름의 리스트를 대괄호에 전달하면 된다. 이 방식으로 분석에 필요한 열만 추출하여 새로운 데이터프레임을 만들 수 있다.</p>
+</section>
+</section>
+<section id="sec-dataframe-create" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="sec-dataframe-create"><span class="header-section-number">12.3</span> 데이터프레임 생성</h2>
+<p>데이터 분석의 첫 단계는 분석할 데이터를 데이터프레임으로 가져오는 것이다. 판다스는 다양한 데이터 소스를 데이터프레임으로 변환하는 방법을 제공한다. 메모리에 있는 파이썬 자료구조(딕셔너리, 리스트)에서 직접 생성할 수도 있고, CSV, Excel, JSON, SQL 데이터베이스 같은 외부 파일이나 시스템에서 읽어올 수도 있다. <a href="#fig-dataframe-create" class="quarto-xref">그림&nbsp;<span>12.4</span></a> 는 데이터프레임 생성의 주요 경로를 보여준다. </p>
+<div id="fig-dataframe-create" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dataframe-create-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/dataframe-create.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dataframe-create-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;12.4: 데이터프레임 생성 방법
+</figcaption>
+</figure>
+</div>
+<section id="딕셔너리로-생성" class="level3" data-number="12.3.1">
+<h3 data-number="12.3.1" class="anchored" data-anchor-id="딕셔너리로-생성"><span class="header-section-number">12.3.1</span> 딕셔너리로 생성</h3>
+<p>가장 직관적인 데이터프레임 생성 방법은 딕셔너리를 사용하는 것이다. 딕셔너리의 키가 열 이름이 되고, 각 키에 대응하는 리스트가 해당 열의 데이터가 된다. 열 단위로 데이터를 준비할 때 자연스러운 방식이며, 코드에서 테스트용 데이터를 빠르게 만들 때도 유용하다.</p>
+<div id="48fe6029" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'name'</span>: [<span class="st">'Alice'</span>, <span class="st">'Bob'</span>, <span class="st">'Charlie'</span>],</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'age'</span>: [<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">35</span>],</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'city'</span>: [<span class="st">'Seoul'</span>, <span class="st">'Busan'</span>, <span class="st">'Daegu'</span>]</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      name  age   city
+0    Alice   25  Seoul
+1      Bob   30  Busan
+2  Charlie   35  Daegu</code></pre>
+</div>
+</div>
+</section>
+<section id="리스트의-리스트로-생성" class="level3" data-number="12.3.2">
+<h3 data-number="12.3.2" class="anchored" data-anchor-id="리스트의-리스트로-생성"><span class="header-section-number">12.3.2</span> 리스트의 리스트로 생성</h3>
+<p>데이터가 행 단위로 정리되어 있다면 리스트의 리스트를 사용한다. 웹 스크래핑이나 API 응답에서 데이터를 가져올 때 흔히 만나는 형태다. 각 내부 리스트가 하나의 행이 되고, <code>columns</code> 매개변수로 열 이름을 별도로 지정해야 한다. 열 이름을 지정하지 않으면 0, 1, 2 같은 정수 인덱스가 열 이름으로 사용된다.</p>
+<div id="04af7df9" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> [</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    [<span class="st">'Alice'</span>, <span class="dv">25</span>, <span class="st">'Seoul'</span>],</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    [<span class="st">'Bob'</span>, <span class="dv">30</span>, <span class="st">'Busan'</span>],</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    [<span class="st">'Charlie'</span>, <span class="dv">35</span>, <span class="st">'Daegu'</span>]</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data, columns<span class="op">=</span>[<span class="st">'name'</span>, <span class="st">'age'</span>, <span class="st">'city'</span>])</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      name  age   city
+0    Alice   25  Seoul
+1      Bob   30  Busan
+2  Charlie   35  Daegu</code></pre>
+</div>
+</div>
+</section>
+<section id="csv-파일-읽기" class="level3" data-number="12.3.3">
+<h3 data-number="12.3.3" class="anchored" data-anchor-id="csv-파일-읽기"><span class="header-section-number">12.3.3</span> CSV 파일 읽기</h3>
+<p>실무에서 가장 많이 사용하는 방법이 CSV 파일 읽기다. <code>pd.read_csv()</code> 함수 하나로 파일을 열고 파싱하고 데이터프레임으로 변환하는 작업을 한 번에 처리한다. 첫 번째 행을 열 이름으로 자동 인식하고, 각 열의 자료형도 데이터를 분석하여 추론한다. 인코딩, 구분자, 결측치 표시 등 다양한 옵션을 지원하므로 대부분의 CSV 형식을 처리할 수 있다. </p>
+<div id="f53466d2" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># CSV 파일 읽기</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'data/employees.csv'</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 처음 5행 확인</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.head())</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="기본-속성-확인" class="level3" data-number="12.3.4">
+<h3 data-number="12.3.4" class="anchored" data-anchor-id="기본-속성-확인"><span class="header-section-number">12.3.4</span> 기본 속성 확인</h3>
+<p>데이터프레임을 생성하거나 파일에서 읽어왔다면 가장 먼저 기본 속성을 확인해야 한다. 행과 열의 수는 예상과 일치하는가? 열 이름은 올바른가? 각 열의 자료형은 적절한가? 이 세 가지 질문에 답할 수 있어야 본격적인 분석을 시작할 수 있다. <code>shape</code>, <code>columns</code>, <code>dtypes</code> 속성과 <code>info()</code> 메서드가 이 정보를 제공한다.</p>
+<div id="6259151a" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'name'</span>: [<span class="st">'Alice'</span>, <span class="st">'Bob'</span>, <span class="st">'Charlie'</span>, <span class="st">'David'</span>],</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'age'</span>: [<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">35</span>, <span class="dv">28</span>],</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'salary'</span>: [<span class="dv">50000</span>, <span class="dv">60000</span>, <span class="dv">70000</span>, <span class="dv">55000</span>],</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'department'</span>: [<span class="st">'HR'</span>, <span class="st">'IT'</span>, <span class="st">'IT'</span>, <span class="st">'HR'</span>]</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"행, 열 수: </span><span class="sc">{</span>df<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"열 이름: </span><span class="sc">{</span><span class="bu">list</span>(df.columns)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"인덱스: </span><span class="sc">{</span><span class="bu">list</span>(df.index)<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>행, 열 수: (4, 4)
+열 이름: ['name', 'age', 'salary', 'department']
+인덱스: [0, 1, 2, 3]</code></pre>
+</div>
+</div>
+<p><code>dtypes</code> 속성으로 각 열의 자료형을 확인한다.</p>
+<div id="264b5c75" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.dtypes)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>name          object
+age            int64
+salary         int64
+department    object
+dtype: object</code></pre>
+</div>
+</div>
+<p><code>info()</code> 메서드는 데이터프레임의 전체 정보를 요약해서 보여준다.</p>
+<div id="cc8286f7" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df.info()</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 4 entries, 0 to 3
+Data columns (total 4 columns):
+ #   Column      Non-Null Count  Dtype 
+---  ------      --------------  ----- 
+ 0   name        4 non-null      object
+ 1   age         4 non-null      int64 
+ 2   salary      4 non-null      int64 
+ 3   department  4 non-null      object
+dtypes: int64(2), object(2)
+memory usage: 260.0+ bytes</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-dataframe-select" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="sec-dataframe-select"><span class="header-section-number">12.4</span> 데이터 선택과 필터링</h2>
+<p>데이터프레임에서 원하는 데이터를 선택하는 방법을 익히는 것이 판다스 활용 핵심이다. 수천 개의 열 중에서 분석에 필요한 몇 개만 추출하거나, 수백만 행 중에서 특정 조건을 만족하는 행만 걸러내는 작업이 데이터 분석의 대부분을 차지한다. 열 선택, 행 선택, 조건 필터링 세 가지 방법을 구분해서 이해해야 한다. <code>loc</code>과 <code>iloc</code>의 차이점과 열/행 선택 방법이 <a href="#fig-dataframe-selection" class="quarto-xref">그림&nbsp;<span>12.5</span></a> 에 나와 있다. </p>
+<div id="fig-dataframe-selection" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dataframe-selection-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/dataframe-selection.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dataframe-selection-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;12.5: 데이터프레임 데이터 선택 - loc vs iloc
+</figcaption>
+</figure>
+</div>
+<section id="열-선택" class="level3" data-number="12.4.1">
+<h3 data-number="12.4.1" class="anchored" data-anchor-id="열-선택"><span class="header-section-number">12.4.1</span> 열 선택</h3>
+<p>열 선택은 데이터프레임에서 가장 기본적인 연산이다. 분석에 필요한 변수만 추출하거나, 특정 열에 대해 통계를 계산할 때 사용한다. 단일 열을 선택하면 판다스 시리즈가 반환되고, 여러 열을 선택하면 데이터프레임이 반환된다는 점을 기억해야 한다.</p>
+<div id="bbb54638" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">'name'</span>])</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(df[<span class="st">'name'</span>]))</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0      Alice
+1        Bob
+2    Charlie
+3      David
+Name: name, dtype: object
+&lt;class 'pandas.core.series.Series'&gt;</code></pre>
+</div>
+</div>
+<p>여러 열을 선택하려면 열 이름의 리스트를 전달한다. 결과는 데이터프레임이다.</p>
+<div id="d8e5c72c" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[[<span class="st">'name'</span>, <span class="st">'salary'</span>]])</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      name  salary
+0    Alice   50000
+1      Bob   60000
+2  Charlie   70000
+3    David   55000</code></pre>
+</div>
+</div>
+</section>
+<section id="행-선택-loc과-iloc" class="level3" data-number="12.4.2">
+<h3 data-number="12.4.2" class="anchored" data-anchor-id="행-선택-loc과-iloc"><span class="header-section-number">12.4.2</span> 행 선택: loc과 iloc</h3>
+<p>행을 선택할 때는 <code>loc</code>과 <code>iloc</code> 두 가지 방법을 사용한다. <code>loc</code>은 레이블(인덱스 이름) 기반이고, <code>iloc</code>은 정수 위치 기반이다. 데이터프레임의 인덱스가 정수일 때는 두 방법의 결과가 비슷해 보이지만, 문자열 인덱스를 사용하거나 슬라이싱을 할 때 중요한 차이가 드러난다. </p>
+<div id="2e5963d2" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># iloc: 정수 인덱스로 선택 (0부터 시작)</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.iloc[<span class="dv">0</span>])      <span class="co"># 첫 번째 행</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.iloc[<span class="dv">0</span>:<span class="dv">2</span>])    <span class="co"># 첫 두 행 (슬라이싱)</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>name          Alice
+age              25
+salary        50000
+department       HR
+Name: 0, dtype: object
+    name  age  salary department
+0  Alice   25   50000         HR
+1    Bob   30   60000         IT</code></pre>
+</div>
+</div>
+<div id="286be9c5" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># loc: 레이블로 선택</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.loc[<span class="dv">0</span>])       <span class="co"># 인덱스가 0인 행</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.loc[<span class="dv">0</span>:<span class="dv">2</span>])     <span class="co"># 인덱스 0부터 2까지 (끝 포함!)</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>name          Alice
+age              25
+salary        50000
+department       HR
+Name: 0, dtype: object
+      name  age  salary department
+0    Alice   25   50000         HR
+1      Bob   30   60000         IT
+2  Charlie   35   70000         IT</code></pre>
+</div>
+</div>
+<div class="callout callout-style-simple callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">경고</span>loc과 iloc 슬라이싱 차이
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>iloc[0:2]</code>는 인덱스 0, 1만 선택한다(끝 제외). <code>loc[0:2]</code>는 인덱스 0, 1, 2를 모두 선택한다(끝 포함). 이 차이를 주의해야 한다.</p>
+</div>
+</div>
+<p>행과 열을 동시에 선택할 수도 있다.</p>
+<div id="2bd255c1" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># iloc: 행 0~1, 열 0~1</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.iloc[<span class="dv">0</span>:<span class="dv">2</span>, <span class="dv">0</span>:<span class="dv">2</span>])</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co"># loc: 특정 행, 특정 열</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.loc[<span class="dv">0</span>:<span class="dv">1</span>, [<span class="st">'name'</span>, <span class="st">'salary'</span>]])</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    name  age
+0  Alice   25
+1    Bob   30
+    name  salary
+0  Alice   50000
+1    Bob   60000</code></pre>
+</div>
+</div>
+</section>
+<section id="조건-필터링" class="level3" data-number="12.4.3">
+<h3 data-number="12.4.3" class="anchored" data-anchor-id="조건-필터링"><span class="header-section-number">12.4.3</span> 조건 필터링</h3>
+<p>조건 필터링은 판다스의 가장 강력한 기능 중 하나다. SQL의 WHERE 절처럼 특정 조건을 만족하는 행만 추출할 수 있다. 조건식을 대괄호 안에 넣으면 해당 조건이 True인 행만 반환된다. 내부적으로 조건식은 불리언 Series를 생성하고, 이 Series가 True인 위치의 행만 선택된다.</p>
+<div id="28981731" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 나이가 30 이상인 행</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[df[<span class="st">'age'</span>] <span class="op">&gt;=</span> <span class="dv">30</span>])</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="co"># IT 부서 직원</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[df[<span class="st">'department'</span>] <span class="op">==</span> <span class="st">'IT'</span>])</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      name  age  salary department
+1      Bob   30   60000         IT
+2  Charlie   35   70000         IT
+      name  age  salary department
+1      Bob   30   60000         IT
+2  Charlie   35   70000         IT</code></pre>
+</div>
+</div>
+<p>여러 조건을 조합할 때는 <code>&amp;</code>(and)와 <code>|</code>(or)를 사용하고, 각 조건을 괄호로 감싼다.</p>
+<div id="4a6eeb7d" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># IT 부서이면서 나이 30 이상</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[(df[<span class="st">'department'</span>] <span class="op">==</span> <span class="st">'IT'</span>) <span class="op">&amp;</span> (df[<span class="st">'age'</span>] <span class="op">&gt;=</span> <span class="dv">30</span>)])</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      name  age  salary department
+1      Bob   30   60000         IT
+2  Charlie   35   70000         IT</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-dataframe-dtype" class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="sec-dataframe-dtype"><span class="header-section-number">12.5</span> 자료형과 형변환</h2>
+<p>데이터프레임의 각 열은 고유한 자료형(dtype)을 갖는다. 판다스는 데이터를 읽을 때 각 열의 자료형을 자동으로 추론하지만, 추론이 항상 정확하지는 않다. CSV 파일에서 “001”, “002” 같은 코드를 읽으면 정수로 인식해 앞의 0이 사라지고, “2024-01-15” 같은 날짜 문자열도 단순 텍스트로 처리된다. 올바른 자료형을 설정해야 정확한 연산과 분석이 가능하다. <a href="#fig-dataframe-dtype" class="quarto-xref">그림&nbsp;<span>12.6</span></a> 은 주요 dtype과 형변환 관계를 보여준다. </p>
+<div id="fig-dataframe-dtype" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dataframe-dtype-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/dataframe-dtype.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dataframe-dtype-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;12.6: 판다스 dtype과 형변환
+</figcaption>
+</figure>
+</div>
+<section id="판다스-dtype-종류" class="level3" data-number="12.5.1">
+<h3 data-number="12.5.1" class="anchored" data-anchor-id="판다스-dtype-종류"><span class="header-section-number">12.5.1</span> 판다스 dtype 종류</h3>
+<p>판다스 dtype 시스템은 넘파이 배열을 기반으로 하면서 데이터 분석에 필요한 타입을 추가로 제공한다. <a href="#fig-dataframe-dtype-system" class="quarto-xref">그림&nbsp;<span>12.7</span></a> 은 넘파이 기본 dtype에서 판다스 확장 dtype으로 발전하는 관계를 보여준다.</p>
+<div id="fig-dataframe-dtype-system" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dataframe-dtype-system-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/dataframe-dtype-system.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dataframe-dtype-system-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;12.7: 넘파이 기반 판다스 dtype 체계
+</figcaption>
+</figure>
+</div>
+<p>넘파이는 <code>int64</code>, <code>float64</code>, <code>bool</code>, <code>object</code> 네 가지 기본 dtype을 제공한다. 판다스는 여기에 데이터 분석에 특화된 타입을 추가했다. <code>datetime64</code>는 날짜와 시간을 다루며 시계열 분석의 기반이 된다. <code>category</code>는 성별이나 부서처럼 제한된 값을 효율적으로 저장하고, <code>string</code>은 텍스트 전용 타입으로 문자열 메서드를 더 일관되게 지원한다. 판다스 1.0부터는 <code>Int64</code>, <code>Float64</code>, <code>boolean</code> 같은 nullable 타입도 도입되어 결측치가 포함된 정수 열도 정수형을 유지할 수 있게 되었다.</p>
+<p>각 dtype에 따라 사용 가능한 메서드와 연산이 달라지므로, 분석 전에 <code>dtypes</code> 속성으로 각 열의 자료형을 확인하는 습관이 중요하다. 숫자 연산이 필요하면 <code>int64</code>나 <code>float64</code>를, 날짜 계산이 필요하면 <code>datetime64</code>를, 메모리 효율이 중요하고 값의 종류가 제한적이면 <code>category</code>를 선택한다.</p>
+</section>
+<section id="astype으로-형변환" class="level3" data-number="12.5.2">
+<h3 data-number="12.5.2" class="anchored" data-anchor-id="astype으로-형변환"><span class="header-section-number">12.5.2</span> astype()으로 형변환</h3>
+<p><code>astype()</code> 메서드는 열의 자료형을 다른 타입으로 변환한다. 문자열로 저장된 숫자를 정수나 실수로 바꾸거나, 숫자를 문자열로 변환할 때 사용한다. 변환이 불가능한 값이 있으면 오류가 발생하므로, 변환 전에 데이터를 확인하거나 <code>errors='coerce'</code> 옵션으로 변환 실패 시 결측치로 처리할 수 있다. </p>
+<div id="052b9016" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 정수를 실수로</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'age_float'</span>] <span class="op">=</span> df[<span class="st">'age'</span>].astype(<span class="st">'float64'</span>)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">'age_float'</span>].dtype)</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 숫자를 문자열로</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'age_str'</span>] <span class="op">=</span> df[<span class="st">'age'</span>].astype(<span class="st">'str'</span>)</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">'age_str'</span>].dtype)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>float64
+object</code></pre>
+</div>
+</div>
+</section>
+<section id="범주형-데이터" class="level3" data-number="12.5.3">
+<h3 data-number="12.5.3" class="anchored" data-anchor-id="범주형-데이터"><span class="header-section-number">12.5.3</span> 범주형 데이터</h3>
+<p>성별, 부서, 등급처럼 제한된 값 중 하나를 갖는 데이터는 범주형(category)으로 저장하는 것이 효율적이다. 문자열(<code>object</code>)로 저장하면 “HR”이 100번 반복될 때 100개의 문자열 객체가 생성되지만, category로 저장하면 고유 값은 한 번만 저장하고 정수 인덱스로 참조한다. 메모리 사용량이 크게 줄어들고, 그룹화나 정렬 연산도 빨라진다. </p>
+<div id="40115a11" class="cell" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"변환 전: </span><span class="sc">{</span>df[<span class="st">'department'</span>]<span class="sc">.</span>dtype<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'department'</span>] <span class="op">=</span> df[<span class="st">'department'</span>].astype(<span class="st">'category'</span>)</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"변환 후: </span><span class="sc">{</span>df[<span class="st">'department'</span>]<span class="sc">.</span>dtype<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">'department'</span>].cat.categories)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>변환 전: object
+변환 후: category
+Index(['HR', 'IT'], dtype='object')</code></pre>
+</div>
+</div>
+<p>순서가 있는 범주형은 <code>pd.Categorical</code>로 생성한다.</p>
+<div id="38ce9584" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 순서 있는 범주형</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>satisfaction <span class="op">=</span> pd.Categorical(</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>    [<span class="st">'High'</span>, <span class="st">'Low'</span>, <span class="st">'Medium'</span>, <span class="st">'High'</span>, <span class="st">'Low'</span>],</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>    categories<span class="op">=</span>[<span class="st">'Low'</span>, <span class="st">'Medium'</span>, <span class="st">'High'</span>],</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>    ordered<span class="op">=</span><span class="va">True</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(satisfaction)</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(satisfaction <span class="op">&gt;</span> <span class="st">'Low'</span>)  <span class="co"># 순서 비교 가능</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['High', 'Low', 'Medium', 'High', 'Low']
+Categories (3, object): ['Low' &lt; 'Medium' &lt; 'High']
+[ True False  True  True False]</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-dataframe-missing" class="level2" data-number="12.6">
+<h2 data-number="12.6" class="anchored" data-anchor-id="sec-dataframe-missing"><span class="header-section-number">12.6</span> 결측치 처리</h2>
+<p>실제 데이터는 완벽하지 않다. 설문 응답에서 누락된 문항, 센서 오류로 기록되지 않은 측정값, 데이터 입력 실수 등 다양한 이유로 결측치(missing values)가 발생한다. 결측치를 무시하고 분석하면 잘못된 결론에 도달할 수 있고, 무조건 제거하면 중요한 정보를 잃을 수 있다. 결측치의 패턴을 파악하고 적절한 처리 전략을 선택하는 것이 데이터 분석의 핵심 역량이다. <a href="#fig-dataframe-missing" class="quarto-xref">그림&nbsp;<span>12.8</span></a> 은 결측치 처리 과정을 보여준다. </p>
+<div id="fig-dataframe-missing" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dataframe-missing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/dataframe-missing.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dataframe-missing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;12.8: 결측치 확인과 처리 흐름
+</figcaption>
+</figure>
+</div>
+<section id="결측치-종류" class="level3" data-number="12.6.1">
+<h3 data-number="12.6.1" class="anchored" data-anchor-id="결측치-종류"><span class="header-section-number">12.6.1</span> 결측치 종류</h3>
+<p>파이썬과 판다스에서 결측치를 나타내는 값이 여러 가지 있다. <code>None</code>은 파이썬 기본 null 값이고, <code>np.nan</code>은 넘파이에서 사용하는 “Not a Number” 값이다. 판다스 1.0부터는 <code>pd.NA</code>라는 통합 결측치 표현이 도입되었다. 세 값 모두 데이터프레임에서 결측치로 인식되지만, dtype에 따라 내부적으로 다르게 처리된다. 숫자형 열에서는 <code>np.nan</code>이 사용되고, 문자열 열에서는 <code>None</code>이 그대로 유지된다.</p>
+<div id="fe7d7a5c" class="cell" data-execution_count="23">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 결측치가 있는 데이터프레임</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>df_missing <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'a'</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="va">None</span>, <span class="dv">4</span>],</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'b'</span>: [<span class="dv">5</span>, np.nan, <span class="dv">7</span>, <span class="dv">8</span>],</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'c'</span>: [<span class="st">'x'</span>, <span class="st">'y'</span>, <span class="va">None</span>, <span class="st">'z'</span>]</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_missing)</span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_missing.dtypes)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     a    b     c
+0  1.0  5.0     x
+1  2.0  NaN     y
+2  NaN  7.0  None
+3  4.0  8.0     z
+a    float64
+b    float64
+c     object
+dtype: object</code></pre>
+</div>
+</div>
+</section>
+<section id="결측치-확인" class="level3" data-number="12.6.2">
+<h3 data-number="12.6.2" class="anchored" data-anchor-id="결측치-확인"><span class="header-section-number">12.6.2</span> 결측치 확인</h3>
+<p>결측치 처리의 첫 단계는 어디에 얼마나 있는지 파악하는 것이다. <code>isna()</code> 메서드는 각 셀이 결측치인지 여부를 불리언으로 반환한다. 전체 데이터프레임에 적용하면 같은 크기의 불리언 데이터프레임이 되고, 열 단위로 <code>sum()</code>을 적용하면 열별 결측치 개수를 얻는다. <code>notna()</code>는 <code>isna()</code>의 반대로, 결측치가 아닌 셀을 True로 표시한다. </p>
+<div id="27c65b36" class="cell" data-execution_count="24">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 결측치 여부 확인</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_missing.isna())</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 열별 결측치 개수</span></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_missing.isna().<span class="bu">sum</span>())</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 결측치가 있는 행 확인</span></span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_missing[df_missing.isna().<span class="bu">any</span>(axis<span class="op">=</span><span class="dv">1</span>)])</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       a      b      c
+0  False  False  False
+1  False   True  False
+2   True  False   True
+3  False  False  False
+a    1
+b    1
+c    1
+dtype: int64
+     a    b     c
+1  2.0  NaN     y
+2  NaN  7.0  None</code></pre>
+</div>
+</div>
+</section>
+<section id="결측치-제거" class="level3" data-number="12.6.3">
+<h3 data-number="12.6.3" class="anchored" data-anchor-id="결측치-제거"><span class="header-section-number">12.6.3</span> 결측치 제거</h3>
+<p>가장 단순한 결측치 처리 방법은 해당 행이나 열을 제거하는 것이다. <code>dropna()</code> 메서드는 기본적으로 결측치가 하나라도 있는 행을 제거한다. 분석에 사용할 열이 명확할 때는 <code>subset</code> 매개변수로 특정 열만 기준으로 삼을 수 있다. 모든 값이 결측치인 행만 제거하려면 <code>how='all'</code>을 지정한다. 다만 결측치가 많은 데이터에서 무조건 제거하면 분석에 사용할 데이터가 크게 줄어들 수 있으므로 주의가 필요하다. </p>
+<div id="deebc359" class="cell" data-execution_count="25">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 결측치가 있는 행 제거</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_missing.dropna())</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 특정 열 기준으로 제거</span></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_missing.dropna(subset<span class="op">=</span>[<span class="st">'a'</span>]))</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     a    b  c
+0  1.0  5.0  x
+3  4.0  8.0  z
+     a    b  c
+0  1.0  5.0  x
+1  2.0  NaN  y
+3  4.0  8.0  z</code></pre>
+</div>
+</div>
+</section>
+<section id="결측치-대체" class="level3" data-number="12.6.4">
+<h3 data-number="12.6.4" class="anchored" data-anchor-id="결측치-대체"><span class="header-section-number">12.6.4</span> 결측치 대체</h3>
+<p>결측치를 제거하는 대신 다른 값으로 대체하면 데이터 손실을 최소화할 수 있다. <code>fillna()</code> 메서드는 결측치를 지정한 값으로 채운다. 단순히 0이나 평균으로 대체할 수도 있고, 딕셔너리를 전달하여 열마다 다른 대체값을 지정할 수도 있다. 시계열 데이터에서는 <code>method='ffill'</code>(앞의 값으로 채움)이나 <code>method='bfill'</code>(뒤의 값으로 채움)을 사용하기도 한다. 어떤 값으로 대체할지는 데이터의 특성과 분석 목적에 따라 달라진다. </p>
+<div id="7a44bd7f" class="cell" data-execution_count="26">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 0으로 대체</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_missing[<span class="st">'a'</span>].fillna(<span class="dv">0</span>))</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 평균으로 대체</span></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_missing[<span class="st">'a'</span>].fillna(df_missing[<span class="st">'a'</span>].mean()))</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 열마다 다른 값으로 대체</span></span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_missing.fillna({<span class="st">'a'</span>: <span class="dv">0</span>, <span class="st">'b'</span>: <span class="op">-</span><span class="dv">1</span>, <span class="st">'c'</span>: <span class="st">'unknown'</span>}))</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0    1.0
+1    2.0
+2    0.0
+3    4.0
+Name: a, dtype: float64
+0    1.000000
+1    2.000000
+2    2.333333
+3    4.000000
+Name: a, dtype: float64
+     a    b        c
+0  1.0  5.0        x
+1  2.0 -1.0        y
+2  0.0  7.0  unknown
+3  4.0  8.0        z</code></pre>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">노트</span>결측치 처리 전략
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>결측치를 제거할지 대체할지는 분석 목적에 따라 결정한다. 무조건 제거하면 데이터가 크게 줄어들 수 있고, 무조건 평균으로 대체하면 분포가 왜곡될 수 있다. 결측치의 원인과 패턴을 먼저 파악하는 것이 중요하다.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-dataframe-summary" class="level2" data-number="12.7">
+<h2 data-number="12.7" class="anchored" data-anchor-id="sec-dataframe-summary"><span class="header-section-number">12.7</span> 데이터프레임 요약</h2>
+<p>데이터 분석의 목표는 대량의 데이터에서 의미 있는 정보를 추출하는 것이다. 수백만 행의 데이터를 한 눈에 파악하려면 요약 통계가 필요하다. 판다스는 평균, 중앙값, 표준편차 같은 기술 통계량을 계산하는 메서드와 그룹별로 집계하는 <code>groupby()</code> 기능을 제공한다. 데이터의 전체적인 분포와 패턴을 파악한 뒤 세부 분석으로 들어가는 것이 효율적인 분석 순서다. </p>
+<section id="describe" class="level3" data-number="12.7.1">
+<h3 data-number="12.7.1" class="anchored" data-anchor-id="describe"><span class="header-section-number">12.7.1</span> describe()</h3>
+<p><code>describe()</code> 메서드는 숫자형 열에 대해 개수, 평균, 표준편차, 최솟값, 사분위수, 최댓값을 한 번에 계산한다. 데이터의 분포를 빠르게 파악할 때 유용하다. 평균과 중앙값(50%)의 차이가 크면 데이터가 한쪽으로 치우쳐 있다는 신호이고, 최솟값과 최댓값이 비정상적으로 크거나 작으면 이상치를 의심해볼 수 있다.</p>
+<div id="9cb85781" class="cell" data-execution_count="27">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'name'</span>: [<span class="st">'Alice'</span>, <span class="st">'Bob'</span>, <span class="st">'Charlie'</span>, <span class="st">'David'</span>, <span class="st">'Eve'</span>],</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'age'</span>: [<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">35</span>, <span class="dv">28</span>, <span class="dv">32</span>],</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'salary'</span>: [<span class="dv">50000</span>, <span class="dv">60000</span>, <span class="dv">70000</span>, <span class="dv">55000</span>, <span class="dv">65000</span>],</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'department'</span>: [<span class="st">'HR'</span>, <span class="st">'IT'</span>, <span class="st">'IT'</span>, <span class="st">'HR'</span>, <span class="st">'IT'</span>]</span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.describe())</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             age       salary
+count   5.000000      5.00000
+mean   30.000000  60000.00000
+std     3.807887   7905.69415
+min    25.000000  50000.00000
+25%    28.000000  55000.00000
+50%    30.000000  60000.00000
+75%    32.000000  65000.00000
+max    35.000000  70000.00000</code></pre>
+</div>
+</div>
+<p>문자열 열을 포함하려면 <code>include='all'</code>을 지정한다.</p>
+<div id="44741613" class="cell" data-execution_count="28">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.describe(include<span class="op">=</span><span class="st">'all'</span>))</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         name        age       salary department
+count       5   5.000000      5.00000          5
+unique      5        NaN          NaN          2
+top     Alice        NaN          NaN         IT
+freq        1        NaN          NaN          3
+mean      NaN  30.000000  60000.00000        NaN
+std       NaN   3.807887   7905.69415        NaN
+min       NaN  25.000000  50000.00000        NaN
+25%       NaN  28.000000  55000.00000        NaN
+50%       NaN  30.000000  60000.00000        NaN
+75%       NaN  32.000000  65000.00000        NaN
+max       NaN  35.000000  70000.00000        NaN</code></pre>
+</div>
+</div>
+</section>
+<section id="집계-함수" class="level3" data-number="12.7.2">
+<h3 data-number="12.7.2" class="anchored" data-anchor-id="집계-함수"><span class="header-section-number">12.7.2</span> 집계 함수</h3>
+<p><code>describe()</code>가 여러 통계량을 한 번에 보여준다면, 개별 집계 함수는 특정 통계량 하나를 계산한다. <code>mean()</code>, <code>sum()</code>, <code>max()</code>, <code>min()</code>, <code>std()</code> 등이 자주 사용된다. <code>nunique()</code>는 고유 값의 개수를 반환하여 범주형 열의 카디널리티(고유값 수)를 파악할 때 유용하다. 이러한 집계 함수는 Series에 적용하면 스칼라 값을 반환하고, 데이터프레임 전체에 적용하면 열별 집계 결과를 Series로 반환한다.</p>
+<div id="a41bd575" class="cell" data-execution_count="29">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"평균 나이: </span><span class="sc">{</span>df[<span class="st">'age'</span>]<span class="sc">.</span>mean()<span class="sc">:.1f}</span><span class="ss">"</span>)</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"급여 합계: </span><span class="sc">{</span>df[<span class="st">'salary'</span>]<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">:,}</span><span class="ss">"</span>)</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"부서 종류: </span><span class="sc">{</span>df[<span class="st">'department'</span>]<span class="sc">.</span>nunique()<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>평균 나이: 30.0
+급여 합계: 300,000
+부서 종류: 2</code></pre>
+</div>
+</div>
+</section>
+<section id="groupby" class="level3" data-number="12.7.3">
+<h3 data-number="12.7.3" class="anchored" data-anchor-id="groupby"><span class="header-section-number">12.7.3</span> groupby()</h3>
+<p><code>groupby()</code>는 데이터 분석에서 가장 강력한 도구 중 하나다. 데이터를 특정 열의 값에 따라 그룹으로 나누고, 각 그룹별로 집계 연산을 수행한다. SQL의 GROUP BY와 동일한 개념으로, “부서별 평균 급여”, “지역별 매출 합계”, “연도별 고객 수”처럼 범주별 통계를 계산할 때 사용한다. <code>agg()</code> 메서드와 함께 사용하면 여러 열에 서로 다른 집계 함수를 동시에 적용할 수 있다.</p>
+<div id="3ad7c58f" class="cell" data-execution_count="30">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 부서별 평균 급여</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.groupby(<span class="st">'department'</span>)[<span class="st">'salary'</span>].mean())</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 부서별 여러 통계량</span></span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.groupby(<span class="st">'department'</span>).agg({</span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'salary'</span>: [<span class="st">'mean'</span>, <span class="st">'max'</span>],</span>
+<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'age'</span>: <span class="st">'mean'</span></span>
+<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a>}))</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>department
+HR    52500.0
+IT    65000.0
+Name: salary, dtype: float64
+             salary               age
+               mean    max       mean
+department                           
+HR          52500.0  55000  26.500000
+IT          65000.0  70000  32.333333</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-dataframe-debug" class="level2" data-number="12.8">
+<h2 data-number="12.8" class="anchored" data-anchor-id="sec-dataframe-debug"><span class="header-section-number">12.8</span> 디버깅</h2>
+<p></p>
+<p>데이터프레임 작업에서 오류는 피할 수 없다. 열 이름 오타, 자료형 불일치, 인덱스 혼동 등 다양한 문제가 발생한다. 중요한 것은 오류 메시지를 정확히 읽고 원인을 파악하는 능력이다. 데이터프레임 관련 오류는 대부분 명확한 패턴이 있어서, 몇 가지 대표적인 사례를 익혀두면 빠르게 해결할 수 있다.</p>
+<section id="keyerror-열-이름-오류" class="level3" data-number="12.8.1">
+<h3 data-number="12.8.1" class="anchored" data-anchor-id="keyerror-열-이름-오류"><span class="header-section-number">12.8.1</span> KeyError: 열 이름 오류</h3>
+<p>가장 흔한 오류 중 하나가 존재하지 않는 열 이름을 사용할 때 발생하는 <code>KeyError</code>다. 특히 대소문자 차이(‘Name’과 ’name’), 앞뒤 공백(’ name’과 ‘name’), 특수문자 포함 여부가 문제가 된다. CSV 파일에서 읽어온 데이터는 열 이름에 예상치 못한 공백이 포함된 경우가 많으므로, <code>df.columns</code>로 정확한 열 이름을 먼저 확인하는 습관이 필요하다.</p>
+<div id="dadd87fd" class="cell" data-execution_count="31">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'name'</span>: [<span class="st">'Alice'</span>], <span class="st">'age'</span>: [<span class="dv">25</span>]})</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="co"># df['Name']  # KeyError: 'Name' (대소문자 주의!)</span></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.columns)  <span class="co"># 열 이름 확인</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Index(['name', 'age'], dtype='object')</code></pre>
+</div>
+</div>
+</section>
+<section id="settingwithcopywarning" class="level3" data-number="12.8.2">
+<h3 data-number="12.8.2" class="anchored" data-anchor-id="settingwithcopywarning"><span class="header-section-number">12.8.2</span> SettingWithCopyWarning</h3>
+<p>판다스를 사용하다 보면 <code>SettingWithCopyWarning</code> 경고를 자주 만난다. 데이터프레임의 일부를 선택한 결과가 원본의 “뷰(view)”인지 “복사본(copy)”인지 모호할 때 발생한다. 복사본에 값을 할당하면 원본은 변경되지 않아 의도한 대로 동작하지 않는다. 이러한 문제를 피하려면 값을 변경할 때 항상 <code>.loc</code>을 사용하여 원본 데이터프레임에 직접 접근해야 한다.</p>
+<div id="5f86c507" class="cell" data-execution_count="32">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 경고가 발생하는 패턴</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>subset <span class="op">=</span> df[df[<span class="st">'age'</span>] <span class="op">&gt;</span> <span class="dv">20</span>]</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="co"># subset['age'] = 30  # SettingWithCopyWarning</span></span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 올바른 방법: .loc 사용</span></span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>df.loc[df[<span class="st">'age'</span>] <span class="op">&gt;</span> <span class="dv">20</span>, <span class="st">'age'</span>] <span class="op">=</span> <span class="dv">30</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="자료형-관련-오류" class="level3" data-number="12.8.3">
+<h3 data-number="12.8.3" class="anchored" data-anchor-id="자료형-관련-오류"><span class="header-section-number">12.8.3</span> 자료형 관련 오류</h3>
+<p>CSV 파일에서 읽어온 숫자가 문자열로 인식되는 경우가 흔하다. 숫자처럼 보이지만 dtype이 <code>object</code>인 열에 <code>mean()</code>이나 <code>sum()</code> 같은 숫자 연산을 시도하면 오류가 발생하거나 예상치 못한 결과가 나온다. 분석 전에 <code>dtypes</code>로 각 열의 자료형을 확인하고, 필요하면 <code>astype()</code>으로 변환해야 한다.</p>
+<div id="6d476152" class="cell" data-execution_count="33">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'value'</span>: [<span class="st">'10'</span>, <span class="st">'20'</span>, <span class="st">'30'</span>]})</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="co"># df['value'].mean()  # 문자열이므로 오류</span></span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 해결: 자료형 변환</span></span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'value'</span>] <span class="op">=</span> df[<span class="st">'value'</span>].astype(<span class="st">'int64'</span>)</span>
+<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">'value'</span>].mean())</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>20.0</code></pre>
+</div>
+</div>
+</section>
+<section id="디버깅-전략" class="level3" data-number="12.8.4">
+<h3 data-number="12.8.4" class="anchored" data-anchor-id="디버깅-전략"><span class="header-section-number">12.8.4</span> 디버깅 전략</h3>
+<p>데이터프레임 작업에서 문제가 발생하면 체계적인 점검이 필요하다. 먼저 <code>dtypes</code>로 각 열의 자료형이 예상과 일치하는지 확인한다. 문자열로 저장된 숫자, 정수로 읽힌 날짜 등이 흔한 문제의 원인이다. 필터링이나 조인 후에는 <code>shape</code>로 행과 열의 수가 예상과 맞는지 점검한다. 데이터가 사라지거나 예상보다 많아졌다면 조건식에 문제가 있거나 조인 키가 잘못된 것이다. 큰 데이터프레임은 <code>head()</code>로 샘플을 확인하고, <code>isna().sum()</code>으로 결측치 현황을 파악한다.</p>
+<div id="37b65863" class="cell" data-execution_count="34">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 디버깅 체크리스트</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'name'</span>: [<span class="st">'Alice'</span>, <span class="st">'Bob'</span>, <span class="va">None</span>],</span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'age'</span>: [<span class="dv">25</span>, <span class="va">None</span>, <span class="dv">35</span>]</span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"1. 자료형 확인:"</span>)</span>
+<span id="cb65-8"><a href="#cb65-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.dtypes)</span>
+<span id="cb65-9"><a href="#cb65-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">2. 형태 확인:"</span>)</span>
+<span id="cb65-10"><a href="#cb65-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.shape)</span>
+<span id="cb65-11"><a href="#cb65-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">3. 결측치 확인:"</span>)</span>
+<span id="cb65-12"><a href="#cb65-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.isna().<span class="bu">sum</span>())</span>
+<span id="cb65-13"><a href="#cb65-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">4. 샘플 확인:"</span>)</span>
+<span id="cb65-14"><a href="#cb65-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.head())</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1. 자료형 확인:
+name     object
+age     float64
+dtype: object
+
+2. 형태 확인:
+(3, 2)
+
+3. 결측치 확인:
+name    1
+age     1
+dtype: int64
+
+4. 샘플 확인:
+    name   age
+0  Alice  25.0
+1    Bob   NaN
+2   None  35.0</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-dataframe-ai" class="level2" data-number="12.9">
+<h2 data-number="12.9" class="anchored" data-anchor-id="sec-dataframe-ai"><span class="header-section-number">12.9</span> AI와 함께하는 데이터프레임 처리</h2>
+<p>판다스 코드는 메서드 체이닝과 다양한 매개변수 조합으로 복잡해지기 쉽다. AI를 활용하면 원하는 변환을 자연어로 설명하고 적절한 코드를 얻을 수 있다. 핵심은 데이터 구조를 정확히 전달하는 것이다. 열 이름과 자료형을 명시하고, 가능하면 샘플 데이터 몇 행을 함께 제시한다. “sales 데이터프레임에서 region이 ’Seoul’인 행만 추출”처럼 조건을 구체적으로 기술하면 정확한 코드를 얻을 확률이 높아진다.</p>
+<p>여러 데이터프레임을 다루는 작업에서는 각 테이블 관계를 명확히 설명해야 한다. 조인 작업을 요청할 때 “customers와 orders를 customer_id로 연결”처럼 키 열을 지정하고, inner/left/outer 중 어떤 조인이 필요한지 명시한다. 그룹별 집계나 피벗 테이블처럼 데이터 형태가 크게 바뀌는 연산은 입력과 출력의 예상 형태를 함께 설명하면 오해를 줄일 수 있다.</p>
+<p>AI가 생성한 판다스 코드는 반드시 검증이 필요하다. 작은 테스트 데이터로 먼저 실행하고, <code>shape</code>로 행과 열 수가 예상과 맞는지 확인한다. 조인 후 행이 늘어났다면 키 중복 문제를, 행이 줄었다면 매칭 실패를 의심한다. <code>dtypes</code>로 자료형이 의도대로 유지되었는지도 점검한다. 특히 날짜 열이 문자열로 남아 있거나, 정수 열에 결측치가 들어가면서 실수형으로 바뀌는 경우가 흔하다.</p>
+</section>
+<section id="생각해볼-점-1" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="생각해볼-점-1">💡 생각해볼 점</h2>
+<p>데이터프레임은 데이터 분석의 기본 단위다. CSV 파일을 읽고, 조건에 맞는 행을 필터링하고, 그룹별 통계를 계산하는 작업이 모두 데이터프레임 위에서 이루어진다. 판다스 데이터프레임의 기본 조작법을 익히면 대부분의 데이터 전처리 작업을 수행할 수 있다.</p>
+<p>열 선택에는 대괄호를, 행 선택에는 <code>loc</code>과 <code>iloc</code>을 사용한다는 점을 기억하자. <code>loc</code>은 레이블 기반, <code>iloc</code>은 위치 기반이다. 조건 필터링은 불리언 인덱싱으로 수행하며, 여러 조건을 조합할 때는 <code>&amp;</code>, <code>|</code> 연산자와 괄호를 사용한다.</p>
+<p>자료형은 분석 결과에 직접적인 영향을 미친다. 문자열로 저장된 숫자는 연산이 되지 않고, 범주형 데이터는 <code>category</code> 타입으로 변환하면 메모리와 성능 이점을 얻는다. 결측치는 무조건 제거하기보다 패턴을 파악하고 적절한 전략을 선택해야 한다.</p>
+<p>다음 장에서는 여러 데이터프레임을 결합하고, 데이터를 변형하고, 복잡한 분석을 수행하는 고급 기법을 다룬다. 기본기가 탄탄해야 응용이 가능하므로, 이번 장에서 다룬 선택, 필터링, 자료형 변환, 결측치 처리를 충분히 연습하기 바란다.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "복사완료!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "복사완료!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/r2bit\.com\/gpt-coding\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./15-tuples.html" class="pagination-link" aria-label="튜플">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">튜플</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./17-json.html" class="pagination-link" aria-label="JSON">
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">JSON</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>챗GPT 쿼토 책은 소프트웨어 카펜트리 “Git 버전제어”를 번역한 것이 포함되어 있습니다.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/16-dataframe.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>순수하게 <a href="https://quarto.org/">쿼토(Quarto)</a>로 제작되었습니다.</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

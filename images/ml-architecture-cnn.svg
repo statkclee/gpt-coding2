@@ -1,0 +1,171 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 70 670 260">
+  <defs>
+    <style>
+      .title { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 24px; fill: #111; font-weight: bold; }
+      .subtitle { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 14px; fill: #555; }
+      .label { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 12px; fill: #333; font-weight: bold; text-anchor: middle; }
+      .desc { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 11px; fill: #666; text-anchor: middle; }
+      .math { font-family: "Times New Roman", Times, serif; font-size: 12px; fill: #444; font-style: italic; text-anchor: middle; }
+      
+      .box { fill: #fcfcfc; stroke: #333; stroke-width: 1; }
+      .feature-map { fill: #eee; stroke: #666; stroke-width: 0.8; }
+      .filter { fill: rgba(0,0,0,0.05); stroke: #333; stroke-width: 1.5; stroke-dasharray: 2,2; }
+      
+      .arrow-line { stroke: #666; stroke-width: 1; fill: none; }
+      .container-box { fill: #f9f9f9; stroke: #ddd; }
+    </style>
+    <marker id="arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6" fill="#666"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="500" fill="white"/>
+
+  <!-- Header -->
+  <!-- <text x="40" y="40" class="title">합성곱 신경망 (CNN)</text>
+  <text x="40" y="65" class="subtitle">이미지의 공간적 정보를 유지하며 특징을 추출하고 학습하는 구조</text> -->
+
+  <!-- 1. Architecture Flow (Top) -->
+  
+  <!-- Input Image -->
+  <g transform="translate(40, 120)">
+    <text x="30" y="-10" class="label">입력</text>
+    <rect x="0" y="0" width="60" height="60" class="box" fill="#fff"/>
+    <!-- Simple Grid -->
+    <path d="M0,20 L60,20 M0,40 L60,40 M20,0 L20,60 M40,0 L40,60" stroke="#eee" stroke-width="1"/>
+    <!-- Filter highlighting -->
+    <rect x="0" y="0" width="20" height="20" class="filter"/>
+    <text x="30" y="75" class="math">32×32×3</text>
+  </g>
+
+  <!-- Arrow -->
+  <path d="M110,150 L140,150" class="arrow-line" marker-end="url(#arrow)"/>
+  <text x="125" y="140" class="desc">합성곱</text>
+
+  <!-- Feature Map 1 (Conv1) -->
+  <g transform="translate(150, 110)">
+    <text x="30" y="-10" class="label">특징 맵</text>
+    <rect x="10" y="10" width="55" height="55" class="feature-map" fill="#f4f4f4"/>
+    <rect x="5" y="5" width="55" height="55" class="feature-map" fill="#f0f0f0"/>
+    <rect x="0" y="0" width="55" height="55" class="feature-map" fill="#ececec"/>
+    <text x="30" y="80" class="math">28×28×6</text>
+  </g>
+
+  <!-- Arrow -->
+  <path d="M225,150 L255,150" class="arrow-line" marker-end="url(#arrow)"/>
+  <text x="240" y="140" class="desc">풀링</text>
+
+  <!-- Subsampling (Pool1) -->
+  <g transform="translate(265, 120)">
+    <text x="25" y="-10" class="label">축소</text>
+    <rect x="10" y="10" width="40" height="40" class="feature-map" fill="#f4f4f4"/>
+    <rect x="5" y="5" width="40" height="40" class="feature-map" fill="#f0f0f0"/>
+    <rect x="0" y="0" width="40" height="40" class="feature-map" fill="#ececec"/>
+    <text x="25" y="65" class="math">14×14×6</text>
+  </g>
+
+  <!-- Arrow -->
+  <path d="M325,150 L355,150" class="arrow-line" marker-end="url(#arrow)"/>
+  <text x="340" y="140" class="desc">합성곱</text>
+
+  <!-- Feature Map 2 (Conv2) -->
+  <g transform="translate(365, 125)">
+     <rect x="10" y="10" width="35" height="35" class="feature-map" fill="#e0e0e0"/>
+    <rect x="5" y="5" width="35" height="35" class="feature-map" fill="#dddddd"/>
+    <rect x="0" y="0" width="35" height="35" class="feature-map" fill="#d9d9d9"/>
+    <text x="22" y="60" class="math">10×10×16</text>
+  </g>
+
+   <!-- Arrow -->
+  <path d="M420,150 L450,150" class="arrow-line" marker-end="url(#arrow)"/>
+  <text x="435" y="140" class="desc">풀링</text>
+
+  <!-- Subsampling 2 (Pool2) -->
+  <g transform="translate(460, 130)">
+     <rect x="10" y="10" width="25" height="25" class="feature-map" fill="#e0e0e0"/>
+    <rect x="5" y="5" width="25" height="25" class="feature-map" fill="#dddddd"/>
+    <rect x="0" y="0" width="25" height="25" class="feature-map" fill="#d9d9d9"/>
+    <text x="17" y="50" class="math">5×5×16</text>
+  </g>
+
+  <!-- Arrow -->
+  <path d="M505,150 L535,150" class="arrow-line" marker-end="url(#arrow)"/>
+  <text x="520" y="140" class="desc">평탄화</text>
+
+  <!-- FC Layer -->
+  <g transform="translate(545, 110)">
+    <text x="10" y="-10" class="label">완전연결</text>
+    <rect x="0" y="0" width="20" height="80" class="box" rx="2"/>
+    <circle cx="10" cy="15" r="3" fill="#666"/>
+    <circle cx="10" cy="30" r="3" fill="#666"/>
+    <circle cx="10" cy="45" r="3" fill="#666"/>
+    <circle cx="10" cy="65" r="3" fill="#666"/>
+    <text x="10" y="95" class="math">120</text>
+  </g>
+
+   <!-- Arrow -->
+  <path d="M575,150 L605,150" class="arrow-line" marker-end="url(#arrow)"/>
+
+   <!-- Output Layer -->
+  <g transform="translate(615, 125)">
+    <text x="10" y="-10" class="label">출력</text>
+    <rect x="0" y="0" width="20" height="50" class="box" rx="2"/>
+    <circle cx="10" cy="12" r="3" fill="#333"/>
+    <circle cx="10" cy="25" r="3" fill="#ccc"/>
+    <circle cx="10" cy="38" r="3" fill="#ccc"/>
+    <text x="10" y="65" class="math">10</text>
+  </g>
+
+  <!-- 2. Feature Hierarchy (Bottom Left) -->
+  <g transform="translate(150, 200)">
+    <text x="190" y="15" class="label" font-size="14" text-anchor="start">계층적 특징 학습</text>
+    
+    <!-- Level 1 -->
+    <g transform="translate(0, 30)">
+        <rect x="0" y="0" width="100" height="80" class="container-box"/>
+        <text x="50" y="20" class="desc" font-weight="bold">저수준</text>
+        <path d="M20,40 L40,60 M20,60 L40,40" stroke="#333" stroke-width="2"/>
+        <circle cx="70" cy="50" r="10" stroke="#333" fill="none" stroke-width="2"/>
+        <text x="50" y="75" class="desc">에지, 곡선</text>
+    </g>
+
+    <!-- Arrow -->
+    <path d="M110,70 L130,70" class="arrow-line" marker-end="url(#arrow)"/>
+
+    <!-- Level 2 -->
+    <g transform="translate(140, 30)">
+        <rect x="0" y="0" width="100" height="80" class="container-box"/>
+        <text x="50" y="20" class="desc" font-weight="bold">중수준</text>
+        <!-- Eye -->
+        <path d="M30,45 Q40,35 50,45 Q40,55 30,45" stroke="#333" fill="none" stroke-width="1.5"/>
+        <circle cx="40" cy="45" r="2" fill="#333"/>
+        <!-- Ear -->
+        <path d="M60,60 L70,35 L80,60" stroke="#333" fill="none" stroke-width="1.5"/>
+        <text x="50" y="75" class="desc">부분 (눈, 귀)</text>
+    </g>
+
+    <!-- Arrow -->
+    <path d="M250,70 L270,70" class="arrow-line" marker-end="url(#arrow)"/>
+
+    <!-- Level 3 -->
+    <g transform="translate(280, 30)">
+        <rect x="0" y="0" width="100" height="80" class="container-box"/>
+        <text x="50" y="20" class="desc" font-weight="bold">고수준</text>
+        <!-- Cat Face (Emoji Style) -->
+        <circle cx="50" cy="50" r="13" stroke="#333" fill="none" stroke-width="1.5"/>
+        <!-- Ears pointing UP from head -->
+        <path d="M38,42 L35,28 L46,38 Z" stroke="#333" fill="none" stroke-width="1.5"/> <!-- Left Ear -->
+        <path d="M62,42 L65,28 L54,38 Z" stroke="#333" fill="none" stroke-width="1.5"/> <!-- Right Ear -->
+        <!-- Eyes -->
+        <ellipse cx="44" cy="47" rx="2" ry="2.5" fill="#333"/>
+        <ellipse cx="56" cy="47" rx="2" ry="2.5" fill="#333"/>
+        <!-- Nose -->
+        <path d="M50,52 L48,55 L52,55 Z" fill="#333"/>
+        <!-- Whiskers -->
+        <path d="M30,48 L42,50 M30,52 L42,53 M30,56 L42,56" stroke="#333" stroke-width="0.8" fill="none"/> <!-- Left -->
+        <path d="M70,48 L58,50 M70,52 L58,53 M70,56 L58,56" stroke="#333" stroke-width="0.8" fill="none"/> <!-- Right -->
+        <text x="50" y="75" class="desc">전체 객체</text>
+    </g>
+  </g>
+
+</svg>

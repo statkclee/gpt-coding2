@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 340">
+  <defs>
+    <style>
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-mono { font-family: 'SF Mono', Consolas, monospace; fill: #333; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #666; }
+      .code-bg { fill: #f5f5f5; stroke: #ccc; stroke-width: 1; }
+      .highlight-row { fill: #e8e8e8; }
+      .hunk-box { fill: #f0f0f0; stroke: #999; stroke-width: 1; }
+    </style>
+  </defs>
+
+  <!-- White background -->
+  <rect x="0" y="0" width="620" height="340" fill="#ffffff"/>
+
+  <!-- Header row -->
+  <rect x="20" y="15" width="280" height="22" fill="#ddd" stroke="#999" stroke-width="1"/>
+  <rect x="300" y="15" width="300" height="22" fill="#ddd" stroke="#999" stroke-width="1"/>
+  <text x="160" y="30" class="tufte-text" font-size="11" text-anchor="middle" font-weight="bold">git diff 출력</text>
+  <text x="450" y="30" class="tufte-text" font-size="11" text-anchor="middle" font-weight="bold">의미</text>
+
+  <!-- Row 1: diff header -->
+  <rect x="20" y="37" width="280" height="22" class="code-bg" stroke="#ccc" stroke-width="1"/>
+  <rect x="300" y="37" width="300" height="22" fill="#fff" stroke="#ccc" stroke-width="1"/>
+  <text x="30" y="52" class="tufte-mono" font-size="10">diff --git a/mars.txt b/mars.txt</text>
+  <text x="310" y="52" class="tufte-label" font-size="10">비교 형식 (유닉스 diff 스타일)</text>
+
+  <!-- Row 2: index -->
+  <rect x="20" y="59" width="280" height="22" class="code-bg" stroke="#ccc" stroke-width="1"/>
+  <rect x="300" y="59" width="300" height="22" fill="#fff" stroke="#ccc" stroke-width="1"/>
+  <text x="30" y="74" class="tufte-mono" font-size="10">index df0654a..315bf3a 100644</text>
+  <text x="310" y="74" class="tufte-label" font-size="10">버전 식별자 (이전..현재)</text>
+
+  <!-- Row 3: old file -->
+  <rect x="20" y="81" width="280" height="22" class="code-bg" stroke="#ccc" stroke-width="1"/>
+  <rect x="300" y="81" width="300" height="22" fill="#fff" stroke="#ccc" stroke-width="1"/>
+  <text x="30" y="96" class="tufte-mono" font-size="10">--- a/mars.txt</text>
+  <text x="310" y="96" class="tufte-label" font-size="10">이전 버전 파일명 (---)</text>
+
+  <!-- Row 4: new file -->
+  <rect x="20" y="103" width="280" height="22" class="code-bg" stroke="#ccc" stroke-width="1"/>
+  <rect x="300" y="103" width="300" height="22" fill="#fff" stroke="#ccc" stroke-width="1"/>
+  <text x="30" y="118" class="tufte-mono" font-size="10">+++ b/mars.txt</text>
+  <text x="310" y="118" class="tufte-label" font-size="10">현재 버전 파일명 (+++)</text>
+
+  <!-- Row 5: hunk header - highlighted -->
+  <rect x="20" y="125" width="280" height="22" fill="#e0e0e0" stroke="#999" stroke-width="1.5"/>
+  <rect x="300" y="125" width="300" height="22" fill="#fff" stroke="#999" stroke-width="1.5"/>
+  <text x="30" y="140" class="tufte-mono" font-size="10" font-weight="bold">@@ -1 +1,2 @@</text>
+  <text x="310" y="140" class="tufte-label" font-size="10" font-weight="bold">헝크 헤더: 변경 위치 (아래 상세)</text>
+
+  <!-- Row 6: context line -->
+  <rect x="20" y="147" width="280" height="22" class="code-bg" stroke="#ccc" stroke-width="1"/>
+  <rect x="300" y="147" width="300" height="22" fill="#fff" stroke="#ccc" stroke-width="1"/>
+  <text x="30" y="162" class="tufte-mono" font-size="10"> Cold and dry, but everything...</text>
+  <text x="310" y="162" class="tufte-label" font-size="10">공백: 변경 없는 줄 (컨텍스트)</text>
+
+  <!-- Row 7: added line -->
+  <rect x="20" y="169" width="280" height="22" class="highlight-row" stroke="#ccc" stroke-width="1"/>
+  <rect x="300" y="169" width="300" height="22" fill="#fff" stroke="#ccc" stroke-width="1"/>
+  <text x="30" y="184" class="tufte-mono" font-size="10">+The two moons may be a problem</text>
+  <text x="310" y="184" class="tufte-label" font-size="10">+ 기호: 추가된 줄</text>
+
+  <!-- Hunk header detail section -->
+  <rect x="20" y="200" width="580" height="85" class="hunk-box" rx="3"/>
+  <text x="35" y="218" class="tufte-text" font-size="11" font-weight="bold">헝크(Hunk) 헤더 형식: @@ -시작줄,줄수 +시작줄,줄수 @@</text>
+
+  <!-- Hunk example breakdown -->
+  <text x="50" y="242" class="tufte-mono" font-size="12">@@</text>
+  <text x="75" y="242" class="tufte-mono" font-size="12" fill="#666">-1</text>
+  <text x="100" y="242" class="tufte-mono" font-size="12" fill="#333">+1,2</text>
+  <text x="135" y="242" class="tufte-mono" font-size="12">@@</text>
+
+  <!-- Arrows and explanations -->
+  <line x1="80" y1="248" x2="80" y2="260" stroke="#666" stroke-width="1"/>
+  <text x="35" y="268" class="tufte-label" font-size="9">이전 파일 1번 줄</text>
+  <text x="35" y="280" class="tufte-label" font-size="9">(줄수 1 생략)</text>
+
+  <line x1="115" y1="248" x2="115" y2="260" stroke="#666" stroke-width="1"/>
+  <text x="110" y="268" class="tufte-label" font-size="9">현재 파일</text>
+  <text x="110" y="280" class="tufte-label" font-size="9">1번 줄부터 2줄</text>
+
+  <!-- Summary -->
+  <text x="280" y="242" class="tufte-label" font-size="10">→</text>
+  <text x="300" y="242" class="tufte-text" font-size="10">이전: 1줄 (1번 줄)</text>
+  <text x="300" y="258" class="tufte-text" font-size="10">현재: 2줄 (1~2번 줄)</text>
+  <text x="300" y="278" class="tufte-label" font-size="9" font-style="italic">= 1줄이 2줄로 변경됨 (1줄 추가)</text>
+
+  <!-- Another example -->
+  <text x="450" y="225" class="tufte-label" font-size="9">예시:</text>
+  <text x="450" y="242" class="tufte-mono" font-size="9">@@ -10,3 +10,5 @@</text>
+  <text x="450" y="258" class="tufte-label" font-size="9">이전 10번줄부터 3줄</text>
+  <text x="450" y="273" class="tufte-label" font-size="9">→ 현재 10번줄부터 5줄</text>
+
+  <!-- Legend section -->
+  <rect x="20" y="295" width="580" height="35" fill="#f9f9f9" stroke="#ccc" stroke-width="1" rx="3"/>
+
+  <text x="35" y="317" class="tufte-text" font-size="10" font-weight="bold">기호:</text>
+
+  <!-- + symbol -->
+  <rect x="75" y="305" width="16" height="16" fill="#e8e8e8" stroke="#999" stroke-width="1"/>
+  <text x="83" y="317" class="tufte-mono" font-size="11" text-anchor="middle">+</text>
+  <text x="97" y="317" class="tufte-label" font-size="9">추가</text>
+
+  <!-- - symbol -->
+  <rect x="135" y="305" width="16" height="16" fill="#e8e8e8" stroke="#999" stroke-width="1"/>
+  <text x="143" y="317" class="tufte-mono" font-size="11" text-anchor="middle">-</text>
+  <text x="157" y="317" class="tufte-label" font-size="9">삭제</text>
+
+  <!-- space symbol -->
+  <rect x="195" y="305" width="16" height="16" fill="#e8e8e8" stroke="#999" stroke-width="1"/>
+  <text x="203" y="317" class="tufte-mono" font-size="9" text-anchor="middle"> </text>
+  <text x="217" y="317" class="tufte-label" font-size="9">유지</text>
+
+  <!-- symbol -->
+  <text x="270" y="317" class="tufte-mono" font-size="9">---</text>
+  <text x="295" y="317" class="tufte-label" font-size="9">이전</text>
+
+  <!-- +++ symbol -->
+  <text x="340" y="317" class="tufte-mono" font-size="9">+++</text>
+  <text x="365" y="317" class="tufte-label" font-size="9">현재</text>
+
+  <!-- @@ symbol -->
+  <text x="410" y="317" class="tufte-mono" font-size="9">@@...@@</text>
+  <text x="455" y="317" class="tufte-label" font-size="9">헝크 헤더</text>
+
+  <!-- index -->
+  <text x="520" y="317" class="tufte-mono" font-size="9">index</text>
+  <text x="555" y="317" class="tufte-label" font-size="9">버전</text>
+</svg>

@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 280">
+  <defs>
+    <style>
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 12px;
+        fill: #333;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 10px;
+        fill: #333;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #666;
+      }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="720" height="280" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="360" y="22" text-anchor="middle" class="tufte-label" font-weight="bold">그래프의 구성 요소</text>
+
+  <!-- Undirected Graph -->
+  <g transform="translate(30, 45)">
+    <text x="100" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">무방향 그래프</text>
+    <rect x="0" y="10" width="200" height="130" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="3"/>
+
+    <!-- Nodes -->
+    <circle cx="50" cy="50" r="18" fill="#fff" stroke="#333" stroke-width="2"/>
+    <text x="50" y="55" text-anchor="middle" class="tufte-label">Alice</text>
+
+    <circle cx="150" cy="50" r="18" fill="#fff" stroke="#333" stroke-width="2"/>
+    <text x="150" y="55" text-anchor="middle" class="tufte-label">Bob</text>
+
+    <circle cx="100" cy="110" r="18" fill="#fff" stroke="#333" stroke-width="2"/>
+    <text x="100" y="115" text-anchor="middle" class="tufte-label">Carol</text>
+
+    <!-- Edges (bidirectional) -->
+    <line x1="68" y1="50" x2="132" y2="50" stroke="#666" stroke-width="2"/>
+    <line x1="60" y1="65" x2="85" y2="95" stroke="#666" stroke-width="2"/>
+    <line x1="140" y1="65" x2="115" y2="95" stroke="#666" stroke-width="2"/>
+
+    <text x="100" y="155" text-anchor="middle" class="tufte-small">양방향 관계 (친구)</text>
+  </g>
+
+  <!-- Directed Graph -->
+  <g transform="translate(260, 45)">
+    <text x="100" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">방향 그래프</text>
+    <rect x="0" y="10" width="200" height="130" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="3"/>
+
+    <!-- Nodes -->
+    <circle cx="50" cy="50" r="18" fill="#fff" stroke="#333" stroke-width="2"/>
+    <text x="50" y="55" text-anchor="middle" class="tufte-label">A</text>
+
+    <circle cx="150" cy="50" r="18" fill="#fff" stroke="#333" stroke-width="2"/>
+    <text x="150" y="55" text-anchor="middle" class="tufte-label">B</text>
+
+    <circle cx="100" cy="110" r="18" fill="#fff" stroke="#333" stroke-width="2"/>
+    <text x="100" y="115" text-anchor="middle" class="tufte-label">C</text>
+
+    <!-- Directed edges -->
+    <line x1="68" y1="50" x2="128" y2="50" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+    <line x1="60" y1="65" x2="82" y2="92" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+    <line x1="118" y1="100" x2="135" y2="68" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+    <text x="100" y="155" text-anchor="middle" class="tufte-small">단방향 관계 (팔로우)</text>
+  </g>
+
+  <!-- Weighted Graph -->
+  <g transform="translate(490, 45)">
+    <text x="100" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">가중 그래프</text>
+    <rect x="0" y="10" width="200" height="130" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="3"/>
+
+    <!-- Nodes -->
+    <circle cx="50" cy="50" r="18" fill="#fff" stroke="#333" stroke-width="2"/>
+    <text x="50" y="55" text-anchor="middle" class="tufte-small">서울</text>
+
+    <circle cx="150" cy="50" r="18" fill="#fff" stroke="#333" stroke-width="2"/>
+    <text x="150" y="55" text-anchor="middle" class="tufte-small">부산</text>
+
+    <circle cx="100" cy="110" r="18" fill="#fff" stroke="#333" stroke-width="2"/>
+    <text x="100" y="115" text-anchor="middle" class="tufte-small">대전</text>
+
+    <!-- Weighted edges -->
+    <line x1="68" y1="50" x2="132" y2="50" stroke="#666" stroke-width="2"/>
+    <text x="100" y="42" text-anchor="middle" class="tufte-code">325km</text>
+
+    <line x1="60" y1="65" x2="85" y2="95" stroke="#666" stroke-width="2"/>
+    <text x="55" y="85" text-anchor="middle" class="tufte-code">140</text>
+
+    <line x1="140" y1="65" x2="115" y2="95" stroke="#666" stroke-width="2"/>
+    <text x="145" y="85" text-anchor="middle" class="tufte-code">200</text>
+
+    <text x="100" y="155" text-anchor="middle" class="tufte-small">거리/비용 표현</text>
+  </g>
+
+  <!-- Bottom: Terminology -->
+  <g transform="translate(30, 195)">
+    <rect x="0" y="0" width="660" height="75" fill="#e8e8e8" stroke="#999" rx="3"/>
+    <text x="330" y="20" text-anchor="middle" class="tufte-label" font-weight="bold">용어 정리</text>
+    <line x1="20" y1="28" x2="640" y2="28" stroke="#ccc"/>
+
+    <text x="30" y="48" class="tufte-label" font-weight="bold">노드(Node)</text>
+    <text x="30" y="63" class="tufte-small">= 정점(Vertex), 개체 표현</text>
+
+    <text x="200" y="48" class="tufte-label" font-weight="bold">엣지(Edge)</text>
+    <text x="200" y="63" class="tufte-small">= 간선, 노드 간 연결</text>
+
+    <text x="370" y="48" class="tufte-label" font-weight="bold">차수(Degree)</text>
+    <text x="370" y="63" class="tufte-small">= 연결된 엣지 수</text>
+
+    <text x="540" y="48" class="tufte-label" font-weight="bold">경로(Path)</text>
+    <text x="540" y="63" class="tufte-small">= 노드를 잇는 엣지 순서</text>
+  </g>
+
+</svg>

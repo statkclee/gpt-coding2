@@ -1,0 +1,170 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 25 850 340">
+  <defs>
+    <style>
+      .label-head { font-family: Palatino, serif; font-size: 14px; font-weight: bold; fill: #222; }
+      .label-body { font-family: Palatino, serif; font-size: 12px; fill: #333; }
+      .label-note { font-family: Palatino, serif; font-size: 11px; fill: #555; font-style: italic; }
+      .label-mono { font-family: 'SF Mono', Consolas, Menlo, monospace; font-size: 10px; fill: #444; }
+
+      .box-pure { fill: #fff; stroke: #333; stroke-width: 2; rx: 4; }
+      .box-impure { fill: #f8f8f8; stroke: #666; stroke-width: 1; stroke-dasharray: 3 2; rx: 4; }
+      .box-func { fill: #f5f5f5; stroke: #333; stroke-width: 1.5; rx: 3; }
+      .box-io { fill: #fff; stroke: #999; stroke-width: 1; rx: 2; }
+      .box-external { fill: #eee; stroke: #666; stroke-width: 1; stroke-dasharray: 2 2; rx: 2; }
+
+      .line-flow { stroke: #666; stroke-width: 1.5; fill: none; }
+      .line-external { stroke: #666; stroke-width: 1.2; stroke-dasharray: 4 2; fill: none; }
+      .line-sep { stroke: #ddd; stroke-width: 1; }
+      .arrow-head { fill: #666; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L0,8 L8,4 z" class="arrow-head" />
+    </marker>
+  </defs>
+
+  <rect width="850" height="400" fill="#fff" />
+
+  <!-- ========================================== -->
+  <!-- LEFT: Pure Function -->
+  <!-- ========================================== -->
+  <g transform="translate(30, 55)">
+    <text x="155" y="0" text-anchor="middle" class="label-head">순수 함수 (Pure Function)</text>
+    <rect x="0" y="15" width="330" height="280" class="box-pure"/>
+
+    <!-- Core concept: Input → Function → Output (isolated) -->
+    <g transform="translate(20, 55)">
+      <!-- Input -->
+      <rect x="0" y="25" width="70" height="40" class="box-io"/>
+      <text x="35" y="40" text-anchor="middle" class="label-mono">입력</text>
+      <text x="35" y="55" text-anchor="middle" class="label-mono" fill="#666">[85, 90, 78]</text>
+
+      <!-- Arrow to function -->
+      <path d="M 75 45 L 95 45" class="line-flow" marker-end="url(#arrow)"/>
+
+      <!-- Function box (isolated, no external connections) -->
+      <g transform="translate(100, 15)">
+        <rect x="0" y="0" width="90" height="60" class="box-func"/>
+        <text x="45" y="25" text-anchor="middle" class="label-mono" font-weight="bold">normalize()</text>
+        <text x="45" y="42" text-anchor="middle" class="label-mono" fill="#555">입력만 사용</text>
+      </g>
+
+      <!-- Arrow to output -->
+      <path d="M 195 45 L 215 45" class="line-flow" marker-end="url(#arrow)"/>
+
+      <!-- Output -->
+      <rect x="220" y="25" width="85" height="40" class="box-io"/>
+      <text x="255" y="40" text-anchor="middle" class="label-mono">출력</text>
+      <text x="262" y="55" text-anchor="middle" class="label-mono" fill="#666">[0.0,1.0,...]</text>
+    </g>
+
+    <!-- Key property: Same input = Same output -->
+    <g transform="translate(20, 150)">
+      <text x="0" y="0" class="label-body" font-weight="bold">핵심 속성</text>
+      <line x1="0" y1="8" x2="270" y2="8" class="line-sep"/>
+
+      <text x="0" y="28" class="label-mono">normalize([85, 90, 78])</text>
+      <text x="150" y="28" class="label-mono">→ [0.0, 1.0, ...]</text>
+
+      <text x="0" y="46" class="label-mono">normalize([85, 90, 78])</text>
+      <text x="150" y="46" class="label-mono">→ [0.0, 1.0, ...]</text>
+
+      <text x="255" y="37" class="label-note" font-weight="bold">항상</text>
+      <text x="255" y="50" class="label-note" font-weight="bold">동일</text>
+    </g>
+
+    <!-- Benefits -->
+    <g transform="translate(20, 215)">
+      <text x="0" y="0" class="label-body" font-weight="bold">장점</text>
+      <line x1="0" y1="8" x2="270" y2="8" class="line-sep"/>
+      <text x="0" y="28" class="label-mono">✓ 테스트 용이 (입력만 검증)</text>
+      <text x="0" y="46" class="label-mono">✓ 캐싱 가능 (결과 재사용)</text>
+      <text x="0" y="64" class="label-mono">✓ 병렬 실행 안전</text>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- RIGHT: Impure Function -->
+  <!-- ========================================== -->
+  <g transform="translate(380, 55)">
+    <text x="210" y="0" text-anchor="middle" class="label-head" fill="#555">비순수 함수 (Impure Function)</text>
+    <rect x="0" y="15" width="420" height="280" class="box-impure"/>
+
+    <!-- Core concept: External state affects function -->
+    <g transform="translate(20, 65)">
+      <!-- External state (위에서 영향) -->
+      <g transform="translate(130, -40)">
+        <rect x="0" y="0" width="90" height="30" class="box-external"/>
+        <text x="45" y="12" text-anchor="middle" class="label-mono" fill="#666">외부 상태</text>
+        <text x="45" y="25" text-anchor="middle" class="label-mono" fill="#666">time(), random()</text>
+      </g>
+
+      <!-- Dashed arrow from external state -->
+      <path d="M 175 -10 L 175 15" class="line-external" marker-end="url(#arrow)"/>
+
+      <!-- Input -->
+      <rect x="0" y="25" width="70" height="40" class="box-io"/>
+      <text x="35" y="40" text-anchor="middle" class="label-mono">입력</text>
+      <text x="35" y="55" text-anchor="middle" class="label-mono" fill="#666">[85, 90, 78]</text>
+
+      <!-- Arrow to function -->
+      <path d="M 75 45 L 115 45" class="line-flow" marker-end="url(#arrow)"/>
+
+      <!-- Function box (with external connection) -->
+      <g transform="translate(120, 15)">
+        <rect x="0" y="0" width="110" height="60" class="box-func" stroke-dasharray="3 2" stroke="#666"/>
+        <text x="55" y="25" text-anchor="middle" class="label-mono" font-weight="bold">add_noise()</text>
+        <text x="55" y="42" text-anchor="middle" class="label-mono" fill="#666">외부 의존</text>
+      </g>
+
+      <!-- Side effect box -->
+      <g transform="translate(270, -40)">
+        <rect x="0" y="0" width="90" height="30" class="box-external"/>
+        <text x="45" y="12" text-anchor="middle" class="label-mono" fill="#666">부작용</text>
+        <text x="45" y="25" text-anchor="middle" class="label-mono" fill="#666">파일, DB...</text>
+      </g>
+
+      <!-- Side effect arrow from function -->
+      <path d="M 235 45 L 295 45 L 295 -10" class="line-external" marker-end="url(#arrow)"/>
+
+      <!-- Arrow to output -->
+      <path d="M 235 45 L 280 45" class="line-flow" marker-end="url(#arrow)"/>
+
+      <!-- Output -->
+      <rect x="285" y="25" width="70" height="40" class="box-io"/>
+      <text x="320" y="40" text-anchor="middle" class="label-mono">출력</text>
+      <text x="320" y="55" text-anchor="middle" class="label-mono" fill="#666">???</text>
+    </g>
+
+    <!-- Key property: Same input = Different output -->
+    <g transform="translate(20, 150)">
+      <text x="0" y="0" class="label-body" font-weight="bold" fill="#555">예측 불가</text>
+      <line x1="0" y1="8" x2="380" y2="8" class="line-sep"/>
+
+      <text x="0" y="28" class="label-mono">add_noise([85, 90, 78])</text>
+      <text x="180" y="28" class="label-mono">→ [85.3, 89.7, ...]</text>
+
+      <text x="0" y="46" class="label-mono">add_noise([85, 90, 78])</text>
+      <text x="180" y="46" class="label-mono">→ [84.8, 90.2, ...]</text>
+
+      <text x="320" y="37" class="label-note" fill="#333">매번</text>
+      <text x="320" y="50" class="label-note" fill="#333">다름!</text>
+    </g>
+
+    <!-- Problems -->
+    <g transform="translate(20, 215)">
+      <text x="0" y="0" class="label-body" font-weight="bold" fill="#555">문제점</text>
+      <line x1="0" y1="8" x2="380" y2="8" class="line-sep"/>
+      <text x="0" y="28" class="label-mono" fill="#555">✗ 테스트 어려움 (외부 상태 모킹 필요)</text>
+      <text x="0" y="46" class="label-mono" fill="#555">✗ 캐싱 불가 (결과가 매번 변동)</text>
+      <text x="0" y="64" class="label-mono" fill="#555">✗ 병렬 실행 시 경쟁 조건 발생</text>
+    </g>
+  </g>
+
+  <!-- Bottom comparison -->
+  <g transform="translate(30, 325)">
+    <!-- <line x1="0" y1="0" x2="790" y2="0" class="line-sep"/> -->
+    <text x="185" y="18" text-anchor="middle" class="label-note" fill="#333" font-weight="bold">f(x) = y (수학적 함수)</text>
+    <text x="590" y="18" text-anchor="middle" class="label-note" fill="#555">f(x) = ? (프로시저)</text>
+  </g>
+
+</svg>

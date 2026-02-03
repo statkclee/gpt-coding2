@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 30 800 350">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #111; font-weight: bold; }
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-mono { font-family: 'SF Mono', Consolas, monospace; fill: #444; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #666; font-style: italic; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #777; font-size: 10px; }
+      .verb-box { fill: #f0f0f0; stroke: #333; stroke-width: 2; }
+      .noun-box { fill: #fff; stroke: #333; stroke-width: 2; }
+      .sentence-box { fill: #fafafa; stroke: #999; stroke-width: 1; }
+      .old-style { fill: #f5f5f5; stroke: #999; stroke-width: 1; stroke-dasharray: 4,2; }
+      .flow-line { fill: none; stroke: #555; stroke-width: 1.5; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="2.5" orient="auto">
+      <path d="M0,0 L0,5 L7,2.5 z" fill="#555" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="380" fill="#ffffff"/>
+
+  <!-- 상단: 핵심 개념 - REST는 문법이다 -->
+  <!-- <text x="400" y="28" text-anchor="middle" class="tufte-title" font-size="15">REST: API 호출을 문장처럼 읽는다</text> -->
+
+  <!-- 문법 공식 -->
+  <g transform="translate(80, 50)">
+    <!-- 동사 (HTTP Method) -->
+    <rect x="0" y="0" width="120" height="50" class="verb-box" rx="6"/>
+    <text x="60" y="25" text-anchor="middle" class="tufte-title" font-size="12">HTTP 메서드</text>
+    <text x="60" y="42" text-anchor="middle" class="tufte-label" font-size="11">= 동사 (Verb)</text>
+
+    <text x="145" y="30" text-anchor="middle" class="tufte-title" font-size="20">+</text>
+
+    <!-- 명사 (URL) -->
+    <rect x="170" y="0" width="180" height="50" class="noun-box" rx="6"/>
+    <text x="260" y="25" text-anchor="middle" class="tufte-title" font-size="12">URL 경로</text>
+    <text x="260" y="42" text-anchor="middle" class="tufte-label" font-size="11">= 명사 (Noun, 자원)</text>
+
+    <text x="375" y="30" text-anchor="middle" class="tufte-title" font-size="20">=</text>
+
+    <!-- 문장 -->
+    <rect x="400" y="0" width="200" height="50" class="sentence-box" rx="6"/>
+    <text x="500" y="25" text-anchor="middle" class="tufte-title" font-size="12">읽을 수 있는 문장</text>
+    <text x="500" y="42" text-anchor="middle" class="tufte-label" font-size="11">"무엇을 어떻게 하라"</text>
+  </g>
+
+  <!-- 중앙: 실제 예시 - 문장처럼 읽기 -->
+  <g transform="translate(40, 120)">
+    <text x="360" y="15" text-anchor="middle" class="tufte-title" font-size="13">API 호출이 문장이 된다</text>
+
+    <!-- 예시 1: GET /users -->
+    <g transform="translate(0, 30)">
+      <rect x="0" y="0" width="70" height="32" class="verb-box" rx="4"/>
+      <text x="35" y="21" text-anchor="middle" class="tufte-mono" font-size="12" font-weight="bold">GET</text>
+
+      <rect x="80" y="0" width="120" height="32" class="noun-box" rx="4"/>
+      <text x="140" y="21" text-anchor="middle" class="tufte-mono" font-size="11">/users</text>
+
+      <path d="M 210,16 L 250,16" class="flow-line" marker-end="url(#arrow)"/>
+
+      <text x="265" y="21" class="tufte-text" font-size="12">"</text>
+      <text x="275" y="21" class="tufte-text" font-size="12" font-weight="bold">가져와라</text>
+      <text x="340" y="21" class="tufte-text" font-size="12">사용자 목록을"</text>
+
+      <text x="520" y="21" class="tufte-mono" font-size="10" fill="#666">→ 200 OK + JSON 배열</text>
+    </g>
+
+    <!-- 예시 2: POST /users -->
+    <g transform="translate(0, 72)">
+      <rect x="0" y="0" width="70" height="32" class="verb-box" rx="4"/>
+      <text x="35" y="21" text-anchor="middle" class="tufte-mono" font-size="12" font-weight="bold">POST</text>
+
+      <rect x="80" y="0" width="120" height="32" class="noun-box" rx="4"/>
+      <text x="140" y="21" text-anchor="middle" class="tufte-mono" font-size="11">/users</text>
+
+      <path d="M 210,16 L 250,16" class="flow-line" marker-end="url(#arrow)"/>
+
+      <text x="265" y="21" class="tufte-text" font-size="12">"</text>
+      <text x="275" y="21" class="tufte-text" font-size="12" font-weight="bold">생성해라</text>
+      <text x="340" y="21" class="tufte-text" font-size="12">새 사용자를"</text>
+
+      <text x="520" y="21" class="tufte-mono" font-size="10" fill="#666">→ 201 Created</text>
+    </g>
+
+    <!-- 예시 3: DELETE /users/123 -->
+    <g transform="translate(0, 114)">
+      <rect x="0" y="0" width="70" height="32" class="verb-box" rx="4"/>
+      <text x="35" y="21" text-anchor="middle" class="tufte-mono" font-size="12" font-weight="bold">DELETE</text>
+
+      <rect x="80" y="0" width="120" height="32" class="noun-box" rx="4"/>
+      <text x="140" y="21" text-anchor="middle" class="tufte-mono" font-size="11">/users/123</text>
+
+      <path d="M 210,16 L 250,16" class="flow-line" marker-end="url(#arrow)"/>
+
+      <text x="265" y="21" class="tufte-text" font-size="12">"</text>
+      <text x="275" y="21" class="tufte-text" font-size="12" font-weight="bold">삭제해라</text>
+      <text x="340" y="21" class="tufte-text" font-size="12">123번 사용자를"</text>
+
+      <text x="520" y="21" class="tufte-mono" font-size="10" fill="#666">→ 204 No Content</text>
+    </g>
+  </g>
+
+  <!-- 하단: 대비 - 옛날 방식 vs REST -->
+  <g transform="translate(40, 290)">
+    <!-- 옛날 RPC 스타일 -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="340" height="75" class="old-style" rx="6"/>
+      <text x="170" y="20" text-anchor="middle" class="tufte-title" font-size="11">예전 방식 (RPC 스타일)</text>
+      <text x="20" y="42" class="tufte-mono" font-size="10">POST /api/createUser</text>
+      <text x="20" y="56" class="tufte-mono" font-size="10">POST /api/deleteUser?id=123</text>
+      <text x="20" y="70" class="tufte-mono" font-size="10">POST /api/getAllUsers</text>
+      <text x="200" y="56" class="tufte-label" font-size="10">동작이 URL에 숨어있다</text>
+    </g>
+
+    <!-- 화살표 -->
+    <path d="M 360,37 L 400,37" class="flow-line" marker-end="url(#arrow)"/>
+    <text x="380" y="55" text-anchor="middle" class="tufte-small">REST</text>
+
+    <!-- REST 스타일 -->
+    <g transform="translate(420, 0)">
+      <rect x="0" y="0" width="300" height="75" fill="#f8f8f8" stroke="#333" stroke-width="1.5" rx="6"/>
+      <text x="150" y="20" text-anchor="middle" class="tufte-title" font-size="11">REST 방식</text>
+      <text x="20" y="42" class="tufte-mono" font-size="10">POST   /users</text>
+      <text x="20" y="56" class="tufte-mono" font-size="10">DELETE /users/123</text>
+      <text x="20" y="70" class="tufte-mono" font-size="10">GET    /users</text>
+      <text x="170" y="56" class="tufte-label" font-size="10">동사 + 명사 = 명확한 의도</text>
+    </g>
+  </g>
+</svg>

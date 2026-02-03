@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 30 800 330">
+  <defs>
+    <style>
+      /* Tufte Grayscale Style */
+      .label-title { font-family: Palatino, serif; font-size: 16px; font-weight: bold; fill: #111; }
+      .label-head { font-family: Palatino, serif; font-size: 14px; font-weight: bold; fill: #222; }
+      .label-body { font-family: Palatino, serif; font-size: 12px; fill: #333; }
+      .label-note { font-family: Palatino, serif; font-size: 11px; fill: #555; font-style: italic; }
+      .label-mono { font-family: 'SF Mono', Consolas, Menlo, monospace; font-size: 10px; fill: #444; }
+      
+      .box-class { fill: #fff; stroke: #333; stroke-width: 1.5; rx: 4; }
+      .box-header { fill: #f0f0f0; stroke: #333; stroke-width: 1; }
+      .box-component { fill: #f9f9f9; stroke: #666; stroke-width: 1; rx: 4; }
+      .box-bad { fill: #fdfdfd; stroke: #999; stroke-width: 1; stroke-dasharray: 2 2; rx: 4; }
+      
+      .line-solid { stroke: #333; stroke-width: 1.5; fill: none; }
+      .line-sep { stroke: #ccc; stroke-width: 1; }
+      .line-inherit { stroke: #666; stroke-width: 1.5; fill: none; }
+      .line-compose { stroke: #333; stroke-width: 1.5; fill: none; }
+      
+      .arrow-head-hollow { fill: #fff; stroke: #666; stroke-width: 1.5; }
+      .arrow-head-diamond { fill: #333; stroke: #333; stroke-width: 1; }
+    </style>
+    <marker id="arrow-hollow" markerWidth="12" markerHeight="12" refX="11" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 z" class="arrow-head-hollow" />
+    </marker>
+    <marker id="diamond" markerWidth="14" markerHeight="14" refX="0" refY="7" orient="auto">
+      <path d="M0,7 L7,0 L14,7 L7,14 z" class="arrow-head-diamond" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="380" fill="#fff" />
+
+  <!-- Title -->
+  <!-- <text x="400" y="30" text-anchor="middle" class="label-title">상속(Inheritance) vs 조합(Composition)</text> -->
+
+  <!-- ========================================== -->
+  <!-- LEFT: Inheritance (Rigid/Bad) -->
+  <!-- ========================================== -->
+  <g transform="translate(40, 60)">
+    <text x="140" y="0" text-anchor="middle" class="label-head" fill="#555">상속: 경직된 결합 (Is-A)</text>
+    
+    <!-- Parent Class -->
+    <g transform="translate(60, 30)">
+        <rect x="0" y="0" width="160" height="60" class="box-bad"/>
+        <text x="80" y="20" text-anchor="middle" class="label-mono" font-weight="bold">LinearTrend</text>
+        <line x1="10" y1="30" x2="150" y2="30" class="line-sep"/>
+        <text x="80" y="45" text-anchor="middle" class="label-mono">fit(), predict()</text>
+    </g>
+
+    <!-- Inheritance Arrow -->
+    <line x1="140" y1="90" x2="140" y2="120" class="line-inherit" marker-end="url(#arrow-hollow)"/>
+
+    <!-- Child Class -->
+    <g transform="translate(60, 130)">
+        <rect x="0" y="0" width="160" height="80" class="box-bad"/>
+        <text x="80" y="20" text-anchor="middle" class="label-mono" font-weight="bold">ScaledLinearModel</text>
+        <line x1="10" y1="30" x2="150" y2="30" class="line-sep"/>
+        <text x="80" y="45" text-anchor="middle" class="label-mono">scale()</text>
+        <text x="80" y="60" text-anchor="middle" class="label-mono">unscale()</text>
+    </g>
+
+    <!-- Problem Note -->
+    <g transform="translate(20, 230)">
+        <text x="0" y="0" class="label-note" fill="#d32f2f">⚠ 문제점:</text>
+        <text x="0" y="15" class="label-note">• 부모가 바뀌면 자식도 깨짐</text>
+        <text x="0" y="30" class="label-note">• 다른 모델로 교체 불가</text>
+        <text x="0" y="45" class="label-note">• "스케일러는 모델이다" (어색함)</text>
+    </g>
+  </g>
+
+  <!-- Divider -->
+  <line x1="360" y1="60" x2="360" y2="320" stroke="#ddd" stroke-dasharray="2 2"/>
+
+  <!-- ========================================== -->
+  <!-- RIGHT: Composition (Flexible/Good) -->
+  <!-- ========================================== -->
+  <g transform="translate(400, 60)">
+    <text x="180" y="0" text-anchor="middle" class="label-head">조합: 유연한 부품 (Has-A)</text>
+
+    <!-- Container Class -->
+    <g transform="translate(90, 30)">
+        <rect x="0" y="0" width="180" height="90" class="box-class"/>
+        <rect x="0" y="0" width="180" height="25" class="box-header" rx="4" ry="0"/>
+        <text x="90" y="17" text-anchor="middle" class="label-mono" font-weight="bold">ModelWithScaler</text>
+        
+        <text x="15" y="45" class="label-mono">self.model</text>
+        <text x="15" y="60" class="label-mono">self.scaler</text>
+        <text x="15" y="80" class="label-note" fill="#555">"모델과 스케일러를 가짐"</text>
+    </g>
+
+    <!-- Composition Arrows (Diamond) -->
+    <!-- Left Leg -->
+    <path d="M 130 120 L 130 150 L 70 150 L 70 170" class="line-compose" marker-start="url(#diamond)"/>
+    <!-- Right Leg -->
+    <path d="M 230 120 L 230 150 L 290 150 L 290 170" class="line-compose" marker-start="url(#diamond)"/>
+
+    <!-- Component 1: Model -->
+    <g transform="translate(0, 180)">
+        <rect x="0" y="0" width="140" height="60" class="box-component"/>
+        <text x="70" y="20" text-anchor="middle" class="label-mono" font-weight="bold">Any Model</text>
+        <line x1="10" y1="30" x2="130" y2="30" class="line-sep"/>
+        <text x="70" y="45" text-anchor="middle" class="label-mono">(Linear, Tree...)</text>
+    </g>
+
+    <!-- Component 2: Scaler -->
+    <g transform="translate(220, 180)">
+        <rect x="0" y="0" width="140" height="60" class="box-component"/>
+        <text x="70" y="20" text-anchor="middle" class="label-mono" font-weight="bold">Any Scaler</text>
+        <line x1="10" y1="30" x2="130" y2="30" class="line-sep"/>
+        <text x="70" y="45" text-anchor="middle" class="label-mono">(MinMax, Std...)</text>
+    </g>
+    
+    <!-- Benefit Note -->
+    <g transform="translate(40, 260)">
+        <text x="0" y="0" class="label-note" fill="#333">✅ 장점:</text>
+        <text x="0" y="15" class="label-note">• 부품을 자유롭게 교체 가능 (Plug &amp; Play)</text>
+        <text x="0" y="30" class="label-note">• 결합도가 낮아 유지보수 용이</text>
+    </g>
+  </g>
+
+  <!-- Bottom Insight -->
+  <!-- <g transform="translate(40, 335)">
+      <rect x="0" y="0" width="720" height="35" fill="#f8f8f8" />
+      <rect x="0" y="0" width="4" height="35" fill="#333" />
+      <text x="20" y="22" class="label-body" font-size="13" fill="#222">
+          <tspan font-weight="bold">Insight:</tspan> 상속보다는 <tspan font-style="italic">조합(Composition)</tspan>을 우선하라. 부품을 조립하듯 설계해야 유연해진다.
+      </text>
+  </g> -->
+
+</svg>

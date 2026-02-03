@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 30 960 520">
+  <defs>
+    <style>
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-mono { font-family: 'SF Mono', Consolas, monospace; fill: #555; font-size: 10px; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #666; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #666; font-size: 11px; }
+      .tufte-tiny { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #777; font-size: 10px; }
+      .warning-box { fill: #f0f0f0; }
+      .warning-text { fill: #666; }
+      .success-box { fill: #f8f8f8; stroke: #aaa; stroke-dasharray: 2,2; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#666"/>
+    </marker>
+    <marker id="arrow-flow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#555"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="960" height="560" fill="#ffffff"/>
+
+  <!-- <text x="480" y="30" text-anchor="middle" class="tufte-text" font-size="18" font-weight="bold">연구 워크플로우의 패러다임 전환</text> -->
+
+  <g transform="translate(30, 60)">
+    <rect x="0" y="0" width="420" height="320" fill="#fafafa" stroke="#bbb" stroke-width="1.5" rx="6"/>
+    <text x="210" y="24" text-anchor="middle" class="tufte-text" font-size="14" font-weight="bold">전통적 연구 (폐쇄형)</text>
+    <line x1="20" y1="40" x2="400" y2="40" stroke="#ddd" stroke-width="1"/>
+
+    <g transform="translate(35, 70)">
+      <circle cx="20" cy="20" r="14" fill="#e0e0e0" stroke="#999" stroke-width="1.5"/>
+      <text x="20" y="25" text-anchor="middle" class="tufte-text" font-size="12">👤</text>
+      <text x="20" y="52" text-anchor="middle" class="tufte-small">개인 연구자</text>
+    </g>
+
+    <g transform="translate(95, 60)">
+        <rect x="0" y="0" width="300" height="110" fill="none" stroke="#999" stroke-width="1" stroke-dasharray="4,2" rx="4"/>
+        <text x="150" y="-8" text-anchor="middle" class="tufte-tiny" fill="#777">▼ 블랙박스 (Black Box): 외부 검증 불가</text>
+        
+        <g transform="translate(20, 25)">
+            <rect x="-5" y="0" width="110" height="40" fill="#fff" stroke="#aaa" stroke-width="1" rx="2"/>
+            <text x="52" y="16" text-anchor="middle" class="tufte-label" font-size="10" font-weight="bold">로컬 데이터</text>
+            <text x="52" y="30" text-anchor="middle" class="tufte-mono">data_final_v3.xls</text>
+        </g>
+
+        <line x1="130" y1="45" x2="155" y2="45" stroke="#aaa" stroke-width="1" marker-end="url(#arrow)"/>
+
+        <g transform="translate(160, 25)">
+            <rect x="0" y="0" width="130" height="40" fill="#fff" stroke="#aaa" stroke-width="1" rx="2"/>
+            <text x="57" y="16" text-anchor="middle" class="tufte-label" font-size="10" font-weight="bold">비공개 스크립트</text>
+            <text x="65" y="30" text-anchor="middle" class="tufte-mono">analysis_fix_final.R</text>
+        </g>
+        
+        <text x="150" y="95" text-anchor="middle" class="tufte-tiny" fill="#666">"어떻게 분석했는지 연구자 본인만 앎"</text>
+    </g>
+
+    <g transform="translate(210, 185)">
+        <polygon points="-25,0 25,0 6,40 -6,40" fill="#ddd" stroke="none"/>
+    </g>
+    <text x="260" y="225" text-anchor="middle" class="tufte-tiny" fill="#666">정보 손실 (압축)</text>
+
+    <g transform="translate(135, 205)">
+       <rect x="0" y="0" width="150" height="1" stroke="#999" stroke-width="2" stroke-dasharray="2,2"/> 
+       <rect x="65" y="-10" width="20" height="20" fill="#fff" stroke="#999" rx="3"/>
+       <text x="75" y="4" text-anchor="middle" font-size="12" fill="#666">🔒</text>
+       <text x="160" y="4" text-anchor="start" class="tufte-tiny" fill="#666">유료장벽 (Paywall)</text>
+    </g>
+
+    <g transform="translate(110, 235)">
+      <rect x="0" y="0" width="200" height="45" fill="#e8e8e8" stroke="#999" stroke-width="1.5" rx="4"/>
+      <text x="100" y="18" text-anchor="middle" class="tufte-label" font-size="11" font-weight="bold">📄 정적인 PDF (요약본)</text>
+      <text x="100" y="35" text-anchor="middle" class="tufte-tiny">원본 데이터/코드와 단절됨</text>
+    </g>
+
+    <g transform="translate(30, 290)">
+      <rect x="0" y="0" width="110" height="20" class="warning-box" rx="3"/>
+      <text x="55" y="13" text-anchor="middle" class="tufte-tiny warning-text">⚠ "믿으세요"</text>
+      
+      <rect x="125" y="0" width="110" height="20" class="warning-box" rx="3"/>
+      <text x="180" y="13" text-anchor="middle" class="tufte-tiny warning-text">⚠ 재현 불가능</text>
+      
+      <rect x="250" y="0" width="100" height="20" class="warning-box" rx="3"/>
+      <text x="300" y="13" text-anchor="middle" class="tufte-tiny warning-text">⚠ 링크 유실</text>
+    </g>
+  </g>
+
+  <g transform="translate(465, 180)">
+    <path d="M 0,30 L 30,30" stroke="#444" stroke-width="3" fill="none" marker-end="url(#arrow-flow)"/>
+    <text x="15" y="15" text-anchor="middle" class="tufte-text" font-size="10" font-weight="bold">전환</text>
+  </g>
+
+  <g transform="translate(510, 60)">
+    <rect x="0" y="0" width="420" height="320" fill="#fcfcfc" stroke="#666" stroke-width="2" rx="6"/>
+    <text x="210" y="24" text-anchor="middle" class="tufte-text" font-size="14" font-weight="bold">오픈 사이언스 (개방형)</text>
+    <line x1="20" y1="40" x2="400" y2="40" stroke="#ccc" stroke-width="1"/>
+
+    <g transform="translate(35, 70)">
+      <circle cx="20" cy="20" r="14" fill="#ddd" stroke="#666" stroke-width="1.5"/>
+      <text x="20" y="25" text-anchor="middle" class="tufte-text" font-size="12">👥</text>
+      <text x="20" y="52" text-anchor="middle" class="tufte-small">협업 커뮤니티</text>
+    </g>
+
+    <g transform="translate(95, 60)">
+        <rect x="0" y="0" width="300" height="110" class="success-box" rx="4"/>
+        <text x="150" y="-8" text-anchor="middle" class="tufte-tiny" fill="#666">▼ 투명한 파이프라인 (Transparent Pipeline)</text>
+
+        <g transform="translate(20, 25)">
+            <rect x="0" y="0" width="105" height="40" fill="#fff" stroke="#666" stroke-width="1" rx="2"/>
+            <text x="52" y="16" text-anchor="middle" class="tufte-label" font-size="10" font-weight="bold">공유 데이터</text>
+            <text x="52" y="30" text-anchor="middle" class="tufte-mono">DOI:10.5281/..</text>
+        </g>
+
+        <line x1="130" y1="45" x2="155" y2="45" stroke="#666" stroke-width="1.5" marker-end="url(#arrow-flow)"/>
+
+        <g transform="translate(160, 25)">
+            <rect x="0" y="0" width="115" height="40" fill="#fff" stroke="#666" stroke-width="1" rx="2"/>
+            <text x="57" y="16" text-anchor="middle" class="tufte-label" font-size="10" font-weight="bold">재현 가능 코드</text>
+            <text x="57" y="30" text-anchor="middle" class="tufte-mono">Docker / Git</text>
+        </g>
+
+        <text x="150" y="95" text-anchor="middle" class="tufte-tiny" fill="#666">"누구나 검증, 실행 및 개선 가능"</text>
+    </g>
+
+    <g transform="translate(210, 185)">
+        <rect x="-22" y="0" width="44" height="40" fill="none" stroke="#999" stroke-dasharray="1,2"/>
+        <line x1="0" y1="0" x2="0" y2="40" stroke="#999" stroke-width="1.5" marker-end="url(#arrow)"/>
+    </g>
+    <text x="270" y="220" text-anchor="middle" class="tufte-tiny" fill="#666">정보 온전 보존</text>
+
+    <g transform="translate(20, 140)">
+       <rect x="0" y="0" width="70" height="25" fill="#eee" stroke="#aaa" rx="8"/>
+       <text x="35" y="16" text-anchor="middle" class="tufte-tiny">⚡ Preprint</text>
+    </g>
+
+    <g transform="translate(110, 235)">
+      <rect x="0" y="0" width="200" height="45" fill="#e0e0e0" stroke="#555" stroke-width="2" rx="4"/>
+      <text x="100" y="18" text-anchor="middle" class="tufte-label" font-size="11" font-weight="bold">📄 동적 문서 (Quarto)</text>
+      <text x="100" y="35" text-anchor="middle" class="tufte-tiny">Code + Data + Text 통합</text>
+    </g>
+
+    <g transform="translate(30, 290)">
+      <text x="20" y="13" class="tufte-text" font-size="11" fill="#444">✓ 투명성 (Audit)</text>
+      <text x="150" y="13" class="tufte-text" font-size="11" fill="#444">✓ 완전 재현성</text>
+      <text x="270" y="13" class="tufte-text" font-size="11" fill="#444">✓ 누적 발전</text>
+    </g>
+
+    <path d="M 310,260 Q 380,180 320,135" stroke="#888" stroke-width="1.5" fill="none" stroke-dasharray="3,2" marker-end="url(#arrow)"/>
+    <text x="385" y="195" class="tufte-tiny" fill="#666">기여</text>
+  </g>
+
+  <g transform="translate(30, 400)">
+    <rect x="0" y="0" width="900" height="130" fill="#fafafa" stroke="#ccc" stroke-width="1" rx="5"/>
+    <text x="450" y="24" text-anchor="middle" class="tufte-text" font-size="13" font-weight="bold">패러다임 전환 동인</text>
+    <line x1="30" y1="38" x2="870" y2="38" stroke="#ddd" stroke-width="1"/>
+
+    <g transform="translate(30, 50)">
+      <rect x="0" y="0" width="190" height="65" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="4"/>
+      <text x="95" y="20" text-anchor="middle" class="tufte-text" font-size="11" font-weight="bold">🔬 재현성 위기</text>
+      <text x="95" y="38" text-anchor="middle" class="tufte-small">Nature 서베이</text>
+      <text x="95" y="52" text-anchor="middle" class="tufte-tiny">"70% 재현 실패 경험"</text>
+    </g>
+
+    <g transform="translate(245, 50)">
+      <rect x="0" y="0" width="190" height="65" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="4"/>
+      <text x="95" y="20" text-anchor="middle" class="tufte-text" font-size="11" font-weight="bold">📈 연구 영향력</text>
+      <text x="95" y="38" text-anchor="middle" class="tufte-small">인용 수 증가 효과</text>
+      <text x="95" y="52" text-anchor="middle" class="tufte-tiny">데이터 공개 시 인용률 ↑</text>
+    </g>
+
+    <g transform="translate(460, 50)">
+      <rect x="0" y="0" width="190" height="65" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="4"/>
+      <text x="95" y="20" text-anchor="middle" class="tufte-text" font-size="11" font-weight="bold">🏛️ 펀딩 정책</text>
+      <text x="95" y="38" text-anchor="middle" class="tufte-small">정부/재단의 요구</text>
+      <text x="95" y="52" text-anchor="middle" class="tufte-tiny">Open Access 의무화</text>
+    </g>
+
+    <g transform="translate(675, 50)">
+      <rect x="0" y="0" width="190" height="65" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="4"/>
+      <text x="95" y="20" text-anchor="middle" class="tufte-text" font-size="11" font-weight="bold">🌐 기술 인프라</text>
+      <text x="95" y="38" text-anchor="middle" class="tufte-small">협업 도구 대중화</text>
+      <text x="95" y="52" text-anchor="middle" class="tufte-tiny">Git, Docker, Cloud</text>
+    </g>
+  </g>
+</svg>

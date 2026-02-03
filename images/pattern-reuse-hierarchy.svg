@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 30 800 370">
+  <defs>
+    <style>
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 16px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-subtitle {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 12px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 11px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-desc {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #666;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Menlo, Monaco, monospace;
+        font-size: 9px;
+        fill: #666;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 9px;
+        fill: #999;
+      }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- White background -->
+  <rect x="0" y="0" width="800" height="400" fill="#ffffff"/>
+
+  <!-- Title -->
+  <!-- <text x="400" y="28" class="tufte-title" text-anchor="middle">재사용의 계층 구조: 왜 패턴과 아키텍처가 필요한가</text> -->
+
+  <!-- Root cause box -->
+  <rect x="280" y="50" width="240" height="50" fill="#fff" stroke="#333" stroke-width="2" rx="3"/>
+  <text x="400" y="72" class="tufte-label" text-anchor="middle">코드 작성 비용이 높다</text>
+  <text x="400" y="90" class="tufte-desc" text-anchor="middle">숙련 개발자 수 시간~수일 투자 필요</text>
+
+  <!-- Arrow down -->
+  <line x1="400" y1="100" x2="400" y2="125" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Core principle - emphasized as key concept -->
+  <rect x="270" y="135" width="260" height="55" fill="#333" stroke="#333" stroke-width="2" rx="4"/>
+  <rect x="273" y="138" width="254" height="49" fill="#fff" stroke="none" rx="3"/>
+  <text x="400" y="160" font-family="Palatino, Georgia, serif" font-size="16px" font-weight="bold" fill="#333" text-anchor="middle">재사용 명령</text>
+  <text x="400" y="178" font-family="Palatino, Georgia, serif" font-size="10px" fill="#666" text-anchor="middle" font-style="italic">Reusability Imperative</text>
+
+  <!-- Arrow splits -->
+  <line x1="400" y1="190" x2="400" y2="210" stroke="#666" stroke-width="1.5"/>
+  <line x1="400" y1="210" x2="150" y2="230" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="400" y1="210" x2="320" y2="230" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="400" y1="210" x2="480" y2="230" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="400" y1="210" x2="650" y2="230" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Four pillars of reuse -->
+  <!-- 1. Architecture (more conceptual) -->
+  <rect x="50" y="240" width="170" height="100" fill="#fff" stroke="#666" stroke-width="1.5" rx="3"/>
+  <text x="135" y="263" class="tufte-label" text-anchor="middle">아키텍처</text>
+  <line x1="65" y1="273" x2="205" y2="273" stroke="#ccc" stroke-width="1"/>
+  <text x="135" y="290" class="tufte-desc" text-anchor="middle">설계 원칙의 재사용</text>
+  <text x="135" y="308" class="tufte-code" text-anchor="middle">MVC, 계층형</text>
+  <text x="135" y="323" class="tufte-code" text-anchor="middle">마이크로서비스</text>
+
+  <!-- 2. Design Patterns -->
+  <rect x="240" y="240" width="150" height="100" fill="#fff" stroke="#666" stroke-width="1.5" rx="3"/>
+  <text x="315" y="263" class="tufte-label" text-anchor="middle">디자인 패턴</text>
+  <line x1="255" y1="273" x2="375" y2="273" stroke="#ccc" stroke-width="1"/>
+  <text x="315" y="290" class="tufte-desc" text-anchor="middle">해법의 재사용</text>
+  <text x="315" y="308" class="tufte-code" text-anchor="middle">GoF 23개 패턴</text>
+  <text x="315" y="323" class="tufte-code" text-anchor="middle">Factory, Observer, ...</text>
+
+  <!-- 3. Framework -->
+  <rect x="410" y="240" width="150" height="100" fill="#fff" stroke="#666" stroke-width="1.5" rx="3"/>
+  <text x="485" y="263" class="tufte-label" text-anchor="middle">프레임워크</text>
+  <line x1="425" y1="273" x2="545" y2="273" stroke="#ccc" stroke-width="1"/>
+  <text x="485" y="290" class="tufte-desc" text-anchor="middle">구조의 재사용</text>
+  <text x="485" y="308" class="tufte-code" text-anchor="middle">Django, React</text>
+  <text x="485" y="323" class="tufte-code" text-anchor="middle">Spring, FastAPI</text>
+
+  <!-- 4. SaaS/Platform -->
+  <rect x="580" y="240" width="170" height="100" fill="#fff" stroke="#666" stroke-width="1.5" rx="3"/>
+  <text x="665" y="263" class="tufte-label" text-anchor="middle">SaaS/플랫폼</text>
+  <line x1="595" y1="273" x2="735" y2="273" stroke="#ccc" stroke-width="1"/>
+  <text x="665" y="290" class="tufte-desc" text-anchor="middle">시스템의 재사용</text>
+  <text x="665" y="308" class="tufte-code" text-anchor="middle">Salesforce, AWS</text>
+  <text x="665" y="323" class="tufte-code" text-anchor="middle">Notion, GitHub</text>
+
+  <!-- Abstraction spectrum - emphasized -->
+  <defs>
+    <linearGradient id="spectrumGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#333;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ccc;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Spectrum bar -->
+  <rect x="50" y="355" width="700" height="8" fill="url(#spectrumGradient)" rx="4"/>
+
+  <!-- Spectrum labels -->
+  <text x="50" y="385" class="tufte-subtitle" font-size="13px">개념적 재사용</text>
+  <text x="400" y="385" class="tufte-desc" text-anchor="middle">← 추상화 스펙트럼 →</text>
+  <text x="750" y="385" class="tufte-subtitle" font-size="13px" text-anchor="end">구체적 재사용</text>
+
+  <!-- Connecting lines from boxes to spectrum -->
+  <line x1="135" y1="340" x2="135" y2="355" stroke="#666" stroke-width="1.5"/>
+  <line x1="315" y1="340" x2="315" y2="355" stroke="#666" stroke-width="1.5"/>
+  <line x1="485" y1="340" x2="485" y2="355" stroke="#666" stroke-width="1.5"/>
+  <line x1="665" y1="340" x2="665" y2="355" stroke="#666" stroke-width="1.5"/>
+
+  <!-- DRY principle - quote callout style -->
+  <g transform="translate(550, 45)">
+    <!-- Accent bar on left -->
+    <rect x="0" y="0" width="4" height="60" fill="#333" rx="2"/>
+    <!-- Background -->
+    <rect x="8" y="0" width="220" height="60" fill="#fafafa" stroke="none"/>
+    <!-- Large quotation mark -->
+    <text x="18" y="28" font-family="Georgia, serif" font-size="36" fill="#ddd" font-style="italic">"</text>
+    <!-- Title -->
+    <text x="45" y="22" class="tufte-label" font-size="12px">DRY</text>
+    <text x="72" y="22" class="tufte-small" font-size="9px" fill="#666">Don't Repeat Yourself</text>
+    <!-- Quote -->
+    <text x="45" y="42" font-family="Palatino, Georgia, serif" font-size="10px" fill="#555" font-style="italic">한 번 작성하고 여러 번 사용하라</text>
+  </g>
+</svg>

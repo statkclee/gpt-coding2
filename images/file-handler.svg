@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 220">
+  <defs>
+    <style>
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 14px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 14px;
+        fill: #333;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 11px;
+        fill: #666;
+      }
+      .tufte-code {
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 11px;
+        fill: #333;
+      }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="600" height="220" fill="#ffffff"/>
+
+  <!-- 프로그램 영역 -->
+  <rect x="20" y="30" width="120" height="150" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="4"/>
+  <text x="80" y="50" text-anchor="middle" class="tufte-title">프로그램</text>
+  <line x1="30" y1="58" x2="130" y2="58" stroke="#ccc" stroke-width="1"/>
+
+  <!-- 코드 -->
+  <text x="30" y="78" class="tufte-code">f = open(...)</text>
+  <text x="30" y="96" class="tufte-code">for ln in f:</text>
+  <text x="45" y="114" class="tufte-code">print(ln)</text>
+  <text x="30" y="132" class="tufte-code">f.close()</text>
+
+  <!-- 프로그램 → 핸들 화살표 -->
+  <line x1="140" y1="105" x2="195" y2="105" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <text x="167" y="98" text-anchor="middle" class="tufte-small">요청</text>
+
+  <!-- 파일 핸들 (중앙) -->
+  <rect x="205" y="60" width="90" height="90" fill="#e8e8e8" stroke="#333" stroke-width="2" rx="4"/>
+  <text x="250" y="95" text-anchor="middle" class="tufte-title">파일 핸들</text>
+  <text x="250" y="115" text-anchor="middle" class="tufte-small">(file handle)</text>
+  <text x="250" y="138" text-anchor="middle" class="tufte-small">데이터 접근 통로</text>
+
+  <!-- 핸들 → 파일 화살표 (양방향) -->
+  <line x1="295" y1="95" x2="355" y2="95" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <line x1="355" y1="115" x2="295" y2="115" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <text x="325" y="88" text-anchor="middle" class="tufte-small">읽기</text>
+  <text x="325" y="130" text-anchor="middle" class="tufte-small">쓰기</text>
+
+  <!-- 파일 (디스크) -->
+  <rect x="365" y="30" width="210" height="150" fill="#ffffff" stroke="#999" stroke-width="1.5" rx="4"/>
+  <text x="470" y="50" text-anchor="middle" class="tufte-title">mbox.txt</text>
+  <line x1="375" y1="58" x2="565" y2="58" stroke="#ccc" stroke-width="1"/>
+
+  <!-- 파일 내용 미리보기 -->
+  <text x="375" y="75" class="tufte-code">From stephen.marquard@uct...</text>
+  <text x="375" y="90" class="tufte-code">Return-Path: &lt;postmaster...</text>
+  <text x="375" y="105" class="tufte-code">Date: Sat, 5 Jan 2008...</text>
+  <text x="375" y="120" class="tufte-code">To: source@collab.sakai...</text>
+  <text x="375" y="135" class="tufte-code">From: stephen.marquard@...</text>
+  <text x="375" y="150" class="tufte-code">Subject: [sakai] svn...</text>
+  <text x="375" y="165" class="tufte-code">...</text>
+
+  <!-- 하단 레이블 -->
+  <text x="80" y="200" text-anchor="middle" class="tufte-small">주기억장치 (RAM)</text>
+  <text x="250" y="200" text-anchor="middle" class="tufte-small">운영체제 관리</text>
+  <text x="470" y="200" text-anchor="middle" class="tufte-small">보조기억장치 (디스크)</text>
+
+</svg>

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 35 850 350">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #111; font-weight: bold; }
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-mono { font-family: 'SF Mono', Consolas, monospace; fill: #444; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #555; font-style: italic; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #666; font-size: 10px; }
+      .outer-box { fill: none; stroke: #111; stroke-width: 2; }
+      .header-box { fill: #e0e0e0; stroke: #111; stroke-width: 2; }
+      .inner-line { stroke: #444; stroke-width: 1; }
+      .pk-cell { fill: #c8c8c8; }
+      .fk-cell { fill: #e8e8e8; }
+      .relation-line { fill: none; stroke: #333; stroke-width: 2; }
+      .highlight-line { fill: none; stroke: #111; stroke-width: 2.5; }
+      .annotation-line { stroke: #888; stroke-width: 1; stroke-dasharray: 3,2; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#333" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="850" height="520" fill="#ffffff"/>
+
+  <!-- ========================================== -->
+  <!-- 상단 제목 -->
+  <!-- ========================================== -->
+  <!-- <text x="425" y="28" text-anchor="middle" class="tufte-title" font-size="16">세 테이블의 키 연결: 데이터 무결성의 핵심</text>
+  <line x1="50" y1="42" x2="800" y2="42" stroke="#ccc" stroke-width="1"/> -->
+
+  <!-- ========================================== -->
+  <!-- Artist 테이블 (좌측 상단) -->
+  <!-- ========================================== -->
+  <g transform="translate(50, 70)">
+    <text x="75" y="-8" text-anchor="middle" class="tufte-title" font-size="13">Artist</text>
+
+    <rect x="0" y="0" width="150" height="120" class="outer-box"/>
+
+    <!-- 헤더 -->
+    <rect x="0" y="0" width="150" height="28" class="header-box"/>
+    <line x1="50" y1="0" x2="50" y2="120" class="inner-line"/>
+    <text x="25" y="19" text-anchor="middle" class="tufte-title" font-size="11">id</text>
+    <text x="100" y="19" text-anchor="middle" class="tufte-title" font-size="11">name</text>
+
+    <!-- 행 1 -->
+    <rect x="1" y="29" width="48" height="29" class="pk-cell"/>
+    <line x1="0" y1="58" x2="150" y2="58" class="inner-line"/>
+    <text x="25" y="48" text-anchor="middle" class="tufte-mono" font-size="12" font-weight="bold">1</text>
+    <text x="100" y="48" text-anchor="middle" class="tufte-mono" font-size="10">Beatles</text>
+
+    <!-- 행 2 -->
+    <rect x="1" y="59" width="48" height="29" class="pk-cell"/>
+    <line x1="0" y1="88" x2="150" y2="88" class="inner-line"/>
+    <text x="25" y="78" text-anchor="middle" class="tufte-mono" font-size="12" font-weight="bold">2</text>
+    <text x="100" y="78" text-anchor="middle" class="tufte-mono" font-size="10">Led Zeppelin</text>
+
+    <!-- 행 3 -->
+    <rect x="1" y="89" width="48" height="30" class="pk-cell"/>
+    <text x="25" y="109" text-anchor="middle" class="tufte-mono" font-size="12" font-weight="bold">3</text>
+    <text x="100" y="109" text-anchor="middle" class="tufte-mono" font-size="10">Sinatra</text>
+
+    <!-- PK 레이블 -->
+    <text x="25" y="140" text-anchor="middle" class="tufte-label" font-size="9">주키(PK)</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- Album 테이블 (중앙) -->
+  <!-- ========================================== -->
+  <g transform="translate(320, 70)">
+    <text x="105" y="-8" text-anchor="middle" class="tufte-title" font-size="13">Album</text>
+
+    <rect x="0" y="0" width="210" height="120" class="outer-box"/>
+
+    <!-- 헤더 -->
+    <rect x="0" y="0" width="210" height="28" class="header-box"/>
+    <line x1="40" y1="0" x2="40" y2="120" class="inner-line"/>
+    <line x1="130" y1="0" x2="130" y2="120" class="inner-line"/>
+    <text x="20" y="19" text-anchor="middle" class="tufte-title" font-size="11">id</text>
+    <text x="85" y="19" text-anchor="middle" class="tufte-title" font-size="11">title</text>
+    <text x="170" y="19" text-anchor="middle" class="tufte-title" font-size="11">artist_id</text>
+
+    <!-- 행 1: Abbey Road (Beatles) -->
+    <rect x="1" y="29" width="38" height="29" class="pk-cell"/>
+    <rect x="131" y="29" width="78" height="29" class="fk-cell"/>
+    <line x1="0" y1="58" x2="210" y2="58" class="inner-line"/>
+    <text x="20" y="48" text-anchor="middle" class="tufte-mono" font-size="12" font-weight="bold">1</text>
+    <text x="85" y="48" text-anchor="middle" class="tufte-mono" font-size="10">Abbey Road</text>
+    <text x="170" y="48" text-anchor="middle" class="tufte-mono" font-size="12" font-weight="bold">1</text>
+
+    <!-- 행 2: Led Zeppelin IV -->
+    <rect x="1" y="59" width="38" height="29" class="pk-cell"/>
+    <rect x="131" y="59" width="78" height="29" class="fk-cell"/>
+    <line x1="0" y1="88" x2="210" y2="88" class="inner-line"/>
+    <text x="20" y="78" text-anchor="middle" class="tufte-mono" font-size="12" font-weight="bold">2</text>
+    <text x="85" y="78" text-anchor="middle" class="tufte-mono" font-size="10">Led Zeppelin IV</text>
+    <text x="170" y="78" text-anchor="middle" class="tufte-mono" font-size="12" font-weight="bold">2</text>
+
+    <!-- 행 3: Help! (Beatles) -->
+    <rect x="1" y="89" width="38" height="30" class="pk-cell"/>
+    <rect x="131" y="89" width="78" height="30" class="fk-cell"/>
+    <text x="20" y="109" text-anchor="middle" class="tufte-mono" font-size="12" font-weight="bold">3</text>
+    <text x="85" y="109" text-anchor="middle" class="tufte-mono" font-size="10">Help!</text>
+    <text x="170" y="109" text-anchor="middle" class="tufte-mono" font-size="12" font-weight="bold">1</text>
+
+    <!-- 레이블 -->
+    <text x="20" y="140" text-anchor="middle" class="tufte-label" font-size="9">PK</text>
+    <text x="170" y="140" text-anchor="middle" class="tufte-label" font-size="9">FK→Artist</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- Track 테이블 (우측) -->
+  <!-- ========================================== -->
+  <g transform="translate(600, 70)">
+    <text x="110" y="-8" text-anchor="middle" class="tufte-title" font-size="13">Track</text>
+
+    <rect x="0" y="0" width="220" height="120" class="outer-box"/>
+
+    <!-- 헤더 -->
+    <rect x="0" y="0" width="220" height="28" class="header-box"/>
+    <line x1="40" y1="0" x2="40" y2="120" class="inner-line"/>
+    <line x1="130" y1="0" x2="130" y2="120" class="inner-line"/>
+    <text x="20" y="19" text-anchor="middle" class="tufte-title" font-size="11">id</text>
+    <text x="85" y="19" text-anchor="middle" class="tufte-title" font-size="11">title</text>
+    <text x="175" y="19" text-anchor="middle" class="tufte-title" font-size="11">album_id</text>
+
+    <!-- 행 1: Come Together -->
+    <rect x="1" y="29" width="38" height="29" class="pk-cell"/>
+    <rect x="131" y="29" width="88" height="29" class="fk-cell"/>
+    <line x1="0" y1="58" x2="220" y2="58" class="inner-line"/>
+    <text x="20" y="48" text-anchor="middle" class="tufte-mono" font-size="12">1</text>
+    <text x="85" y="48" text-anchor="middle" class="tufte-mono" font-size="10">Come Together</text>
+    <text x="175" y="48" text-anchor="middle" class="tufte-mono" font-size="12" font-weight="bold">1</text>
+
+    <!-- 행 2: Stairway -->
+    <rect x="1" y="59" width="38" height="29" class="pk-cell"/>
+    <rect x="131" y="59" width="88" height="29" class="fk-cell"/>
+    <line x1="0" y1="88" x2="220" y2="88" class="inner-line"/>
+    <text x="20" y="78" text-anchor="middle" class="tufte-mono" font-size="12">2</text>
+    <text x="85" y="78" text-anchor="middle" class="tufte-mono" font-size="10">Stairway</text>
+    <text x="175" y="78" text-anchor="middle" class="tufte-mono" font-size="12" font-weight="bold">2</text>
+
+    <!-- 행 3: Something -->
+    <rect x="1" y="89" width="38" height="30" class="pk-cell"/>
+    <rect x="131" y="89" width="88" height="30" class="fk-cell"/>
+    <text x="20" y="109" text-anchor="middle" class="tufte-mono" font-size="12">3</text>
+    <text x="85" y="109" text-anchor="middle" class="tufte-mono" font-size="10">Something</text>
+    <text x="175" y="109" text-anchor="middle" class="tufte-mono" font-size="12" font-weight="bold">1</text>
+
+    <!-- 레이블 -->
+    <text x="20" y="140" text-anchor="middle" class="tufte-label" font-size="9">PK</text>
+    <text x="175" y="140" text-anchor="middle" class="tufte-label" font-size="9">FK→Album</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 연결선: Artist → Album (id=1 연결 강조) -->
+  <!-- ========================================== -->
+  <g>
+    <!-- Artist.id=1 → Album.artist_id=1 (행 1) -->
+    <path d="M 200,113 C 240,113 280,113 320,113" class="highlight-line" marker-end="url(#arrow)"/>
+    <!-- Artist.id=1 → Album.artist_id=1 (행 3, Help!) -->
+    <path d="M 200,113 C 230,113 230,177 320,177" class="relation-line" marker-end="url(#arrow)"/>
+
+    <!-- Artist.id=2 → Album.artist_id=2 -->
+    <path d="M 200,143 L 320,143" class="relation-line" marker-end="url(#arrow)"/>
+
+    <!-- 관계 표시 -->
+    <text x="260" y="100" text-anchor="middle" class="tufte-title" font-size="10">1:N</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 연결선: Album → Track -->
+  <!-- ========================================== -->
+  <g>
+    <!-- Album.id=1 → Track.album_id=1 (Come Together) -->
+    <path d="M 530,113 C 550,113 580,113 600,113" class="highlight-line" marker-end="url(#arrow)"/>
+    <!-- Album.id=1 → Track.album_id=1 (Something) -->
+    <path d="M 530,113 C 560,113 560,177 600,177" class="relation-line" marker-end="url(#arrow)"/>
+
+    <!-- Album.id=2 → Track.album_id=2 -->
+    <path d="M 530,143 L 600,143" class="relation-line" marker-end="url(#arrow)"/>
+
+    <!-- 관계 표시 -->
+    <text x="565" y="100" text-anchor="middle" class="tufte-title" font-size="10">1:N</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 중앙: 핵심 인사이트 패널 -->
+  <!-- ========================================== -->
+  <g transform="translate(50, 240)">
+    <rect x="0" y="0" width="750" height="130" fill="#f8f8f8" stroke="#999" stroke-width="1" rx="6"/>
+
+    <text x="375" y="25" text-anchor="middle" class="tufte-title" font-size="13">외래키가 연결하는 것: 숫자가 아니라 "관계"</text>
+    <line x1="20" y1="38" x2="730" y2="38" stroke="#ddd" stroke-width="1"/>
+
+    <!-- 시각적 흐름도 -->
+    <g transform="translate(50, 55)">
+      <!-- Beatles 예시 -->
+      <rect x="0" y="0" width="100" height="50" fill="#c8c8c8" stroke="#333" stroke-width="1.5" rx="4"/>
+      <text x="50" y="20" text-anchor="middle" class="tufte-title" font-size="11">Artist</text>
+      <text x="50" y="38" text-anchor="middle" class="tufte-mono" font-size="10">id = 1</text>
+
+      <path d="M 100,25 L 150,25" class="highlight-line" marker-end="url(#arrow)"/>
+      <text x="125" y="18" text-anchor="middle" class="tufte-small">참조</text>
+
+      <rect x="150" y="0" width="130" height="50" fill="#e8e8e8" stroke="#333" stroke-width="1.5" rx="4"/>
+      <text x="215" y="20" text-anchor="middle" class="tufte-title" font-size="11">Album</text>
+      <text x="215" y="38" text-anchor="middle" class="tufte-mono" font-size="10">artist_id = 1</text>
+
+      <path d="M 280,25 L 330,25" class="highlight-line" marker-end="url(#arrow)"/>
+      <text x="305" y="18" text-anchor="middle" class="tufte-small">참조</text>
+
+      <rect x="330" y="0" width="130" height="50" fill="#e8e8e8" stroke="#333" stroke-width="1.5" rx="4"/>
+      <text x="395" y="20" text-anchor="middle" class="tufte-title" font-size="11">Track</text>
+      <text x="395" y="38" text-anchor="middle" class="tufte-mono" font-size="10">album_id = 1</text>
+
+      <!-- 의미 해석 -->
+      <text x="500" y="18" text-anchor="start" class="tufte-text" font-size="11">→ "Come Together"는</text>
+      <text x="500" y="38" text-anchor="start" class="tufte-text" font-size="11">   Beatles의 Abbey Road 앨범 수록곡</text>
+    </g>
+
+    <!-- 핵심 메시지 -->
+    <text x="375" y="120" text-anchor="middle" class="tufte-label" font-size="11">"숫자 1은 Beatles를 가리키는 포인터 — 데이터 중복 없이 관계만 저장"</text>
+  </g>
+
+
+</svg>

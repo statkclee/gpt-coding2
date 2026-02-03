@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 35 800 280">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #111; font-weight: bold; }
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-mono { font-family: 'SF Mono', Consolas, monospace; fill: #444; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #666; font-style: italic; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #777; font-size: 10px; }
+      .client-box { fill: #e8e8e8; stroke: #333; stroke-width: 2; }
+      .api-box { fill: #f8f8f8; stroke: #333; stroke-width: 1.5; }
+      .service-box { fill: #f0f0f0; stroke: #666; stroke-width: 1; }
+      .flow-line { fill: none; stroke: #555; stroke-width: 1.5; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="2.5" orient="auto">
+      <path d="M0,0 L0,5 L7,2.5 z" fill="#555" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="320" fill="#ffffff"/>
+
+  <!-- 왼쪽: 파이썬 클라이언트 -->
+  <g transform="translate(40, 55)">
+    <rect x="0" y="0" width="180" height="220" class="client-box" rx="6"/>
+    <text x="90" y="25" text-anchor="middle" class="tufte-title" font-size="12">파이썬 클라이언트</text>
+    <line x1="15" y1="35" x2="165" y2="35" stroke="#999" stroke-width="1"/>
+
+    <!-- 코드 블록 -->
+    <rect x="15" y="50" width="150" height="80" fill="#fff" stroke="#999" stroke-width="1" rx="3"/>
+    <text x="25" y="70" class="tufte-mono" font-size="9">import requests</text>
+    <text x="25" y="85" class="tufte-mono" font-size="9">import openai</text>
+    <text x="25" y="100" class="tufte-mono" font-size="9">import anthropic</text>
+    <text x="25" y="120" class="tufte-mono" font-size="9">response = api.call()</text>
+
+    <!-- 기능 -->
+    <text x="90" y="155" text-anchor="middle" class="tufte-label" font-size="9">HTTP 요청 전송</text>
+    <text x="90" y="170" text-anchor="middle" class="tufte-label" font-size="9">JSON 파싱</text>
+    <text x="90" y="185" text-anchor="middle" class="tufte-label" font-size="9">인증 처리</text>
+    <text x="90" y="200" text-anchor="middle" class="tufte-label" font-size="9">에러 핸들링</text>
+  </g>
+
+  <!-- 중앙: REST API 레이어 -->
+  <g transform="translate(280, 55)">
+    <rect x="0" y="0" width="160" height="220" class="api-box" rx="6"/>
+    <text x="80" y="25" text-anchor="middle" class="tufte-title" font-size="12">REST API</text>
+    <line x1="15" y1="35" x2="145" y2="35" stroke="#ddd" stroke-width="1"/>
+
+    <!-- HTTP 메서드 -->
+    <g transform="translate(20, 50)">
+      <rect x="0" y="0" width="120" height="25" fill="#e0e0e0" stroke="#999" stroke-width="1" rx="3"/>
+      <text x="60" y="17" text-anchor="middle" class="tufte-mono" font-size="9">GET /resource</text>
+    </g>
+
+    <g transform="translate(20, 85)">
+      <rect x="0" y="0" width="120" height="25" fill="#e0e0e0" stroke="#999" stroke-width="1" rx="3"/>
+      <text x="60" y="17" text-anchor="middle" class="tufte-mono" font-size="9">POST /resource</text>
+    </g>
+
+    <g transform="translate(20, 120)">
+      <rect x="0" y="0" width="120" height="25" fill="#e0e0e0" stroke="#999" stroke-width="1" rx="3"/>
+      <text x="60" y="17" text-anchor="middle" class="tufte-mono" font-size="9">Authorization</text>
+    </g>
+
+    <!-- JSON -->
+    <text x="80" y="175" text-anchor="middle" class="tufte-label" font-size="10">JSON 응답</text>
+    <rect x="30" y="185" width="100" height="25" fill="#fff" stroke="#999" stroke-width="1" rx="3"/>
+    <text x="80" y="202" text-anchor="middle" class="tufte-mono" font-size="8">{"data": [...]}</text>
+  </g>
+
+  <!-- 오른쪽: 외부 서비스들 -->
+  <g transform="translate(500, 55)">
+    <rect x="0" y="0" width="260" height="220" fill="#fafafa" stroke="#999" stroke-width="1" rx="6"/>
+    <text x="130" y="22" text-anchor="middle" class="tufte-title" font-size="12">외부 서비스</text>
+    <line x1="15" y1="32" x2="245" y2="32" stroke="#ddd" stroke-width="1"/>
+
+    <!-- 공공 데이터 -->
+    <g transform="translate(15, 45)">
+      <rect x="0" y="0" width="105" height="50" class="service-box" rx="4"/>
+      <text x="52" y="18" text-anchor="middle" class="tufte-title" font-size="9">공공 데이터</text>
+      <text x="52" y="35" text-anchor="middle" class="tufte-small">기상청, 교통, 통계</text>
+    </g>
+
+    <!-- 금융 API -->
+    <g transform="translate(135, 45)">
+      <rect x="0" y="0" width="105" height="50" class="service-box" rx="4"/>
+      <text x="52" y="18" text-anchor="middle" class="tufte-title" font-size="9">금융 API</text>
+      <text x="52" y="35" text-anchor="middle" class="tufte-small">환율, 주가, 결제</text>
+    </g>
+
+    <!-- AI API -->
+    <g transform="translate(15, 110)">
+      <rect x="0" y="0" width="105" height="50" class="service-box" rx="4"/>
+      <text x="52" y="18" text-anchor="middle" class="tufte-title" font-size="9">OpenAI</text>
+      <text x="52" y="35" text-anchor="middle" class="tufte-small">GPT-4, DALL-E</text>
+    </g>
+
+    <!-- Anthropic -->
+    <g transform="translate(135, 110)">
+      <rect x="0" y="0" width="105" height="50" class="service-box" rx="4"/>
+      <text x="52" y="18" text-anchor="middle" class="tufte-title" font-size="9">Anthropic</text>
+      <text x="52" y="35" text-anchor="middle" class="tufte-small">Claude</text>
+    </g>
+
+    <!-- 기타 -->
+    <g transform="translate(75, 175)">
+      <rect x="0" y="0" width="105" height="35" class="service-box" rx="4"/>
+      <text x="52" y="15" text-anchor="middle" class="tufte-title" font-size="9">기타 서비스</text>
+      <text x="52" y="28" text-anchor="middle" class="tufte-small">지도, 번역, 검색...</text>
+    </g>
+  </g>
+
+  <!-- 화살표 연결 -->
+  <path d="M 220,165 L 270,165" class="flow-line" marker-end="url(#arrow)"/>
+  <path d="M 440,165 L 490,165" class="flow-line" marker-end="url(#arrow)"/>
+
+  <!-- 라벨 -->
+  <text x="245" y="155" text-anchor="middle" class="tufte-small">요청</text>
+  <text x="465" y="155" text-anchor="middle" class="tufte-small">호출</text>
+
+  <!-- 하단: 핵심 메시지 -->
+  <text x="400" y="300" text-anchor="middle" class="tufte-label" font-size="11">"하나의 인터페이스로 수천 개의 서비스에 접근: 파이썬 → REST → 세계"</text>
+
+</svg>

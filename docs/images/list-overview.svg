@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 30 650 290">
+  <defs>
+    <style>
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 15px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-subtitle {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 13px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 12px;
+        fill: #333;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 11px;
+        fill: #666;
+      }
+      .tufte-code {
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 11px;
+        fill: #333;
+      }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="650" height="320" fill="#ffffff"/>
+
+  <!-- 제목 -->
+  <!-- <text x="325" y="25" text-anchor="middle" class="tufte-title">리스트(List): 여러 값을 순서대로 담는 컬렉션</text>
+  <line x1="50" y1="35" x2="600" y2="35" stroke="#ccc" stroke-width="1"/> -->
+
+  <!-- 왼쪽: 문자열과 비교 -->
+  <rect x="20" y="50" width="190" height="120" fill="#f5f5f5" stroke="#999" stroke-width="1.5" rx="4"/>
+  <text x="115" y="70" text-anchor="middle" class="tufte-subtitle">문자열 (String)</text>
+  <line x1="30" y1="80" x2="200" y2="80" stroke="#ccc" stroke-width="1"/>
+
+  <text x="35" y="100" class="tufte-code">"Hello"</text>
+  <text x="35" y="120" class="tufte-small">문자의 시퀀스</text>
+  <text x="35" y="140" class="tufte-small">변경 불가 (immutable)</text>
+  <text x="35" y="160" class="tufte-small">인덱스: 0부터 시작</text>
+
+  <!-- 화살표 -->
+  <line x1="220" y1="110" x2="250" y2="110" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <text x="235" y="100" text-anchor="middle" class="tufte-small">확장</text>
+
+  <!-- 중앙: 리스트 -->
+  <rect x="260" y="50" width="190" height="120" fill="#e8e8e8" stroke="#333" stroke-width="2" rx="4"/>
+  <text x="355" y="70" text-anchor="middle" class="tufte-subtitle">리스트 (List)</text>
+  <line x1="270" y1="80" x2="440" y2="80" stroke="#ccc" stroke-width="1"/>
+
+  <text x="275" y="100" class="tufte-code">[1, "a", True]</text>
+  <text x="275" y="120" class="tufte-small">값의 시퀀스 (임의 타입)</text>
+  <text x="275" y="140" class="tufte-small">변경 가능 (mutable)</text>
+  <text x="275" y="160" class="tufte-small">인덱스: 0부터 시작</text>
+
+  <!-- 화살표 -->
+  <line x1="460" y1="110" x2="490" y2="110" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <text x="475" y="100" text-anchor="middle" class="tufte-small">활용</text>
+
+  <!-- 오른쪽: 활용 사례 -->
+  <rect x="500" y="50" width="130" height="120" fill="#f5f5f5" stroke="#999" stroke-width="1.5" rx="4"/>
+  <text x="565" y="70" text-anchor="middle" class="tufte-subtitle">활용 사례</text>
+  <line x1="510" y1="80" x2="620" y2="80" stroke="#ccc" stroke-width="1"/>
+
+  <text x="515" y="100" class="tufte-small">파일 라인 저장</text>
+  <text x="515" y="120" class="tufte-small">데이터 수집</text>
+  <text x="515" y="140" class="tufte-small">결과 누적</text>
+  <text x="515" y="160" class="tufte-small">일괄 처리</text>
+
+  <!-- 하단: 핵심 연산 -->
+  <rect x="20" y="185" width="610" height="120" fill="#f5f5f5" stroke="#999" stroke-width="1.5" rx="4"/>
+  <text x="325" y="205" text-anchor="middle" class="tufte-subtitle">리스트 핵심 연산</text>
+  <line x1="30" y1="215" x2="620" y2="215" stroke="#ccc" stroke-width="1"/>
+
+  <!-- 생성 -->
+  <rect x="35" y="225" width="100" height="65" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="85" y="245" text-anchor="middle" class="tufte-label">생성</text>
+  <text x="85" y="265" text-anchor="middle" class="tufte-code">[]</text>
+  <text x="85" y="282" text-anchor="middle" class="tufte-small">빈/초기 리스트</text>
+
+  <!-- 접근 -->
+  <rect x="150" y="225" width="100" height="65" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="200" y="245" text-anchor="middle" class="tufte-label">접근</text>
+  <text x="200" y="265" text-anchor="middle" class="tufte-code">x[i]</text>
+  <text x="200" y="282" text-anchor="middle" class="tufte-small">인덱스로 접근</text>
+
+  <!-- 순회 -->
+  <rect x="265" y="225" width="100" height="65" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="315" y="245" text-anchor="middle" class="tufte-label">순회</text>
+  <text x="315" y="265" text-anchor="middle" class="tufte-code">for x in L:</text>
+  <text x="315" y="282" text-anchor="middle" class="tufte-small">각 요소 반복</text>
+
+  <!-- 변환 -->
+  <rect x="380" y="225" width="100" height="65" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="430" y="245" text-anchor="middle" class="tufte-label">변환</text>
+  <text x="430" y="265" text-anchor="middle" class="tufte-code">split/join</text>
+  <text x="430" y="282" text-anchor="middle" class="tufte-small">문자열 ↔ 리스트</text>
+
+  <!-- 함수 -->
+  <rect x="495" y="225" width="120" height="65" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="555" y="245" text-anchor="middle" class="tufte-label">집계</text>
+  <text x="555" y="265" text-anchor="middle" class="tufte-code">sum, max, min</text>
+  <text x="555" y="282" text-anchor="middle" class="tufte-small">통계 함수 적용</text>
+
+</svg>

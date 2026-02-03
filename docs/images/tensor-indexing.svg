@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300">
+  <defs>
+    <style>
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 12px;
+        fill: #333;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 10px;
+        fill: #333;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #666;
+      }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="720" height="300" fill="#ffffff"/>
+
+  <!-- Original array visualization -->
+  <g transform="translate(30, 20)">
+    <text x="90" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">원본 배열 (3×4)</text>
+
+    <!-- Column indices -->
+    <text x="28" y="30" text-anchor="middle" class="tufte-small">0</text>
+    <text x="63" y="30" text-anchor="middle" class="tufte-small">1</text>
+    <text x="98" y="30" text-anchor="middle" class="tufte-small">2</text>
+    <text x="133" y="30" text-anchor="middle" class="tufte-small">3</text>
+
+    <!-- Row indices and cells -->
+    <text x="0" y="52" text-anchor="middle" class="tufte-small">0</text>
+    <rect x="10" y="35" width="35" height="25" fill="#e8e8e8" stroke="#333" stroke-width="1"/>
+    <text x="27" y="52" text-anchor="middle" class="tufte-code">0</text>
+    <rect x="45" y="35" width="35" height="25" fill="#e8e8e8" stroke="#333" stroke-width="1"/>
+    <text x="62" y="52" text-anchor="middle" class="tufte-code">1</text>
+    <rect x="80" y="35" width="35" height="25" fill="#e8e8e8" stroke="#333" stroke-width="1"/>
+    <text x="97" y="52" text-anchor="middle" class="tufte-code">2</text>
+    <rect x="115" y="35" width="35" height="25" fill="#e8e8e8" stroke="#333" stroke-width="1"/>
+    <text x="132" y="52" text-anchor="middle" class="tufte-code">3</text>
+
+    <text x="0" y="77" text-anchor="middle" class="tufte-small">1</text>
+    <rect x="10" y="60" width="35" height="25" fill="#f5f5f5" stroke="#333" stroke-width="1"/>
+    <text x="27" y="77" text-anchor="middle" class="tufte-code">4</text>
+    <rect x="45" y="60" width="35" height="25" fill="#f5f5f5" stroke="#333" stroke-width="1"/>
+    <text x="62" y="77" text-anchor="middle" class="tufte-code">5</text>
+    <rect x="80" y="60" width="35" height="25" fill="#f5f5f5" stroke="#333" stroke-width="1"/>
+    <text x="97" y="77" text-anchor="middle" class="tufte-code">6</text>
+    <rect x="115" y="60" width="35" height="25" fill="#f5f5f5" stroke="#333" stroke-width="1"/>
+    <text x="132" y="77" text-anchor="middle" class="tufte-code">7</text>
+
+    <text x="0" y="102" text-anchor="middle" class="tufte-small">2</text>
+    <rect x="10" y="85" width="35" height="25" fill="#e8e8e8" stroke="#333" stroke-width="1"/>
+    <text x="27" y="102" text-anchor="middle" class="tufte-code">8</text>
+    <rect x="45" y="85" width="35" height="25" fill="#e8e8e8" stroke="#333" stroke-width="1"/>
+    <text x="62" y="102" text-anchor="middle" class="tufte-code">9</text>
+    <rect x="80" y="85" width="35" height="25" fill="#e8e8e8" stroke="#333" stroke-width="1"/>
+    <text x="97" y="102" text-anchor="middle" class="tufte-code">10</text>
+    <rect x="115" y="85" width="35" height="25" fill="#e8e8e8" stroke="#333" stroke-width="1"/>
+    <text x="132" y="102" text-anchor="middle" class="tufte-code">11</text>
+  </g>
+
+  <!-- Indexing examples -->
+  <g transform="translate(200, 20)">
+    <text x="250" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">인덱싱 방법</text>
+
+    <!-- Single element -->
+    <g transform="translate(0, 20)">
+      <rect x="0" y="0" width="160" height="45" fill="#f5f5f5" stroke="#999" rx="2"/>
+      <text x="80" y="18" text-anchor="middle" class="tufte-code">arr[1, 2]</text>
+      <text x="80" y="35" text-anchor="middle" class="tufte-small">단일 요소 → 6</text>
+    </g>
+
+    <!-- Row slice -->
+    <g transform="translate(170, 20)">
+      <rect x="0" y="0" width="160" height="45" fill="#f5f5f5" stroke="#999" rx="2"/>
+      <text x="80" y="18" text-anchor="middle" class="tufte-code">arr[0, :]</text>
+      <text x="80" y="35" text-anchor="middle" class="tufte-small">첫 번째 행 전체</text>
+    </g>
+
+    <!-- Column slice -->
+    <g transform="translate(340, 20)">
+      <rect x="0" y="0" width="160" height="45" fill="#f5f5f5" stroke="#999" rx="2"/>
+      <text x="80" y="18" text-anchor="middle" class="tufte-code">arr[:, 1]</text>
+      <text x="80" y="35" text-anchor="middle" class="tufte-small">두 번째 열 전체</text>
+    </g>
+
+    <!-- Sub array -->
+    <g transform="translate(0, 75)">
+      <rect x="0" y="0" width="160" height="45" fill="#f5f5f5" stroke="#999" rx="2"/>
+      <text x="80" y="18" text-anchor="middle" class="tufte-code">arr[:2, :2]</text>
+      <text x="80" y="35" text-anchor="middle" class="tufte-small">왼쪽 위 2×2</text>
+    </g>
+
+    <!-- Step slice -->
+    <g transform="translate(170, 75)">
+      <rect x="0" y="0" width="160" height="45" fill="#f5f5f5" stroke="#999" rx="2"/>
+      <text x="80" y="18" text-anchor="middle" class="tufte-code">arr[::2, ::2]</text>
+      <text x="80" y="35" text-anchor="middle" class="tufte-small">짝수 행, 짝수 열</text>
+    </g>
+
+    <!-- Boolean indexing -->
+    <g transform="translate(340, 75)">
+      <rect x="0" y="0" width="160" height="45" fill="#e8e8e8" stroke="#999" rx="2"/>
+      <text x="80" y="18" text-anchor="middle" class="tufte-code">arr[arr > 5]</text>
+      <text x="80" y="35" text-anchor="middle" class="tufte-small">조건 필터링</text>
+    </g>
+  </g>
+
+  <!-- Bottom: View vs Copy -->
+  <g transform="translate(30, 170)">
+    <rect x="0" y="0" width="660" height="120" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="330" y="22" text-anchor="middle" class="tufte-label" font-weight="bold">뷰(View) vs 복사(Copy)</text>
+    <line x1="20" y1="30" x2="640" y2="30" stroke="#ccc"/>
+
+    <!-- View -->
+    <g transform="translate(20, 45)">
+      <rect x="0" y="0" width="290" height="60" fill="#e8e8e8" stroke="#999" rx="2"/>
+      <text x="145" y="18" text-anchor="middle" class="tufte-label" font-weight="bold">슬라이싱 → 뷰</text>
+      <text x="145" y="38" text-anchor="middle" class="tufte-code">view = arr[:2, :2]</text>
+      <text x="145" y="52" text-anchor="middle" class="tufte-small">원본과 메모리 공유, 수정 시 원본도 변경</text>
+    </g>
+
+    <!-- Copy -->
+    <g transform="translate(350, 45)">
+      <rect x="0" y="0" width="290" height="60" fill="#fff" stroke="#999" rx="2"/>
+      <text x="145" y="18" text-anchor="middle" class="tufte-label" font-weight="bold">.copy() → 독립 복사</text>
+      <text x="145" y="38" text-anchor="middle" class="tufte-code">copy = arr[:2, :2].copy()</text>
+      <text x="145" y="52" text-anchor="middle" class="tufte-small">별도 메모리, 원본과 독립적</text>
+    </g>
+  </g>
+
+</svg>

@@ -1,0 +1,238 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3200 1500" style="background-color: #ffffff;">
+  <defs>
+    <style>
+      /* Tufte CSS: Minimalist, Serif, High Contrast */
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #111; }
+      .title { font-size: 60px; font-weight: normal; letter-spacing: -0.5px; }
+      .subtitle { font-size: 32px; fill: #555; font-style: italic; }
+
+      /* Card Typography */
+      .card-title { font-size: 36px; font-weight: bold; }
+      .card-sub { font-size: 26px; fill: #444; }
+      .item-title { font-size: 32px; font-weight: bold; text-decoration: underline; text-decoration-thickness: 1px; }
+      .item-year { font-size: 26px; fill: #111; }
+      .item-desc { font-size: 24px; fill: #333; }
+      .item-impact { font-size: 24px; font-weight: bold; fill: #000; margin-top: 10px; }
+      .item-data { font-size: 22px; fill: #555; }
+
+      /* Graphics */
+      .axis-line { stroke: #333; stroke-width: 2; }
+      .tick-line { stroke: #333; stroke-width: 2; }
+      .year-label { font-size: 28px; font-weight: bold; font-family: sans-serif; fill: #000; }
+      
+      /* Connector Lines */
+      .conn-line { stroke: #888; stroke-width: 1.5; stroke-dasharray: 5,5; }
+      
+      /* Card Box */
+      .card-bg { fill: #fff; stroke: #333; stroke-width: 1.5; }
+      .card-header-bg { fill: #f4f4f4; stroke: none; }
+      .marker-circle { fill: #fff; stroke: #000; stroke-width: 3; }
+    </style>
+  </defs>
+
+  <rect width="3200" height="1500" fill="#ffffff"/>
+
+  <text x="1600" y="80" text-anchor="middle" class="tufte-text title">IDE 발전사: 60년의 진화</text>
+  <text x="1600" y="140" text-anchor="middle" class="tufte-text subtitle">천공카드에서 AI 페어 프로그래밍까지 (1964-2025)</text>
+
+  <line x1="100" y1="750" x2="3100" y2="750" class="axis-line"/>
+
+  <g transform="translate(0, 750)">
+    <line x1="250" y1="-10" x2="250" y2="10" class="tick-line"/> <text x="250" y="40" text-anchor="middle" class="year-label">1964</text>
+    <line x1="500" y1="-10" x2="500" y2="10" class="tick-line"/> <text x="500" y="40" text-anchor="middle" class="year-label">1983</text>
+    <line x1="750" y1="-10" x2="750" y2="10" class="tick-line"/> <text x="750" y="40" text-anchor="middle" class="year-label">1991</text>
+    <line x1="1000" y1="-10" x2="1000" y2="10" class="tick-line"/> <text x="1000" y="40" text-anchor="middle" class="year-label">1997</text>
+    <line x1="1300" y1="-10" x2="1300" y2="10" class="tick-line"/> <text x="1300" y="40" text-anchor="middle" class="year-label">2001</text>
+    <line x1="1600" y1="-10" x2="1600" y2="10" class="tick-line"/> <text x="1600" y="40" text-anchor="middle" class="year-label">2001</text>
+    <line x1="1900" y1="-10" x2="1900" y2="10" class="tick-line"/> <text x="1900" y="40" text-anchor="middle" class="year-label">2008</text>
+    <line x1="2200" y1="-10" x2="2200" y2="10" class="tick-line"/> <text x="2200" y="40" text-anchor="middle" class="year-label">2015</text>
+    <line x1="2500" y1="-10" x2="2500" y2="10" class="tick-line"/> <text x="2500" y="40" text-anchor="middle" class="year-label">2020</text>
+    <line x1="2800" y1="-10" x2="2800" y2="10" class="tick-line"/> <text x="2800" y="40" text-anchor="middle" class="year-label">2022+</text>
+  </g>
+
+  <g transform="translate(250, 200)">
+    <line x1="0" y1="480" x2="0" y2="550" class="conn-line"/>
+    <rect x="-140" y="0" width="280" height="480" class="card-bg"/>
+    <rect x="-139" y="1" width="278" height="60" class="card-header-bg"/>
+    <text x="0" y="40" text-anchor="middle" class="tufte-text card-title">초기 시대</text>
+
+    <text x="0" y="100" text-anchor="middle" class="tufte-text item-title">Dartmouth BASIC</text>
+    <text x="0" y="135" text-anchor="middle" class="tufte-text item-desc">시분할 시스템</text>
+    <text x="0" y="170" text-anchor="middle" class="tufte-text item-impact">최초 대화형 환경</text>
+
+    <line x1="-100" y1="210" x2="100" y2="210" stroke="#ccc"/>
+
+    <text x="0" y="255" text-anchor="middle" class="tufte-text item-title">DTSS</text>
+    <text x="0" y="290" text-anchor="middle" class="tufte-text item-desc">원격 터미널</text>
+    <text x="0" y="320" text-anchor="middle" class="tufte-text item-data">PC 이전 시대</text>
+  </g>
+
+  <g transform="translate(750, 200)">
+    <line x1="0" y1="480" x2="0" y2="550" class="conn-line"/>
+    <rect x="-140" y="0" width="280" height="480" class="card-bg"/>
+    <rect x="-139" y="1" width="278" height="60" class="card-header-bg"/>
+    <text x="0" y="40" text-anchor="middle" class="tufte-text card-title">비주얼 시대</text>
+
+    <text x="0" y="100" text-anchor="middle" class="tufte-text item-title">Visual Basic</text>
+    <text x="0" y="135" text-anchor="middle" class="tufte-text item-desc">드래그 &amp; 드롭 GUI</text>
+    <text x="0" y="170" text-anchor="middle" class="tufte-text item-impact">RAD 혁명</text>
+
+    <line x1="-100" y1="210" x2="100" y2="210" stroke="#ccc"/>
+
+    <text x="0" y="255" text-anchor="middle" class="tufte-text item-title">Delphi (1995)</text>
+    <text x="0" y="290" text-anchor="middle" class="tufte-text item-desc">네이티브 컴파일</text>
+    <text x="0" y="320" text-anchor="middle" class="tufte-text item-data">비주얼 + 속도</text>
+  </g>
+
+  <g transform="translate(1300, 200)">
+    <line x1="0" y1="480" x2="0" y2="550" class="conn-line"/>
+    <rect x="-140" y="0" width="280" height="480" class="card-bg"/>
+    <rect x="-139" y="1" width="278" height="60" class="card-header-bg"/>
+    <text x="0" y="40" text-anchor="middle" class="tufte-text card-title">오픈소스</text>
+
+    <text x="0" y="100" text-anchor="middle" class="tufte-text item-title">Eclipse</text>
+    <text x="0" y="135" text-anchor="middle" class="tufte-text item-desc">플러그인 아키텍처</text>
+    <text x="0" y="170" text-anchor="middle" class="tufte-text item-impact">Java 표준</text>
+
+    <line x1="-100" y1="210" x2="100" y2="210" stroke="#ccc"/>
+
+    <text x="0" y="255" text-anchor="middle" class="tufte-text item-title">NetBeans</text>
+    <text x="0" y="290" text-anchor="middle" class="tufte-text item-desc">Sun Microsystems</text>
+    <text x="0" y="320" text-anchor="middle" class="tufte-text item-data">Apache 재단</text>
+  </g>
+
+  <g transform="translate(1900, 200)">
+    <line x1="0" y1="480" x2="0" y2="550" class="conn-line"/>
+    <rect x="-140" y="0" width="280" height="480" class="card-bg"/>
+    <rect x="-139" y="1" width="278" height="60" class="card-header-bg"/>
+    <text x="0" y="40" text-anchor="middle" class="tufte-text card-title">고성능</text>
+
+    <text x="0" y="100" text-anchor="middle" class="tufte-text item-title">Sublime Text</text>
+    <text x="0" y="135" text-anchor="middle" class="tufte-text item-desc">초고속 성능</text>
+    <text x="0" y="170" text-anchor="middle" class="tufte-text item-impact">에디터 르네상스</text>
+
+    <line x1="-100" y1="210" x2="100" y2="210" stroke="#ccc"/>
+
+    <text x="0" y="255" text-anchor="middle" class="tufte-text item-title">멀티 커서</text>
+    <text x="0" y="290" text-anchor="middle" class="tufte-text item-desc">일괄 편집</text>
+    <text x="0" y="320" text-anchor="middle" class="tufte-text item-data">Python API</text>
+  </g>
+
+  <g transform="translate(2500, 200)">
+    <line x1="0" y1="480" x2="0" y2="550" class="conn-line"/>
+    <rect x="-140" y="0" width="280" height="480" class="card-bg"/>
+    <rect x="-139" y="1" width="278" height="60" class="card-header-bg"/>
+    <text x="0" y="40" text-anchor="middle" class="tufte-text card-title">클라우드 IDE</text>
+
+    <text x="0" y="100" text-anchor="middle" class="tufte-text item-title">Codespaces</text>
+    <text x="0" y="135" text-anchor="middle" class="tufte-text item-desc">브라우저 기반</text>
+    <text x="0" y="170" text-anchor="middle" class="tufte-text item-impact">설치 불필요</text>
+
+    <line x1="-100" y1="210" x2="100" y2="210" stroke="#ccc"/>
+
+    <text x="0" y="255" text-anchor="middle" class="tufte-text item-title">Replit</text>
+    <text x="0" y="290" text-anchor="middle" class="tufte-text item-desc">소셜 코딩</text>
+    <text x="0" y="320" text-anchor="middle" class="tufte-text item-data">교육 중심</text>
+  </g>
+
+  <g transform="translate(500, 820)">
+    <line x1="0" y1="0" x2="0" y2="-70" class="conn-line"/>
+    <rect x="-140" y="0" width="280" height="480" class="card-bg"/>
+    <rect x="-139" y="1" width="278" height="60" class="card-header-bg"/>
+    <text x="0" y="40" text-anchor="middle" class="tufte-text card-title">상업용</text>
+
+    <text x="0" y="100" text-anchor="middle" class="tufte-text item-title">Turbo Pascal</text>
+    <text x="0" y="135" text-anchor="middle" class="tufte-text item-desc">통합 에디터</text>
+    <text x="0" y="170" text-anchor="middle" class="tufte-text item-impact">속도 + 저가격</text>
+
+    <line x1="-100" y1="210" x2="100" y2="210" stroke="#ccc"/>
+
+    <text x="0" y="255" text-anchor="middle" class="tufte-text item-title">Borland</text>
+    <text x="0" y="290" text-anchor="middle" class="tufte-text item-desc">Anders Hejlsberg</text>
+    <text x="0" y="320" text-anchor="middle" class="tufte-text item-data">메모리 상주</text>
+  </g>
+
+  <g transform="translate(1000, 820)">
+    <line x1="0" y1="0" x2="0" y2="-70" class="conn-line"/>
+    <rect x="-140" y="0" width="280" height="480" class="card-bg"/>
+    <rect x="-139" y="1" width="278" height="60" class="card-header-bg"/>
+    <text x="0" y="40" text-anchor="middle" class="tufte-text card-title">엔터프라이즈</text>
+
+    <text x="0" y="100" text-anchor="middle" class="tufte-text item-title">Visual Studio</text>
+    <text x="0" y="135" text-anchor="middle" class="tufte-text item-desc">다중 언어</text>
+    <text x="0" y="170" text-anchor="middle" class="tufte-text item-impact">IntelliSense</text>
+
+    <line x1="-100" y1="210" x2="100" y2="210" stroke="#ccc"/>
+
+    <text x="0" y="255" text-anchor="middle" class="tufte-text item-title">MS 생태계</text>
+    <text x="0" y="290" text-anchor="middle" class="tufte-text item-desc">디버거 통합</text>
+    <text x="0" y="320" text-anchor="middle" class="tufte-text item-data">엔터프라이즈 표준</text>
+  </g>
+
+  <g transform="translate(1600, 820)">
+    <line x1="0" y1="0" x2="0" y2="-70" class="conn-line"/>
+    <rect x="-140" y="0" width="280" height="480" class="card-bg"/>
+    <rect x="-139" y="1" width="278" height="60" class="card-header-bg"/>
+    <text x="0" y="40" text-anchor="middle" class="tufte-text card-title">스마트 IDE</text>
+
+    <text x="0" y="100" text-anchor="middle" class="tufte-text item-title">IntelliJ IDEA</text>
+    <text x="0" y="135" text-anchor="middle" class="tufte-text item-desc">심층 코드 분석</text>
+    <text x="0" y="170" text-anchor="middle" class="tufte-text item-impact">리팩토링 최강</text>
+
+    <line x1="-100" y1="210" x2="100" y2="210" stroke="#ccc"/>
+
+    <text x="0" y="255" text-anchor="middle" class="tufte-text item-title">JetBrains</text>
+    <text x="0" y="290" text-anchor="middle" class="tufte-text item-desc">"즐거운 개발"</text>
+    <text x="0" y="320" text-anchor="middle" class="tufte-text item-data">Kotlin 탄생지</text>
+  </g>
+
+  <g transform="translate(2200, 820)">
+    <line x1="0" y1="0" x2="0" y2="-70" class="conn-line"/>
+    <rect x="-140" y="0" width="280" height="480" class="card-bg"/>
+    <rect x="-139" y="1" width="278" height="60" class="card-header-bg"/>
+    <text x="0" y="40" text-anchor="middle" class="tufte-text card-title">생태계</text>
+
+    <text x="0" y="100" text-anchor="middle" class="tufte-text item-title">VS Code</text>
+    <text x="0" y="135" text-anchor="middle" class="tufte-text item-desc">Electron 기반</text>
+    <text x="0" y="170" text-anchor="middle" class="tufte-text item-impact">확장 최강</text>
+
+    <line x1="-100" y1="210" x2="100" y2="210" stroke="#ccc"/>
+
+    <text x="0" y="255" text-anchor="middle" class="tufte-text item-title">Monaco Editor</text>
+    <text x="0" y="290" text-anchor="middle" class="tufte-text item-desc">웹 기술</text>
+    <text x="0" y="320" text-anchor="middle" class="tufte-text item-data">30,000+ 확장</text>
+  </g>
+
+  <g transform="translate(2800, 820)">
+    <line x1="0" y1="0" x2="0" y2="-70" class="conn-line"/>
+    <rect x="-140" y="0" width="280" height="480" class="card-bg"/>
+    <rect x="-139" y="1" width="278" height="60" class="card-header-bg"/>
+    <text x="0" y="40" text-anchor="middle" class="tufte-text card-title">AI 시대</text>
+
+    <text x="0" y="100" text-anchor="middle" class="tufte-text item-title">GitHub Copilot</text>
+    <text x="0" y="135" text-anchor="middle" class="tufte-text item-desc">AI 페어 프로그래머</text>
+    <text x="0" y="170" text-anchor="middle" class="tufte-text item-impact">생성형 코드</text>
+
+    <line x1="-100" y1="210" x2="100" y2="210" stroke="#ccc"/>
+
+    <text x="0" y="255" text-anchor="middle" class="tufte-text item-title">Claude Code</text>
+    <text x="0" y="290" text-anchor="middle" class="tufte-text item-desc">에이전트 CLI</text>
+    <text x="0" y="320" text-anchor="middle" class="tufte-text item-data">자율 작업</text>
+  </g>
+
+  <circle cx="250" cy="750" r="8" class="marker-circle"/>
+  <circle cx="500" cy="750" r="8" class="marker-circle"/>
+  <circle cx="750" cy="750" r="8" class="marker-circle"/>
+  <circle cx="1000" cy="750" r="8" class="marker-circle"/>
+  <circle cx="1300" cy="750" r="8" class="marker-circle"/>
+  <circle cx="1600" cy="750" r="8" class="marker-circle"/>
+  <circle cx="1900" cy="750" r="8" class="marker-circle"/>
+  <circle cx="2200" cy="750" r="8" class="marker-circle"/>
+  <circle cx="2500" cy="750" r="8" class="marker-circle"/>
+  <circle cx="2800" cy="750" r="8" class="marker-circle"/>
+
+  <text x="1600" y="1400" text-anchor="middle" class="tufte-text item-desc" style="font-style:italic;">
+    "코드 작성 방식의 진화는 곧 인간-컴퓨터 상호작용의 진화다"
+  </text>
+
+</svg>

@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 50 720 270">
+  <defs>
+    <style>
+      .tufte-text {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+      }
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 14px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 12px;
+        fill: #333;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 11px;
+        fill: #333;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #666;
+      }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="720" height="320" fill="#ffffff"/>
+
+  <!-- Central problem -->
+  <!-- <text x="360" y="50" text-anchor="middle" class="tufte-title">대용량 딕셔너리 디버깅 전략</text> -->
+
+  <!-- Problem statement -->
+  <rect x="230" y="60" width="260" height="35" fill="#e8e8e8" stroke="#666" rx="3"/>
+  <text x="360" y="82" text-anchor="middle" class="tufte-code">counts = {'a': 1, 'b': 2, ...}</text>
+  <text x="360" y="107" text-anchor="middle" class="tufte-small">수천 개 항목을 눈으로 확인할 수 없다</text>
+
+  <!-- Four strategies in quadrants -->
+
+  <!-- Strategy 1: 입력 크기 축소 (top-left) -->
+  <g transform="translate(30, 130)">
+    <rect x="0" y="0" width="160" height="85" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="80" y="18" text-anchor="middle" class="tufte-label" font-weight="bold">1. 입력 크기 축소</text>
+    <text x="10" y="38" class="tufte-code">data[:10]</text>
+    <text x="10" y="55" class="tufte-small">작은 샘플로 테스트</text>
+    <text x="10" y="72" class="tufte-small">오류 재현 최소 크기 찾기</text>
+  </g>
+
+  <!-- Strategy 2: 요약 정보 활용 (top-right) -->
+  <g transform="translate(200, 130)">
+    <rect x="0" y="0" width="160" height="85" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="80" y="18" text-anchor="middle" class="tufte-label" font-weight="bold">2. 요약 정보 활용</text>
+    <text x="10" y="38" class="tufte-code">len(d), type(x)</text>
+    <text x="10" y="55" class="tufte-small">항목 수, 자료형 확인</text>
+    <text x="10" y="72" class="tufte-small">전체 그림 파악</text>
+  </g>
+
+  <!-- Strategy 3: 자동 검증 (bottom-left) -->
+  <g transform="translate(370, 130)">
+    <rect x="0" y="0" width="160" height="85" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="80" y="18" text-anchor="middle" class="tufte-label" font-weight="bold">3. 자동 검증</text>
+    <text x="10" y="38" class="tufte-code">assert min &lt;= avg</text>
+    <text x="10" y="55" class="tufte-small">건전성 검사(sanity)</text>
+    <text x="10" y="72" class="tufte-small">일관성 검사(consistency)</text>
+  </g>
+
+  <!-- Strategy 4: pprint (bottom-right) -->
+  <g transform="translate(540, 130)">
+    <rect x="0" y="0" width="150" height="85" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="75" y="18" text-anchor="middle" class="tufte-label" font-weight="bold">4. 출력 형식 개선</text>
+    <text x="10" y="38" class="tufte-code">pprint(d)</text>
+    <text x="10" y="55" class="tufte-small">들여쓰기, 줄바꿈</text>
+    <text x="10" y="72" class="tufte-small">구조 시각화</text>
+  </g>
+
+  <!-- Example: Before/After pprint -->
+  <text x="30" y="245" class="tufte-label" font-weight="bold">print() vs pprint()</text>
+
+  <!-- Before -->
+  <rect x="30" y="255" width="310" height="50" fill="#e8e8e8" stroke="#999" rx="2"/>
+  <text x="40" y="273" class="tufte-code">{'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5}</text>
+  <text x="40" y="293" class="tufte-small">한 줄 출력 → 구조 파악 어려움</text>
+
+  <!-- Arrow -->
+  <line x1="355" y1="280" x2="385" y2="280" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+  <!-- After -->
+  <rect x="400" y="255" width="290" height="50" fill="#f5f5f5" stroke="#666" rx="2"/>
+  <text x="410" y="270" class="tufte-code">{'a': 1,</text>
+  <text x="410" y="283" class="tufte-code"> 'b': 2,</text>
+  <text x="410" y="296" class="tufte-code"> 'c': 3, ...}</text>
+  <text x="550" y="283" class="tufte-small">구조화 출력</text>
+</svg>

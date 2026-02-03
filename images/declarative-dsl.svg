@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 35 800 280">
+  <defs>
+    <style>
+      .label-head { font-family: Palatino, serif; font-size: 14px; font-weight: bold; fill: #222; }
+      .label-body { font-family: Palatino, serif; font-size: 12px; fill: #333; }
+      .label-note { font-family: Palatino, serif; font-size: 11px; fill: #555; font-style: italic; }
+      .label-mono { font-family: 'SF Mono', Consolas, Menlo, monospace; font-size: 10px; fill: #444; }
+
+      .box-domain { fill: #fff; stroke: #333; stroke-width: 2; rx: 4; }
+      .box-example { fill: #f8f8f8; stroke: #999; stroke-width: 1; rx: 3; }
+
+      .line-sep { stroke: #ddd; stroke-width: 1; }
+    </style>
+  </defs>
+
+  <rect width="800" height="340" fill="#fff" />
+
+  <!-- Column 1: Database -->
+  <g transform="translate(30, 55)">
+    <rect x="0" y="0" width="170" height="240" class="box-domain"/>
+    <text x="85" y="25" text-anchor="middle" class="label-head">데이터 질의</text>
+    <line x1="10" y1="35" x2="160" y2="35" class="line-sep"/>
+
+    <text x="15" y="55" class="label-body" font-weight="bold">SQL</text>
+    <rect x="10" y="65" width="150" height="50" class="box-example"/>
+    <text x="20" y="82" class="label-mono">SELECT name</text>
+    <text x="20" y="95" class="label-mono">FROM users</text>
+    <text x="20" y="108" class="label-mono">WHERE age > 30</text>
+
+    <text x="15" y="135" class="label-note">40년 이상 최적화된 엔진</text>
+    <text x="15" y="155" class="label-note">집합 연산에 특화</text>
+
+    <text x="85" y="185" text-anchor="middle" class="label-body" fill="#666">↓</text>
+    <text x="85" y="205" text-anchor="middle" class="label-mono" fill="#666">인덱스, 조인,</text>
+    <text x="85" y="218" text-anchor="middle" class="label-mono" fill="#666">쿼리 플래닝 자동</text>
+  </g>
+
+  <!-- Column 2: Pattern Matching -->
+  <g transform="translate(220, 55)">
+    <rect x="0" y="0" width="170" height="240" class="box-domain"/>
+    <text x="85" y="25" text-anchor="middle" class="label-head">패턴 매칭</text>
+    <line x1="10" y1="35" x2="160" y2="35" class="line-sep"/>
+
+    <text x="15" y="55" class="label-body" font-weight="bold">정규표현식</text>
+    <rect x="10" y="65" width="150" height="50" class="box-example"/>
+    <text x="20" y="85" class="label-mono">\d{3}-\d{4}-\d{4}</text>
+    <text x="20" y="105" class="label-mono">(전화번호 패턴)</text>
+
+    <text x="15" y="135" class="label-note">유한 오토마타 기반</text>
+    <text x="15" y="155" class="label-note">문자열 탐색에 특화</text>
+
+    <text x="85" y="185" text-anchor="middle" class="label-body" fill="#666">↓</text>
+    <text x="85" y="205" text-anchor="middle" class="label-mono" fill="#666">NFA/DFA 변환,</text>
+    <text x="85" y="218" text-anchor="middle" class="label-mono" fill="#666">백트래킹 자동</text>
+  </g>
+
+  <!-- Column 3: Typesetting -->
+  <g transform="translate(410, 55)">
+    <rect x="0" y="0" width="170" height="240" class="box-domain"/>
+    <text x="85" y="25" text-anchor="middle" class="label-head">수식 조판</text>
+    <line x1="10" y1="35" x2="160" y2="35" class="line-sep"/>
+
+    <text x="15" y="55" class="label-body" font-weight="bold">LaTeX</text>
+    <rect x="10" y="65" width="150" height="50" class="box-example"/>
+    <text x="20" y="82" class="label-mono">\frac{</text>
+    <text x="20" y="95" class="label-mono">-b \pm \sqrt{b^2-4ac}}</text>
+    <text x="20" y="108" class="label-mono">{2a}</text>
+
+    <text x="15" y="135" class="label-note">TeX 조판 엔진 기반</text>
+    <text x="15" y="155" class="label-note">수학적 표기에 특화</text>
+
+    <text x="85" y="185" text-anchor="middle" class="label-body" fill="#666">↓</text>
+    <text x="85" y="205" text-anchor="middle" class="label-mono" fill="#666">분수선, 제곱근,</text>
+    <text x="85" y="218" text-anchor="middle" class="label-mono" fill="#666">첨자 배치 자동</text>
+  </g>
+
+  <!-- Column 4: Markup -->
+  <g transform="translate(600, 55)">
+    <rect x="0" y="0" width="170" height="240" class="box-domain"/>
+    <text x="85" y="25" text-anchor="middle" class="label-head">문서/UI</text>
+    <line x1="10" y1="35" x2="160" y2="35" class="line-sep"/>
+
+    <text x="15" y="55" class="label-body" font-weight="bold">HTML + CSS</text>
+    <rect x="10" y="65" width="150" height="50" class="box-example"/>
+    <text x="20" y="85" class="label-mono">&lt;h1&gt;제목&lt;/h1&gt;</text>
+    <text x="20" y="105" class="label-mono">h1 { color: #333; }</text>
+
+    <text x="15" y="135" class="label-note">구조와 스타일 분리</text>
+    <text x="15" y="155" class="label-note">렌더링 엔진에 위임</text>
+
+    <text x="85" y="185" text-anchor="middle" class="label-body" fill="#666">↓</text>
+    <text x="85" y="205" text-anchor="middle" class="label-mono" fill="#666">DOM 파싱, 레이아웃,</text>
+    <text x="85" y="218" text-anchor="middle" class="label-mono" fill="#666">페인팅 자동</text>
+  </g>
+
+  <!-- Bottom insight -->
+  <!-- <g transform="translate(30, 310)">
+    <text x="370" y="0" text-anchor="middle" class="label-note" font-weight="bold" fill="#333">
+      각 DSL은 해당 도메인의 수십 년 전문 지식을 캡슐화한다
+    </text>
+  </g> -->
+
+</svg>

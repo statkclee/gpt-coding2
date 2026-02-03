@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 280">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 14px; fill: #333; font-weight: bold; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 11px; fill: #333; font-weight: bold; }
+      .tufte-desc { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 9px; fill: #666; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 8px; fill: #999; }
+      .tufte-code { font-family: 'SF Mono', Menlo, Monaco, monospace; font-size: 8px; fill: #666; }
+      .box { fill: #f5f5f5; stroke: #666; stroke-width: 1; }
+      .box-start { fill: #fff5f5; stroke: #999; stroke-width: 1; }
+      .box-end { fill: #f0f5f0; stroke: #666; stroke-width: 1.5; }
+      .arrow { stroke: #666; stroke-width: 1.5; fill: none; marker-end: url(#arrowhead); }
+    </style>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#666"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="280" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="400" y="22" text-anchor="middle" class="tufte-title">노트북에서 프로덕션으로: 전환 경로</text>
+
+  <!-- Stage 1: Notebook -->
+  <rect x="20" y="45" width="130" height="85" rx="3" class="box-start"/>
+  <text x="85" y="65" text-anchor="middle" class="tufte-label">1. 노트북</text>
+  <line x1="35" y1="72" x2="135" y2="72" stroke="#ccc" stroke-width="0.5"/>
+  <text x="85" y="85" text-anchor="middle" class="tufte-desc">탐색적 분석</text>
+  <text x="85" y="97" text-anchor="middle" class="tufte-desc">프로토타이핑</text>
+  <text x="85" y="115" text-anchor="middle" class="tufte-code">.ipynb</text>
+  <text x="85" y="125" text-anchor="middle" class="tufte-small">셀 단위 실행</text>
+
+  <path d="M 150 87 L 170 87" class="arrow"/>
+
+  <!-- Stage 2: Function -->
+  <rect x="175" y="45" width="130" height="85" rx="3" class="box"/>
+  <text x="240" y="65" text-anchor="middle" class="tufte-label">2. 함수화</text>
+  <line x1="190" y1="72" x2="290" y2="72" stroke="#ccc" stroke-width="0.5"/>
+  <text x="240" y="85" text-anchor="middle" class="tufte-desc">셀 → 함수 추출</text>
+  <text x="240" y="97" text-anchor="middle" class="tufte-desc">재사용 가능</text>
+  <text x="240" y="115" text-anchor="middle" class="tufte-code">def func():</text>
+  <text x="240" y="125" text-anchor="middle" class="tufte-small">단위 테스트 가능</text>
+
+  <path d="M 305 87 L 325 87" class="arrow"/>
+
+  <!-- Stage 3: Module -->
+  <rect x="330" y="45" width="130" height="85" rx="3" class="box"/>
+  <text x="395" y="65" text-anchor="middle" class="tufte-label">3. 모듈화</text>
+  <line x1="345" y1="72" x2="445" y2="72" stroke="#ccc" stroke-width="0.5"/>
+  <text x="395" y="85" text-anchor="middle" class="tufte-desc">.py 파일 분리</text>
+  <text x="395" y="97" text-anchor="middle" class="tufte-desc">관심사 분리</text>
+  <text x="395" y="115" text-anchor="middle" class="tufte-code">data/, models/</text>
+  <text x="395" y="125" text-anchor="middle" class="tufte-small">import 가능</text>
+
+  <path d="M 460 87 L 480 87" class="arrow"/>
+
+  <!-- Stage 4: Package -->
+  <rect x="485" y="45" width="130" height="85" rx="3" class="box"/>
+  <text x="550" y="65" text-anchor="middle" class="tufte-label">4. 패키지화</text>
+  <line x1="500" y1="72" x2="600" y2="72" stroke="#ccc" stroke-width="0.5"/>
+  <text x="550" y="85" text-anchor="middle" class="tufte-desc">테스트, 문서 추가</text>
+  <text x="550" y="97" text-anchor="middle" class="tufte-desc">설치 가능</text>
+  <text x="550" y="115" text-anchor="middle" class="tufte-code">pyproject.toml</text>
+  <text x="550" y="125" text-anchor="middle" class="tufte-small">pip install -e .</text>
+
+  <path d="M 615 87 L 635 87" class="arrow"/>
+
+  <!-- Stage 5: Pipeline -->
+  <rect x="640" y="45" width="140" height="85" rx="3" class="box-end"/>
+  <text x="710" y="65" text-anchor="middle" class="tufte-label">5. 파이프라인</text>
+  <line x1="655" y1="72" x2="765" y2="72" stroke="#ccc" stroke-width="0.5"/>
+  <text x="710" y="85" text-anchor="middle" class="tufte-desc">프로덕션 배포</text>
+  <text x="710" y="97" text-anchor="middle" class="tufte-desc">자동화, 모니터링</text>
+  <text x="710" y="115" text-anchor="middle" class="tufte-code">Airflow, Prefect</text>
+  <text x="710" y="125" text-anchor="middle" class="tufte-small">스케줄링, 로깅</text>
+
+  <!-- Bottom: What changes at each step -->
+  <text x="20" y="155" class="tufte-small" fill="#666">각 단계별 개선 사항</text>
+
+  <!-- Improvement indicators -->
+  <rect x="20" y="165" width="130" height="50" rx="2" fill="#fff5f5" stroke="#ccc" stroke-width="0.5"/>
+  <text x="85" y="180" text-anchor="middle" class="tufte-small" fill="#666">한계점</text>
+  <text x="85" y="192" text-anchor="middle" class="tufte-code">재현성 ✗</text>
+  <text x="85" y="203" text-anchor="middle" class="tufte-code">테스트 ✗</text>
+
+  <rect x="175" y="165" width="130" height="50" rx="2" fill="#f9f9f9" stroke="#ccc" stroke-width="0.5"/>
+  <text x="240" y="180" text-anchor="middle" class="tufte-small" fill="#666">개선</text>
+  <text x="240" y="192" text-anchor="middle" class="tufte-code">테스트 ✓</text>
+  <text x="240" y="203" text-anchor="middle" class="tufte-code">재사용 ✓</text>
+
+  <rect x="330" y="165" width="130" height="50" rx="2" fill="#f9f9f9" stroke="#ccc" stroke-width="0.5"/>
+  <text x="395" y="180" text-anchor="middle" class="tufte-small" fill="#666">개선</text>
+  <text x="395" y="192" text-anchor="middle" class="tufte-code">버전관리 ✓</text>
+  <text x="395" y="203" text-anchor="middle" class="tufte-code">협업 ✓</text>
+
+  <rect x="485" y="165" width="130" height="50" rx="2" fill="#f9f9f9" stroke="#ccc" stroke-width="0.5"/>
+  <text x="550" y="180" text-anchor="middle" class="tufte-small" fill="#666">개선</text>
+  <text x="550" y="192" text-anchor="middle" class="tufte-code">배포 ✓</text>
+  <text x="550" y="203" text-anchor="middle" class="tufte-code">의존성 ✓</text>
+
+  <rect x="640" y="165" width="140" height="50" rx="2" fill="#f0f5f0" stroke="#ccc" stroke-width="0.5"/>
+  <text x="710" y="180" text-anchor="middle" class="tufte-small" fill="#666">프로덕션</text>
+  <text x="710" y="192" text-anchor="middle" class="tufte-code">재현성 ✓</text>
+  <text x="710" y="203" text-anchor="middle" class="tufte-code">모니터링 ✓</text>
+
+  <!-- Project structure example -->
+  <rect x="20" y="230" width="760" height="40" rx="2" fill="#f5f5f5" stroke="#ccc" stroke-width="0.5"/>
+  <text x="400" y="248" text-anchor="middle" class="tufte-desc">Cookiecutter Data Science 템플릿: data/ → src/ → models/ → notebooks/ → tests/</text>
+  <text x="400" y="262" text-anchor="middle" class="tufte-small">표준 디렉토리 구조로 팀 협업과 코드 위치 파악 용이</text>
+</svg>

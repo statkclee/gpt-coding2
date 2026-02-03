@@ -1,0 +1,165 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 280">
+  <defs>
+    <style>
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-title { font-size: 22px; font-weight: bold; font-variant: small-caps; }
+      .tufte-label { font-size: 14px; fill: #555; }
+      .tufte-small { font-size: 11px; fill: #666; }
+      .character { fill: #e8e8e8; stroke: #333; stroke-width: 1.5; }
+      .character-dark { fill: #555; stroke: #333; stroke-width: 1.5; }
+      .planet { stroke: #666; stroke-width: 1; }
+      .building { fill: #d0d0d0; stroke: none; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="600" height="280" fill="#ffffff"/>
+
+  <!-- City silhouette background -->
+  <rect x="0" y="180" width="600" height="100" fill="#f0f0f0"/>
+  <rect x="20" y="160" width="40" height="120" class="building"/>
+  <rect x="70" y="140" width="35" height="140" class="building"/>
+  <rect x="115" y="155" width="45" height="125" class="building"/>
+  <rect x="180" y="145" width="30" height="135" class="building"/>
+  <rect x="350" y="150" width="50" height="130" class="building"/>
+  <rect x="410" y="165" width="35" height="115" class="building"/>
+  <rect x="455" y="140" width="40" height="140" class="building"/>
+  <rect x="520" y="155" width="45" height="125" class="building"/>
+
+  <!-- Title -->
+  <text x="300" y="35" text-anchor="middle" class="tufte-text tufte-title">우주 탐사 프로젝트</text>
+
+  <!-- Wolfman (left) -->
+  <g transform="translate(80, 95)">
+    <!-- Body - muscular torso -->
+    <ellipse cx="30" cy="80" rx="22" ry="30" class="character"/>
+    <!-- Shoulders -->
+    <ellipse cx="30" cy="55" rx="28" ry="12" class="character"/>
+    <!-- Head -->
+    <ellipse cx="30" cy="28" r="20" rx="18" ry="22" class="character"/>
+    <!-- Pointed ears -->
+    <path d="M10,15 L5,0 L18,12 Z" fill="#e8e8e8" stroke="#333" stroke-width="1.2"/>
+    <path d="M50,15 L55,0 L42,12 Z" fill="#e8e8e8" stroke="#333" stroke-width="1.2"/>
+    <!-- Inner ears -->
+    <path d="M12,14 L9,5 L17,12" fill="none" stroke="#999" stroke-width="0.8"/>
+    <path d="M48,14 L51,5 L43,12" fill="none" stroke="#999" stroke-width="0.8"/>
+    <!-- Fur texture on head -->
+    <path d="M12,20 Q15,18 18,22 M42,22 Q45,18 48,20" fill="none" stroke="#999" stroke-width="1"/>
+    <path d="M20,10 Q25,8 30,10 Q35,8 40,10" fill="none" stroke="#999" stroke-width="1"/>
+    <!-- Eyebrows - fierce -->
+    <path d="M16,22 L24,26" stroke="#555" stroke-width="2"/>
+    <path d="M44,22 L36,26" stroke="#555" stroke-width="2"/>
+    <!-- Eyes - glowing -->
+    <circle cx="22" cy="30" r="4" fill="#fff" stroke="#333" stroke-width="1"/>
+    <circle cx="38" cy="30" r="4" fill="#fff" stroke="#333" stroke-width="1"/>
+    <circle cx="23" cy="30" r="2" fill="#333"/>
+    <circle cx="39" cy="30" r="2" fill="#333"/>
+    <!-- Snout/muzzle -->
+    <ellipse cx="30" cy="42" rx="10" ry="8" fill="#d0d0d0" stroke="#333" stroke-width="1.2"/>
+    <!-- Nose -->
+    <ellipse cx="30" cy="38" rx="4" ry="3" fill="#555"/>
+    <!-- Mouth with fangs -->
+    <path d="M22,48 Q30,52 38,48" fill="none" stroke="#333" stroke-width="1.2"/>
+    <path d="M24,48 L25,53" stroke="#333" stroke-width="1.5"/>
+    <path d="M36,48 L35,53" stroke="#333" stroke-width="1.5"/>
+    <!-- Arms - muscular, reaching out -->
+    <path d="M5,60 C-5,75 -8,90 0,105" fill="none" stroke="#333" stroke-width="4"/>
+    <path d="M55,60 C65,75 68,90 60,105" fill="none" stroke="#333" stroke-width="4"/>
+    <!-- Hands/paws -->
+    <ellipse cx="0" cy="108" rx="8" ry="6" fill="#e8e8e8" stroke="#333" stroke-width="1"/>
+    <ellipse cx="60" cy="108" rx="8" ry="6" fill="#e8e8e8" stroke="#333" stroke-width="1"/>
+    <!-- Claws -->
+    <path d="M-6,106 L-10,112 M-2,108 L-4,115 M3,108 L5,115" stroke="#333" stroke-width="1.5"/>
+    <path d="M66,106 L70,112 M62,108 L64,115 M57,108 L55,115" stroke="#333" stroke-width="1.5"/>
+    <!-- Label -->
+    <text x="30" y="135" text-anchor="middle" class="tufte-label">늑대인간</text>
+  </g>
+
+  <!-- Dracula (center) -->
+  <g transform="translate(250, 85)">
+    <!-- Cape -->
+    <path d="M0,40 L50,40 L60,140 L-10,140 Z" fill="#444" stroke="#333" stroke-width="1"/>
+    <!-- Body -->
+    <rect x="10" y="40" width="30" height="70" class="character"/>
+    <!-- Head -->
+    <circle cx="25" cy="25" r="20" class="character"/>
+    <!-- Hair peak -->
+    <path d="M10,10 L25,0 L40,10 L35,15 L25,8 L15,15 Z" fill="#333"/>
+    <!-- Eyes -->
+    <circle cx="18" cy="22" r="2.5" fill="#333"/>
+    <circle cx="32" cy="22" r="2.5" fill="#333"/>
+    <!-- Eyebrows -->
+    <path d="M13,18 L22,16" stroke="#333" stroke-width="1.5"/>
+    <path d="M28,16 L37,18" stroke="#333" stroke-width="1.5"/>
+    <!-- Mouth/fangs -->
+    <path d="M18,35 Q25,40 32,35" fill="none" stroke="#333" stroke-width="1"/>
+    <path d="M20,36 L21,40 M30,36 L29,40" stroke="#333" stroke-width="1"/>
+    <!-- Arms raised -->
+    <path d="M5,50 L-15,30" stroke="#333" stroke-width="3"/>
+    <path d="M45,50 L65,30" stroke="#333" stroke-width="3"/>
+    <!-- Hands -->
+    <circle cx="-15" cy="30" r="6" class="character"/>
+    <circle cx="65" cy="30" r="6" class="character"/>
+    <!-- Bats -->
+    <g transform="translate(-30, -10)">
+      <path d="M0,0 Q-8,-5 -12,0 Q-8,2 0,0 Q8,-5 12,0 Q8,2 0,0" fill="#555"/>
+    </g>
+    <g transform="translate(70, 5)">
+      <path d="M0,0 Q-6,-4 -9,0 Q-6,1.5 0,0 Q6,-4 9,0 Q6,1.5 0,0" fill="#555"/>
+    </g>
+    <g transform="translate(80, -15)">
+      <path d="M0,0 Q-5,-3 -7,0 Q-5,1 0,0 Q5,-3 7,0 Q5,1 0,0" fill="#666"/>
+    </g>
+    <!-- Label -->
+    <text x="25" y="160" text-anchor="middle" class="tufte-label">드라큘라</text>
+  </g>
+
+  <!-- Mummy (right) -->
+  <g transform="translate(400, 95)">
+    <!-- Body -->
+    <rect x="5" y="30" width="40" height="80" rx="5" fill="#f5f5f5" stroke="#999" stroke-width="1"/>
+    <!-- Bandage pattern -->
+    <path d="M5,40 L45,45 M5,55 L45,50 M5,65 L45,70 M5,80 L45,75 M5,95 L45,100"
+          fill="none" stroke="#bbb" stroke-width="2"/>
+    <!-- Head -->
+    <circle cx="25" cy="15" r="18" fill="#f5f5f5" stroke="#999" stroke-width="1"/>
+    <!-- Bandage on head -->
+    <path d="M10,5 Q25,-5 40,5 M8,15 L42,15 M10,25 Q25,35 40,25"
+          fill="none" stroke="#bbb" stroke-width="2"/>
+    <!-- Eyes (hollow) -->
+    <ellipse cx="18" cy="12" rx="4" ry="5" fill="#666"/>
+    <ellipse cx="32" cy="12" rx="4" ry="5" fill="#666"/>
+    <!-- Arms -->
+    <path d="M5,50 L-10,70" stroke="#999" stroke-width="4"/>
+    <path d="M45,50 L60,70" stroke="#999" stroke-width="4"/>
+    <!-- Label -->
+    <text x="25" y="135" text-anchor="middle" class="tufte-label">미라</text>
+  </g>
+
+  <!-- Planets on the right -->
+  <g transform="translate(520, 60)">
+    <!-- Moon -->
+    <circle cx="0" cy="0" r="18" fill="#e0e0e0" class="planet"/>
+    <circle cx="-5" cy="-5" r="4" fill="#ccc"/>
+    <circle cx="5" cy="5" r="3" fill="#ccc"/>
+    <circle cx="-8" cy="8" r="2" fill="#ccc"/>
+    <text x="0" y="30" text-anchor="middle" class="tufte-small">달</text>
+  </g>
+
+  <g transform="translate(555, 110)">
+    <!-- Mars -->
+    <circle cx="0" cy="0" r="14" fill="#c0c0c0" class="planet"/>
+    <text x="0" y="25" text-anchor="middle" class="tufte-small">화성</text>
+  </g>
+
+  <g transform="translate(530, 160)">
+    <!-- Neptune/Planet -->
+    <circle cx="0" cy="0" r="16" fill="#d8d8d8" class="planet"/>
+    <ellipse cx="0" cy="0" rx="22" ry="4" fill="none" stroke="#999" stroke-width="1"/>
+    <text x="0" y="28" text-anchor="middle" class="tufte-small">행성</text>
+  </g>
+
+  <!-- Subtitle -->
+  <text x="300" y="265" text-anchor="middle" class="tufte-text tufte-small" style="fill:#888;">행성 탐사 프로젝트를 함께 진행하는 팀</text>
+
+</svg>

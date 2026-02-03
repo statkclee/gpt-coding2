@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320">
+  <defs>
+    <style>
+      .label-title { font-family: Palatino, serif; font-size: 16px; font-weight: bold; fill: #111; }
+      .label-head { font-family: Palatino, serif; font-size: 14px; font-weight: bold; fill: #222; }
+      .label-body { font-family: Palatino, serif; font-size: 12px; fill: #333; }
+      .label-note { font-family: Palatino, serif; font-size: 11px; fill: #555; font-style: italic; }
+      .label-mono { font-family: 'SF Mono', Consolas, Menlo, monospace; font-size: 10px; fill: #444; }
+
+      .box-element { fill: #fff; stroke: #333; stroke-width: 2; rx: 6; }
+      .box-code { fill: #f8f8f8; stroke: #ccc; stroke-width: 1; rx: 3; }
+      .box-result { fill: #fff; stroke: #999; stroke-width: 1; rx: 3; }
+
+      .line-flow { stroke: #666; stroke-width: 1.5; fill: none; }
+      .line-sep { stroke: #ddd; stroke-width: 1; }
+
+      .arrow-head { fill: #666; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L0,8 L8,4 z" class="arrow-head" />
+    </marker>
+  </defs>
+
+  <rect width="800" height="320" fill="#fff" />
+
+  <!-- ========================================== -->
+  <!-- 1. Comprehension -->
+  <!-- ========================================== -->
+  <g transform="translate(30, 30)">
+    <rect x="0" y="0" width="230" height="260" class="box-element"/>
+    <text x="115" y="25" text-anchor="middle" class="label-head">컴프리헨션</text>
+    <text x="115" y="42" text-anchor="middle" class="label-note">집합 기술어의 파이썬 구현</text>
+    <line x1="15" y1="52" x2="215" y2="52" class="line-sep"/>
+
+    <!-- Math notation -->
+    <text x="20" y="75" class="label-body" font-weight="bold">수학 표기</text>
+    <rect x="15" y="82" width="200" height="28" class="box-code"/>
+    <text x="115" y="100" text-anchor="middle" class="label-mono">{x² | x ∈ data, x mod 2 = 0}</text>
+
+    <!-- Python syntax -->
+    <text x="20" y="130" class="label-body" font-weight="bold">파이썬 구문</text>
+    <rect x="15" y="137" width="200" height="28" class="box-code"/>
+    <text x="115" y="155" text-anchor="middle" class="label-mono">[x**2 for x in data if x%2==0]</text>
+
+    <!-- Key insight -->
+    <g transform="translate(15, 180)">
+      <text x="0" y="0" class="label-body" font-weight="bold">핵심</text>
+      <text x="0" y="18" class="label-note">"무엇을 포함할지" 선언</text>
+      <text x="0" y="33" class="label-note">"어떻게 순회할지"는 숨김</text>
+      <text x="0" y="55" class="label-mono" fill="#666">→ 결과의 명세 = 코드</text>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 2. Decorator -->
+  <!-- ========================================== -->
+  <g transform="translate(285, 30)">
+    <rect x="0" y="0" width="230" height="260" class="box-element"/>
+    <text x="115" y="25" text-anchor="middle" class="label-head">데코레이터</text>
+    <text x="115" y="42" text-anchor="middle" class="label-note">관심사의 선언적 부착</text>
+    <line x1="15" y1="52" x2="215" y2="52" class="line-sep"/>
+
+    <!-- Decorator syntax -->
+    <text x="20" y="75" class="label-body" font-weight="bold">선언</text>
+    <rect x="15" y="82" width="200" height="45" class="box-code"/>
+    <text x="25" y="100" class="label-mono">@lru_cache(maxsize=128)</text>
+    <text x="25" y="115" class="label-mono">def fibonacci(n): ...</text>
+
+    <!-- What it does -->
+    <text x="20" y="148" class="label-body" font-weight="bold">의미</text>
+    <rect x="15" y="155" width="200" height="28" class="box-result"/>
+    <text x="115" y="173" text-anchor="middle" class="label-note">"이 함수의 결과를 캐싱하라"</text>
+
+    <!-- Key insight -->
+    <g transform="translate(15, 198)">
+      <text x="0" y="0" class="label-body" font-weight="bold">핵심</text>
+      <text x="0" y="18" class="label-note">"어떤 기능을 적용할지" 선언</text>
+      <text x="0" y="33" class="label-note">"어떻게 구현할지"는 숨김</text>
+      <text x="0" y="55" class="label-mono" fill="#666">→ 횡단 관심사 분리</text>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 3. Type Hints -->
+  <!-- ========================================== -->
+  <g transform="translate(540, 30)">
+    <rect x="0" y="0" width="230" height="260" class="box-element"/>
+    <text x="115" y="25" text-anchor="middle" class="label-head">타입 힌트</text>
+    <text x="115" y="42" text-anchor="middle" class="label-note">계약의 선언적 명시</text>
+    <line x1="15" y1="52" x2="215" y2="52" class="line-sep"/>
+
+    <!-- Type hint syntax -->
+    <text x="20" y="75" class="label-body" font-weight="bold">선언</text>
+    <rect x="15" y="82" width="200" height="45" class="box-code"/>
+    <text x="25" y="100" class="label-mono">def find_max(</text>
+    <text x="35" y="115" class="label-mono">nums: List[float]) -> float</text>
+
+    <!-- What it means -->
+    <text x="20" y="148" class="label-body" font-weight="bold">의미</text>
+    <rect x="15" y="155" width="200" height="28" class="box-result"/>
+    <text x="115" y="173" text-anchor="middle" class="label-note">"float 리스트 → float 반환"</text>
+
+    <!-- Key insight -->
+    <g transform="translate(15, 198)">
+      <text x="0" y="0" class="label-body" font-weight="bold">핵심</text>
+      <text x="0" y="18" class="label-note">"입출력 타입이 무엇인지" 선언</text>
+      <text x="0" y="33" class="label-note">"어떻게 검증할지"는 도구에 위임</text>
+      <text x="0" y="55" class="label-mono" fill="#666">→ 문서화 + 정적 분석</text>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- Bottom: Common Pattern -->
+  <!-- ========================================== -->
+  <g transform="translate(30, 300)">
+    <text x="370" y="10" text-anchor="middle" class="label-note" fill="#555">
+      공통 패턴: "무엇(What)"만 명시하고, "어떻게(How)"는 파이썬/도구에 위임
+    </text>
+  </g>
+
+</svg>

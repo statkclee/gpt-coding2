@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-50 30 650 280">
+  <defs>
+    <style>
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-mono { font-family: 'SF Mono', Consolas, monospace; fill: #333; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #666; }
+      .section-box { fill: #f9f9f9; stroke: #999; stroke-width: 1; rx: 5; }
+      .highlight-box { fill: #f0f0f0; stroke: #333; stroke-width: 1.5; rx: 3; }
+      .arrow { fill: none; stroke: #666; stroke-width: 1.5; }
+      .arrow-head { fill: #666; stroke: none; }
+      .flow-arrow { fill: none; stroke: #999; stroke-width: 1; stroke-dasharray: 4,3; }
+    </style>
+  </defs>
+
+  <!-- White background -->
+  <rect x="-70" y="0" width="670" height="320" fill="#ffffff"/>
+
+  <!-- Title -->
+  <!-- <text x="325" y="28" class="tufte-text" text-anchor="middle" font-size="16" font-weight="bold">변경사항 추적: 학습 개요</text> -->
+
+  <!-- Section 1: 파일 생성 -->
+  <g transform="translate(20, 50)">
+    <rect x="0" y="0" width="140" height="100" class="section-box"/>
+    <text x="70" y="22" class="tufte-text" text-anchor="middle" font-size="12" font-weight="bold">1. 파일 생성</text>
+    <rect x="40" y="35" width="60" height="50" class="highlight-box"/>
+    <line x1="50" y1="50" x2="90" y2="50" stroke="#333" stroke-width="1"/>
+    <line x1="50" y1="58" x2="90" y2="58" stroke="#333" stroke-width="1"/>
+    <line x1="50" y1="66" x2="90" y2="66" stroke="#333" stroke-width="1"/>
+    <text x="70" y="95" class="tufte-mono" text-anchor="middle" font-size="9">nano mars.txt</text>
+  </g>
+
+  <!-- Arrow 1→2 -->
+  <g transform="translate(165, 100)">
+    <line x1="0" y1="0" x2="30" y2="0" class="arrow"/>
+    <polygon points="30,-4 38,0 30,4" class="arrow-head"/>
+  </g>
+
+  <!-- Section 2: 상태 확인 -->
+  <g transform="translate(210, 50)">
+    <rect x="0" y="0" width="140" height="100" class="section-box"/>
+    <text x="70" y="22" class="tufte-text" text-anchor="middle" font-size="12" font-weight="bold">2. 상태 확인</text>
+    <text x="70" y="55" class="tufte-mono" text-anchor="middle" font-size="10">git status</text>
+    <text x="70" y="75" class="tufte-label" text-anchor="middle" font-size="9" font-style="italic">untracked files:</text>
+    <text x="70" y="90" class="tufte-label" text-anchor="middle" font-size="9">mars.txt</text>
+  </g>
+
+  <!-- Arrow 2→3 -->
+  <g transform="translate(355, 100)">
+    <line x1="0" y1="0" x2="30" y2="0" class="arrow"/>
+    <polygon points="30,-4 38,0 30,4" class="arrow-head"/>
+  </g>
+
+  <!-- Section 3: 준비 영역에 추가 -->
+  <g transform="translate(400, 50)">
+    <rect x="0" y="0" width="140" height="100" class="section-box"/>
+    <text x="70" y="22" class="tufte-text" text-anchor="middle" font-size="12" font-weight="bold">3. 추가</text>
+    <text x="70" y="55" class="tufte-mono" text-anchor="middle" font-size="10">git add</text>
+    <text x="70" y="75" class="tufte-label" text-anchor="middle" font-size="9" font-style="italic">→ 스테이징 영역</text>
+  </g>
+
+  <!-- Arrow 3→4 (downward) -->
+  <path d="M 470,150 L 470,170 L 470,180" class="flow-arrow"/>
+  <g transform="translate(-70, 0)">
+    <polygon points="536,180 540,188 544,180" fill="#999"/>
+  </g>
+
+  <!-- Section 4: 커밋 -->
+  <g transform="translate(400, 195)">
+    <rect x="0" y="0" width="140" height="100" class="section-box"/>
+    <text x="70" y="22" class="tufte-text" text-anchor="middle" font-size="12" font-weight="bold">4. 커밋</text>
+    <text x="70" y="50" class="tufte-mono" text-anchor="middle" font-size="10">git commit</text>
+    <text x="70" y="70" class="tufte-mono" text-anchor="middle" font-size="9">-m "message"</text>
+    <text x="70" y="90" class="tufte-label" text-anchor="middle" font-size="9" font-style="italic">→ .git/ 저장소</text>
+  </g>
+
+  <!-- Arrow 4→5 -->
+  <g transform="translate(355, 245)">
+    <line x1="40" y1="0" x2="0" y2="0" class="arrow"/>
+    <polygon points="0,-4 -8,0 0,4" class="arrow-head"/>
+  </g>
+
+  <!-- Section 5: 이력 확인 -->
+  <g transform="translate(210, 195)">
+    <rect x="0" y="0" width="140" height="100" class="section-box"/>
+    <text x="70" y="22" class="tufte-text" text-anchor="middle" font-size="12" font-weight="bold">5. 이력 확인</text>
+    <text x="70" y="50" class="tufte-mono" text-anchor="middle" font-size="10">git log</text>
+    <text x="70" y="70" class="tufte-label" text-anchor="middle" font-size="9" font-style="italic">commit f22b25e</text>
+    <text x="70" y="85" class="tufte-label" text-anchor="middle" font-size="9">Author: ...</text>
+  </g>
+
+  <!-- Arrow 5→6 -->
+  <g transform="translate(165, 245)">
+    <line x1="40" y1="0" x2="0" y2="0" class="arrow"/>
+    <polygon points="0,-4 -8,0 0,4" class="arrow-head"/>
+  </g>
+
+  <!-- Section 6: 반복 (수정 → 추가 → 커밋) -->
+  <g transform="translate(20, 195)">
+    <rect x="0" y="0" width="140" height="100" class="section-box"/>
+    <text x="70" y="22" class="tufte-text" text-anchor="middle" font-size="12" font-weight="bold">6. 반복</text>
+    <text x="70" y="48" class="tufte-label" text-anchor="middle" font-size="10">수정</text>
+    <text x="70" y="65" class="tufte-label" text-anchor="middle" font-size="10">↓</text>
+    <text x="70" y="80" class="tufte-mono" text-anchor="middle" font-size="9">git diff</text>
+    <text x="70" y="95" class="tufte-mono" text-anchor="middle" font-size="9">git add → commit</text>
+  </g>
+
+  <!-- Cycle arrow from Section 6 back to Section 2 -->
+  <g transform="translate(-10, 0)">
+    <path d="M 20,245 C -10,245 -10,100 20,100" class="flow-arrow"/>
+    <polygon points="20,96 28,100 20,104" fill="#999"/>
+  </g>
+
+  <!-- Key commands summary -->
+  <!-- <g transform="translate(555, 50)">
+    <text x="0" y="0" class="tufte-text" font-size="11" font-weight="bold">핵심 명령어</text>
+    <text x="0" y="25" class="tufte-mono" font-size="9">git status</text>
+    <text x="0" y="45" class="tufte-mono" font-size="9">git add</text>
+    <text x="0" y="65" class="tufte-mono" font-size="9">git commit</text>
+    <text x="0" y="85" class="tufte-mono" font-size="9">git log</text>
+    <text x="0" y="105" class="tufte-mono" font-size="9">git diff</text>
+  </g> -->
+</svg>

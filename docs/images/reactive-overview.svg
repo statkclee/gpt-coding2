@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 40 850 210">
+  <defs>
+    <style>
+      /* Tufte Grayscale Style */
+      .label-title { font-family: Palatino, serif; font-size: 16px; font-weight: bold; fill: #111; }
+      .label-head { font-family: Palatino, serif; font-size: 14px; font-weight: bold; fill: #222; }
+      .label-body { font-family: Palatino, serif; font-size: 12px; fill: #333; }
+      .label-note { font-family: Palatino, serif; font-size: 11px; fill: #555; font-style: italic; }
+      .label-mono { font-family: 'SF Mono', Consolas, Menlo, monospace; font-size: 10px; fill: #444; }
+      
+      .box-source { fill: #fff; stroke: #333; stroke-width: 1.5; rx: 4; }
+      .box-stream { fill: #fcfcfc; stroke: #999; stroke-width: 1; stroke-dasharray: 4 2; rx: 4; }
+      .box-observer { fill: #f9f9f9; stroke: #333; stroke-width: 1.5; rx: 4; }
+      .box-ui { fill: #fff; stroke: #666; stroke-width: 1.5; rx: 2; }
+      
+      .line-flow { stroke: #333; stroke-width: 1.5; fill: none; }
+      .line-subscribe { stroke: #666; stroke-width: 1.5; stroke-dasharray: 2 2; fill: none; }
+      .line-sep { stroke: #ccc; stroke-width: 1; }
+      
+      .arrow-head { fill: #333; }
+      .arrow-sub { fill: #666; }
+      .marble { fill: #fff; stroke: #666; stroke-width: 1.5; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L0,8 L8,4 z" class="arrow-head" />
+    </marker>
+    <marker id="arrow-sub" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L0,8 L8,4 z" class="arrow-sub" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="850" height="380" fill="#fff" />
+
+  <!-- Title -->
+  <!-- <text x="425" y="30" text-anchor="middle" class="label-title">반응형 아키텍처: 구독(Subscription)과 데이터 흐름</text> -->
+
+  <!-- ========================================== -->
+  <!-- 1. Event Sources (Producers) -->
+  <!-- ========================================== -->
+  <g transform="translate(40, 80)">
+    <text x="70" y="-10" text-anchor="middle" class="label-head">1. 이벤트 소스</text>
+    <rect x="0" y="0" width="140" height="150" class="box-source"/>
+
+    <text x="70" y="25" text-anchor="middle" class="label-note">비동기 데이터 발생</text>
+    <line x1="15" y1="35" x2="125" y2="35" class="line-sep"/>
+
+    <g transform="translate(15, 45)">
+      <rect x="0" y="0" width="110" height="22" fill="#eee" rx="2"/>
+      <text x="55" y="15" text-anchor="middle" class="label-mono">사용자 입력</text>
+    </g>
+
+    <g transform="translate(15, 72)">
+      <rect x="0" y="0" width="110" height="22" fill="#eee" rx="2"/>
+      <text x="55" y="15" text-anchor="middle" class="label-mono">네트워크 / API</text>
+    </g>
+
+    <g transform="translate(15, 99)">
+      <rect x="0" y="0" width="110" height="22" fill="#eee" rx="2"/>
+      <text x="55" y="15" text-anchor="middle" class="label-mono">타이머 / 스케줄러</text>
+    </g>
+
+    <g transform="translate(15, 126)">
+      <rect x="0" y="0" width="110" height="22" fill="#eee" rx="2"/>
+      <text x="55" y="15" text-anchor="middle" class="label-mono">센서 / IoT</text>
+    </g>
+  </g>
+
+  <!-- Flow Arrow -->
+  <path d="M 180 155 L 220 155" class="line-flow" marker-end="url(#arrow)"/>
+
+  <!-- ========================================== -->
+  <!-- 2. Observable Stream (The Pipe) -->
+  <!-- ========================================== -->
+  <g transform="translate(220, 100)">
+    <text x="90" y="-30" text-anchor="middle" class="label-head">2. Observable (생산)</text>
+    <rect x="0" y="-10" width="180" height="110" class="box-stream"/>
+    <text x="90" y="8" text-anchor="middle" class="label-note">데이터 스트림 발행</text>
+    
+    <!-- Stream Line -->
+    <line x1="10" y1="40" x2="170" y2="40" stroke="#999" stroke-width="2"/>
+    <text x="160" y="60" text-anchor="end" class="label-note">시간 →</text>
+
+    <!-- Marbles (Events) -->
+    <circle cx="30" cy="40" r="8" class="marble"/>
+    <text x="30" y="44" text-anchor="middle" font-size="10" font-weight="bold">E1</text>
+    
+    <circle cx="80" cy="40" r="8" class="marble"/>
+    <text x="80" y="44" text-anchor="middle" font-size="10" font-weight="bold">E2</text>
+    
+    <text x="90" y="85" text-anchor="middle" class="label-mono">filter() . map()</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- SUBSCRIPTION LINK (The Bridge) -->
+  <!-- ========================================== -->
+  <g transform="translate(420, 115)">
+      <!-- Forward Data Flow (Observable → Observer) -->
+      <path d="M 0 30 L 55 30" class="line-flow" stroke-width="2" marker-end="url(#arrow)"/>
+      <text x="27" y="20" text-anchor="middle" class="label-mono" font-weight="bold">데이터 →</text>
+
+      <!-- Reverse Subscription Flow (Observer → Observable) -->
+      <path d="M 55 55 L 0 55" class="line-subscribe" stroke-width="2" marker-end="url(#arrow-sub)"/>
+      <text x="27" y="72" text-anchor="middle" class="label-mono" fill="#666">← subscribe()</text>
+
+      <!-- Subscription Box Highlight -->
+      <rect x="-15" y="8" width="82" height="75" fill="none" stroke="#d32f2f" stroke-width="1.5" stroke-dasharray="3 2" rx="4"/>
+      <text x="28" y="98" text-anchor="middle" class="label-note" fill="#d32f2f" font-weight="bold">구독 (연결)</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 3. Observer (Consumer) -->
+  <!-- ========================================== -->
+  <g transform="translate(490, 80)">
+    <text x="70" y="-10" text-anchor="middle" class="label-head">3. Observer (소비)</text>
+    <rect x="0" y="0" width="140" height="150" class="box-observer"/>
+
+    <text x="70" y="25" text-anchor="middle" class="label-note">데이터 수신 및 처리</text>
+    <line x1="15" y1="35" x2="125" y2="35" class="line-sep"/>
+
+    <g transform="translate(15, 50)">
+      <text x="0" y="0" class="label-mono" font-weight="bold">onNext(data)</text>
+    </g>
+
+    <g transform="translate(15, 80)">
+      <text x="0" y="0" class="label-mono" font-weight="bold">onError(err)</text>
+    </g>
+
+    <g transform="translate(15, 110)">
+      <text x="0" y="0" class="label-mono" font-weight="bold">onComplete()</text>
+    </g>
+  </g>
+
+  <!-- Flow Arrow -->
+  <path d="M 630 155 L 690 155" class="line-flow" marker-end="url(#arrow)"/>
+
+  <!-- ========================================== -->
+  <!-- 4. State/UI Update (Effect) -->
+  <!-- ========================================== -->
+  <g transform="translate(690, 80)">
+    <text x="70" y="-10" text-anchor="middle" class="label-head">4. 부수 효과</text>
+    <rect x="0" y="0" width="140" height="150" class="box-ui"/>
+
+    <text x="70" y="25" text-anchor="middle" class="label-note">최종 상태 반영</text>
+    <line x1="15" y1="35" x2="125" y2="35" class="line-sep"/>
+
+    <text x="70" y="60" text-anchor="middle" class="label-body">UI 렌더링</text>
+    <text x="70" y="85" text-anchor="middle" class="label-body">DB 저장</text>
+    <text x="70" y="110" text-anchor="middle" class="label-body">로깅</text>
+    <text x="70" y="135" text-anchor="middle" class="label-body">알림 발송</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- Bottom Insight -->
+  <!-- ========================================== -->
+  <!-- <g transform="translate(40, 300)">
+    <rect x="0" y="0" width="740" height="45" fill="#fcfcfc" stroke="#ccc" rx="4"/>
+    <text x="20" y="28" class="label-body">
+        <tspan font-weight="bold">핵심:</tspan> Observable(생산) → Subscription(연결) → Observer(소비). subscribe() 호출로 연결이 성립되어야 데이터가 흐른다.
+    </text>
+  </g> -->
+
+</svg>

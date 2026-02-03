@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 270">
+  <defs>
+    <style>
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 13px; fill: #333; font-weight: bold; }
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 11px; fill: #333; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 10px; fill: #666; }
+      .tufte-code { font-family: 'SF Mono', Consolas, Monaco, monospace; font-size: 10px; fill: #444; }
+      .tufte-era { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 11px; fill: #999; font-style: italic; }
+      .box-pure { fill: #fff; stroke: #333; stroke-width: 1.5; }
+      .box-impure { fill: #f5f5f5; stroke: #666; stroke-width: 1.5; }
+      .box-state { fill: #e8e8e8; stroke: #999; stroke-width: 1; }
+      .arrow { fill: none; stroke: #666; stroke-width: 1.5; }
+      .arrow-side { fill: none; stroke: #999; stroke-width: 1.2; stroke-dasharray: 4,2; }
+    </style>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#666"/>
+    </marker>
+    <marker id="arrowhead-light" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#999"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="280" fill="#fff"/>
+
+  <!-- ========================================== -->
+  <!-- LEFT: Pure Function (No Side Effect) -->
+  <!-- ========================================== -->
+  <g transform="translate(40, 25)">
+    <text x="160" y="0" text-anchor="middle" class="tufte-label">순수 함수 (Pure Function)</text>
+    <text x="160" y="18" text-anchor="middle" class="tufte-era">같은 입력 → 항상 같은 출력</text>
+
+    <rect x="0" y="30" width="320" height="200" class="box-pure" rx="4"/>
+
+    <!-- Input -->
+    <g transform="translate(30, 60)">
+      <rect x="0" y="0" width="70" height="35" fill="#f5f5f5" stroke="#666" rx="3"/>
+      <text x="35" y="15" text-anchor="middle" class="tufte-code">입력</text>
+      <text x="35" y="28" text-anchor="middle" class="tufte-code">[1, 2, 3]</text>
+    </g>
+
+    <!-- Arrow to function -->
+    <line x1="105" y1="78" x2="135" y2="78" class="arrow" marker-end="url(#arrowhead)"/>
+
+    <!-- Function box -->
+    <g transform="translate(140, 55)">
+      <rect x="0" y="0" width="95" height="45" fill="#fff" stroke="#333" stroke-width="2" rx="4"/>
+      <text x="40" y="18" text-anchor="middle" class="tufte-code">def sum(x):</text>
+      <text x="52" y="34" text-anchor="middle" class="tufte-code">return total</text>
+    </g>
+
+    <!-- Arrow to output -->
+    <line x1="240" y1="78" x2="260" y2="78" class="arrow" marker-end="url(#arrowhead)"/>
+
+    <!-- Output -->
+    <g transform="translate(265, 60)">
+      <rect x="0" y="0" width="45" height="35" fill="#f5f5f5" stroke="#666" rx="3"/>
+      <text x="22" y="15" text-anchor="middle" class="tufte-code">출력</text>
+      <text x="22" y="28" text-anchor="middle" class="tufte-code">6</text>
+    </g>
+
+    <!-- Second call - same result -->
+    <g transform="translate(30, 130)">
+      <rect x="0" y="0" width="70" height="35" fill="#f5f5f5" stroke="#666" rx="3"/>
+      <text x="35" y="15" text-anchor="middle" class="tufte-code">입력</text>
+      <text x="35" y="28" text-anchor="middle" class="tufte-code">[1, 2, 3]</text>
+    </g>
+    <line x1="105" y1="148" x2="135" y2="148" class="arrow" marker-end="url(#arrowhead)"/>
+    <g transform="translate(140, 125)">
+      <rect x="0" y="0" width="95" height="45" fill="#fff" stroke="#333" stroke-width="2" rx="4"/>
+      <text x="43" y="18" text-anchor="middle" class="tufte-code">def sum(x):</text>
+      <text x="49" y="34" text-anchor="middle" class="tufte-code">return total</text>
+    </g>
+    <line x1="240" y1="148" x2="260" y2="148" class="arrow" marker-end="url(#arrowhead)"/>
+    <g transform="translate(265, 130)">
+      <rect x="0" y="0" width="45" height="35" fill="#f5f5f5" stroke="#666" rx="3"/>
+      <text x="22" y="15" text-anchor="middle" class="tufte-code">출력</text>
+      <text x="22" y="28" text-anchor="middle" class="tufte-code">6</text>
+    </g>
+
+    <!-- Checkmark -->
+    <text x="160" y="205" text-anchor="middle" class="tufte-small">테스트 용이, 예측 가능, 병렬 처리 안전</text>
+  </g>
+
+  <!-- Divider -->
+  <line x1="400" y1="40" x2="400" y2="240" stroke="#ccc" stroke-dasharray="4,3"/>
+
+  <!-- ========================================== -->
+  <!-- RIGHT: Impure Function (With Side Effect) -->
+  <!-- ========================================== -->
+  <g transform="translate(430, 25)">
+    <text x="170" y="0" text-anchor="middle" class="tufte-label">비순수 함수 (Impure Function)</text>
+    <text x="170" y="18" text-anchor="middle" class="tufte-era">같은 입력 → 다른 출력 가능</text>
+
+    <rect x="0" y="30" width="340" height="200" class="box-impure" rx="4"/>
+
+    <!-- Global State Box - 오른쪽 상단에 배치 -->
+    <g transform="translate(260, 55)">
+      <rect x="0" y="0" width="70" height="75" class="box-state" rx="3"/>
+      <text x="35" y="16" text-anchor="middle" class="tufte-small" font-weight="bold">전역 상태</text>
+      <line x1="5" y1="23" x2="65" y2="23" stroke="#bbb"/>
+      <text x="35" y="40" text-anchor="middle" class="tufte-code">cache</text>
+      <text x="35" y="55" text-anchor="middle" class="tufte-code">config</text>
+      <text x="35" y="70" text-anchor="middle" class="tufte-code">count</text>
+    </g>
+
+    <!-- First call -->
+    <g transform="translate(20, 65)">
+      <rect x="0" y="0" width="55" height="30" fill="#fff" stroke="#666" rx="3"/>
+      <text x="27" y="12" text-anchor="middle" class="tufte-code">입력</text>
+      <text x="27" y="25" text-anchor="middle" class="tufte-code">"A"</text>
+    </g>
+    <line x1="80" y1="80" x2="100" y2="80" class="arrow" marker-end="url(#arrowhead)"/>
+
+    <g transform="translate(105, 60)">
+      <rect x="0" y="0" width="65" height="40" fill="#fff" stroke="#666" stroke-width="1.5" rx="4"/>
+      <text x="32" y="25" text-anchor="middle" class="tufte-code">fetch()</text>
+    </g>
+
+    <line x1="175" y1="80" x2="195" y2="80" class="arrow" marker-end="url(#arrowhead)"/>
+    <g transform="translate(200, 65)">
+      <rect x="0" y="0" width="30" height="30" fill="#fff" stroke="#666" rx="3"/>
+      <text x="15" y="20" text-anchor="middle" class="tufte-code">1</text>
+    </g>
+
+    <!-- Side effect arrow: fetch() → 전역 상태 (위쪽 곡선) -->
+    <path d="M 170 55 Q 170 40, 190 40 L 248 40 Q 260 40, 260 52" class="arrow-side" marker-end="url(#arrowhead-light)"/>
+    <text x="215" y="55" text-anchor="middle" class="tufte-small" fill="#888">상태 변경</text>
+
+    <!-- Second call - different result -->
+    <g transform="translate(0, 10)">
+      <g transform="translate(20, 155)">
+        <rect x="0" y="0" width="55" height="30" fill="#fff" stroke="#666" rx="3"/>
+        <text x="27" y="12" text-anchor="middle" class="tufte-code">입력</text>
+        <text x="27" y="25" text-anchor="middle" class="tufte-code">"A"</text>
+      </g>
+      <line x1="80" y1="170" x2="100" y2="170" class="arrow" marker-end="url(#arrowhead)"/>
+
+      <g transform="translate(105, 150)">
+        <rect x="0" y="0" width="65" height="40" fill="#fff" stroke="#666" stroke-width="1.5" rx="4"/>
+        <text x="32" y="25" text-anchor="middle" class="tufte-code">fetch()</text>
+      </g>
+
+      <line x1="175" y1="170" x2="195" y2="170" class="arrow" marker-end="url(#arrowhead)"/>
+      <g transform="translate(200, 155)">
+        <rect x="0" y="0" width="30" height="30" fill="#fff" stroke="#666" rx="3"/>
+        <text x="15" y="20" text-anchor="middle" class="tufte-code">2</text>
+      </g>
+    </g>
+
+    <!-- Arrow from state to second fetch (상태 읽기) -->
+    <path d="M 295 130 Q 295 148, 270 148 L 178 148 Q 170 148, 170 160" class="arrow-side" marker-end="url(#arrowhead-light)"/>
+    <text x="230" y="145" text-anchor="middle" class="tufte-small" fill="#888">상태 읽기</text>
+
+    <!-- Warning -->
+    <text x="170" y="220" text-anchor="middle" class="tufte-small">디버깅 어려움, 테스트 복잡, 경쟁 조건 위험</text>
+  </g>
+
+</svg>

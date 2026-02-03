@@ -1,0 +1,2335 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" xml:lang="ko-KR"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.16">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="이광춘(Openai)">
+<title>36&nbsp; 반응형 프로그래밍 – 챗GPT 코딩(개정판)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./arch-reuse.html" rel="next">
+<link href="./prog-declarative.html" rel="prev">
+<link href="./images/logo.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-8ee146c0b749343448e797d10b61a7f9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-55f79cb6abf2a16ff6075165a9063c3c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "일치 없음",
+    "search-matching-documents-text": "일치된 문서",
+    "search-copy-link-title": "검색 링크 복사",
+    "search-hide-matches-text": "추가 검색 결과 숨기기",
+    "search-more-match-text": "추가 검색결과",
+    "search-more-matches-text": "추가 검색결과",
+    "search-clear-button-title": "제거",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "취소",
+    "search-submit-button-title": "검색",
+    "search-label": "검색"
+  }
+}</script><script type="text/javascript">
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-229551680-1', 'auto');
+
+ga('send', {
+  hitType: 'pageview',
+  'anonymizeIp': true,
+});
+</script>
+</head>
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./prog-paradigm.html"><strong>5부</strong> 프로그래밍 패러다임</a></li><li class="breadcrumb-item"><a href="./prog-reactive.html"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">반응형 프로그래밍</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="검색" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">챗GPT 코딩(개정판)</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/bit2r/gpt-coding/" title="소스 코드" class="quarto-navigation-tool px-1" aria-label="소스 코드"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="리더 모드 전환">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="검색"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">서문</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>1부</strong> 전통 프로그래밍</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">프로그래밍 시작하기</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-var.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">변수, 표현식, 문장</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-cont.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">조건부 실행</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-func.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">함수</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-loop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">반복문</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>2부</strong> 자료구조</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-data-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">데이터, AI 식량</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-string.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">문자열</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-file.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">파일</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-list.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">리스트</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-dictionaries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">딕셔너리</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-tuples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">튜플</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-dataframe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">데이터프레임</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-json.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">JSON</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18-tensor.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">텐서</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-embedding.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">벡터와 임베딩</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-graph.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">그래프</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>3부</strong> 버전제어와 협업</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Git 시작하기</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-tracking.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">변경사항 추적</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-history.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">히스토리와 파일 관리</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-remote.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">GitHub와 원격 저장소</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-collab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">협업과 충돌 해결</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">오픈 사이언스</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>4부</strong> 분야별 코딩</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">특화 도구 입문</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-regex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">정규 표현식</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-network.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-web.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">웹서비스</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-database.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">데이터베이스와 SQL</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-ds.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">데이터 과학과 R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-auto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">파일 자동화</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-make.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">빌드 자동화: make</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>5부</strong> 프로그래밍 패러다임</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-paradigm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">패러다임의 이해</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-imperative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">명령형과 절차적 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-oop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">객체지향 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-fp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">함수형 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-declarative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">선언형 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-reactive.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">반응형 프로그래밍</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>6부</strong> 소프트웨어 설계와 아키텍처</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-reuse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">재사용 명령</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-stack.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">소프트웨어 스택</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">소프트웨어 아키텍처</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-pattern.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">살아남은 패턴</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>7부</strong> 기계학습 패러다임</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-paradigm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">소프트웨어 2.0</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">신경망 아키텍처</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">43</span>&nbsp; <span class="chapter-title">학습과 추론</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-to-llm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">44</span>&nbsp; <span class="chapter-title">트랜스포머에서 거대 언어모형으로</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>부록</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">용어사전</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">참고문헌</span></a>
+  </div>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">목차</h2>
+   
+  <ul>
+<li>
+<a href="#sec-reactive-layers" id="toc-sec-reactive-layers" class="nav-link active" data-scroll-target="#sec-reactive-layers"><span class="header-section-number">36.1</span> 비동기 생태계 세가지 개념</a>
+  <ul class="collapse">
+<li><a href="#sec-reactive-history" id="toc-sec-reactive-history" class="nav-link" data-scroll-target="#sec-reactive-history"><span class="header-section-number">36.1.1</span> 역사적 발전 과정</a></li>
+  <li><a href="#sec-reactive-event-driven" id="toc-sec-reactive-event-driven" class="nav-link" data-scroll-target="#sec-reactive-event-driven"><span class="header-section-number">36.1.2</span> 이벤트 기반</a></li>
+  <li><a href="#sec-reactive-pubsub" id="toc-sec-reactive-pubsub" class="nav-link" data-scroll-target="#sec-reactive-pubsub"><span class="header-section-number">36.1.3</span> Pub-Sub</a></li>
+  <li><a href="#sec-reactive-reactive" id="toc-sec-reactive-reactive" class="nav-link" data-scroll-target="#sec-reactive-reactive"><span class="header-section-number">36.1.4</span> 반응형</a></li>
+  <li><a href="#sec-reactive-comparison" id="toc-sec-reactive-comparison" class="nav-link" data-scroll-target="#sec-reactive-comparison"><span class="header-section-number">36.1.5</span> 세 개념 비교</a></li>
+  </ul>
+</li>
+  <li><a href="#sec-reactive-shiny" id="toc-sec-reactive-shiny" class="nav-link" data-scroll-target="#sec-reactive-shiny"><span class="header-section-number">36.2</span> Shiny와 데이터 과학 혁명</a></li>
+  <li><a href="#sec-reactive-python" id="toc-sec-reactive-python" class="nav-link" data-scroll-target="#sec-reactive-python"><span class="header-section-number">36.3</span> 파이썬 반응형 구현</a></li>
+  <li><a href="#sec-reactive-sandwich" id="toc-sec-reactive-sandwich" class="nav-link" data-scroll-target="#sec-reactive-sandwich"><span class="header-section-number">36.4</span> 반응형 아키텍처 패턴</a></li>
+  <li>
+<a href="#sec-reactive-debug" id="toc-sec-reactive-debug" class="nav-link" data-scroll-target="#sec-reactive-debug"><span class="header-section-number">36.5</span> 디버깅</a>
+  <ul class="collapse">
+<li><a href="#sec-reactive-debug-timetravel" id="toc-sec-reactive-debug-timetravel" class="nav-link" data-scroll-target="#sec-reactive-debug-timetravel"><span class="header-section-number">36.5.1</span> 타임 트래블 디버깅</a></li>
+  <li><a href="#sec-reactive-debug-marble" id="toc-sec-reactive-debug-marble" class="nav-link" data-scroll-target="#sec-reactive-debug-marble"><span class="header-section-number">36.5.2</span> 마블 다이어그램</a></li>
+  <li><a href="#sec-reactive-debug-dependency" id="toc-sec-reactive-debug-dependency" class="nav-link" data-scroll-target="#sec-reactive-debug-dependency"><span class="header-section-number">36.5.3</span> 의존성 그래프 시각화</a></li>
+  </ul>
+</li>
+  <li><a href="#%EC%83%9D%EA%B0%81%ED%95%B4%EB%B3%BC-%EC%A0%90" id="toc-생각해볼-점" class="nav-link" data-scroll-target="#%EC%83%9D%EA%B0%81%ED%95%B4%EB%B3%BC-%EC%A0%90">💡 생각해볼 점</a></li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/prog-reactive.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./prog-paradigm.html"><strong>5부</strong> 프로그래밍 패러다임</a></li><li class="breadcrumb-item"><a href="./prog-reactive.html"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">반응형 프로그래밍</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-reactive" class="quarto-section-identifier"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">반응형 프로그래밍</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><p> </p>
+<p>반응형 프로그래밍(Reactive Programming)은 데이터 흐름과 변화의 전파를 중심으로 하는 패러다임이다. 이벤트가 발생하면 관련 코드가 자동으로 실행되고, 상태 변화가 의존 관계를 따라 전파된다. 스프레드시트에서 셀 값이 바뀌면 해당 셀을 참조하는 수식이 자동으로 재계산되는 것과 같은 원리다.</p>
+<div id="fig-reactive-overview" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-reactive-overview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/reactive-overview.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-reactive-overview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;36.1: 반응형 아키텍처: 구독(Subscription)과 데이터 흐름
+</figcaption></figure>
+</div>
+<p><a href="#fig-reactive-overview" class="quarto-xref">그림&nbsp;<span>36.1</span></a> 는 반응형 시스템의 핵심 구조를 보여준다. <strong>1. 이벤트 소스</strong>에서 사용자 입력, 네트워크/API, 타이머, 센서/IoT 등 비동기 데이터가 발생한다. <strong>2. Observable(생산)</strong>은 이 데이터를 스트림으로 발행하며 <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code>, <code>map()</code> 같은 연산자로 변환한다. <strong>3. Observer(소비)</strong>가 <code>subscribe()</code>를 호출해야 비로소 연결이 성립되어 데이터가 흐르기 시작한다. Observer는 <code>onNext(data)</code>, <code>onError(err)</code>, <code>onComplete()</code> 세 가지 콜백으로 데이터를 수신한다. 최종적으로 <strong>4. 부수 효과</strong>에서 UI 렌더링, DB 저장, 로깅, 알림 발송 등 실제 작업이 수행된다.</p>
+<p>반응형 패러다임이 주목받는 이유는 현대 소프트웨어의 특성에 있다. 웹 애플리케이션, 모바일 앱, IoT 시스템은 모두 비동기 이벤트에 반응해야 한다. 전통적인 명령형 방식으로 이 복잡성을 다루면 콜백 중첩과 상태 관리가 엉망이 되기 쉽다. 반응형 프로그래밍은 “무엇이 바뀌면 무엇이 따라서 바뀌는지”를 선언적으로 표현하여 이 문제를 해결한다.</p>
+<section id="sec-reactive-layers" class="level2" data-number="36.1"><h2 data-number="36.1" class="anchored" data-anchor-id="sec-reactive-layers">
+<span class="header-section-number">36.1</span> 비동기 생태계 세가지 개념</h2>
+<p> </p>
+<p>반응형 프로그래밍을 이해하려면 비동기 생태계 전체를 조망해야 한다. 이벤트 기반 아키텍처가 환경(기반)을 제공하고, 그 위에서 Pub-Sub 패턴과 반응형 프로그래밍이 각각 다른 역할을 수행한다.</p>
+<div id="fig-reactive-layers" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-reactive-layers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/reactive-three-layers.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-reactive-layers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;36.2: 비동기 생태계: 아키텍처, 패턴, 그리고 패러다임
+</figcaption></figure>
+</div>
+<p><a href="#fig-reactive-layers" class="quarto-xref">그림&nbsp;<span>36.2</span></a> 는 세 개념의 관계를 보여준다. <strong>이벤트 기반 아키텍처(Event-Driven Architecture)</strong>는 비동기 이벤트가 시스템을 주도하는 넓은 환경이다. 이 환경 위에서 두 가지 접근법이 공존한다. <strong>Pub-Sub 패턴</strong>은 발행자와 구독자를 분리하는 구조적 패턴으로, “메시지를 누구에게 보낼 것인가”라는 결합도 문제를 해결한다. <strong>반응형 프로그래밍</strong>은 데이터 흐름과 변화 전파를 선언적으로 다루는 패러다임으로, “데이터가 어떻게 흐르고 변하는가”라는 질문에 답한다. Reactive는 Event-Driven 환경 위에서 Pub-Sub 패턴을 도구로 활용하여 만든 “선언적 데이터 파이프라인”이다.</p>
+<section id="sec-reactive-history" class="level3" data-number="36.1.1"><h3 data-number="36.1.1" class="anchored" data-anchor-id="sec-reactive-history">
+<span class="header-section-number">36.1.1</span> 역사적 발전 과정</h3>
+<p> </p>
+<p>세 개념은 순차적으로 발전했으며, 각 시대에 주류였던 프로그래밍 패러다임이 구현 방식을 결정했다.</p>
+<p><strong>1세대: 이벤트 기반 (1970-80년대)</strong> — 명령형/절차적 프로그래밍이 지배하던 시대다. C, Assembly로 콜백 함수를 등록하고 이벤트 루프에서 폴링하는 방식이 표준이었다. X Window System, 초기 GUI 툴킷이 대표적이다. “이벤트가 발생하면 핸들러를 실행”하는 단순한 메커니즘이지만, 상태 관리가 복잡해지면 코드가 급격히 엉망이 되는 한계가 있었다.</p>
+<p><strong>2세대: Pub-Sub (1980-90년대)</strong> — 객체지향 프로그래밍의 부상과 함께 Observer 패턴이 Gang of Four(1994) 디자인 패턴으로 정형화되었다. Java, C++, Smalltalk로 발행자와 구독자를 분리하여 결합도를 낮추는 구조가 확립되었다. IBM MQ, TIBCO 같은 메시지 미들웨어가 엔터프라이즈 시스템에 도입되었고, JMS(Java Message Service)가 표준 API로 자리잡았다. 결합도 문제는 해결했지만, 콜백이 중첩되면 “콜백 지옥”에 빠지기 쉬웠다.</p>
+<p><strong>3세대: 반응형 (1997년~)</strong> — 1997년 코널 엘리엇(Conal Elliott)의 FRP(Functional Reactive Programming) 논문이 이론적 토대를 놓았다. 2009-2011년 에릭 마이어(Erik Meijer)가 ReactiveX를 개발하고 Netflix가 실전에 적용하면서 산업계에 확산되었다. 2013년 Reactive Manifesto가 발표되어 반응형 시스템의 4대 원칙(응답성, 복원력, 탄력성, 메시지 기반)이 정립되었다. 명령형 콜백 관리를 선언적 데이터 흐름으로 추상화하여 합성 가능한(composable) 코드를 작성할 수 있게 되었다.</p>
+<div class="cell">
+<div id="tbl-reactive-evolution" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><div aria-describedby="tbl-reactive-evolution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="ojmkwukgeo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ojmkwukgeo table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#ojmkwukgeo thead, #ojmkwukgeo tbody, #ojmkwukgeo tfoot, #ojmkwukgeo tr, #ojmkwukgeo td, #ojmkwukgeo th {
+  border-style: none;
+}
+
+#ojmkwukgeo p {
+  margin: 0;
+  padding: 0;
+}
+
+#ojmkwukgeo .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ojmkwukgeo .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#ojmkwukgeo .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ojmkwukgeo .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ojmkwukgeo .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ojmkwukgeo .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ojmkwukgeo .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ojmkwukgeo .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ojmkwukgeo .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ojmkwukgeo .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ojmkwukgeo .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ojmkwukgeo .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ojmkwukgeo .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#ojmkwukgeo .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#ojmkwukgeo .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ojmkwukgeo .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ojmkwukgeo .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ojmkwukgeo .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ojmkwukgeo .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ojmkwukgeo .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#ojmkwukgeo .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#ojmkwukgeo .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#ojmkwukgeo .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ojmkwukgeo .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#ojmkwukgeo .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#ojmkwukgeo .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ojmkwukgeo .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ojmkwukgeo .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ojmkwukgeo .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ojmkwukgeo .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ojmkwukgeo .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ojmkwukgeo .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ojmkwukgeo .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ojmkwukgeo .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ojmkwukgeo .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ojmkwukgeo .gt_left {
+  text-align: left;
+}
+
+#ojmkwukgeo .gt_center {
+  text-align: center;
+}
+
+#ojmkwukgeo .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ojmkwukgeo .gt_font_normal {
+  font-weight: normal;
+}
+
+#ojmkwukgeo .gt_font_bold {
+  font-weight: bold;
+}
+
+#ojmkwukgeo .gt_font_italic {
+  font-style: italic;
+}
+
+#ojmkwukgeo .gt_super {
+  font-size: 65%;
+}
+
+#ojmkwukgeo .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#ojmkwukgeo .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#ojmkwukgeo .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#ojmkwukgeo .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#ojmkwukgeo .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#ojmkwukgeo .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#ojmkwukgeo .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#ojmkwukgeo .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#ojmkwukgeo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table do-not-create-environment cell table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings header">
+<th id="a세대" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">세대</th>
+<th id="a시기" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">시기</th>
+<th id="a패러다임" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">패러다임</th>
+<th id="a비동기-처리-방식" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">비동기 처리 방식</th>
+<th id="a한계" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">한계</th>
+</tr></thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers="세대">1세대</td>
+<td class="gt_row gt_center" headers="시기">1970-80s</td>
+<td class="gt_row gt_center" headers="패러다임">절차적</td>
+<td class="gt_row gt_center" headers="비동기 처리 방식">콜백 + 이벤트 루프</td>
+<td class="gt_row gt_center" headers="한계">상태 관리 복잡</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="세대">2세대</td>
+<td class="gt_row gt_center" headers="시기">1980-90s</td>
+<td class="gt_row gt_center" headers="패러다임">객체지향</td>
+<td class="gt_row gt_center" headers="비동기 처리 방식">Observer 패턴</td>
+<td class="gt_row gt_center" headers="한계">콜백 지옥, 에러 전파 어려움</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="세대">3세대</td>
+<td class="gt_row gt_center" headers="시기">1997~</td>
+<td class="gt_row gt_center" headers="패러다임">반응형</td>
+<td class="gt_row gt_center" headers="비동기 처리 방식">스트림 + 연산자</td>
+<td class="gt_row gt_center" headers="한계">선언적, 합성 가능</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-tbl" id="tbl-reactive-evolution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+표&nbsp;36.1: 비동기 프로그래밍의 세대별 발전
+</figcaption></figure>
+</div>
+</div>
+<p>반응형 프로그래밍이 해결하고자 한 핵심 문제는 <strong>콜백 지옥(Callback Hell)</strong>이다. 1-2세대 방식으로 비동기 작업을 연쇄적으로 처리하면 콜백이 깊게 중첩되어 가독성과 유지보수성이 급격히 저하된다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// 콜백 지옥: 반응형이 해결하고자 한 문제</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fetchUser</span>(userId<span class="op">,</span> <span class="kw">function</span>(user) {</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fetchOrders</span>(user<span class="op">.</span><span class="at">id</span><span class="op">,</span> <span class="kw">function</span>(orders) {</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">fetchProducts</span>(orders[<span class="dv">0</span>]<span class="op">.</span><span class="at">id</span><span class="op">,</span> <span class="kw">function</span>(products) {</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>            <span class="co">// 깊어지는 중첩, 에러 처리 분산, 흐름 파악 어려움</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        })<span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>반응형 패러다임은 이 문제를 스트림과 연산자 체인으로 해결한다. <code>fetchUser().pipe(switchMap(fetchOrders), switchMap(fetchProducts)).subscribe(...)</code> 형태로 선형적이고 읽기 쉬운 코드가 된다.</p>
+</section><section id="sec-reactive-event-driven" class="level3" data-number="36.1.2"><h3 data-number="36.1.2" class="anchored" data-anchor-id="sec-reactive-event-driven">
+<span class="header-section-number">36.1.2</span> 이벤트 기반</h3>
+<p><strong>이벤트 기반(Event-Driven)</strong>은 가장 기초적인 메커니즘이다. “이벤트가 발생하면 핸들러를 실행한다”는 단순한 원리에 기반한다. 콜백 함수, 이벤트 루프, 핸들러 등록이 핵심 메커니즘이다. GUI 프로그래밍에서 버튼 클릭 시 함수를 호출하는 것이 전형적인 예다.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 이벤트 기반의 기초: 콜백 등록과 호출</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Button:</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, label):</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.label <span class="op">=</span> label</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._handlers <span class="op">=</span> []</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> on_click(<span class="va">self</span>, handler):</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._handlers.append(handler)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> click(<span class="va">self</span>):</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> handler <span class="kw">in</span> <span class="va">self</span>._handlers:</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>            handler()</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>button <span class="op">=</span> Button(<span class="st">"저장"</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>button.on_click(<span class="kw">lambda</span>: <span class="bu">print</span>(<span class="st">"파일 저장 중..."</span>))</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>button.on_click(<span class="kw">lambda</span>: <span class="bu">print</span>(<span class="st">"저장 완료!"</span>))</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>button.click()</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 파일 저장 중...</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 저장 완료!</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section><section id="sec-reactive-pubsub" class="level3" data-number="36.1.3"><h3 data-number="36.1.3" class="anchored" data-anchor-id="sec-reactive-pubsub">
+<span class="header-section-number">36.1.3</span> Pub-Sub</h3>
+<p><strong>Pub-Sub(Publisher-Subscriber)</strong>는 한 단계 높은 추상화다. 이벤트 발생자(Publisher)와 이벤트 소비자(Subscriber)를 분리하여 결합도를 낮춘다. 발행자는 누가 구독하는지 모르고, 구독자는 누가 발행하는지 모른다. 메시지 브로커, 토픽 기반 라우팅이 핵심이다.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pub-Sub: 발행자와 구독자의 분리</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> EventBus:</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.subscribers <span class="op">=</span> {}</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> subscribe(<span class="va">self</span>, topic, handler):</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> topic <span class="kw">not</span> <span class="kw">in</span> <span class="va">self</span>.subscribers:</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.subscribers[topic] <span class="op">=</span> []</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.subscribers[topic].append(handler)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> publish(<span class="va">self</span>, topic, data):</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> topic <span class="kw">in</span> <span class="va">self</span>.subscribers:</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> handler <span class="kw">in</span> <span class="va">self</span>.subscribers[topic]:</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>                handler(data)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>bus <span class="op">=</span> EventBus()</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>bus.subscribe(<span class="st">"score_updated"</span>, <span class="kw">lambda</span> s: <span class="bu">print</span>(<span class="ss">f"평균 재계산: </span><span class="sc">{</span>s<span class="sc">}</span><span class="ss">"</span>))</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>bus.subscribe(<span class="st">"score_updated"</span>, <span class="kw">lambda</span> s: <span class="bu">print</span>(<span class="ss">f"차트 갱신: </span><span class="sc">{</span>s<span class="sc">}</span><span class="ss">"</span>))</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>bus.publish(<span class="st">"score_updated"</span>, {<span class="st">"student"</span>: <span class="st">"김철수"</span>, <span class="st">"score"</span>: <span class="dv">85</span>})</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 평균 재계산: {'student': '김철수', 'score': 85}</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 차트 갱신: {'student': '김철수', 'score': 85}</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section><section id="sec-reactive-reactive" class="level3" data-number="36.1.4"><h3 data-number="36.1.4" class="anchored" data-anchor-id="sec-reactive-reactive">
+<span class="header-section-number">36.1.4</span> 반응형</h3>
+<p><strong>반응형(Reactive)</strong>은 최상위 추상화다. 데이터를 시간에 따라 흐르는 스트림으로 취급하고, 스트림 간의 의존 관계가 자동으로 전파된다. “A가 바뀌면 A에 의존하는 B, C가 자동으로 재계산된다”는 선언적 모델이다. map, filter, reduce 같은 함수형 연산자로 스트림을 조합한다.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 반응형: 의존 관계의 자동 전파</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ReactiveValue:</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, value):</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._value <span class="op">=</span> value</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._dependents <span class="op">=</span> []</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">@property</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> value(<span class="va">self</span>):</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._value</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">@value.setter</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> value(<span class="va">self</span>, new_value):</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._value <span class="op">=</span> new_value</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> dependent <span class="kw">in</span> <span class="va">self</span>._dependents:</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>            dependent()  <span class="co"># 의존하는 계산 자동 실행</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> subscribe(<span class="va">self</span>, callback):</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._dependents.append(callback)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co"># 성적 입력값</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>score <span class="op">=</span> ReactiveValue(<span class="dv">85</span>)</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="co"># 의존하는 계산들 (자동 갱신)</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>score.subscribe(<span class="kw">lambda</span>: <span class="bu">print</span>(<span class="ss">f"  → 등급 계산: </span><span class="sc">{</span><span class="st">'A'</span> <span class="cf">if</span> score<span class="sc">.</span>value <span class="op">&gt;=</span> <span class="dv">90</span> <span class="cf">else</span> <span class="st">'B'</span> <span class="cf">if</span> score<span class="sc">.</span>value <span class="op">&gt;=</span> <span class="dv">80</span> <span class="cf">else</span> <span class="st">'C'</span><span class="sc">}</span><span class="ss">"</span>))</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>score.subscribe(<span class="kw">lambda</span>: <span class="bu">print</span>(<span class="ss">f"  → 통과 여부: </span><span class="sc">{</span><span class="st">'통과'</span> <span class="cf">if</span> score<span class="sc">.</span>value <span class="op">&gt;=</span> <span class="dv">60</span> <span class="cf">else</span> <span class="st">'재시험'</span><span class="sc">}</span><span class="ss">"</span>))</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"점수를 85로 설정:"</span>)</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 점수를 85로 설정:</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>score.value <span class="op">=</span> <span class="dv">85</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   → 등급 계산: B</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   → 통과 여부: 통과</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">점수를 92로 변경:"</span>)</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 점수를 92로 변경:</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>score.value <span class="op">=</span> <span class="dv">92</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   → 등급 계산: A</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   → 통과 여부: 통과</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section><section id="sec-reactive-comparison" class="level3" data-number="36.1.5"><h3 data-number="36.1.5" class="anchored" data-anchor-id="sec-reactive-comparison">
+<span class="header-section-number">36.1.5</span> 세 개념 비교</h3>
+<p>세 개념의 핵심 차이는 <strong>관심사</strong>에 있다. 이벤트 기반은 “이벤트가 발생하면 X를 실행”이라는 메커니즘을 제공한다. Pub-Sub는 “누가 누구에게 메시지를 보내는가”라는 결합도 문제를 해결한다. 반응형은 “값이 바뀌면 의존하는 모든 것이 자동으로 갱신”이라는 선언적 데이터 흐름을 제공한다.</p>
+<div class="cell">
+<div id="tbl-reactive-comparison" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><div aria-describedby="tbl-reactive-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="pcrbckgtjg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pcrbckgtjg table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#pcrbckgtjg thead, #pcrbckgtjg tbody, #pcrbckgtjg tfoot, #pcrbckgtjg tr, #pcrbckgtjg td, #pcrbckgtjg th {
+  border-style: none;
+}
+
+#pcrbckgtjg p {
+  margin: 0;
+  padding: 0;
+}
+
+#pcrbckgtjg .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#pcrbckgtjg .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#pcrbckgtjg .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#pcrbckgtjg .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#pcrbckgtjg .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pcrbckgtjg .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pcrbckgtjg .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pcrbckgtjg .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#pcrbckgtjg .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#pcrbckgtjg .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#pcrbckgtjg .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#pcrbckgtjg .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#pcrbckgtjg .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#pcrbckgtjg .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#pcrbckgtjg .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#pcrbckgtjg .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#pcrbckgtjg .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#pcrbckgtjg .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#pcrbckgtjg .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pcrbckgtjg .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#pcrbckgtjg .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#pcrbckgtjg .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#pcrbckgtjg .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pcrbckgtjg .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#pcrbckgtjg .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#pcrbckgtjg .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pcrbckgtjg .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pcrbckgtjg .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#pcrbckgtjg .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pcrbckgtjg .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#pcrbckgtjg .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pcrbckgtjg .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pcrbckgtjg .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pcrbckgtjg .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pcrbckgtjg .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pcrbckgtjg .gt_left {
+  text-align: left;
+}
+
+#pcrbckgtjg .gt_center {
+  text-align: center;
+}
+
+#pcrbckgtjg .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#pcrbckgtjg .gt_font_normal {
+  font-weight: normal;
+}
+
+#pcrbckgtjg .gt_font_bold {
+  font-weight: bold;
+}
+
+#pcrbckgtjg .gt_font_italic {
+  font-style: italic;
+}
+
+#pcrbckgtjg .gt_super {
+  font-size: 65%;
+}
+
+#pcrbckgtjg .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#pcrbckgtjg .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#pcrbckgtjg .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#pcrbckgtjg .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#pcrbckgtjg .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#pcrbckgtjg .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#pcrbckgtjg .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#pcrbckgtjg .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#pcrbckgtjg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table do-not-create-environment cell table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings header">
+<th id="a구분" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">구분</th>
+<th id="a이벤트-기반" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">이벤트 기반</th>
+<th id="Pub-Sub" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">Pub-Sub</th>
+<th id="a반응형" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">반응형</th>
+</tr></thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="구분" style="font-weight: bold">핵심 질문</td>
+<td class="gt_row gt_center" headers="이벤트 기반">무엇을 실행할까?</td>
+<td class="gt_row gt_center" headers="Pub-Sub">누구에게 보낼까?</td>
+<td class="gt_row gt_center" headers="반응형">무엇이 의존하는가?</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="구분" style="font-weight: bold">결합도</td>
+<td class="gt_row gt_center" headers="이벤트 기반">높음 (핸들러 직접 등록)</td>
+<td class="gt_row gt_center" headers="Pub-Sub">낮음 (브로커 경유)</td>
+<td class="gt_row gt_center" headers="반응형">최소 (선언적 의존성)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="구분" style="font-weight: bold">데이터 흐름</td>
+<td class="gt_row gt_center" headers="이벤트 기반">단방향, 수동 전파</td>
+<td class="gt_row gt_center" headers="Pub-Sub">단방향, 토픽 기반</td>
+<td class="gt_row gt_center" headers="반응형">양방향, 자동 전파</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="구분" style="font-weight: bold">에러 처리</td>
+<td class="gt_row gt_center" headers="이벤트 기반">각 핸들러에서 개별 처리</td>
+<td class="gt_row gt_center" headers="Pub-Sub">구독자별 개별 처리</td>
+<td class="gt_row gt_center" headers="반응형">스트림 연산자로 통합</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="구분" style="font-weight: bold">대표 사례</td>
+<td class="gt_row gt_center" headers="이벤트 기반">DOM 이벤트, GUI 콜백</td>
+<td class="gt_row gt_center" headers="Pub-Sub">메시지 큐, 알림 시스템</td>
+<td class="gt_row gt_center" headers="반응형">Shiny, RxJS, Streamlit</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-tbl" id="tbl-reactive-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+표&nbsp;36.2: 이벤트 기반 vs Pub-Sub vs 반응형 비교
+</figcaption></figure>
+</div>
+</div>
+<p>세 개념은 서로 배타적이지 않고 <strong>계층적</strong>으로 쌓인다. 반응형 시스템은 내부적으로 Pub-Sub 패턴을 사용하고, Pub-Sub은 이벤트 기반 메커니즘 위에 구축된다. 따라서 “어떤 것이 더 좋은가”가 아니라 “어떤 수준의 추상화가 필요한가”를 판단해야 한다.</p>
+<p><strong>상황별 권장 추상화 수준</strong>은 명확하다. 버튼 클릭 한 번에 함수 하나를 실행하는 단순한 경우라면 이벤트 기반으로 충분하다. 여러 컴포넌트가 동일한 이벤트를 구독해야 할 때는 Pub-Sub로 결합도를 낮춘다. 값이 변하면 의존하는 모든 계산이 자동으로 갱신되어야 하는 경우, 예컨대 스프레드시트처럼 셀 간 의존성이 복잡한 시스템이라면 반응형이 적합하다. merge, debounce, throttle 같은 복잡한 스트림 조합이 필요한 실시간 대시보드나 금융 시스템에서는 RxPY 같은 전용 라이브러리가 필수다.</p>
+<p>추상화 수준 선택에서 가장 중요한 원칙은 <strong>과도한 추상화를 피하는 것</strong>이다. 단순한 버튼 클릭에 RxPY를 도입하면 오버엔지니어링이다. 반대로, 10개 이상의 이벤트 소스가 서로 의존하는 대시보드를 콜백만으로 구현하면 유지보수가 불가능해진다. “지금 이 수준으로 충분한가?”를 먼저 자문하고, 한계를 느낄 때 다음 단계로 이동하라.</p>
+</section></section><section id="sec-reactive-shiny" class="level2" data-number="36.2"><h2 data-number="36.2" class="anchored" data-anchor-id="sec-reactive-shiny">
+<span class="header-section-number">36.2</span> Shiny와 데이터 과학 혁명</h2>
+<p> </p>
+<p>반응형 프로그래밍이 데이터 과학의 한 축이 된 계기는 2012년 R Shiny의 등장이다. Shiny 이전에 통계학자나 분석가가 인터랙티브 웹 애플리케이션을 만들려면 JavaScript, HTML, 서버 프로그래밍을 모두 알아야 했다. Shiny는 R 코드만으로 반응형 웹 앱을 만들 수 있게 했다.</p>
+<div id="fig-reactive-shiny" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-reactive-shiny-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/reactive-shiny-paradigm.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-reactive-shiny-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;36.3: 반응형 패러다임: 입력 → 반응형 엔진 → 출력의 자동 갱신
+</figcaption></figure>
+</div>
+<p><a href="#fig-reactive-shiny" class="quarto-xref">그림&nbsp;<span>36.3</span></a> 는 Shiny/Streamlit의 핵심 원리를 보여준다. 사용자가 슬라이더를 조작하거나 체크박스를 선택하면(입력), 반응형 엔진이 의존성 그래프를 추적하여(반응형 엔진), 관련된 차트와 통계가 자동으로 갱신된다(출력). 개발자는 “무엇을” 표시할지만 선언하고, “언제 갱신할지”는 프레임워크가 알아서 처리한다.</p>
+<p>Shiny가 한 시대를 풍미한 이유는 진입 장벽을 낮추면서도 강력한 결과물을 만들어냈기 때문이다. R을 아는 통계학자라면 JavaScript 없이도 인터랙티브 대시보드를 제작할 수 있게 되었고, 데이터 시각화와 탐색적 분석이 정적 보고서에서 동적 애플리케이션으로 진화했다. 전통적인 보고서가 데이터에서 분석, 문서 작성, 공유로 이어지는 단방향 흐름이었다면, 반응형 앱에서는 입력을 바꾸면 결과가 즉시 바뀌어 탐색적 분석에 최적화된 워크플로우를 제공한다. 동일한 R 코드가 분석과 프레젠테이션을 동시에 담당하면서 재현가능한 분석과 인터랙티브 발표가 결합되었고, 과학 커뮤니케이션의 방식 자체가 바뀌었다.</p>
+<p>Shiny의 성공은 Python 생태계에도 영향을 미쳤다. 2019년 Streamlit이 등장하여 “Python 버전 Shiny”를 표방했고, 2022년에는 Posit(구 RStudio)에서 Shiny for Python을 공식 출시했다. 데이터 과학에서 반응형 패러다임은 이제 언어를 넘어 보편적인 도구가 되었다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># grade_dashboard.py - Streamlit 학생 성적 대시보드</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 실행: streamlit run grade_dashboard.py</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>st.title(<span class="st">"학생 성적 대시보드"</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 입력: 슬라이더로 3명의 점수 조정</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>col1, col2, col3 <span class="op">=</span> st.columns(<span class="dv">3</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> col1:</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    score_kim <span class="op">=</span> st.slider(<span class="st">"김철수"</span>, <span class="dv">0</span>, <span class="dv">100</span>, <span class="dv">85</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> col2:</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    score_lee <span class="op">=</span> st.slider(<span class="st">"이영희"</span>, <span class="dv">0</span>, <span class="dv">100</span>, <span class="dv">92</span>)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> col3:</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    score_park <span class="op">=</span> st.slider(<span class="st">"박지민"</span>, <span class="dv">0</span>, <span class="dv">100</span>, <span class="dv">78</span>)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> {<span class="st">"김철수"</span>: score_kim, <span class="st">"이영희"</span>: score_lee, <span class="st">"박지민"</span>: score_park}</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co"># 출력 1: 통계 (슬라이더 변경 시 자동 갱신)</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>mean_score <span class="op">=</span> <span class="bu">sum</span>(scores.values()) <span class="op">/</span> <span class="bu">len</span>(scores)</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>st.metric(<span class="st">"평균"</span>, <span class="ss">f"</span><span class="sc">{</span>mean_score<span class="sc">:.1f}</span><span class="ss">점"</span>)</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>st.write(<span class="ss">f"최고: </span><span class="sc">{</span><span class="bu">max</span>(scores.values())<span class="sc">}</span><span class="ss">점 | 최저: </span><span class="sc">{</span><span class="bu">min</span>(scores.values())<span class="sc">}</span><span class="ss">점"</span>)</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="co"># 출력 2: 등급 분포 (슬라이더 변경 시 자동 갱신)</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>grades <span class="op">=</span> {<span class="st">"A"</span>: <span class="dv">0</span>, <span class="st">"B"</span>: <span class="dv">0</span>, <span class="st">"C"</span>: <span class="dv">0</span>}</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> s <span class="kw">in</span> scores.values():</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> s <span class="op">&gt;=</span> <span class="dv">90</span>: grades[<span class="st">"A"</span>] <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> s <span class="op">&gt;=</span> <span class="dv">80</span>: grades[<span class="st">"B"</span>] <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>: grades[<span class="st">"C"</span>] <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Altair 차트: 정수 y축</span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">"등급"</span>: <span class="bu">list</span>(grades.keys()), <span class="st">"학생 수"</span>: <span class="bu">list</span>(grades.values())})</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>chart <span class="op">=</span> alt.Chart(df).mark_bar().encode(</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span>alt.X(<span class="st">"등급:N"</span>, sort<span class="op">=</span>[<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>]),</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>alt.Y(<span class="st">"학생 수:Q"</span>, axis<span class="op">=</span>alt.Axis(tickMinStep<span class="op">=</span><span class="dv">1</span>), scale<span class="op">=</span>alt.Scale(domain<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">3</span>]))</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>).properties(height<span class="op">=</span><span class="dv">300</span>)</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>st.altair_chart(chart, use_container_width<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fig-streamlit-dashboard" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-streamlit-dashboard-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/declarative-streamlit.png" class="img-fluid figure-img" style="width:50.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-streamlit-dashboard-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;36.4: Streamlit 학생 성적 대시보드 실행 결과
+</figcaption></figure>
+</div>
+<p>Streamlit 코드에서 반응형의 핵심이 드러난다. 슬라이더 값이 바뀌면 평균, 최고/최저, 막대 차트가 <strong>자동으로 재계산</strong>된다. 개발자는 “슬라이더가 바뀌면 차트를 다시 그려라”라고 명시하지 않는다. Streamlit이 의존성을 추적하여 필요한 부분만 갱신한다.</p>
+</section><section id="sec-reactive-python" class="level2" data-number="36.3"><h2 data-number="36.3" class="anchored" data-anchor-id="sec-reactive-python">
+<span class="header-section-number">36.3</span> 파이썬 반응형 구현</h2>
+<p> </p>
+<p>파이썬은 Elm이나 Erlang처럼 반응형을 언어 자체에 내장한 특화 언어가 아니다. 반응형이 언어 수준에서 지원되지 않기 때문에, 기존 패턴과 라이브러리를 조합하여 반응형 시스템을 구축해야 한다. 파이썬에서 반응형을 구현하는 방법은 크게 세 가지 수준으로 나뉜다.</p>
+<div id="fig-reactive-python-spectrum" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-reactive-python-spectrum-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/reactive-python-spectrum.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-reactive-python-spectrum-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;36.5: 파이썬 반응형 스펙트럼: 기본 패턴부터 전용 라이브러리까지
+</figcaption></figure>
+</div>
+<p><strong>1단계: 기본 패턴</strong>은 표준 라이브러리만으로 구현한다. <code>property</code> 데코레이터와 콜백 리스트를 조합하면 상태 변화 시 자동 알림이 가능하다. 외부 의존성이 없고 코드 이해와 디버깅이 단순하지만, 스트림 연산자가 없어 복잡한 이벤트 조합에는 한계가 있다. 이벤트 소스가 1~2개이고 단순 상태 알림만 필요한 경우에 적합하다.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ReactiveScore:</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._score, <span class="va">self</span>._callbacks <span class="op">=</span> <span class="dv">0</span>, []</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> on_change(<span class="va">self</span>, fn): <span class="va">self</span>._callbacks.append(fn)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">@property</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> score(<span class="va">self</span>): <span class="cf">return</span> <span class="va">self</span>._score</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">@score.setter</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> score(<span class="va">self</span>, v):</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._score <span class="op">=</span> v</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> fn <span class="kw">in</span> <span class="va">self</span>._callbacks: fn(v)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>student <span class="op">=</span> ReactiveScore()</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>student.on_change(<span class="kw">lambda</span> s: <span class="bu">print</span>(<span class="ss">f"점수 </span><span class="sc">{</span>s<span class="sc">}</span><span class="ss"> → 등급 </span><span class="sc">{</span><span class="st">'A'</span> <span class="cf">if</span> s <span class="op">&gt;=</span> <span class="dv">90</span> <span class="cf">else</span> <span class="st">'B'</span> <span class="cf">if</span> s <span class="op">&gt;=</span> <span class="dv">80</span> <span class="cf">else</span> <span class="st">'C'</span><span class="sc">}</span><span class="ss">"</span>))</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>student.score <span class="op">=</span> <span class="dv">85</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 점수 85 → 등급 B</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>2단계: asyncio</strong>는 네트워크 요청이나 파일 I/O처럼 대기 시간이 긴 작업이 여러 개일 때 효율적이다. <code>async/await</code> 문법으로 동기 코드처럼 읽히면서도 동시에 여러 작업을 처리한다. 표준 라이브러리에 포함되어 있고 I/O 바운드 작업에 최적화되어 있지만, 이벤트 스트림 조합이 어렵고 CPU 바운드 작업에는 부적합하다. API 호출이 다수인 크롤러나 웹 서버 개발에 적합하다.</p>
+<p><strong>3단계: 전용 라이브러리</strong>는 복잡한 이벤트 조합이나 실시간 대시보드가 필요할 때 도입한다. RxPY는 <code>map</code>, <code>filter</code>, <code>merge</code>, <code>debounce</code> 같은 강력한 스트림 연산자를 제공하고, Streamlit은 데이터 대시보드를 선언적으로 구축할 수 있게 한다. 선언적 코드로 복잡한 비동기 흐름을 처리할 수 있지만, 외부 의존성이 생기고 학습 비용이 높으며 디버깅이 복잡해진다.</p>
+<p>적절한 수준 선택이 중요하다. 처음부터 RxPY를 도입할 필요는 없다. 1단계로 시작해서 한계를 느낄 때 다음 단계로 이동하는 것이 현실적이다. 콜백이 3개 이상 중첩되면 asyncio를 검토하고, “A와 B가 모두 발생할 때만 C를 실행”처럼 이벤트 조합이 복잡해지면 RxPY를 검토한다. 인터랙티브 대시보드가 필요하면 Streamlit이나 Shiny가 적합하다. 단순한 버튼 클릭에 RxPY를 도입하면 오버엔지니어링이고, 10개 이상의 이벤트 소스가 서로 의존하는 대시보드를 콜백만으로 구현하면 유지보수가 불가능해진다. “지금 이 수준으로 충분한가?”를 먼저 자문하고, 한계를 느낄 때 다음 단계로 이동하라.</p>
+</section><section id="sec-reactive-sandwich" class="level2" data-number="36.4"><h2 data-number="36.4" class="anchored" data-anchor-id="sec-reactive-sandwich">
+<span class="header-section-number">36.4</span> 반응형 아키텍처 패턴</h2>
+<p> </p>
+<p>선언형 프로그래밍에서 “SQL → Python → HTML” 샌드위치 구조를 살펴보았다. 반응형 프로그래밍에도 유사한 계층 구조가 있다: <strong>이벤트(Event) → 상태(State) → 뷰(View)</strong>. <a href="#fig-reactive-sandwich" class="quarto-xref">그림&nbsp;<span>36.6</span></a> 는 분야를 막론하고 반복되는 아키텍처를 보여준다. 프론트엔드의 Redux, 백엔드의 Kafka, 데이터 과학의 Shiny는 언어와 도구가 다르지만 동일한 “단방향 데이터 흐름”을 구현한다.</p>
+<div id="fig-reactive-sandwich" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-reactive-sandwich-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/reactive-sandwich.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-reactive-sandwich-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;36.6: 반응형 샌드위치: 이벤트 → 상태 → 뷰
+</figcaption></figure>
+</div>
+<p><strong>프론트엔드 상태 관리</strong>는 Redux가 2015년 등장한 이후 사실상 표준이 되었다. Redux의 핵심 통찰은 “상태를 한 곳에서 관리하라”다. 장바구니, 로그인 정보, 필터 조건이 컴포넌트마다 흩어져 있으면 어떤 컴포넌트가 어떤 상태를 바꾸는지 추적할 수 없다. Redux는 모든 상태를 단일 저장소(Store)에 모으고, 상태 변경은 반드시 액션(Action)을 통해서만 허용한다. 실무에서 Redux 코드는 수천 줄에 달하지만, 핵심 원리는 단순하다: “무엇이 일어났는가(액션)”와 “그 결과 상태가 어떻게 바뀌는가(리듀서)”를 분리하면, 버그 발생 시 액션 로그만 추적해도 문제를 재현할 수 있다. 대형 이커머스 사이트에서 “장바구니에 담았는데 결제 페이지에서 사라졌다”는 버그가 발생하면, Redux DevTools로 액션 이력을 재생하여 어느 시점에서 상태가 꼬였는지 정확히 파악할 수 있다.</p>
+<p><strong>실시간 데이터 파이프라인</strong>은 IoT, 금융, 모니터링 시스템에서 필수다. 초당 수만 건의 센서 데이터가 쏟아지는 환경에서는 데이터베이스에 저장한 뒤 조회하는 전통적 방식이 통하지 않는다. Apache Kafka가 이벤트를 수집하고, Apache Flink나 Spark Streaming이 실시간으로 집계하며, Grafana 같은 대시보드가 결과를 시각화한다. 실무에서 겪는 가장 큰 어려움은 “늦게 도착하는 이벤트” 처리다. 네트워크 지연으로 5분 전 센서 데이터가 지금 도착하면, 이미 계산한 5분 전 집계 결과를 수정해야 한다. 워터마크(Watermark)와 윈도우(Window) 개념을 제대로 이해하지 않으면, 대시보드 숫자가 계속 바뀌거나 데이터가 누락되는 문제가 발생한다. 파이프라인 코드 자체는 수백 줄이지만, 장애 복구, 재처리, 모니터링까지 포함하면 수만 줄의 인프라 코드가 필요하다.</p>
+<p><strong>이벤트 소싱과 CQRS</strong>는 금융, 의료, 법률처럼 “왜 이 상태가 되었는가”가 중요한 도메인에서 쓰인다. 일반적인 CRUD 시스템은 현재 상태만 저장한다. 계좌 잔액이 100만원이면 100만원만 기록한다. 이벤트 소싱은 “입금 50만원”, “출금 30만원”, “입금 80만원” 같은 모든 이벤트를 저장하고, 현재 상태는 이벤트를 재생하여 계산한다. 감사(Audit)가 필수인 금융 시스템에서 “왜 잔액이 100만원인가”라는 질문에 답하려면 이벤트 이력이 필요하다. CQRS(Command Query Responsibility Segregation)는 쓰기(Command)와 읽기(Query)를 분리한다. 주문 이벤트는 이벤트 저장소에 기록하고, 대시보드용 집계 데이터는 별도의 읽기 전용 데이터베이스에 유지한다. 복잡도가 높아 “정말 필요한가”를 먼저 자문해야 한다. 단순한 게시판에 이벤트 소싱을 도입하면 오버엔지니어링이다.</p>
+<p>세 패턴이 공유하는 핵심 원칙이 있다. <strong>불변성(Immutability)</strong>—상태를 직접 수정하지 않고 새 상태를 생성한다. <strong>단방향 흐름</strong>—이벤트가 상태를 바꾸고, 상태가 뷰를 갱신한다. 역방향은 없다. <strong>관심사 분리</strong>—이벤트 발생, 상태 계산, 화면 렌더링이 명확히 분리되어 각 계층을 독립적으로 테스트할 수 있다. 실무에서 수만 줄의 코드로 구현되는 복잡한 시스템도 이 세 가지 원칙을 따른다. 원칙을 이해하면 Redux, Kafka, Shiny 어느 도구를 쓰더라도 본질은 같다는 것을 알게 된다.</p>
+</section><section id="sec-reactive-debug" class="level2" data-number="36.5"><h2 data-number="36.5" class="anchored" data-anchor-id="sec-reactive-debug">
+<span class="header-section-number">36.5</span> 디버깅</h2>
+<p> </p>
+<p>전통적인 디버깅은 브레이크포인트에서 현재 상태를 확인한다. 반응형 코드에서는 이 방식이 잘 통하지 않는다. 버그가 발생한 시점에 브레이크포인트를 걸어도, “어떤 이벤트가 이 상태를 만들었는가”를 알 수 없기 때문이다. 상태 A에서 상태 B로 바뀌었을 때, 그 변화를 일으킨 이벤트가 무엇인지, 그 이벤트가 어떤 경로로 전파되었는지 추적해야 한다. 비동기로 실행되는 콜백들의 실행 순서는 코드 순서와 다를 수 있고, 스택 트레이스가 “이벤트 루프”에서 끊어져 원인을 파악하기 어렵다.</p>
+<p>반응형 시스템에서 흔히 마주하는 버그 유형은 몇 가지로 수렴한다. “장바구니에 담았는데 결제 페이지에서 사라졌다”—어떤 액션이 상태를 덮어썼거나 누락시켰다. “슬라이더를 움직였는데 차트가 갱신되지 않는다”—의존성 연결이 끊어졌거나 조건부 렌더링이 잘못되었다. “앱이 점점 느려진다”—구독을 해제하지 않아 메모리가 누수되고 있다. “데이터가 밀린다”—이벤트 생산 속도가 소비 속도를 초과해 버퍼가 넘친다. 전통적 디버깅으로 이런 문제를 추적하려면 <code>console.log</code>를 수십 군데 심어야 하고, 그마저도 타이밍 문제를 재현하기 어렵다.</p>
+<div id="fig-reactive-debugging" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-reactive-debugging-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/reactive-debugging.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-reactive-debugging-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;36.7: 반응형 디버깅: 5가지 핵심 기법
+</figcaption></figure>
+</div>
+<p><a href="#fig-reactive-debugging" class="quarto-xref">그림&nbsp;<span>36.7</span></a> 는 반응형 전용 디버깅 기법 다섯 가지를 보여준다. 상단의 타임 트래블, 마블 다이어그램, 의존성 그래프가 핵심이고, 하단의 구독 누수 탐지와 백프레셔 모니터링은 성능 문제에 대응한다.</p>
+<section id="sec-reactive-debug-timetravel" class="level3" data-number="36.5.1"><h3 data-number="36.5.1" class="anchored" data-anchor-id="sec-reactive-debug-timetravel">
+<span class="header-section-number">36.5.1</span> 타임 트래블 디버깅</h3>
+<p></p>
+<p>타임 트래블 디버깅은 반응형 패러다임이 가능하게 만든 혁신적 기법이다. Redux DevTools가 대표적이며, 상태 관리 라이브러리인 Zustand, MobX-State-Tree도 유사한 기능을 제공한다. 원리는 단순하다: 모든 상태 변경을 “액션 로그”로 저장하고, 과거 시점으로 “되감기”하여 상태를 재현한다.</p>
+<p>가능한 이유는 반응형 시스템의 두 가지 제약 덕분이다. 첫째, <strong>불변성</strong>—상태를 직접 수정하지 않고 새 상태 객체를 생성하므로, 과거 상태가 보존된다. 둘째, <strong>순수 함수</strong>—리듀서가 동일한 입력에 동일한 출력을 보장하므로, 액션 시퀀스를 재생하면 동일한 상태를 재현할 수 있다.</p>
+<p>실무에서 타임 트래블의 위력은 버그 재현에서 드러난다. “장바구니가 비어 있다”는 고객 신고를 받았을 때, 전통적 방식으로는 사용자의 행동 패턴을 추측해야 한다. Redux DevTools가 있으면 액션 로그를 덤프받아 그대로 재생할 수 있다. “ADD_ITEM → ADD_ITEM → CLEAR_CART → …”—CLEAR_CART 액션이 의도치 않게 호출된 지점을 바로 찾을 수 있다. 액션 하나씩 스텝하며 상태 변화를 관찰하면, 어느 시점에서 데이터가 사라졌는지 정확히 파악된다.</p>
+</section><section id="sec-reactive-debug-marble" class="level3" data-number="36.5.2"><h3 data-number="36.5.2" class="anchored" data-anchor-id="sec-reactive-debug-marble">
+<span class="header-section-number">36.5.2</span> 마블 다이어그램</h3>
+<p> </p>
+<p>마블 다이어그램(Marble Diagram)은 스트림 연산자의 동작을 시간축 위에 시각화한다. RxJS, RxPY 같은 ReactiveX 계열 라이브러리에서 표준 표기법으로 사용된다. <code>--1--2--3--4--|</code> 형식으로, 대시(-)는 시간의 흐름, 숫자는 발행된 값, 파이프(|)는 스트림 완료를 나타낸다.</p>
+<p>복잡한 스트림 파이프라인을 디버깅할 때 마블 다이어그램이 필수인 이유는, 연산자 체인의 중간 단계를 눈으로 확인할 수 없기 때문이다. <code>source$.pipe(filter(...), map(...), debounceTime(...), distinctUntilChanged(...))</code>—어디서 값이 사라지거나 변형되었는지 코드만 봐서는 알기 어렵다. 마블 다이어그램으로 각 단계의 입출력을 그려보면, <code>filter</code>가 조건을 잘못 걸러내는지, <code>debounceTime</code>이 값을 누락시키는지 명확해진다.</p>
+<p>RxJS Marbles 같은 도구는 연산자별 마블 다이어그램을 인터랙티브하게 보여준다. 테스트 코드에서는 가상 시간(Virtual Time)을 사용해 시간 의존적 연산자를 동기적으로 테스트한다. 실제 500ms를 기다리지 않고, <code>testScheduler.run()</code>으로 가상 시간을 조작하여 <code>debounceTime(500)</code>의 동작을 검증할 수 있다.</p>
+</section><section id="sec-reactive-debug-dependency" class="level3" data-number="36.5.3"><h3 data-number="36.5.3" class="anchored" data-anchor-id="sec-reactive-debug-dependency">
+<span class="header-section-number">36.5.3</span> 의존성 그래프 시각화</h3>
+<p> </p>
+<p>Shiny, Streamlit 같은 데이터 과학용 반응형 프레임워크에서 가장 흔한 버그는 “왜 이 출력이 갱신되지 않는가”이다. 입력을 바꿨는데 차트가 그대로인 경우, 의존성 연결이 끊어졌거나 조건부 렌더링이 잘못되었을 가능성이 높다.</p>
+<p>Shiny의 <code>reactlog</code> 패키지는 반응형 의존성 그래프를 브라우저에서 시각화한다. 입력(슬라이더, 체크박스) → 반응형 계산 → 출력(차트, 테이블) 간의 연결을 노드와 엣지로 보여주고, 어떤 노드가 “무효화(invalidated)”되어 재계산되었는지 색상으로 표시한다. “입력A를 바꿨는데 출력C가 갱신되지 않는다”면, A → C 사이의 연결이 끊어진 지점을 그래프에서 찾을 수 있다.</p>
+<p>의존성 그래프는 성능 최적화에도 유용하다. 불필요한 재계산이 발생하는지, 순환 의존성이 있는지, 특정 입력 변경이 예상보다 많은 출력을 갱신시키는지 확인할 수 있다. “슬라이더를 움직일 때마다 모든 차트가 깜빡인다”면, 의존성이 과도하게 연결되어 있을 수 있다. 그래프를 보고 불필요한 의존성을 끊거나, <code>@cached</code> 데코레이터로 재계산을 방지한다.</p>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">노트</span>추가 디버깅 기법: 구독 누수와 백프레셔
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>구독 누수 탐지</strong>는 메모리 누수 방지에 필수다. RxJS에서 <code>subscribe()</code>를 호출하면 Subscription 객체가 반환되고, 컴포넌트가 사라질 때 <code>unsubscribe()</code>를 호출해야 한다. 누락하면 구독이 계속 살아있어 메모리가 누수된다. <code>takeUntil()</code> 연산자나 <code>Subject</code>를 활용해 자동 해제 패턴을 적용하는 것이 안전하다.</p>
+<p><strong>백프레셔 모니터링</strong>은 생산 속도가 소비 속도를 초과하는 문제를 감지한다. 센서 데이터가 초당 1000건 발생하는데 처리 속도가 100건이라면, 버퍼가 넘쳐 데이터가 누락되거나 메모리가 폭발한다. <code>buffer()</code>, <code><a href="https://rdrr.io/r/base/sample.html">sample()</a></code>, <code>throttleTime()</code> 연산자로 생산 속도를 조절하거나, 백프레셔 전략(drop, latest, buffer)을 명시적으로 선택해야 한다.</p>
+</div>
+</div>
+</section></section><section id="생각해볼-점" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="생각해볼-점">💡 생각해볼 점</h2>
+<p><strong>반응형은 선언형의 시간 확장이다.</strong> 선언형 프로그래밍이 “무엇을” 원하는지 선언하고 “어떻게”를 시스템에 맡긴다면, 반응형은 여기에 시간 차원을 추가한다. “A가 바뀌면 B도 바뀐다”는 관계를 선언하면, 시간에 따라 발생하는 변화가 자동으로 전파된다. SQL이 데이터 질의를 추상화했듯이, 반응형은 상태 변화의 전파를 추상화한다.</p>
+<p><strong>세 개념의 계층을 구분하라.</strong> 이벤트 기반은 “이벤트가 발생하면 X를 실행”하는 메커니즘이고, Pub-Sub은 “누가 누구에게 보내는가”라는 결합도 문제를 해결하며, 반응형은 “값이 바뀌면 의존하는 모든 것이 자동 갱신”되는 선언적 모델이다. 세 개념은 배타적이 아니라 계층적으로 쌓인다. 반응형 시스템은 내부적으로 Pub-Sub을 사용하고, Pub-Sub은 이벤트 기반 위에 구축된다. 단순한 버튼 클릭에 RxPY를 도입하면 오버엔지니어링이고, 10개 이상의 이벤트 소스가 서로 의존하는 대시보드를 콜백만으로 구현하면 유지보수가 불가능해진다.</p>
+<p><strong>이벤트 → 상태 → 뷰 패턴은 분야를 관통한다.</strong> Redux로 장바구니 상태를 관리하든, Kafka + Flink로 실시간 파이프라인을 구축하든, Shiny로 통계 대시보드를 만들든, 동일한 “단방향 데이터 흐름” 원칙이 적용된다. 불변성, 단방향 흐름, 관심사 분리—이 세 가지를 이해하면 도구가 바뀌어도 본질은 같다. 한 영역에서 패턴을 익히면 다른 영역으로 전이할 수 있다.</p>
+<p><strong>반응형 디버깅은 전통적 디버깅과 다르다.</strong> 브레이크포인트에서 현재 상태를 확인하는 방식은 “어떤 이벤트가 이 상태를 만들었는가”라는 질문에 답하지 못한다. 타임 트래블 디버깅으로 액션 이력을 되감고, 마블 다이어그램으로 스트림 연산자의 동작을 시각화하며, 의존성 그래프로 “왜 이 출력이 갱신되지 않는가”를 추적해야 한다. 반응형 코드가 복잡해 보이는 이유는 실행 흐름이 비선형이기 때문이다. 전용 도구 없이 <code>console.log</code>만으로는 타이밍 문제를 재현하기 어렵다.</p>
+<p> </p>
+
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "복사완료!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "복사완료!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/r2bit\.com\/gpt-coding\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./prog-declarative.html" class="pagination-link" aria-label="선언형 프로그래밍">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">선언형 프로그래밍</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./arch-reuse.html" class="pagination-link" aria-label="재사용 명령">
+        <span class="nav-page-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">재사용 명령</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+<p>챗GPT 쿼토 책은 소프트웨어 카펜트리 “Git 버전제어”를 번역한 것이 포함되어 있습니다.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/prog-reactive.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>순수하게 <a href="https://quarto.org/">쿼토(Quarto)</a>로 제작되었습니다.</p>
+</div>
+  </div>
+</footer>
+
+
+</body></html>

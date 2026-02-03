@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" xml:lang="ko-KR"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.16">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="이광춘(Openai)">
+
+<title>42&nbsp; 신경망 아키텍처 – 챗GPT 코딩(개정판)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./ml-workflow.html" rel="next">
+<link href="./ml-paradigm.html" rel="prev">
+<link href="./images/logo.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-8ee146c0b749343448e797d10b61a7f9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-55f79cb6abf2a16ff6075165a9063c3c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "일치 없음",
+    "search-matching-documents-text": "일치된 문서",
+    "search-copy-link-title": "검색 링크 복사",
+    "search-hide-matches-text": "추가 검색 결과 숨기기",
+    "search-more-match-text": "추가 검색결과",
+    "search-more-matches-text": "추가 검색결과",
+    "search-clear-button-title": "제거",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "취소",
+    "search-submit-button-title": "검색",
+    "search-label": "검색"
+  }
+}</script>
+
+<script type="text/javascript">
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-229551680-1', 'auto');
+
+ga('send', {
+  hitType: 'pageview',
+  'anonymizeIp': true,
+});
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ml-paradigm.html"><strong>7부</strong> 기계학습 패러다임</a></li><li class="breadcrumb-item"><a href="./ml-architecture.html"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">신경망 아키텍처</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="검색" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">챗GPT 코딩(개정판)</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/bit2r/gpt-coding/" title="소스 코드" class="quarto-navigation-tool px-1" aria-label="소스 코드"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="리더 모드 전환">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="검색"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">서문</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>1부</strong> 전통 프로그래밍</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">프로그래밍 시작하기</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-var.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">변수, 표현식, 문장</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-cont.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">조건부 실행</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-func.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">함수</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-loop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">반복문</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>2부</strong> 자료구조</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-data-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">데이터, AI 식량</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-string.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">문자열</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-file.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">파일</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-list.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">리스트</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-dictionaries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">딕셔너리</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-tuples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">튜플</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-dataframe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">데이터프레임</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-json.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">JSON</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18-tensor.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">텐서</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-embedding.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">벡터와 임베딩</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-graph.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">그래프</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>3부</strong> 버전제어와 협업</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Git 시작하기</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-tracking.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">변경사항 추적</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-history.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">히스토리와 파일 관리</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-remote.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">GitHub와 원격 저장소</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-collab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">협업과 충돌 해결</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">오픈 사이언스</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>4부</strong> 분야별 코딩</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">특화 도구 입문</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-regex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">정규 표현식</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-network.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-web.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">웹서비스</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-database.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">데이터베이스와 SQL</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-ds.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">데이터 과학과 R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-auto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">파일 자동화</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-make.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">빌드 자동화: make</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>5부</strong> 프로그래밍 패러다임</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-paradigm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">패러다임의 이해</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-imperative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">명령형과 절차적 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-oop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">객체지향 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-fp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">함수형 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-declarative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">선언형 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-reactive.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">반응형 프로그래밍</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>6부</strong> 소프트웨어 설계와 아키텍처</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-reuse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">재사용 명령</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-stack.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">소프트웨어 스택</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">소프트웨어 아키텍처</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-pattern.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">살아남은 패턴</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>7부</strong> 기계학습 패러다임</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-paradigm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">소프트웨어 2.0</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-architecture.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">신경망 아키텍처</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">43</span>&nbsp; <span class="chapter-title">학습과 추론</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-to-llm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">44</span>&nbsp; <span class="chapter-title">트랜스포머에서 거대 언어모형으로</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>부록</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">용어사전</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">참고문헌</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">목차</h2>
+   
+  <ul>
+  <li><a href="#sec-ml-architecture-mlp" id="toc-sec-ml-architecture-mlp" class="nav-link active" data-scroll-target="#sec-ml-architecture-mlp"><span class="header-section-number">42.1</span> 다층 퍼셉트론: 모든 것의 시작</a></li>
+  <li><a href="#sec-ml-architecture-cnn" id="toc-sec-ml-architecture-cnn" class="nav-link" data-scroll-target="#sec-ml-architecture-cnn"><span class="header-section-number">42.2</span> CNN: 공간 구조를 이해하다</a></li>
+  <li><a href="#sec-ml-architecture-rnn" id="toc-sec-ml-architecture-rnn" class="nav-link" data-scroll-target="#sec-ml-architecture-rnn"><span class="header-section-number">42.3</span> RNN: 시간을 기억하다</a></li>
+  <li><a href="#sec-ml-architecture-transformer" id="toc-sec-ml-architecture-transformer" class="nav-link" data-scroll-target="#sec-ml-architecture-transformer"><span class="header-section-number">42.4</span> Transformer: 어텐션이 전부다</a></li>
+  <li><a href="#sec-ml-architecture-selection" id="toc-sec-ml-architecture-selection" class="nav-link" data-scroll-target="#sec-ml-architecture-selection"><span class="header-section-number">42.5</span> 아키텍처 선택 기준</a></li>
+  <li><a href="#생각해볼-점" id="toc-생각해볼-점" class="nav-link" data-scroll-target="#생각해볼-점">💡 생각해볼 점</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/ml-architecture.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ml-paradigm.html"><strong>7부</strong> 기계학습 패러다임</a></li><li class="breadcrumb-item"><a href="./ml-architecture.html"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">신경망 아키텍처</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-ml-architecture" class="quarto-section-identifier"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">신경망 아키텍처</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>기계학습에서 아키텍처(architecture)는 데이터가 모델 내부를 어떻게 흐르는지 결정하는 구조적 설계를 의미한다. 건축에서 건물의 구조가 용도에 따라 달라지듯, 신경망 아키텍처도 처리하려는 데이터 유형에 따라 발전해 왔다. 이미지에는 CNN, 시계열에는 RNN, 그리고 텍스트와 범용 작업에는 Transformer가 각각 최적화된 구조로 자리잡았다.</p>
+<div id="fig-ml-architecture-evolution" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ml-architecture-evolution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ml-architecture-evolution.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ml-architecture-evolution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;42.1: 신경망 아키텍처의 진화
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-ml-architecture-evolution" class="quarto-xref">그림&nbsp;<span>42.1</span></a> 은 데이터의 본질적 특성이 아키텍처 선택을 어떻게 결정하는지 보여준다. 정형 데이터는 나이, 도시, 소득처럼 서로 다른 유형의 속성이 섞여 있다. MLP는 완전 연결 구조로 이러한 이질적 특징들의 상호작용을 학습한다. 이미지는 격자 구조를 가진다. 픽셀들은 공간상에서 규칙적으로 배열되어 있고, 인접한 픽셀끼리 강한 상관관계를 보인다. CNN은 작은 필터로 지역적 패턴을 포착하여 에지, 텍스처, 물체를 계층적으로 인식한다. 시계열이나 텍스트 같은 순차 데이터는 시간 순서가 핵심이다. “고양이가 쥐를 잡았다”와 “쥐가 고양이를 잡았다”는 순서만 다를 뿐인데 의미가 정반대다. RNN은 은닉 상태를 순환시켜 과거 정보를 누적하고, Transformer는 어텐션으로 문장 전체의 맥락을 동시에 파악한다. 자연어는 장거리 의존성이 중요하다. “어제 공원에서 … (100단어) … 그 강아지”처럼 먼 거리에 있는 단어 간 관계를 파악해야 한다. Transformer의 셀프 어텐션은 모든 단어 쌍의 관계를 한 번에 계산하여 이 문제를 해결한다. 멀티모달 데이터는 이미지와 텍스트를 동시에 처리한다. CLIP이나 Flamingo 같은 모델은 Transformer 구조로 서로 다른 양식의 정보를 통합된 표현 공간에서 학습한다.</p>
+<p>아키텍처 선택의 핵심 원리는 “귀납적 편향(Inductive Bias) 매칭”이다. MLP는 특별한 구조적 가정 없이 모든 입력 조합을 탐색하지만, CNN은 “지역성”이라는 강한 가정을 내장한다. 멀리 떨어진 픽셀보다 이웃한 픽셀이 더 관련성이 높다고 미리 가정한다. RNN은 “인과성”을 가정한다. 과거는 미래에 영향을 주지만 그 반대는 아니라고 본다. Transformer는 이러한 제약을 최소화하여 데이터가 스스로 관계를 드러내도록 한다. 데이터가 실제로 격자 구조나 순차 구조를 가진다면, 그에 맞는 귀납적 편향을 가진 모델이 효율적이다. 반대로 데이터 구조가 복잡하거나 알려지지 않았다면, Transformer 같은 범용 구조가 유리하다.</p>
+<section id="sec-ml-architecture-mlp" class="level2" data-number="42.1">
+<h2 data-number="42.1" class="anchored" data-anchor-id="sec-ml-architecture-mlp"><span class="header-section-number">42.1</span> 다층 퍼셉트론: 모든 것의 시작</h2>
+<p>다층 퍼셉트론(MLP, Multi-Layer Perceptron)은 가장 기본적인 신경망 구조다. 입력층, 은닉층, 출력층으로 구성되며, 각 층의 뉴런은 다음 층의 모든 뉴런과 연결된다(완전 연결, Fully Connected).</p>
+<div id="fig-ml-architecture-mlp" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ml-architecture-mlp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ml-architecture-mlp.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ml-architecture-mlp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;42.2: MLP: 완전 연결 신경망 구조
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-ml-architecture-mlp" class="quarto-xref">그림&nbsp;<span>42.2</span></a> 는 MLP 핵심 구조를 보여준다. 입력층 모든 뉴런이 은닉층 모든 뉴런과 연결되고, 은닉층은 다시 출력층과 완전히 연결된다. 가중치 행렬 W₁, W₂, W₃가 각 층 사이 연결 강도를 결정하며, ReLU 같은 활성화 함수가 비선형성을 부여한다. 그림 하단 처리 흐름은 MLP가 데이터를 변환하는 두 가지 핵심 연산을 보여준다.</p>
+<p><strong>아핀 변환(Affine Transform)</strong>은 선형 변환과 평행 이동을 결합한 연산이다. 수식으로 표현하면 <span class="math inline">\(z = Wx + b\)</span>로, 입력 벡터 <span class="math inline">\(x\)</span>에 가중치 행렬 <span class="math inline">\(W\)</span>를 곱하고 편향 벡터 <span class="math inline">\(b\)</span>를 더한다. 기하학적으로 보면 데이터를 회전, 확대/축소, 이동시키는 변환이다. 하지만 아핀 변환만으로는 선형 함수만 표현할 수 있다. 아무리 많은 선형 층을 쌓아도 결과는 여전히 하나의 선형 함수와 동일하다. <span class="math inline">\(W_2(W_1x + b_1) + b_2 = W'x + b'\)</span>처럼 단일 행렬 연산으로 축약되기 때문이다.</p>
+<p><strong>비선형 활성화(Non-linear Activation)</strong>가 이 한계를 돌파한다. ReLU(<span class="math inline">\(\max(0, x)\)</span>), 시그모이드(<span class="math inline">\(\frac{1}{1+e^{-x}}\)</span>), tanh 같은 활성화 함수를 층 사이에 삽입하면 네트워크가 복잡한 비선형 패턴을 학습할 수 있다. ReLU는 음수를 0으로 만들고 양수는 그대로 통과시키는 단순한 함수지만, 이 비선형성 덕분에 심층 네트워크가 XOR 문제부터 이미지 인식까지 다양한 비선형 함수를 근사할 수 있다. 아핀 변환이 “데이터를 새로운 좌표계로 옮기는” 역할이라면, 비선형 활성화는 “좌표계를 구부려서 복잡한 결정 경계를 만드는” 역할이다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn <span class="im">as</span> nn</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MLP(nn.Module):</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, input_dim, hidden_dim, output_dim):</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.fc1 <span class="op">=</span> nn.Linear(input_dim, hidden_dim)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.fc2 <span class="op">=</span> nn.Linear(hidden_dim, hidden_dim)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.fc3 <span class="op">=</span> nn.Linear(hidden_dim, output_dim)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.relu <span class="op">=</span> nn.ReLU()</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> forward(<span class="va">self</span>, x):</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> <span class="va">self</span>.relu(<span class="va">self</span>.fc1(x))</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> <span class="va">self</span>.relu(<span class="va">self</span>.fc2(x))</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.fc3(x)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 예: 10차원 입력 → 64개 은닉 뉴런 → 3개 클래스 분류</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> MLP(input_dim<span class="op">=</span><span class="dv">10</span>, hidden_dim<span class="op">=</span><span class="dv">64</span>, output_dim<span class="op">=</span><span class="dv">3</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>MLP 핵심 원리는 범용 근사 정리(Universal Approximation Theorem)다.[^uat] 충분히 넓은 은닉층을 가진 MLP는 어떤 연속 함수든 근사할 수 있다. 임의 연속 함수 <span class="math inline">\(f: [0,1]^n \to \mathbb{R}\)</span>와 임의의 <span class="math inline">\(\epsilon &gt; 0\)</span>에 대해, 단일 은닉층을 가진 신경망 <span class="math inline">\(F(x) = \sum_{i=1}^{N} \alpha_i \sigma(w_i^T x + b_i)\)</span>가 존재하여 <span class="math inline">\(\sup_{x \in [0,1]^n} |F(x) - f(x)| &lt; \epsilon\)</span>을 만족한다. 여기서 <span class="math inline">\(\sigma\)</span>는 시그모이드나 ReLU 같은 비선형 활성화 함수이고, <span class="math inline">\(N\)</span>은 충분히 큰 은닉 뉴런 수다. 단, 정리는 근사 가능성만 보장할 뿐, 필요한 뉴런 수 <span class="math inline">\(N\)</span>이나 학습 가능성은 보장하지 않는다.</p>
+<p>이론적으로 강력하지만, 실제로는 몇 가지 한계가 있다. 입력 차원이 커지면 필요한 파라미터 수가 폭발적으로 증가한다. 28×28 픽셀 흑백 이미지만 해도 784차원이 된다. 이미지의 픽셀을 1차원으로 펼치면 인접 픽셀 간 관계가 사라진다. 왼쪽 위 픽셀과 오른쪽 아래 픽셀이 구조적으로 동등하게 취급된다. 시퀀스 데이터의 순서 정보도 직접 활용하지 못한다. “고양이가 쥐를”과 “쥐를 고양이가”가 같은 단어 집합으로 보일 수 있다. 이러한 한계를 극복하기 위해 데이터 구조에 특화된 아키텍처가 등장했다.</p>
+</section>
+<section id="sec-ml-architecture-cnn" class="level2" data-number="42.2">
+<h2 data-number="42.2" class="anchored" data-anchor-id="sec-ml-architecture-cnn"><span class="header-section-number">42.2</span> CNN: 공간 구조를 이해하다</h2>
+<p>합성곱 신경망(CNN, Convolutional Neural Network)은 이미지의 공간적 구조를 활용하도록 설계되었다. 1998년 얀 르쿤(Yann LeCun)이 LeNet으로 손글씨 숫자 인식에 성공했고, 2012년 알렉스 크리제브스키(Alex Krizhevsky)의 AlexNet이 ImageNet 대회에서 오류율을 절반으로 낮추며 딥러닝 혁명의 서막을 열었다.</p>
+<div id="fig-ml-architecture-cnn" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ml-architecture-cnn-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ml-architecture-cnn.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ml-architecture-cnn-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;42.3: CNN: 합성곱으로 공간 패턴 인식
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-ml-architecture-cnn" class="quarto-xref">그림&nbsp;<span>42.3</span></a> 은 CNN 아키텍처를 보여준다. 합성곱과 풀링을 반복하며 공간 크기는 줄어들고 채널 수는 늘어난다. 저수준 에지에서 고수준 객체로 계층적 추상화가 일어나는 구조다.</p>
+<p>CNN 설계의 핵심 통찰은 <strong>지역적 연결(Local Connectivity)</strong>과 <strong>가중치 공유(Parameter Sharing)</strong>다. 지역적 연결은 인접 픽셀끼리 강한 상관관계를 가진다는 이미지의 본질을 반영한다. 3×3 필터는 한 번에 9개 픽셀만 보며, 고양이 귀를 인식하는 데 반대편 구석 픽셀은 불필요하다. 가중치 공유는 동일 필터를 이미지 전체에 적용한다. MLP는 위치마다 별도 가중치가 필요하지만, CNN은 3×3 필터 9개 파라미터로 수백만 픽셀을 처리한다. 파라미터 효율성뿐 아니라, 물체가 어디에 있든 동일하게 인식하는 이동 불변성(Translation Invariance)까지 얻는다.</p>
+<p>풀링(Pooling)은 “무엇이 있는가”를 보존하고 “정확히 어디에 있는가”를 버린다. 2×2 최대 풀링은 4픽셀 중 가장 큰 값만 선택하여 해상도를 절반으로 줄인다. 고양이가 이미지에서 10픽셀 왼쪽으로 이동해도 “고양이가 있다”는 판단에는 영향이 없어야 한다. 풀링이 바로 이 위치 둔감성을 제공한다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn <span class="im">as</span> nn</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SimpleCNN(nn.Module):</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="co"># 합성곱 층: 3x3 필터로 지역적 패턴 추출</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.conv1 <span class="op">=</span> nn.Conv2d(in_channels<span class="op">=</span><span class="dv">1</span>, out_channels<span class="op">=</span><span class="dv">32</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                                kernel_size<span class="op">=</span><span class="dv">3</span>, padding<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.conv2 <span class="op">=</span> nn.Conv2d(<span class="dv">32</span>, <span class="dv">64</span>, kernel_size<span class="op">=</span><span class="dv">3</span>, padding<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="co"># 풀링: 공간 크기 축소, 위치 불변성 확보</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.pool <span class="op">=</span> nn.MaxPool2d(kernel_size<span class="op">=</span><span class="dv">2</span>, stride<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        <span class="co"># 완전 연결층: 최종 분류</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.fc <span class="op">=</span> nn.Linear(<span class="dv">64</span> <span class="op">*</span> <span class="dv">7</span> <span class="op">*</span> <span class="dv">7</span>, <span class="dv">10</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> forward(<span class="va">self</span>, x):</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>        <span class="co"># x: (batch, 1, 28, 28)</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> <span class="va">self</span>.pool(torch.relu(<span class="va">self</span>.conv1(x)))  <span class="co"># → (batch, 32, 14, 14)</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> <span class="va">self</span>.pool(torch.relu(<span class="va">self</span>.conv2(x)))  <span class="co"># → (batch, 64, 7, 7)</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> x.view(x.size(<span class="dv">0</span>), <span class="op">-</span><span class="dv">1</span>)                 <span class="co"># Flatten</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.fc(x)                          <span class="co"># → (batch, 10)</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>CNN 각 층이 학습하는 특징은 계층적 구조를 이룬다. 초기층은 에지와 색상 변화를, 중간층은 텍스처와 패턴을, 깊은 층은 눈이나 바퀴 같은 부분 객체를, 최상위층은 얼굴이나 자동차 같은 전체 객체를 인식한다. 2012년 AlexNet 내부를 시각화한 연구에서 이 계층적 특징 학습이 실제로 일어남을 확인했다.</p>
+<p>CNN은 이후 더 깊어졌다. 2015년 허카이밍(Kaiming He)의 ResNet은 잔차 연결(Skip Connection)로 152층까지 쌓았고, 기울기 소실 없이 학습할 수 있음을 보였다. 최근 Vision Transformer(ViT)가 대규모 데이터에서 CNN을 능가하기도 하지만, 데이터가 적은 환경에서는 CNN의 귀납적 편향이 여전히 유리하다. “지역성”이라는 사전 지식이 적은 데이터에서 더 빠른 수렴을 가능하게 하기 때문이다.</p>
+</section>
+<section id="sec-ml-architecture-rnn" class="level2" data-number="42.3">
+<h2 data-number="42.3" class="anchored" data-anchor-id="sec-ml-architecture-rnn"><span class="header-section-number">42.3</span> RNN: 시간을 기억하다</h2>
+<p>순환 신경망(RNN, Recurrent Neural Network)은 시퀀스 데이터를 위해 설계되었다. 텍스트, 음성, 주가처럼 순서가 의미를 결정하는 데이터에서 “고양이가 쥐를 잡았다”와 “쥐가 고양이를 잡았다”는 완전히 다른 의미를 가진다.</p>
+<div id="fig-ml-architecture-rnn" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ml-architecture-rnn-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ml-architecture-rnn.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ml-architecture-rnn-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;42.4: RNN과 LSTM: 시간을 따라 정보를 전달
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-ml-architecture-rnn" class="quarto-xref">그림&nbsp;<span>42.4</span></a> 상단은 RNN의 두 가지 표현을 보여준다. 왼쪽 “접힌 표현”은 자기 순환 구조를 간결하게 나타내고, 오른쪽 “펼친 표현”은 시간에 따라 동일한 RNN 셀이 반복 적용되는 모습이다. “고양이”, “가”, “쥐를”, “잡았다”가 순차적으로 입력되면 은닉 상태 <span class="math inline">\(h\)</span>가 각 시점의 문맥을 누적하며 전달된다. 핵심 수식 <span class="math inline">\(h_t = \tanh(W_x x_t + W_h h_{t-1} + b)\)</span>는 현재 입력과 이전 기억을 결합해 새 기억을 만드는 과정을 표현한다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SimpleRNN(nn.Module):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, input_dim, hidden_dim, output_dim):</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.rnn <span class="op">=</span> nn.RNN(input_dim, hidden_dim, batch_first<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.fc <span class="op">=</span> nn.Linear(hidden_dim, output_dim)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> forward(<span class="va">self</span>, x):</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="co"># x: (batch, seq_len, input_dim)</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        output, h_n <span class="op">=</span> <span class="va">self</span>.rnn(x)  <span class="co"># h_n: 마지막 은닉 상태</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.fc(h_n.squeeze(<span class="dv">0</span>))</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>RNN의 치명적 한계는 <strong>장기 의존성 문제(Long-term Dependency)</strong>다. <a href="#fig-ml-architecture-rnn" class="quarto-xref">그림&nbsp;<span>42.4</span></a> 중간의 기울기 소실 시각화가 보여주듯, 역전파 시 기울기가 시간을 거슬러 전파되면서 점점 작아진다. 시점 <span class="math inline">\(t\)</span>에서 <span class="math inline">\(t-5\)</span>로 갈수록 색이 옅어지는 것은 기울기가 소실되어 먼 과거 정보가 학습에 거의 기여하지 못함을 의미한다. “어제 공원에서 … (100단어) … 그 강아지”에서 “그 강아지”가 무엇을 가리키는지 파악하기 어렵다.</p>
+<p>LSTM(Long Short-Term Memory)은 이 문제를 <strong>게이트 메커니즘</strong>으로 해결한다. <a href="#fig-ml-architecture-rnn" class="quarto-xref">그림&nbsp;<span>42.4</span></a> 하단은 LSTM의 핵심 구조를 보여준다. 셀 상태(Cell State)는 “장기 기억”을 담당하는 컨베이어 벨트처럼 정보가 거의 변형 없이 전체 시퀀스를 따라 흐를 수 있다. 세 개의 게이트가 정보 흐름을 제어한다: 망각 게이트(×)는 불필요한 정보를 삭제하고, 입력 게이트(+)는 새 정보를 추가하며, 출력 게이트(σ)는 현재 출력에 사용할 정보를 선택한다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># LSTM: 게이트로 장기 기억 유지</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="va">self</span>.lstm <span class="op">=</span> nn.LSTM(input_dim, hidden_dim, batch_first<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># GRU: 게이트를 2개로 간소화한 변형</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="va">self</span>.gru <span class="op">=</span> nn.GRU(input_dim, hidden_dim, batch_first<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>셀 상태가 기울기 소실을 해결하는 원리는 잔차 연결(Skip Connection)과 유사하다. 기울기가 셀 상태를 따라 거의 그대로 역전파되므로, 수백 시점 전의 정보도 학습에 기여할 수 있다. 2015-2016년경 LSTM은 기계 번역과 음성 인식에서 최고 성능을 달성했지만, 순차 처리라는 본질적 한계로 인해 병렬화가 어려웠다. Transformer가 이 문제를 해결하며 새로운 시대를 열었다.</p>
+</section>
+<section id="sec-ml-architecture-transformer" class="level2" data-number="42.4">
+<h2 data-number="42.4" class="anchored" data-anchor-id="sec-ml-architecture-transformer"><span class="header-section-number">42.4</span> Transformer: 어텐션이 전부다</h2>
+<p>2017년 구글의 “Attention Is All You Need” 논문<span class="citation" data-cites="vaswani2017attention"><a href="references.html#ref-vaswani2017attention" role="doc-biblioref">[1]</a></span>은 딥러닝 역사의 전환점이 되었다. Transformer는 RNN의 순차적 처리 방식을 버리고, <strong>어텐션(Attention)</strong> 메커니즘만으로 시퀀스를 처리한다.</p>
+<div id="fig-ml-architecture-transformer" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ml-architecture-transformer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ml-architecture-transformer.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ml-architecture-transformer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;42.5: Transformer: 어텐션이 전부다
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-ml-architecture-transformer" class="quarto-xref">그림&nbsp;<span>42.5</span></a> 는 Transformer의 핵심을 세 부분으로 나눠 보여준다. 첫 번째 섹션은 셀프 어텐션의 원리다. “The animal didn’t cross because it”이라는 문장에서 “it”이 무엇을 가리키는지 파악하는 과정을 시각화했다. “it”에서 “animal”로 향하는 굵은 곡선이 높은 어텐션 가중치를 나타내고, 다른 단어들로 향하는 가는 곡선은 상대적으로 낮은 가중치를 보여준다. 하단의 수식 <span class="math inline">\(\text{Attention}(Q, K, V) = \text{softmax}(\frac{QK^T}{\sqrt{d_k}})V\)</span>가 이 연산을 수학적으로 표현한다.</p>
+<p>두 번째 섹션은 RNN과 Transformer의 처리 방식 차이다. RNN은 순차 처리 방식으로 이전 단계가 완료되어야 다음 단계를 시작할 수 있어 느리고 이전 단계에 의존적이다. 반면 Transformer는 병렬 처리로 모든 단어를 동시에 처리하여 “한 번에 전체 문장 처리”가 가능하다. 하단의 연결선이 모든 블록이 동시에 처리됨을 보여준다.</p>
+<p>세 번째 섹션은 인코더-디코더 구조다. 인코더는 멀티헤드 어텐션과 피드포워드 네트워크를 N번 반복하며, 각 층마다 덧셈과 정규화(Add &amp; Norm)로 잔차 연결을 수행한다. 디코더는 마스크드 어텐션으로 미래 정보 누출을 방지하고, 크로스 어텐션으로 인코더의 맥락 벡터(K, V)를 참조한다. 최종 출력은 선형층과 소프트맥스를 거쳐 다음 토큰 확률 분포가 된다.</p>
+<p><strong>Q, K, V: 검색 엔진의 비유</strong></p>
+<p>어텐션의 Query, Key, Value는 검색 엔진에 비유하면 직관적으로 이해된다. 쿼리(Q)는 “무엇을 찾고 있는가”이고, 키(K)는 “각 항목이 무엇을 제공하는가”이며, 값(V)은 “실제로 가져올 정보”다. “it”이라는 단어가 쿼리를 생성하면, 문장의 모든 단어가 키를 제공하고, 쿼리-키 유사도에 따라 값을 가중 합산한다. “animal”의 키가 “it”의 쿼리와 높은 유사도를 보이므로, “animal”의 값이 많이 반영된다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn.functional <span class="im">as</span> F</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> scaled_dot_product_attention(Q, K, V):</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    d_k <span class="op">=</span> Q.size(<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    scores <span class="op">=</span> torch.matmul(Q, K.transpose(<span class="op">-</span><span class="dv">2</span>, <span class="op">-</span><span class="dv">1</span>)) <span class="op">/</span> math.sqrt(d_k)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    attention_weights <span class="op">=</span> F.softmax(scores, dim<span class="op">=-</span><span class="dv">1</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> torch.matmul(attention_weights, V)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p><span class="math inline">\(\sqrt{d_k}\)</span>로 나누는 스케일링이 핵심이다. 차원이 커지면 내적 값도 커져서 소프트맥스 출력이 극단적으로 치우친다. 스케일링 없이는 기울기가 거의 0이 되어 학습이 멈춘다. 이 작은 트릭이 Transformer의 안정적 학습을 가능케 했다.</p>
+<p><strong>멀티헤드 어텐션: 다양한 관점으로 보기</strong></p>
+<p>단일 어텐션은 하나의 관점으로만 관계를 파악한다. “bank”라는 단어는 문맥에 따라 “은행”일 수도 있고 “강둑”일 수도 있다. 멀티헤드 어텐션은 8개(또는 그 이상) 헤드가 각기 다른 관점에서 관계를 학습한다. 한 헤드는 구문적 관계(주어-동사)를, 다른 헤드는 의미적 관계(대명사-선행사)를 포착할 수 있다. 마치 한 문장을 여러 전문가가 각자의 시각으로 분석한 뒤 의견을 종합하는 것과 같다.</p>
+<p><strong>위치 인코딩: 순서 정보의 주입</strong></p>
+<p>어텐션 연산 자체는 순서를 모른다. “고양이가 쥐를 잡았다”와 “쥐가 고양이를 잡았다”가 동일한 단어 집합으로 보인다. 위치 인코딩(Positional Encoding)이 이 문제를 해결한다. 사인과 코사인 함수를 조합하여 각 위치에 고유한 벡터를 부여하고, 단어 임베딩에 더한다. 신기하게도 이 단순한 방법으로 Transformer는 수천 토큰의 상대적 위치 관계까지 학습한다.</p>
+<p><strong>병렬 처리와 O(n²)의 트레이드오프</strong></p>
+<p>Transformer가 RNN을 대체한 핵심은 병렬화다. RNN은 t번째 단어를 처리하려면 t-1번째까지 완료해야 하므로 1000개 단어면 1000번 순차 연산이 필요하다. Transformer는 모든 단어 쌍의 관계를 한 번에 계산하여 GPU 수천 코어를 동시에 활용한다. 학습 속도가 극적으로 빨라지고, 장거리 의존성도 단일 연산으로 포착된다. 대신 계산 복잡도가 O(n²)이다. 시퀀스 길이가 두 배면 계산량은 네 배다. GPT-4의 128K 토큰 컨텍스트는 이 O(n²) 병목을 극복하기 위해 Sparse Attention 같은 기법을 동원했을 것으로 추정된다.</p>
+<p><strong>확장성: 왜 Transformer만 조 단위 파라미터까지 성장했나</strong></p>
+<p>논문 제목 “Attention Is All You Need”는 RNN이나 CNN 없이 어텐션만으로 충분하다는 선언이다. 이 단순한 구조가 놀라운 확장성을 제공했다. 층을 깊게 쌓아도, 헤드를 늘려도, 은닉 차원을 키워도 구조가 동일하게 유지된다. 복잡한 순환 연결이나 합성곱 필터 설계가 필요 없다. 덕분에 GPT-3의 1750억 파라미터, GPT-4의 추정 1조+ 파라미터까지 스케일업이 가능했다. Scaling Law 연구에 따르면 파라미터, 데이터, 연산량을 함께 늘리면 성능이 예측 가능하게 향상된다. Transformer는 이 법칙을 실현할 수 있는 거의 유일한 아키텍처였다.</p>
+</section>
+<section id="sec-ml-architecture-selection" class="level2" data-number="42.5">
+<h2 data-number="42.5" class="anchored" data-anchor-id="sec-ml-architecture-selection"><span class="header-section-number">42.5</span> 아키텍처 선택 기준</h2>
+<p>어떤 아키텍처를 선택할 것인가는 데이터의 특성과 문제의 요구사항에 따라 달라진다. <a href="#fig-ml-architecture-choice" class="quarto-xref">그림&nbsp;<span>42.6</span></a> 는 데이터 유형을 시작점으로 최적 아키텍처를 탐색하는 의사결정 흐름을 보여준다.</p>
+<div id="fig-ml-architecture-choice" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ml-architecture-choice-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ml-architecture-choice.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ml-architecture-choice-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;42.6: 데이터 맞춤형 모델 선택 가이드
+</figcaption>
+</figure>
+</div>
+<p>정형 데이터를 다룬다면 트리 모델(XGBoost, LightGBM)이 최강의 성능을 보인다. 테이블 형태의 데이터는 특징 간 비선형 상호작용이 중요한데, 트리 구조가 이를 자연스럽게 포착한다. Kaggle 대회의 정형 데이터 부문 상위권은 거의 트리 앙상블 모델이 차지한다. 이미지 데이터는 규모에 따라 선택이 갈린다. 수만 장 이하의 작은 데이터셋에서는 CNN(ResNet, EfficientNet)이 안정적이다. 합성곱의 지역성 가정이 샘플 효율성을 높인다. 반면 수백만 장 이상의 대규모 데이터셋에서는 Vision Transformer(ViT)가 CNN을 능가한다. 어텐션의 전역적 수용 영역이 복잡한 패턴 학습에 유리하다.</p>
+<p>시계열이나 순차 데이터는 시퀀스 길이와 자원 제약을 고려해야 한다. 시퀀스가 짧거나(수십 스텝 이하) GPU 자원이 제한적이라면 LSTM이 실용적이다. 순차 처리 방식이라 메모리 효율이 좋고, 작은 모델로도 합리적인 성능을 낸다. 시퀀스가 길고(수백~수천 스텝) 충분한 자원이 있다면 Transformer가 표준이다. 병렬 처리로 학습이 빠르고, 장거리 의존성 포착 능력이 뛰어나다. 텍스트나 자연어 처리는 Transformer가 사실상 표준이다. BERT는 문맥 이해에, GPT는 생성에 최적화되어 있다. 멀티모달 데이터는 Transformer 기반 융합 모델을 쓴다. CLIP은 이미지와 텍스트를 공통 임베딩 공간으로 투사하고, Flamingo는 시각적 질의응답을 수행한다.</p>
+<p>실무에서는 데이터 유형만큼이나 제약 조건이 중요하다. 작은 데이터셋에서는 단순한 모델이 오히려 좋을 수 있다. 파라미터가 많은 Transformer는 과적합되기 쉬운 반면, 잘 정규화된 CNN이나 LSTM은 안정적이다. 모바일이나 엣지 환경에서는 추론 속도가 생명이다. 경량 CNN(MobileNet, SqueezeNet)이나 증류(distillation)된 작은 Transformer를 선택한다. 의료나 금융처럼 규제가 강한 도메인에서는 해석 가능성이 필수다. 어텐션 가중치를 시각화할 수 있는 Transformer나, 의사결정 경로를 추적할 수 있는 트리 모델이 선호된다. 팀의 경험과 기존 도구 스택도 무시할 수 없다. PyTorch에 익숙한 팀이라면 Hugging Face의 사전학습 Transformer를, TensorFlow 환경이라면 Keras 기반 CNN을 쓰는 것이 현실적이다.</p>
+</section>
+<section id="생각해볼-점" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="생각해볼-점">💡 생각해볼 점</h2>
+<p>2019년 AI 선구자 리치 서튼(Rich Sutton)은 “쓴 교훈(The Bitter Lesson)”<span class="citation" data-cites="sutton2019bitter"><a href="references.html#ref-sutton2019bitter" role="doc-biblioref">[2]</a></span>이라는 글에서 AI 70년 역사를 관통하는 불편한 진실을 지적했다. 인간이 설계한 정교한 도메인 지식은 결국 단순하지만 확장 가능한 방법에 패배한다는 것이다. 체스에서 인간 전문가의 오프닝 데이터베이스보다 무차별 탐색이 이겼고, 음성 인식에서 음소 규칙보다 통계적 학습이 이겼다. 신경망 아키텍처의 역사도 이 교훈을 반복한다. CNN의 지역성, RNN의 순차성, LSTM의 게이트 구조 모두 인간이 설계한 귀납적 편향이다. Transformer는 이런 편향을 최소화하고 “데이터가 스스로 말하게” 했다. 결과는 놀라웠다. 기계 번역용으로 탄생한 구조가 이미지(ViT), 단백질 구조(AlphaFold2), 강화학습(Decision Transformer), 심지어 날씨 예측(Pangu-Weather)까지 적용 영역을 넓혔다.</p>
+<p>왜 “덜 영리한” 구조가 승리했을까? 한 가지 답은 확장성(Scalability)이다. CNN과 RNN은 특정 데이터 구조에 최적화되어 있어 그 가정이 맞을 때는 효율적이지만, 스케일업하면 한계에 부딪힌다. Transformer는 균일한 블록을 쌓기만 하면 된다. 층을 깊게, 헤드를 많이, 차원을 크게. Scaling Law가 보장하는 예측 가능한 성능 향상이 가능하다. 또 다른 답은 표현력이다. 사전 가정이 적다는 것은 더 넓은 함수 공간을 탐색한다는 의미다. 충분한 데이터와 연산이 있다면, 인간이 미처 생각하지 못한 패턴까지 발견할 수 있다.</p>
+<p>이것이 암시하는 바는 무엇인가? 어쩌면 우리는 계산의 근본 원리에 가까워지고 있는지 모른다. 어텐션은 “관계”를 계산하는 가장 일반적인 방식이다. 모든 쌍의 상호작용을 허용하고, 어떤 관계가 중요한지는 데이터에서 학습한다. 이것이 언어든 이미지든 단백질이든 통하는 이유는, 세상의 구조 자체가 “관계들의 집합”이기 때문일 수 있다. 물론 모든 관계를 계산하는 데는 <span class="math inline">\(O(n^2)\)</span>이라는 막대한 비용이 들지만, GPU 발전이 이를 감당 가능하게 만들었다. “쓴 교훈”의 핵심은 결국 연산(Computation)의 승리다.</p>
+<p>물론 쓴 교훈에도 한계는 있다. 작은 데이터에서는 여전히 도메인 지식이 강력하다. 의료 영상 100장으로 CNN을 학습시키면 Transformer보다 낫다. 실시간 추론이 필요한 엣지 환경에서는 경량 CNN이 현실적이다. 결국 아키텍처 선택은 “데이터 규모 × 연산 자원 × 도메인 특성”의 함수다. 그러나 자원이 무한히 커지는 방향으로 역사가 흐른다면, 가장 범용적인 구조가 승리하는 추세는 계속될 것이다.</p>
+<p>다음 장에서는 이러한 아키텍처가 실제로 “학습”되고 “추론”에 사용되는 과정, 즉 기계학습의 두 가지 실행 모드를 살펴본다.</p>
+
+
+<div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-vaswani2017attention" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">A. Vaswani <em>기타</em>, <span>“Attention is all you need”</span>, <em>Advances in neural information processing systems</em>, vol 30, 2017.</div>
+</div>
+<div id="ref-sutton2019bitter" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">R. S. Sutton, <span>“The Bitter Lesson”</span>. Blog post, 2019년. Available at: <a href="http://www.incompleteideas.net/IncIdeas/BitterLesson.html">http://www.incompleteideas.net/IncIdeas/BitterLesson.html</a></div>
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "복사완료!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "복사완료!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/r2bit\.com\/gpt-coding\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./ml-paradigm.html" class="pagination-link" aria-label="소프트웨어 2.0">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">소프트웨어 2.0</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./ml-workflow.html" class="pagination-link" aria-label="학습과 추론">
+        <span class="nav-page-text"><span class="chapter-number">43</span>&nbsp; <span class="chapter-title">학습과 추론</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>챗GPT 쿼토 책은 소프트웨어 카펜트리 “Git 버전제어”를 번역한 것이 포함되어 있습니다.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/ml-architecture.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>순수하게 <a href="https://quarto.org/">쿼토(Quarto)</a>로 제작되었습니다.</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

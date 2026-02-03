@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 280">
+  <defs>
+    <style>
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 12px;
+        fill: #333;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 10px;
+        fill: #333;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #666;
+      }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="720" height="280" fill="#ffffff"/>
+
+  <!-- NumPy 기반 -->
+  <g transform="translate(30, 25)">
+    <text x="80" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">넘파이 기본 dtype</text>
+
+    <rect x="0" y="15" width="160" height="35" fill="#e8e8e8" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="80" y="38" text-anchor="middle" class="tufte-code">int64, float64</text>
+
+    <rect x="0" y="60" width="160" height="35" fill="#e8e8e8" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="80" y="83" text-anchor="middle" class="tufte-code">bool</text>
+
+    <rect x="0" y="105" width="160" height="35" fill="#e8e8e8" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="80" y="128" text-anchor="middle" class="tufte-code">object</text>
+  </g>
+
+  <!-- 화살표 -->
+  <line x1="200" y1="90" x2="240" y2="90" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="220" y="80" text-anchor="middle" class="tufte-small">확장</text>
+
+  <!-- pandas 확장 dtype -->
+  <g transform="translate(260, 25)">
+    <text x="200" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">pandas 확장 dtype</text>
+
+    <!-- 숫자형 -->
+    <rect x="0" y="15" width="130" height="55" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="65" y="35" text-anchor="middle" class="tufte-code">Int64, Float64</text>
+    <text x="65" y="50" text-anchor="middle" class="tufte-small">nullable 정수/실수</text>
+    <text x="65" y="63" text-anchor="middle" class="tufte-small">(NA 허용)</text>
+
+    <!-- 문자열 -->
+    <rect x="140" y="15" width="130" height="55" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="205" y="35" text-anchor="middle" class="tufte-code">string</text>
+    <text x="205" y="50" text-anchor="middle" class="tufte-small">전용 문자열</text>
+    <text x="205" y="63" text-anchor="middle" class="tufte-small">(pandas 1.0+)</text>
+
+    <!-- 범주형 -->
+    <rect x="280" y="15" width="130" height="55" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="345" y="35" text-anchor="middle" class="tufte-code">category</text>
+    <text x="345" y="50" text-anchor="middle" class="tufte-small">범주형</text>
+    <text x="345" y="63" text-anchor="middle" class="tufte-small">(메모리 효율)</text>
+
+    <!-- 날짜/시간 -->
+    <rect x="0" y="80" width="130" height="55" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="65" y="100" text-anchor="middle" class="tufte-code">datetime64</text>
+    <text x="65" y="115" text-anchor="middle" class="tufte-small">날짜/시간</text>
+    <text x="65" y="128" text-anchor="middle" class="tufte-small">(시계열 분석)</text>
+
+    <!-- 시간 간격 -->
+    <rect x="140" y="80" width="130" height="55" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="205" y="100" text-anchor="middle" class="tufte-code">timedelta64</text>
+    <text x="205" y="115" text-anchor="middle" class="tufte-small">시간 간격</text>
+    <text x="205" y="128" text-anchor="middle" class="tufte-small">(기간 계산)</text>
+
+    <!-- boolean -->
+    <rect x="280" y="80" width="130" height="55" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="345" y="100" text-anchor="middle" class="tufte-code">boolean</text>
+    <text x="345" y="115" text-anchor="middle" class="tufte-small">nullable 불리언</text>
+    <text x="345" y="128" text-anchor="middle" class="tufte-small">(NA 허용)</text>
+  </g>
+
+  <!-- 하단 요약 -->
+  <g transform="translate(30, 195)">
+    <rect x="0" y="0" width="660" height="70" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="330" y="20" text-anchor="middle" class="tufte-label" font-weight="bold">dtype 선택 기준</text>
+    <line x1="20" y1="28" x2="640" y2="28" stroke="#ccc"/>
+    <text x="110" y="45" text-anchor="middle" class="tufte-small">숫자 연산 → int64/float64</text>
+    <text x="330" y="45" text-anchor="middle" class="tufte-small">결측치 포함 → Int64/Float64</text>
+    <text x="550" y="45" text-anchor="middle" class="tufte-small">날짜 연산 → datetime64</text>
+    <text x="165" y="62" text-anchor="middle" class="tufte-small">제한된 값 → category</text>
+    <text x="440" y="62" text-anchor="middle" class="tufte-small">텍스트 처리 → string/object</text>
+  </g>
+
+</svg>

@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 50 800 210">
+  <defs>
+    <style>
+      /* Tufte Grayscale Style */
+      .label-title { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 15px; font-weight: bold; fill: #111; }
+      .label-head { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 13px; font-weight: bold; fill: #222; }
+      .label-body { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 11px; fill: #333; }
+      .label-note { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 10px; fill: #555; font-style: italic; }
+      .label-mono { font-family: 'SF Mono', Consolas, Menlo, monospace; font-size: 10px; fill: #444; }
+
+      .box-simple { fill: #fff; stroke: #999; stroke-width: 1.5; rx: 5; }
+      .box-medium { fill: #f8f8f8; stroke: #666; stroke-width: 1.5; rx: 5; }
+      .box-full { fill: #f0f0f0; stroke: #333; stroke-width: 2; rx: 5; }
+      .box-decision { fill: #fff; stroke: #555; stroke-width: 1.5; rx: 3; }
+
+      .line-flow { stroke: #666; stroke-width: 1.5; fill: none; }
+      .line-sep { stroke: #ccc; stroke-width: 1; }
+
+      .arrow-head { fill: #666; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L0,8 L8,4 z" class="arrow-head" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="400" fill="#fff" />
+
+  <!-- Title -->
+  <!-- <text x="400" y="65" text-anchor="middle" class="label-title">파이썬 반응형 스펙트럼: 단순 → 전문</text> -->
+
+  <!-- Spectrum Arrow -->
+  <g transform="translate(60, 85)">
+    <line x1="0" y1="0" x2="680" y2="0" stroke="#999" stroke-width="3"/>
+    <polygon points="680,0 670,-6 670,6" fill="#999"/>
+    <text x="0" y="-10" class="label-note">단순/빠른 개발</text>
+    <text x="680" y="-10" text-anchor="end" class="label-note">복잡/고성능</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- Level 1: Basic Patterns -->
+  <!-- ========================================== -->
+  <g transform="translate(60, 110)">
+    <rect x="0" y="0" width="180" height="130" class="box-simple"/>
+    <text x="90" y="22" text-anchor="middle" class="label-head">1단계: 기본 패턴</text>
+    <line x1="15" y1="32" x2="165" y2="32" class="line-sep"/>
+
+    <g transform="translate(15, 45)">
+      <text x="0" y="0" class="label-mono">콜백 + 옵저버 패턴</text>
+      <text x="0" y="18" class="label-body">• 표준 라이브러리만</text>
+      <text x="0" y="33" class="label-body">• 소규모 이벤트 처리</text>
+      <text x="0" y="48" class="label-body">• 학습 비용 낮음</text>
+    </g>
+
+    <rect x="15" y="100" width="150" height="18" fill="#f5f5f5" rx="2"/>
+    <text x="90" y="113" text-anchor="middle" class="label-mono" fill="#666">property + setter</text>
+  </g>
+
+  <!-- Arrow -->
+  <path d="M 250 175 L 290 175" class="line-flow" marker-end="url(#arrow)"/>
+
+  <!-- ========================================== -->
+  <!-- Level 2: Asyncio -->
+  <!-- ========================================== -->
+  <g transform="translate(300, 110)">
+    <rect x="0" y="0" width="180" height="130" class="box-medium"/>
+    <text x="90" y="22" text-anchor="middle" class="label-head">2단계: asyncio</text>
+    <line x1="15" y1="32" x2="165" y2="32" class="line-sep"/>
+
+    <g transform="translate(15, 45)">
+      <text x="0" y="0" class="label-mono">async/await + Queue</text>
+      <text x="0" y="18" class="label-body">• 동시성 I/O 처리</text>
+      <text x="0" y="33" class="label-body">• 네트워크/파일 작업</text>
+      <text x="0" y="48" class="label-body">• 중간 학습 비용</text>
+    </g>
+
+    <rect x="15" y="100" width="150" height="18" fill="#f0f0f0" rx="2"/>
+    <text x="90" y="113" text-anchor="middle" class="label-mono" fill="#666">asyncio.gather()</text>
+  </g>
+
+  <!-- Arrow -->
+  <path d="M 490 175 L 530 175" class="line-flow" marker-end="url(#arrow)"/>
+
+  <!-- ========================================== -->
+  <!-- Level 3: Full Reactive -->
+  <!-- ========================================== -->
+  <g transform="translate(540, 110)">
+    <rect x="0" y="0" width="200" height="130" class="box-full"/>
+    <text x="100" y="22" text-anchor="middle" class="label-head">3단계: 전용 라이브러리</text>
+    <line x1="15" y1="32" x2="185" y2="32" class="line-sep"/>
+
+    <g transform="translate(15, 45)">
+      <text x="0" y="0" class="label-mono">RxPY / Streamlit / Shiny</text>
+      <text x="0" y="18" class="label-body">• 선언적 스트림 처리</text>
+      <text x="0" y="33" class="label-body">• 복잡한 데이터 파이프라인</text>
+      <text x="0" y="48" class="label-body">• 높은 학습 비용</text>
+    </g>
+
+    <rect x="15" y="100" width="170" height="18" fill="#e8e8e8" rx="2"/>
+    <text x="100" y="113" text-anchor="middle" class="label-mono" fill="#555">Observable.pipe(...)</text>
+  </g>
+
+
+</svg>

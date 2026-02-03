@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 35 850 290">
+  <defs>
+    <style>
+      /* Tufte Grayscale Style */
+      .label-title { font-family: Palatino, serif; font-size: 16px; font-weight: bold; fill: #111; }
+      .label-head { font-family: Palatino, serif; font-size: 14px; font-weight: bold; fill: #222; }
+      .label-body { font-family: Palatino, serif; font-size: 12px; fill: #333; }
+      .label-note { font-family: Palatino, serif; font-size: 11px; fill: #555; font-style: italic; }
+      .label-mono { font-family: 'SF Mono', Consolas, Menlo, monospace; font-size: 10px; fill: #444; }
+      
+      .box-problem { fill: #fdfdfd; stroke: #999; stroke-width: 1; stroke-dasharray: 4 2; rx: 4; }
+      .box-solution { fill: #fff; stroke: #333; stroke-width: 1.5; rx: 4; }
+      .box-thread { fill: #f5f5f5; stroke: #666; stroke-width: 1; rx: 2; }
+      .box-state { fill: #eee; stroke: #333; stroke-width: 1.5; rx: 2; }
+      .box-pure { fill: #fff; stroke: #333; stroke-width: 1.5; rx: 2; }
+      
+      .line-solid { stroke: #333; stroke-width: 1.5; fill: none; }
+      .line-sep { stroke: #ccc; stroke-width: 1; }
+      .line-conflict { stroke: #333; stroke-width: 1.5; stroke-dasharray: 2 1; fill: none; }
+      .line-flow { stroke: #666; stroke-width: 1.2; fill: none; }
+
+      .arrow-head { fill: #666; }
+      .arrow-head-alert { fill: #333; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L0,8 L8,4 z" class="arrow-head" />
+    </marker>
+    <marker id="arrow-alert" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L0,8 L8,4 z" class="arrow-head-alert" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="850" height="380" fill="#fff" />
+
+  <!-- Title -->
+  <!-- <text x="425" y="30" text-anchor="middle" class="label-title">멀티코어 시대의 해법: 공유 상태 vs 불변성</text> -->
+
+  <!-- ========================================== -->
+  <!-- LEFT: The Problem (Shared Mutable State) -->
+  <!-- ========================================== -->
+  <g transform="translate(40, 60)">
+    <text x="125" y="0" text-anchor="middle" class="label-head" fill="#333">문제: 공유 가변 상태</text>
+    <rect x="0" y="15" width="250" height="230" class="box-problem"/>
+    
+    <text x="125" y="40" text-anchor="middle" class="label-note">멀티코어 환경</text>
+
+    <!-- Shared State -->
+    <g transform="translate(75, 120)">
+        <rect x="0" y="0" width="100" height="40" class="box-state" stroke="#333"/>
+        <text x="50" y="15" text-anchor="middle" class="label-mono" font-weight="bold" fill="#333">공유 합계</text>
+        <text x="50" y="30" text-anchor="middle" class="label-mono">value = ?</text>
+    </g>
+
+    <!-- Thread 1 -->
+    <g transform="translate(20, 60)">
+        <rect x="0" y="0" width="70" height="40" class="box-thread"/>
+        <text x="35" y="15" text-anchor="middle" class="label-mono">스레드 A</text>
+        <text x="35" y="30" text-anchor="middle" class="label-mono">total += 1</text>
+    </g>
+
+    <!-- Thread 2 -->
+    <g transform="translate(160, 60)">
+        <rect x="0" y="0" width="70" height="40" class="box-thread"/>
+        <text x="35" y="15" text-anchor="middle" class="label-mono">스레드 B</text>
+        <text x="35" y="30" text-anchor="middle" class="label-mono">total += 1</text>
+    </g>
+
+    <!-- Conflict Arrows -->
+    <path d="M 55 100 L 90 120" class="line-conflict" marker-end="url(#arrow-alert)"/>
+    <path d="M 195 100 L 160 120" class="line-conflict" marker-end="url(#arrow-alert)"/>
+    
+    <!-- Crash Icon -->
+    <text x="125" y="112" text-anchor="middle" class="label-mono" font-weight="bold" fill="#333">충돌!</text>
+
+    <!-- Result -->
+    <g transform="translate(20, 180)">
+        <text x="0" y="0" class="label-mono" fill="#333" font-weight="bold">* 경쟁 조건</text>
+        <text x="0" y="15" class="label-mono">• 교착 상태 (Deadlock)</text>
+        <text x="0" y="30" class="label-mono">• 데이터 무결성 훼손</text>
+        <text x="0" y="45" class="label-mono">• 복잡한 잠금(Lock) 필요</text>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- CENTER: Transition (Lisp Revival) -->
+  <!-- ========================================== -->
+  <g transform="translate(310, 130)">
+    <line x1="0" y1="20" x2="60" y2="20" class="line-solid" marker-end="url(#arrow)"/>
+    <text x="30" y="10" text-anchor="middle" class="label-note" font-weight="bold">전환</text>
+    <text x="30" y="50" text-anchor="middle" class="label-mono">Lisp (1958)</text>
+    <text x="30" y="62" text-anchor="middle" class="label-mono">↓</text>
+    <text x="30" y="75" text-anchor="middle" class="label-mono">멀티코어</text>
+    <text x="30" y="87" text-anchor="middle" class="label-mono">(2000년대)</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- RIGHT: The Solution (Functional) -->
+  <!-- ========================================== -->
+  <g transform="translate(390, 60)">
+    <text x="125" y="0" text-anchor="middle" class="label-head">해법: 불변성 + 순수 함수</text>
+    <rect x="0" y="15" width="250" height="230" class="box-solution"/>
+    
+    <text x="125" y="40" text-anchor="middle" class="label-note">독립 처리</text>
+
+    <!-- Thread 1 (Independent) -->
+    <g transform="translate(20, 60)">
+        <rect x="0" y="0" width="80" height="50" class="box-thread"/>
+        <text x="40" y="15" text-anchor="middle" class="label-mono">워커 A</text>
+        <text x="40" y="30" text-anchor="middle" class="label-mono">sum(batch1)</text>
+        <text x="40" y="43" text-anchor="middle" class="label-mono" fill="#555">→ 500</text>
+    </g>
+
+    <!-- Thread 2 (Independent) -->
+    <g transform="translate(150, 60)">
+        <rect x="0" y="0" width="80" height="50" class="box-thread"/>
+        <text x="40" y="15" text-anchor="middle" class="label-mono">워커 B</text>
+        <text x="40" y="30" text-anchor="middle" class="label-mono">sum(batch2)</text>
+        <text x="40" y="43" text-anchor="middle" class="label-mono" fill="#555">→ 700</text>
+    </g>
+
+    <!-- Merge (Reduce) -->
+    <g transform="translate(65, 130)">
+        <line x1="0" y1="-20" x2="40" y2="0" class="line-flow" marker-end="url(#arrow)"/>
+        <line x1="120" y1="-20" x2="80" y2="0" class="line-flow" marker-end="url(#arrow)"/>
+        
+        <rect x="20" y="0" width="80" height="30" class="box-pure"/>
+        <text x="60" y="20" text-anchor="middle" class="label-mono" font-weight="bold">reduce(+)</text>
+        
+        <text x="60" y="45" text-anchor="middle" class="label-mono" font-weight="bold">결과: 1200</text>
+    </g>
+
+    <!-- Benefits -->
+    <g transform="translate(20, 190)">
+        <text x="0" y="0" class="label-mono" font-weight="bold">안전한 병렬 처리</text>
+        <text x="0" y="15" class="label-mono">• 상태 변경 없음 (Stateless)</text>
+        <text x="0" y="30" class="label-mono">• 잠금(Lock) 불필요</text>
+    </g>
+  </g>
+  
+  <!-- Right Sidebar: Key Concepts -->
+  <g transform="translate(660, 60)">
+      <rect x="0" y="15" width="160" height="210" fill="#fcfcfc" stroke="#ddd" rx="4"/>
+      <text x="80" y="35" text-anchor="middle" class="label-head" font-size="12">FP 3대 원칙</text>
+      <line x1="10" y1="45" x2="150" y2="45" class="line-sep"/>
+
+      <g transform="translate(12, 67)">
+          <text x="0" y="0" class="label-body" font-weight="bold">① 순수 함수</text>
+          <text x="0" y="16" class="label-mono">f(x) → 항상 동일 결과</text>
+          <text x="0" y="30" class="label-note">→ 테스트·캐싱 용이</text>
+
+          <text x="0" y="55" class="label-body" font-weight="bold">② 불변성</text>
+          <text x="0" y="71" class="label-mono">원본 수정 금지</text>
+          <text x="0" y="85" class="label-note">→ 중간 상태 모두 보존</text>
+
+          <text x="0" y="110" class="label-body" font-weight="bold">③ 고차 함수</text>
+          <text x="0" y="126" class="label-mono">map / filter / reduce</text>
+          <text x="0" y="140" class="label-note">→ "무엇을" 선언적 표현</text>
+      </g>
+  </g>
+
+
+</svg>

@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 20 600 330">
+  <defs>
+    <style>
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-label { font-size: 14px; font-weight: bold; }
+      .tufte-small { font-size: 12px; fill: #555; }
+      .tufte-tiny { font-size: 11px; fill: #666; }
+      .tufte-mono { font-family: 'Courier New', monospace; font-size: 10px; fill: #444; }
+      .box { fill: #f5f5f5; stroke: #333; stroke-width: 1.5; }
+      .step-circle { fill: #e0e0e0; stroke: #555; stroke-width: 1.5; }
+      .arrow { stroke: #666; stroke-width: 1.5; fill: none; }
+      .key-private { fill: #d8d8d8; stroke: #555; stroke-width: 1.2; }
+      .key-public { fill: #e8e8e8; stroke: #555; stroke-width: 1.2; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="600" height="350" fill="#ffffff"/>
+
+  <!-- Step 1: ssh-keygen command -->
+  <g transform="translate(30, 30)">
+    <circle cx="20" cy="20" r="18" class="step-circle"/>
+    <text x="20" y="25" text-anchor="middle" class="tufte-label">1</text>
+    <text x="50" y="18" class="tufte-text tufte-label">키 쌍 생성</text>
+    <text x="50" y="35" class="tufte-small">ssh-keygen 명령 실행</text>
+
+    <!-- Terminal box -->
+    <rect x="0" y="50" width="250" height="70" class="box" rx="3"/>
+    <rect x="5" y="55" width="240" height="15" fill="#e0e0e0" rx="2"/>
+    <circle cx="15" cy="62" r="4" fill="#999"/>
+    <circle cx="28" cy="62" r="4" fill="#999"/>
+    <circle cx="41" cy="62" r="4" fill="#999"/>
+    <text x="15" y="85" class="tufte-mono">$ ssh-keygen -t ed25519 \</text>
+    <text x="15" y="100" class="tufte-mono">  -C "email@example.com"</text>
+    <text x="15" y="115" class="tufte-mono" style="fill:#888;">Generating key pair...</text>
+  </g>
+
+  <!-- Arrow from step 1 to step 2 -->
+  <path d="M290,95 L320,95" class="arrow" marker-end="url(#arrowhead)"/>
+
+  <!-- Step 2: Two keys generated -->
+  <g transform="translate(330, 30)">
+    <circle cx="20" cy="20" r="18" class="step-circle"/>
+    <text x="20" y="25" text-anchor="middle" class="tufte-label">2</text>
+    <text x="50" y="18" class="tufte-text tufte-label">키 쌍 생성 완료</text>
+    <text x="50" y="35" class="tufte-small">~/.ssh/ 디렉토리에 저장</text>
+
+    <!-- Two key files -->
+    <g transform="translate(0, 50)">
+      <!-- Private key -->
+      <rect x="0" y="0" width="110" height="55" class="key-private" rx="3"/>
+      <text x="55" y="20" text-anchor="middle" class="tufte-small" style="font-weight:bold;">비밀 키</text>
+      <text x="55" y="38" text-anchor="middle" class="tufte-mono">id_ed25519</text>
+      <!-- Lock icon -->
+      <g transform="translate(85, 5)">
+        <rect x="0" y="6" width="10" height="8" fill="#888" stroke="#555" stroke-width="0.8" rx="1"/>
+        <path d="M2,6 L2,4 Q5,-1 8,4 L8,6" fill="none" stroke="#555" stroke-width="1"/>
+      </g>
+
+      <!-- Public key -->
+      <rect x="130" y="0" width="110" height="55" class="key-public" rx="3"/>
+      <text x="185" y="20" text-anchor="middle" class="tufte-small" style="font-weight:bold;">공개 키</text>
+      <text x="185" y="38" text-anchor="middle" class="tufte-mono">id_ed25519.pub</text>
+      <!-- Unlock icon -->
+      <g transform="translate(215, 8)">
+        <circle cx="7" cy="7" r="7" fill="none" stroke="#666" stroke-width="1"/>
+        <path d="M4,7 L6,9 L10,4" fill="none" stroke="#666" stroke-width="1.5"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- Step 3: Keep private, share public -->
+  <g transform="translate(30, 160)">
+    <circle cx="20" cy="20" r="18" class="step-circle"/>
+    <text x="20" y="25" text-anchor="middle" class="tufte-label">3</text>
+    <text x="50" y="18" class="tufte-text tufte-label">비밀 키 보관</text>
+    <text x="50" y="35" class="tufte-small">내 컴퓨터에만 저장</text>
+
+    <!-- Computer with private key -->
+    <g transform="translate(20, 50)">
+      <rect x="0" y="0" width="180" height="80" class="box" rx="3"/>
+      <text x="90" y="20" text-anchor="middle" class="tufte-text tufte-label">내 컴퓨터</text>
+
+      <!-- Computer icon -->
+      <rect x="30" y="30" width="40" height="30" fill="#e0e0e0" stroke="#333" stroke-width="1" rx="2"/>
+      <rect x="35" y="35" width="30" height="20" fill="#fff" stroke="#999" stroke-width="0.5"/>
+      <rect x="42" y="60" width="16" height="4" fill="#ccc" stroke="#333" stroke-width="0.5"/>
+
+      <!-- Private key inside -->
+      <rect x="90" y="35" width="70" height="35" class="key-private" rx="2"/>
+      <text x="125" y="50" text-anchor="middle" class="tufte-tiny" style="font-weight:bold;">비밀 키</text>
+      <text x="125" y="63" text-anchor="middle" class="tufte-tiny" style="fill:#888; font-style:italic;">절대 공유 금지</text>
+    </g>
+  </g>
+
+  <!-- Arrow from step 3 to step 4 -->
+  <path d="M240,220 L320,220" class="arrow" marker-end="url(#arrowhead)"/>
+  <text x="280" y="210" text-anchor="middle" class="tufte-tiny">공개 키 복사</text>
+
+  <!-- Step 4: Register on GitHub -->
+  <g transform="translate(330, 160)">
+    <circle cx="20" cy="20" r="18" class="step-circle"/>
+    <text x="20" y="25" text-anchor="middle" class="tufte-label">4</text>
+    <text x="50" y="18" class="tufte-text tufte-label">GitHub에 등록</text>
+    <text x="50" y="35" class="tufte-small">Settings → SSH keys</text>
+
+    <!-- GitHub server -->
+    <g transform="translate(20, 50)">
+      <rect x="0" y="0" width="220" height="80" class="box" rx="3"/>
+      <text x="110" y="20" text-anchor="middle" class="tufte-text tufte-label">GitHub</text>
+
+      <!-- Server icon -->
+      <rect x="30" y="30" width="40" height="35" fill="#e0e0e0" stroke="#333" stroke-width="1" rx="2"/>
+      <line x1="35" y1="40" x2="65" y2="40" stroke="#999" stroke-width="1"/>
+      <line x1="35" y1="48" x2="65" y2="48" stroke="#999" stroke-width="1"/>
+      <line x1="35" y1="56" x2="65" y2="56" stroke="#999" stroke-width="1"/>
+      <circle cx="40" cy="35" r="2" fill="#666"/>
+      <circle cx="60" cy="35" r="2" fill="#888"/>
+
+      <!-- Public key registered -->
+      <rect x="90" y="35" width="110" height="35" class="key-public" rx="2"/>
+      <text x="145" y="50" text-anchor="middle" class="tufte-tiny" style="font-weight:bold;">공개 키 등록됨</text>
+      <text x="145" y="63" text-anchor="middle" class="tufte-tiny" style="fill:#666;">✓ 인증 준비 완료</text>
+    </g>
+  </g>
+
+  <!-- Bottom summary -->
+  <g transform="translate(30, 300)">
+    <rect x="0" y="0" width="540" height="35" fill="#fafafa" stroke="#ccc" stroke-width="1" rx="5"/>
+    <text x="270" y="15" text-anchor="middle" class="tufte-small" style="font-weight:bold;">ssh-keygen → 비밀 키(로컬 보관) + 공개 키(GitHub 등록) → 인증 완료</text>
+    <text x="270" y="30" text-anchor="middle" class="tufte-tiny">ssh -T git@github.com 으로 연결 테스트</text>
+  </g>
+
+</svg>

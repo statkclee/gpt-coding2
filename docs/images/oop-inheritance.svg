@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 35 800 360">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 14px; fill: #333; font-weight: bold; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 12px; fill: #333; font-weight: bold; }
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 11px; fill: #333; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 10px; fill: #666; }
+      .tufte-code { font-family: 'SF Mono', Consolas, Monaco, monospace; font-size: 10px; fill: #333; }
+      .label-mono { font-family: 'SF Mono', Consolas, Monaco, monospace; font-size: 10px; fill: #333; }
+      .label-note { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 11px; fill: #555; }
+      .box-interface { fill: #fff; stroke: #333; stroke-width: 2; }
+      .box-impl { fill: #f5f5f5; stroke: #666; stroke-width: 1.5; }
+      .box-client { fill: #fff; stroke: #999; stroke-width: 1; }
+      .arrow { fill: none; stroke: #666; stroke-width: 1.5; }
+      .arrow-dashed { fill: none; stroke: #999; stroke-width: 1; stroke-dasharray: 4 2; }
+      .line-dependency { fill: none; stroke: #999; stroke-width: 1.5; stroke-dasharray: 6 3; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#666"/>
+    </marker>
+    <marker id="hollow-arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M 0 0 L 12 6 L 0 12 z" fill="#fff" stroke="#666" stroke-width="1.5"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="430" fill="#ffffff"/>
+
+  <!-- Interface (Contract) -->
+  <g transform="translate(275, 55)">
+    <rect x="0" y="0" width="200" height="100" class="box-interface" rx="4"/>
+    <rect x="0" y="0" width="200" height="28" fill="#eee" stroke="#333" stroke-width="2" rx="4" ry="0"/>
+    <text x="100" y="18" text-anchor="middle" class="tufte-label">BaseModel (계약)</text>
+
+    <text x="15" y="48" class="tufte-code" font-weight="bold">fit(X, y)</text>
+    <text x="120" y="48" class="tufte-small" fill="#666">← 학습</text>
+    <text x="15" y="65" class="tufte-code" font-weight="bold">predict(X)</text>
+    <text x="120" y="65" class="tufte-small" fill="#666">← 예측</text>
+    <line x1="10" y1="75" x2="190" y2="75" stroke="#ccc"/>
+    <text x="100" y="92" text-anchor="middle" class="tufte-small" font-style="italic">"무엇을 할 수 있는가"</text>
+  </g>
+
+  <!-- Inheritance arrows -->
+  <line x1="320" y1="155" x2="150" y2="195" class="arrow" marker-end="url(#hollow-arrow)"/>
+  <line x1="375" y1="155" x2="375" y2="195" class="arrow" marker-end="url(#hollow-arrow)"/>
+  <line x1="430" y1="155" x2="600" y2="195" class="arrow" marker-end="url(#hollow-arrow)"/>
+
+  <!-- Implementation 1: MeanPredictor -->
+  <g transform="translate(50, 210)">
+    <rect x="0" y="0" width="180" height="95" class="box-impl" rx="4"/>
+    <rect x="0" y="0" width="180" height="25" fill="#e8e8e8" stroke="#666" stroke-width="1.5" rx="4" ry="0"/>
+    <text x="90" y="17" text-anchor="middle" class="tufte-label">MeanPredictor</text>
+
+    <text x="10" y="42" class="tufte-small" fill="#888">✓ fit(): 평균 저장</text>
+    <text x="10" y="57" class="tufte-small" fill="#888">✓ predict(): 평균 반환</text>
+    <line x1="10" y1="65" x2="170" y2="65" stroke="#ccc"/>
+    <text x="10" y="82" class="tufte-code">mean_: float</text>
+  </g>
+
+  <!-- Implementation 2: LinearTrend -->
+  <g transform="translate(285, 210)">
+    <rect x="0" y="0" width="180" height="95" class="box-impl" rx="4"/>
+    <rect x="0" y="0" width="180" height="25" fill="#e8e8e8" stroke="#666" stroke-width="1.5" rx="4" ry="0"/>
+    <text x="90" y="17" text-anchor="middle" class="tufte-label">LinearTrend</text>
+
+    <text x="10" y="42" class="tufte-small" fill="#888">✓ fit(): 회귀 계수 계산</text>
+    <text x="10" y="57" class="tufte-small" fill="#888">✓ predict(): 선형 예측</text>
+    <line x1="10" y1="65" x2="170" y2="65" stroke="#ccc"/>
+    <text x="10" y="82" class="tufte-code">slope_, intercept_</text>
+  </g>
+
+  <!-- Implementation 3: NeuralNet (future) -->
+  <g transform="translate(520, 210)">
+    <rect x="0" y="0" width="180" height="95" class="box-impl" stroke-dasharray="4 2" rx="4"/>
+    <rect x="0" y="0" width="180" height="25" fill="#f0f0f0" stroke="#999" stroke-width="1" stroke-dasharray="4 2" rx="4" ry="0"/>
+    <text x="90" y="17" text-anchor="middle" class="tufte-label" fill="#888">NeuralNet (미래)</text>
+
+    <text x="10" y="42" class="tufte-small" fill="#aaa">✓ fit(): 역전파 학습</text>
+    <text x="10" y="57" class="tufte-small" fill="#aaa">✓ predict(): 순전파</text>
+    <line x1="10" y1="65" x2="170" y2="65" stroke="#ddd"/>
+    <text x="10" y="82" class="tufte-code" fill="#aaa">weights_, layers_</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- BOTTOM: Client Code (Polymorphism) -->
+  <!-- ========================================== -->
+  <g transform="translate(260, 320)">
+    <rect x="0" y="0" width="220" height="55" class="box-client" rx="3"/>
+    <text x="110" y="18" text-anchor="middle" class="label-mono" font-weight="bold">def evaluate_model(model):</text>
+    <text x="60" y="34" class="label-mono">    model.fit(X, y)</text>
+    <text x="60" y="48" class="label-mono">    return model.predict(X)</text>
+  </g>
+
+  <!-- Orthogonal Dependency Arrow (꺾은선) -->
+  <path d="M 480 350 L 760 350 L 760 105 L 475 105" class="line-dependency" marker-end="url(#arrow)"/>
+
+  <!-- 설명 박스 -->
+  <g transform="translate(-50, 105)">
+    <rect x="650" y="220" width="140" height="45" fill="#fff" stroke="#999" rx="4"/>
+    <text x="720" y="238" text-anchor="middle" class="label-note" font-weight="bold">인터페이스에만 의존</text>
+    <text x="720" y="254" text-anchor="middle" class="tufte-small">(구현체 우회)</text>
+  </g>
+
+  <!-- Annotation -->
+  <!-- <text x="375" y="395" text-anchor="middle" class="tufte-small" font-style="italic">
+    "구현이 바뀌어도 계약만 지키면 클라이언트 코드는 수정 불필요"
+  </text> -->
+
+</svg>

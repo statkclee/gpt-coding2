@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 70 800 390">
+  <defs>
+    <style>
+      .tufte-title {
+        font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif;
+        font-size: 18px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-subtitle {
+        font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif;
+        font-size: 14px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-label {
+        font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif;
+        font-size: 12px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-label-white {
+        font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif;
+        font-size: 15px;
+        font-weight: bold;
+        fill: #fff;
+      }
+      .tufte-text {
+        font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif;
+        font-size: 10px;
+        fill: #444;
+      }
+      .tufte-small {
+        font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif;
+        font-size: 9px;
+        fill: #666;
+      }
+      .box-ml {
+        fill: #333;
+        stroke: #000;
+        stroke-width: 0;
+      }
+      .box-infra {
+        fill: #eee;
+        stroke: #ccc;
+        stroke-width: 1;
+      }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="800" height="500" fill="#ffffff"/>
+
+  <!-- Title -->
+  <!-- <text x="400" y="40" class="tufte-title" text-anchor="middle">ML 시스템의 숨겨진 기술 부채 (Hidden Technical Debt)</text>
+  <text x="400" y="60" class="tufte-text" text-anchor="middle" font-style="italic">Based on "Hidden Technical Debt in Machine Learning Systems" (Google, NeurIPS 2015)</text> -->
+
+  <!-- Container Group for the mosaic -->
+  <g transform="translate(50, 100)">
+    
+    <!-- Row 1: Config, Collection -->
+    <rect x="150" y="0" width="140" height="80" class="box-infra" rx="2"/>
+    <text x="220" y="35" class="tufte-label" text-anchor="middle">설정 관리</text>
+    <text x="220" y="55" class="tufte-small" text-anchor="middle">(Configuration)</text>
+
+    <rect x="310" y="0" width="140" height="80" class="box-infra" rx="2"/>
+    <text x="380" y="35" class="tufte-label" text-anchor="middle">데이터 수집</text>
+    <text x="380" y="55" class="tufte-small" text-anchor="middle">(Data Collection)</text>
+
+    <!-- Row 2: Verification -->
+    <rect x="150" y="100" width="140" height="120" class="box-infra" rx="2"/>
+    <text x="220" y="150" class="tufte-label" text-anchor="middle">데이터 검증</text>
+    <text x="220" y="170" class="tufte-small" text-anchor="middle">(Data Verification)</text>
+
+    <!-- The tiny ML Code box in the center -->
+    <rect x="310" y="100" width="80" height="60" class="box-ml" rx="2"/>
+    <text x="350" y="125" class="tufte-label-white" text-anchor="middle">ML 코드</text>
+    <!-- Made 5% much larger and pure white for clarity -->
+    <text x="350" y="145" class="tufte-label-white" text-anchor="middle" font-size="18px">5%</text>
+
+    <!-- Feature Extraction (Right of ML Code) -->
+    <rect x="410" y="100" width="140" height="60" class="box-infra" rx="2"/>
+    <text x="480" y="125" class="tufte-label" text-anchor="middle">특징 추출</text>
+    <text x="480" y="145" class="tufte-small" text-anchor="middle">(Feature Extraction)</text>
+
+    <!-- Analysis Tools (Below ML Code) -->
+    <rect x="310" y="180" width="100" height="100" class="box-infra" rx="2"/>
+    <text x="360" y="220" class="tufte-label" text-anchor="middle">분석 도구</text>
+    <text x="360" y="240" class="tufte-small" text-anchor="middle">(Analysis)</text>
+
+    <!-- Process Mgmt (Right of Analysis) -->
+    <rect x="430" y="180" width="120" height="100" class="box-infra" rx="2"/>
+    <text x="490" y="220" class="tufte-label" text-anchor="middle">프로세스 관리</text>
+    <text x="490" y="240" class="tufte-small" text-anchor="middle">(Process Mgmt)</text>
+
+    <!-- Row 3/Side: Resource Mgmt -->
+    <rect x="0" y="50" width="130" height="230" class="box-infra" rx="2"/>
+    <text x="65" y="155" class="tufte-label" text-anchor="middle">자원 관리</text>
+    <text x="65" y="175" class="tufte-small" text-anchor="middle">(Resource Mgmt)</text>
+
+    <!-- Serving Infra -->
+    <rect x="570" y="50" width="130" height="150" class="box-infra" rx="2"/>
+    <text x="635" y="115" class="tufte-label" text-anchor="middle">서빙 인프라</text>
+    <text x="635" y="135" class="tufte-small" text-anchor="middle">(Serving Infra)</text>
+
+    <!-- Monitoring -->
+    <rect x="570" y="220" width="130" height="120" class="box-infra" rx="2"/>
+    <text x="635" y="270" class="tufte-label" text-anchor="middle">모니터링</text>
+    <text x="635" y="290" class="tufte-small" text-anchor="middle">(Monitoring)</text>
+
+    <!-- Bottom Wide: Infrastructure -->
+    <rect x="150" y="300" width="400" height="40" class="box-infra" rx="2"/>
+    <text x="350" y="325" class="tufte-label" text-anchor="middle">기타 인프라 (Storage, Network, etc.)</text>
+
+  </g>
+
+  <!-- Key Insight Annotation -->
+  <!-- <line x1="50" y1="460" x2="750" y2="460" stroke="#ddd" stroke-width="1"/>
+  <text x="400" y="480" class="tufte-subtitle" text-anchor="middle">"작고 귀여운 ML 코드(5%)를 지탱하기 위해 거대하고 복잡한 인프라(95%)가 필요하다"</text> -->
+
+</svg>

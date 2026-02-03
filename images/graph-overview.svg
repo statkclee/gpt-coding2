@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320">
+  <defs>
+    <style>
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 12px;
+        fill: #333;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 10px;
+        fill: #333;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #666;
+      }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="720" height="320" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="360" y="25" text-anchor="middle" class="tufte-label" font-weight="bold" font-size="14">그래프 - 관계 데이터의 표현</text>
+
+  <!-- Left: Real-world relations -->
+  <g transform="translate(30, 50)">
+    <text x="90" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">현실 세계의 관계</text>
+
+    <rect x="0" y="15" width="180" height="30" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="90" y="35" text-anchor="middle" class="tufte-small">소셜 네트워크 (친구 관계)</text>
+
+    <rect x="0" y="50" width="180" height="30" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="90" y="70" text-anchor="middle" class="tufte-small">웹 (페이지 간 링크)</text>
+
+    <rect x="0" y="85" width="180" height="30" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="90" y="105" text-anchor="middle" class="tufte-small">교통망 (도시 간 도로)</text>
+
+    <rect x="0" y="120" width="180" height="30" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="90" y="140" text-anchor="middle" class="tufte-small">지식 (개념 간 관계)</text>
+  </g>
+
+  <!-- Arrow -->
+  <g transform="translate(220, 100)">
+    <line x1="0" y1="0" x2="50" y2="0" stroke="#666" stroke-width="2"/>
+    <polygon points="50,0 42,-5 42,5" fill="#666"/>
+    <text x="25" y="20" text-anchor="middle" class="tufte-small">모델링</text>
+  </g>
+
+  <!-- Center: Graph structure -->
+  <g transform="translate(290, 50)">
+    <text x="70" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">그래프</text>
+
+    <rect x="0" y="15" width="140" height="140" fill="#e8e8e8" stroke="#333" stroke-width="1.5" rx="3"/>
+
+    <!-- Nodes -->
+    <circle cx="40" cy="50" r="15" fill="#fff" stroke="#333" stroke-width="2"/>
+    <text x="40" y="54" text-anchor="middle" class="tufte-code">A</text>
+
+    <circle cx="100" cy="50" r="15" fill="#fff" stroke="#333" stroke-width="2"/>
+    <text x="100" y="54" text-anchor="middle" class="tufte-code">B</text>
+
+    <circle cx="40" cy="110" r="15" fill="#fff" stroke="#333" stroke-width="2"/>
+    <text x="40" y="114" text-anchor="middle" class="tufte-code">C</text>
+
+    <circle cx="100" cy="110" r="15" fill="#fff" stroke="#333" stroke-width="2"/>
+    <text x="100" y="114" text-anchor="middle" class="tufte-code">D</text>
+
+    <!-- Edges -->
+    <line x1="55" y1="50" x2="85" y2="50" stroke="#666" stroke-width="2"/>
+    <line x1="40" y1="65" x2="40" y2="95" stroke="#666" stroke-width="2"/>
+    <line x1="55" y1="105" x2="85" y2="105" stroke="#666" stroke-width="2"/>
+    <line x1="50" y1="60" x2="90" y2="100" stroke="#666" stroke-width="2"/>
+
+    <!-- Labels -->
+    <text x="70" y="175" text-anchor="middle" class="tufte-small">노드(Node) + 엣지(Edge)</text>
+  </g>
+
+  <!-- Arrow -->
+  <g transform="translate(440, 100)">
+    <line x1="0" y1="0" x2="50" y2="0" stroke="#666" stroke-width="2"/>
+    <polygon points="50,0 42,-5 42,5" fill="#666"/>
+    <text x="25" y="20" text-anchor="middle" class="tufte-small">분석</text>
+  </g>
+
+  <!-- Right: Applications -->
+  <g transform="translate(510, 50)">
+    <text x="90" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">AI 활용</text>
+
+    <rect x="0" y="15" width="180" height="30" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="90" y="35" text-anchor="middle" class="tufte-small">지식 그래프 (Knowledge Graph)</text>
+
+    <rect x="0" y="50" width="180" height="30" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="90" y="70" text-anchor="middle" class="tufte-small">추천 시스템</text>
+
+    <rect x="0" y="85" width="180" height="30" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="90" y="105" text-anchor="middle" class="tufte-small">그래프 신경망 (GNN)</text>
+
+    <rect x="0" y="120" width="180" height="30" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="90" y="140" text-anchor="middle" class="tufte-small">경로 최적화</text>
+  </g>
+
+  <!-- Bottom: Chapter structure -->
+  <g transform="translate(30, 210)">
+    <rect x="0" y="0" width="660" height="100" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="330" y="22" text-anchor="middle" class="tufte-label" font-weight="bold">학습 흐름</text>
+    <line x1="20" y1="30" x2="640" y2="30" stroke="#ccc"/>
+
+    <!-- Steps -->
+    <g transform="translate(20, 45)">
+      <rect x="0" y="0" width="90" height="40" fill="#e8e8e8" stroke="#999" rx="2"/>
+      <text x="45" y="18" text-anchor="middle" class="tufte-small">그래프 기초</text>
+      <text x="45" y="32" text-anchor="middle" class="tufte-code">노드, 엣지</text>
+    </g>
+
+    <text x="120" y="65" class="tufte-label">→</text>
+
+    <g transform="translate(135, 45)">
+      <rect x="0" y="0" width="90" height="40" fill="#e8e8e8" stroke="#999" rx="2"/>
+      <text x="45" y="18" text-anchor="middle" class="tufte-small">표현 방법</text>
+      <text x="45" y="32" text-anchor="middle" class="tufte-code">리스트, 행렬</text>
+    </g>
+
+    <text x="235" y="65" class="tufte-label">→</text>
+
+    <g transform="translate(250, 45)">
+      <rect x="0" y="0" width="90" height="40" fill="#e8e8e8" stroke="#999" rx="2"/>
+      <text x="45" y="18" text-anchor="middle" class="tufte-small">탐색</text>
+      <text x="45" y="32" text-anchor="middle" class="tufte-code">BFS, DFS</text>
+    </g>
+
+    <text x="350" y="65" class="tufte-label">→</text>
+
+    <g transform="translate(365, 45)">
+      <rect x="0" y="0" width="90" height="40" fill="#e8e8e8" stroke="#999" rx="2"/>
+      <text x="45" y="18" text-anchor="middle" class="tufte-small">분석</text>
+      <text x="45" y="32" text-anchor="middle" class="tufte-code">중심성</text>
+    </g>
+
+    <text x="465" y="65" class="tufte-label">→</text>
+
+    <g transform="translate(480, 45)">
+      <rect x="0" y="0" width="90" height="40" fill="#e8e8e8" stroke="#999" rx="2"/>
+      <text x="45" y="18" text-anchor="middle" class="tufte-small">지식 그래프</text>
+      <text x="45" y="32" text-anchor="middle" class="tufte-code">트리플</text>
+    </g>
+
+    <text x="580" y="65" class="tufte-label">→</text>
+
+    <g transform="translate(595, 45)">
+      <rect x="0" y="0" width="50" height="40" fill="#333" stroke="#333" rx="2"/>
+      <text x="25" y="25" text-anchor="middle" class="tufte-small" fill="#fff">AI</text>
+    </g>
+  </g>
+
+</svg>

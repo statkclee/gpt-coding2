@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 70 800 410">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #111; font-weight: bold; }
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-mono { font-family: 'SF Mono', Consolas, monospace; fill: #444; font-size: 11px; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #666; font-style: italic; font-size: 11px; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #777; font-size: 10px; }
+
+      .zone-bg { fill: #f9f9f9; stroke: #ddd; stroke-width: 1; stroke-dasharray: 4,4; }
+      .node-box { fill: #fff; stroke: #333; stroke-width: 1.5; }
+      .node-header { fill: #eee; }
+
+      .flow-line { fill: none; stroke: #555; stroke-width: 1.5; }
+      .flow-line-thick { fill: none; stroke: #333; stroke-width: 2.5; }
+      .sync-line { fill: none; stroke: #888; stroke-width: 1.5; stroke-dasharray: 4,2; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#555" />
+    </marker>
+    <marker id="arrow-thick" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#333" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="580" fill="#ffffff"/>
+
+  <!-- <text x="400" y="40" text-anchor="middle" class="tufte-title" font-size="18">포크와 풀 리퀘스트 워크플로우</text> -->
+
+  <!-- Remote 영역 -->
+  <rect x="50" y="85" width="700" height="200" class="zone-bg"/>
+  <text x="70" y="108" class="tufte-label" font-weight="bold">☁️ 원격 (GitHub 서버)</text>
+
+  <!-- Local 영역 -->
+  <rect x="50" y="305" width="700" height="160" class="zone-bg"/>
+  <text x="70" y="328" class="tufte-label" font-weight="bold">💻 로컬 (내 컴퓨터)</text>
+
+  <!-- Upstream Repository -->
+  <g transform="translate(300, 120)">
+    <rect x="0" y="0" width="200" height="75" class="node-box" stroke-width="2"/>
+    <rect x="1" y="1" width="198" height="24" class="node-header"/>
+    <text x="100" y="17" text-anchor="middle" class="tufte-text" font-weight="bold" font-size="12">원본 저장소 (Upstream)</text>
+    <text x="100" y="42" text-anchor="middle" class="tufte-mono">original/project</text>
+    <text x="100" y="62" text-anchor="middle" class="tufte-small">🔒 쓰기 권한 없음</text>
+  </g>
+
+  <!-- Origin Repository -->
+  <g transform="translate(530, 185)">
+    <rect x="0" y="0" width="180" height="75" class="node-box"/>
+    <rect x="1" y="1" width="178" height="24" fill="#f4f4f4"/>
+    <text x="90" y="17" text-anchor="middle" class="tufte-text" font-weight="bold" font-size="12">내 원격 저장소 (Origin)</text>
+    <text x="90" y="42" text-anchor="middle" class="tufte-mono">me/project</text>
+    <text x="90" y="62" text-anchor="middle" class="tufte-small">✓ 쓰기 권한 있음</text>
+  </g>
+
+  <!-- Local Repository -->
+  <g transform="translate(300, 350)">
+    <rect x="0" y="0" width="200" height="100" class="node-box"/>
+    <rect x="1" y="1" width="198" height="24" fill="#fff"/>
+    <text x="100" y="17" text-anchor="middle" class="tufte-text" font-weight="bold" font-size="12">로컬 저장소</text>
+    <text x="100" y="42" text-anchor="middle" class="tufte-mono">~/project</text>
+
+    <!-- 작업 흐름 시각화 -->
+    <path d="M 60,70 Q 100,55 140,70" fill="none" stroke="#ccc" stroke-width="1"/>
+    <circle cx="60" cy="70" r="3" fill="#999"/>
+    <circle cx="100" cy="62" r="3" fill="#999"/>
+    <circle cx="140" cy="70" r="3" fill="#999"/>
+    <text x="100" y="88" text-anchor="middle" class="tufte-small">수정 → 스테이지 → 커밋</text>
+  </g>
+
+  <!-- 1. Fork 화살표 -->
+  <path d="M 500,157 Q 550,157 580,185" class="flow-line" marker-end="url(#arrow)"/>
+  <rect x="520" y="143" width="45" height="18" fill="#fff"/>
+  <text x="542" y="156" text-anchor="middle" class="tufte-text" font-size="11" font-weight="bold">① Fork</text>
+
+  <!-- 2. Clone 화살표 -->
+  <path d="M 620,260 Q 620,420 500,420" class="flow-line" marker-end="url(#arrow)"/>
+  <text x="632" y="350" text-anchor="start" class="tufte-mono">② git clone</text>
+
+  <!-- 3. Push 화살표 -->
+  <path d="M 500,395 Q 560,395 560,268" class="flow-line" marker-end="url(#arrow)"/>
+  <text x="572" y="320" text-anchor="start" class="tufte-mono">③ git push</text>
+  <text x="572" y="335" text-anchor="start" class="tufte-small">(feature 브랜치)</text>
+
+  <!-- 4. Pull Request 화살표 -->
+  <path d="M 530,222 Q 465,240 400,195" class="flow-line-thick" marker-end="url(#arrow-thick)"/>
+  <g transform="translate(-10, -5)">
+    <rect x="430" y="225" width="100" height="22" fill="#fff" stroke="#333" stroke-width="2" rx="4"/>
+    <text x="480" y="241" text-anchor="middle" class="tufte-text" font-size="11" font-weight="bold">④ Pull Request</text>
+  </g>
+
+  <!-- 5. Upstream 동기화 화살표 -->
+  <path d="M 300,157 C 130,180 130,400 290,405" class="sync-line" marker-end="url(#arrow)"/>
+  <g transform="translate(0, 5)">
+    <rect x="85" y="270" width="140" height="35" fill="#fff" stroke="#ccc" rx="3"/>
+    <text x="155" y="285" text-anchor="middle" class="tufte-mono" font-size="10">⑤ git pull upstream</text>
+    <text x="155" y="300" text-anchor="middle" class="tufte-small">(동기화)</text>
+  </g>
+
+  <!-- 하단 핵심 원리 박스 -->
+  <!-- <g transform="translate(50, 520)">
+    <rect x="0" y="0" width="700" height="50" fill="#f5f5f5" stroke="#ccc" stroke-width="1" rx="4"/>
+    <text x="20" y="18" class="tufte-small" font-weight="bold">핵심 원리</text>
+    <text x="20" y="33" class="tufte-small">원본(Upstream)에는 쓰기 권한이 없으므로, 복제본(Origin)으로 Push한 뒤 변경 사항을 원본으로</text>
+    <text x="20" y="45" class="tufte-small">가져가 달라고 요청(Pull Request)하는 구조. 작업 전 항상 git pull upstream으로 최신 상태 유지.</text>
+  </g> -->
+
+  <text x="600" y="105" text-anchor="middle" class="tufte-text" font-size="12">"권한 없는 프로젝트에 기여하는 안전한 사이클"</text>
+
+</svg>

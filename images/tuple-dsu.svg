@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 30 720 320">
+  <defs>
+    <style>
+      .tufte-text {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+      }
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 14px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 12px;
+        fill: #333;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 11px;
+        fill: #333;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #666;
+      }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="720" height="400" fill="#ffffff"/>
+
+  <!-- Title -->
+  <!-- <text x="360" y="25" text-anchor="middle" class="tufte-title">DSU 패턴: Decorate-Sort-Undecorate</text>
+  <text x="360" y="42" text-anchor="middle" class="tufte-small">딕셔너리를 값 기준으로 정렬하는 표준 패턴</text> -->
+
+  <!-- Step 0: Original Dictionary -->
+  <g transform="translate(30, 55)">
+    <text x="0" y="15" class="tufte-label" font-weight="bold">원본 딕셔너리</text>
+    <rect x="0" y="25" width="200" height="70" fill="#e8e8e8" stroke="#999" rx="3"/>
+    <text x="10" y="45" class="tufte-code">{'the': 45,</text>
+    <text x="10" y="60" class="tufte-code"> 'and': 32,</text>
+    <text x="10" y="75" class="tufte-code"> 'to': 28, ...}</text>
+    <text x="10" y="90" class="tufte-small">키(단어) 기준 정렬만 가능</text>
+  </g>
+
+  <!-- Arrow to Step 1 -->
+  <line x1="240" y1="105" x2="280" y2="105" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+  <!-- Step 1: Decorate -->
+  <g transform="translate(290, 55)">
+    <rect x="0" y="0" width="180" height="110" fill="#f5f5f5" stroke="#333" stroke-width="2" rx="3"/>
+    <text x="90" y="20" text-anchor="middle" class="tufte-label" font-weight="bold">1. Decorate</text>
+    <text x="90" y="35" text-anchor="middle" class="tufte-small">(정렬키, 값) 튜플 생성</text>
+    <line x1="10" y1="45" x2="170" y2="45" stroke="#ccc"/>
+    <text x="15" y="63" class="tufte-code">(45, 'the')</text>
+    <text x="15" y="78" class="tufte-code">(32, 'and')</text>
+    <text x="15" y="93" class="tufte-code">(28, 'to')</text>
+    <text x="110" y="63" class="tufte-small">← 빈도가 앞</text>
+  </g>
+
+  <!-- Arrow to Step 2 -->
+  <line x1="480" y1="105" x2="520" y2="105" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+  <!-- Step 2: Sort -->
+  <g transform="translate(530, 55)">
+    <rect x="0" y="0" width="160" height="110" fill="#f5f5f5" stroke="#333" stroke-width="2" rx="3"/>
+    <text x="80" y="20" text-anchor="middle" class="tufte-label" font-weight="bold">2. Sort</text>
+    <text x="80" y="35" text-anchor="middle" class="tufte-small">튜플 리스트 정렬</text>
+    <line x1="10" y1="45" x2="150" y2="45" stroke="#ccc"/>
+    <text x="15" y="63" class="tufte-code">(45, 'the')</text>
+    <text x="15" y="78" class="tufte-code">(32, 'and')</text>
+    <text x="15" y="93" class="tufte-code">(28, 'to')</text>
+    <text x="100" y="93" class="tufte-small">정렬됨</text>
+  </g>
+
+  <!-- Arrow down to Step 3 -->
+  <line x1="610" y1="175" x2="610" y2="205" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+  <!-- Step 3: Undecorate -->
+  <g transform="translate(470, 215)">
+    <rect x="0" y="0" width="220" height="90" fill="#f5f5f5" stroke="#333" stroke-width="2" rx="3"/>
+    <text x="110" y="20" text-anchor="middle" class="tufte-label" font-weight="bold">3. Undecorate</text>
+    <text x="110" y="35" text-anchor="middle" class="tufte-small">필요한 부분 추출</text>
+    <line x1="10" y1="45" x2="210" y2="45" stroke="#ccc"/>
+    <text x="15" y="65" class="tufte-code">the 45, and 32, to 28</text>
+    <text x="15" y="83" class="tufte-small">상위 N개 단어만 추출</text>
+  </g>
+
+  <!-- Code example -->
+  <g transform="translate(30, 190)">
+    <rect x="0" y="0" width="400" height="140" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="200" y="20" text-anchor="middle" class="tufte-label" font-weight="bold">Python 구현</text>
+    <line x1="10" y1="28" x2="390" y2="28" stroke="#ccc"/>
+    <text x="15" y="48" class="tufte-code"># 1. Decorate</text>
+    <text x="15" y="63" class="tufte-code">dec = [(v, k) for k, v in counts.items()]</text>
+    <text x="15" y="80" class="tufte-code"># 2. Sort</text>
+    <text x="15" y="95" class="tufte-code">dec.sort(reverse=True)</text>
+    <text x="15" y="112" class="tufte-code"># 3. Undecorate</text>
+    <text x="15" y="127" class="tufte-code">for v, k in dec[:3]</text>
+  </g>
+
+</svg>

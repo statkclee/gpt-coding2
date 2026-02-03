@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 50 800 450">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #111; font-weight: bold; }
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-mono { font-family: 'SF Mono', Consolas, monospace; fill: #444; font-size: 10px; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #666; font-style: italic; }
+      .tufte-note { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #555; font-size: 10px; }
+      .flow-line { fill: none; stroke: #555; stroke-width: 1.5; }
+      .dashed-line { fill: none; stroke: #999; stroke-width: 1; stroke-dasharray: 4,4; }
+      .box-bg { fill: #fff; stroke: #333; stroke-width: 1; }
+      .highlight-bg { fill: #f4f4f4; stroke: none; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#555" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="600" fill="#ffffff"/>
+
+  <!-- <text x="400" y="40" text-anchor="middle" class="tufte-title" font-size="18">연구 소프트웨어의 생명주기: 개발에서 보존까지</text> -->
+  <text x="500" y="300" text-anchor="middle" class="tufte-text" font-size="14">"GitHub은 실험실이고, Zenodo는 도서관이다."</text>
+
+  <g transform="translate(50, 100)">
+    <text x="120" y="-10" text-anchor="middle" class="tufte-text" font-weight="bold" font-size="14">🔨 개발 (Dynamic)</text>
+    <text x="120" y="5" text-anchor="middle" class="tufte-label" font-size="11">지속적 변경, 협업, 버전관리</text>
+
+    <circle cx="120" cy="80" r="60" fill="#f9f9f9" stroke="#ddd" stroke-width="1"/>
+    <!-- 순환 화살표: 원 외곽 오른쪽에 배치하여 텍스트와 겹침 방지 -->
+    <path d="M 185,60 A 70,70 0 0 1 185,100" fill="none" stroke="#777" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <text x="120" y="75" text-anchor="middle" class="tufte-mono" font-weight="bold">git commit</text>
+    <text x="120" y="90" text-anchor="middle" class="tufte-mono" font-weight="bold">git push</text>
+    <text x="120" y="105" text-anchor="middle" class="tufte-note">반복</text>
+
+    <rect x="50" y="160" width="140" height="40" class="box-bg"/>
+    <text x="120" y="180" text-anchor="middle" class="tufte-text" font-weight="bold">GitHub / GitLab</text>
+    <text x="120" y="195" text-anchor="middle" class="tufte-note">협업 플랫폼</text>
+  </g>
+
+  <g transform="translate(300, 150)">
+    <text x="65" y="-30" text-anchor="middle" class="tufte-text" font-size="11" font-weight="bold">Trigger: Release (v1.0)</text>
+    <line x1="0" y1="30" x2="130" y2="30" class="flow-line" marker-end="url(#arrow)"/>
+    <text x="65" y="45" text-anchor="middle" class="tufte-mono" font-size="9">WebHook 자동 연동</text>
+  </g>
+
+  <g transform="translate(450, 100)">
+    <text x="120" y="-10" text-anchor="middle" class="tufte-text" font-weight="bold" font-size="14">🏛️ 보존 (Static)</text>
+    <text x="120" y="5" text-anchor="middle" class="tufte-label" font-size="11">불변성, 영구 식별자, 인용 가능</text>
+
+    <rect x="60" y="40" width="120" height="100" fill="#fff" stroke="#999" stroke-width="1"/>
+    <rect x="65" y="45" width="120" height="100" fill="#fff" stroke="#999" stroke-width="1"/>
+    <rect x="70" y="50" width="120" height="100" class="box-bg"/> <text x="130" y="80" text-anchor="middle" class="tufte-text" font-weight="bold">Zenodo</text>
+    <text x="130" y="95" text-anchor="middle" class="tufte-note">Software Heritage</text>
+    
+    <line x1="85" y1="110" x2="175" y2="110" stroke="#ccc"/>
+    
+    <rect x="80" y="120" width="100" height="20" rx="3" fill="#e8e8e8" stroke="#999" stroke-width="0.5"/>
+    <text x="130" y="133" text-anchor="middle" class="tufte-mono" fill="#333" font-size="10">DOI: 10.5281/..</text>
+  </g>
+
+  <path d="M 600,240 Q 650,250 400,250 T 150,250" fill="none" stroke="#999" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#arrow)"/>
+  <rect x="330" y="240" width="140" height="20" fill="#fff"/>
+  <text x="400" y="253" text-anchor="middle" class="tufte-label" font-size="11">논문에 DOI 인용 (Credit)</text>
+
+
+  <g transform="translate(50, 320)">
+    <text x="0" y="0" class="tufte-text" font-weight="bold" font-size="14">어떤 조합을 선택해야 할까?</text>
+    <line x1="0" y1="10" x2="700" y2="10" stroke="#333" stroke-width="1"/>
+
+    <g transform="translate(0, 20)">
+      <rect x="0" y="0" width="220" height="140" class="highlight-bg" rx="5"/>
+      <text x="110" y="25" text-anchor="middle" class="tufte-text" font-weight="bold">표준형 (Open Science)</text>
+      <line x1="20" y1="35" x2="200" y2="35" stroke="#ccc"/>
+      
+      <text x="20" y="60" class="tufte-text" font-size="11">목표: <tspan font-weight="bold">최대 확산 및 인용</tspan></text>
+      
+      <g transform="translate(20, 80)">
+        <text x="0" y="0" class="tufte-mono">1. GitHub (Public)</text>
+        <line x1="5" y1="10" x2="5" y2="20" stroke="#555"/>
+        <text x="0" y="30" class="tufte-mono">2. Zenodo (DOI)</text>
+      </g>
+      
+      <text x="130" y="95" class="tufte-note" font-size="30">★</text>
+      <text x="150" y="95" class="tufte-note">권장</text>
+    </g>
+
+    <g transform="translate(240, 20)">
+      <rect x="0" y="0" width="220" height="140" fill="#fff" stroke="#ccc" stroke-width="1" rx="5"/>
+      <text x="110" y="25" text-anchor="middle" class="tufte-text" font-weight="bold">보안형 (Private)</text>
+      <line x1="20" y1="35" x2="200" y2="35" stroke="#ccc"/>
+      
+      <text x="20" y="60" class="tufte-text" font-size="11">목표: <tspan font-weight="bold">민감 데이터 보호</tspan></text>
+      
+      <g transform="translate(20, 80)">
+        <text x="0" y="0" class="tufte-mono">1. GitLab (Self-hosted)</text>
+        <line x1="5" y1="10" x2="5" y2="20" stroke="#555"/>
+        <text x="0" y="30" class="tufte-mono">2. 내부 아카이브/서버</text>
+      </g>
+    </g>
+
+    <g transform="translate(480, 20)">
+      <rect x="0" y="0" width="220" height="140" fill="#fff" stroke="#ccc" stroke-width="1" rx="5"/>
+      <text x="110" y="25" text-anchor="middle" class="tufte-text" font-weight="bold">역사적 보존 (Heritage)</text>
+      <line x1="20" y1="35" x2="200" y2="35" stroke="#ccc"/>
+      
+      <text x="20" y="60" class="tufte-text" font-size="11">목표: <tspan font-weight="bold">소스코드 영구 보존</tspan></text>
+      
+      <g transform="translate(20, 80)">
+        <text x="0" y="0" class="tufte-mono">1. Any Git Repo</text>
+        <line x1="5" y1="10" x2="5" y2="20" stroke="#555"/>
+        <text x="0" y="30" class="tufte-mono">2. Software Heritage</text>
+      </g>
+      <text x="20" y="125" class="tufte-note">* Save Code Now 기능</text>
+    </g>
+  </g>
+
+  <!-- <text x="400" y="580" text-anchor="middle" class="tufte-label" font-size="10">FAIR4RS (2022) 원칙에 기반함. 연구 성과의 가시성을 높이려면 표준형(GitHub+Zenodo)이 가장 유리합니다.</text> -->
+
+</svg>

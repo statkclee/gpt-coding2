@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 40 650 150">
+  <defs>
+    <style>
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 14px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-subtitle {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 13px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 12px;
+        fill: #333;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 11px;
+        fill: #666;
+      }
+      .tufte-code {
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 12px;
+        fill: #333;
+      }
+      .element-box {
+        fill: #f5f5f5;
+        stroke: #333;
+        stroke-width: 1.5;
+      }
+      .selected-box {
+        fill: #ccc;
+        stroke: #333;
+        stroke-width: 2;
+      }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="650" height="200" fill="#ffffff"/>
+
+  <!-- 제목 -->
+  <!-- <text x="325" y="25" text-anchor="middle" class="tufte-title">리스트 인덱싱과 슬라이싱</text>
+  <line x1="50" y1="35" x2="600" y2="35" stroke="#ccc" stroke-width="1"/> -->
+
+  <!-- 리스트 요소들 -->
+  <text x="50" y="60" class="tufte-code">fruits &lt;- list("사과", "바나나", "체리", "딸기", "포도")</text>
+
+  <!-- 요소 박스들 -->
+  <rect x="50" y="75" width="80" height="40" class="element-box" rx="3"/>
+  <text x="90" y="100" text-anchor="middle" class="tufte-code">"사과"</text>
+
+  <rect x="140" y="75" width="80" height="40" class="element-box" rx="3"/>
+  <text x="180" y="100" text-anchor="middle" class="tufte-code">"바나나"</text>
+
+  <rect x="230" y="75" width="80" height="40" class="element-box" rx="3"/>
+  <text x="270" y="100" text-anchor="middle" class="tufte-code">"체리"</text>
+
+  <rect x="320" y="75" width="80" height="40" class="element-box" rx="3"/>
+  <text x="360" y="100" text-anchor="middle" class="tufte-code">"딸기"</text>
+
+  <rect x="410" y="75" width="80" height="40" class="element-box" rx="3"/>
+  <text x="450" y="100" text-anchor="middle" class="tufte-code">"포도"</text>
+
+  <!-- 인덱스 -->
+  <text x="90" y="132" text-anchor="middle" class="tufte-label">1</text>
+  <text x="180" y="132" text-anchor="middle" class="tufte-label">2</text>
+  <text x="270" y="132" text-anchor="middle" class="tufte-label">3</text>
+  <text x="360" y="132" text-anchor="middle" class="tufte-label">4</text>
+  <text x="450" y="132" text-anchor="middle" class="tufte-label">5</text>
+
+  <!-- 인덱스 라벨 -->
+  <text x="510" y="100" class="tufte-small">← 요소</text>
+  <text x="510" y="132" class="tufte-small">← 인덱스</text>
+
+  <!-- 예시 -->
+  <line x1="50" y1="150" x2="600" y2="150" stroke="#ccc" stroke-width="1"/>
+
+  <text x="60" y="172" class="tufte-code">fruits[[2]]</text>
+  <text x="170" y="172" class="tufte-small">→ "바나나"</text>
+
+  <text x="280" y="172" class="tufte-code">fruits[2:4]</text>
+  <text x="390" y="172" class="tufte-small">→ list("바나나", "체리", "딸기")</text>
+
+</svg>

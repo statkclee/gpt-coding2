@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300">
+  <defs>
+    <style>
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 12px;
+        fill: #333;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 10px;
+        fill: #333;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #666;
+      }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="720" height="300" fill="#ffffff"/>
+
+  <!-- Element-wise operations -->
+  <g transform="translate(30, 20)">
+    <text x="100" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">요소별 연산</text>
+    <rect x="0" y="15" width="200" height="100" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="3"/>
+
+    <text x="15" y="40" class="tufte-code">a + b</text>
+    <text x="100" y="40" class="tufte-small">덧셈</text>
+
+    <text x="15" y="58" class="tufte-code">a * b</text>
+    <text x="100" y="58" class="tufte-small">곱셈</text>
+
+    <text x="15" y="76" class="tufte-code">a ** 2</text>
+    <text x="100" y="76" class="tufte-small">거듭제곱</text>
+
+    <text x="15" y="94" class="tufte-code">a / b</text>
+    <text x="100" y="94" class="tufte-small">나눗셈</text>
+
+    <text x="100" y="130" text-anchor="middle" class="tufte-small">같은 위치끼리 연산</text>
+  </g>
+
+  <!-- Universal functions -->
+  <g transform="translate(260, 20)">
+    <text x="100" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">유니버설 함수</text>
+    <rect x="0" y="15" width="200" height="100" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="3"/>
+
+    <text x="15" y="40" class="tufte-code">np.sin(a)</text>
+    <text x="110" y="40" class="tufte-small">삼각함수</text>
+
+    <text x="15" y="58" class="tufte-code">np.exp(a)</text>
+    <text x="110" y="58" class="tufte-small">지수</text>
+
+    <text x="15" y="76" class="tufte-code">np.log(a)</text>
+    <text x="110" y="76" class="tufte-small">로그</text>
+
+    <text x="15" y="94" class="tufte-code">np.sqrt(a)</text>
+    <text x="110" y="94" class="tufte-small">제곱근</text>
+
+    <text x="100" y="130" text-anchor="middle" class="tufte-small">배열 전체에 함수 적용</text>
+  </g>
+
+  <!-- Aggregate operations -->
+  <g transform="translate(490, 20)">
+    <text x="100" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">집계 연산</text>
+    <rect x="0" y="15" width="200" height="100" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="3"/>
+
+    <text x="15" y="40" class="tufte-code">a.sum()</text>
+    <text x="100" y="40" class="tufte-small">합계</text>
+
+    <text x="15" y="58" class="tufte-code">a.mean()</text>
+    <text x="100" y="58" class="tufte-small">평균</text>
+
+    <text x="15" y="76" class="tufte-code">a.std()</text>
+    <text x="100" y="76" class="tufte-small">표준편차</text>
+
+    <text x="15" y="94" class="tufte-code">a.max()</text>
+    <text x="100" y="94" class="tufte-small">최댓값</text>
+
+    <text x="100" y="130" text-anchor="middle" class="tufte-small">axis로 축 지정 가능</text>
+  </g>
+
+  <!-- Broadcasting -->
+  <g transform="translate(30, 165)">
+    <rect x="0" y="0" width="660" height="125" fill="#e8e8e8" stroke="#666" rx="3"/>
+    <text x="330" y="22" text-anchor="middle" class="tufte-label" font-weight="bold">브로드캐스팅 (Broadcasting)</text>
+    <line x1="20" y1="30" x2="640" y2="30" stroke="#ccc"/>
+
+    <!-- Scalar + Array -->
+    <g transform="translate(20, 40)">
+      <text x="0" y="15" class="tufte-code">arr + 10</text>
+      <text x="100" y="15" class="tufte-small">스칼라 + 배열</text>
+
+      <!-- Visual -->
+      <rect x="0" y="25" width="25" height="20" fill="#fff" stroke="#999"/>
+      <text x="12" y="38" text-anchor="middle" class="tufte-code">1</text>
+      <rect x="25" y="25" width="25" height="20" fill="#fff" stroke="#999"/>
+      <text x="37" y="38" text-anchor="middle" class="tufte-code">2</text>
+
+      <text x="60" y="40" class="tufte-code">+ 10 →</text>
+
+      <rect x="100" y="25" width="25" height="20" fill="#f5f5f5" stroke="#999"/>
+      <text x="112" y="38" text-anchor="middle" class="tufte-code">11</text>
+      <rect x="125" y="25" width="25" height="20" fill="#f5f5f5" stroke="#999"/>
+      <text x="137" y="38" text-anchor="middle" class="tufte-code">12</text>
+    </g>
+
+    <!-- 2D + 1D Row -->
+    <g transform="translate(230, 40)">
+      <text x="0" y="15" class="tufte-code">arr + row</text>
+      <text x="100" y="15" class="tufte-small">2D + 1D 행</text>
+
+      <!-- 2D array -->
+      <rect x="0" y="25" width="20" height="15" fill="#fff" stroke="#999"/>
+      <rect x="20" y="25" width="20" height="15" fill="#fff" stroke="#999"/>
+      <rect x="0" y="40" width="20" height="15" fill="#fff" stroke="#999"/>
+      <rect x="20" y="40" width="20" height="15" fill="#fff" stroke="#999"/>
+
+      <text x="50" y="42" class="tufte-code">+</text>
+
+      <!-- Row vector -->
+      <rect x="60" y="32" width="20" height="15" fill="#e8e8e8" stroke="#999"/>
+      <rect x="80" y="32" width="20" height="15" fill="#e8e8e8" stroke="#999"/>
+
+      <text x="110" y="42" class="tufte-code">→</text>
+
+      <!-- Result -->
+      <rect x="120" y="25" width="20" height="15" fill="#f5f5f5" stroke="#999"/>
+      <rect x="140" y="25" width="20" height="15" fill="#f5f5f5" stroke="#999"/>
+      <rect x="120" y="40" width="20" height="15" fill="#f5f5f5" stroke="#999"/>
+      <rect x="140" y="40" width="20" height="15" fill="#f5f5f5" stroke="#999"/>
+    </g>
+
+    <!-- Rule -->
+    <g transform="translate(450, 40)">
+      <text x="0" y="15" class="tufte-label" font-weight="bold">규칙</text>
+      <text x="0" y="35" class="tufte-small">뒤쪽 차원부터 비교하여</text>
+      <text x="0" y="50" class="tufte-small">크기가 같거나 1이면</text>
+      <text x="0" y="65" class="tufte-small">브로드캐스팅 가능</text>
+    </g>
+
+    <text x="330" y="110" text-anchor="middle" class="tufte-small">(3, 4) + (4,) ✓ | (3, 4) + (3, 1) ✓ | (3, 4) + (3,) ✗</text>
+  </g>
+
+</svg>

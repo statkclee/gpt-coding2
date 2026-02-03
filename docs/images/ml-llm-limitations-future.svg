@@ -1,0 +1,193 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 55 900 500">
+  <defs>
+    <style>
+      /* Tufte Typography */
+      .tufte-title { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif; font-size: 24px; font-weight: bold; fill: #111; }
+      .tufte-subtitle { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif; font-size: 18px; font-weight: bold; fill: #222; }
+      .tufte-label { font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif; font-size: 13px; font-weight: bold; fill: #333; }
+      .tufte-text { font-family: "Malgun Gothic", "Apple SD Gothic Neo", serif; font-size: 12px; fill: #555; }
+      .tufte-small { font-family: "Malgun Gothic", "Apple SD Gothic Neo", serif; font-size: 11px; fill: #666; font-style: italic; }
+      .tufte-code { font-family: 'SF Mono', Menlo, Monaco, monospace; font-size: 11px; fill: #444; }
+
+      /* Shapes */
+      .box-limit { fill: #fff; stroke: #999; stroke-width: 1; rx: 5; }
+      .box-solution { fill: #f5f5f5; stroke: #666; stroke-width: 1.5; rx: 15; }
+      .box-future { fill: #fff; stroke: #333; stroke-width: 1.5; rx: 5; }
+      
+      /* Connectors */
+      .arrow { stroke: #333; stroke-width: 1.5; fill: none; marker-end: url(#arrowhead); }
+      .arrow-light { stroke: #ccc; stroke-width: 1; fill: none; }
+
+      /* Icons */
+      .icon-stroke { stroke: #333; stroke-width: 1.5; fill: none; }
+      .icon-fill { fill: #333; stroke: none; }
+    </style>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#333" />
+    </marker>
+  </defs>
+
+  <rect width="900" height="600" fill="#fff" />
+
+  <!-- Title -->
+  <!-- <text x="450" y="40" class="tufte-title" text-anchor="middle">LLM의 한계와 진화: 문제와 해법</text>
+  <text x="450" y="65" class="tufte-text" text-anchor="middle">"확률적 앵무새"에서 "신뢰할 수 있는 에이전트"로의 진화 과정</text> -->
+
+  <!-- Headers -->
+  <g transform="translate(0, 90)">
+    <text x="160" y="0" class="tufte-subtitle" text-anchor="middle">현재 문제</text>
+    <text x="450" y="0" class="tufte-subtitle" text-anchor="middle">핵심 해법</text>
+    <text x="740" y="0" class="tufte-subtitle" text-anchor="middle">미래 모습</text>
+    <line x1="50" y1="15" x2="850" y2="15" stroke="#ddd" stroke-width="1" />
+  </g>
+
+  <!-- Row 1: Hallucination -> RAG -> Reliability -->
+  <g transform="translate(50, 120)">
+    <!-- Limitation -->
+    <rect x="0" y="0" width="220" height="90" class="box-limit" />
+    <g transform="translate(110, 25)">
+       <!-- Icon: Brain with ? -->
+       <circle cx="0" cy="0" r="12" class="icon-stroke" />
+       <text x="0" y="4" text-anchor="middle" font-weight="bold" font-size="14">?</text>
+    </g>
+    <text x="110" y="55" class="tufte-label" text-anchor="middle">환각 &amp; 지식 단절</text>
+    <text x="110" y="75" class="tufte-small" text-anchor="middle">그럴듯한 거짓말, 최신 정보 부재</text>
+
+    <!-- Arrow -->
+    <path d="M220,45 L260,45" class="arrow" />
+
+    <!-- Solution -->
+    <g transform="translate(260, 20)">
+      <rect x="0" y="0" width="280" height="50" class="box-solution" />
+      <text x="140" y="20" class="tufte-label" text-anchor="middle">RAG (검색 증강 생성)</text>
+      <text x="140" y="38" class="tufte-text" text-anchor="middle">외부 지식 베이스(Vector DB) 참조</text>
+    </g>
+
+    <!-- Arrow -->
+    <path d="M540,45 L580,45" class="arrow" />
+
+    <!-- Future -->
+    <rect x="580" y="0" width="220" height="90" class="box-future" />
+    <g transform="translate(690, 25)">
+       <!-- Icon: Book/Check -->
+       <rect x="-10" y="-12" width="20" height="24" class="icon-stroke" />
+       <path d="M-5,0 L0,5 L5,-5" class="icon-stroke" />
+    </g>
+    <text x="690" y="55" class="tufte-label" text-anchor="middle">신뢰할 수 있는 지식</text>
+    <text x="690" y="75" class="tufte-small" text-anchor="middle">팩트 기반, 실시간성 확보</text>
+  </g>
+
+  <!-- Row 2: Reasoning -> Agents -> Problem Solving -->
+  <g transform="translate(50, 230)">
+    <!-- Limitation -->
+    <rect x="0" y="0" width="220" height="90" class="box-limit" />
+    <g transform="translate(110, 25)">
+       <!-- Icon: Tangled Line -->
+       <path d="M-10,0 Q-5,-10 0,0 T10,0" class="icon-stroke" />
+    </g>
+    <text x="110" y="55" class="tufte-label" text-anchor="middle">추론 능력의 한계</text>
+    <text x="110" y="75" class="tufte-small" text-anchor="middle">복잡한 논리/수학 계산 오류</text>
+
+    <!-- Arrow -->
+    <path d="M220,45 L260,45" class="arrow" />
+
+    <!-- Solution -->
+    <g transform="translate(260, 20)">
+      <rect x="0" y="0" width="280" height="50" class="box-solution" />
+      <text x="140" y="20" class="tufte-label" text-anchor="middle">CoT &amp; Agents (에이전트)</text>
+      <text x="140" y="38" class="tufte-text" text-anchor="middle">도구 사용(Tool Use)과 단계적 사고</text>
+    </g>
+
+    <!-- Arrow -->
+    <path d="M540,45 L580,45" class="arrow" />
+
+    <!-- Future -->
+    <rect x="580" y="0" width="220" height="90" class="box-future" />
+    <g transform="translate(690, 25)">
+       <!-- Icon: Gears -->
+       <circle cx="-6" cy="-6" r="6" class="icon-stroke" />
+       <circle cx="6" cy="6" r="6" class="icon-stroke" />
+    </g>
+    <text x="690" y="55" class="tufte-label" text-anchor="middle">복합 문제 해결사</text>
+    <text x="690" y="75" class="tufte-small" text-anchor="middle">계획 수립(Planning) 및 실행</text>
+  </g>
+
+  <!-- Row 3: Unimodal -> Multimodal -> Perception -->
+  <g transform="translate(50, 340)">
+    <!-- Limitation -->
+    <rect x="0" y="0" width="220" height="90" class="box-limit" />
+    <g transform="translate(110, 25)">
+       <!-- Icon: Text Only -->
+       <rect x="-10" y="-8" width="20" height="16" class="icon-stroke" />
+       <line x1="-5" y1="-2" x2="5" y2="-2" class="icon-stroke" stroke-width="1" />
+       <line x1="-5" y1="2" x2="5" y2="2" class="icon-stroke" stroke-width="1" />
+    </g>
+    <text x="110" y="55" class="tufte-label" text-anchor="middle">텍스트 감옥</text>
+    <text x="110" y="75" class="tufte-small" text-anchor="middle">시각/청각 정보 이해 불가</text>
+
+    <!-- Arrow -->
+    <path d="M220,45 L260,45" class="arrow" />
+
+    <!-- Solution -->
+    <g transform="translate(260, 20)">
+      <rect x="0" y="0" width="280" height="50" class="box-solution" />
+      <text x="140" y="20" class="tufte-label" text-anchor="middle">Multimodal (멀티모달)</text>
+      <text x="140" y="38" class="tufte-text" text-anchor="middle">이미지, 오디오 인코더 통합</text>
+    </g>
+
+    <!-- Arrow -->
+    <path d="M540,45 L580,45" class="arrow" />
+
+    <!-- Future -->
+    <rect x="580" y="0" width="220" height="90" class="box-future" />
+    <g transform="translate(690, 25)">
+       <!-- Icon: Eye -->
+       <path d="M-12,0 Q0,-10 12,0 Q0,10 -12,0" class="icon-stroke" />
+       <circle cx="0" cy="0" r="3" class="icon-fill" />
+    </g>
+    <text x="690" y="55" class="tufte-label" text-anchor="middle">세상을 보는 눈</text>
+    <text x="690" y="75" class="tufte-small" text-anchor="middle">인간 수준의 감각 통합</text>
+  </g>
+
+  <!-- Row 4: Cost -> Optimization -> On-Device -->
+  <g transform="translate(50, 450)">
+    <!-- Limitation -->
+    <rect x="0" y="0" width="220" height="90" class="box-limit" />
+    <g transform="translate(110, 25)">
+       <!-- Icon: Server/Money -->
+       <rect x="-10" y="-10" width="20" height="20" class="icon-stroke" />
+       <line x1="-10" y1="0" x2="10" y2="0" class="icon-stroke" />
+    </g>
+    <text x="110" y="55" class="tufte-label" text-anchor="middle">고비용 / 저효율</text>
+    <text x="110" y="75" class="tufte-small" text-anchor="middle">막대한 GPU 자원 필요</text>
+
+    <!-- Arrow -->
+    <path d="M220,45 L260,45" class="arrow" />
+
+    <!-- Solution -->
+    <g transform="translate(260, 20)">
+      <rect x="0" y="0" width="280" height="50" class="box-solution" />
+      <text x="140" y="20" class="tufte-label" text-anchor="middle">SLM &amp; Distillation (경량화)</text>
+      <text x="140" y="38" class="tufte-text" text-anchor="middle">지식 증류 및 양자화</text>
+    </g>
+
+    <!-- Arrow -->
+    <path d="M540,45 L580,45" class="arrow" />
+
+    <!-- Future -->
+    <rect x="580" y="0" width="220" height="90" class="box-future" />
+    <g transform="translate(690, 25)">
+       <!-- Icon: Phone -->
+       <rect x="-8" y="-12" width="16" height="24" rx="2" class="icon-stroke" />
+       <line x1="-2" y1="8" x2="2" y2="8" class="icon-stroke" />
+    </g>
+    <text x="690" y="55" class="tufte-label" text-anchor="middle">온디바이스(On-Device) AI</text>
+    <text x="690" y="75" class="tufte-small" text-anchor="middle">개인화 및 프라이버시 보호</text>
+  </g>
+
+  <!-- Bottom Insight -->
+  <text x="450" y="580" class="tufte-text" text-anchor="middle" font-style="italic">
+    "단순한 텍스트 생성기를 넘어, 신뢰할 수 있고 효율적인 문제 해결 도구로 진화 중"
+  </text>
+
+</svg>

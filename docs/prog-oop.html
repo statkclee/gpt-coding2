@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" xml:lang="ko-KR"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.16">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="이광춘(Openai)">
+
+<title>33&nbsp; 객체지향 프로그래밍 – 챗GPT 코딩(개정판)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./prog-fp.html" rel="next">
+<link href="./prog-imperative.html" rel="prev">
+<link href="./images/logo.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-8ee146c0b749343448e797d10b61a7f9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-55f79cb6abf2a16ff6075165a9063c3c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "일치 없음",
+    "search-matching-documents-text": "일치된 문서",
+    "search-copy-link-title": "검색 링크 복사",
+    "search-hide-matches-text": "추가 검색 결과 숨기기",
+    "search-more-match-text": "추가 검색결과",
+    "search-more-matches-text": "추가 검색결과",
+    "search-clear-button-title": "제거",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "취소",
+    "search-submit-button-title": "검색",
+    "search-label": "검색"
+  }
+}</script>
+
+<script type="text/javascript">
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-229551680-1', 'auto');
+
+ga('send', {
+  hitType: 'pageview',
+  'anonymizeIp': true,
+});
+</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./prog-paradigm.html"><strong>5부</strong> 프로그래밍 패러다임</a></li><li class="breadcrumb-item"><a href="./prog-oop.html"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">객체지향 프로그래밍</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="검색" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">챗GPT 코딩(개정판)</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/bit2r/gpt-coding/" title="소스 코드" class="quarto-navigation-tool px-1" aria-label="소스 코드"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="리더 모드 전환">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="검색"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">서문</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>1부</strong> 전통 프로그래밍</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">프로그래밍 시작하기</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-var.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">변수, 표현식, 문장</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-cont.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">조건부 실행</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-func.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">함수</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-loop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">반복문</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>2부</strong> 자료구조</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-data-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">데이터, AI 식량</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-string.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">문자열</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-file.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">파일</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-list.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">리스트</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-dictionaries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">딕셔너리</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-tuples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">튜플</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-dataframe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">데이터프레임</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-json.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">JSON</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18-tensor.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">텐서</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-embedding.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">벡터와 임베딩</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-graph.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">그래프</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>3부</strong> 버전제어와 협업</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Git 시작하기</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-tracking.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">변경사항 추적</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-history.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">히스토리와 파일 관리</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-remote.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">GitHub와 원격 저장소</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-collab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">협업과 충돌 해결</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">오픈 사이언스</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>4부</strong> 분야별 코딩</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">특화 도구 입문</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-regex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">정규 표현식</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-network.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-web.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">웹서비스</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-database.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">데이터베이스와 SQL</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-ds.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">데이터 과학과 R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-auto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">파일 자동화</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-make.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">빌드 자동화: make</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>5부</strong> 프로그래밍 패러다임</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-paradigm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">패러다임의 이해</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-imperative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">명령형과 절차적 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-oop.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">객체지향 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-fp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">함수형 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-declarative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">선언형 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-reactive.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">반응형 프로그래밍</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>6부</strong> 소프트웨어 설계와 아키텍처</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-reuse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">재사용 명령</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-stack.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">소프트웨어 스택</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">소프트웨어 아키텍처</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-pattern.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">살아남은 패턴</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>7부</strong> 기계학습 패러다임</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-paradigm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">소프트웨어 2.0</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">신경망 아키텍처</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">43</span>&nbsp; <span class="chapter-title">학습과 추론</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-to-llm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">44</span>&nbsp; <span class="chapter-title">트랜스포머에서 거대 언어모형으로</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>부록</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">용어사전</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">참고문헌</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">목차</h2>
+   
+  <ul>
+  <li><a href="#sec-oop-localization" id="toc-sec-oop-localization" class="nav-link active" data-scroll-target="#sec-oop-localization"><span class="header-section-number">33.1</span> 변경의 지역화</a></li>
+  <li><a href="#sec-oop-interface" id="toc-sec-oop-interface" class="nav-link" data-scroll-target="#sec-oop-interface"><span class="header-section-number">33.2</span> 인터페이스: 계약으로 설계</a></li>
+  <li><a href="#sec-oop-polymorphism" id="toc-sec-oop-polymorphism" class="nav-link" data-scroll-target="#sec-oop-polymorphism"><span class="header-section-number">33.3</span> 다형성</a>
+  <ul class="collapse">
+  <li><a href="#sec-oop-duck-typing" id="toc-sec-oop-duck-typing" class="nav-link" data-scroll-target="#sec-oop-duck-typing"><span class="header-section-number">33.3.1</span> 덕 타이핑</a></li>
+  </ul></li>
+  <li><a href="#sec-oop-composition" id="toc-sec-oop-composition" class="nav-link" data-scroll-target="#sec-oop-composition"><span class="header-section-number">33.4</span> 조합: 상속보다 유연한 재사용</a></li>
+  <li><a href="#sec-oop-debug" id="toc-sec-oop-debug" class="nav-link" data-scroll-target="#sec-oop-debug"><span class="header-section-number">33.5</span> 디버깅: OOP 특유의 함정</a></li>
+  <li><a href="#생각해볼-점" id="toc-생각해볼-점" class="nav-link" data-scroll-target="#생각해볼-점">💡 생각해볼 점</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/prog-oop.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./prog-paradigm.html"><strong>5부</strong> 프로그래밍 패러다임</a></li><li class="breadcrumb-item"><a href="./prog-oop.html"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">객체지향 프로그래밍</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-oop" class="quarto-section-identifier"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">객체지향 프로그래밍</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p> </p>
+<p>1960년대 후반, 소프트웨어 산업은 위기에 직면했다. 하드웨어 성능은 기하급수적으로 향상되었지만, 소프트웨어 개발은 그 속도를 따라가지 못했다. 프로젝트는 예산을 초과하고, 일정은 지연되며, 납품된 시스템은 버그투성이였다. 1968년 NATO 컨퍼런스에서 이 현상에 <strong>소프트웨어 위기(Software Crisis)</strong>라는 이름이 붙었다. 문제의 핵심은 명확했다: 절차적 프로그래밍으로는 <strong>대규모 시스템의 복잡성</strong>을 감당할 수 없었다.</p>
+<p>앞 장에서 살펴본 학생 관리 예제가 바로 그 축소판이다. 학생 100명을 관리하려면 300개의 변수가 필요했고, <code>student47_name</code>과 <code>student47_scores</code>가 같은 학생을 가리킨다는 보장이 없었다. 함수를 추가할수록 어떤 함수가 어떤 데이터를 건드리는지 파악하기 어려워졌다. 한 곳을 수정하면 예상치 못한 곳에서 버그가 터졌다. 프로그램이 커질수록 복잡성은 선형이 아니라 기하급수적으로 증가했다.</p>
+<div id="fig-oop-overview" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-oop-overview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/oop-overview.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-oop-overview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;33.1: 객체지향의 핵심: 변경의 지역화
+</figcaption>
+</figure>
+</div>
+<p>객체지향 프로그래밍(OOP)은 <strong>복잡성을 분할</strong>하기 위해 탄생했다. 1967년 노르웨이에서 Ole-Johan Dahl과 Kristen Nygaard가 만든 Simula가 시초다. 항만 시뮬레이션을 개발하면서 배, 고객, 창고를 각각 <strong>독립된 단위</strong>로 묶었더니 시스템 전체를 한꺼번에 이해하지 않아도 됐다. 배의 동작을 수정해도 창고 코드는 건드릴 필요가 없었다. 복잡한 시스템을 <strong>변경해도 영향 범위가 제한</strong>되는 구조—바로 여기서 OOP의 핵심 가치가 드러난다.</p>
+<section id="sec-oop-localization" class="level2" data-number="33.1">
+<h2 data-number="33.1" class="anchored" data-anchor-id="sec-oop-localization"><span class="header-section-number">33.1</span> 변경의 지역화</h2>
+<p> </p>
+<p>OOP의 진짜 목적은 코드 재사용이 아니다. 상속을 통한 재사용은 OOP의 부산물일 뿐, 핵심 가치는 <strong>변경의 지역화(Localization of Change)</strong>다. 잘 설계된 객체는 내부 구현이 바뀌어도 외부 인터페이스가 유지된다. 100군데에서 호출되는 코드를 수정할 때, 캡슐화가 잘 되어 있으면 한 곳만 고치면 된다.</p>
+<p>앞 장의 학생 문제를 OOP로 해결해보자. 절차적 방식에서는 데이터(<code>scores</code>)와 함수(<code>get_average()</code>)가 분리되어 있었다. 평균 계산 방식을 바꾸려면 <code>get_average()</code> 함수를 찾아 수정해야 하는데, <code>get_average()</code>가 학생 점수 외에 다른 데이터에도 사용되고 있다면 영향 범위를 파악하기 어렵다.</p>
+<div id="oop-student-class" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Student:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""학생 데이터와 관련 연산을 하나로 묶는다"""</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name, scores):</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.name <span class="op">=</span> name</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._scores <span class="op">=</span> scores  <span class="co"># 내부 구현: 리스트</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> average(<span class="va">self</span>):</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">sum</span>(<span class="va">self</span>._scores) <span class="op">/</span> <span class="bu">len</span>(<span class="va">self</span>._scores)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> is_passing(<span class="va">self</span>, threshold<span class="op">=</span><span class="dv">60</span>):</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.average() <span class="op">&gt;=</span> threshold</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터와 연산이 하나의 단위로 묶였다</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>kim <span class="op">=</span> Student(<span class="st">"김철수"</span>, [<span class="dv">85</span>, <span class="dv">90</span>, <span class="dv">78</span>])</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>lee <span class="op">=</span> Student(<span class="st">"이영희"</span>, [<span class="dv">92</span>, <span class="dv">88</span>, <span class="dv">95</span>])</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>kim<span class="sc">.</span>name<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>kim<span class="sc">.</span>average()<span class="sc">:.1f}</span><span class="ss">"</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>lee<span class="sc">.</span>name<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>lee<span class="sc">.</span>average()<span class="sc">:.1f}</span><span class="ss">, 합격: </span><span class="sc">{</span>lee<span class="sc">.</span>is_passing()<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>김철수: 84.3
+이영희: 91.7, 합격: True</code></pre>
+</div>
+</div>
+<p><code>_scores</code>에 언더스코어를 붙인 건 “내부 구현”이라는 신호다. 외부에서는 <code>average()</code>와 <code>is_passing()</code> 메서드만 사용하면 된다. 나중에 점수 저장 방식을 리스트에서 딕셔너리로 바꾸거나, 가중 평균으로 계산 로직을 변경해도 <strong>외부 코드는 수정할 필요가 없다</strong>. 변경이 <code>Student</code> 클래스 내부에 <strong>지역화</strong>된 것이다.</p>
+<div id="fig-oop-class" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-oop-class-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/oop-class.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-oop-class-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;33.2: 클래스 경계: 인터페이스와 구현의 분리
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-oop-class" class="quarto-xref">그림&nbsp;<span>33.2</span></a> 는 변경의 지역화가 실제로 어떻게 작동하는지 보여준다. <code>average()</code> 메서드의 내부 구현이 <code>sum(s)/len(s)</code>에서 <code>mean(self._scores)</code>로 바뀌었다고 가정하자. 클래스 정의에서 <code>average()</code> 메서드 한 곳만 수정하면 된다. <code>kim</code> 객체와 <code>lee</code> 객체는 여전히 <code>kim.average()</code>를 호출하고, 결과값 84.3과 91.7도 동일하게 반환된다. 외부 코드는 수정할 필요가 없다. 만약 <code>average()</code>를 100군데에서 호출하고 있었다면, 절차적 방식에서는 100군데를 일일이 확인해야 했겠지만, 캡슐화된 클래스에서는 한 곳만 고치면 된다. 이것이 OOP가 대규모 시스템에서 유지보수를 가능하게 만드는 핵심 원리다.</p>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">노트</span>self의 정체
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>파이썬 초보자가 가장 혼란스러워하는 부분이 <code>self</code>다. 메서드 정의에는 <code>self</code>가 있는데, 호출할 때는 전달하지 않는다. 비밀은 파이썬이 자동으로 변환한다는 점에 있다. <code>kim.average()</code>를 호출하면 파이썬은 내부적으로 <code>Student.average(kim)</code>으로 바꾼다. <code>self</code>는 “호출한 객체 자신”을 가리키는 관례적 이름일 뿐, <code>this</code>나 <code>me</code>로 써도 동작한다. 다만 파이썬 커뮤니티의 강력한 관습이므로 <code>self</code>를 고수하라. 메서드는 일반 함수와 다르지 않다—단지 첫 번째 인자로 객체를 받도록 설계된 함수일 뿐이다.</p>
+</div>
+</div>
+</section>
+<section id="sec-oop-interface" class="level2" data-number="33.2">
+<h2 data-number="33.2" class="anchored" data-anchor-id="sec-oop-interface"><span class="header-section-number">33.2</span> 인터페이스: 계약으로 설계</h2>
+<p> </p>
+<p>앞 절에서 <code>average()</code> 메서드의 내부 구현을 바꿔도 외부 코드가 영향받지 않는다고 했다. 그런데 한 가지 전제가 있다. <code>average()</code>라는 <strong>메서드 이름</strong>, <strong>매개변수</strong>, <strong>반환값 타입</strong>이 그대로 유지되어야 한다. 만약 메서드 이름을 <code>calc_avg()</code>로 바꾸거나, 반환값을 <code>float</code>에서 <code>dict</code>로 바꾼다면? <code>kim.average()</code>를 호출하던 100군데 코드가 모두 깨진다. 변경의 지역화가 작동하려면 <strong>안정된 인터페이스</strong>가 전제 조건이다.</p>
+<p>인터페이스는 “이 객체가 무엇을 할 수 있는가”를 정의하는 <strong>계약(Contract)</strong>이다. 계약은 구현 방법이 아니라 <strong>약속</strong>을 명시한다. “이 객체에 <code>average()</code>를 호출하면 <code>float</code>를 반환한다”는 약속이 계약이다. 내부에서 <code>sum()/len()</code>을 쓰든 <code>statistics.mean()</code>을 쓰든 <code>numpy.mean()</code>을 쓰든 상관없다. 계약만 지키면 외부 코드는 깨지지 않는다. 반대로 말하면, 인터페이스를 함부로 바꾸면 변경의 지역화가 무너진다. 인터페이스 설계에 시간을 투자해야 하는 이유다.</p>
+<p>데이터 과학에서 가장 성공적인 인터페이스 사례가 scikit-learn의 <code>fit()</code>과 <code>predict()</code>다. 수백 개의 모델이 같은 계약을 따른다. <code>model.fit(X, y)</code>로 학습하고 <code>model.predict(X)</code>로 예측한다. 내부 알고리즘이 선형 회귀든, 결정 트리든, 신경망이든 사용법은 동일하다. 덕분에 모델을 교체해도 파이프라인 코드를 수정할 필요가 없다.</p>
+<div id="oop-interface" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BaseModel:</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""모델 인터페이스 정의: fit()과 predict() 계약"""</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.is_fitted <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> fit(<span class="va">self</span>, X, y):</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""학습 데이터로 모델을 훈련한다"""</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">NotImplementedError</span>(<span class="st">"구현 필요"</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> predict(<span class="va">self</span>, X):</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""새 데이터에 대해 예측한다"""</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> <span class="va">self</span>.is_fitted:</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">RuntimeError</span>(<span class="st">"fit()을 먼저 호출하세요"</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._predict(X)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _predict(<span class="va">self</span>, X):</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">NotImplementedError</span>(<span class="st">"구현 필요"</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><code>BaseModel</code>은 구체적인 알고리즘을 구현하지 않는다. 대신 “모든 모델은 <code>fit()</code>과 <code>predict()</code>를 가져야 한다”는 <strong>계약</strong>을 선언한다. 실제 구현은 자식 클래스가 담당한다.</p>
+<div id="oop-implementations" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MeanPredictor(BaseModel):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""가장 단순한 모델: 항상 평균값 예측"""</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> fit(<span class="va">self</span>, X, y):</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.mean_ <span class="op">=</span> <span class="bu">sum</span>(y) <span class="op">/</span> <span class="bu">len</span>(y)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.is_fitted <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _predict(<span class="va">self</span>, X):</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [<span class="va">self</span>.mean_] <span class="op">*</span> <span class="bu">len</span>(X)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LinearTrend(BaseModel):</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""단순 선형 추세 모델"""</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> fit(<span class="va">self</span>, X, y):</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        n <span class="op">=</span> <span class="bu">len</span>(X)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        sum_x, sum_y <span class="op">=</span> <span class="bu">sum</span>(X), <span class="bu">sum</span>(y)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        sum_xy <span class="op">=</span> <span class="bu">sum</span>(x <span class="op">*</span> yi <span class="cf">for</span> x, yi <span class="kw">in</span> <span class="bu">zip</span>(X, y))</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        sum_xx <span class="op">=</span> <span class="bu">sum</span>(x <span class="op">*</span> x <span class="cf">for</span> x <span class="kw">in</span> X)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.slope_ <span class="op">=</span> (n <span class="op">*</span> sum_xy <span class="op">-</span> sum_x <span class="op">*</span> sum_y) <span class="op">/</span> (n <span class="op">*</span> sum_xx <span class="op">-</span> sum_x <span class="op">**</span> <span class="dv">2</span>)</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.intercept_ <span class="op">=</span> (sum_y <span class="op">-</span> <span class="va">self</span>.slope_ <span class="op">*</span> sum_x) <span class="op">/</span> n</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.is_fitted <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _predict(<span class="va">self</span>, X):</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [<span class="va">self</span>.slope_ <span class="op">*</span> x <span class="op">+</span> <span class="va">self</span>.intercept_ <span class="cf">for</span> x <span class="kw">in</span> X]</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><code>MeanPredictor</code>는 단순히 평균을 반환하고, <code>LinearTrend</code>는 선형 회귀를 수행한다. 내부 구현은 완전히 다르지만 <strong>인터페이스는 동일</strong>하다. 두 모델을 실제로 사용해보자.</p>
+<div id="oop-interface-usage" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 학습 데이터: x=시간, y=매출</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">22</span>, <span class="dv">28</span>, <span class="dv">41</span>, <span class="dv">52</span>]</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># MeanPredictor: 평균만 예측</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>mean_model <span class="op">=</span> MeanPredictor()</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>mean_model.fit(X, y)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"MeanPredictor 예측: </span><span class="sc">{</span>mean_model<span class="sc">.</span>predict([<span class="dv">6</span>, <span class="dv">7</span>])<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># LinearTrend: 선형 추세 예측</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>linear_model <span class="op">=</span> LinearTrend()</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>linear_model.fit(X, y)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"LinearTrend 예측: </span><span class="sc">{</span>[<span class="ss">f'</span><span class="sc">{</span>p<span class="sc">:.1f}</span><span class="ss">'</span> <span class="cf">for</span> p <span class="kw">in</span> linear_model.predict([<span class="dv">6</span>, <span class="dv">7</span>])]<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>MeanPredictor 예측: [30.6, 30.6]
+LinearTrend 예측: ['61.5', '71.8']</code></pre>
+</div>
+</div>
+<p>두 모델 모두 <code>fit(X, y)</code>로 학습하고 <code>predict(X)</code>로 예측한다. 호출 방식이 동일하므로 모델을 교체해도 사용하는 쪽 코드는 수정할 필요가 없다.</p>
+<div id="fig-oop-inheritance" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-oop-inheritance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/oop-inheritance.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-oop-inheritance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;33.3: 인터페이스: 계약과 구현의 분리
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-oop-inheritance" class="quarto-xref">그림&nbsp;<span>33.3</span></a> 는 계약으로서의 인터페이스가 어떻게 작동하는지 보여준다. 상단의 <code>BaseModel</code>이 계약이다. “이 객체는 <code>fit()</code>과 <code>predict()</code>를 제공한다”라는 약속만 정의하고, 구체적인 구현은 비워둔다. 하단의 <code>MeanPredictor</code>, <code>LinearTrend</code>, 그리고 미래에 추가될 <code>NeuralNet</code>은 각각 계약을 이행하는 구현체다. <code>MeanPredictor</code>는 평균을 저장하고, <code>LinearTrend</code>는 회귀 계수를 계산하며, <code>NeuralNet</code>은 역전파로 가중치를 학습한다. 내부 알고리즘은 완전히 다르지만, 외부에서 보면 모두 “학습하고 예측하는 객체”일 뿐이다.</p>
+<p>핵심은 하단의 <code>evaluate()</code> 함수다. <code>model.fit(X, y); model.predict(X)</code>라는 두 줄만 작성하면 어떤 모델이든 동작한다. <code>MeanPredictor</code>를 전달하든 <code>LinearTrend</code>를 전달하든 <code>evaluate()</code> 코드는 수정할 필요가 없다. 내년에 <code>NeuralNet</code>을 추가해도 마찬가지다. 계약만 지키면 클라이언트 코드는 영향받지 않는다. 인터페이스가 <strong>확장에는 열려 있고, 수정에는 닫혀 있는</strong> 구조를 만드는 것이다.</p>
+</section>
+<section id="sec-oop-polymorphism" class="level2" data-number="33.3">
+<h2 data-number="33.3" class="anchored" data-anchor-id="sec-oop-polymorphism"><span class="header-section-number">33.3</span> 다형성</h2>
+<p> </p>
+<p>앞 절에서 인터페이스를 “계약”이라고 정의했다. 다형성(Polymorphism)은 그 계약의 <strong>실행 시점 해석</strong>이다. 컴파일 시점에는 <code>model.predict()</code>가 어떤 코드를 실행할지 결정되지 않는다. 런타임에 <code>model</code> 변수에 실제로 담긴 객체가 무엇인지에 따라 실행 경로가 달라진다. 인터페이스가 “무엇을 할 수 있는가”를 정의한다면, 다형성은 “<strong>같은 호출이 상황에 따라 다르게 동작한다</strong>”는 것을 보장한다.</p>
+<div id="oop-polymorphism" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 학습 데이터</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> [<span class="fl">2.1</span>, <span class="fl">4.0</span>, <span class="fl">5.9</span>, <span class="fl">8.1</span>, <span class="fl">10.0</span>]</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> [<span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>]</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 런타임에 어떤 모델인지 결정된다</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> [MeanPredictor(), LinearTrend()]</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> model <span class="kw">in</span> models:</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    model.fit(X_train, y_train)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    preds <span class="op">=</span> model.predict(X_test)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>model<span class="sc">.</span><span class="va">__class__</span><span class="sc">.</span><span class="va">__name__</span><span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>[<span class="ss">f'</span><span class="sc">{</span>p<span class="sc">:.1f}</span><span class="ss">'</span> <span class="cf">for</span> p <span class="kw">in</span> preds]<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>MeanPredictor: ['6.0', '6.0', '6.0']
+LinearTrend: ['12.0', '14.0', '16.0']</code></pre>
+</div>
+</div>
+<p>동일한 <code>model.predict(X_test)</code> 호출이 첫 번째 반복에서는 평균값을 반환하고, 두 번째 반복에서는 선형 회귀 예측값을 반환한다. 코드를 작성할 때가 아니라 <strong>실행할 때</strong> 동작이 결정된다. 이 유연함이 플러그인 아키텍처, 전략 패턴, 의존성 주입의 기반이 된다. 설정 파일이나 사용자 입력에 따라 알고리즘을 동적으로 교체할 수 있다.</p>
+<p>다형성이 주는 진짜 이점은 <strong>조건 분기의 제거</strong>다. 다형성 없이 여러 모델을 처리하려면 <code>if-elif-else</code> 사슬이 필요하다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 다형성 없이: 타입마다 분기</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> predict_without_polymorphism(model_type, X):</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> model_type <span class="op">==</span> <span class="st">"mean"</span>:</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [mean_value] <span class="op">*</span> <span class="bu">len</span>(X)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> model_type <span class="op">==</span> <span class="st">"linear"</span>:</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [slope <span class="op">*</span> x <span class="op">+</span> intercept <span class="cf">for</span> x <span class="kw">in</span> X]</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> model_type <span class="op">==</span> <span class="st">"neural"</span>:</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> neural_forward(X)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 새 모델 추가 시 여기를 수정해야...</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>모델이 추가될 때마다 이 함수를 수정해야 한다. 반면 다형성을 사용하면 <code>model.predict(X)</code> 한 줄로 끝난다. 새 모델이 추가되어도 호출 코드는 건드리지 않는다. <strong>열린-닫힌 원칙(Open-Closed Principle)</strong>—확장에는 열려 있고, 수정에는 닫혀 있다—이 실현되는 방식이다.</p>
+<p> </p>
+<p>열린-닫힌 원칙은 1988년 버트란드 마이어(Bertrand Meyer)가 『객체지향 소프트웨어 구성』<span class="citation" data-cites="Meyer1988OOSC"><a href="references.html#ref-Meyer1988OOSC" role="doc-biblioref">[1]</a></span>에서 처음 명명했다. 이후 로버트 마틴(Robert C. Martin)이 『애자일 소프트웨어 개발』<span class="citation" data-cites="Martin2002Agile"><a href="references.html#ref-Martin2002Agile" role="doc-biblioref">[2]</a></span>에서 SOLID 원칙의 두 번째 글자 ’O’로 정립하면서 널리 알려졌다. 핵심 통찰은 <strong>기존 코드를 수정하지 않고도 시스템을 확장할 수 있어야 한다</strong>는 것이다. 수정은 버그를 만들고, 테스트를 무효화하며, 의존하는 모든 코드에 파급된다. 반면 확장은 새 코드를 추가할 뿐 기존 코드를 건드리지 않는다.</p>
+<p>OOP에서 열린-닫힌 원칙이 자연스럽게 구현되는 이유는 <strong>다형성</strong> 덕분이다. 인터페이스를 정의하고 구현체를 분리하면, 새 구현체를 추가해도 인터페이스를 사용하는 코드는 변경할 필요가 없다. <code>BaseModel</code>을 사용하는 수백 개의 함수가 있어도 <code>NeuralNet</code> 클래스를 추가하는 순간 모든 함수에서 동작한다. 기존 함수를 열어서 <code>elif model_type == "neural"</code>을 추가할 필요가 없다.</p>
+<p>다른 패러다임에서도 유사한 개념이 존재한다. 함수형 프로그래밍에서는 <strong>고차 함수(Higher-Order Function)</strong>가 비슷한 역할을 한다. 동작을 함수로 전달받으면 기존 함수를 수정하지 않고 새 동작을 주입할 수 있다. 파이썬의 <code>sorted(data, key=fn)</code>가 예시다—정렬 알고리즘은 그대로 두고 <code>key</code> 함수만 바꿔서 정렬 기준을 확장한다. 절차적 프로그래밍에서는 함수 포인터나 콜백으로 유사하게 구현할 수 있지만, 언어 수준의 체계적인 지원이 부족하다. OOP는 클래스 계층, 인터페이스, 다형성이라는 일관된 메커니즘으로 열린-닫힌 원칙을 <strong>설계 시점부터</strong> 강제할 수 있다는 점에서 차별화된다.</p>
+<section id="sec-oop-duck-typing" class="level3" data-number="33.3.1">
+<h3 data-number="33.3.1" class="anchored" data-anchor-id="sec-oop-duck-typing"><span class="header-section-number">33.3.1</span> 덕 타이핑</h3>
+<p> </p>
+<p>Java나 C++에서 다형성은 상속이나 인터페이스 구현을 통해서만 가능하다. 클래스 선언 시점에 “나는 <code>Predictable</code> 인터페이스를 구현한다”고 명시해야 한다. 파이썬은 다르다. <strong>실행 시점에 메서드가 존재하는지</strong>만 확인한다. 타입을 묻지 않는다.</p>
+<div id="oop-duck-typing" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># BaseModel을 상속하지 않는 완전히 독립된 클래스</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> RandomGuess:</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""랜덤 예측기 - 상속 없음, 인터페이스 선언 없음"""</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, seed<span class="op">=</span><span class="dv">42</span>):</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>        <span class="im">import</span> random</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.rng <span class="op">=</span> random.Random(seed)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> fit(<span class="va">self</span>, X, y):</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.min_val, <span class="va">self</span>.max_val <span class="op">=</span> <span class="bu">min</span>(y), <span class="bu">max</span>(y)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> predict(<span class="va">self</span>, X):</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [<span class="va">self</span>.rng.uniform(<span class="va">self</span>.min_val, <span class="va">self</span>.max_val) <span class="cf">for</span> _ <span class="kw">in</span> X]</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 상속 관계 없이도 같은 방식으로 동작</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>random_model <span class="op">=</span> RandomGuess()</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>random_model.fit(X_train, y_train)</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>preds <span class="op">=</span> random_model.predict(X_test)</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"RandomGuess: </span><span class="sc">{</span>[<span class="ss">f'</span><span class="sc">{</span>p<span class="sc">:.1f}</span><span class="ss">'</span> <span class="cf">for</span> p <span class="kw">in</span> preds]<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>RandomGuess: ['7.2', '2.3', '4.3']</code></pre>
+</div>
+</div>
+<p><code>RandomGuess</code>는 <code>BaseModel</code>과 아무런 관계가 없다. 상속도 없고, <code>BaseModel</code>을 import하지도 않는다. 그러나 <code>fit()</code>과 <code>predict()</code> 메서드를 가지므로 기존 코드와 함께 동작한다. 파이썬 인터프리터는 “이 객체가 <code>MeanPredictor</code>의 서브클래스인가?”라고 묻지 않는다. “이 객체에 <code>fit()</code> 메서드가 있는가?”만 확인한다.</p>
+<div id="fig-oop-duck-typing" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-oop-duck-typing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/oop-duck-typing.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-oop-duck-typing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;33.4: 덕 타이핑: 타입이 아닌 행동으로 판단
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-oop-duck-typing" class="quarto-xref">그림&nbsp;<span>33.4</span></a> 는 덕 타이핑의 핵심을 보여준다. <code>Duck</code>, <code>Person</code>, <code>RubberDuck</code>은 상속 관계가 전혀 없는 독립된 클래스다. 공통 조상도 없고, 인터페이스 선언도 없다. 그러나 세 클래스 모두 <code>quack()</code> 메서드를 가지므로 <code>make_sound()</code> 함수에서 동일하게 동작한다. 파이썬의 질문은 단 하나다: “<code>quack()</code> 메서드가 있는가?” 타입은 묻지 않는다.</p>
+<p>“오리처럼 걷고 오리처럼 꽥꽥거리면, 그것은 오리다”—덕 타이핑의 철학이다. 정적 타입 언어에서는 클래스 계층을 미리 설계해야 하지만, 파이썬에서는 사후에 호환되는 클래스를 추가할 수 있다. 외부 라이브러리의 클래스를 수정하지 않고도 기존 함수와 함께 사용할 수 있다.</p>
+<p>물론 트레이드오프가 있다. 타입 검사가 없으므로 런타임에야 오류가 드러난다. <code>quack()</code> 대신 <code>quak()</code>이라고 오타를 내도 컴파일러가 잡아주지 않는다. 실행해봐야 <code>AttributeError</code>가 발생한다. 이런 위험을 줄이려면 <strong>타입 힌트</strong>와 <code>mypy</code> 같은 정적 분석 도구를 함께 사용하라. 또는 <code>hasattr(obj, 'quack')</code>로 메서드 존재 여부를 명시적으로 확인할 수도 있다.</p>
+</section>
+</section>
+<section id="sec-oop-composition" class="level2" data-number="33.4">
+<h2 data-number="33.4" class="anchored" data-anchor-id="sec-oop-composition"><span class="header-section-number">33.4</span> 조합: 상속보다 유연한 재사용</h2>
+<p> </p>
+<p>OOP 초보자는 코드 재사용을 위해 상속을 남용한다. 그러나 상속은 <strong>강한 결합</strong>을 만든다. 부모를 수정하면 모든 자식이 영향받는다. <strong>조합(Composition)</strong>은 더 유연한 대안이다: 객체를 상속하는 대신 <strong>속성으로 포함</strong>한다.</p>
+<div id="fig-oop-composition" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-oop-composition-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/oop-composition.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-oop-composition-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;33.5: 조합 vs 상속: 상속은 계층 구조 고정, 조합은 부품을 독립적으로 교체
+</figcaption>
+</figure>
+</div>
+<p>1994년 출간된 『디자인 패턴』<span class="citation" data-cites="GoF1994"><a href="references.html#ref-GoF1994" role="doc-biblioref">[3]</a></span>에서 4인방(Gang of Four: 에리히 감마, 리처드 헬름, 랄프 존슨, 존 블리시디스)은 “<strong>상속보다 조합을 선호하라(Favor composition over inheritance)</strong>”는 원칙을 제시했다. 상속이 <strong>컴파일 타임</strong>에 관계를 고정하는 반면, 조합은 <strong>런타임</strong>에 부품을 교체할 수 있기 때문이다. 스케일러를 표준화(StandardScaler)에서 정규화(MinMaxScaler)로 바꾸고 싶다면, 상속 구조에서는 새 클래스를 만들어야 한다. 조합에서는 <code>self.scaler = MinMaxScaler()</code>로 한 줄만 수정하면 된다.</p>
+<div id="oop-composition" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Scaler:</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""데이터 스케일링 담당"""</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> fit(<span class="va">self</span>, data):</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.min_ <span class="op">=</span> <span class="bu">min</span>(data)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.max_ <span class="op">=</span> <span class="bu">max</span>(data)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> transform(<span class="va">self</span>, data):</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>        rng <span class="op">=</span> <span class="va">self</span>.max_ <span class="op">-</span> <span class="va">self</span>.min_</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [(x <span class="op">-</span> <span class="va">self</span>.min_) <span class="op">/</span> rng <span class="cf">if</span> rng <span class="op">!=</span> <span class="dv">0</span> <span class="cf">else</span> <span class="dv">0</span> <span class="cf">for</span> x <span class="kw">in</span> data]</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ModelWithScaler:</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""스케일러를 '포함'하는 모델 (상속 아님)"""</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, model):</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.model <span class="op">=</span> model              <span class="co"># 조합: 모델을 속성으로</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.scaler <span class="op">=</span> Scaler()          <span class="co"># 조합: 스케일러를 속성으로</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> fit(<span class="va">self</span>, X, y):</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>        X_scaled <span class="op">=</span> <span class="va">self</span>.scaler.fit(X).transform(X)</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.model.fit(X_scaled, y)</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> predict(<span class="va">self</span>, X):</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>        X_scaled <span class="op">=</span> <span class="va">self</span>.scaler.transform(X)</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.model.predict(X_scaled)</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a><span class="co"># 어떤 모델이든 스케일러와 조합 가능</span></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>scaled_model <span class="op">=</span> ModelWithScaler(LinearTrend())</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>scaled_model.fit(X_train, y_train)</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"스케일링 적용: </span><span class="sc">{</span>[<span class="ss">f'</span><span class="sc">{</span>p<span class="sc">:.1f}</span><span class="ss">'</span> <span class="cf">for</span> p <span class="kw">in</span> scaled_model.predict(X_test)]<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>스케일링 적용: ['12.0', '14.0', '16.0']</code></pre>
+</div>
+</div>
+<p><code>ModelWithScaler</code>는 <code>LinearTrend</code>를 상속하지 않는다. 대신 <code>self.model</code>에 모델 객체를 <strong>포함</strong>한다. 장점은 명확하다: <code>MeanPredictor</code>, <code>RandomGuess</code>, 외부 라이브러리 모델까지 어떤 것이든 조합할 수 있다. 스케일러 구현을 바꿔도 모델은 영향받지 않고, 모델을 바꿔도 스케일러는 영향받지 않는다. 각 부품이 <strong>독립적으로 변경 가능</strong>하다.</p>
+<p>조합의 핵심 메커니즘은 <strong>위임(Delegation)</strong>이다. <code>ModelWithScaler.fit()</code>은 직접 학습하지 않고 <code>self.model.fit()</code>에 작업을 <strong>위임</strong>한다. 자신이 모든 걸 구현하는 대신, 적합한 부품에 요청을 전달한다. 상속이 “나는 부모다”라면, 조합은 “나는 부품들을 조율한다”이다. 오케스트라 지휘자가 직접 악기를 연주하지 않듯, <code>ModelWithScaler</code>는 실제 계산을 부품에 맡기고 흐름만 조율한다.</p>
+<p>조합은 <strong>의존성 주입(Dependency Injection)</strong>의 기반이기도 하다. <code>__init__(self, model)</code>에서 모델을 외부에서 주입받으므로, 테스트 시 실제 모델 대신 Mock 객체를 넣을 수 있다. 데이터베이스 연결, 외부 API 호출처럼 테스트하기 어려운 부품을 가짜로 대체하면 단위 테스트가 쉬워진다. 상속 구조에서는 부모 클래스를 통째로 모킹해야 하므로 테스트가 복잡해진다.</p>
+<p>상속은 “is-a” 관계가 명확할 때만 사용하라. <code>LinearTrend</code><strong>는</strong> <code>BaseModel</code><strong>이다</strong>—자연스럽다. 그러나 <code>ModelWithScaler</code><strong>는</strong> <code>LinearTrend</code><strong>이다</strong>—어색하다. 어색한 상속은 조합으로 대체하라.</p>
+<div class="callout callout-style-simple callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">경고</span>상속 계층이 깊어지면 위험 신호
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>3단계 이상의 상속 계층(<code>A → B → C → D</code>)은 대부분 설계 문제를 암시한다. 자식 클래스가 부모의 일부 메서드만 필요하거나, 부모 클래스 변경이 예상치 못한 자식에 영향을 미친다면 상속 대신 조합을 고려하라. scikit-learn의 <code>Pipeline</code>이 대표적인 조합 사례다. <code>Pipeline([('scaler', StandardScaler()), ('model', LinearRegression())])</code>처럼 변환기와 모델을 상속 없이 <strong>리스트로 조합</strong>한다. 각 단계는 독립적이고, 순서를 바꾸거나 부품을 교체하기 쉽다.</p>
+</div>
+</div>
+</section>
+<section id="sec-oop-debug" class="level2" data-number="33.5">
+<h2 data-number="33.5" class="anchored" data-anchor-id="sec-oop-debug"><span class="header-section-number">33.5</span> 디버깅: OOP 특유의 함정</h2>
+<p> </p>
+<p>OOP 코드에서 자주 발생하는 버그는 세 가지 함정에서 비롯된다: <strong>가변 기본 인자</strong>, <strong>클래스 속성 vs 인스턴스 속성 혼동</strong>, <strong><code>super().__init__()</code> 누락</strong>이다. <a href="#fig-oop-debugging" class="quarto-xref">그림&nbsp;<span>33.6</span></a> 은 세 가지 함정과 디버깅 도구를 요약한다.</p>
+<div id="fig-oop-debugging" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-oop-debugging-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/oop-debugging.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-oop-debugging-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;33.6: OOP 디버깅: 세 가지 함정과 도구
+</figcaption>
+</figure>
+</div>
+<p>첫 번째 함정은 <strong>가변 기본 인자</strong>다. 앞 장에서 함수의 기본 인자로 리스트나 딕셔너리를 사용하면 안 된다고 배웠다. 클래스 생성자에서도 동일한 문제가 발생한다. 데이터 로더를 만들 때 캐시를 기본값으로 빈 리스트를 지정하면 모든 인스턴스가 <strong>같은 리스트를 공유</strong>한다.</p>
+<div id="oop-debug-mutable" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 위험: 가변 객체를 기본값으로</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> DataLoader:</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, cache<span class="op">=</span>[]):   <span class="co"># 버그!</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.cache <span class="op">=</span> cache</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>loader1 <span class="op">=</span> DataLoader()</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>loader1.cache.append(<span class="st">"train.csv"</span>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>loader2 <span class="op">=</span> DataLoader()</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>loader2.cache.append(<span class="st">"test.csv"</span>)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"loader1.cache: </span><span class="sc">{</span>loader1<span class="sc">.</span>cache<span class="sc">}</span><span class="ss">"</span>)  <span class="co"># ['train.csv', 'test.csv']</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"loader2.cache: </span><span class="sc">{</span>loader2<span class="sc">.</span>cache<span class="sc">}</span><span class="ss">"</span>)  <span class="co"># 동일한 리스트!</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>loader1.cache: ['train.csv', 'test.csv']
+loader2.cache: ['train.csv', 'test.csv']</code></pre>
+</div>
+</div>
+<p>해결책은 <code>None</code>을 기본값으로 사용하고 생성자 내부에서 새 리스트를 생성하는 것이다.</p>
+<div id="oop-debug-mutable-fix" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 해결: None + 내부 생성</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> DataLoader:</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, cache<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.cache <span class="op">=</span> cache <span class="cf">if</span> cache <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span> <span class="cf">else</span> []</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>두 번째 함정은 <strong>클래스 속성과 인스턴스 속성의 혼동</strong>이다. 파이썬에서 클래스 본문에 직접 정의한 변수는 클래스 속성이 되어 모든 인스턴스가 공유한다. 반면 <code>__init__</code> 안에서 <code>self.변수</code>로 정의하면 인스턴스 속성이 되어 각 객체가 독립적으로 소유한다. 모델의 가중치를 클래스 수준에서 정의하면 <strong>모든 모델 인스턴스가 가중치를 공유</strong>하는 심각한 버그가 발생한다.</p>
+<div id="oop-debug-classattr" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 위험: 클래스 속성으로 가변 객체 정의</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BuggyModel:</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    weights <span class="op">=</span> []  <span class="co"># 클래스 속성 - 모든 인스턴스가 공유</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> fit(<span class="va">self</span>, X, y):</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.weights.append(<span class="bu">sum</span>(y) <span class="op">/</span> <span class="bu">len</span>(y))  <span class="co"># 누적됨!</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>model1 <span class="op">=</span> BuggyModel()</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>model1.fit([<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">10</span>, <span class="dv">20</span>])</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>model2 <span class="op">=</span> BuggyModel()</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>model2.fit([<span class="dv">3</span>, <span class="dv">4</span>], [<span class="dv">30</span>, <span class="dv">40</span>])</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"model1.weights: </span><span class="sc">{</span>model1<span class="sc">.</span>weights<span class="sc">}</span><span class="ss">"</span>)  <span class="co"># [15.0, 35.0] - 두 모델이 공유!</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"model2.weights: </span><span class="sc">{</span>model2<span class="sc">.</span>weights<span class="sc">}</span><span class="ss">"</span>)  <span class="co"># 동일</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>model1.weights: [15.0, 35.0]
+model2.weights: [15.0, 35.0]</code></pre>
+</div>
+</div>
+<p><code>__init__</code>에서 인스턴스 속성으로 정의해야 각 모델이 독립적인 가중치를 갖는다.</p>
+<div id="oop-debug-classattr-fix" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 해결: 인스턴스 속성으로 정의</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> CorrectModel:</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.weights <span class="op">=</span> []  <span class="co"># 인스턴스 속성 - 각자 소유</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> fit(<span class="va">self</span>, X, y):</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.weights.append(<span class="bu">sum</span>(y) <span class="op">/</span> <span class="bu">len</span>(y))</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>세 번째 함정은 <strong><code>super().__init__()</code> 호출 누락</strong>이다. 상속받은 자식 클래스에서 <code>__init__</code>을 오버라이드할 때, 부모의 초기화 로직을 명시적으로 호출해야 한다. 이를 잊으면 부모 클래스가 설정해야 할 속성이 생성되지 않아 <code>AttributeError</code>가 발생한다. 특히 다중 상속에서는 <code>super()</code>가 MRO(메서드 탐색 순서)를 따라 올바른 부모를 호출하므로 반드시 사용해야 한다.</p>
+<div id="oop-debug-super" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 위험: 부모 초기화 누락</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BaseModel:</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.fitted_ <span class="op">=</span> <span class="va">False</span>   <span class="co"># 학습 여부 플래그</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LinearTrendBuggy(BaseModel):</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, learning_rate<span class="op">=</span><span class="fl">0.01</span>):</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>        <span class="co"># super().__init__() 호출 누락!</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.lr <span class="op">=</span> learning_rate</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LinearTrendBuggy()</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="co"># print(model.fitted_)  # AttributeError: 'LinearTrendBuggy' object has no attribute 'fitted_'</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"fitted_ 속성 존재?"</span>, <span class="bu">hasattr</span>(model, <span class="st">'fitted_'</span>))  <span class="co"># False</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>fitted_ 속성 존재? False</code></pre>
+</div>
+</div>
+<p><code>super().__init__()</code>을 명시적으로 호출해야 부모의 <code>fitted_</code> 속성이 초기화된다.</p>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">힌트</span>디버깅 도구 세 가지
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p> </p>
+<p>객체 상태를 확인하는 세 가지 도구를 기억하라.</p>
+<div id="oop-debug-tools" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LinearTrend()</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>model.fit([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>])</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. __dict__: 인스턴스 속성 확인</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"인스턴스 속성:"</span>, model.__dict__)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. type() / isinstance(): 타입 확인</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"타입:"</span>, <span class="bu">type</span>(model).<span class="va">__name__</span>)</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"BaseModel 상속?"</span>, <span class="bu">isinstance</span>(model, BaseModel))</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. __mro__: 메서드 탐색 순서 (다중 상속 디버깅)</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"MRO:"</span>, [c.<span class="va">__name__</span> <span class="cf">for</span> c <span class="kw">in</span> LinearTrend.__mro__])</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>인스턴스 속성: {'is_fitted': True, 'slope_': 2.0, 'intercept_': 0.0}
+타입: LinearTrend
+BaseModel 상속? False
+MRO: ['LinearTrend', 'BaseModel', 'object']</code></pre>
+</div>
+</div>
+<p><code>__mro__</code>(Method Resolution Order)는 다중 상속에서 메서드가 어떤 순서로 탐색되는지 보여준다. 다중 상속을 사용하면 <code>super()</code>가 직관과 다르게 동작할 수 있다. <code>super()</code>는 “부모 클래스”가 아니라 <strong>MRO의 다음 클래스</strong>를 호출하기 때문이다. 특히 두 부모가 공통 조상을 갖는 다이아몬드 상속 구조에서는 공통 조상의 <code>__init__</code>이 두 번 호출될 위험이 있다. 파이썬은 C3 선형화 알고리즘으로 MRO를 계산해 각 클래스가 정확히 한 번만 호출되도록 보장하지만, 예상치 못한 동작이 발생하면 <code>__mro__</code>부터 출력해보라.</p>
+</div>
+</div>
+</section>
+<section id="생각해볼-점" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="생각해볼-점">💡 생각해볼 점</h2>
+<p><strong>OOP의 본질은 “변경의 지역화”다.</strong> 1960년대 소프트웨어 위기의 핵심은 수정의 파급 효과였다. 한 줄을 고치면 어디서 버그가 터질지 예측할 수 없었다. OOP는 <strong>캡슐화</strong>로 내부 구현을 숨기고, <strong>인터페이스</strong>로 외부와의 계약을 명시함으로써 변경의 영향 범위를 객체 내부로 한정한다. <code>Student</code> 클래스 내부에서 성적을 리스트에서 딕셔너리로 바꿔도 <code>average()</code> 메서드 시그니처만 유지하면 외부 코드는 수정할 필요가 없다. 대규모 시스템에서 이 특성이 없으면 유지보수가 사실상 불가능하다.</p>
+<p><strong>다형성은 조건문의 적이다.</strong> <code>if model_type == "linear": ... elif model_type == "neural": ...</code> 같은 분기는 새 모델이 추가될 때마다 수정이 필요하다. 다형성은 <code>model.predict()</code>라는 단일 호출로 런타임에 적절한 메서드가 실행되도록 보장한다. 열린-닫힌 원칙(OCP)이 실현되는 방식이다—기존 코드를 <strong>수정</strong>하지 않고 새 클래스를 <strong>확장</strong>만 하면 된다. 조건 분기가 늘어나는 코드를 발견하면 다형성으로 리팩토링할 수 있는지 검토하라.</p>
+<p><strong>상속보다 조합을 먼저 고려하라.</strong> 1994년 GoF의 『디자인 패턴』이 강조한 원칙이다. 상속은 컴파일 타임에 관계를 고정하지만, 조합은 런타임에 부품을 교체할 수 있다. <code>ModelWithScaler</code>가 <code>LinearTrend</code>를 상속하는 대신 <code>self.model</code>로 포함하면, 어떤 모델이든 끼워 넣을 수 있다. 핵심 메커니즘은 <strong>위임</strong>이다—자신이 모든 걸 구현하는 대신 적합한 부품에 요청을 전달한다. 상속 계층이 3단계를 넘어가면 설계를 재검토하라.</p>
+<p><strong>파이썬의 덕 타이핑은 유연함과 위험을 동시에 준다.</strong> “오리처럼 걷고 꽥꽥거리면 오리다”—Java처럼 인터페이스를 명시적으로 선언하지 않아도 <code>fit()</code>과 <code>predict()</code> 메서드만 있으면 어떤 객체든 모델로 사용할 수 있다. 외부 라이브러리 클래스를 수정 없이 기존 함수와 함께 사용할 수 있는 강력함이다. 그러나 <code>quack()</code> 대신 <code>quak()</code>이라고 오타를 내도 실행 전까지 오류가 드러나지 않는다. 타입 힌트와 <code>mypy</code>로 정적 분석을 병행하면 두 세계의 장점을 취할 수 있다.</p>
+<p><strong>OOP 디버깅의 핵심은 객체 상태를 눈으로 확인하는 것이다.</strong> <code>print(model.__dict__)</code> 한 줄이 1시간의 디버깅을 줄여준다. 가변 기본 인자, 클래스 속성과 인스턴스 속성 혼동, <code>super().__init__()</code> 누락—세 가지 함정은 모두 <strong>객체 상태가 예상과 다를 때</strong> 발생한다. <code>__dict__</code>로 인스턴스 속성을, <code>type()</code>과 <code>isinstance()</code>로 타입을, <code>__mro__</code>로 메서드 탐색 순서를 확인하라. 다중 상속에서 다이아몬드 문제가 의심되면 MRO부터 출력하라.</p>
+<p> </p>
+
+
+<div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-Meyer1988OOSC" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">B. Meyer, <em>Object-Oriented Software Construction</em>. Englewood Cliffs, NJ: Prentice-Hall, 1988.</div>
+</div>
+<div id="ref-Martin2002Agile" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">R. C. Martin, <em>Agile Software Development, Principles, Patterns, and Practices</em>. Upper Saddle River, NJ: Prentice Hall, 2002.</div>
+</div>
+<div id="ref-GoF1994" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline">E. Gamma, R. Helm, R. Johnson, 와/과 J. Vlissides, <em>Design Patterns: Elements of Reusable Object-Oriented Software</em>. Addison-Wesley, 1994.</div>
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "복사완료!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "복사완료!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/r2bit\.com\/gpt-coding\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./prog-imperative.html" class="pagination-link" aria-label="명령형과 절차적 프로그래밍">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">명령형과 절차적 프로그래밍</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./prog-fp.html" class="pagination-link" aria-label="함수형 프로그래밍">
+        <span class="nav-page-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">함수형 프로그래밍</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>챗GPT 쿼토 책은 소프트웨어 카펜트리 “Git 버전제어”를 번역한 것이 포함되어 있습니다.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/prog-oop.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>순수하게 <a href="https://quarto.org/">쿼토(Quarto)</a>로 제작되었습니다.</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

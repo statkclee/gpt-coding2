@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 50 800 340">
+  <defs>
+    <style>
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-mono { font-family: 'SF Mono', Consolas, monospace; fill: #222; font-weight: bold; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #555; font-style: italic; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #666; font-size: 11px; }
+      .tufte-tiny { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #777; font-size: 10px; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#666"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="400" fill="#ffffff"/>
+
+  <!-- 제목 영역 -->
+  <!-- <text x="400" y="25" text-anchor="middle" class="tufte-text" font-size="14" font-weight="bold">크리에이티브 커먼즈 라이선스 조합</text> -->
+
+  <!-- 4가지 요소 설명 -->
+  <g transform="translate(30, 50)">
+    <!-- <text x="0" y="0" class="tufte-text" font-size="12" font-weight="bold">4가지 기본 요소</text> -->
+
+    <g transform="translate(0, 20)">
+      <rect x="0" y="0" width="175" height="50" fill="#f8f8f8" stroke="#999" stroke-width="1" rx="4"/>
+      <text x="12" y="20" class="tufte-mono" font-size="11">BY (저작자 표시)</text>
+      <text x="12" y="38" class="tufte-tiny">원저작자 이름 표시 의무</text>
+    </g>
+
+    <g transform="translate(190, 20)">
+      <rect x="0" y="0" width="175" height="50" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="4"/>
+      <text x="12" y="20" class="tufte-mono" font-size="11">SA (동일조건변경허락)</text>
+      <text x="12" y="38" class="tufte-tiny">동일 라이선스 적용 의무</text>
+    </g>
+
+    <g transform="translate(380, 20)">
+      <rect x="0" y="0" width="175" height="50" fill="#f0f0f0" stroke="#999" stroke-width="1" rx="4"/>
+      <text x="12" y="20" class="tufte-mono" font-size="11">NC (비영리)</text>
+      <text x="12" y="38" class="tufte-tiny">영리 목적 사용 금지</text>
+    </g>
+
+    <g transform="translate(570, 20)">
+      <rect x="0" y="0" width="175" height="50" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="4"/>
+      <text x="12" y="20" class="tufte-mono" font-size="11">ND (변경금지)</text>
+      <text x="12" y="38" class="tufte-tiny">2차적 저작물 제작 금지</text>
+    </g>
+  </g>
+
+  <!-- 스펙트럼 -->
+  <g transform="translate(30, 140)">
+    <line x1="0" y1="0" x2="740" y2="0" stroke="#666" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="0" y="-10" text-anchor="start" class="tufte-label" font-size="10">개방적 (Open)</text>
+    <text x="740" y="-10" text-anchor="end" class="tufte-label" font-size="10">제한적 (Restrictive)</text>
+
+    <!-- CC BY -->
+    <g transform="translate(60, 0)">
+      <line x1="0" y1="-5" x2="0" y2="5" stroke="#666" stroke-width="2"/>
+      <rect x="-55" y="15" width="110" height="80" fill="#f8f8f8" stroke="#666" stroke-width="1.5" rx="4"/>
+      <text x="0" y="35" text-anchor="middle" class="tufte-mono" font-size="12">CC BY</text>
+      <text x="0" y="52" text-anchor="middle" class="tufte-small">오픈 라이선스</text>
+      <text x="0" y="68" text-anchor="middle" class="tufte-tiny">학술 논문 표준</text>
+      <text x="0" y="82" text-anchor="middle" class="tufte-tiny">Wikipedia 이미지</text>
+    </g>
+
+    <!-- CC BY-SA -->
+    <g transform="translate(200, 0)">
+      <line x1="0" y1="-5" x2="0" y2="5" stroke="#666" stroke-width="2"/>
+      <rect x="-55" y="15" width="110" height="80" fill="#f5f5f5" stroke="#666" stroke-width="1.5" rx="4"/>
+      <text x="0" y="35" text-anchor="middle" class="tufte-mono" font-size="12">CC BY-SA</text>
+      <text x="0" y="52" text-anchor="middle" class="tufte-small">오픈 라이선스</text>
+      <text x="0" y="68" text-anchor="middle" class="tufte-tiny">기여 환류 강제</text>
+      <text x="0" y="82" text-anchor="middle" class="tufte-tiny">Wikipedia 본문</text>
+    </g>
+
+    <!-- CC BY-NC -->
+    <g transform="translate(370, 0)">
+      <line x1="0" y1="-5" x2="0" y2="5" stroke="#666" stroke-width="2"/>
+      <rect x="-55" y="15" width="110" height="80" fill="#f0f0f0" stroke="#999" stroke-width="1" stroke-dasharray="2,2" rx="4"/>
+      <text x="0" y="35" text-anchor="middle" class="tufte-mono" font-size="12">CC BY-NC</text>
+      <text x="0" y="52" text-anchor="middle" class="tufte-small" fill="#777">비오픈</text>
+      <text x="0" y="68" text-anchor="middle" class="tufte-tiny">교육 자료 배포</text>
+      <text x="0" y="82" text-anchor="middle" class="tufte-tiny">상업적 재사용 차단</text>
+    </g>
+
+    <!-- CC BY-NC-SA -->
+    <g transform="translate(520, 0)">
+      <line x1="0" y1="-5" x2="0" y2="5" stroke="#666" stroke-width="2"/>
+      <rect x="-60" y="15" width="120" height="80" fill="#e8e8e8" stroke="#999" stroke-width="1" stroke-dasharray="2,2" rx="4"/>
+      <text x="0" y="35" text-anchor="middle" class="tufte-mono" font-size="12">CC BY-NC-SA</text>
+      <text x="0" y="52" text-anchor="middle" class="tufte-small" fill="#777">비오픈</text>
+      <text x="0" y="68" text-anchor="middle" class="tufte-tiny">비영리+동일조건</text>
+      <text x="0" y="82" text-anchor="middle" class="tufte-tiny">교재, 강의노트</text>
+    </g>
+
+    <!-- CC BY-ND / CC BY-NC-ND -->
+    <g transform="translate(680, 0)">
+      <line x1="0" y1="-5" x2="0" y2="5" stroke="#666" stroke-width="2"/>
+      <rect x="-55" y="15" width="110" height="80" fill="#e0e0e0" stroke="#999" stroke-width="1" stroke-dasharray="2,2" rx="4"/>
+      <text x="0" y="35" text-anchor="middle" class="tufte-mono" font-size="12">BY-ND 계열</text>
+      <text x="0" y="52" text-anchor="middle" class="tufte-small" fill="#777">비오픈</text>
+      <text x="0" y="68" text-anchor="middle" class="tufte-tiny">원본 그대로만</text>
+      <text x="0" y="82" text-anchor="middle" class="tufte-tiny">홍보물, 보도자료</text>
+    </g>
+  </g>
+
+  <!-- 하단 비교표 -->
+  <g transform="translate(30, 265)">
+    <line x1="0" y1="0" x2="740" y2="0" stroke="#ccc" stroke-width="1"/>
+    <text x="0" y="20" class="tufte-text" font-size="11" font-weight="bold">오픈 정의 충족 여부</text>
+
+    <g transform="translate(0, 35)">
+      <text x="0" y="0" class="tufte-small">2차 저작물 허용</text>
+      <text x="100" y="0" text-anchor="middle" class="tufte-tiny">● 허용</text>
+      <text x="200" y="0" text-anchor="middle" class="tufte-tiny">● 허용</text>
+      <text x="370" y="0" text-anchor="middle" class="tufte-tiny">● 허용</text>
+      <text x="520" y="0" text-anchor="middle" class="tufte-tiny">● 허용</text>
+      <text x="680" y="0" text-anchor="middle" class="tufte-tiny">— 금지</text>
+    </g>
+
+    <g transform="translate(0, 55)">
+      <text x="0" y="0" class="tufte-small">상업적 사용</text>
+      <text x="100" y="0" text-anchor="middle" class="tufte-tiny">● 허용</text>
+      <text x="200" y="0" text-anchor="middle" class="tufte-tiny">● 허용</text>
+      <text x="370" y="0" text-anchor="middle" class="tufte-tiny">— 금지</text>
+      <text x="520" y="0" text-anchor="middle" class="tufte-tiny">— 금지</text>
+      <text x="680" y="0" text-anchor="middle" class="tufte-tiny">△ 조건부</text>
+    </g>
+
+    <g transform="translate(0, 75)">
+      <text x="0" y="0" class="tufte-small" font-weight="bold">오픈 라이선스</text>
+      <text x="100" y="0" text-anchor="middle" class="tufte-tiny" font-weight="bold">● Yes</text>
+      <text x="200" y="0" text-anchor="middle" class="tufte-tiny" font-weight="bold">● Yes</text>
+      <text x="370" y="0" text-anchor="middle" class="tufte-tiny">— No</text>
+      <text x="520" y="0" text-anchor="middle" class="tufte-tiny">— No</text>
+      <text x="680" y="0" text-anchor="middle" class="tufte-tiny">— No</text>
+    </g>
+  </g>
+
+  <!-- 권장 박스 -->
+  <g transform="translate(30, 355)">
+    <rect x="0" y="0" width="740" height="22" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="4"/>
+    <text x="15" y="15" class="tufte-text" font-size="10">
+      <tspan font-weight="bold">★ 학술 콘텐츠 권장:</tspan>
+      <tspan dx="10">논문/보고서에는</tspan>
+      <tspan class="tufte-mono" dx="3">CC BY</tspan>
+      <tspan dx="3">, 교육 자료에는</tspan>
+      <tspan class="tufte-mono" dx="3">CC BY-SA</tspan>
+      <tspan dx="3">, 비영리 교재에는</tspan>
+      <tspan class="tufte-mono" dx="3">CC BY-NC</tspan>
+      <tspan dx="3">선택</tspan>
+    </text>
+  </g>
+</svg>

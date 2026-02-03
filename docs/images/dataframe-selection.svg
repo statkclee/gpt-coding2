@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 30 720 290">
+  <defs>
+    <style>
+      .tufte-text {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+      }
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 14px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 12px;
+        fill: #333;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 11px;
+        fill: #333;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #666;
+      }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="720" height="330" fill="#ffffff"/>
+
+  <!-- Title -->
+  <!-- <text x="360" y="25" text-anchor="middle" class="tufte-title">DataFrame 데이터 선택: loc vs iloc</text> -->
+
+  <!-- Left: iloc (위치 기반) -->
+  <g transform="translate(30, 50)">
+    <text x="100" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">iloc: 정수 위치 기반</text>
+
+    <rect x="0" y="15" width="200" height="180" fill="#f5f5f5" stroke="#333" stroke-width="2" rx="3"/>
+
+    <!-- Header -->
+    <text x="100" y="35" text-anchor="middle" class="tufte-code">df.iloc[0:2]</text>
+    <line x1="10" y1="42" x2="190" y2="42" stroke="#ccc"/>
+
+    <!-- Position labels on left -->
+    <text x="25" y="65" class="tufte-small">위치 0</text>
+    <text x="25" y="90" class="tufte-small">위치 1</text>
+    <text x="25" y="115" class="tufte-small" fill="#999">위치 2</text>
+    <text x="25" y="140" class="tufte-small" fill="#999">위치 3</text>
+
+    <!-- Data rows -->
+    <rect x="70" y="52" width="110" height="20" fill="#e8e8e8" stroke="#333" stroke-width="1.5"/>
+    <text x="125" y="67" text-anchor="middle" class="tufte-code">Alice, 25</text>
+
+    <rect x="70" y="77" width="110" height="20" fill="#e8e8e8" stroke="#333" stroke-width="1.5"/>
+    <text x="125" y="92" text-anchor="middle" class="tufte-code">Bob, 30</text>
+
+    <rect x="70" y="102" width="110" height="20" fill="#fff" stroke="#999"/>
+    <text x="125" y="117" text-anchor="middle" class="tufte-code" fill="#999">Charlie, 35</text>
+
+    <rect x="70" y="127" width="110" height="20" fill="#fff" stroke="#999"/>
+    <text x="125" y="142" text-anchor="middle" class="tufte-code" fill="#999">David, 28</text>
+
+    <!-- Note -->
+    <text x="100" y="165" text-anchor="middle" class="tufte-small">0:2 → 0, 1 선택</text>
+    <text x="100" y="180" text-anchor="middle" class="tufte-small" font-weight="bold">끝 인덱스 제외</text>
+  </g>
+
+  <!-- Right: loc (레이블 기반) -->
+  <g transform="translate(260, 50)">
+    <text x="100" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">loc: 레이블 기반</text>
+
+    <rect x="0" y="15" width="200" height="180" fill="#f5f5f5" stroke="#333" stroke-width="2" rx="3"/>
+
+    <!-- Header -->
+    <text x="100" y="35" text-anchor="middle" class="tufte-code">df.loc[0:2]</text>
+    <line x1="10" y1="42" x2="190" y2="42" stroke="#ccc"/>
+
+    <!-- Label labels on left -->
+    <text x="25" y="65" class="tufte-small">인덱스 0</text>
+    <text x="25" y="90" class="tufte-small">인덱스 1</text>
+    <text x="25" y="115" class="tufte-small">인덱스 2</text>
+    <text x="25" y="140" class="tufte-small" fill="#999">인덱스 3</text>
+
+    <!-- Data rows -->
+    <rect x="70" y="52" width="110" height="20" fill="#e8e8e8" stroke="#333" stroke-width="1.5"/>
+    <text x="125" y="67" text-anchor="middle" class="tufte-code">Alice, 25</text>
+
+    <rect x="70" y="77" width="110" height="20" fill="#e8e8e8" stroke="#333" stroke-width="1.5"/>
+    <text x="125" y="92" text-anchor="middle" class="tufte-code">Bob, 30</text>
+
+    <rect x="70" y="102" width="110" height="20" fill="#e8e8e8" stroke="#333" stroke-width="1.5"/>
+    <text x="125" y="117" text-anchor="middle" class="tufte-code">Charlie, 35</text>
+
+    <rect x="70" y="127" width="110" height="20" fill="#fff" stroke="#999"/>
+    <text x="125" y="142" text-anchor="middle" class="tufte-code" fill="#999">David, 28</text>
+
+    <!-- Note -->
+    <text x="100" y="165" text-anchor="middle" class="tufte-small">0:2 → 0, 1, 2 선택</text>
+    <text x="100" y="180" text-anchor="middle" class="tufte-small" font-weight="bold">끝 인덱스 포함</text>
+  </g>
+
+  <!-- Bottom comparison -->
+  <g transform="translate(490, 50)">
+    <text x="100" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">선택 방법 비교</text>
+
+    <rect x="0" y="15" width="200" height="180" fill="#f5f5f5" stroke="#999" rx="3"/>
+
+    <!-- Column selection -->
+    <text x="100" y="38" text-anchor="middle" class="tufte-label">열 선택</text>
+    <text x="15" y="55" class="tufte-code">df['name']</text>
+    <text x="15" y="70" class="tufte-small">단일 열 → Series</text>
+    <text x="15" y="88" class="tufte-code">df[['name','age']]</text>
+    <text x="15" y="103" class="tufte-small">다중 열 → DataFrame</text>
+
+    <line x1="10" y1="115" x2="190" y2="115" stroke="#ccc"/>
+
+    <!-- Boolean filtering -->
+    <text x="100" y="132" text-anchor="middle" class="tufte-label">조건 필터링</text>
+    <text x="15" y="150" class="tufte-code">df[df['age'] &gt; 30]</text>
+    <text x="15" y="165" class="tufte-small">불리언 인덱싱</text>
+    <text x="15" y="183" class="tufte-code">(조건1) &amp; (조건2)</text>
+  </g>
+
+  <!-- Key difference box -->
+  <g transform="translate(30, 250)">
+    <rect x="0" y="0" width="660" height="55" fill="#e8e8e8" stroke="#666" rx="3"/>
+    <text x="330" y="20" text-anchor="middle" class="tufte-label" font-weight="bold">핵심 차이점</text>
+    <text x="165" y="42" text-anchor="middle" class="tufte-code">iloc[0:2] → 위치 0, 1 (끝 제외)</text>
+    <text x="495" y="42" text-anchor="middle" class="tufte-code">loc[0:2] → 레이블 0, 1, 2 (끝 포함)</text>
+  </g>
+
+</svg>

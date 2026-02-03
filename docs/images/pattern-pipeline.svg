@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320">
+  <defs>
+    <style>
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 16px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 13px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-desc {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 11px;
+        fill: #666;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Menlo, Monaco, monospace;
+        font-size: 10px;
+        fill: #666;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #999;
+      }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- White background -->
+  <rect x="0" y="0" width="800" height="320" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="400" y="30" class="tufte-title" text-anchor="middle">Pipeline 패턴</text>
+
+  <!-- Pipeline visualization -->
+  <!-- Input -->
+  <rect x="40" y="70" width="100" height="60" fill="#f5f5f5" stroke="#666" stroke-width="1.5" rx="3"/>
+  <text x="90" y="95" class="tufte-label" text-anchor="middle">입력</text>
+  <text x="90" y="115" class="tufte-code" text-anchor="middle">raw_data</text>
+
+  <!-- Arrow -->
+  <line x1="140" y1="100" x2="178" y2="100" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Stage 1 -->
+  <rect x="190" y="70" width="120" height="60" fill="#fff" stroke="#333" stroke-width="2" rx="3"/>
+  <text x="250" y="95" class="tufte-label" text-anchor="middle">clean</text>
+  <text x="250" y="115" class="tufte-code" text-anchor="middle">정제</text>
+
+  <!-- Arrow -->
+  <line x1="310" y1="100" x2="348" y2="100" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Stage 2 -->
+  <rect x="360" y="70" width="120" height="60" fill="#fff" stroke="#333" stroke-width="2" rx="3"/>
+  <text x="420" y="95" class="tufte-label" text-anchor="middle">transform</text>
+  <text x="420" y="115" class="tufte-code" text-anchor="middle">변환</text>
+
+  <!-- Arrow -->
+  <line x1="480" y1="100" x2="518" y2="100" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Stage 3 -->
+  <rect x="530" y="70" width="120" height="60" fill="#fff" stroke="#333" stroke-width="2" rx="3"/>
+  <text x="590" y="95" class="tufte-label" text-anchor="middle">validate</text>
+  <text x="590" y="115" class="tufte-code" text-anchor="middle">검증</text>
+
+  <!-- Arrow -->
+  <line x1="650" y1="100" x2="688" y2="100" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Output -->
+  <rect x="700" y="70" width="80" height="60" fill="#f5f5f5" stroke="#666" stroke-width="1.5" rx="3"/>
+  <text x="740" y="95" class="tufte-label" text-anchor="middle">출력</text>
+  <text x="740" y="115" class="tufte-code" text-anchor="middle">result</text>
+
+  <!-- Implementation comparison -->
+  <rect x="40" y="160" width="350" height="130" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="215" y="185" class="tufte-label" text-anchor="middle">중첩 호출 방식</text>
+  <line x1="55" y1="195" x2="375" y2="195" stroke="#ccc" stroke-width="1"/>
+  <text x="215" y="220" class="tufte-code" text-anchor="middle">validate(transform(clean(data)))</text>
+  <text x="215" y="250" class="tufte-small" text-anchor="middle">안쪽에서 바깥쪽으로 읽어야 함</text>
+  <text x="215" y="270" class="tufte-small" text-anchor="middle">중간 단계 확인 어려움</text>
+
+  <rect x="410" y="160" width="350" height="130" fill="#fff" stroke="#333" stroke-width="2" rx="3"/>
+  <text x="585" y="185" class="tufte-label" text-anchor="middle">Pipeline 방식</text>
+  <line x1="425" y1="195" x2="745" y2="195" stroke="#ccc" stroke-width="1"/>
+  <text x="585" y="220" class="tufte-code" text-anchor="middle">pipe(data, clean, transform, validate)</text>
+  <text x="585" y="250" class="tufte-small" text-anchor="middle">왼쪽에서 오른쪽으로 자연스럽게 읽힘</text>
+  <text x="585" y="270" class="tufte-small" text-anchor="middle">각 단계 독립적으로 테스트 가능</text>
+
+  <!-- Bottom note -->
+  <text x="400" y="310" class="tufte-small" text-anchor="middle">데이터는 파이프라인을 따라 흐르고, 각 함수는 순수하게 변환만 수행</text>
+</svg>

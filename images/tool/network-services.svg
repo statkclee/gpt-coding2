@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 330">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #111; font-weight: bold; }
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-mono { font-family: 'SF Mono', Consolas, monospace; fill: #444; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #666; font-style: italic; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #777; font-size: 10px; }
+      .building { fill: #f8f8f8; stroke: #333; stroke-width: 2; }
+      .floor { fill: #fff; stroke: #666; stroke-width: 1; }
+      .door { fill: #e8e8e8; stroke: #333; stroke-width: 1.5; }
+      .flow-line { fill: none; stroke: #555; stroke-width: 1.5; }
+      .address-box { fill: #fff; stroke: #999; stroke-width: 1; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="2.5" orient="auto">
+      <path d="M0,0 L0,5 L7,2.5 z" fill="#555" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="340" fill="#ffffff"/>
+
+  <!-- 왼쪽: 주소 비유 설명 -->
+  <g transform="translate(30, 25)">
+    <text x="0" y="0" class="tufte-title" font-size="13">네트워크 주소 = 건물 주소 + 호수</text>
+
+    <rect x="0" y="15" width="200" height="75" class="address-box" rx="3"/>
+    <text x="100" y="35" text-anchor="middle" class="tufte-mono" font-size="11">data.pr4e.org:80</text>
+    <line x1="100" y1="45" x2="100" y2="80" stroke="#999" stroke-width="1" stroke-dasharray="2,2"/>
+    <text x="50" y="60" text-anchor="middle" class="tufte-label" font-size="10">호스트 (건물)</text>
+    <text x="150" y="60" text-anchor="middle" class="tufte-label" font-size="10">포트 (호수)</text>
+    <text x="50" y="78" text-anchor="middle" class="tufte-small">어느 서버?</text>
+    <text x="150" y="78" text-anchor="middle" class="tufte-small">어느 서비스?</text>
+  </g>
+
+  <!-- 오른쪽: 서버 건물 시각화 -->
+  <g transform="translate(280, 20)">
+    <!-- 건물 외벽 -->
+    <rect x="0" y="0" width="480" height="295" class="building" rx="4"/>
+
+    <!-- 건물 간판 -->
+    <rect x="140" y="8" width="200" height="24" fill="#e0e0e0" stroke="#333" stroke-width="1" rx="3"/>
+    <text x="240" y="25" text-anchor="middle" class="tufte-title" font-size="12">server.example.com</text>
+    <text x="240" y="47" text-anchor="middle" class="tufte-label" font-size="10">IP: 192.168.1.100</text>
+
+    <!-- 층별 서비스 (위에서 아래로: 고수준 → 저수준) -->
+
+    <!-- 4층: 데이터베이스 -->
+    <g transform="translate(20, 60)">
+      <rect x="0" y="0" width="440" height="50" class="floor" rx="2"/>
+      <text x="10" y="18" class="tufte-label" font-size="10">4F</text>
+
+      <rect x="40" y="8" width="80" height="35" class="door" rx="2"/>
+      <text x="80" y="23" text-anchor="middle" class="tufte-mono" font-size="11">:3306</text>
+      <text x="80" y="37" text-anchor="middle" class="tufte-small">MySQL</text>
+
+      <rect x="140" y="8" width="80" height="35" class="door" rx="2"/>
+      <text x="180" y="23" text-anchor="middle" class="tufte-mono" font-size="11">:5432</text>
+      <text x="180" y="37" text-anchor="middle" class="tufte-small">PostgreSQL</text>
+
+      <rect x="240" y="8" width="80" height="35" class="door" rx="2"/>
+      <text x="280" y="23" text-anchor="middle" class="tufte-mono" font-size="11">:27017</text>
+      <text x="280" y="37" text-anchor="middle" class="tufte-small">MongoDB</text>
+
+      <text x="380" y="30" text-anchor="middle" class="tufte-text" font-size="10">데이터베이스</text>
+    </g>
+
+    <!-- 3층: 웹 서비스 -->
+    <g transform="translate(20, 115)">
+      <rect x="0" y="0" width="440" height="50" class="floor" rx="2"/>
+      <text x="10" y="18" class="tufte-label" font-size="10">3F</text>
+
+      <rect x="40" y="8" width="80" height="35" class="door" rx="2" stroke-width="2"/>
+      <text x="80" y="23" text-anchor="middle" class="tufte-mono" font-size="11" font-weight="bold">:80</text>
+      <text x="80" y="37" text-anchor="middle" class="tufte-small">HTTP</text>
+
+      <rect x="140" y="8" width="80" height="35" class="door" rx="2" stroke-width="2"/>
+      <text x="180" y="23" text-anchor="middle" class="tufte-mono" font-size="11" font-weight="bold">:443</text>
+      <text x="180" y="37" text-anchor="middle" class="tufte-small">HTTPS</text>
+
+      <rect x="240" y="8" width="80" height="35" class="door" rx="2"/>
+      <text x="280" y="23" text-anchor="middle" class="tufte-mono" font-size="11">:8080</text>
+      <text x="280" y="37" text-anchor="middle" class="tufte-small">개발서버</text>
+
+      <text x="380" y="30" text-anchor="middle" class="tufte-text" font-size="10">웹 서비스</text>
+    </g>
+
+    <!-- 2층: 메일/파일 -->
+    <g transform="translate(20, 170)">
+      <rect x="0" y="0" width="440" height="50" class="floor" rx="2"/>
+      <text x="10" y="18" class="tufte-label" font-size="10">2F</text>
+
+      <rect x="40" y="8" width="80" height="35" class="door" rx="2"/>
+      <text x="80" y="23" text-anchor="middle" class="tufte-mono" font-size="11">:25</text>
+      <text x="80" y="37" text-anchor="middle" class="tufte-small">SMTP</text>
+
+      <rect x="140" y="8" width="80" height="35" class="door" rx="2"/>
+      <text x="180" y="23" text-anchor="middle" class="tufte-mono" font-size="11">:143</text>
+      <text x="180" y="37" text-anchor="middle" class="tufte-small">IMAP</text>
+
+      <rect x="240" y="8" width="80" height="35" class="door" rx="2"/>
+      <text x="280" y="23" text-anchor="middle" class="tufte-mono" font-size="11">:21</text>
+      <text x="280" y="37" text-anchor="middle" class="tufte-small">FTP</text>
+
+      <text x="380" y="30" text-anchor="middle" class="tufte-text" font-size="10">메일/파일</text>
+    </g>
+
+    <!-- 1층: 시스템 관리 -->
+    <g transform="translate(20, 225)">
+      <rect x="0" y="0" width="440" height="50" class="floor" rx="2"/>
+      <text x="10" y="18" class="tufte-label" font-size="10">1F</text>
+
+      <rect x="40" y="8" width="80" height="35" class="door" rx="2"/>
+      <text x="80" y="23" text-anchor="middle" class="tufte-mono" font-size="11">:22</text>
+      <text x="80" y="37" text-anchor="middle" class="tufte-small">SSH</text>
+
+      <rect x="140" y="8" width="80" height="35" class="door" rx="2"/>
+      <text x="180" y="23" text-anchor="middle" class="tufte-mono" font-size="11">:53</text>
+      <text x="180" y="37" text-anchor="middle" class="tufte-small">DNS</text>
+
+      <rect x="240" y="8" width="80" height="35" class="door" rx="2"/>
+      <text x="280" y="23" text-anchor="middle" class="tufte-mono" font-size="11">:23</text>
+      <text x="280" y="37" text-anchor="middle" class="tufte-small">Telnet</text>
+
+      <text x="380" y="30" text-anchor="middle" class="tufte-text" font-size="10">시스템 관리</text>
+    </g>
+  </g>
+
+  <!-- 클라이언트 화살표 -->
+  <g transform="translate(30, 130)">
+    <rect x="0" y="0" width="90" height="45" class="address-box" rx="3"/>
+    <text x="45" y="18" text-anchor="middle" class="tufte-mono" font-size="10">클라이언트</text>
+    <text x="45" y="35" text-anchor="middle" class="tufte-small">socket.connect()</text>
+
+    <path d="M 95,22 L 230,22" class="flow-line" marker-end="url(#arrow)"/>
+    <text x="162" y="15" text-anchor="middle" class="tufte-mono" font-size="9">(host, 80)</text>
+  </g>
+
+  <!-- 좌측하단: 핵심 요약 -->
+  <g transform="translate(30, 195)">
+    <rect x="0" y="0" width="220" height="115" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="4"/>
+
+    <text x="110" y="25" text-anchor="middle" class="tufte-title" font-size="13">기억할 것</text>
+
+    <text x="15" y="50" class="tufte-text" font-size="11">같은 <tspan font-weight="bold">건물</tspan>(서버)이라도</text>
+    <text x="15" y="68" class="tufte-text" font-size="11"><tspan font-weight="bold">문</tspan>(포트)이 다르면</text>
+    <text x="15" y="86" class="tufte-text" font-size="11">다른 <tspan font-weight="bold">서비스</tspan>를 만난다.</text>
+
+    <text x="15" y="106" class="tufte-mono" font-size="10" fill="#555">0~1023번: 예약된 포트</text>
+  </g>
+</svg>

@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 200">
+  <defs>
+    <style>
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 14px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-text {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 12px;
+        fill: #333;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #666;
+      }
+      .tufte-code {
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 12px;
+        fill: #333;
+      }
+      .char-box {
+        fill: #f5f5f5;
+        stroke: #999;
+        stroke-width: 1;
+      }
+      .newline-box {
+        fill: #e8e8e8;
+        stroke: #333;
+        stroke-width: 1.5;
+      }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="650" height="200" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="325" y="25" text-anchor="middle" class="tufte-title">줄바꿈 문자(\n)와 파일 구조</text>
+
+  <!-- File representation -->
+  <text x="30" y="55" class="tufte-text">파일 내부:</text>
+
+  <!-- Line 1: Hello -->
+  <rect x="100" y="40" width="25" height="25" class="char-box"/>
+  <text x="112" y="58" text-anchor="middle" class="tufte-code">H</text>
+  <rect x="125" y="40" width="25" height="25" class="char-box"/>
+  <text x="137" y="58" text-anchor="middle" class="tufte-code">e</text>
+  <rect x="150" y="40" width="25" height="25" class="char-box"/>
+  <text x="162" y="58" text-anchor="middle" class="tufte-code">l</text>
+  <rect x="175" y="40" width="25" height="25" class="char-box"/>
+  <text x="187" y="58" text-anchor="middle" class="tufte-code">l</text>
+  <rect x="200" y="40" width="25" height="25" class="char-box"/>
+  <text x="212" y="58" text-anchor="middle" class="tufte-code">o</text>
+  <rect x="225" y="40" width="25" height="25" class="newline-box"/>
+  <text x="237" y="58" text-anchor="middle" class="tufte-code">\n</text>
+
+  <!-- Line 2: World -->
+  <rect x="250" y="40" width="25" height="25" class="char-box"/>
+  <text x="262" y="58" text-anchor="middle" class="tufte-code">W</text>
+  <rect x="275" y="40" width="25" height="25" class="char-box"/>
+  <text x="287" y="58" text-anchor="middle" class="tufte-code">o</text>
+  <rect x="300" y="40" width="25" height="25" class="char-box"/>
+  <text x="312" y="58" text-anchor="middle" class="tufte-code">r</text>
+  <rect x="325" y="40" width="25" height="25" class="char-box"/>
+  <text x="337" y="58" text-anchor="middle" class="tufte-code">l</text>
+  <rect x="350" y="40" width="25" height="25" class="char-box"/>
+  <text x="362" y="58" text-anchor="middle" class="tufte-code">d</text>
+  <rect x="375" y="40" width="25" height="25" class="newline-box"/>
+  <text x="387" y="58" text-anchor="middle" class="tufte-code">\n</text>
+
+  <!-- Annotation -->
+  <text x="440" y="55" class="tufte-small">← 라인 구분자</text>
+
+  <!-- Visual representation -->
+  <text x="30" y="105" class="tufte-text">화면 출력:</text>
+
+  <rect x="100" y="85" width="300" height="55" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="115" y="107" class="tufte-code">Hello</text>
+  <text x="115" y="127" class="tufte-code">World</text>
+
+  <!-- Length explanation -->
+  <rect x="420" y="85" width="200" height="55" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="4"/>
+  <text x="520" y="102" text-anchor="middle" class="tufte-title">len('X\nY') = 3</text>
+  <line x1="430" y1="110" x2="610" y2="110" stroke="#ccc" stroke-width="1"/>
+  <text x="520" y="128" text-anchor="middle" class="tufte-small">\n도 한 문자로 계산</text>
+
+  <!-- Key points -->
+  <text x="30" y="165" class="tufte-text">핵심:</text>
+  <text x="80" y="165" class="tufte-small">• 줄바꿈(\n)은 눈에 보이지 않지만 파일에 존재하는 문자</text>
+  <text x="80" y="182" class="tufte-small">• 파일을 읽을 때 각 라인 끝에 \n이 포함됨 → rstrip()으로 제거</text>
+
+</svg>

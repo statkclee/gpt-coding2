@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 30 800 240">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #111; font-weight: bold; }
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-mono { font-family: 'SF Mono', Consolas, monospace; fill: #444; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #666; font-style: italic; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #777; font-size: 10px; }
+      .table-part { fill: #f8f8f8; stroke: #333; stroke-width: 1.5; }
+      .header-part { fill: #d0d0d0; stroke: #333; stroke-width: 1.5; }
+      .body-part { fill: #e8e8e8; stroke: #333; stroke-width: 1.5; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="2.5" orient="auto">
+      <path d="M0,0 L0,5 L7,2.5 z" fill="#555" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="280" fill="#ffffff"/>
+
+  <!-- 상단 제목 -->
+  <!-- <text x="400" y="25" text-anchor="middle" class="tufte-title" font-size="13">gt 표 문법: 표의 해부학적 구조</text>
+  <line x1="100" y1="35" x2="700" y2="35" stroke="#ddd" stroke-width="1"/> -->
+
+  <!-- 왼쪽: gt 테이블 구조 -->
+  <g transform="translate(50, 55)">
+    <!-- Title -->
+    <rect x="0" y="0" width="250" height="25" fill="#c0c0c0" stroke="#333" stroke-width="1.5" rx="4"/>
+    <text x="125" y="17" text-anchor="middle" class="tufte-title" font-size="10">tab_header(title, subtitle)</text>
+
+    <!-- Stub Head + Column Labels -->
+    <g transform="translate(0, 30)">
+      <rect x="0" y="0" width="60" height="25" fill="#b0b0b0" stroke="#333" stroke-width="1"/>
+      <text x="30" y="17" text-anchor="middle" class="tufte-mono" font-size="8">stub</text>
+      <rect x="60" y="0" width="190" height="25" class="header-part"/>
+      <text x="155" y="17" text-anchor="middle" class="tufte-mono" font-size="9">cols_label()</text>
+    </g>
+
+    <!-- Spanner -->
+    <g transform="translate(60, 55)">
+      <rect x="0" y="0" width="95" height="20" fill="#d8d8d8" stroke="#666" stroke-width="1"/>
+      <text x="47" y="14" text-anchor="middle" class="tufte-mono" font-size="7">tab_spanner</text>
+      <rect x="95" y="0" width="95" height="20" fill="#d8d8d8" stroke="#666" stroke-width="1"/>
+      <text x="142" y="14" text-anchor="middle" class="tufte-mono" font-size="7">tab_spanner</text>
+    </g>
+
+    <!-- Body -->
+    <g transform="translate(0, 75)">
+      <rect x="0" y="0" width="60" height="70" fill="#c8c8c8" stroke="#333" stroke-width="1"/>
+      <text x="30" y="38" text-anchor="middle" class="tufte-mono" font-size="8">row</text>
+      <text x="30" y="50" text-anchor="middle" class="tufte-mono" font-size="8">groups</text>
+
+      <rect x="60" y="0" width="190" height="70" class="body-part"/>
+      <text x="155" y="38" text-anchor="middle" class="tufte-title" font-size="10">Body Cells</text>
+      <text x="155" y="55" text-anchor="middle" class="tufte-mono" font-size="8">fmt_*(), data_color()</text>
+    </g>
+
+    <!-- Footer -->
+    <rect x="0" y="145" width="250" height="25" fill="#e0e0e0" stroke="#333" stroke-width="1.5" rx="4"/>
+    <text x="125" y="162" text-anchor="middle" class="tufte-mono" font-size="9">tab_footnote(), tab_source_note()</text>
+
+    <!-- 라벨 -->
+    <text x="265" y="17" text-anchor="start" class="tufte-small">제목/부제목</text>
+    <text x="265" y="47" text-anchor="start" class="tufte-small">열 라벨</text>
+    <text x="265" y="70" text-anchor="start" class="tufte-small">열 그룹</text>
+    <text x="265" y="115" text-anchor="start" class="tufte-small">본문 데이터</text>
+    <text x="265" y="162" text-anchor="start" class="tufte-small">각주/출처</text>
+  </g>
+
+  <!-- 오른쪽: gt 파이프라인 -->
+  <g transform="translate(400, 55)">
+    <rect x="0" y="0" width="360" height="200" fill="#fafafa" stroke="#999" stroke-width="1" rx="6"/>
+    <text x="180" y="22" text-anchor="middle" class="tufte-title" font-size="12">gt 파이프라인</text>
+    <line x1="20" y1="32" x2="340" y2="32" stroke="#ddd" stroke-width="1"/>
+
+    <!-- 단계별 흐름 -->
+    <g transform="translate(20, 45)">
+      <rect x="0" y="0" width="75" height="30" fill="#e8e8e8" stroke="#666" stroke-width="1" rx="3"/>
+      <text x="37" y="20" text-anchor="middle" class="tufte-mono" font-size="9">gt(data)</text>
+    </g>
+
+    <text x="105" y="65" text-anchor="middle" class="tufte-mono" font-size="12">|></text>
+
+    <g transform="translate(120, 45)">
+      <rect x="0" y="0" width="90" height="30" fill="#e8e8e8" stroke="#666" stroke-width="1" rx="3"/>
+      <text x="45" y="20" text-anchor="middle" class="tufte-mono" font-size="9">tab_header()</text>
+    </g>
+
+    <text x="220" y="65" text-anchor="middle" class="tufte-mono" font-size="12">|></text>
+
+    <g transform="translate(235, 45)">
+      <rect x="0" y="0" width="90" height="30" fill="#e8e8e8" stroke="#666" stroke-width="1" rx="3"/>
+      <text x="45" y="20" text-anchor="middle" class="tufte-mono" font-size="9">cols_label()</text>
+    </g>
+
+    <!-- 두 번째 줄 -->
+    <g transform="translate(20, 90)">
+      <rect x="0" y="0" width="75" height="30" fill="#e8e8e8" stroke="#666" stroke-width="1" rx="3"/>
+      <text x="37" y="20" text-anchor="middle" class="tufte-mono" font-size="9">fmt_*()</text>
+    </g>
+
+    <text x="105" y="110" text-anchor="middle" class="tufte-mono" font-size="12">|></text>
+
+    <g transform="translate(120, 90)">
+      <rect x="0" y="0" width="90" height="30" fill="#e8e8e8" stroke="#666" stroke-width="1" rx="3"/>
+      <text x="45" y="20" text-anchor="middle" class="tufte-mono" font-size="9">data_color()</text>
+    </g>
+
+    <text x="220" y="110" text-anchor="middle" class="tufte-mono" font-size="12">|></text>
+
+    <g transform="translate(235, 90)">
+      <rect x="0" y="0" width="90" height="30" fill="#e8e8e8" stroke="#666" stroke-width="1" rx="3"/>
+      <text x="45" y="20" text-anchor="middle" class="tufte-mono" font-size="9">tab_footnote()</text>
+    </g>
+
+    <!-- 핵심 함수 그룹 -->
+    <g transform="translate(20, 140)">
+      <text x="0" y="12" text-anchor="start" class="tufte-label" font-size="9">구조:</text>
+      <text x="35" y="12" text-anchor="start" class="tufte-mono" font-size="8">tab_header, tab_spanner, tab_footnote</text>
+
+      <text x="0" y="28" text-anchor="start" class="tufte-label" font-size="9">서식:</text>
+      <text x="35" y="28" text-anchor="start" class="tufte-mono" font-size="8">fmt_number, fmt_percent, fmt_date</text>
+
+      <text x="0" y="44" text-anchor="start" class="tufte-label" font-size="9">스타일:</text>
+      <text x="35" y="44" text-anchor="start" class="tufte-mono" font-size="8">data_color, tab_style, gt_theme_*</text>
+    </g>
+  </g>
+
+  <!-- 하단: 핵심 메시지 -->
+  <text x="200" y="255" text-anchor="middle" class="tufte-label" font-size="11">"데이터프레임을 출판 품질의 표로 변환: 구조 → 서식 → 스타일"</text>
+
+</svg>

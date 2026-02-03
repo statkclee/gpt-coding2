@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 10 750 220">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #111; font-weight: bold; }
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-mono { font-family: 'SF Mono', Consolas, monospace; fill: #444; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #555; font-style: italic; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #666; font-size: 12px; }
+      .outer-box { fill: none; stroke: #111; stroke-width: 2; }
+      .op-box { fill: #f5f5f5; stroke: #333; stroke-width: 1.5; }
+      .table-header { fill: #c8c8c8; stroke: #111; stroke-width: 2; }
+      .arrow-in { fill: none; stroke: #333; stroke-width: 2; }
+      .arrow-out { fill: none; stroke: #333; stroke-width: 2; stroke-dasharray: 5,3; }
+    </style>
+    <marker id="arrow-in" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#333" />
+    </marker>
+    <marker id="arrow-out" markerWidth="10" markerHeight="10" refX="0" refY="3" orient="auto">
+      <path d="M9,0 L9,6 L0,3 z" fill="#333" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="750" height="240" fill="#ffffff"/>
+
+  <!-- 중앙 데이터베이스 테이블 -->
+  <g transform="translate(275, 60)">
+    <rect x="0" y="0" width="200" height="120" class="outer-box" rx="4"/>
+    <rect x="0" y="0" width="200" height="28" class="table-header" rx="4"/>
+    <text x="100" y="20" text-anchor="middle" class="tufte-title" font-size="13">Track</text>
+
+    <!-- 헤더 -->
+    <line x1="0" y1="50" x2="200" y2="50" stroke="#999" stroke-width="1"/>
+    <line x1="100" y1="28" x2="100" y2="120" stroke="#999" stroke-width="1"/>
+    <text x="50" y="42" text-anchor="middle" class="tufte-title" font-size="10">title</text>
+    <text x="150" y="42" text-anchor="middle" class="tufte-title" font-size="10">plays</text>
+
+    <!-- 데이터 행 -->
+    <text x="50" y="70" text-anchor="middle" class="tufte-mono" font-size="12">Thunderstruck</text>
+    <text x="150" y="70" text-anchor="middle" class="tufte-mono" font-size="12">20</text>
+    <line x1="0" y1="80" x2="200" y2="80" stroke="#eee" stroke-width="1"/>
+    <text x="50" y="100" text-anchor="middle" class="tufte-mono" font-size="12">My Way</text>
+    <text x="150" y="100" text-anchor="middle" class="tufte-mono" font-size="12">15</text>
+  </g>
+
+  <!-- CREATE (INSERT) - 왼쪽 상단: 데이터가 테이블로 들어감 -->
+  <g transform="translate(30, 30)">
+    <rect x="0" y="0" width="120" height="65" class="op-box" rx="6"/>
+    <text x="60" y="20" text-anchor="middle" class="tufte-title" font-size="12">Create</text>
+    <text x="60" y="38" text-anchor="middle" class="tufte-mono" font-size="9">INSERT INTO</text>
+    <text x="60" y="54" text-anchor="middle" class="tufte-small">+ 새 행 추가</text>
+  </g>
+  <!-- 화살표: 테이블로 들어감 -->
+  <path d="M 150,62 L 265,90" class="arrow-in" marker-end="url(#arrow-in)"/>
+
+  <!-- READ (SELECT) - 왼쪽 하단: 데이터가 테이블에서 나옴 -->
+  <g transform="translate(30, 145)">
+    <rect x="0" y="0" width="120" height="65" class="op-box" rx="6"/>
+    <text x="60" y="20" text-anchor="middle" class="tufte-title" font-size="12">Read</text>
+    <text x="60" y="38" text-anchor="middle" class="tufte-mono" font-size="9">SELECT</text>
+    <text x="60" y="54" text-anchor="middle" class="tufte-small">← 데이터 조회</text>
+  </g>
+  <!-- 화살표: 테이블에서 나옴 (점선) -->
+  <path d="M 265,150 L 150,177" class="arrow-out" marker-end="url(#arrow-out)"/>
+
+  <!-- UPDATE - 오른쪽 상단: 데이터가 테이블로 들어가 수정 -->
+  <g transform="translate(600, 30)">
+    <rect x="0" y="0" width="120" height="65" class="op-box" rx="6"/>
+    <text x="60" y="20" text-anchor="middle" class="tufte-title" font-size="12">Update</text>
+    <text x="60" y="38" text-anchor="middle" class="tufte-mono" font-size="9">UPDATE SET</text>
+    <text x="60" y="54" text-anchor="middle" class="tufte-small">↻ 기존 값 수정</text>
+  </g>
+  <!-- 화살표: 테이블로 들어감 -->
+  <path d="M 600,62 L 485,90" class="arrow-in" marker-end="url(#arrow-in)"/>
+
+  <!-- DELETE - 오른쪽 하단: 삭제 명령이 테이블로 -->
+  <g transform="translate(600, 145)">
+    <rect x="0" y="0" width="120" height="65" class="op-box" rx="6"/>
+    <text x="60" y="20" text-anchor="middle" class="tufte-title" font-size="12">Delete</text>
+    <text x="60" y="38" text-anchor="middle" class="tufte-mono" font-size="9">DELETE FROM</text>
+    <text x="60" y="54" text-anchor="middle" class="tufte-small">− 행 제거</text>
+  </g>
+  <!-- 화살표: 테이블로 들어감 -->
+  <path d="M 600,177 L 485,150" class="arrow-in" marker-end="url(#arrow-in)"/>
+
+</svg>

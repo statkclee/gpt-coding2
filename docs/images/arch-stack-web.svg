@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 130">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 13px; fill: #333; font-weight: bold; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 12px; fill: #333; font-weight: bold; }
+      .tufte-desc { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 9px; fill: #666; }
+      .tufte-use { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 8px; fill: #999; }
+      .box { fill: #f5f5f5; stroke: #666; stroke-width: 1; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="750" height="130" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="20" y="22" class="tufte-title">웹 개발 스택</text>
+
+  <!-- Flask -->
+  <rect x="20" y="38" width="220" height="80" rx="3" class="box"/>
+  <text x="130" y="58" text-anchor="middle" class="tufte-label">Flask</text>
+  <text x="130" y="72" text-anchor="middle" class="tufte-desc">최소한의 기능, 자유로운 구조</text>
+  <line x1="50" y1="82" x2="210" y2="82" stroke="#ccc" stroke-width="0.5"/>
+  <text x="130" y="95" text-anchor="middle" class="tufte-use">작은 API</text>
+  <text x="130" y="106" text-anchor="middle" class="tufte-use">마이크로서비스, 학습용</text>
+
+  <!-- Django -->
+  <rect x="260" y="38" width="220" height="80" rx="3" class="box"/>
+  <text x="370" y="58" text-anchor="middle" class="tufte-label">Django</text>
+  <text x="370" y="72" text-anchor="middle" class="tufte-desc">모든 기능 내장, 강제된 구조</text>
+  <line x1="290" y1="82" x2="450" y2="82" stroke="#ccc" stroke-width="0.5"/>
+  <text x="370" y="95" text-anchor="middle" class="tufte-use">대형 웹 애플리케이션</text>
+  <text x="370" y="106" text-anchor="middle" class="tufte-use">관리자 페이지 필요 시</text>
+
+  <!-- FastAPI -->
+  <rect x="500" y="38" width="230" height="80" rx="3" class="box"/>
+  <text x="615" y="58" text-anchor="middle" class="tufte-label">FastAPI</text>
+  <text x="615" y="72" text-anchor="middle" class="tufte-desc">타입 힌트 기반, 자동 문서</text>
+  <line x1="530" y1="82" x2="700" y2="82" stroke="#ccc" stroke-width="0.5"/>
+  <text x="615" y="95" text-anchor="middle" class="tufte-use">REST API, 비동기 서비스</text>
+  <text x="615" y="106" text-anchor="middle" class="tufte-use">ML 모델 서빙</text>
+</svg>

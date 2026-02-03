@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 50 700 360">
+  <defs>
+    <style>
+      .tufte-text {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+        font-size: 14px;
+      }
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+        font-size: 16px;
+        font-weight: bold;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #666;
+        font-size: 11px;
+      }
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #555;
+        font-size: 13px;
+        font-style: italic;
+      }
+      .tufte-concept {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+        font-size: 15px;
+        font-weight: bold;
+      }
+      .tufte-english {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #666;
+        font-size: 11px;
+      }
+      .axis-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+        font-size: 13px;
+        font-weight: bold;
+      }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="700" height="420" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="350" y="35" class="tufte-title" text-anchor="middle">재현가능 연구의 4가지 핵심 개념</text>
+
+  <!-- Axes -->
+  <!-- X-axis (분석 방법) -->
+  <line x1="140" y1="370" x2="620" y2="370" stroke="#666" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="380" y="400" class="axis-label" text-anchor="middle">분석 방법</text>
+  <text x="230" y="390" class="tufte-small" text-anchor="middle">동일</text>
+  <text x="500" y="390" class="tufte-small" text-anchor="middle">다른</text>
+
+  <!-- Y-axis (데이터) -->
+  <line x1="140" y1="370" x2="140" y2="60" stroke="#666" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="60" y="215" class="axis-label" text-anchor="middle" transform="rotate(-90, 60, 215)">데이터</text>
+  <text x="120" y="280" class="tufte-small" text-anchor="end">동일</text>
+  <text x="120" y="150" class="tufte-small" text-anchor="end">다른</text>
+
+  <g transform="translate(0, -10)">
+    <!-- Grid lines (subtle) -->
+    <line x1="140" y1="215" x2="600" y2="215" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
+    <line x1="370" y1="60" x2="370" y2="370" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
+
+    <!-- Quadrant 1: 재현성 (동일 데이터 + 동일 분석) - Bottom Left -->
+    <rect x="160" y="235" width="190" height="120" fill="#f0f0f0" stroke="#999" stroke-width="1" rx="5"/>
+    <text x="255" y="280" class="tufte-concept" text-anchor="middle">재현성</text>
+    <text x="255" y="300" class="tufte-english" text-anchor="middle">Reproducibility</text>
+    <text x="255" y="330" class="tufte-small" text-anchor="middle">동일 데이터 + 동일 분석</text>
+    <text x="255" y="345" class="tufte-small" text-anchor="middle">= 동일한 결과</text>
+
+    <!-- Quadrant 2: 강건성 (동일 데이터 + 다른 분석) - Bottom Right -->
+    <rect x="390" y="235" width="190" height="120" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="5"/>
+    <text x="485" y="280" class="tufte-concept" text-anchor="middle">강건성</text>
+    <text x="485" y="300" class="tufte-english" text-anchor="middle">Robustness</text>
+    <text x="485" y="330" class="tufte-small" text-anchor="middle">동일 데이터 + 다른 분석</text>
+    <text x="485" y="345" class="tufte-small" text-anchor="middle">= 유사한 결론</text>
+
+    <!-- Quadrant 3: 복제성 (다른 데이터 + 동일 분석) - Top Left -->
+    <rect x="160" y="80" width="190" height="120" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="5"/>
+    <text x="255" y="125" class="tufte-concept" text-anchor="middle">복제성</text>
+    <text x="255" y="145" class="tufte-english" text-anchor="middle">Replicability</text>
+    <text x="255" y="175" class="tufte-small" text-anchor="middle">다른 데이터 + 동일 분석</text>
+    <text x="255" y="190" class="tufte-small" text-anchor="middle">= 유사한 결과</text>
+
+    <!-- Quadrant 4: 일반화 (다른 데이터 + 다른 분석) - Top Right -->
+    <rect x="390" y="80" width="190" height="120" fill="#ddd" stroke="#999" stroke-width="1" rx="5"/>
+    <text x="485" y="125" class="tufte-concept" text-anchor="middle">일반화</text>
+    <text x="485" y="145" class="tufte-english" text-anchor="middle">Generalizability</text>
+    <text x="485" y="175" class="tufte-small" text-anchor="middle">다른 데이터 + 다른 분석</text>
+    <text x="485" y="190" class="tufte-small" text-anchor="middle">= 보편적 적용</text>
+
+    <!-- Arrows indicating progression -->
+    <path d="M 255 230 L 255 205" stroke="#666" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+    <path d="M 355 280 L 385 280" stroke="#666" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+    <path d="M 355 140 L 385 140" stroke="#666" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+    <path d="M 485 230 L 485 205" stroke="#666" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+    <rect x="160" y="235" width="190" height="120" fill="none" stroke="#333" stroke-width="2" rx="5"/>
+  </g>
+
+  <!-- Foundation note -->
+  <text x="255" y="365" class="tufte-label" text-anchor="middle">최소 요구사항</text>
+
+</svg>

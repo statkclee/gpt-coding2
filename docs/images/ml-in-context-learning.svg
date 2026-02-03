@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 80 950 360">
+  <defs>
+    <style>
+      .tufte-title { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif; font-size: 22px; font-weight: bold; fill: #111; }
+      .tufte-subtitle { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif; font-size: 16px; font-weight: bold; fill: #222; }
+      .tufte-label { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif; font-size: 13px; font-weight: bold; fill: #333; }
+      .tufte-text { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif; font-size: 12px; fill: #444; }
+      .tufte-small { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif; font-size: 11px; fill: #666; }
+      .tufte-code { font-family: 'SF Mono', Menlo, Monaco, monospace; font-size: 11px; fill: #333; }
+
+      .box-prompt { fill: #fff; stroke: #333; stroke-width: 1.5; rx: 5; }
+      .box-example { fill: #f9f9f9; stroke: #ccc; stroke-width: 1; rx: 3; }
+      .box-query { fill: #fff; stroke: #333; stroke-width: 2; rx: 3; }
+      
+      .box-model { fill: #f0f0f0; stroke: #111; stroke-width: 2; rx: 5; }
+      .box-highlight { fill: #fff; stroke: #333; stroke-width: 2; rx: 3; }
+      
+      .arrow-main { stroke: #333; stroke-width: 2; fill: none; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#333" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="950" height="500" fill="#ffffff"/>
+
+  <!-- Title -->
+  <!-- <text x="475" y="40" class="tufte-title" text-anchor="middle">맥락 내 학습 (In-Context Learning)</text>
+  <text x="475" y="65" class="tufte-text" text-anchor="middle" font-style="italic">가중치 업데이트 없이, 프롬프트의 패턴만으로 추론한다</text>
+
+  <line x1="50" y1="80" x2="900" y2="80" stroke="#ddd" stroke-width="2"/> -->
+
+  <!-- LEFT: The Prompt (Context Window) -->
+  <g transform="translate(50, 100)">
+    <text x="0" y="20" class="tufte-subtitle">1. 입력: 프롬프트</text>
+    
+    <!-- Prompt Stack Container -->
+    <rect x="0" y="35" width="320" height="290" class="box-prompt"/>
+    
+    <!-- Instruction -->
+    <g transform="translate(20, 55)">
+      <text x="0" y="0" class="tufte-label" fill="#666">지시 (Instruction)</text>
+      <text x="0" y="20" class="tufte-text">다음 문장의 감정을 분류하세요.</text>
+    </g>
+
+    <!-- Few-Shot Examples -->
+    <g transform="translate(20, 100)">
+      <text x="0" y="0" class="tufte-label" fill="#666">예시 (Demonstrations)</text>
+      
+      <!-- Ex 1 -->
+      <rect x="0" y="10" width="280" height="50" class="box-example"/>
+      <text x="10" y="30" class="tufte-code">입력: "배송이 정말 빨라요!"</text>
+      <text x="10" y="45" class="tufte-code">감정: 긍정</text>
+
+      <!-- Ex 2 -->
+      <rect x="0" y="70" width="280" height="50" class="box-example"/>
+      <text x="10" y="95" class="tufte-code">입력: "박스가 찌그러졌어요."</text>
+      <text x="10" y="110" class="tufte-code">감정: 부정</text>
+    </g>
+
+    <!-- Query (Test) -->
+    <g transform="translate(20, 245)">
+      <text x="0" y="0" class="tufte-label" fill="#333">질문 (Query)</text>
+      <rect x="0" y="10" width="280" height="50" class="box-query"/>
+      <text x="10" y="30" class="tufte-code">입력: "가성비가 좋네요."</text>
+      <text x="10" y="45" class="tufte-code" font-weight="bold">감정: </text> <!-- Cursor waiting -->
+      <line x1="50" y1="45" x2="60" y2="45" stroke="#333" stroke-width="2"/>
+    </g>
+  </g>
+
+  <!-- Arrow: Prompt to Model -->
+  <line x1="380" y1="260" x2="420" y2="260" class="arrow-main" marker-end="url(#arrow)"/>
+
+  <!-- MIDDLE: The Model (Frozen) -->
+  <g transform="translate(430, 150)">
+    <text x="0" y="-30" class="tufte-subtitle">2. 모델 (LLM)</text>
+    
+    <!-- Model Box -->
+    <rect x="0" y="0" width="180" height="220" class="box-model"/>
+    <text x="90" y="30" class="tufte-subtitle" text-anchor="middle">Transformer</text>
+    <text x="90" y="50" class="tufte-small" text-anchor="middle">(GPT-4, Claude)</text>
+
+    <!-- Frozen Weight Icon -->
+    <g transform="translate(65, 80)">
+      <path d="M10,0 L40,0 L40,30 L10,30 Z" fill="#fff" stroke="#333" stroke-width="2"/>
+      <path d="M15,0 L15,-10 A10,10 0 0,1 35,-10 L35,0" fill="none" stroke="#333" stroke-width="2"/>
+      <circle cx="25" cy="15" r="3" fill="#333"/>
+    </g>
+    
+    <text x="90" y="140" class="tufte-label" text-anchor="middle">가중치 고정</text>
+    <text x="90" y="160" class="tufte-text" text-anchor="middle">파라미터 (θ) 변경 없음</text>
+    <text x="90" y="180" class="tufte-small" text-anchor="middle" fill="#666">학습 과정 없음</text>
+  </g>
+
+  <!-- Arrow: Model to Output -->
+  <line x1="620" y1="260" x2="660" y2="260" class="arrow-main" marker-end="url(#arrow)"/>
+
+  <!-- RIGHT: The Output -->
+  <g transform="translate(670, 150)">
+    <text x="0" y="-30" class="tufte-subtitle">3. 결과 (Completion)</text>
+    
+    <rect x="0" y="85" width="150" height="60" class="box-highlight"/>
+    <text x="75" y="120" class="tufte-code" text-anchor="middle" font-size="16px" font-weight="bold">"긍정"</text>
+  </g>
+
+  <!-- Comparison / Insight Box -->
+  <g transform="translate(50, 410)">
+    <!-- <rect x="0" y="0" width="850" height="70" fill="#fafafa" stroke="#ccc" stroke-width="1" rx="5"/>
+    <line x1="425" y1="10" x2="425" y2="60" stroke="#ddd" stroke-width="1"/> -->
+
+    <!-- Traditional ML -->
+    <!-- <g transform="translate(20, 20)">
+      <text x="0" y="15" class="tufte-label">전통적 기계학습 (Fine-tuning)</text>
+      <text x="0" y="35" class="tufte-small">데이터로 <tspan font-weight="bold">가중치($\Delta W$)를 업데이트</tspan> (비용 높음)</text>
+    </g> -->
+
+    <!-- In-Context Learning -->
+    <!-- <g transform="translate(445, 20)">
+      <text x="0" y="15" class="tufte-label">맥락 내 학습 (In-Context Learning)</text>
+      <text x="0" y="35" class="tufte-small">가중치는 그대로 두고 <tspan font-weight="bold">입력(Context)으로 패턴 전달</tspan> (즉시 실행)</text>
+    </g> -->
+  </g>
+
+</svg>

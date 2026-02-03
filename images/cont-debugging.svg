@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 10 650 250">
+  <defs>
+    <style>
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-title { font-size: 14px; font-weight: bold; }
+      .tufte-label { font-size: 12px; }
+      .tufte-small { font-size: 11px; }
+      .tufte-code { font-family: 'Consolas', 'Monaco', monospace; font-size: 10px; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="650" height="260" fill="#ffffff"/>
+
+  <!-- Error Type 1: Syntax Error -->
+  <g transform="translate(30, 30)">
+    <rect x="0" y="0" width="180" height="120" fill="#e8e8e8" stroke="#333" stroke-width="1.5" rx="5"/>
+    <text x="90" y="25" text-anchor="middle" class="tufte-text tufte-label" font-weight="bold">구문 오류</text>
+    <text x="90" y="42" text-anchor="middle" class="tufte-text tufte-small" fill="#666">(SyntaxError)</text>
+
+    <line x1="15" y1="52" x2="165" y2="52" stroke="#ccc" stroke-width="1"/>
+
+    <text x="90" y="72" text-anchor="middle" class="tufte-text tufte-code" fill="#666">if x > 0</text>
+    <text x="90" y="88" text-anchor="middle" class="tufte-text tufte-small" fill="#c00">콜론 누락</text>
+    <text x="90" y="108" text-anchor="middle" class="tufte-text tufte-small" fill="#333">실행 전 발견</text>
+  </g>
+
+  <!-- Error Type 2: Indentation Error -->
+  <g transform="translate(235, 30)">
+    <rect x="0" y="0" width="180" height="120" fill="#f0f0f0" stroke="#333" stroke-width="1.5" rx="5"/>
+    <text x="90" y="25" text-anchor="middle" class="tufte-text tufte-label" font-weight="bold">들여쓰기 오류</text>
+    <text x="90" y="42" text-anchor="middle" class="tufte-text tufte-small" fill="#666">(IndentationError)</text>
+
+    <line x1="15" y1="52" x2="165" y2="52" stroke="#ccc" stroke-width="1"/>
+
+    <text x="90" y="72" text-anchor="middle" class="tufte-text tufte-code" fill="#666">if x > 0:</text>
+    <text x="90" y="88" text-anchor="middle" class="tufte-text tufte-code" fill="#c00">print(x)  # 들여쓰기 없음</text>
+    <text x="90" y="108" text-anchor="middle" class="tufte-text tufte-small" fill="#333">실행 전 발견</text>
+  </g>
+
+  <!-- Error Type 3: Logic Error -->
+  <g transform="translate(440, 30)">
+    <rect x="0" y="0" width="180" height="120" fill="#f8f8f8" stroke="#333" stroke-width="1.5" rx="5"/>
+    <text x="90" y="25" text-anchor="middle" class="tufte-text tufte-label" font-weight="bold">논리 오류</text>
+    <text x="90" y="42" text-anchor="middle" class="tufte-text tufte-small" fill="#666">(Logic Error)</text>
+
+    <line x1="15" y1="52" x2="165" y2="52" stroke="#ccc" stroke-width="1"/>
+
+    <text x="90" y="72" text-anchor="middle" class="tufte-text tufte-code" fill="#666">if x = 5:  # ==가 아닌 =</text>
+    <text x="90" y="88" text-anchor="middle" class="tufte-text tufte-small" fill="#c00">비교가 아닌 대입</text>
+    <text x="90" y="108" text-anchor="middle" class="tufte-text tufte-small" fill="#333">실행 중/후 발견</text>
+  </g>
+
+  <!-- Common mistakes section -->
+  <g transform="translate(30, 170)">
+    <text x="0" y="0" class="tufte-text tufte-label" font-weight="bold">조건문 작성 시 흔한 실수:</text>
+    <text x="0" y="22" class="tufte-text tufte-small">1. 콜론(:) 누락 - if x > 0 대신 if x > 0:</text>
+    <text x="0" y="40" class="tufte-text tufte-small">2. 비교 연산자 혼동 - = 대신 ==</text>
+    <text x="0" y="58" class="tufte-text tufte-small">3. 들여쓰기 불일치 - 탭과 스페이스 혼용</text>
+    <text x="0" y="76" class="tufte-text tufte-small">4. 조건 순서 오류 - elif/else 순서 실수</text>
+  </g>
+
+  <!-- Tip section -->
+  <g transform="translate(350, 170)">
+    <rect x="0" y="-10" width="270" height="90" fill="#fafafa" stroke="#999" stroke-width="1" rx="4"/>
+    <text x="135" y="10" text-anchor="middle" class="tufte-text tufte-label" font-weight="bold" fill="#666">디버깅 팁</text>
+    <text x="15" y="32" class="tufte-text tufte-small" fill="#333">오류 메시지의 줄 번호 확인</text>
+    <text x="15" y="50" class="tufte-text tufte-small" fill="#333">print()로 조건식 결과 출력</text>
+    <text x="15" y="68" class="tufte-text tufte-small" fill="#333">복잡한 조건은 단계별로 분리</text>
+  </g>
+
+</svg>

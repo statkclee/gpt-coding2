@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 350">
+  <defs>
+    <style>
+      /* Tufte Grayscale Style */
+      .label-head { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 14px; font-weight: bold; fill: #222; }
+      .label-body { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 12px; fill: #333; }
+      .label-note { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 11px; fill: #666; font-style: italic; }
+      .label-mono { font-family: 'SF Mono', Consolas, Menlo, monospace; font-size: 10px; fill: #444; }
+      .label-small { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 10px; fill: #666; }
+
+      .box-declaration { fill: #fff; stroke: #333; stroke-width: 2; rx: 3; }
+      .box-hidden { fill: #fcfcfc; stroke: #999; stroke-width: 1; stroke-dasharray: 4 2; rx: 3; }
+      .box-inner { fill: #fff; stroke: #ccc; stroke-width: 1; rx: 2; }
+
+      .line-flow { stroke: #333; stroke-width: 1.5; fill: none; }
+      .line-scale { stroke: #ccc; stroke-width: 1; }
+
+      .arrow-head { fill: #333; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L0,8 L8,4 z" class="arrow-head" />
+    </marker>
+  </defs>
+
+  <rect width="800" height="350" fill="#fff" />
+
+  <!-- ========================================== -->
+  <!-- Layer 1: Declaration (What) - User's Intent -->
+  <!-- ========================================== -->
+  <g transform="translate(40, 30)">
+    <text x="0" y="0" class="label-head">1. 선언 계층</text>
+    <text x="100" y="0" class="label-note">(What: 의도 표현)</text>
+
+    <rect x="0" y="15" width="620" height="70" class="box-declaration"/>
+
+    <text x="20" y="40" class="label-body">개발자의 의도:</text>
+    <rect x="20" y="50" width="580" height="25" fill="#f5f5f5" stroke="#ddd" rx="2"/>
+    <text x="30" y="66" class="label-mono" font-size="9">SELECT name, email FROM users WHERE active = true ORDER BY date DESC LIMIT 10</text>
+  </g>
+
+  <!-- Arrow: Declaration → Optimization -->
+  <g transform="translate(350, 115)">
+    <path d="M 0 0 L 0 35" class="line-flow" marker-end="url(#arrow)"/>
+    <text x="13" y="25" class="label-small">해석/파싱</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- Layer 2 & 3: Implementation (How) -->
+  <!-- ========================================== -->
+  <g transform="translate(40, 145)">
+    <text x="0" y="0" class="label-head" fill="#666">2. 구현 계층</text>
+    <text x="100" y="0" class="label-note" fill="#888">(How: 블랙박스)</text>
+
+    <rect x="0" y="15" width="620" height="175" class="box-hidden"/>
+
+    <!-- Optimization Layer -->
+    <g transform="translate(20, 30)">
+      <text x="0" y="0" class="label-body" fill="#555">최적화 엔진</text>
+      <text x="80" y="0" class="label-mono" fill="#888">(MySQL · PostgreSQL · Oracle · SQLite ...)</text>
+      <rect x="0" y="10" width="580" height="60" class="box-inner"/>
+
+      <text x="15" y="35" class="label-mono" fill="#666" font-weight="bold">Planner:</text>
+      <text x="75" y="35" class="label-small">→ 비용 추정, 인덱스 스캔 vs 풀 스캔 결정, 조인 순서 최적화</text>
+
+      <text x="15" y="55" class="label-mono" fill="#666" font-weight="bold">Plan:</text>
+      <text x="75" y="55" class="label-small">→ IndexScan(idx_active) → Sort(date) → Limit(10)</text>
+    </g>
+
+    <!-- Internal Arrow -->
+    <path d="M 310 100 L 310 125" class="line-flow" marker-end="url(#arrow)"/>
+
+    <!-- Execution Layer -->
+    <g transform="translate(20, 125)">
+      <text x="0" y="0" class="label-body" fill="#333" font-weight="bold">하드웨어 실행</text>
+      <rect x="0" y="10" width="580" height="30" class="box-inner" fill="#f0f0f0" stroke="#666" stroke-width="1.5"/>
+      <text x="15" y="29" class="label-small" fill="#555">Physical I/O · Buffer Cache · CPU Registers · Memory Allocation · Threads</text>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- Right Side: Abstraction Indicator -->
+  <!-- ========================================== -->
+  <g transform="translate(730, 60)">
+    <line x1="0" y1="0" x2="0" y2="260" class="line-scale"/>
+
+    <!-- High -->
+    <circle cx="0" cy="0" r="3" fill="#333"/>
+    <text x="10" y="4" class="label-small" fill="#333" font-weight="bold">높음</text>
+    <text x="10" y="16" class="label-small" fill="#555">(인간)</text>
+
+    <!-- Low -->
+    <circle cx="0" cy="260" r="3" fill="#999"/>
+    <text x="10" y="255" class="label-small" fill="#999" font-weight="bold">낮음</text>
+    <text x="10" y="267" class="label-small" fill="#aaa">(기계)</text>
+
+    <!-- Label -->
+    <text x="-15" y="130" class="label-note" style="writing-mode: tb; text-orientation: upright;" text-anchor="middle" fill="#aaa">추상화 수준</text>
+  </g>
+
+</svg>

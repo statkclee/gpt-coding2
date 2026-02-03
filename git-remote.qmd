@@ -1,0 +1,318 @@
+# GitHub와 원격 저장소 {#sec-git-remote}
+
+\index{git!GitHub} \index{원격 작업}
+
+버전 관리의 진정한 가치는 다른 사람과 협업할 때 드러난다. 앞선 장에서 로컬 저장소에서 변경 이력을 추적하는 방법을 익혔다. 이제 한 저장소에서 다른 저장소로 변경 사항을 주고받는 방법을 배울 차례다.
+
+@fig-git-remote-overview 는 로컬 저장소와 원격 저장소 사이의 데이터 흐름을 보여준다. `git push`로 로컬 커밋을 원격에 업로드하고, `git pull`로 원격의 변경 사항을 로컬로 가져온다. 두 명령어의 방향과 역할을 확실히 이해하면 협업 과정에서 혼란을 피할 수 있다.
+
+![원격 저장소 워크플로우](images/git/git-remote-workflow.svg){#fig-git-remote-overview fig-align="center" width="550"} 
+
+Git은 임의의 두 저장소 사이에서 작업 내용을 동기화할 수 있지만, 실무에서는 중앙 허브 역할을 하는 원격 저장소를 두는 방식이 효율적이다. [GitHub](http://github.com), [BitBucket](http://bitbucket.org), [GitLab](http://gitlab.com/) 같은 호스팅 서비스가 중앙 허브 역할을 담당한다. \index{GitHub} \index{BitBucket} \index{GitLab}
+
+## 원격 저장소 생성 {#sec-git-remote-create}
+
+\index{원격 저장소}
+
+프로젝트를 다른 사람과 공유하려면 먼저 원격 저장소를 만들어야 한다. GitHub에 로그인한 후 우측 상단의 `+` 아이콘을 클릭하고 "New repository"를 선택하여 `planets`라는 이름으로 저장소를 생성한다.
+
+![(1단계) GitHub 저장소 생성](images/git/github-create-repo-01.png){#fig-github-repo fig-align="center" width="500"}
+
+저장소 이름을 "planets"으로 입력하고 "Create Repository" 버튼을 클릭한다. 설명(Description)은 선택 사항이지만, 저장소의 목적을 간략히 적어두면 나중에 찾기 쉽다.
+
+![(2단계) GitHub 저장소 생성](images/git/github-create-repo-02.png){#fig-github-repo-create fig-align="center" width="500"}
+
+저장소가 생성되면 GitHub는 저장소 URL과 함께 로컬 저장소 연결 방법을 안내하는 페이지를 보여준다.
+
+![(3단계) GitHub 저장소 생성](images/git/github-create-repo-03.png){#fig-github-repo-info fig-align="center" width="500"}
+
+GitHub 서버에서는 실제로 다음과 같은 작업이 자동으로 수행된다.
+
+``` bash
+$ mkdir planets
+$ cd planets
+$ git init
+```
+
+앞서 `mars.txt` 파일을 추가하고 커밋했던 내용을 떠올려보자. 로컬 저장소 상태는 다음과 같이 표현할 수 있다.
+
+![Git 스테이징 영역과 로컬 저장소](images/git/git-staging-area.svg){#fig-github-staging fig-align="center" width="428"}
+
+로컬 저장소에는 `mars.txt`에 대한 커밋 이력이 있지만, 방금 생성한 GitHub 원격 저장소는 아직 비어 있다.
+
+![새로 생성된 GitHub 저장소](images/git/git-freshly-made-github-repo.svg){#fig-github-two-repo fig-align="center" width="366"}
+
+## 로컬 저장소와 원격 저장소 연결 {#sec-git-remote-connect}
+
+\index{git!원격 저장소} \index{git!remote}
+
+로컬 저장소와 원격 저장소는 서로 독립적으로 생성되었으므로, 아직 연결 관계가 없다. 두 저장소를 연결하려면 로컬에 원격 저장소의 주소를 등록해야 한다. GitHub 저장소 페이지에서 연결에 필요한 URL을 확인할 수 있다.
+
+![GitHub 저장소 URL 확인](images/git/github-find-repo-string.png)
+
+HTTPS 대신 SSH 프로토콜을 사용하려면 'SSH' 탭을 클릭한다. SSH는 초기 설정이 필요하지만 이후에는 비밀번호 입력 없이 편리하게 사용할 수 있다.
+
+브라우저에서 URL을 복사한 후 로컬 `planets` 디렉터리로 이동하여 다음 명령어를 실행한다.
+
+``` bash
+$ git remote add origin git@github.com:vlad/planets.git
+```
+
+`vlad` 부분은 본인의 GitHub 사용자 이름으로 바꿔야 한다. `origin`은 원격 저장소에 부여하는 별명으로, 관례적으로 주 원격 저장소에 `origin`이라는 이름을 사용한다.
+
+`git remote -v` 명령어로 원격 저장소가 제대로 등록되었는지 확인한다.
+
+``` bash
+$ git remote -v
+
+origin   git@github.com:vlad/planets.git (fetch)
+origin   git@github.com:vlad/planets.git (push)
+```
+
+출력에서 `fetch`와 `push`가 각각 표시되는데, 가져오기(fetch)와 보내기(push)에 서로 다른 URL을 사용할 수도 있음을 보여준다.
+
+::: callout-tip
+### HTTPS vs. SSH 인증
+
+\index{SSH} \index{HTTPS}
+
+GitHub 연결에는 HTTPS와 SSH 두 가지 방식이 있다. HTTPS는 별도 설정 없이 바로 사용할 수 있지만 매번 사용자 이름과 비밀번호(또는 토큰)를 입력해야 한다. SSH는 초기 키 설정이 필요하지만 이후에는 자동 인증되어 편리하다. 보안과 편의성 모두를 고려할 때 SSH 방식을 권장한다.
+
+SSH 키 설정이 아직 안 되어 있다면 @sec-git-auth 에서 상세한 설정 방법을 참조한다. 설정을 완료했다면 다음 명령어로 인증 상태를 확인할 수 있다.
+
+``` bash
+$ ssh -T git@github.com
+
+Hi Vlad! You've successfully authenticated, but GitHub does not provide shell access.
+```
+
+위와 같은 메시지가 나타나면 SSH 설정이 정상적으로 완료된 것이다.
+:::
+
+## 로컬 변경사항 푸시 {#sec-git-remote-push}
+
+\index{git!push}
+
+로컬 저장소와 원격 저장소가 연결되었으니, 로컬에서 작업한 내용을 원격으로 보낼 수 있다. `git push` 명령어는 로컬 저장소의 커밋을 원격 저장소로 전송한다. 푸시는 "밀다"라는 뜻 그대로, 내 작업을 원격 서버로 밀어 넣는 동작이다.
+
+``` bash
+$ git push origin main
+```
+
+`origin`은 앞서 등록한 원격 저장소 별명이고, `main`은 푸시할 브랜치 이름이다. SSH 키에 암호 문구(passphrase)를 설정했다면 입력 창이 나타난다.
+
+``` bash
+Enumerating objects: 16, done.
+Counting objects: 100% (16/16), done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (11/11), done.
+Writing objects: 100% (16/16), 1.45 KiB | 372.00 KiB/s, done.
+Total 16 (delta 2), reused 0 (delta 0)
+remote: Resolving deltas: 100% (2/2), done.
+To https://github.com/vlad/planets.git
+ * [new branch]      main -> main
+```
+
+::: callout-tip
+### 프록시 환경에서의 연결
+
+회사나 학교 네트워크처럼 프록시를 사용하는 환경에서 "Could not resolve hostname" 오류가 발생하면 Git에 프록시 정보를 설정해야 한다.
+
+``` bash
+$ git config --global http.proxy http://user:password@proxy.url
+$ git config --global https.proxy http://user:password@proxy.url
+```
+
+프록시가 없는 네트워크로 이동하면 설정을 해제한다.
+
+``` bash
+$ git config --global --unset http.proxy
+$ git config --global --unset https.proxy
+```
+:::
+
+푸시가 성공하면 두 저장소의 상태는 다음과 같이 동기화된다.
+\index{푸시} \index{원격 저장소}
+
+![첫 번째 푸시 후 GitHub 저장소 상태](images/git/github-repo-after-first-push.svg){#fig-github-repo-push fig-align="center" width="539"}
+
+::: callout-tip
+### `-u` 옵션으로 업스트림 설정
+
+`git push -u origin main` 명령어의 `-u` 옵션은 로컬 브랜치와 원격 브랜치를 연결한다. 한 번 연결하면 이후에는 `git push`나 `git pull`만 입력해도 된다.
+:::
+
+## 원격 변경사항 가져오기 {#sec-git-remote-pull}
+
+\index{git!pull}
+
+협업 환경에서는 다른 팀원이 원격 저장소에 새 커밋을 푸시해도 내 로컬 저장소에 자동으로 반영되지 않는다. `git pull` 명령어는 원격 저장소의 변경 사항을 로컬로 "당겨오는" 역할을 한다. 풀(pull)은 푸시의 반대 방향으로, 원격의 최신 상태를 내 컴퓨터에 동기화한다.
+
+``` bash
+$ git pull origin main
+
+From https://github.com/vlad/planets
+ * branch            master     -> FETCH_HEAD
+Already up-to-date.
+```
+
+두 저장소가 이미 동기화되어 있어서 가져올 내용이 없다. 팀원이 원격 저장소에 새 커밋을 푸시했다면, `git pull`로 변경 사항을 로컬에 반영한다.
+
+::: callout-note
+### fetch와 pull의 차이
+
+`git fetch`는 원격 저장소의 변경 사항을 로컬에 다운로드하지만 작업 디렉터리에 반영하지는 않는다. 변경 내용을 먼저 확인한 후 병합 여부를 결정하고 싶을 때 유용하다. `git pull`은 `git fetch`와 `git merge`를 한 번에 수행한다.
+
+``` bash
+# 원격 변경사항 확인만
+$ git fetch origin
+$ git log origin/main --oneline
+
+# 확인 후 병합
+$ git merge origin/main
+```
+:::
+
+::: callout-tip
+### GitHub 웹에서 직접 파일 업로드
+
+GitHub 웹사이트에서 명령줄 없이 파일을 업로드할 수도 있다. 저장소 페이지에서 "Add file" > "Upload files"를 클릭하거나 파일을 드래그 앤 드롭하면 된다. 단, 웹에서 변경한 내용은 로컬에서 `git pull`로 가져와야 한다.
+:::
+
+## 원격 저장소 관리 {#sec-git-remote-manage}
+
+\index{git!remote}
+
+프로젝트가 커지면 원격 저장소를 단순히 `origin` 하나만 사용하지 않는 경우도 생긴다. 회사 내부 서버와 GitHub를 동시에 사용하거나, 저장소 URL을 변경해야 하는 상황이 발생할 수 있다. Git은 여러 원격 저장소를 등록하고 관리하는 기능을 제공한다.
+
+### 여러 원격 저장소 사용
+
+하나의 로컬 저장소에 여러 원격 저장소를 등록할 수 있다. 예를 들어 회사 서버(`company`)와 개인 백업용 GitHub(`backup`)를 동시에 사용할 수 있다.
+
+``` bash
+$ git remote add company git@company.server:team/project.git
+$ git remote add backup git@github.com:username/project.git
+
+$ git remote -v
+company   git@company.server:team/project.git (fetch)
+company   git@company.server:team/project.git (push)
+backup    git@github.com:username/project.git (fetch)
+backup    git@github.com:username/project.git (push)
+origin    git@github.com:vlad/planets.git (fetch)
+origin    git@github.com:vlad/planets.git (push)
+```
+
+특정 원격 저장소에 푸시하려면 이름을 명시한다.
+
+``` bash
+$ git push backup main
+```
+
+### 원격 저장소 정보 확인
+
+`git remote show` 명령어로 특정 원격 저장소의 상세 정보를 확인할 수 있다.
+
+``` bash
+$ git remote show origin
+
+* remote origin
+  Fetch URL: git@github.com:vlad/planets.git
+  Push  URL: git@github.com:vlad/planets.git
+  HEAD branch: main
+  Remote branch:
+    main tracked
+  Local branch configured for 'git pull':
+    main merges with remote main
+  Local ref configured for 'git push':
+    main pushes to main (up to date)
+```
+
+### 원격 저장소 URL 변경 및 삭제
+
+원격 URL을 잘못 입력했거나 변경해야 할 때는 `git remote set-url`을 사용한다.
+
+``` bash
+$ git remote set-url origin git@github.com:correct/url.git
+```
+
+더 이상 필요 없는 원격 저장소는 `git remote remove`로 삭제한다.
+
+``` bash
+$ git remote remove backup
+```
+
+## GitHub 활용 팁 {#sec-git-remote-tips}
+
+\index{GitHub!활용}
+
+`push`와 `pull`의 기본 작업을 익혔다면 실제 협업에서 자주 마주치는 상황과 GitHub의 부가 기능을 알아두면 유용하다. 명령어 자체보다 작업 순서와 개념을 이해하는 것이 충돌 없는 협업의 핵심이다.
+
+### 협업 워크플로우 이해
+
+\index{git!commit} \index{git!push} \index{협업}
+
+Git을 처음 배우면 `commit`과 `push`를 혼동하기 쉽다. `git commit`은 변경 사항을 **로컬 저장소에 기록**하는 명령어이고, `git push`는 로컬에 쌓인 커밋을 **원격 저장소로 전송**하는 명령어다. 커밋은 내 컴퓨터에서만 일어나는 일이고, 푸시해야 비로소 다른 사람이 내 작업을 볼 수 있다.
+
+![협업 워크플로우](images/git/git-collaboration-workflow.svg){#fig-git-collab-workflow fig-align="center" width="600"}
+
+협업 환경에서 충돌을 줄이려면 @fig-git-collab-workflow 와 같은 순서를 따르는 것이 좋다. 작업을 시작하기 전에 `git pull`로 원격의 최신 상태를 가져오고, 파일을 수정한 뒤 `git add`와 `git commit`으로 로컬에 기록한다. 마지막으로 `git push`로 원격에 공유한다. 여러 커밋을 모아 한 번에 푸시해도 되지만, 푸시 전에 다시 한 번 `git pull`을 실행하면 그 사이 다른 팀원이 올린 변경 사항과의 충돌을 미리 파악할 수 있다.
+
+### GitHub 웹 인터페이스 활용
+
+\index{GitHub!GUI} \index{GitHub!시간도장}
+
+명령줄이 익숙하지 않거나 빠르게 이력을 확인하고 싶을 때는 GitHub 웹사이트가 편리하다. 저장소 페이지의 "Code" 탭에서 "XX commits"를 클릭하면 전체 커밋 목록이 나타나고, 각 커밋을 클릭하면 변경된 파일과 코드 diff를 시각적으로 확인할 수 있다. 커밋 옆의 버튼으로 커밋 ID 복사, 해당 시점의 전체 파일 보기도 가능하다.
+
+커밋 시간은 "2 hours ago", "3 weeks ago"처럼 상대적 형태로 표시된다. 정확한 날짜와 시간이 필요하면 마우스를 올려 툴팁을 확인한다. 명령줄에서는 `git log`로 커밋 목록을, `git diff ID1..ID2`로 두 커밋 사이의 차이를, `git show ID`로 특정 커밋의 상세 정보를 확인한다.
+
+::: callout-tip
+### GitHub에서 직접 편집
+
+간단한 오타 수정이나 README 업데이트는 GitHub 웹에서 직접 파일을 편집할 수도 있다. 파일을 열고 연필 아이콘을 클릭하면 편집 모드로 전환된다. 웹에서 커밋한 내용은 로컬에서 `git pull`로 가져와야 한다.
+:::
+
+### 저장소 설정 시 주의사항
+
+\index{git!remote}
+
+원격 저장소를 처음 설정할 때 몇 가지 흔한 실수가 있다. 먼저, `git remote add`로 잘못된 URL을 등록해도 즉시 오류가 발생하지 않는다. Git은 URL을 저장만 하고 실제 연결은 `push`나 `pull` 시점에 시도하기 때문이다. 오류를 발견하면 `git remote set-url origin 올바른URL`로 수정하거나, `git remote remove origin` 후 다시 추가한다.
+
+또 다른 주의점은 GitHub에서 저장소 생성 시 "Add a README file"이나 "Add .gitignore", "Choose a license" 옵션을 선택하면 원격에 첫 커밋이 생긴다는 것이다. 이미 로컬에 커밋 이력이 있는 경우 두 저장소의 이력이 서로 연결되지 않아 다음과 같은 오류가 발생한다.
+
+``` bash
+$ git pull origin main
+
+fatal: refusing to merge unrelated histories
+```
+
+이미 발생한 상황이라면 `--allow-unrelated-histories` 옵션으로 강제 병합할 수 있다.
+
+``` bash
+$ git pull origin main --allow-unrelated-histories
+
+From https://github.com/vlad/planets
+ * branch            main       -> FETCH_HEAD
+Merge made by the 'ort' strategy.
+ README.md | 2 ++
+ 1 file changed, 2 insertions(+)
+ create mode 100644 README.md
+```
+
+두 저장소의 독립적인 이력을 하나로 합치는 병합 커밋이 생성된다. README.md처럼 양쪽에 같은 파일이 있으면 충돌이 발생할 수 있으므로 수동으로 해결해야 한다. 병합 후 이력 그래프가 두 갈래로 시작하여 복잡해 보일 수 있지만, 기능상 문제는 없다.
+
+가장 깔끔한 방법은 애초에 **GitHub에서 빈 저장소를 생성**하는 것이다. README, .gitignore, LICENSE 파일은 로컬에서 직접 만들어 첫 커밋에 포함시키면 이력이 단일 선으로 깔끔하게 유지된다.
+
+
+::: {.content-visible when-format="pdf"}
+\faLightbulb\ 생각해볼 점
+:::
+
+::: {.content-visible when-format="html"}
+## 💡 생각해볼 점 {.unnumbered}
+:::
+
+원격 저장소는 Git 협업의 핵심이다. 로컬에서 아무리 꼼꼼하게 버전 관리를 해도 공유하지 않으면 혼자만의 기록에 그친다. GitHub 같은 호스팅 서비스는 팀원들이 각자의 작업을 통합하고 검토하는 중앙 허브 역할을 한다. SSH 키 설정이 처음에는 번거롭게 느껴질 수 있지만, 한 번 해두면 이후 작업이 훨씬 편리해진다.
+
+`push`와 `pull`의 방향을 이해하는 것이 협업의 출발점이다. 푸시는 내 작업을 공유하는 것이고, 풀은 다른 사람의 작업을 가져오는 것이다. 혼자 작업할 때는 백업 용도로 푸시만 하면 되지만, 여러 명이 함께 작업하면 풀과 푸시의 순서가 중요해진다. 푸시 전에 항상 풀부터 하는 습관을 들이면 충돌을 상당 부분 예방할 수 있다.
+
+원격 저장소를 사용하면 작업 환경의 유연성이 높아진다. 회사 컴퓨터에서 시작한 작업을 집에서 이어갈 수 있고, 노트북이 고장 나도 코드를 잃지 않는다. GitHub는 저장소 기능을 넘어 이슈 트래킹, 코드 리뷰, 프로젝트 관리 도구까지 제공한다. Git 기본기를 익힌 후에는 Pull Request, Issue, Actions 같은 GitHub 부가 기능도 탐색해보자. 오픈소스 프로젝트 기여나 포트폴리오 공개도 GitHub를 통해 시작할 수 있다.

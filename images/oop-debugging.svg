@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 35 800 310">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 14px; fill: #333; font-weight: bold; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 12px; fill: #333; font-weight: bold; }
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 11px; fill: #333; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 10px; fill: #666; }
+      .label-mono { font-family: 'SF Mono', Consolas, Monaco, monospace; font-size: 10px; fill: #333; }
+      .label-note { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 11px; fill: #555; }
+
+      .box-trap { fill: #fff; stroke: #999; stroke-width: 1.5; stroke-dasharray: 4 2; }
+      .box-fix { fill: #f8f8f8; stroke: #333; stroke-width: 1.5; }
+      .box-header { fill: #eee; stroke: #333; stroke-width: 1.5; }
+      .box-tool { fill: #f5f5f5; stroke: #666; stroke-width: 1; }
+
+      .line-arrow { fill: none; stroke: #666; stroke-width: 1.5; }
+      .line-sep { stroke: #ccc; stroke-width: 1; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#666"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="400" fill="#ffffff"/>
+
+  <!-- ========================================== -->
+  <!-- TOP: Three Common OOP Traps -->
+  <!-- ========================================== -->
+
+  <!-- Trap 1: Mutable Default Argument -->
+  <g transform="translate(30, 55)">
+    <rect x="0" y="0" width="230" height="120" class="box-trap" rx="4"/>
+    <text x="115" y="20" text-anchor="middle" class="tufte-label" fill="#c62828">함정 1: 가변 기본 인자</text>
+    <line x1="10" y1="30" x2="220" y2="30" class="line-sep"/>
+
+    <text x="15" y="50" class="label-mono">class DataLoader:</text>
+    <text x="25" y="65" class="label-mono">  def __init__(self,</text>
+    <text x="105" y="80" class="label-mono" fill="#c62828">    cache=[]):  # 위험!</text>
+    <text x="25" y="95" class="label-mono">    self.cache = cache</text>
+
+    <text x="115" y="115" text-anchor="middle" class="tufte-small" font-style="italic">모든 인스턴스가 같은 리스트 공유</text>
+  </g>
+
+  <!-- Trap 2: Class vs Instance Attribute -->
+  <g transform="translate(285, 55)">
+    <rect x="0" y="0" width="230" height="120" class="box-trap" rx="4"/>
+    <text x="115" y="20" text-anchor="middle" class="tufte-label" fill="#c62828">함정 2: 클래스 vs 인스턴스 속성</text>
+    <line x1="10" y1="30" x2="220" y2="30" class="line-sep"/>
+
+    <text x="15" y="50" class="label-mono">class Model:</text>
+    <text x="25" y="65" class="label-mono" fill="#c62828">  weights = []  # 클래스 속성</text>
+    <text x="25" y="80" class="label-mono">  def fit(self, X):</text>
+    <text x="35" y="95" class="label-mono" fill="#c62828">    self.weights.append(w)</text>
+
+    <text x="115" y="115" text-anchor="middle" class="tufte-small" font-style="italic">weights가 모든 모델에서 누적됨</text>
+  </g>
+
+  <!-- Trap 3: Forgetting super().__init__() -->
+  <g transform="translate(540, 55)">
+    <rect x="0" y="0" width="230" height="120" class="box-trap" rx="4"/>
+    <text x="115" y="20" text-anchor="middle" class="tufte-label" fill="#c62828">함정 3: super().__init__() 누락</text>
+    <line x1="10" y1="30" x2="220" y2="30" class="line-sep"/>
+
+    <text x="15" y="50" class="label-mono">class LinearTrend(BaseModel):</text>
+    <text x="25" y="65" class="label-mono">  def __init__(self, lr=0.01):</text>
+    <text x="35" y="80" class="label-mono">    self.lr = lr</text>
+    <text x="35" y="95" class="label-mono" fill="#c62828">    # super() 호출 없음!</text>
+
+    <text x="115" y="115" text-anchor="middle" class="tufte-small" font-style="italic">부모의 초기화 로직이 실행 안 됨</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- MIDDLE: Arrow to Solutions -->
+  <!-- ========================================== -->
+  <path d="M 400 180 L 400 210" class="line-arrow" marker-end="url(#arrow)"/>
+  <text x="450" y="200" text-anchor="middle" class="tufte-label" fill="#333">디버깅 도구</text>
+
+  <!-- ========================================== -->
+  <!-- BOTTOM: Debugging Tools -->
+  <!-- ========================================== -->
+
+  <!-- Tool 1: __dict__ -->
+  <g transform="translate(50, 230)">
+    <rect x="0" y="0" width="200" height="100" class="box-tool" rx="4"/>
+    <rect x="0" y="0" width="200" height="25" class="box-header" rx="4" ry="0"/>
+    <text x="100" y="17" text-anchor="middle" class="tufte-label">__dict__</text>
+
+    <text x="10" y="45" class="label-mono">model.__dict__</text>
+    <text x="10" y="62" class="label-mono">{'slope_': 2.0,</text>
+    <text x="10" y="77" class="label-mono"> 'intercept_': 0.5}</text>
+    <text x="100" y="95" text-anchor="middle" class="tufte-small">인스턴스 속성만 표시</text>
+  </g>
+
+  <!-- Tool 2: type() + isinstance() -->
+  <g transform="translate(300, 230)">
+    <rect x="0" y="0" width="200" height="100" class="box-tool" rx="4"/>
+    <rect x="0" y="0" width="200" height="25" class="box-header" rx="4" ry="0"/>
+    <text x="100" y="17" text-anchor="middle" class="tufte-label">type() / isinstance()</text>
+
+    <text x="10" y="45" class="label-mono">type(model)</text>
+    <text x="10" y="62" class="label-mono"># &lt;class 'LinearTrend'&gt;</text>
+    <text x="10" y="77" class="label-mono">isinstance(model, BaseModel)</text>
+    <text x="100" y="95" text-anchor="middle" class="tufte-small">계층 관계 확인</text>
+  </g>
+
+  <!-- Tool 3: MRO -->
+  <g transform="translate(550, 230)">
+    <rect x="0" y="0" width="200" height="100" class="box-tool" rx="4"/>
+    <rect x="0" y="0" width="200" height="25" class="box-header" rx="4" ry="0"/>
+    <text x="100" y="17" text-anchor="middle" class="tufte-label">__mro__ (메서드 탐색 순서)</text>
+
+    <text x="10" y="45" class="label-mono">LinearTrend.__mro__</text>
+    <text x="10" y="62" class="label-mono">(LinearTrend,</text>
+    <text x="10" y="77" class="label-mono"> BaseModel, object)</text>
+    <text x="100" y="95" text-anchor="middle" class="tufte-small">다중 상속 디버깅 필수</text>
+  </g>
+
+  <!-- Bottom insight -->
+  <!-- <g transform="translate(50, 350)">
+    <rect x="0" y="0" width="700" height="30" fill="#f5f5f5" stroke="#999" rx="4"/>
+    <text x="350" y="20" text-anchor="middle" class="tufte-text" font-weight="bold">
+      객체 상태를 눈으로 확인하라: print(model.__dict__) 한 줄이 1시간 디버깅을 줄여준다
+    </text>
+  </g> -->
+
+</svg>

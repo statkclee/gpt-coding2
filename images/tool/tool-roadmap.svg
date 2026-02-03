@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 40 800 330">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #111; font-weight: bold; }
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-mono { font-family: 'SF Mono', Consolas, monospace; fill: #444; font-size: 11px; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #666; font-style: italic; font-size: 11px; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #777; font-size: 10px; }
+      .flow-line { fill: none; stroke: #555; stroke-width: 2; }
+      .node-box { fill: #fff; stroke: #333; stroke-width: 1.5; }
+      .node-header { fill: #f0f0f0; }
+      .phase-bg { fill: #fafafa; stroke: #ddd; stroke-width: 1; stroke-dasharray: 4,4; }
+    </style>
+    <marker id="arrow" markerWidth="7" markerHeight="7" refX="5.0" refY="2.1" orient="auto">
+      <path d="M0,0 L0,4.2 L6.3,2.1 z" fill="#555" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="380" fill="#ffffff"/>
+
+  <!-- 상단 흐름 설명 -->
+  <!-- <text x="400" y="30" text-anchor="middle" class="tufte-text" font-size="14" font-weight="bold">텍스트에서 시작 → 외부 세계로 확장 → 데이터를 저장 → 시각화로 표현 → AI와 통합</text> -->
+
+  <!-- Phase 1: 텍스트 처리 -->
+  <g transform="translate(30, 60)">
+    <rect x="0" y="0" width="110" height="130" class="phase-bg" rx="4"/>
+    <text x="55" y="20" text-anchor="middle" class="tufte-label" font-weight="bold">1단계</text>
+    <text x="55" y="35" text-anchor="middle" class="tufte-small">텍스트 처리</text>
+
+    <rect x="10" y="50" width="90" height="65" class="node-box" rx="3"/>
+    <rect x="11" y="51" width="88" height="20" class="node-header" rx="2"/>
+    <text x="55" y="66" text-anchor="middle" class="tufte-text" font-size="11" font-weight="bold">정규표현식</text>
+    <text x="55" y="85" text-anchor="middle" class="tufte-mono">패턴 매칭</text>
+    <text x="55" y="100" text-anchor="middle" class="tufte-small">추출, 치환</text>
+  </g>
+
+  <!-- Arrow 1→2 -->
+  <path d="M 145,125 L 170,125" class="flow-line" marker-end="url(#arrow)"/>
+
+  <!-- Phase 2: 외부 연결 -->
+  <g transform="translate(175, 60)">
+    <rect x="0" y="0" width="200" height="130" class="phase-bg" rx="4"/>
+    <text x="100" y="20" text-anchor="middle" class="tufte-label" font-weight="bold">2단계</text>
+    <text x="100" y="35" text-anchor="middle" class="tufte-small">외부 세계 연결</text>
+
+    <!-- 네트워크 -->
+    <rect x="10" y="50" width="85" height="65" class="node-box" rx="3"/>
+    <rect x="11" y="51" width="83" height="20" class="node-header" rx="2"/>
+    <text x="52" y="66" text-anchor="middle" class="tufte-text" font-size="11" font-weight="bold">네트워크</text>
+    <text x="52" y="85" text-anchor="middle" class="tufte-mono">HTTP, API</text>
+    <text x="52" y="100" text-anchor="middle" class="tufte-small">소켓 통신</text>
+
+    <!-- 웹 -->
+    <rect x="105" y="50" width="85" height="65" class="node-box" rx="3"/>
+    <rect x="106" y="51" width="83" height="20" class="node-header" rx="2"/>
+    <text x="147" y="66" text-anchor="middle" class="tufte-text" font-size="11" font-weight="bold">웹</text>
+    <text x="147" y="85" text-anchor="middle" class="tufte-mono">스크래핑</text>
+    <text x="147" y="100" text-anchor="middle" class="tufte-small">HTML 파싱</text>
+  </g>
+
+  <!-- Arrow 2→3 -->
+  <path d="M 380,125 L 405,125" class="flow-line" marker-end="url(#arrow)"/>
+
+  <!-- Phase 3: 데이터 저장 -->
+  <g transform="translate(410, 60)">
+    <rect x="0" y="0" width="110" height="130" class="phase-bg" rx="4"/>
+    <text x="55" y="20" text-anchor="middle" class="tufte-label" font-weight="bold">3단계</text>
+    <text x="55" y="35" text-anchor="middle" class="tufte-small">데이터 저장</text>
+
+    <rect x="10" y="50" width="90" height="65" class="node-box" rx="3"/>
+    <rect x="11" y="51" width="88" height="20" class="node-header" rx="2"/>
+    <text x="55" y="66" text-anchor="middle" class="tufte-text" font-size="11" font-weight="bold">데이터베이스</text>
+    <text x="55" y="85" text-anchor="middle" class="tufte-mono">SQL, SQLite</text>
+    <text x="55" y="100" text-anchor="middle" class="tufte-small">CRUD 연산</text>
+  </g>
+
+  <!-- Arrow 3→4 -->
+  <path d="M 525,125 L 550,125" class="flow-line" marker-end="url(#arrow)"/>
+
+  <!-- Phase 4: 시각화 -->
+  <g transform="translate(555, 60)">
+    <rect x="0" y="0" width="110" height="130" class="phase-bg" rx="4"/>
+    <text x="55" y="20" text-anchor="middle" class="tufte-label" font-weight="bold">4단계</text>
+    <text x="55" y="35" text-anchor="middle" class="tufte-small">데이터 표현</text>
+
+    <rect x="10" y="50" width="90" height="65" class="node-box" rx="3"/>
+    <rect x="11" y="51" width="88" height="20" class="node-header" rx="2"/>
+    <text x="55" y="66" text-anchor="middle" class="tufte-text" font-size="11" font-weight="bold">시각화</text>
+    <text x="55" y="85" text-anchor="middle" class="tufte-mono">ggplot2</text>
+    <text x="55" y="100" text-anchor="middle" class="tufte-small">Matplotlib</text>
+  </g>
+
+  <!-- Arrow 4→5 -->
+  <path d="M 670,125 L 695,125" class="flow-line" marker-end="url(#arrow)"/>
+
+  <!-- Phase 5: AI 통합 -->
+  <g transform="translate(700, 60)">
+    <rect x="0" y="0" width="90" height="130" class="phase-bg" rx="4"/>
+    <text x="45" y="20" text-anchor="middle" class="tufte-label" font-weight="bold">5단계</text>
+    <text x="45" y="35" text-anchor="middle" class="tufte-small">AI 통합</text>
+
+    <rect x="5" y="50" width="80" height="65" class="node-box" rx="3" stroke-width="2"/>
+    <rect x="6" y="51" width="78" height="20" class="node-header" rx="2"/>
+    <text x="45" y="66" text-anchor="middle" class="tufte-text" font-size="11" font-weight="bold">GPT 활용</text>
+    <text x="45" y="85" text-anchor="middle" class="tufte-mono">프롬프트</text>
+    <text x="45" y="100" text-anchor="middle" class="tufte-small">코드 검증</text>
+  </g>
+
+  <!-- 하단 설명: 범용 도구 vs 특화 도구 -->
+  <g transform="translate(30, 220)">
+    <line x1="0" y1="0" x2="740" y2="0" stroke="#ccc" stroke-width="1"/>
+    <text x="0" y="25" class="tufte-text" font-size="13" font-weight="bold">범용 도구 vs 특화 도구</text>
+
+    <!-- 범용 도구 박스 -->
+    <rect x="0" y="40" width="350" height="100" fill="#fff" stroke="#999" stroke-width="1" rx="4"/>
+    <text x="175" y="60" text-anchor="middle" class="tufte-text" font-size="12" font-weight="bold">범용 도구</text>
+    <line x1="20" y1="70" x2="330" y2="70" stroke="#ddd"/>
+    <text x="30" y="90" class="tufte-mono">for, if, while, list, dict</text>
+    <text x="30" y="110" class="tufte-small">어떤 문제든 해결 가능하나 비효율적일 수 있음</text>
+    <text x="30" y="125" class="tufte-small" fill="#999">예: 문자열 순회로 이메일 찾기 → 수십 줄 코드</text>
+
+    <!-- 특화 도구 박스 -->
+    <rect x="390" y="40" width="350" height="100" fill="#f8f8f8" stroke="#333" stroke-width="1.5" rx="4"/>
+    <text x="565" y="60" text-anchor="middle" class="tufte-text" font-size="12" font-weight="bold">특화 도구 ★</text>
+    <line x1="410" y1="70" x2="720" y2="70" stroke="#ddd"/>
+    <text x="400" y="90" class="tufte-mono">re, requests, BeautifulSoup, sqlite3</text>
+    <text x="400" y="110" class="tufte-small">특정 문제를 매우 효율적으로 해결</text>
+    <text x="400" y="125" class="tufte-small" fill="#555">예: re.findall(r'[\w.-]+@[\w.-]+', text) → 한 줄</text>
+  </g>
+
+  <!-- 하단 인용문 -->
+  <text x="450" y="245" text-anchor="middle" class="tufte-label" font-size="11">"알면 한 줄, 모르면 백 줄" — 특화 도구를 알면 코드량이 10분의 1로 줄어든다</text>
+
+</svg>

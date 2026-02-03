@@ -1,0 +1,181 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 30 850 350">
+  <defs>
+    <style>
+      /* Tufte Grayscale Style */
+      .label-title { font-family: Palatino, serif; font-size: 16px; font-weight: bold; fill: #111; }
+      .label-head { font-family: Palatino, serif; font-size: 14px; font-weight: bold; fill: #222; }
+      .label-body { font-family: Palatino, serif; font-size: 12px; fill: #333; }
+      .label-note { font-family: Palatino, serif; font-size: 11px; fill: #555; font-style: italic; }
+      .label-mono { font-family: 'SF Mono', Consolas, Menlo, monospace; font-size: 10px; fill: #444; }
+      .label-mono-big { font-family: 'SF Mono', Consolas, Menlo, monospace; font-size: 16px; fill: #444; }
+
+      .box-container { fill: #fff; stroke: #ccc; stroke-width: 1; rx: 4; }
+      .box-highlight { fill: #f9f9f9; stroke: #333; stroke-width: 1.5; rx: 4; }
+      .box-process { fill: #fff; stroke: #666; stroke-width: 1; rx: 2; }
+      .box-broken { fill: #f5f5f5; stroke: #999; stroke-width: 1; stroke-dasharray: 4 2; rx: 2; }
+      .box-data { fill: #f0f0f0; stroke: #333; stroke-width: 1.5; rx: 2; }
+      .box-class { fill: #fff; stroke: #333; stroke-width: 2; rx: 4; }
+      .box-internal { fill: #f5f5f5; stroke: #999; stroke-width: 1; stroke-dasharray: 4 2; rx: 2; }
+
+      .line-solid { stroke: #333; stroke-width: 1.5; fill: none; }
+      .line-dashed { stroke: #999; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .line-dependency { stroke: #666; stroke-width: 1.2; fill: none; }
+      .line-broken { stroke: #999; stroke-width: 1.5; stroke-dasharray: 6 3; fill: none; }
+
+      .arrow-head { fill: #333; }
+      .cross-mark { stroke: #666; stroke-width: 2.5; stroke-linecap: round; }
+    </style>
+    <marker id="arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L6,3 z" class="arrow-head" />
+    </marker>
+    <marker id="arrow-gray" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L6,3 z" fill="#999" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="850" height="420" fill="#fff" />
+
+  <!-- Main Title -->
+  <!-- <text x="425" y="30" text-anchor="middle" class="label-title">OOP 핵심: 캡슐화와 변경의 국소화</text> -->
+
+  <!-- ========================================== -->
+  <!-- LEFT: Procedural (Fragile) -->
+  <!-- ========================================== -->
+  <g transform="translate(40, 55)">
+    <text x="170" y="0" text-anchor="middle" class="label-head">절차적 프로그래밍: 파급 효과 (Ripple Effect)</text>
+    <rect x="0" y="15" width="340" height="290" class="box-container"/>
+
+    <!-- Shared Data at center -->
+    <g transform="translate(90, 130)">
+        <rect x="0" y="0" width="160" height="55" class="box-data"/>
+        <text x="80" y="20" text-anchor="middle" class="label-mono" font-weight="bold">Shared Data</text>
+        <text x="80" y="38" text-anchor="middle" class="label-mono">struct Student { ... }</text>
+        <!-- Change indicator -->
+        <text x="170" y="35" class="label-mono-big" font-weight="bold" fill="#333">⚡ 변경!</text>
+    </g>
+
+    <!-- Functions accessing data - arranged in circle around data -->
+    <!-- Top row -->
+    <g transform="translate(20, 50)">
+        <rect x="0" y="0" width="85" height="30" class="box-broken"/>
+        <text x="42" y="19" text-anchor="middle" class="label-mono" fill="#888">validate()</text>
+        <g transform="translate(70, 10)">
+          <line x1="0" y1="0" x2="12" y2="12" class="cross-mark"/>
+          <line x1="12" y1="0" x2="0" y2="12" class="cross-mark"/>
+        </g>
+    </g>
+
+    <g transform="translate(125, 50)">
+        <rect x="0" y="0" width="85" height="30" class="box-broken"/>
+        <text x="42" y="19" text-anchor="middle" class="label-mono" fill="#888">calc_avg()</text>
+        <g transform="translate(70, 10)">
+          <line x1="0" y1="0" x2="12" y2="12" class="cross-mark"/>
+          <line x1="12" y1="0" x2="0" y2="12" class="cross-mark"/>
+        </g>
+    </g>
+
+    <g transform="translate(230, 50)">
+        <rect x="0" y="0" width="90" height="30" class="box-broken"/>
+        <text x="45" y="19" text-anchor="middle" class="label-mono" fill="#888">print_report()</text>
+        <g transform="translate(75, 10)">
+          <line x1="0" y1="0" x2="12" y2="12" class="cross-mark"/>
+          <line x1="12" y1="0" x2="0" y2="12" class="cross-mark"/>
+        </g>
+    </g>
+
+    <!-- Bottom row -->
+    <g transform="translate(20, 220)">
+        <rect x="0" y="0" width="85" height="30" class="box-broken"/>
+        <text x="42" y="19" text-anchor="middle" class="label-mono" fill="#888">save_file()</text>
+        <g transform="translate(70, 10)">
+          <line x1="0" y1="0" x2="12" y2="12" class="cross-mark"/>
+          <line x1="12" y1="0" x2="0" y2="12" class="cross-mark"/>
+        </g>
+    </g>
+
+    <g transform="translate(125, 220)">
+        <rect x="0" y="0" width="85" height="30" class="box-broken"/>
+        <text x="42" y="19" text-anchor="middle" class="label-mono" fill="#888">sort_by()</text>
+        <g transform="translate(70, 10)">
+          <line x1="0" y1="0" x2="12" y2="12" class="cross-mark"/>
+          <line x1="12" y1="0" x2="0" y2="12" class="cross-mark"/>
+        </g>
+    </g>
+
+    <g transform="translate(230, 220)">
+        <rect x="0" y="0" width="90" height="30" class="box-broken"/>
+        <text x="45" y="19" text-anchor="middle" class="label-mono" fill="#888">export_csv()</text>
+        <g transform="translate(75, 10)">
+          <line x1="0" y1="0" x2="12" y2="12" class="cross-mark"/>
+          <line x1="12" y1="0" x2="0" y2="12" class="cross-mark"/>
+        </g>
+    </g>
+
+    <!-- Dependency Lines from functions to data -->
+    <!-- Top row to data -->
+    <path d="M 60 80 L 120 130" class="line-broken" marker-end="url(#arrow-gray)"/>
+    <path d="M 167 80 L 167 130" class="line-broken" marker-end="url(#arrow-gray)"/>
+    <path d="M 275 80 L 215 130" class="line-broken" marker-end="url(#arrow-gray)"/>
+
+    <!-- Bottom row to data -->
+    <path d="M 60 220 L 120 185" class="line-broken" marker-end="url(#arrow-gray)"/>
+    <path d="M 167 220 L 167 185" class="line-broken" marker-end="url(#arrow-gray)"/>
+    <path d="M 275 220 L 215 185" class="line-broken" marker-end="url(#arrow-gray)"/>
+
+    <text x="170" y="278" text-anchor="middle" class="label-note" fill="#555">"데이터 구조 변경 → 6개 함수 모두 수정 필요"</text>
+  </g>
+
+
+  <!-- ========================================== -->
+  <!-- RIGHT: OOP (Robust) -->
+  <!-- ========================================== -->
+  <g transform="translate(470, 55)">
+    <text x="170" y="0" text-anchor="middle" class="label-head">OOP: 캡슐화 (Encapsulation)</text>
+    <rect x="0" y="15" width="340" height="290" class="box-highlight"/>
+
+    <!-- The Object -->
+    <g transform="translate(35, 45)">
+        <rect x="0" y="0" width="270" height="170" class="box-class"/>
+        <text x="135" y="-10" text-anchor="middle" class="label-mono" font-weight="bold" fill="#333">class Student</text>
+
+        <!-- Private Data (위쪽: 숨겨진 내부) -->
+        <g transform="translate(15, 20)">
+            <rect x="0" y="0" width="240" height="45" class="box-internal"/>
+            <text x="120" y="18" text-anchor="middle" class="label-mono" fill="#666">Private Data (자유롭게 변경)</text>
+            <text x="120" y="35" text-anchor="middle" class="label-mono" fill="#666">list → dict → numpy ⚡</text>
+        </g>
+
+        <!-- Barrier -->
+        <line x1="10" y1="80" x2="260" y2="80" stroke="#333" stroke-width="2"/>
+        <text x="135" y="97" text-anchor="middle" class="label-mono" fill="#333">▲ 경계: 외부 접근 차단 ▲</text>
+
+        <!-- Public Interface (아래쪽: 클라이언트가 접근) -->
+        <g transform="translate(15, 110)">
+            <rect x="0" y="0" width="240" height="50" fill="#fff" stroke="#333" rx="2"/>
+            <text x="120" y="18" text-anchor="middle" class="label-mono" font-weight="bold">Public Interface (불변)</text>
+            <text x="120" y="38" text-anchor="middle" class="label-mono">average(), is_passing(), to_dict()</text>
+        </g>
+    </g>
+
+    <!-- External Client Code -->
+    <g transform="translate(35, 235)">
+        <rect x="0" y="0" width="100" height="30" class="box-process"/>
+        <text x="50" y="19" text-anchor="middle" class="label-mono">client_A()</text>
+        <text x="50" y="45" text-anchor="middle" class="label-mono" fill="#333">✓ 영향 없음</text>
+    </g>
+
+    <g transform="translate(205, 235)">
+        <rect x="0" y="0" width="100" height="30" class="box-process"/>
+        <text x="50" y="19" text-anchor="middle" class="label-mono">client_B()</text>
+        <text x="50" y="45" text-anchor="middle" class="label-mono" fill="#333">✓ 영향 없음</text>
+    </g>
+
+    <!-- Arrows from clients to public interface -->
+    <path d="M 85 235 L 130 215" class="line-solid" marker-end="url(#arrow)"/>
+    <path d="M 255 235 L 210 215" class="line-solid" marker-end="url(#arrow)"/>
+
+    <text x="170" y="295" text-anchor="middle" class="label-note">"내부 구현 변경 → 외부 코드 수정 불필요"</text>
+  </g>
+
+</svg>

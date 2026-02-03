@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <defs>
+    <style>
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 18px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-subtitle {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 13px;
+        fill: #666;
+      }
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 14px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-desc {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 11px;
+        fill: #666;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #999;
+      }
+    </style>
+  </defs>
+
+  <!-- White background -->
+  <rect x="0" y="0" width="800" height="400" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="400" y="35" class="tufte-title" text-anchor="middle">대표적 안티패턴</text>
+  <text x="400" y="55" class="tufte-subtitle" text-anchor="middle">피해야 할 나쁜 설계 관행</text>
+
+  <!-- God Object -->
+  <rect x="40" y="80" width="170" height="140" fill="#f5f5f5" stroke="#666" stroke-width="1" rx="3"/>
+  <text x="125" y="105" class="tufte-label" text-anchor="middle">God Object</text>
+  <line x1="60" y1="115" x2="190" y2="115" stroke="#ccc" stroke-width="1"/>
+
+  <!-- God Object illustration -->
+  <circle cx="125" cy="155" r="35" fill="none" stroke="#333" stroke-width="2"/>
+  <text x="125" y="160" class="tufte-small" text-anchor="middle">모든 것</text>
+  <line x1="125" y1="120" x2="125" y2="105" stroke="#999" stroke-width="1"/>
+  <line x1="90" y1="155" x2="70" y2="155" stroke="#999" stroke-width="1"/>
+  <line x1="160" y1="155" x2="180" y2="155" stroke="#999" stroke-width="1"/>
+  <line x1="125" y1="190" x2="125" y2="205" stroke="#999" stroke-width="1"/>
+
+  <text x="125" y="210" class="tufte-desc" text-anchor="middle">너무 많은 책임</text>
+
+  <!-- Spaghetti Code -->
+  <rect x="230" y="80" width="170" height="140" fill="#f5f5f5" stroke="#666" stroke-width="1" rx="3"/>
+  <text x="315" y="105" class="tufte-label" text-anchor="middle">Spaghetti Code</text>
+  <line x1="250" y1="115" x2="380" y2="115" stroke="#ccc" stroke-width="1"/>
+
+  <!-- Spaghetti illustration -->
+  <path d="M 260 140 C 280 160, 300 130, 320 160 C 340 190, 350 140, 370 170" fill="none" stroke="#333" stroke-width="2"/>
+  <path d="M 265 170 C 285 140, 310 180, 330 145 C 350 110, 360 165, 365 135" fill="none" stroke="#666" stroke-width="1.5"/>
+  <path d="M 270 150 C 290 180, 320 120, 340 170 C 360 130, 355 180, 360 155" fill="none" stroke="#999" stroke-width="1"/>
+
+  <text x="315" y="210" class="tufte-desc" text-anchor="middle">뒤엉킨 흐름</text>
+
+  <!-- Copy-Paste -->
+  <rect x="420" y="80" width="170" height="140" fill="#f5f5f5" stroke="#666" stroke-width="1" rx="3"/>
+  <text x="505" y="105" class="tufte-label" text-anchor="middle">Copy-Paste</text>
+  <line x1="440" y1="115" x2="570" y2="115" stroke="#ccc" stroke-width="1"/>
+
+  <!-- Copy-Paste illustration -->
+  <rect x="445" y="125" width="50" height="35" fill="none" stroke="#333" stroke-width="1.5" rx="2"/>
+  <rect x="455" y="135" width="50" height="35" fill="none" stroke="#666" stroke-width="1" rx="2"/>
+  <rect x="465" y="145" width="50" height="35" fill="none" stroke="#999" stroke-width="1" rx="2"/>
+  <text x="480" y="147" class="tufte-small">code</text>
+  <text x="490" y="157" class="tufte-small">code</text>
+  <text x="500" y="167" class="tufte-small">code</text>
+
+  <text x="505" y="210" class="tufte-desc" text-anchor="middle">중복 코드</text>
+
+  <!-- Pattern Overuse -->
+  <rect x="610" y="80" width="150" height="140" fill="#f5f5f5" stroke="#666" stroke-width="1" rx="3"/>
+  <text x="685" y="105" class="tufte-label" text-anchor="middle">패턴 남용</text>
+  <line x1="630" y1="115" x2="740" y2="115" stroke="#ccc" stroke-width="1"/>
+
+  <!-- Pattern Overuse illustration -->
+  <rect x="635" y="130" width="30" height="20" fill="none" stroke="#333" stroke-width="1" rx="1"/>
+  <rect x="670" y="130" width="30" height="20" fill="none" stroke="#333" stroke-width="1" rx="1"/>
+  <rect x="705" y="130" width="30" height="20" fill="none" stroke="#333" stroke-width="1" rx="1"/>
+  <rect x="652" y="155" width="30" height="20" fill="none" stroke="#333" stroke-width="1" rx="1"/>
+  <rect x="687" y="155" width="30" height="20" fill="none" stroke="#333" stroke-width="1" rx="1"/>
+  <line x1="650" y1="150" x2="667" y2="155" stroke="#666" stroke-width="1"/>
+  <line x1="685" y1="150" x2="667" y2="155" stroke="#666" stroke-width="1"/>
+  <line x1="720" y1="150" x2="702" y2="155" stroke="#666" stroke-width="1"/>
+  <text x="685" y="195" class="tufte-small" text-anchor="middle">print("hello")</text>
+
+  <text x="685" y="210" class="tufte-desc" text-anchor="middle">과도한 복잡성</text>
+
+  <!-- Solutions row -->
+  <text x="400" y="260" class="tufte-subtitle" text-anchor="middle">해결책</text>
+
+  <!-- Solution boxes -->
+  <rect x="40" y="275" width="170" height="55" fill="#fff" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="125" y="298" class="tufte-desc" text-anchor="middle">단일 책임 원칙 (SRP)</text>
+  <text x="125" y="315" class="tufte-small" text-anchor="middle">클래스별 하나의 책임</text>
+
+  <rect x="230" y="275" width="170" height="55" fill="#fff" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="315" y="298" class="tufte-desc" text-anchor="middle">구조적 프로그래밍</text>
+  <text x="315" y="315" class="tufte-small" text-anchor="middle">순차, 선택, 반복</text>
+
+  <rect x="420" y="275" width="170" height="55" fill="#fff" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="505" y="298" class="tufte-desc" text-anchor="middle">함수 추출</text>
+  <text x="505" y="315" class="tufte-small" text-anchor="middle">공통 로직 재사용</text>
+
+  <rect x="610" y="275" width="150" height="55" fill="#fff" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="685" y="298" class="tufte-desc" text-anchor="middle">YAGNI 원칙</text>
+  <text x="685" y="315" class="tufte-small" text-anchor="middle">필요할 때만 적용</text>
+
+  <!-- Bottom note -->
+  <text x="400" y="370" class="tufte-small" text-anchor="middle" fill="#999">안티패턴을 아는 것은 패턴을 아는 것만큼 중요하다</text>
+</svg>

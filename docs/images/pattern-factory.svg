@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 380">
+  <defs>
+    <style>
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 16px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 13px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-desc {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 11px;
+        fill: #666;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Menlo, Monaco, monospace;
+        font-size: 10px;
+        fill: #666;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #999;
+      }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+    <marker id="arrow-dashed" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#999"/>
+    </marker>
+  </defs>
+
+  <!-- White background -->
+  <rect x="0" y="0" width="750" height="380" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="375" y="30" class="tufte-title" text-anchor="middle">Factory Method 패턴</text>
+
+  <!-- Client -->
+  <rect x="30" y="140" width="120" height="60" fill="#f5f5f5" stroke="#666" stroke-width="1" rx="3"/>
+  <text x="90" y="165" class="tufte-label" text-anchor="middle">Client</text>
+  <text x="90" y="182" class="tufte-code" text-anchor="middle">process_report()</text>
+
+  <!-- Factory -->
+  <rect x="220" y="70" width="160" height="80" fill="#f5f5f5" stroke="#333" stroke-width="2" rx="3"/>
+  <text x="300" y="95" class="tufte-label" text-anchor="middle">ExporterFactory</text>
+  <line x1="235" y1="105" x2="365" y2="105" stroke="#ccc" stroke-width="1"/>
+  <text x="300" y="122" class="tufte-code" text-anchor="middle">create(format) → Exporter</text>
+  <text x="300" y="138" class="tufte-code" text-anchor="middle">register(format, class)</text>
+
+  <!-- Arrow: Client -> Factory -->
+  <line x1="150" y1="160" x2="218" y2="120" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="175" y="125" class="tufte-small">요청</text>
+
+  <!-- Product Interface -->
+  <rect x="450" y="70" width="140" height="80" fill="#fff" stroke="#666" stroke-width="1" stroke-dasharray="4" rx="3"/>
+  <text x="520" y="95" class="tufte-label" text-anchor="middle">«interface»</text>
+  <text x="520" y="112" class="tufte-label" text-anchor="middle">Exporter</text>
+  <line x1="465" y1="120" x2="575" y2="120" stroke="#ccc" stroke-width="1"/>
+  <text x="520" y="138" class="tufte-code" text-anchor="middle">export(data) → str</text>
+
+  <!-- Arrow: Factory -> Product -->
+  <line x1="380" y1="110" x2="448" y2="110" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="414" y="100" class="tufte-small">생성</text>
+
+  <!-- Concrete Products -->
+  <rect x="420" y="200" width="130" height="55" fill="#fff" stroke="#666" stroke-width="1" rx="3"/>
+  <text x="485" y="222" class="tufte-label" text-anchor="middle">PDFExporter</text>
+  <text x="485" y="242" class="tufte-code" text-anchor="middle">export() → "[PDF]..."</text>
+
+  <rect x="560" y="200" width="130" height="55" fill="#fff" stroke="#666" stroke-width="1" rx="3"/>
+  <text x="625" y="222" class="tufte-label" text-anchor="middle">CSVExporter</text>
+  <text x="625" y="242" class="tufte-code" text-anchor="middle">export() → "[CSV]..."</text>
+
+  <rect x="420" y="270" width="130" height="55" fill="#fff" stroke="#666" stroke-width="1" rx="3"/>
+  <text x="485" y="292" class="tufte-label" text-anchor="middle">JSONExporter</text>
+  <text x="485" y="312" class="tufte-code" text-anchor="middle">export() → "[JSON]..."</text>
+
+  <rect x="560" y="270" width="130" height="55" fill="#fff" stroke="#666" stroke-width="1" stroke-dasharray="2" rx="3"/>
+  <text x="625" y="292" class="tufte-label" text-anchor="middle" fill="#999">XMLExporter</text>
+  <text x="625" y="312" class="tufte-code" text-anchor="middle" fill="#999">+ 쉽게 추가</text>
+
+  <!-- Inheritance arrows -->
+  <line x1="485" y1="200" x2="485" y2="150" stroke="#999" stroke-width="1"/>
+  <line x1="485" y1="150" x2="520" y2="150" stroke="#999" stroke-width="1" marker-end="url(#arrow-dashed)"/>
+
+  <line x1="625" y1="200" x2="625" y2="150" stroke="#999" stroke-width="1"/>
+  <line x1="625" y1="150" x2="575" y2="150" stroke="#999" stroke-width="1"/>
+
+  <line x1="485" y1="270" x2="485" y2="260" stroke="#999" stroke-width="1"/>
+  <line x1="625" y1="270" x2="625" y2="260" stroke="#999" stroke-width="1"/>
+
+  <!-- Registry box -->
+  <rect x="220" y="180" width="160" height="90" fill="#fff" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="300" y="200" class="tufte-desc" text-anchor="middle">레지스트리</text>
+  <text x="300" y="220" class="tufte-code" text-anchor="middle">"pdf" → PDFExporter</text>
+  <text x="300" y="235" class="tufte-code" text-anchor="middle">"csv" → CSVExporter</text>
+  <text x="300" y="250" class="tufte-code" text-anchor="middle">"json" → JSONExporter</text>
+
+  <!-- Arrow: Factory -> Registry -->
+  <line x1="300" y1="150" x2="300" y2="178" stroke="#666" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- Note -->
+  <text x="375" y="360" class="tufte-small" text-anchor="middle">클라이언트는 구체 클래스를 모름 → 새 유형 추가 시 기존 코드 수정 불필요</text>
+</svg>

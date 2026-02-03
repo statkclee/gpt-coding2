@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 40 800 330">
+  <defs>
+    <style>
+      /* Tufte Grayscale Style */
+      .title { font-family: Palatino, serif; font-size: 18px; font-weight: bold; fill: #111; }
+      .header { font-family: Palatino, serif; font-size: 14px; font-weight: bold; fill: #222; }
+      .text { font-family: Palatino, serif; font-size: 12px; fill: #333; }
+      .note { font-family: Palatino, serif; font-size: 11px; fill: #555; font-style: italic; }
+      .code { font-family: 'SF Mono', Consolas, monospace; font-size: 10px; fill: #444; }
+      
+      .box-class { fill: #fff; stroke: #333; stroke-width: 2; rx: 4; }
+      .box-header { fill: #eee; stroke: #333; stroke-width: 1; }
+      .box-object { fill: #fafafa; stroke: #666; stroke-width: 1.5; rx: 4; }
+      .box-code { fill: #f9f9f9; stroke: #ccc; stroke-width: 1; rx: 4; }
+      
+      .line-sep { stroke: #ccc; stroke-width: 1; }
+      .line-arrow { stroke: #666; stroke-width: 1.5; fill: none; }
+      
+      .arrow-head { fill: #666; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L0,8 L8,4 z" class="arrow-head" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="420" fill="#fff" />
+
+  <!-- Title -->
+  <!-- <text x="400" y="30" text-anchor="middle" class="title">클래스와 객체: 설계도(Blueprint)와 실체(Instance)</text> -->
+
+  <!-- ========================================== -->
+  <!-- LEFT: Class (Blueprint) -->
+  <!-- ========================================== -->
+  <g transform="translate(50, 70)">
+    <!-- Class Box -->
+    <rect x="0" y="0" width="220" height="200" class="box-class"/>
+    
+    <!-- Header -->
+    <rect x="0" y="0" width="220" height="35" class="box-header"/>
+    <text x="110" y="22" text-anchor="middle" class="header">Student (클래스)</text>
+
+    <!-- Attributes -->
+    <text x="15" y="55" class="note" font-weight="bold">속성 (Attributes)</text>
+    <line x1="10" y1="60" x2="210" y2="60" class="line-sep"/>
+    <text x="20" y="78" class="code">name: str</text>
+    <text x="20" y="94" class="code">_scores: list (내부)</text>
+
+    <!-- Methods -->
+    <text x="15" y="125" class="note" font-weight="bold">메서드 (Methods)</text>
+    <line x1="10" y1="130" x2="210" y2="130" class="line-sep"/>
+    <text x="20" y="148" class="code">__init__(name, scores)</text>
+    <text x="20" y="164" class="code">average() -> float ⚡ 구현 변경</text>
+    <text x="20" y="180" class="code">is_passing() -> bool</text>
+  </g>
+
+  <!-- Arrows: Instantiation -->
+  <g transform="translate(280, 160)">
+      <line x1="0" y1="0" x2="40" y2="-60" class="line-arrow" marker-end="url(#arrow)"/>
+      <line x1="0" y1="0" x2="40" y2="60" class="line-arrow" marker-end="url(#arrow)"/>
+      <text x="30" y="5" text-anchor="middle" class="note" fill="#333">객체 생성</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- CENTER: Objects (Instances) -->
+  <!-- ========================================== -->
+  <g transform="translate(340, 60)">
+    <!-- Object 1: Kim -->
+    <g transform="translate(0, 0)">
+        <rect x="0" y="0" width="180" height="90" class="box-object"/>
+        <text x="90" y="20" text-anchor="middle" class="header" font-size="13">kim (객체)</text>
+        <line x1="10" y1="28" x2="170" y2="28" class="line-sep"/>
+        <text x="15" y="45" class="code">name = "김철수"</text>
+        <text x="15" y="60" class="code">_scores = [85, 90, 78]</text>
+        <text x="15" y="80" class="note" fill="#555">→ average(): 84.3 ✓수정불필요</text>
+    </g>
+
+    <!-- Object 2: Lee -->
+    <g transform="translate(0, 120)">
+        <rect x="0" y="0" width="180" height="90" class="box-object"/>
+        <text x="90" y="20" text-anchor="middle" class="header" font-size="13">lee (객체)</text>
+        <line x1="10" y1="28" x2="170" y2="28" class="line-sep"/>
+        <text x="15" y="45" class="code">name = "이영희"</text>
+        <text x="15" y="60" class="code">_scores = [92, 88, 95]</text>
+        <text x="15" y="80" class="note" fill="#555">→ average(): 91.7 ✓수정불필요</text>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- RIGHT: Python Code -->
+  <!-- ========================================== -->
+  <g transform="translate(550, 60)">
+    <rect x="0" y="0" width="230" height="290" class="box-code"/>
+    <text x="115" y="20" text-anchor="middle" class="header" font-size="13">파이썬 구현</text>
+    <line x1="10" y1="28" x2="220" y2="28" class="line-sep"/>
+
+    <g transform="translate(15, 45)">
+        <text x="0" y="0" class="code" font-weight="bold">class Student:</text>
+        <text x="12" y="15" class="code">def __init__(self, n, s):</text>
+        <text x="24" y="30" class="code">self.name = n</text>
+        <text x="24" y="45" class="code">self._scores = s</text>
+
+        <text x="12" y="70" class="code">def average(self): ⚡</text>
+        <text x="24" y="85" class="code" fill="#999" text-decoration="line-through"># 전: sum(s)/len(s)</text>
+        <text x="24" y="100" class="code" fill="#333"># 후: mean(self._scores)</text>
+        <text x="24" y="115" class="code">return mean(self._scores)</text>
+
+        <text x="0" y="145" class="code"># 객체 생성</text>
+        <text x="0" y="160" class="code">kim = Student("김철수",</text>
+        <text x="90" y="175" class="code">[85, 90, 78])</text>
+
+        <text x="0" y="200" class="code"># 메서드 호출 (변경 없음)</text>
+        <text x="0" y="215" class="code">print(kim.average())</text>
+        <text x="0" y="230" class="code" fill="#555"># → 84.3 (동일 결과)</text>
+    </g>
+  </g>
+
+  
+</svg>

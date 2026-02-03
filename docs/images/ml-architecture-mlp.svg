@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 120 750 320">
+  <defs>
+    <style>
+      .title { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 24px; fill: #111; font-weight: bold; }
+      .subtitle { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 14px; fill: #555; }
+      .label { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 14px; fill: #333; font-weight: bold; text-anchor: middle; }
+      .desc { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 12px; fill: #666; text-anchor: middle; }
+      .math { font-family: "Times New Roman", Times, serif; font-size: 14px; fill: #444; font-style: italic; text-anchor: middle; }
+      
+      .node { fill: #fff; stroke: #333; stroke-width: 1.5; }
+      .node-hidden { fill: #f8f8f8; stroke: #444; stroke-width: 1.5; }
+      .node-out { fill: #eee; stroke: #000; stroke-width: 1.5; }
+      
+      .link { stroke: #bbb; stroke-width: 0.5; opacity: 0.5; }
+      .arrow-line { stroke: #666; stroke-width: 1; fill: none; }
+    </style>
+    <marker id="arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6" fill="#666"/>
+    </marker>
+  </defs>
+
+  <rect width="750" height="450" fill="white"/>
+
+  <!-- Title Section -->
+  <!-- <text x="40" y="40" class="title">다층 퍼셉트론 (MLP)</text>
+  <text x="40" y="65" class="subtitle">입력 데이터가 은닉층의 가중치(Weights)와 활성화 함수(Activation)를 통해</text>
+  <text x="40" y="85" class="subtitle">추상적인 특징으로 변환되어 최종 결과를 예측하는 구조</text> -->
+
+  <!-- Links -->
+  <g id="links">
+    <!-- Input (4 nodes) to H1 (5 nodes) -->
+    <path d="M100,200 L280,180 M100,200 L280,220 M100,200 L280,260" class="link"/>
+    <path d="M100,240 L280,180 M100,240 L280,220 M100,240 L280,260 M100,240 L280,300" class="link"/>
+    <path d="M100,280 L280,220 M100,280 L280,260 M100,280 L280,300 M100,280 L280,340" class="link"/>
+    <path d="M100,320 L280,260 M100,320 L280,300 M100,320 L280,340" class="link"/>
+    
+    <!-- Representative dense connections -->
+    <path d="M100,200 L280,300 M100,200 L280,340" class="link" opacity="0.3"/>
+    <path d="M100,320 L280,180 M100,320 L280,220" class="link" opacity="0.3"/>
+
+    <!-- H1 (5) to H2 (4) -->
+    <path d="M280,180 L460,200 M280,180 L460,240 M280,180 L460,280" class="link"/>
+    <path d="M280,220 L460,200 M280,220 L460,240 M280,220 L460,280 M280,220 L460,320" class="link"/>
+    <path d="M280,260 L460,200 M280,260 L460,240 M280,260 L460,280 M280,260 L460,320" class="link"/>
+    <path d="M280,300 L460,240 M280,300 L460,280 M280,300 L460,320" class="link"/>
+    <path d="M280,340 L460,280 M280,340 L460,320" class="link"/>
+    
+    <!-- H2 (4) to Out (3) -->
+    <path d="M460,200 L640,220 M460,200 L640,260" class="link"/>
+    <path d="M460,240 L640,220 M460,240 L640,260 M460,240 L640,300" class="link"/>
+    <path d="M460,280 L640,220 M460,280 L640,260 M460,280 L640,300" class="link"/>
+    <path d="M460,320 L640,260 M460,320 L640,300" class="link"/>
+  </g>
+
+  <!-- Input Layer -->
+  <g transform="translate(100,0)">
+    <text x="0" y="150" class="label">입력층</text>
+    <circle cx="0" cy="200" r="15" class="node"/>
+    <text x="-25" y="205" class="math">x₁</text>
+    <circle cx="0" cy="240" r="15" class="node"/>
+    <text x="-25" y="245" class="math">x₂</text>
+    <circle cx="0" cy="280" r="15" class="node"/>
+    <circle cx="0" cy="320" r="15" class="node"/>
+    <text x="0" y="360" class="math">x ∈ ℝ⁴</text>
+    <text x="0" y="380" class="desc">원본 특징</text>
+  </g>
+
+  <!-- Hidden Layer 1 -->
+  <g transform="translate(280,0)">
+    <text x="0" y="150" class="label">은닉층 1</text>
+    <circle cx="0" cy="180" r="15" class="node-hidden"/>
+    <circle cx="0" cy="220" r="15" class="node-hidden"/>
+    <circle cx="0" cy="260" r="15" class="node-hidden"/>
+    <circle cx="0" cy="300" r="15" class="node-hidden"/>
+    <circle cx="0" cy="340" r="15" class="node-hidden"/>
+    <text x="0" y="380" class="desc">특징 추출</text>
+  </g>
+
+  <!-- Hidden Layer 2 -->
+  <g transform="translate(460,0)">
+    <text x="0" y="150" class="label">은닉층 2</text>
+    <circle cx="0" cy="200" r="15" class="node-hidden"/>
+    <circle cx="0" cy="240" r="15" class="node-hidden"/>
+    <circle cx="0" cy="280" r="15" class="node-hidden"/>
+    <circle cx="0" cy="320" r="15" class="node-hidden"/>
+    <text x="0" y="380" class="desc">추상화</text>
+  </g>
+
+  <!-- Output Layer -->
+  <g transform="translate(640,0)">
+    <text x="0" y="150" class="label">출력층</text>
+    <circle cx="0" cy="220" r="15" class="node-out"/>
+    <text x="30" y="225" class="math">y₁</text>
+    <circle cx="0" cy="260" r="15" class="node-out"/>
+    <circle cx="0" cy="300" r="15" class="node-out"/>
+    <text x="0" y="360" class="math">y = f(x)</text>
+    <text x="0" y="380" class="desc">예측</text>
+  </g>
+
+  <!-- Weight Labels -->
+  <text x="190" y="180" class="math">W₁</text>
+  <text x="370" y="180" class="math">W₂</text>
+  <text x="550" y="180" class="math">W₃</text>
+
+  <!-- Process Flow -->
+  <path d="M130,410 L250,410" class="arrow-line" marker-end="url(#arrow)"/>
+  <text x="190" y="430" class="desc">아핀 변환</text>
+  
+  <path d="M310,410 L430,410" class="arrow-line" marker-end="url(#arrow)"/>
+  <text x="370" y="430" class="desc">비선형 활성화 (ReLU)</text>
+  
+  <path d="M490,410 L610,410" class="arrow-line" marker-end="url(#arrow)"/>
+  <text x="550" y="430" class="desc">최종 결정</text>
+
+</svg>

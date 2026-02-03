@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 40 600 280">
+  <defs>
+    <style>
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-title { font-size: 18px; font-weight: bold; }
+      .tufte-label { font-size: 14px; font-weight: bold; }
+      .tufte-small { font-size: 12px; fill: #555; }
+      .tufte-tiny { font-size: 11px; fill: #666; }
+      .box { fill: #f5f5f5; stroke: #333; stroke-width: 1.5; }
+      .box-highlight { fill: #e8e8e8; stroke: #333; stroke-width: 2; }
+      .key-private { fill: #d0d0d0; stroke: #555; stroke-width: 1.5; }
+      .key-public { fill: #e8e8e8; stroke: #555; stroke-width: 1.5; }
+      .arrow { stroke: #666; stroke-width: 1.5; fill: none; }
+      .arrow-dashed { stroke: #999; stroke-width: 1.5; stroke-dasharray: 5,3; fill: none; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="600" height="320" fill="#ffffff"/>
+
+  <!-- Title -->
+  <!-- <text x="300" y="28" text-anchor="middle" class="tufte-text tufte-title">SSH 공개 키 인증 방식</text> -->
+
+  <!-- Left side: Local Computer -->
+  <g transform="translate(40, 55)">
+    <rect x="0" y="0" width="200" height="200" class="box" rx="5"/>
+    <text x="100" y="25" text-anchor="middle" class="tufte-text tufte-label">내 컴퓨터</text>
+
+    <!-- Computer icon -->
+    <rect x="70" y="45" width="60" height="45" fill="#e0e0e0" stroke="#333" stroke-width="1" rx="2"/>
+    <rect x="75" y="50" width="50" height="35" fill="#fff" stroke="#999" stroke-width="0.5"/>
+    <rect x="85" y="90" width="30" height="5" fill="#ccc" stroke="#333" stroke-width="0.5"/>
+
+    <!-- Private Key -->
+    <g transform="translate(35, 115)">
+      <rect x="0" y="0" width="130" height="45" class="key-private" rx="3"/>
+      <text x="65" y="18" text-anchor="middle" class="tufte-small" style="font-weight:bold;">비밀 키 (Private)</text>
+      <text x="65" y="35" text-anchor="middle" class="tufte-tiny">~/.ssh/id_ed25519</text>
+    </g>
+
+    <!-- Lock icon on private key -->
+    <g transform="translate(145, 120)">
+      <rect x="0" y="8" width="14" height="12" fill="#888" stroke="#555" stroke-width="1" rx="1"/>
+      <path d="M2,8 L2,5 Q7,-2 12,5 L12,8" fill="none" stroke="#555" stroke-width="1.5"/>
+    </g>
+
+    <!-- Note: Keep secret -->
+    <text x="100" y="180" text-anchor="middle" class="tufte-tiny" style="fill:#888; font-style:italic;">절대 공유 금지</text>
+  </g>
+
+  <!-- Right side: GitHub Server -->
+  <g transform="translate(360, 55)">
+    <rect x="0" y="0" width="200" height="200" class="box" rx="5"/>
+    <text x="100" y="25" text-anchor="middle" class="tufte-text tufte-label">GitHub 서버</text>
+
+    <!-- Server icon -->
+    <rect x="70" y="42" width="60" height="50" fill="#e0e0e0" stroke="#333" stroke-width="1" rx="2"/>
+    <line x1="75" y1="55" x2="125" y2="55" stroke="#999" stroke-width="1"/>
+    <line x1="75" y1="67" x2="125" y2="67" stroke="#999" stroke-width="1"/>
+    <line x1="75" y1="79" x2="125" y2="79" stroke="#999" stroke-width="1"/>
+    <circle cx="80" cy="50" r="2" fill="#666"/>
+    <circle cx="120" cy="50" r="2" fill="#888"/>
+
+    <!-- Public Key -->
+    <g transform="translate(35, 115)">
+      <rect x="0" y="0" width="130" height="45" class="key-public" rx="3"/>
+      <text x="65" y="18" text-anchor="middle" class="tufte-small" style="font-weight:bold;">공개 키 (Public)</text>
+      <text x="65" y="35" text-anchor="middle" class="tufte-tiny">id_ed25519.pub</text>
+    </g>
+
+    <!-- Unlock/check icon -->
+    <g transform="translate(145, 125)">
+      <circle cx="7" cy="10" r="10" fill="none" stroke="#666" stroke-width="1.5"/>
+      <path d="M3,10 L6,13 L12,6" fill="none" stroke="#666" stroke-width="2"/>
+    </g>
+
+    <!-- Note: Registered -->
+    <text x="100" y="180" text-anchor="middle" class="tufte-tiny" style="fill:#888; font-style:italic;">Settings에 등록</text>
+  </g>
+
+  <!-- Connection arrows -->
+  <!-- Arrow 1: Authentication request -->
+  <g>
+    <path d="M245,100 L355,100" class="arrow" marker-end="url(#arrowhead)"/>
+    <text x="300" y="90" text-anchor="middle" class="tufte-tiny">1. 접속 요청</text>
+  </g>
+
+  <!-- Arrow 2: Challenge -->
+  <g>
+    <path d="M355,130 L245,130" class="arrow-dashed" marker-end="url(#arrowhead)"/>
+    <text x="300" y="122" text-anchor="middle" class="tufte-tiny">2. 암호화된 질문</text>
+  </g>
+
+  <!-- Arrow 3: Response -->
+  <g>
+    <path d="M245,160 L355,160" class="arrow" marker-end="url(#arrowhead)"/>
+    <text x="300" y="152" text-anchor="middle" class="tufte-tiny">3. 비밀 키로 응답</text>
+  </g>
+
+  <!-- Arrow 4: Access granted -->
+  <g>
+    <path d="M355,190 L245,190" class="arrow-dashed" marker-end="url(#arrowhead)"/>
+    <text x="300" y="182" text-anchor="middle" class="tufte-tiny">4. 인증 완료</text>
+  </g>
+
+  <!-- Bottom explanation -->
+  <g transform="translate(30, 270)">
+    <rect x="0" y="0" width="540" height="40" fill="#fafafa" stroke="#ccc" stroke-width="1" rx="5"/>
+    <text x="270" y="17" text-anchor="middle" class="tufte-small" style="font-weight:bold;">공개 키로 암호화한 메시지는 비밀 키로만 복호화할 수 있다</text>
+    <text x="270" y="33" text-anchor="middle" class="tufte-tiny">비밀번호 대신 키 쌍으로 신원을 증명하므로 더 안전하고 편리하다</text>
+  </g>
+
+</svg>

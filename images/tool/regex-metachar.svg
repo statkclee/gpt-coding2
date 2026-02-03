@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 30 800 370">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #111; font-weight: bold; }
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-mono { font-family: 'SF Mono', Consolas, monospace; fill: #444; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #666; font-style: italic; font-size: 11px; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #777; font-size: 10px; }
+      .header-bg { fill: #f0f0f0; }
+      .row-odd { fill: #fafafa; }
+      .row-even { fill: #ffffff; }
+      .table-line { stroke: #ccc; stroke-width: 1; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="420" fill="#ffffff"/>
+
+  <!-- 제목 -->
+  <!-- <text x="400" y="30" text-anchor="middle" class="tufte-title" font-size="16">정규표현식 메타문자 정리</text> -->
+
+  <!-- 테이블 헤더 -->
+  <rect x="30" y="50" width="740" height="30" class="header-bg"/>
+  <line x1="30" y1="50" x2="770" y2="50" class="table-line"/>
+  <line x1="30" y1="80" x2="770" y2="80" class="table-line" stroke-width="2"/>
+
+  <text x="80" y="70" text-anchor="middle" class="tufte-text" font-size="12" font-weight="bold">기호</text>
+  <text x="200" y="70" text-anchor="middle" class="tufte-text" font-size="12" font-weight="bold">이름</text>
+  <text x="400" y="70" text-anchor="middle" class="tufte-text" font-size="12" font-weight="bold">의미</text>
+  <text x="650" y="70" text-anchor="middle" class="tufte-text" font-size="12" font-weight="bold">예제</text>
+
+  <!-- Row 1: ^ -->
+  <rect x="30" y="80" width="740" height="30" class="row-odd"/>
+  <line x1="30" y1="110" x2="770" y2="110" class="table-line"/>
+  <text x="80" y="100" text-anchor="middle" class="tufte-mono" font-size="14">^</text>
+  <text x="200" y="100" text-anchor="middle" class="tufte-text" font-size="11">캐럿</text>
+  <text x="400" y="100" text-anchor="middle" class="tufte-text" font-size="11">라인 시작</text>
+  <text x="650" y="100" text-anchor="middle" class="tufte-mono" font-size="11">^From → 라인 시작의 From</text>
+
+  <!-- Row 2: $ -->
+  <rect x="30" y="110" width="740" height="30" class="row-even"/>
+  <line x1="30" y1="140" x2="770" y2="140" class="table-line"/>
+  <text x="80" y="130" text-anchor="middle" class="tufte-mono" font-size="14">$</text>
+  <text x="200" y="130" text-anchor="middle" class="tufte-text" font-size="11">달러</text>
+  <text x="400" y="130" text-anchor="middle" class="tufte-text" font-size="11">라인 끝</text>
+  <text x="650" y="130" text-anchor="middle" class="tufte-mono" font-size="11">end$ → 라인 끝의 end</text>
+
+  <!-- Row 3: . -->
+  <rect x="30" y="140" width="740" height="30" class="row-odd"/>
+  <line x1="30" y1="170" x2="770" y2="170" class="table-line"/>
+  <text x="80" y="160" text-anchor="middle" class="tufte-mono" font-size="14">.</text>
+  <text x="200" y="160" text-anchor="middle" class="tufte-text" font-size="11">점</text>
+  <text x="400" y="160" text-anchor="middle" class="tufte-text" font-size="11">임의의 문자 1개 (줄바꿈 제외)</text>
+  <text x="650" y="160" text-anchor="middle" class="tufte-mono" font-size="11">c.t → cat, cot, cut</text>
+
+  <!-- Row 4: * -->
+  <rect x="30" y="170" width="740" height="30" class="row-even"/>
+  <line x1="30" y1="200" x2="770" y2="200" class="table-line"/>
+  <text x="80" y="190" text-anchor="middle" class="tufte-mono" font-size="14">*</text>
+  <text x="200" y="190" text-anchor="middle" class="tufte-text" font-size="11">별표</text>
+  <text x="400" y="190" text-anchor="middle" class="tufte-text" font-size="11">앞 문자 0회 이상 반복</text>
+  <text x="650" y="190" text-anchor="middle" class="tufte-mono" font-size="11">ab*c → ac, abc, abbc</text>
+
+  <!-- Row 5: + -->
+  <rect x="30" y="200" width="740" height="30" class="row-odd"/>
+  <line x1="30" y1="230" x2="770" y2="230" class="table-line"/>
+  <text x="80" y="220" text-anchor="middle" class="tufte-mono" font-size="14">+</text>
+  <text x="200" y="220" text-anchor="middle" class="tufte-text" font-size="11">더하기</text>
+  <text x="400" y="220" text-anchor="middle" class="tufte-text" font-size="11">앞 문자 1회 이상 반복</text>
+  <text x="650" y="220" text-anchor="middle" class="tufte-mono" font-size="11">ab+c → abc, abbc (ac 제외)</text>
+
+  <!-- Row 6: ? -->
+  <rect x="30" y="230" width="740" height="30" class="row-even"/>
+  <line x1="30" y1="260" x2="770" y2="260" class="table-line"/>
+  <text x="80" y="250" text-anchor="middle" class="tufte-mono" font-size="14">?</text>
+  <text x="200" y="250" text-anchor="middle" class="tufte-text" font-size="11">물음표</text>
+  <text x="400" y="250" text-anchor="middle" class="tufte-text" font-size="11">앞 문자 0회 또는 1회</text>
+  <text x="650" y="250" text-anchor="middle" class="tufte-mono" font-size="11">colou?r → color, colour</text>
+
+  <!-- Row 7: [] -->
+  <rect x="30" y="260" width="740" height="30" class="row-odd"/>
+  <line x1="30" y1="290" x2="770" y2="290" class="table-line"/>
+  <text x="80" y="280" text-anchor="middle" class="tufte-mono" font-size="14">[ ]</text>
+  <text x="200" y="280" text-anchor="middle" class="tufte-text" font-size="11">문자 클래스</text>
+  <text x="400" y="280" text-anchor="middle" class="tufte-text" font-size="11">괄호 안 문자 중 하나</text>
+  <text x="650" y="280" text-anchor="middle" class="tufte-mono" font-size="11">[aeiou] → 모음 하나</text>
+
+  <!-- Row 8: () -->
+  <rect x="30" y="290" width="740" height="30" class="row-even"/>
+  <line x1="30" y1="320" x2="770" y2="320" class="table-line"/>
+  <text x="80" y="310" text-anchor="middle" class="tufte-mono" font-size="14">( )</text>
+  <text x="200" y="310" text-anchor="middle" class="tufte-text" font-size="11">그룹 캡처</text>
+  <text x="400" y="310" text-anchor="middle" class="tufte-text" font-size="11">그룹화 및 추출 대상 지정</text>
+  <text x="650" y="310" text-anchor="middle" class="tufte-mono" font-size="11">([0-9]+) → 숫자 추출</text>
+
+  <!-- Row 9: \S -->
+  <rect x="30" y="320" width="740" height="30" class="row-odd"/>
+  <line x1="30" y1="350" x2="770" y2="350" class="table-line"/>
+  <text x="80" y="340" text-anchor="middle" class="tufte-mono" font-size="14">\S</text>
+  <text x="200" y="340" text-anchor="middle" class="tufte-text" font-size="11">비공백</text>
+  <text x="400" y="340" text-anchor="middle" class="tufte-text" font-size="11">공백이 아닌 문자</text>
+  <text x="650" y="340" text-anchor="middle" class="tufte-mono" font-size="11">\S+@\S+ → 이메일 패턴</text>
+
+  <!-- Row 10: \d -->
+  <rect x="30" y="350" width="740" height="30" class="row-even"/>
+  <line x1="30" y1="380" x2="770" y2="380" class="table-line"/>
+  <text x="80" y="370" text-anchor="middle" class="tufte-mono" font-size="14">\d</text>
+  <text x="200" y="370" text-anchor="middle" class="tufte-text" font-size="11">숫자</text>
+  <text x="400" y="370" text-anchor="middle" class="tufte-text" font-size="11">[0-9]와 동일</text>
+  <text x="650" y="370" text-anchor="middle" class="tufte-mono" font-size="11">\d{4} → 4자리 숫자</text>
+
+  <!-- 외곽선 -->
+  <rect x="30" y="50" width="740" height="330" fill="none" stroke="#333" stroke-width="1.5"/>
+
+  <!-- 열 구분선 -->
+  <line x1="130" y1="50" x2="130" y2="380" class="table-line"/>
+  <line x1="280" y1="50" x2="280" y2="380" class="table-line"/>
+  <line x1="520" y1="50" x2="520" y2="380" class="table-line"/>
+
+  <!-- 하단 주석 -->
+  <!-- <text x="400" y="405" text-anchor="middle" class="tufte-label" font-size="11">※ R에서는 역슬래시를 두 번 써야 함: \S → \\S, \d → \\d</text> -->
+</svg>

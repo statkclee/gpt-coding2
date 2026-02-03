@@ -1,0 +1,189 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 15 800 390">
+  <defs>
+    <style>
+      .label-title { font-family: Palatino, serif; font-size: 16px; font-weight: bold; fill: #111; }
+      .label-head { font-family: Palatino, serif; font-size: 13px; font-weight: bold; fill: #222; }
+      .label-body { font-family: Palatino, serif; font-size: 11px; fill: #333; }
+      .label-note { font-family: Palatino, serif; font-size: 10px; fill: #555; font-style: italic; }
+      .label-mono { font-family: 'SF Mono', Consolas, Menlo, monospace; font-size: 9px; fill: #444; }
+
+      .box-center { fill: #fff; stroke: #333; stroke-width: 2.5; rx: 8; }
+      .box-group { fill: #fafafa; stroke: #666; stroke-width: 1.5; rx: 6; }
+      .box-item { fill: #fff; stroke: #999; stroke-width: 1; rx: 3; }
+
+      .line-branch { stroke: #888; stroke-width: 1.5; fill: none; }
+      .line-sub { stroke: #bbb; stroke-width: 1; fill: none; }
+    </style>
+  </defs>
+
+  <rect width="800" height="420" fill="#fff" />
+
+  <!-- ========================================== -->
+  <!-- CENTER: DSL Hub -->
+  <!-- ========================================== -->
+  <g transform="translate(350, 190)">
+    <rect x="0" y="0" width="100" height="50" class="box-center"/>
+    <text x="50" y="22" text-anchor="middle" class="label-title">DSL</text>
+    <text x="50" y="38" text-anchor="middle" class="label-note">도메인 특화 언어</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- GROUP 1: 데이터 질의/교환 (좌상) -->
+  <!-- ========================================== -->
+  <path d="M 350 210 Q 280 180 220 140" class="line-branch"/>
+  <g transform="translate(30, 30)">
+    <rect x="0" y="0" width="200" height="130" class="box-group"/>
+    <text x="100" y="22" text-anchor="middle" class="label-head">데이터 질의·교환</text>
+
+    <g transform="translate(15, 35)">
+      <rect x="0" y="0" width="80" height="35" class="box-item"/>
+      <text x="40" y="15" text-anchor="middle" class="label-mono" font-weight="bold">SQL</text>
+      <text x="40" y="28" text-anchor="middle" class="label-note">관계형 DB</text>
+    </g>
+
+    <g transform="translate(105, 35)">
+      <rect x="0" y="0" width="80" height="35" class="box-item"/>
+      <text x="40" y="15" text-anchor="middle" class="label-mono" font-weight="bold">GraphQL</text>
+      <text x="40" y="28" text-anchor="middle" class="label-note">API 쿼리</text>
+    </g>
+
+    <g transform="translate(15, 80)">
+      <rect x="0" y="0" width="80" height="35" class="box-item"/>
+      <text x="40" y="15" text-anchor="middle" class="label-mono" font-weight="bold">JSON</text>
+      <text x="40" y="28" text-anchor="middle" class="label-note">데이터 교환</text>
+    </g>
+
+    <g transform="translate(105, 80)">
+      <rect x="0" y="0" width="80" height="35" class="box-item"/>
+      <text x="40" y="15" text-anchor="middle" class="label-mono" font-weight="bold">YAML</text>
+      <text x="40" y="28" text-anchor="middle" class="label-note">설정 파일</text>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- GROUP 2: 문서·시각화 (우상) -->
+  <!-- ========================================== -->
+  <path d="M 450 210 Q 520 180 580 140" class="line-branch"/>
+  <g transform="translate(490, 30)">
+    <rect x="0" y="0" width="280" height="130" class="box-group"/>
+    <text x="140" y="22" text-anchor="middle" class="label-head">문서·시각화</text>
+
+    <g transform="translate(15, 35)">
+      <rect x="0" y="0" width="75" height="35" class="box-item"/>
+      <text x="37" y="15" text-anchor="middle" class="label-mono" font-weight="bold">LaTeX</text>
+      <text x="37" y="28" text-anchor="middle" class="label-note">수식 조판</text>
+    </g>
+
+    <g transform="translate(100, 35)">
+      <rect x="0" y="0" width="75" height="35" class="box-item"/>
+      <text x="37" y="15" text-anchor="middle" class="label-mono" font-weight="bold">Markdown</text>
+      <text x="37" y="28" text-anchor="middle" class="label-note">경량 문서</text>
+    </g>
+
+    <g transform="translate(185, 35)">
+      <rect x="0" y="0" width="80" height="35" class="box-item"/>
+      <text x="40" y="15" text-anchor="middle" class="label-mono" font-weight="bold">Mermaid</text>
+      <text x="40" y="28" text-anchor="middle" class="label-note">다이어그램</text>
+    </g>
+
+    <g transform="translate(15, 80)">
+      <rect x="0" y="0" width="120" height="35" class="box-item"/>
+      <text x="60" y="15" text-anchor="middle" class="label-mono" font-weight="bold">Quarto/R Markdown</text>
+      <text x="60" y="28" text-anchor="middle" class="label-note">재현가능 문서</text>
+    </g>
+
+    <g transform="translate(145, 80)">
+      <rect x="0" y="0" width="120" height="35" class="box-item"/>
+      <text x="60" y="15" text-anchor="middle" class="label-mono" font-weight="bold">Typst</text>
+      <text x="60" y="28" text-anchor="middle" class="label-note">현대 조판</text>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- GROUP 3: 인프라·자동화 (좌하) -->
+  <!-- ========================================== -->
+  <path d="M 350 240 Q 280 270 220 310" class="line-branch"/>
+  <g transform="translate(30, 260)">
+    <rect x="0" y="0" width="200" height="130" class="box-group"/>
+    <text x="100" y="22" text-anchor="middle" class="label-head">인프라·자동화</text>
+
+    <g transform="translate(15, 35)">
+      <rect x="0" y="0" width="80" height="35" class="box-item"/>
+      <text x="40" y="15" text-anchor="middle" class="label-mono" font-weight="bold">Dockerfile</text>
+      <text x="40" y="28" text-anchor="middle" class="label-note">컨테이너</text>
+    </g>
+
+    <g transform="translate(105, 35)">
+      <rect x="0" y="0" width="80" height="35" class="box-item"/>
+      <text x="40" y="15" text-anchor="middle" class="label-mono" font-weight="bold">Makefile</text>
+      <text x="40" y="28" text-anchor="middle" class="label-note">빌드 자동화</text>
+    </g>
+
+    <g transform="translate(15, 80)">
+      <rect x="0" y="0" width="80" height="35" class="box-item"/>
+      <text x="40" y="15" text-anchor="middle" class="label-mono" font-weight="bold">Terraform</text>
+      <text x="40" y="28" text-anchor="middle" class="label-note">IaC</text>
+    </g>
+
+    <g transform="translate(105, 80)">
+      <rect x="0" y="0" width="80" height="35" class="box-item"/>
+      <text x="40" y="15" text-anchor="middle" class="label-mono" font-weight="bold">GH Actions</text>
+      <text x="40" y="28" text-anchor="middle" class="label-note">CI/CD</text>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- GROUP 4: UI·웹 (우하) -->
+  <!-- ========================================== -->
+  <path d="M 450 240 Q 520 270 580 310" class="line-branch"/>
+  <g transform="translate(490, 260)">
+    <rect x="0" y="0" width="280" height="130" class="box-group"/>
+    <text x="140" y="22" text-anchor="middle" class="label-head">UI·웹</text>
+
+    <g transform="translate(15, 35)">
+      <rect x="0" y="0" width="80" height="35" class="box-item"/>
+      <text x="40" y="15" text-anchor="middle" class="label-mono" font-weight="bold">HTML</text>
+      <text x="40" y="28" text-anchor="middle" class="label-note">문서 구조</text>
+    </g>
+
+    <g transform="translate(100, 35)">
+      <rect x="0" y="0" width="80" height="35" class="box-item"/>
+      <text x="40" y="15" text-anchor="middle" class="label-mono" font-weight="bold">CSS</text>
+      <text x="40" y="28" text-anchor="middle" class="label-note">스타일</text>
+    </g>
+
+    <g transform="translate(185, 35)">
+      <rect x="0" y="0" width="80" height="35" class="box-item"/>
+      <text x="40" y="15" text-anchor="middle" class="label-mono" font-weight="bold">SVG</text>
+      <text x="40" y="28" text-anchor="middle" class="label-note">벡터 그래픽</text>
+    </g>
+
+    <g transform="translate(15, 80)">
+      <rect x="0" y="0" width="80" height="35" class="box-item"/>
+      <text x="40" y="15" text-anchor="middle" class="label-mono" font-weight="bold">JSX</text>
+      <text x="40" y="28" text-anchor="middle" class="label-note">React UI</text>
+    </g>
+
+    <g transform="translate(100, 80)">
+      <rect x="0" y="0" width="80" height="35" class="box-item"/>
+      <text x="40" y="15" text-anchor="middle" class="label-mono" font-weight="bold">정규표현식</text>
+      <text x="40" y="28" text-anchor="middle" class="label-note">패턴 매칭</text>
+    </g>
+
+    <g transform="translate(185, 80)">
+      <rect x="0" y="0" width="80" height="35" class="box-item"/>
+      <text x="40" y="15" text-anchor="middle" class="label-mono" font-weight="bold">XPath</text>
+      <text x="40" y="28" text-anchor="middle" class="label-note">XML 탐색</text>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- AI 시대 강조 -->
+  <!-- ========================================== -->
+  <!-- <g transform="translate(280, 5)">
+    <text x="120" y="15" text-anchor="middle" class="label-note" fill="#555">
+      AI가 코드를 생성할수록, 그 코드를 검증할 DSL 지식이 더 중요해진다
+    </text>
+  </g> -->
+
+</svg>

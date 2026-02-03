@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 30 600 130">
+  <defs>
+    <style>
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-title { font-size: 16px; font-weight: bold; }
+      .tufte-label { font-size: 13px; }
+      .tufte-small { font-size: 11px; }
+      .tufte-code { font-family: 'Consolas', 'Monaco', monospace; font-size: 12px; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="600" height="200" fill="#ffffff"/>
+
+  <!-- Title -->
+  <!-- <text x="300" y="28" text-anchor="middle" class="tufte-text tufte-title">파이썬 기본 자료형</text> -->
+
+  <!-- int Box -->
+  <rect x="30" y="55" width="120" height="90" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="4"/>
+  <text x="90" y="80" text-anchor="middle" class="tufte-text tufte-label" font-weight="bold">int</text>
+  <text x="90" y="100" text-anchor="middle" class="tufte-text tufte-small">(정수)</text>
+  <text x="90" y="125" text-anchor="middle" class="tufte-text tufte-code">42, -7, 0</text>
+
+  <!-- float Box -->
+  <rect x="170" y="55" width="120" height="90" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="4"/>
+  <text x="230" y="80" text-anchor="middle" class="tufte-text tufte-label" font-weight="bold">float</text>
+  <text x="230" y="100" text-anchor="middle" class="tufte-text tufte-small">(부동소수점)</text>
+  <text x="230" y="125" text-anchor="middle" class="tufte-text tufte-code">3.14, -0.5</text>
+
+  <!-- str Box -->
+  <rect x="310" y="55" width="120" height="90" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="4"/>
+  <text x="370" y="80" text-anchor="middle" class="tufte-text tufte-label" font-weight="bold">str</text>
+  <text x="370" y="100" text-anchor="middle" class="tufte-text tufte-small">(문자열)</text>
+  <text x="370" y="125" text-anchor="middle" class="tufte-text tufte-code">"hello", '파이썬'</text>
+
+  <!-- bool Box -->
+  <rect x="450" y="55" width="120" height="90" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="4"/>
+  <text x="510" y="80" text-anchor="middle" class="tufte-text tufte-label" font-weight="bold">bool</text>
+  <text x="510" y="100" text-anchor="middle" class="tufte-text tufte-small">(논리)</text>
+  <text x="510" y="125" text-anchor="middle" class="tufte-text tufte-code">True, False</text>
+
+  <!-- type() function annotation -->
+  <text x="300" y="175" text-anchor="middle" class="tufte-text tufte-small" fill="#666">type() 함수로 자료형 확인</text>
+</svg>

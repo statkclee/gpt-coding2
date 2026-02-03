@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 280">
+  <defs>
+    <style>
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 12px;
+        fill: #333;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 10px;
+        fill: #333;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #666;
+      }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="720" height="280" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="360" y="22" text-anchor="middle" class="tufte-label" font-weight="bold">벡터 연산</text>
+
+  <!-- Dot Product -->
+  <g transform="translate(30, 40)">
+    <text x="100" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">내적 (Dot Product)</text>
+    <rect x="0" y="10" width="200" height="100" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="3"/>
+
+    <!-- Formula -->
+    <text x="100" y="35" text-anchor="middle" class="tufte-code">a · b = Σ(aᵢ × bᵢ)</text>
+
+    <!-- Example -->
+    <text x="15" y="55" class="tufte-code">[1,2,3] · [4,5,6]</text>
+    <text x="15" y="70" class="tufte-code">= 1×4 + 2×5 + 3×6</text>
+    <text x="15" y="85" class="tufte-code">= 32</text>
+
+    <text x="100" y="120" text-anchor="middle" class="tufte-small">같은 방향 → 큰 값</text>
+  </g>
+
+  <!-- Cosine Similarity -->
+  <g transform="translate(260, 40)">
+    <text x="100" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">코사인 유사도</text>
+    <rect x="0" y="10" width="200" height="100" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="3"/>
+
+    <!-- Formula -->
+    <text x="100" y="35" text-anchor="middle" class="tufte-code">cos(θ) = (a·b)/(|a||b|)</text>
+
+    <!-- Visual -->
+    <line x1="40" y1="85" x2="100" y2="50" stroke="#333" stroke-width="2"/>
+    <line x1="40" y1="85" x2="120" y2="60" stroke="#666" stroke-width="2"/>
+    <text x="75" y="75" class="tufte-small">θ</text>
+
+    <text x="140" y="55" class="tufte-small">a</text>
+    <text x="130" y="70" class="tufte-small">b</text>
+
+    <text x="100" y="120" text-anchor="middle" class="tufte-small">범위: -1 ~ 1</text>
+  </g>
+
+  <!-- Euclidean Distance -->
+  <g transform="translate(490, 40)">
+    <text x="100" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">유클리드 거리</text>
+    <rect x="0" y="10" width="200" height="100" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="3"/>
+
+    <!-- Formula -->
+    <text x="100" y="35" text-anchor="middle" class="tufte-code">d = √Σ(aᵢ-bᵢ)²</text>
+
+    <!-- Visual -->
+    <circle cx="50" cy="70" r="5" fill="#333"/>
+    <circle cx="130" cy="55" r="5" fill="#666"/>
+    <line x1="50" y1="70" x2="130" y2="55" stroke="#999" stroke-width="1" stroke-dasharray="4,2"/>
+    <text x="40" y="90" class="tufte-small">a</text>
+    <text x="135" y="50" class="tufte-small">b</text>
+    <text x="90" y="75" class="tufte-small">d</text>
+
+    <text x="100" y="120" text-anchor="middle" class="tufte-small">가까울수록 작은 값</text>
+  </g>
+
+  <!-- Comparison -->
+  <g transform="translate(30, 170)">
+    <rect x="0" y="0" width="660" height="100" fill="#e8e8e8" stroke="#999" rx="3"/>
+    <text x="330" y="22" text-anchor="middle" class="tufte-label" font-weight="bold">비교: 코사인 유사도 vs 유클리드 거리</text>
+    <line x1="20" y1="30" x2="640" y2="30" stroke="#ccc"/>
+
+    <!-- Left diagram -->
+    <g transform="translate(80, 50)">
+      <line x1="0" y1="40" x2="100" y2="0" stroke="#333" stroke-width="2"/>
+      <line x1="0" y1="40" x2="50" y2="0" stroke="#666" stroke-width="2"/>
+      <circle cx="100" cy="0" r="4" fill="#333"/>
+      <circle cx="50" cy="0" r="4" fill="#666"/>
+      <text x="50" y="60" text-anchor="middle" class="tufte-small">코사인: 같은 방향</text>
+      <text x="50" y="75" text-anchor="middle" class="tufte-small">(유사도 = 1)</text>
+    </g>
+
+    <!-- Right diagram -->
+    <g transform="translate(280, 50)">
+      <circle cx="20" cy="20" r="4" fill="#333"/>
+      <circle cx="80" cy="20" r="4" fill="#666"/>
+      <line x1="20" y1="20" x2="80" y2="20" stroke="#999" stroke-dasharray="4,2"/>
+      <text x="50" y="60" text-anchor="middle" class="tufte-small">유클리드: 절대 거리</text>
+      <text x="50" y="75" text-anchor="middle" class="tufte-small">(크기 차이 반영)</text>
+    </g>
+
+    <!-- Recommendation -->
+    <g transform="translate(480, 40)">
+      <rect x="0" y="0" width="150" height="50" fill="#f5f5f5" stroke="#999" rx="2"/>
+      <text x="75" y="20" text-anchor="middle" class="tufte-label" font-weight="bold">임베딩 권장</text>
+      <text x="75" y="38" text-anchor="middle" class="tufte-small">코사인 유사도</text>
+    </g>
+  </g>
+
+</svg>

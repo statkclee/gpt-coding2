@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 60 700 150">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 14px; fill: #333; font-weight: bold; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 11px; fill: #333; font-weight: bold; }
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 10px; fill: #333; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 9px; fill: #666; }
+      .tufte-code { font-family: 'SF Mono', Menlo, Monaco, monospace; font-size: 9px; fill: #666; }
+      .arrow { fill: none; stroke: #999; stroke-width: 1.5; }
+    </style>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#999"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="700" height="220" fill="#ffffff"/>
+
+  <!-- Title -->
+  <!-- <text x="350" y="25" text-anchor="middle" class="tufte-title">명령형 버그의 핵심: 상태는 시간 따라 변한다</text> -->
+
+  <!-- 시간 축 -->
+  <line x1="50" y1="100" x2="650" y2="100" stroke="#ccc" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <text x="665" y="105" class="tufte-small">시간</text>
+
+  <!-- 상태 변화 점들 -->
+  <g transform="translate(100, 60)">
+    <circle cx="0" cy="40" r="8" fill="#fff" stroke="#333" stroke-width="2"/>
+    <text x="0" y="25" text-anchor="middle" class="tufte-code">total=0</text>
+    <text x="0" y="70" text-anchor="middle" class="tufte-small">초기화</text>
+  </g>
+
+  <g transform="translate(220, 60)">
+    <circle cx="0" cy="40" r="8" fill="#fff" stroke="#333" stroke-width="2"/>
+    <text x="0" y="25" text-anchor="middle" class="tufte-code">total=85</text>
+    <text x="0" y="70" text-anchor="middle" class="tufte-small">1회차</text>
+  </g>
+
+  <g transform="translate(340, 60)">
+    <circle cx="0" cy="40" r="10" fill="#333" stroke="#333" stroke-width="2"/>
+    <text x="0" y="20" text-anchor="middle" class="tufte-code" style="fill:#333; font-weight:bold">total=90</text>
+    <text x="0" y="70" text-anchor="middle" class="tufte-label">← 버그 발생</text>
+    <text x="0" y="85" text-anchor="middle" class="tufte-small">175여야 하는데?</text>
+  </g>
+
+  <g transform="translate(460, 60)">
+    <circle cx="0" cy="40" r="8" fill="#f5f5f5" stroke="#999" stroke-width="1"/>
+    <text x="0" y="25" text-anchor="middle" class="tufte-code" style="fill:#999">total=78</text>
+    <text x="0" y="70" text-anchor="middle" class="tufte-small" style="fill:#999">3회차</text>
+  </g>
+
+  <g transform="translate(580, 60)">
+    <circle cx="0" cy="40" r="8" fill="#f5f5f5" stroke="#999" stroke-width="1"/>
+    <text x="0" y="25" text-anchor="middle" class="tufte-code" style="fill:#999">total=92</text>
+    <text x="0" y="70" text-anchor="middle" class="tufte-small" style="fill:#999">최종(틀림)</text>
+  </g>
+
+  <!-- 핵심 메시지 -->
+  <g transform="translate(50, 155)">
+    <rect x="0" y="0" width="600" height="45" fill="#f5f5f5" stroke="#ccc" rx="4"/>
+    <text x="300" y="18" text-anchor="middle" class="tufte-label">디버깅 원칙: 최종값만 보지 말고, 중간 상태를 추적하라</text>
+    <text x="300" y="35" text-anchor="middle" class="tufte-code">for i, s in enumerate(scores): print(f"[{i}] s={s}, total={total}")</text>
+  </g>
+
+</svg>

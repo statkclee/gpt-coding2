@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" xml:lang="ko-KR"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.16">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="이광춘(Openai)">
+
+<title>38&nbsp; 소프트웨어 스택 – 챗GPT 코딩(개정판)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./arch-architecture.html" rel="next">
+<link href="./arch-reuse.html" rel="prev">
+<link href="./images/logo.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-8ee146c0b749343448e797d10b61a7f9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-55f79cb6abf2a16ff6075165a9063c3c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "일치 없음",
+    "search-matching-documents-text": "일치된 문서",
+    "search-copy-link-title": "검색 링크 복사",
+    "search-hide-matches-text": "추가 검색 결과 숨기기",
+    "search-more-match-text": "추가 검색결과",
+    "search-more-matches-text": "추가 검색결과",
+    "search-clear-button-title": "제거",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "취소",
+    "search-submit-button-title": "검색",
+    "search-label": "검색"
+  }
+}</script>
+
+<script type="text/javascript">
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-229551680-1', 'auto');
+
+ga('send', {
+  hitType: 'pageview',
+  'anonymizeIp': true,
+});
+</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./arch-reuse.html"><strong>6부</strong> 소프트웨어 설계와 아키텍처</a></li><li class="breadcrumb-item"><a href="./arch-stack.html"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">소프트웨어 스택</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="검색" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">챗GPT 코딩(개정판)</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/bit2r/gpt-coding/" title="소스 코드" class="quarto-navigation-tool px-1" aria-label="소스 코드"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="리더 모드 전환">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="검색"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">서문</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>1부</strong> 전통 프로그래밍</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">프로그래밍 시작하기</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-var.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">변수, 표현식, 문장</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-cont.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">조건부 실행</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-func.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">함수</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-loop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">반복문</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>2부</strong> 자료구조</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-data-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">데이터, AI 식량</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-string.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">문자열</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-file.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">파일</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-list.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">리스트</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-dictionaries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">딕셔너리</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-tuples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">튜플</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-dataframe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">데이터프레임</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-json.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">JSON</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18-tensor.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">텐서</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-embedding.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">벡터와 임베딩</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-graph.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">그래프</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>3부</strong> 버전제어와 협업</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Git 시작하기</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-tracking.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">변경사항 추적</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-history.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">히스토리와 파일 관리</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-remote.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">GitHub와 원격 저장소</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-collab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">협업과 충돌 해결</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">오픈 사이언스</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>4부</strong> 분야별 코딩</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">특화 도구 입문</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-regex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">정규 표현식</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-network.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-web.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">웹서비스</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-database.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">데이터베이스와 SQL</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-ds.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">데이터 과학과 R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-auto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">파일 자동화</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-make.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">빌드 자동화: make</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>5부</strong> 프로그래밍 패러다임</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-paradigm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">패러다임의 이해</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-imperative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">명령형과 절차적 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-oop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">객체지향 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-fp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">함수형 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-declarative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">선언형 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-reactive.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">반응형 프로그래밍</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>6부</strong> 소프트웨어 설계와 아키텍처</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-reuse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">재사용 명령</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-stack.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">소프트웨어 스택</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">소프트웨어 아키텍처</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-pattern.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">살아남은 패턴</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>7부</strong> 기계학습 패러다임</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-paradigm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">소프트웨어 2.0</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">신경망 아키텍처</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">43</span>&nbsp; <span class="chapter-title">학습과 추론</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-to-llm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">44</span>&nbsp; <span class="chapter-title">트랜스포머에서 거대 언어모형으로</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>부록</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">용어사전</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">참고문헌</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">목차</h2>
+   
+  <ul>
+  <li><a href="#sec-arch-stack-model" id="toc-sec-arch-stack-model" class="nav-link active" data-scroll-target="#sec-arch-stack-model"><span class="header-section-number">38.1</span> 3계층 모델</a></li>
+  <li><a href="#sec-arch-stack-runtime" id="toc-sec-arch-stack-runtime" class="nav-link" data-scroll-target="#sec-arch-stack-runtime"><span class="header-section-number">38.2</span> 실행 환경 계층</a>
+  <ul class="collapse">
+  <li><a href="#sec-arch-stack-platform" id="toc-sec-arch-stack-platform" class="nav-link" data-scroll-target="#sec-arch-stack-platform"><span class="header-section-number">38.2.1</span> Platform</a></li>
+  <li><a href="#sec-arch-stack-runtime-detail" id="toc-sec-arch-stack-runtime-detail" class="nav-link" data-scroll-target="#sec-arch-stack-runtime-detail"><span class="header-section-number">38.2.2</span> Runtime</a></li>
+  </ul></li>
+  <li><a href="#sec-arch-stack-impl" id="toc-sec-arch-stack-impl" class="nav-link" data-scroll-target="#sec-arch-stack-impl"><span class="header-section-number">38.3</span> 구현 계층</a>
+  <ul class="collapse">
+  <li><a href="#sec-arch-stack-library" id="toc-sec-arch-stack-library" class="nav-link" data-scroll-target="#sec-arch-stack-library"><span class="header-section-number">38.3.1</span> Library</a></li>
+  <li><a href="#sec-arch-stack-framework" id="toc-sec-arch-stack-framework" class="nav-link" data-scroll-target="#sec-arch-stack-framework"><span class="header-section-number">38.3.2</span> Framework</a></li>
+  <li><a href="#sec-arch-stack-comparison" id="toc-sec-arch-stack-comparison" class="nav-link" data-scroll-target="#sec-arch-stack-comparison"><span class="header-section-number">38.3.3</span> Library vs Framework 비교</a></li>
+  <li><a href="#sec-arch-stack-sdk" id="toc-sec-arch-stack-sdk" class="nav-link" data-scroll-target="#sec-arch-stack-sdk"><span class="header-section-number">38.3.4</span> SDK</a></li>
+  </ul></li>
+  <li><a href="#sec-arch-stack-streamlit" id="toc-sec-arch-stack-streamlit" class="nav-link" data-scroll-target="#sec-arch-stack-streamlit"><span class="header-section-number">38.4</span> 실전 예제: Streamlit 해부</a>
+  <ul class="collapse">
+  <li><a href="#streamlit의-동작-원리" id="toc-streamlit의-동작-원리" class="nav-link" data-scroll-target="#streamlit의-동작-원리"><span class="header-section-number">38.4.1</span> Streamlit의 동작 원리</a></li>
+  </ul></li>
+  <li><a href="#sec-arch-stack-python-ecosystem" id="toc-sec-arch-stack-python-ecosystem" class="nav-link" data-scroll-target="#sec-arch-stack-python-ecosystem"><span class="header-section-number">38.5</span> 파이썬 생태계 지도</a>
+  <ul class="collapse">
+  <li><a href="#데이터-과학-스택" id="toc-데이터-과학-스택" class="nav-link" data-scroll-target="#데이터-과학-스택"><span class="header-section-number">38.5.1</span> 데이터 과학 스택</a></li>
+  <li><a href="#웹-개발-스택" id="toc-웹-개발-스택" class="nav-link" data-scroll-target="#웹-개발-스택"><span class="header-section-number">38.5.2</span> 웹 개발 스택</a></li>
+  <li><a href="#aiml-스택" id="toc-aiml-스택" class="nav-link" data-scroll-target="#aiml-스택"><span class="header-section-number">38.5.3</span> AI/ML 스택</a></li>
+  <li><a href="#cli-도구-스택" id="toc-cli-도구-스택" class="nav-link" data-scroll-target="#cli-도구-스택"><span class="header-section-number">38.5.4</span> CLI 도구 스택</a></li>
+  </ul></li>
+  <li><a href="#sec-arch-stack-debug" id="toc-sec-arch-stack-debug" class="nav-link" data-scroll-target="#sec-arch-stack-debug"><span class="header-section-number">38.6</span> 디버깅</a></li>
+  <li><a href="#생각해볼-점" id="toc-생각해볼-점" class="nav-link" data-scroll-target="#생각해볼-점">💡 생각해볼 점</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/arch-stack.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./arch-reuse.html"><strong>6부</strong> 소프트웨어 설계와 아키텍처</a></li><li class="breadcrumb-item"><a href="./arch-stack.html"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">소프트웨어 스택</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-arch-stack" class="quarto-section-identifier"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">소프트웨어 스택</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p> </p>
+<p>설계 패턴과 아키텍처는 추상적 개념이다. 실제로 작동하려면 구체적인 <strong>실행 환경</strong>이 필요하다. MVC 패턴을 알아도 Django나 Flask 없이는 웹 애플리케이션을 만들 수 없고, 계층형 아키텍처를 설계해도 파이썬 런타임 없이는 코드가 실행되지 않는다.</p>
+<p>이 장에서는 패턴과 아키텍처가 <strong>구현되고 실행되는 환경</strong>—개발 도구 스택을 해부한다. SDK, Runtime, Library, Framework, Platform—이 용어들은 자주 사용되지만 정확한 의미와 관계를 아는 개발자는 많지 않다. 설계를 현실로 만드는 도구들의 역할과 관계를 이해하면, 기술 선택과 디버깅 모두 수월해진다.</p>
+<section id="sec-arch-stack-model" class="level2" data-number="38.1">
+<h2 data-number="38.1" class="anchored" data-anchor-id="sec-arch-stack-model"><span class="header-section-number">38.1</span> 3계층 모델</h2>
+<p> </p>
+<p>소프트웨어 개발은 세 가지 계층으로 나눌 수 있다. 맨 위에는 패러다임, 패턴, 아키텍처 같은 <strong>추상 개념</strong>이 자리한다. 가운데에는 프레임워크, 애플리케이션 코드, 라이브러리로 이루어진 <strong>구현</strong> 계층이 있다. 맨 아래에는 런타임과 플랫폼으로 구성된 <strong>실행 환경</strong> 계층이 코드를 실제로 구동한다.</p>
+<div id="fig-arch-stack-hierarchy" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-arch-stack-hierarchy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/pattern-concept-hierarchy.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-arch-stack-hierarchy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;38.1: 소프트웨어 개발의 3단계 계층 구조
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-arch-stack-hierarchy" class="quarto-xref">그림&nbsp;<span>38.1</span></a> 에서 주목할 점은 <strong>화살표의 방향</strong>이다. 추상 개념은 구현으로, 구현은 실행 환경으로 <strong>구체화</strong>된다. 역방향으로 보면, 실행 환경이 구현을 <strong>지탱</strong>하고, 구현이 추상 개념을 <strong>실현</strong>한다.</p>
+<p>개발자의 일상 대부분은 가운데 구현 계층에서 이루어진다—main.py를 작성하고, Django를 활용하고, pandas를 호출한다. 그러나 좋은 설계를 하려면 위쪽 추상 개념 계층을 알아야 하고, 문제를 디버깅하려면 아래쪽 실행 환경 계층을 이해해야 한다.</p>
+</section>
+<section id="sec-arch-stack-runtime" class="level2" data-number="38.2">
+<h2 data-number="38.2" class="anchored" data-anchor-id="sec-arch-stack-runtime"><span class="header-section-number">38.2</span> 실행 환경 계층</h2>
+<p> </p>
+<p>실행 환경 계층은 코드가 실제로 구동되는 토대다. 플랫폼(Platform)이 하드웨어와 운영체제를 추상화하고, 런타임(Runtime)이 프로그래밍 언어의 실행을 담당한다. 개발자가 작성한 파이썬 코드가 CPU에서 실행되기까지, 여러 계층이 복잡성을 숨기고 단순한 인터페이스를 제공한다.</p>
+<section id="sec-arch-stack-platform" class="level3" data-number="38.2.1">
+<h3 data-number="38.2.1" class="anchored" data-anchor-id="sec-arch-stack-platform"><span class="header-section-number">38.2.1</span> Platform</h3>
+<p><strong>플랫폼(Platform)</strong>은 소프트웨어가 실행되는 기반 환경이다. 가장 넓은 의미에서 플랫폼은 세 가지 수준으로 나뉜다.</p>
+<p><strong>운영체제(OS)</strong>: Linux, Windows, macOS가 대표적이다. 파일 시스템, 프로세스 관리, 네트워크 스택 등 기본 서비스를 제공한다. 같은 파이썬 코드라도 Windows의 경로 구분자(<code>\</code>)와 Linux의 경로 구분자(<code>/</code>)가 달라 문제가 생기기도 한다.</p>
+<p><strong>클라우드</strong>: AWS, GCP, Azure 같은 클라우드 서비스는 가상화된 인프라를 제공한다. EC2 인스턴스, Lambda 함수, S3 스토리지—모두 클라우드 플랫폼의 구성요소다. 온프레미스 서버 관리 없이 코드만 배포하면 된다.</p>
+<p><strong>컨테이너</strong>: Docker, Kubernetes는 애플리케이션을 격리된 환경에서 실행한다. “내 컴퓨터에서는 되는데…”라는 문제를 해결한다. 개발 환경과 프로덕션 환경을 동일하게 유지할 수 있다.</p>
+</section>
+<section id="sec-arch-stack-runtime-detail" class="level3" data-number="38.2.2">
+<h3 data-number="38.2.2" class="anchored" data-anchor-id="sec-arch-stack-runtime-detail"><span class="header-section-number">38.2.2</span> Runtime</h3>
+<p><strong>런타임(Runtime)</strong>은 프로그램이 실행되는 동안 필요한 환경 전체를 가리킨다. 메모리 관리, 가비지 컬렉션, 타입 검사, 예외 처리 등을 담당한다.</p>
+<div id="arch-stack-runtime-check" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> platform</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Python 구현체: </span><span class="sc">{</span>platform<span class="sc">.</span>python_implementation()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Python 버전: </span><span class="sc">{</span>sys<span class="sc">.</span>version<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"운영체제: </span><span class="sc">{</span>platform<span class="sc">.</span>system()<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>platform<span class="sc">.</span>release()<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Python 구현체: CPython
+Python 버전: 3.12.2 | packaged by conda-forge | (main, Feb 16 2024, 20:54:21) [Clang 16.0.6 ]
+운영체제: Darwin 23.6.0</code></pre>
+</div>
+</div>
+<p><strong>파이썬 런타임</strong>은 여러 구현체가 있다. 가장 널리 쓰이는 <strong>CPython</strong>은 C로 작성된 표준 구현체로, <code>.py</code> 파일을 바이트코드로 컴파일한 뒤 인터프리터로 실행한다. <code>pip install</code>로 설치하는 대부분의 패키지가 CPython을 기준으로 작성되었다. <strong>PyPy</strong>는 JIT(Just-In-Time) 컴파일러를 사용하여 CPython보다 빠르며, 반복문이 많은 코드에서 성능 향상이 두드러진다. 다만 C 확장 호환성이 완벽하지 않아 NumPy 같은 일부 패키지가 작동하지 않을 수 있다. <strong>Jython</strong>은 Java 가상 머신(JVM) 위에서 파이썬을 실행하여 Java 라이브러리를 직접 호출할 수 있지만, 파이썬 3을 완전히 지원하지 않는다.</p>
+<p><strong>JavaScript 런타임</strong>도 다양하다. Google이 개발한 <strong>V8</strong> 엔진은 Chrome과 Node.js에서 사용하며, JIT 컴파일로 빠른 실행 속도를 제공한다. <strong>SpiderMonkey</strong>는 Firefox에서 사용하는 Mozilla의 JavaScript 엔진이다. <strong>Node.js</strong>는 V8 엔진 위에 이벤트 루프와 비동기 I/O를 추가한 서버 사이드 런타임으로, 브라우저 밖에서 JavaScript를 실행할 수 있게 해준다.</p>
+<p><strong>Java 런타임</strong>은 JVM(Java Virtual Machine)이다. Oracle의 <strong>HotSpot</strong>이 표준 JVM 구현체이며, <strong>GraalVM</strong>은 다언어 지원 VM으로 Java, JavaScript, Python, Ruby 등을 하나의 VM에서 실행할 수 있다.</p>
+<p>같은 코드라도 어떤 런타임을 사용하느냐에 따라 성능, 호환성, 배포 방식이 달라진다.</p>
+</section>
+</section>
+<section id="sec-arch-stack-impl" class="level2" data-number="38.3">
+<h2 data-number="38.3" class="anchored" data-anchor-id="sec-arch-stack-impl"><span class="header-section-number">38.3</span> 구현 계층</h2>
+<p> </p>
+<p>구현 계층은 개발자가 실제로 코드를 작성하는 영역이다. 라이브러리(Library)와 프레임워크(Framework)가 핵심 구성요소이며, SDK(Software Development Kit)가 이들을 통합하여 제공하기도 한다. 라이브러리와 프레임워크의 차이를 이해하면 새로운 도구를 접했을 때 어떻게 활용해야 하는지 빠르게 파악할 수 있다.</p>
+<section id="sec-arch-stack-library" class="level3" data-number="38.3.1">
+<h3 data-number="38.3.1" class="anchored" data-anchor-id="sec-arch-stack-library"><span class="header-section-number">38.3.1</span> Library</h3>
+<p><strong>라이브러리(Library)</strong>는 개발자가 필요할 때 호출하는 코드 모음이다. 핵심 특징은 <strong>“내가 부른다”</strong>는 것이다.</p>
+<div id="arch-stack-library-example" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 개발자가 필요할 때 함수를 호출한다</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"데이터 크기: </span><span class="sc">{</span>df<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.head(<span class="dv">3</span>))</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>데이터 크기: (150, 5)
+   sepal_length  sepal_width  petal_length  petal_width species
+0           5.1          3.5           1.4          0.2  setosa
+1           4.9          3.0           1.4          0.2  setosa
+2           4.7          3.2           1.3          0.2  setosa</code></pre>
+</div>
+</div>
+<p>위 코드에서 <code>pd.read_csv()</code>는 개발자가 원하는 시점에 호출했다. pandas는 요청에 응답할 뿐, 프로그램의 흐름을 통제하지 않는다.</p>
+<p>대표적인 파이썬 라이브러리로는 데이터 분석을 위한 <strong>pandas</strong>, 수치 계산과 다차원 배열을 다루는 <strong>NumPy</strong>, HTTP 클라이언트로 API 호출과 웹 스크래핑에 활용되는 <strong>requests</strong>, 차트와 그래프를 생성하는 시각화 도구 <strong>matplotlib</strong> 등이 있다.</p>
+</section>
+<section id="sec-arch-stack-framework" class="level3" data-number="38.3.2">
+<h3 data-number="38.3.2" class="anchored" data-anchor-id="sec-arch-stack-framework"><span class="header-section-number">38.3.2</span> Framework</h3>
+<p><strong>프레임워크(Framework)</strong>는 라이브러리와 반대다. 핵심 특징은 <strong>“나를 부른다”</strong>—즉, <strong>제어의 역전(IoC, Inversion of Control)</strong>이다.</p>
+<div id="arch-stack-framework-example" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Django 예제 (실행 불가, 개념 설명용)</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># views.py</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> django.http <span class="im">import</span> HttpResponse</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> hello(request):</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> HttpResponse(<span class="st">"Hello, World!"</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 개발자는 함수를 정의만 한다</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Django가 HTTP 요청이 들어오면 이 함수를 '호출'한다</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>위 코드에서 <code>hello()</code> 함수는 개발자가 직접 호출하지 않는다. 사용자가 브라우저에서 <code>/hello/</code> URL에 접속하면, Django가 알아서 이 함수를 호출한다. 제어권이 개발자에서 Django로 역전된 것이다.</p>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">노트</span>제어의 역전(IoC)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>라이브러리</strong>: “내가 부른다” — <code>pandas.read_csv()</code>처럼 개발자가 필요할 때 함수를 호출한다.</li>
+<li><strong>프레임워크</strong>: “나를 부른다” — Django가 <code>views.py</code>의 함수를, React가 컴포넌트의 <code>render()</code>를 알아서 호출한다.</li>
+</ul>
+<p>제어권이 개발자에서 프레임워크로 역전되었기 때문에 IoC(Inversion of Control)라 부른다.</p>
+</div>
+</div>
+<p>대표적인 파이썬 프레임워크로는 ORM, 관리자 페이지, 인증 시스템을 내장한 풀스택 웹 프레임워크 <strong>Django</strong>가 있다. <strong>Flask</strong>는 최소한의 기능만 제공하는 마이크로 웹 프레임워크로 확장성이 높다. <strong>FastAPI</strong>는 타입 힌트 기반의 현대적 API 프레임워크로 자동 문서 생성 기능을 제공한다. <strong>Streamlit</strong>은 파이썬 코드만으로 대시보드를 생성하는 데이터 앱 프레임워크다.</p>
+</section>
+<section id="sec-arch-stack-comparison" class="level3" data-number="38.3.3">
+<h3 data-number="38.3.3" class="anchored" data-anchor-id="sec-arch-stack-comparison"><span class="header-section-number">38.3.3</span> Library vs Framework 비교</h3>
+<p>라이브러리와 프레임워크의 핵심 차이는 <strong>제어권</strong>이다. <a href="#tbl-arch-lib-framework" class="quarto-xref">표&nbsp;<span>38.1</span></a> 는 두 개념의 차이를 정리한다.</p>
+<div id="tbl-arch-lib-framework" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<div aria-describedby="tbl-arch-lib-framework-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<thead>
+<tr class="header">
+<th>구분</th>
+<th>Library</th>
+<th>Framework</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>제어권</td>
+<td>개발자</td>
+<td>프레임워크</td>
+</tr>
+<tr class="even">
+<td>호출 방향</td>
+<td>내가 부른다</td>
+<td>나를 부른다</td>
+</tr>
+<tr class="odd">
+<td>유연성</td>
+<td>높음</td>
+<td>낮음 (정해진 구조)</td>
+</tr>
+<tr class="even">
+<td>학습 곡선</td>
+<td>낮음</td>
+<td>높음</td>
+</tr>
+<tr class="odd">
+<td>예시</td>
+<td>pandas, requests</td>
+<td>Django, React</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-tbl" id="tbl-arch-lib-framework-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+표&nbsp;38.1: Library와 Framework 비교
+</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">힌트</span>선택 기준
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>라이브러리는 특정 기능만 필요하거나, 기존 코드에 기능을 추가하거나, 자유로운 구조가 필요할 때 선택한다. 프레임워크는 전체 애플리케이션 구조가 필요하거나, 팀 협업에서 일관성이 중요하거나, 빠른 개발이 필요할 때 적합하다.</p>
+</div>
+</div>
+</section>
+<section id="sec-arch-stack-sdk" class="level3" data-number="38.3.4">
+<h3 data-number="38.3.4" class="anchored" data-anchor-id="sec-arch-stack-sdk"><span class="header-section-number">38.3.4</span> SDK</h3>
+<p>라이브러리와 프레임워크를 개별적으로 설치하고 설정하는 것은 번거롭다. 특정 플랫폼이나 서비스를 대상으로 개발할 때는 필요한 도구들이 미리 통합되어 있으면 편리하다. <strong>SDK(Software Development Kit)</strong>는 이런 필요에서 탄생했다. 프레임워크, 라이브러리, 빌드 도구, 문서를 하나로 묶어 해당 플랫폼 개발에 필요한 모든 것을 제공한다.</p>
+<pre><code>SDK = Framework + Library + Build Tools + Documentation</code></pre>
+<p><strong>빌드 도구(Build Tools)</strong>는 소스 코드를 배포 가능한 형태로 변환한다. 파이썬에서는 <strong>setuptools</strong>가 패키지를 빌드하고, <strong>wheel</strong>이 배포용 바이너리 형식을 생성한다. 최근에는 <strong>hatch</strong>와 <strong>flit</strong>이 더 단순한 빌드 워크플로우를 제공한다. JavaScript에서는 <strong>webpack</strong>, <strong>vite</strong>, <strong>esbuild</strong>가 모듈 번들링을 담당한다. Java와 Android에서는 <strong>Maven</strong>과 <strong>Gradle</strong>이 컴파일부터 테스트, 배포까지 빌드 자동화를 담당한다.</p>
+<p>빌드 도구와 함께 <strong>패키지 관리자</strong>도 SDK의 핵심 구성요소다. 파이썬에서는 <strong>pip</strong>가 표준 패키지 관리자로 오랫동안 사용되었다. 최근에는 Rust로 작성된 <strong>uv</strong>가 pip보다 10~100배 빠른 속도로 주목받고 있다. <strong>poetry</strong>는 의존성 관리와 가상환경을 통합하여 프로젝트 관리를 단순화한다. JavaScript 생태계에서는 <strong>npm</strong>, <strong>yarn</strong>, <strong>pnpm</strong>이 패키지 관리를 담당한다.</p>
+<p>대표적인 SDK로는 <strong>Android SDK</strong>가 있다. Java/Kotlin 컴파일러, 에뮬레이터, Android Studio 등 Android 앱 개발에 필요한 모든 것을 포함한다. <strong>iOS SDK(Xcode)</strong>는 Swift 컴파일러, 시뮬레이터, Interface Builder를 묶은 iOS/macOS 앱 개발 키트다. <strong>AWS SDK for Python(boto3)</strong>은 S3, EC2, Lambda 등 모든 AWS 서비스에 접근할 수 있는 라이브러리다. SDK를 설치하면 해당 플랫폼에서 개발하는 데 필요한 도구가 한 번에 갖춰진다.</p>
+</section>
+</section>
+<section id="sec-arch-stack-streamlit" class="level2" data-number="38.4">
+<h2 data-number="38.4" class="anchored" data-anchor-id="sec-arch-stack-streamlit"><span class="header-section-number">38.4</span> 실전 예제: Streamlit 해부</h2>
+<p> </p>
+<p>앞서 살펴본 3계층 모델이 실제 애플리케이션에서 어떻게 구체화되는지 Streamlit 대시보드를 예로 들어 살펴본다. Streamlit은 파이썬 코드만으로 웹 대시보드를 만들 수 있어 데이터 과학자들에게 인기 있는 프레임워크다.</p>
+<div id="fig-arch-streamlit-stack" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-arch-streamlit-stack-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/pattern-streamlit-stack.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-arch-streamlit-stack-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;38.2: Streamlit 대시보드 실행 스택
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-arch-streamlit-stack" class="quarto-xref">그림&nbsp;<span>38.2</span></a> 은 파이썬 Streamlit 대시보드를 예로 들어, 3계층 모델이 실제로 어떻게 구체화되는지 보여준다. 하드웨어(CPU, RAM, Storage)부터 운영체제(Linux), 컨테이너(Docker), 런타임(CPython), 프레임워크(Streamlit), 애플리케이션 코드(dashboard.py), 그리고 브라우저까지—7개 계층이 협력하여 하나의 웹 애플리케이션을 구동한다.</p>
+<p><a href="#fig-arch-streamlit-stack" class="quarto-xref">그림&nbsp;<span>38.2</span></a> 에서 주목할 점은 서버와 클라이언트가 <strong>서로 다른 언어 생태계</strong>를 사용한다는 것이다. 서버는 파이썬(CPython 런타임, Streamlit/pandas 패키지)으로 구성되고, 클라이언트는 JavaScript(V8 런타임, React 라이브러리)로 구성된다. 그렇다면 파이썬 코드가 어떻게 JavaScript 대시보드가 되는 것일까?</p>
+<section id="streamlit의-동작-원리" class="level3" data-number="38.4.1">
+<h3 data-number="38.4.1" class="anchored" data-anchor-id="streamlit의-동작-원리"><span class="header-section-number">38.4.1</span> Streamlit의 동작 원리</h3>
+<p>흔히 “파이썬을 JavaScript로 변환(Transpile)한다”고 오해하지만, Streamlit의 동작 방식은 <strong>원격 제어(Remote Control)</strong>에 가깝다.</p>
+<p><code>pip install streamlit</code>을 실행하면 파이썬 서버뿐 아니라, 이미 완성된 React 웹 애플리케이션도 함께 설치된다. 브라우저가 <code>localhost:8501</code>에 접속하면 서버는 파이썬 코드가 아닌, <strong>미리 빌드된 React 앱</strong>(index.html + main.js)을 먼저 내려보낸다. React 앱에는 “heading 메시지가 오면 <code>&lt;h1&gt;</code> 태그를 그린다”, “dataframe 메시지가 오면 <code>&lt;table&gt;</code>을 그린다”는 규칙이 내장되어 있다.</p>
+<p>React 앱이 로딩되면 즉시 서버에 웹소켓(WebSocket) 연결을 맺는다. 서버는 파이썬 스크립트(dashboard.py)를 처음부터 끝까지 실행하면서, <code>st.title("안녕")</code>같은 코드를 만날 때마다 <strong>Delta 메시지</strong>를 생성한다. “heading 타입, 내용은 ‘안녕’”이라는 정보가 <strong>Protobuf</strong>(Protocol Buffers) 이진 포맷으로 직렬화되어 웹소켓을 통해 브라우저로 전송된다. Protobuf는 JSON보다 작고 빠른 구글의 직렬화 포맷으로, 대용량 데이터프레임이나 차트 데이터를 효율적으로 전달한다. 브라우저의 React 앱은 메시지를 받는 즉시 해당 컴포넌트를 화면에 렌더링한다.</p>
+<p>핵심은 파이썬 코드가 JavaScript로 “번역”되는 것이 아니라, 파이썬이 <strong>명령을 보내고</strong> JavaScript가 <strong>명령을 수행</strong>한다는 점이다. 방송국의 PD(파이썬)가 대본을 쓰고 지시하면, TV 화면(React)이 영상을 보여주는 구조다. 그래서 Streamlit 앱을 배포하려면 파이썬 프로세스가 계속 실행되어야 하고, 서버가 꺼지면 대시보드도 멈춘다.</p>
+</section>
+</section>
+<section id="sec-arch-stack-python-ecosystem" class="level2" data-number="38.5">
+<h2 data-number="38.5" class="anchored" data-anchor-id="sec-arch-stack-python-ecosystem"><span class="header-section-number">38.5</span> 파이썬 생태계 지도</h2>
+<p></p>
+<p>파이썬은 범용 언어로 시작했지만, 30년간 축적된 패키지 생태계 덕분에 거의 모든 분야에서 활용된다. 데이터 과학, 웹 개발, 인공지능, 자동화 스크립트까지—각 분야마다 핵심 라이브러리와 프레임워크 조합이 다르다. 초보자는 방대한 선택지 앞에서 길을 잃기 쉽고, 경험 있는 개발자도 다른 분야로 넘어갈 때 새로운 스택을 익혀야 한다. 분야별 대표 도구와 그 관계를 지도처럼 파악하면, 필요한 도구를 빠르게 찾고 학습 우선순위를 정할 수 있다.</p>
+<div id="fig-arch-python-ecosystem" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-arch-python-ecosystem-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/arch-python-ecosystem.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-arch-python-ecosystem-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;38.3: 파이썬 생태계 지도: 분야별 핵심 스택
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-arch-python-ecosystem" class="quarto-xref">그림&nbsp;<span>38.3</span></a> 은 분야별 대표 스택을 한눈에 보여준다. 데이터 분석에는 pandas, matplotlib, Jupyter 조합이 적합하고, 웹 API 개발에는 FastAPI, SQLAlchemy, Pydantic을 함께 사용한다. 대형 웹 서비스에는 Django, PostgreSQL, Redis 스택이 검증되었고, ML 연구에는 PyTorch, Hugging Face, W&amp;B(Weights &amp; Biases)가 널리 쓰인다. 데이터 대시보드에는 Streamlit 또는 Shiny for Python을 선택한다. 각 스택의 세부 구성을 아래에서 살펴본다.</p>
+<section id="데이터-과학-스택" class="level3" data-number="38.5.1">
+<h3 data-number="38.5.1" class="anchored" data-anchor-id="데이터-과학-스택"><span class="header-section-number">38.5.1</span> 데이터 과학 스택</h3>
+<p>데이터 과학 분야에서는 수치 계산부터 머신러닝까지 계층적으로 연결된 라이브러리 스택이 형성되어 있다.</p>
+<div id="fig-arch-stack-data-science" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-arch-stack-data-science-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/arch-stack-data-science.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-arch-stack-data-science-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;38.4: 데이터 과학 스택
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-arch-stack-data-science" class="quarto-xref">그림&nbsp;<span>38.4</span></a> 에서 보듯이, 데이터 과학 스택은 두 갈래로 나뉜다. 데이터 처리 계열은 NumPy에서 pandas, scikit-learn, XGBoost/LightGBM으로 이어지고, 시각화 계열은 matplotlib에서 seaborn, plotly로 발전한다. <strong>NumPy</strong>는 모든 수치 계산의 기반으로 다차원 배열과 선형대수 연산을 제공한다. <strong>pandas</strong>는 DataFrame으로 테이블 데이터를 조작하며, SQL과 유사한 연산을 파이썬에서 수행한다. <strong>scikit-learn</strong>은 분류, 회귀, 클러스터링, 전처리 등 머신러닝 알고리즘을 모아둔 라이브러리다. <strong>matplotlib</strong>과 <strong>seaborn</strong>은 논문이나 보고서용 정적 차트를 생성한다.</p>
+</section>
+<section id="웹-개발-스택" class="level3" data-number="38.5.2">
+<h3 data-number="38.5.2" class="anchored" data-anchor-id="웹-개발-스택"><span class="header-section-number">38.5.2</span> 웹 개발 스택</h3>
+<p>파이썬 웹 개발에서는 프로젝트 규모와 요구사항에 따라 세 가지 주요 프레임워크 중 하나를 선택한다.</p>
+<div id="fig-arch-stack-web" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-arch-stack-web-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/arch-stack-web.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-arch-stack-web-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;38.5: 웹 개발 스택
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-arch-stack-web" class="quarto-xref">그림&nbsp;<span>38.5</span></a> 은 세 프레임워크의 특징과 적합한 사용 사례를 보여준다. <strong>Flask</strong>는 마이크로서비스나 학습용으로 적합하며, 필요한 기능만 확장해서 사용할 수 있다. <strong>Django</strong>는 관리자 페이지, ORM, 인증 시스템이 내장되어 있어 대형 웹 애플리케이션에 적합하다. <strong>FastAPI</strong>는 타입 힌트를 활용한 자동 문서 생성과 비동기 지원이 강점으로, REST API나 ML 모델 서빙에 널리 쓰인다.</p>
+</section>
+<section id="aiml-스택" class="level3" data-number="38.5.3">
+<h3 data-number="38.5.3" class="anchored" data-anchor-id="aiml-스택"><span class="header-section-number">38.5.3</span> AI/ML 스택</h3>
+<p>AI/ML 분야에서는 연구용과 프로덕션용으로 생태계가 나뉜다. 최근에는 LLM 애플리케이션 개발을 위한 도구도 빠르게 성장하고 있다.</p>
+<div id="fig-arch-stack-aiml" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-arch-stack-aiml-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/arch-stack-aiml.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-arch-stack-aiml-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;38.6: AI/ML 스택
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-arch-stack-aiml" class="quarto-xref">그림&nbsp;<span>38.6</span></a> 은 연구용과 프로덕션용으로 나뉜 AI/ML 생태계를 보여준다. 연구용 계열은 PyTorch에서 Hugging Face Transformers, LangChain으로 이어지고, 프로덕션 계열은 TensorFlow에서 Keras, TensorFlow Serving으로 연결된다. 대시보드 도구로는 Streamlit과 Gradio가 있으며, 실험 추적에는 W&amp;B와 MLflow가 쓰인다. <strong>PyTorch</strong>는 동적 계산 그래프와 디버깅 용이성 덕분에 연구 커뮤니티에서 선호된다. <strong>TensorFlow</strong>는 TensorFlow Lite(모바일)와 TensorFlow.js(웹) 등 프로덕션 배포에 강점이 있다. <strong>Hugging Face</strong>는 BERT, GPT 등 수천 개의 사전 학습 모델을 제공하는 허브다. <strong>LangChain</strong>은 RAG와 에이전트를 구축하는 LLM 애플리케이션 프레임워크다.</p>
+</section>
+<section id="cli-도구-스택" class="level3" data-number="38.5.4">
+<h3 data-number="38.5.4" class="anchored" data-anchor-id="cli-도구-스택"><span class="header-section-number">38.5.4</span> CLI 도구 스택</h3>
+<p>명령줄 인터페이스(CLI) 도구 개발에도 표준 라이브러리부터 현대적인 타입 힌트 기반 도구까지 다양한 선택지가 있다.</p>
+<div id="fig-arch-stack-cli" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-arch-stack-cli-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/arch-stack-cli.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-arch-stack-cli-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;38.7: CLI 도구 스택
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-arch-stack-cli" class="quarto-xref">그림&nbsp;<span>38.7</span></a> 는 인자 파싱과 터미널 출력 두 영역으로 CLI 도구를 분류한다. 인자 파싱은 표준 라이브러리 <strong>argparse</strong>에서 시작해 데코레이터 기반의 <strong>click</strong>, 타입 힌트 기반의 <strong>typer</strong>로 발전했다. typer는 FastAPI와 동일한 철학으로 설계되어 타입 힌트만으로 자동 완성과 도움말을 생성한다. 터미널 출력에는 색상, 테이블, 프로그레스 바를 지원하는 <strong>rich</strong>가 대표적이며, <strong>tqdm</strong>은 반복문 진행률 표시에, <strong>colorama</strong>는 크로스 플랫폼 색상 출력에 사용된다.</p>
+</section>
+</section>
+<section id="sec-arch-stack-debug" class="level2" data-number="38.6">
+<h2 data-number="38.6" class="anchored" data-anchor-id="sec-arch-stack-debug"><span class="header-section-number">38.6</span> 디버깅</h2>
+<p> </p>
+<p>소프트웨어 스택에서 발생하는 문제는 대부분 <strong>환경 불일치</strong>에서 비롯된다. 코드 자체에는 오류가 없는데도 실행 환경이 다르면 예상치 못한 동작이 발생한다. 개발자 노트북에서 잘 돌아가던 코드가 서버에서 실패하거나, 동료의 컴퓨터에서 import 에러가 나는 경우가 대표적이다. 스택의 각 계층—런타임, 라이브러리, 프레임워크—이 서로 맞물려 있기 때문에 한 곳의 버전 차이가 전체 동작에 영향을 미친다.</p>
+<div id="fig-arch-stack-debug" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-arch-stack-debug-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/arch-stack-debug.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-arch-stack-debug-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;38.8: 소프트웨어 스택 디버깅
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-arch-stack-debug" class="quarto-xref">그림&nbsp;<span>38.8</span></a> 는 가장 흔한 세 가지 환경 문제와 해결 방법을 보여준다. 첫 번째는 <strong>“내 컴퓨터에서는 되는데…”</strong> 문제로, 개발 환경과 프로덕션 환경의 차이가 원인이다. 파이썬 버전 차이(3.9 vs 3.11), 패키지 버전 차이(pandas 1.x vs 2.x), 운영체제 차이(Windows vs Linux) 등이 문제를 일으킨다. 해결책은 <code>requirements.txt</code>에 정확한 버전을 고정하거나, Docker로 환경 자체를 통일하는 것이다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># requirements.txt에 버전 고정</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> freeze <span class="op">&gt;</span> requirements.txt</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 또는 Docker로 환경 통일</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> build <span class="at">-t</span> myapp .</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run myapp</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>두 번째는 <strong>“ImportError: No module named ‘xxx’”</strong> 에러로, 가상환경이 활성화되지 않았거나 패키지가 설치되지 않았을 때 발생한다. <code>which python</code> 명령으로 현재 어떤 파이썬을 사용 중인지 확인하면 원인을 파악할 수 있다. <code>/usr/bin/python</code>이면 시스템 파이썬을 사용 중이므로 가상환경을 활성화해야 한다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 가상환경 확인</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> python</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># /usr/bin/python이면 시스템 Python (X)</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ./venv/bin/python이면 가상환경 (O)</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 가상환경 활성화</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> venv/bin/activate</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-r</span> requirements.txt</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>세 번째는 <strong>Library와 Framework 혼동</strong> 문제다. Flask를 라이브러리처럼 사용하거나, pandas를 프레임워크처럼 사용하면 예상대로 동작하지 않는다. 프레임워크는 제어권을 프레임워크가 가져가므로 <code>app.run()</code> 같은 진입점 호출이 필수다. “내가 부른다”면 라이브러리, “나를 부른다”면 프레임워크라는 원칙을 기억하면 혼동을 피할 수 있다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 잘못된 예: Flask를 라이브러리처럼 사용</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> flask <span class="im">import</span> Flask</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>app <span class="op">=</span> Flask(<span class="va">__name__</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ... 하지만 app.run()을 호출하지 않음</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 올바른 예: Flask는 프레임워크</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    app.run(debug<span class="op">=</span><span class="va">True</span>)  <span class="co"># Flask가 제어권을 가져감</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="생각해볼-점" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="생각해볼-점">💡 생각해볼 점</h2>
+<p><strong>추상화의 대가는 무엇인가?</strong> 스택의 각 계층은 하위 복잡성을 숨기고 단순한 인터페이스를 제공한다. <code>pandas.read_csv()</code>를 호출할 때 파일 시스템, 메모리 관리, 문자 인코딩을 신경 쓰지 않아도 된다. 하지만 성능 문제가 발생하거나 예상치 못한 오류를 만나면, 숨겨진 계층을 파고들어야 한다. 추상화가 높을수록 편리하지만, 문제 해결 시 더 깊이 내려가야 하는 역설이 존재한다.</p>
+<p><strong>“내가 부른다” vs “나를 부른다”—제어권의 문제.</strong> 라이브러리를 쓸 때는 개발자가 주인이지만, 프레임워크를 쓸 때는 프레임워크가 주인이다. Django의 ORM이 마음에 들지 않아도 쉽게 교체할 수 없다. 프레임워크는 생산성을 높여주지만, 그 대가로 자유를 제한한다. 새 프로젝트를 시작할 때 “얼마나 많은 결정을 프레임워크에 위임할 것인가?”라는 질문은 기술 선택 이상의 의미를 갖는다.</p>
+<p><strong>살아남는 도구의 조건은 무엇인가?</strong> NumPy는 2006년부터, Flask는 2010년부터 현역이다. 반면 수많은 도구가 등장했다 사라졌다. 살아남은 도구들의 공통점은 “한 가지를 잘 하고, 다른 도구와 잘 연결된다”는 것이다. 모든 것을 해결하려는 올인원 솔루션보다, 유닉스 철학을 따르는 작은 도구들이 더 오래 살아남는 경향이 있다.</p>
+<p>다음 장에서는 소프트웨어 <strong>아키텍처</strong>를 다룬다. 스택이 “무엇으로 만드는가”라면, 아키텍처는 “어떻게 구조화하는가”다. 계층형, 이벤트 기반, 마이크로서비스—각 아키텍처가 어떤 문제를 해결하고, 언제 어떤 구조를 선택해야 하는지 살펴본다.</p>
+<p></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "복사완료!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "복사완료!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/r2bit\.com\/gpt-coding\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./arch-reuse.html" class="pagination-link" aria-label="재사용 명령">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">재사용 명령</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./arch-architecture.html" class="pagination-link" aria-label="소프트웨어 아키텍처">
+        <span class="nav-page-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">소프트웨어 아키텍처</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>챗GPT 쿼토 책은 소프트웨어 카펜트리 “Git 버전제어”를 번역한 것이 포함되어 있습니다.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/arch-stack.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>순수하게 <a href="https://quarto.org/">쿼토(Quarto)</a>로 제작되었습니다.</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 280">
+  <defs>
+    <style>
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 12px;
+        fill: #333;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 10px;
+        fill: #333;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #666;
+      }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="720" height="280" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="360" y="22" text-anchor="middle" class="tufte-label" font-weight="bold">그래프 분석 지표</text>
+
+  <!-- Degree Centrality -->
+  <g transform="translate(30, 45)">
+    <text x="100" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">연결 중심성</text>
+    <rect x="0" y="10" width="200" height="110" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="3"/>
+
+    <!-- Graph with hub -->
+    <circle cx="100" cy="60" r="18" fill="#333" stroke="#333" stroke-width="2"/>
+    <text x="100" y="65" text-anchor="middle" class="tufte-code" fill="#fff">Hub</text>
+
+    <circle cx="50" cy="40" r="12" fill="#fff" stroke="#666" stroke-width="1"/>
+    <circle cx="150" cy="40" r="12" fill="#fff" stroke="#666" stroke-width="1"/>
+    <circle cx="50" cy="90" r="12" fill="#fff" stroke="#666" stroke-width="1"/>
+    <circle cx="150" cy="90" r="12" fill="#fff" stroke="#666" stroke-width="1"/>
+
+    <line x1="62" y1="45" x2="82" y2="55" stroke="#666" stroke-width="1"/>
+    <line x1="138" y1="45" x2="118" y2="55" stroke="#666" stroke-width="1"/>
+    <line x1="62" y1="85" x2="82" y2="70" stroke="#666" stroke-width="1"/>
+    <line x1="138" y1="85" x2="118" y2="70" stroke="#666" stroke-width="1"/>
+
+    <text x="100" y="135" text-anchor="middle" class="tufte-small">연결 많음 = 높은 중심성</text>
+  </g>
+
+  <!-- Betweenness Centrality -->
+  <g transform="translate(260, 45)">
+    <text x="100" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">매개 중심성</text>
+    <rect x="0" y="10" width="200" height="110" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="3"/>
+
+    <!-- Graph with bridge -->
+    <circle cx="40" cy="50" r="12" fill="#fff" stroke="#666" stroke-width="1"/>
+    <circle cx="70" cy="80" r="12" fill="#fff" stroke="#666" stroke-width="1"/>
+    <circle cx="40" cy="90" r="12" fill="#fff" stroke="#666" stroke-width="1"/>
+
+    <circle cx="100" cy="65" r="15" fill="#333" stroke="#333" stroke-width="2"/>
+    <text x="100" y="69" text-anchor="middle" class="tufte-code" fill="#fff">B</text>
+
+    <circle cx="160" cy="50" r="12" fill="#fff" stroke="#666" stroke-width="1"/>
+    <circle cx="130" cy="80" r="12" fill="#fff" stroke="#666" stroke-width="1"/>
+    <circle cx="160" cy="90" r="12" fill="#fff" stroke="#666" stroke-width="1"/>
+
+    <line x1="52" y1="52" x2="58" y2="72" stroke="#666" stroke-width="1"/>
+    <line x1="52" y1="88" x2="58" y2="82" stroke="#666" stroke-width="1"/>
+    <line x1="82" y1="75" x2="85" y2="68" stroke="#666" stroke-width="1"/>
+
+    <line x1="115" y1="65" x2="118" y2="75" stroke="#666" stroke-width="1"/>
+    <line x1="148" y1="52" x2="142" y2="72" stroke="#666" stroke-width="1"/>
+    <line x1="148" y1="88" x2="142" y2="82" stroke="#666" stroke-width="1"/>
+
+    <text x="100" y="135" text-anchor="middle" class="tufte-small">경로 위 = 높은 매개성</text>
+  </g>
+
+  <!-- Clustering Coefficient -->
+  <g transform="translate(490, 45)">
+    <text x="100" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">클러스터링 계수</text>
+    <rect x="0" y="10" width="200" height="110" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="3"/>
+
+    <!-- High clustering -->
+    <g transform="translate(25, 25)">
+      <circle cx="30" cy="20" r="12" fill="#fff" stroke="#333" stroke-width="2"/>
+      <circle cx="60" cy="50" r="12" fill="#fff" stroke="#333" stroke-width="2"/>
+      <circle cx="0" cy="50" r="12" fill="#fff" stroke="#333" stroke-width="2"/>
+      <line x1="18" y1="28" x2="12" y2="40" stroke="#666" stroke-width="1"/>
+      <line x1="42" y1="28" x2="48" y2="40" stroke="#666" stroke-width="1"/>
+      <line x1="12" y1="50" x2="48" y2="50" stroke="#666" stroke-width="1"/>
+      <text x="30" y="75" text-anchor="middle" class="tufte-small">높음 (1.0)</text>
+    </g>
+
+    <!-- Low clustering -->
+    <g transform="translate(115, 25)">
+      <circle cx="30" cy="20" r="12" fill="#fff" stroke="#666" stroke-width="1"/>
+      <circle cx="60" cy="50" r="12" fill="#fff" stroke="#666" stroke-width="1"/>
+      <circle cx="0" cy="50" r="12" fill="#fff" stroke="#666" stroke-width="1"/>
+      <line x1="18" y1="28" x2="12" y2="40" stroke="#666" stroke-width="1"/>
+      <line x1="42" y1="28" x2="48" y2="40" stroke="#666" stroke-width="1"/>
+      <!-- No edge between bottom nodes -->
+      <text x="30" y="75" text-anchor="middle" class="tufte-small">낮음 (0.0)</text>
+    </g>
+
+    <text x="100" y="135" text-anchor="middle" class="tufte-small">이웃 간 연결 비율</text>
+  </g>
+
+  <!-- Bottom: Code examples -->
+  <g transform="translate(30, 175)">
+    <rect x="0" y="0" width="660" height="95" fill="#e8e8e8" stroke="#999" rx="3"/>
+    <text x="330" y="20" text-anchor="middle" class="tufte-label" font-weight="bold">NetworkX 분석 함수</text>
+    <line x1="20" y1="28" x2="640" y2="28" stroke="#ccc"/>
+
+    <text x="30" y="50" class="tufte-code">nx.degree_centrality(G)</text>
+    <text x="30" y="65" class="tufte-small">연결 중심성 계산</text>
+
+    <text x="250" y="50" class="tufte-code">nx.betweenness_centrality(G)</text>
+    <text x="250" y="65" class="tufte-small">매개 중심성 계산</text>
+
+    <text x="490" y="50" class="tufte-code">nx.clustering(G)</text>
+    <text x="490" y="65" class="tufte-small">클러스터링 계수</text>
+
+    <text x="30" y="85" class="tufte-code">nx.pagerank(G)</text>
+    <text x="250" y="85" class="tufte-code">nx.shortest_path(G, s, t)</text>
+    <text x="490" y="85" class="tufte-code">nx.connected_components(G)</text>
+  </g>
+
+</svg>

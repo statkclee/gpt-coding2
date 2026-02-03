@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" xml:lang="ko-KR"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.16">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="이광춘(Openai)">
+
+<title>35&nbsp; 선언형 프로그래밍 – 챗GPT 코딩(개정판)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./prog-reactive.html" rel="next">
+<link href="./prog-fp.html" rel="prev">
+<link href="./images/logo.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-8ee146c0b749343448e797d10b61a7f9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-55f79cb6abf2a16ff6075165a9063c3c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "일치 없음",
+    "search-matching-documents-text": "일치된 문서",
+    "search-copy-link-title": "검색 링크 복사",
+    "search-hide-matches-text": "추가 검색 결과 숨기기",
+    "search-more-match-text": "추가 검색결과",
+    "search-more-matches-text": "추가 검색결과",
+    "search-clear-button-title": "제거",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "취소",
+    "search-submit-button-title": "검색",
+    "search-label": "검색"
+  }
+}</script>
+
+<script type="text/javascript">
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-229551680-1', 'auto');
+
+ga('send', {
+  hitType: 'pageview',
+  'anonymizeIp': true,
+});
+</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./prog-paradigm.html"><strong>5부</strong> 프로그래밍 패러다임</a></li><li class="breadcrumb-item"><a href="./prog-declarative.html"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">선언형 프로그래밍</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="검색" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">챗GPT 코딩(개정판)</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/bit2r/gpt-coding/" title="소스 코드" class="quarto-navigation-tool px-1" aria-label="소스 코드"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="리더 모드 전환">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="검색"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">서문</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>1부</strong> 전통 프로그래밍</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">프로그래밍 시작하기</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-var.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">변수, 표현식, 문장</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-cont.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">조건부 실행</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-func.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">함수</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-loop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">반복문</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>2부</strong> 자료구조</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-data-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">데이터, AI 식량</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-string.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">문자열</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-file.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">파일</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-list.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">리스트</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-dictionaries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">딕셔너리</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-tuples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">튜플</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-dataframe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">데이터프레임</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-json.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">JSON</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18-tensor.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">텐서</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-embedding.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">벡터와 임베딩</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-graph.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">그래프</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>3부</strong> 버전제어와 협업</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Git 시작하기</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-tracking.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">변경사항 추적</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-history.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">히스토리와 파일 관리</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-remote.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">GitHub와 원격 저장소</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-collab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">협업과 충돌 해결</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">오픈 사이언스</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>4부</strong> 분야별 코딩</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">특화 도구 입문</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-regex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">정규 표현식</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-network.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-web.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">웹서비스</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-database.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">데이터베이스와 SQL</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-ds.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">데이터 과학과 R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-auto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">파일 자동화</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-make.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">빌드 자동화: make</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>5부</strong> 프로그래밍 패러다임</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-paradigm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">패러다임의 이해</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-imperative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">명령형과 절차적 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-oop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">객체지향 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-fp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">함수형 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-declarative.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">선언형 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-reactive.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">반응형 프로그래밍</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>6부</strong> 소프트웨어 설계와 아키텍처</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-reuse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">재사용 명령</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-stack.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">소프트웨어 스택</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">소프트웨어 아키텍처</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-pattern.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">살아남은 패턴</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>7부</strong> 기계학습 패러다임</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-paradigm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">소프트웨어 2.0</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">신경망 아키텍처</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">43</span>&nbsp; <span class="chapter-title">학습과 추론</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-to-llm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">44</span>&nbsp; <span class="chapter-title">트랜스포머에서 거대 언어모형으로</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>부록</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">용어사전</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">참고문헌</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">목차</h2>
+   
+  <ul>
+  <li><a href="#sec-declarative-abstraction" id="toc-sec-declarative-abstraction" class="nav-link active" data-scroll-target="#sec-declarative-abstraction"><span class="header-section-number">35.1</span> 추상화 계층 분리</a></li>
+  <li><a href="#sec-declarative-dsl" id="toc-sec-declarative-dsl" class="nav-link" data-scroll-target="#sec-declarative-dsl"><span class="header-section-number">35.2</span> DSL: 전문 지식 캡슐화</a>
+  <ul class="collapse">
+  <li><a href="#데이터-질의-sql" id="toc-데이터-질의-sql" class="nav-link" data-scroll-target="#데이터-질의-sql"><span class="header-section-number">35.2.1</span> 데이터 질의: SQL</a></li>
+  <li><a href="#패턴-매칭-정규표현식" id="toc-패턴-매칭-정규표현식" class="nav-link" data-scroll-target="#패턴-매칭-정규표현식"><span class="header-section-number">35.2.2</span> 패턴 매칭: 정규표현식</a></li>
+  <li><a href="#수식-조판-latex" id="toc-수식-조판-latex" class="nav-link" data-scroll-target="#수식-조판-latex"><span class="header-section-number">35.2.3</span> 수식 조판: LaTeX</a></li>
+  <li><a href="#문서-구조-htmlcss" id="toc-문서-구조-htmlcss" class="nav-link" data-scroll-target="#문서-구조-htmlcss"><span class="header-section-number">35.2.4</span> 문서 구조: HTML/CSS</a></li>
+  </ul></li>
+  <li><a href="#sec-declarative-pitfalls" id="toc-sec-declarative-pitfalls" class="nav-link" data-scroll-target="#sec-declarative-pitfalls"><span class="header-section-number">35.3</span> 위임의 함정: 맹신과 오용</a></li>
+  <li><a href="#sec-declarative-python" id="toc-sec-declarative-python" class="nav-link" data-scroll-target="#sec-declarative-python"><span class="header-section-number">35.4</span> 파이썬 선언형 요소</a>
+  <ul class="collapse">
+  <li><a href="#sec-declarative-comprehension" id="toc-sec-declarative-comprehension" class="nav-link" data-scroll-target="#sec-declarative-comprehension"><span class="header-section-number">35.4.1</span> 컴프리헨션: 집합 기술어</a></li>
+  <li><a href="#sec-declarative-decorator" id="toc-sec-declarative-decorator" class="nav-link" data-scroll-target="#sec-declarative-decorator"><span class="header-section-number">35.4.2</span> 데코레이터: 관심사 선언</a></li>
+  <li><a href="#sec-declarative-type-hints" id="toc-sec-declarative-type-hints" class="nav-link" data-scroll-target="#sec-declarative-type-hints"><span class="header-section-number">35.4.3</span> 타입 힌트: 계약의 선언</a></li>
+  </ul></li>
+  <li><a href="#sec-declarative-hybrid" id="toc-sec-declarative-hybrid" class="nav-link" data-scroll-target="#sec-declarative-hybrid"><span class="header-section-number">35.5</span> 명령형과의 협력</a></li>
+  <li><a href="#sec-declarative-debug" id="toc-sec-declarative-debug" class="nav-link" data-scroll-target="#sec-declarative-debug"><span class="header-section-number">35.6</span> 디버깅: 계층 경계에서 검증하기</a></li>
+  <li><a href="#생각해볼-점" id="toc-생각해볼-점" class="nav-link" data-scroll-target="#생각해볼-점">💡 생각해볼 점</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/prog-declarative.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./prog-paradigm.html"><strong>5부</strong> 프로그래밍 패러다임</a></li><li class="breadcrumb-item"><a href="./prog-declarative.html"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">선언형 프로그래밍</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-declarative" class="quarto-section-identifier"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">선언형 프로그래밍</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p> </p>
+<p>선언형 프로그래밍은 단순한 코딩 스타일이 아니다. “무엇을(What)” 원하는지 선언하고, “어떻게(How)” 수행할지는 시스템에 위임하는 근본적인 사고방식의 전환이다. 명령형이 요리 레시피라면, 선언형은 식당 주문에 가깝다. “양파를 썰고, 팬에 기름을 두르고, 중불에서 3분간 볶는다”처럼 모든 절차를 명시하는 대신, “양파 볶음 주세요”라고 결과만 말한다.</p>
+<div id="fig-declarative-overview" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-declarative-overview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/declarative-overview.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-declarative-overview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;35.1: 선언형 패러다임: 의도를 선언하면 전문 엔진이 실행한다
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-declarative-overview" class="quarto-xref">그림&nbsp;<span>35.1</span></a> 는 선언형 프로그래밍의 핵심 구조를 네 가지 대표적인 DSL로 보여준다. SQL은 “20세 이상 사용자를 찾아라”고 선언하면 쿼리 옵티마이저가 인덱스 탐색, 조인 순서, 정렬 전략을 결정해 테이블 형태의 결과를 반환한다. 정규표현식은 <code>^\d{3}-\d{4}$</code> 패턴만 선언하면 NFA/DFA 변환과 백트래킹을 거쳐 문자열 매칭 여부를 판정한다. LaTeX는 <code>\frac{-b \pm \sqrt{b^2-4ac}}{2a}</code> 수식을 선언하면 TeX 조판 엔진이 분수선, 제곱근 기호, 위첨자 배치를 자동으로 계산해 수학적으로 정확한 수식을 렌더링한다. HTML의 <code>&lt;button class="primary"&gt;제출&lt;/button&gt;</code>은 브라우저 렌더링 엔진에 위임되어 DOM 파싱, 레이아웃 계산, 페인팅을 거쳐 클릭 가능한 버튼으로 화면에 나타난다. 네가지 DSL 모두 개발자는 <strong>의도만 선언</strong>하고, <strong>실행의 복잡성은 전문 엔진에 위임</strong>한다는 공통 구조를 갖는다.</p>
+<p>흥미로운 점은 이 패러다임이 프로그래밍을 넘어 인류의 협업 방식과 맞닿아 있다는 것이다. 병원에서 의사는 “MRI 촬영해 주세요”라고 선언하지, 자기공명영상의 물리학 원리부터 기계 조작법까지 설명하지 않는다. 변호사가 “계약서 검토해 주세요”라고 요청할 때, 법률 조항 하나하나 어떻게 해석할지 지시하지 않는다. 전문 지식의 위임은 문명의 근간이며, 선언형 프로그래밍은 이 원리를 소프트웨어에 적용한 것이다.</p>
+<section id="sec-declarative-abstraction" class="level2" data-number="35.1">
+<h2 data-number="35.1" class="anchored" data-anchor-id="sec-declarative-abstraction"><span class="header-section-number">35.1</span> 추상화 계층 분리</h2>
+<p> </p>
+<p>선언형의 핵심은 두 계층의 분리에 있다. 개발자가 의도를 표현하는 <strong>선언 계층(What)</strong>과, 시스템이 알아서 처리하는 <strong>구현 계층(How)</strong>이다. 구현 계층은 개발자에게 블랙박스다—내부를 몰라도 선언만 정확하면 결과를 얻는다.</p>
+<div id="fig-declarative-abstraction" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-declarative-abstraction-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/declarative-abstraction.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-declarative-abstraction-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;35.2: 선언형의 추상화: 선언 → 최적화 → 하드웨어 실행
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-declarative-abstraction" class="quarto-xref">그림&nbsp;<span>35.2</span></a> 에서 선언 계층의 SQL 쿼리 <code>SELECT name, email FROM users WHERE active = true ORDER BY date DESC LIMIT 10</code>은 인간의 언어에 가깝다. “활성 사용자 중 최근 가입순으로 10명의 이름과 이메일을 달라”는 의도만 표현할 뿐이다. 구현 계층은 MySQL, PostgreSQL, Oracle, SQLite 같은 데이터베이스 엔진이 담당한다. 쿼리 플래너(Planner)가 비용을 추정하고, 인덱스 스캔과 풀 스캔 중 효율적인 방법을 선택하며, 조인 순서를 최적화한다. 실행 계획(Plan)이 수립되면 <code>IndexScan(idx_active) → Sort(date) → Limit(10)</code> 같은 구체적인 연산 순서가 결정된다. 최종적으로 하드웨어 계층에서 물리적 I/O, 버퍼 캐시, CPU 레지스터, 메모리 할당, 병렬 스레드가 동원되어 실제 데이터를 처리한다.</p>
+<p>개발자가 알아야 할 것은 선언 계층뿐이다. B-트리 인덱스가 어떻게 동작하는지, 해시 조인과 중첩 루프 조인 중 어느 쪽이 효율적인지, 버퍼 캐시 크기를 얼마로 설정해야 하는지 몰라도 된다. 데이터베이스 엔진이 업그레이드되면 동일한 쿼리가 더 빠르게 실행되고, 하드웨어가 바뀌어도 코드 수정 없이 성능이 향상된다. 선언과 구현의 분리는 시스템이 독립적으로 진화할 수 있는 여지를 만든다.</p>
+<p>파이썬에서 SQLite를 사용해 선언형 패러다임을 직접 체험해보자. 인메모리 데이터베이스에 사용자 테이블을 만들고, SQL 쿼리로 원하는 데이터를 요청한다. 개발자가 작성하는 것은 <code>SELECT ... WHERE ... ORDER BY ... LIMIT</code> 형태의 선언문뿐이다. SQLite 엔진이 테이블 스캔, 필터링, 정렬, 결과 제한을 어떤 순서로 처리할지는 전적으로 엔진의 몫이다.</p>
+<div id="declarative-layers-example" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sqlite3</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 메모리 DB 생성 및 테이블/데이터 준비</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>conn <span class="op">=</span> sqlite3.<span class="ex">connect</span>(<span class="st">":memory:"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>cursor <span class="op">=</span> conn.cursor()</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>cursor.execute(<span class="st">"""</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="st">    CREATE TABLE users (</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="st">        name TEXT, email TEXT, active INTEGER, date TEXT</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="st">    )</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>cursor.executemany(</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"INSERT INTO users VALUES (?, ?, ?, ?)"</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    [(<span class="st">"김철수"</span>, <span class="st">"kim@ex.com"</span>, <span class="dv">1</span>, <span class="st">"2024-03-15"</span>),</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>     (<span class="st">"이영희"</span>, <span class="st">"lee@ex.com"</span>, <span class="dv">1</span>, <span class="st">"2024-03-10"</span>),</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>     (<span class="st">"박민수"</span>, <span class="st">"park@ex.com"</span>, <span class="dv">0</span>, <span class="st">"2024-03-12"</span>),</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>     (<span class="st">"최지연"</span>, <span class="st">"choi@ex.com"</span>, <span class="dv">1</span>, <span class="st">"2024-03-08"</span>)]</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># 선언 계층: SQL로 의도만 표현</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT name, email FROM users</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="st">    WHERE active = 1</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="st">    ORDER BY date DESC</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="st">    LIMIT 3</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co"># 구현 계층(블랙박스): SQLite 엔진이 알아서 처리</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> cursor.execute(query).fetchall()</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"활성 사용자 (최근 가입순 3명):"</span>)</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, email <span class="kw">in</span> results:</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>email<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>conn.close()</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>활성 사용자 (최근 가입순 3명):
+  김철수: kim@ex.com
+  이영희: lee@ex.com
+  최지연: choi@ex.com</code></pre>
+</div>
+</div>
+<p>출력 결과를 보면 활성 사용자 3명이 최근 가입순으로 정렬되어 나온다. 개발자는 정렬 알고리즘을 구현하지 않았고, 필터링 로직을 직접 작성하지도 않았다. <code>WHERE active = 1</code>과 <code>ORDER BY date DESC</code>라는 선언만으로 원하는 결과를 얻었다. 동일한 쿼리를 MySQL이나 PostgreSQL에서 실행해도 결과는 같다. 구현 계층이 달라져도 선언 계층의 코드는 변하지 않는다—선언형 프로그래밍의 핵심 가치다.</p>
+</section>
+<section id="sec-declarative-dsl" class="level2" data-number="35.2">
+<h2 data-number="35.2" class="anchored" data-anchor-id="sec-declarative-dsl"><span class="header-section-number">35.2</span> DSL: 전문 지식 캡슐화</h2>
+<p> </p>
+<p>선언형 프로그래밍의 가장 강력한 형태는 DSL(Domain Specific Language, 도메인 특화 언어)이다. 범용 프로그래밍 언어가 모든 문제를 다루려 하지만, DSL은 특정 영역에 최적화된 언어를 설계한다. 데이터 질의에는 SQL, 패턴 매칭에는 정규표현식, 수식 조판에는 LaTeX, 문서 구조에는 HTML—각 DSL은 해당 도메인의 전문가들이 수십 년간 축적한 지식을 문법과 엔진에 응축해 놓은 것이다.</p>
+<div id="fig-declarative-dsl" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-declarative-dsl-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/declarative-dsl.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-declarative-dsl-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;35.3: 각 DSL은 해당 도메인의 수십 년 전문 지식을 캡슐화한다
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-declarative-dsl" class="quarto-xref">그림&nbsp;<span>35.3</span></a> 에서 보듯 SQL, 정규표현식, LaTeX, HTML/CSS는 모두 특정 문제 영역에 특화된 선언형 언어다. 데이터베이스 이론, 오토마타 이론, 조판 알고리즘, 렌더링 엔진—각 분야에서 40년 이상의 연구와 최적화가 축적되어 있다. 개발자는 이 거인들의 어깨 위에 서서 한 줄의 선언으로 수십 년의 전문 지식을 활용한다.</p>
+<section id="데이터-질의-sql" class="level3" data-number="35.2.1">
+<h3 data-number="35.2.1" class="anchored" data-anchor-id="데이터-질의-sql"><span class="header-section-number">35.2.1</span> 데이터 질의: SQL</h3>
+<p>SQL이 1970년대에 등장한 이후, 수십 년간 쿼리 옵티마이저가 발전해왔다. 통계 기반 비용 추정, 인덱스 활용 전략, 병렬 실행 계획 등 개발자가 직접 구현하기 어려운 최적화가 자동으로 적용된다. 동일한 결과를 명령형으로 작성하면 성능이 떨어질 뿐 아니라, 데이터 규모가 커질수록 그 격차는 기하급수적으로 벌어진다. 데이터베이스와 SQL 문법은 4부 분야별 코딩 <code>tool-database.qmd</code>에서 자세히 다룬다.</p>
+</section>
+<section id="패턴-매칭-정규표현식" class="level3" data-number="35.2.2">
+<h3 data-number="35.2.2" class="anchored" data-anchor-id="패턴-매칭-정규표현식"><span class="header-section-number">35.2.2</span> 패턴 매칭: 정규표현식</h3>
+<p><code>\d{3}-\d{4}-\d{4}</code>라는 짧은 선언이 전화번호 패턴을 표현한다. 정규표현식 엔진은 NFA(비결정적 유한 오토마타)에서 DFA(결정적 유한 오토마타)로의 변환, 백트래킹 최적화 등 컴퓨터 과학의 이론적 성과를 적용한다. 동일한 검증을 명령형으로 작성하면 수십 줄의 조건문이 필요하고, 패턴이 복잡해질수록 유지보수가 불가능해진다. 정규표현식 문법과 활용법은 <code>tool-regex.qmd</code>에서 자세히 다룬다.</p>
+</section>
+<section id="수식-조판-latex" class="level3" data-number="35.2.3">
+<h3 data-number="35.2.3" class="anchored" data-anchor-id="수식-조판-latex"><span class="header-section-number">35.2.3</span> 수식 조판: LaTeX</h3>
+<p></p>
+<p><code>\frac{-b \pm \sqrt{b^2-4ac}}{2a}</code>라는 선언이 근의 공식을 표현한다. LaTeX 조판 엔진은 분수선의 두께와 길이, 제곱근 기호의 곡률, 위첨자와 아래첨자의 정확한 위치를 자동으로 계산한다. 도널드 크누스(Donald Knuth)가 1978년부터 개발한 TeX 엔진에는 수학 조판에 관한 수십 년의 타이포그래피 지식이 응축되어 있다. 동일한 수식을 HTML과 CSS로 직접 구현하려면 수백 줄의 코드가 필요하고, 브라우저마다 다르게 렌더링될 수 있다. LaTeX는 “이 수식을 아름답게 조판하라”고 선언하면, 나머지는 TeX 엔진이 알아서 처리한다.</p>
+</section>
+<section id="문서-구조-htmlcss" class="level3" data-number="35.2.4">
+<h3 data-number="35.2.4" class="anchored" data-anchor-id="문서-구조-htmlcss"><span class="header-section-number">35.2.4</span> 문서 구조: HTML/CSS</h3>
+<p>HTML은 문서의 의미 구조를, CSS는 표현 스타일을 선언한다. <code>&lt;article&gt;</code>, <code>&lt;h1&gt;</code>, <code>&lt;p&gt;</code> 같은 태그는 “이것이 글의 본문이다, 제목이다, 문단이다”라고 선언할 뿐, 화면에 어떻게 배치될지는 브라우저 렌더링 엔진이 결정한다. DOM 파싱, 레이아웃 계산, 페인팅 순서 최적화 등 복잡한 과정이 추상화되어 있다.</p>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">노트</span>AI 시대 DSL 지형도
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>앞서 살펴본 SQL, 정규표현식, LaTeX, HTML/CSS는 DSL의 일부에 불과하다. 실제 소프트웨어 개발에서 마주치는 DSL은 훨씬 다양하며, AI 시대에 그 중요성이 다시 부각되고 있다.</p>
+<div id="fig-declarative-dsl-landscape" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-declarative-dsl-landscape-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/declarative-dsl-landscape.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-declarative-dsl-landscape-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;35.4: AI가 코드를 생성할수록, 그 코드를 검증할 DSL 지식이 더 중요해진다
+</figcaption>
+</figure>
+</div>
+<p><strong>데이터 질의·교환</strong>: SQL과 GraphQL은 데이터를 질의하고, JSON과 YAML은 데이터를 교환한다. API 시대에 이 네 가지는 필수 교양이다.</p>
+<p><strong>문서·시각화</strong>: LaTeX는 학술 조판의 표준이고, Markdown은 경량 문서 작성의 사실상 표준이다. Mermaid는 코드로 다이어그램을 그리고, Quarto/R Markdown은 분석과 문서를 통합한다. 최근 주목받는 Typst는 LaTeX의 현대적 대안이다.</p>
+<p><strong>인프라·자동화</strong>: Dockerfile은 컨테이너 환경을, Makefile은 빌드 자동화를, Terraform은 클라우드 인프라를, GitHub Actions는 CI/CD 파이프라인을 선언한다. DevOps 엔지니어에게 이 네 가지는 일상 언어다.</p>
+<p><strong>UI·웹</strong>: HTML, CSS, SVG는 웹의 삼위일체다. JSX는 React 생태계에서 UI를 선언하고, 정규표현식은 패턴 매칭에, XPath는 XML 탐색에 특화되어 있다.</p>
+<p><strong>AI가 생성하고, 인간이 검증한다.</strong> ChatGPT에게 “30세 이상 VIP 고객의 최근 구매 내역을 조회하는 SQL을 작성해줘”라고 요청하면 즉시 쿼리가 생성된다. 그러나 그 쿼리가 <strong>올바른지</strong> 판단하는 것은 개발자의 몫이다. <code>LEFT JOIN</code>과 <code>INNER JOIN</code>의 차이를 모르면 누락된 데이터를 발견하지 못한다. <code>GROUP BY</code> 없이 집계 함수를 사용한 오류를 잡아내려면 SQL 문법을 이해해야 한다. 인덱스가 없는 컬럼에 <code>WHERE</code> 조건을 걸어 성능이 저하되는 것을 예측하려면 쿼리 실행 계획을 읽을 줄 알아야 한다.</p>
+<p>GitHub Copilot이 제안한 정규표현식 <code>^[\w.-]+@[\w.-]+\.\w+$</code>가 이메일을 올바르게 검증하는가? 탐욕적 매칭(greedy matching)으로 인해 예상과 다른 부분이 캡처되지는 않는가? AI가 생성한 Dockerfile에서 <code>RUN</code> 명령어가 레이어를 불필요하게 늘려 이미지 크기를 부풀리지는 않는가? Terraform 코드가 의도치 않게 보안 그룹을 열어두지는 않았는가?</p>
+<p><strong>역설적으로, AI가 코드를 더 많이 생성할수록 DSL을 깊이 이해하는 개발자의 가치가 올라간다.</strong> AI는 패턴을 학습해 그럴듯한 코드를 만들지만, 그 코드가 특정 상황에서 올바르게 동작하는지, 성능상 문제는 없는지, 보안 취약점은 없는지 판단하지 못한다. DSL의 문법과 의미, 엣지 케이스와 함정을 아는 개발자만이 AI의 출력을 검증하고 교정할 수 있다. AI 시대의 개발자 역량은 “코드를 작성하는 능력”에서 “코드를 검증하는 능력”으로 무게중심이 이동하고 있다.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-declarative-pitfalls" class="level2" data-number="35.3">
+<h2 data-number="35.3" class="anchored" data-anchor-id="sec-declarative-pitfalls"><span class="header-section-number">35.3</span> 위임의 함정: 맹신과 오용</h2>
+<p> </p>
+<p>전문성을 위임한다고 해서 책임까지 위임되는 것은 아니다. DSL 엔진이 아무리 정교해도, 잘못된 선언은 심각한 결과를 초래한다. 선언형의 강력함은 동시에 위험의 원천이기도 하다.</p>
+<p><strong>SQL 인젝션</strong>은 선언형의 가장 악명 높은 함정이다. 사용자 입력을 검증 없이 SQL 쿼리에 삽입하면, 공격자가 의도하지 않은 명령을 실행할 수 있다. <code>SELECT * FROM users WHERE name = '사용자입력'</code>에서 사용자가 <code>'; DROP TABLE users; --</code>를 입력하면 테이블 전체가 삭제된다. 선언의 힘을 빌렸지만, 그 선언이 어떻게 해석되는지 이해하지 못한 결과다.</p>
+<div id="declarative-injection-risk" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 위험한 코드 (절대 사용 금지)</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>user_input <span class="op">=</span> <span class="st">"'; DROP TABLE users; --"</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>dangerous_query <span class="op">=</span> <span class="ss">f"SELECT * FROM users WHERE name = '</span><span class="sc">{</span>user_input<span class="sc">}</span><span class="ss">'"</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"위험한 쿼리:</span><span class="ch">\n</span><span class="sc">{</span>dangerous_query<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 안전한 코드: 파라미터 바인딩 사용</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>safe_query <span class="op">=</span> <span class="st">"SELECT * FROM users WHERE name = ?"</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">안전한 쿼리: </span><span class="sc">{</span>safe_query<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"파라미터: ('</span><span class="sc">{</span>user_input<span class="sc">}</span><span class="ss">',)"</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>위험한 쿼리:
+SELECT * FROM users WHERE name = ''; DROP TABLE users; --'
+
+안전한 쿼리: SELECT * FROM users WHERE name = ?
+파라미터: (''; DROP TABLE users; --',)</code></pre>
+</div>
+</div>
+<p><strong>ReDoS(정규표현식 서비스 거부)</strong>는 덜 알려졌지만 똑같이 위험하다. 백트래킹이 기하급수적으로 증가하는 패턴에 악의적 입력을 넣으면 서버가 멈춘다. <code>(a+)+$</code> 같은 패턴에 <code>aaaaaaaaaaaaaaaaaaaaaaaaaaaaab</code>를 입력하면 매칭 시도가 수십억 번 발생한다. 정규표현식 엔진의 내부 동작을 모르면 이런 함정을 피할 수 없다.</p>
+<p>위임은 신뢰를 전제로 하지만, <strong>검증 없는 신뢰는 위험</strong>하다. DSL을 사용한다는 것은 해당 도메인의 규칙과 함정을 이해해야 한다는 뜻이다. SQL을 쓰려면 인젝션 방어법을, 정규표현식을 쓰려면 백트래킹의 위험을 알아야 한다. 앞서 살펴본 “AI가 생성하고 인간이 검증한다”는 원칙이 여기서도 적용된다. AI가 생성한 쿼리나 패턴이 보안상 안전한지 판단하려면 DSL의 함정을 알아야 한다.</p>
+</section>
+<section id="sec-declarative-python" class="level2" data-number="35.4">
+<h2 data-number="35.4" class="anchored" data-anchor-id="sec-declarative-python"><span class="header-section-number">35.4</span> 파이썬 선언형 요소</h2>
+<p> </p>
+<p>파이썬은 본질적으로 명령형 언어다. 변수에 값을 할당하고, 조건문으로 분기하고, 반복문으로 순회한다. 그러나 파이썬은 선언형 스타일도 지원하는 멀티패러다임 언어다. 특정 구문에서는 “무엇을 원하는지”만 선언하면 파이썬 인터프리터가 “어떻게 수행할지”를 알아서 처리한다.</p>
+<p>파이썬의 선언형 요소 중 가장 대표적인 세 가지가 <strong>컴프리헨션, 데코레이터, 타입 힌트</strong>다. 컴프리헨션은 수학의 집합 기술어를 파이썬 문법으로 옮긴 것으로, “어떤 원소들로 컬렉션을 구성할지” 선언한다. 데코레이터는 함수에 “어떤 부가 기능을 적용할지” 선언하는 메타 프로그래밍 도구다. 타입 힌트는 “입력과 출력의 타입이 무엇인지” 선언하여 정적 분석 도구가 코드를 검증하게 한다. 세 요소 모두 “How”가 아닌 “What”에 집중한다는 공통점이 있다.</p>
+<div id="fig-declarative-python" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-declarative-python-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/declarative-python.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-declarative-python-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;35.5: 파이썬의 선언형 3요소: 컴프리헨션, 데코레이터, 타입 힌트
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-declarative-python" class="quarto-xref">그림&nbsp;<span>35.5</span></a> 은 파이썬의 선언형 요소가 공유하는 패턴을 보여준다. 각 요소는 “무엇”만 명시하고 “어떻게”는 파이썬 인터프리터나 외부 도구에 위임한다. 컴프리헨션은 순회와 필터링의 구현을 숨기고, 데코레이터는 횡단 관심사(cross-cutting concern)의 구현을 캡슐화하며, 타입 힌트는 검증 로직을 정적 분석기에 맡긴다.</p>
+<section id="sec-declarative-comprehension" class="level3" data-number="35.4.1">
+<h3 data-number="35.4.1" class="anchored" data-anchor-id="sec-declarative-comprehension"><span class="header-section-number">35.4.1</span> 컴프리헨션: 집합 기술어</h3>
+<p>리스트 컴프리헨션 <code>[x**2 for x in range(10) if x % 2 == 0]</code>은 수학의 집합 기술어(set-builder notation) <code>{x² | x ∈ {0,...,9}, x mod 2 = 0}</code>를 파이썬 문법으로 옮긴 것이다. “어떤 원소들로 리스트를 구성할지” 선언하는 방식이다.</p>
+<div id="declarative-comprehension-philosophy" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 집합 기술어 스타일: 조건을 만족하는 원소들의 집합</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> <span class="bu">range</span>(<span class="dv">20</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># {x² | x ∈ data, x는 짝수, x &gt; 5}</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>squares <span class="op">=</span> [x<span class="op">**</span><span class="dv">2</span> <span class="cf">for</span> x <span class="kw">in</span> data <span class="cf">if</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span> <span class="kw">and</span> x <span class="op">&gt;</span> <span class="dv">5</span>]</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"조건을 만족하는 제곱: </span><span class="sc">{</span>squares<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 딕셔너리 컴프리헨션: {k → v | k, v는 특정 조건 만족}</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>word <span class="op">=</span> <span class="st">"mississippi"</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>freq <span class="op">=</span> {char: word.count(char) <span class="cf">for</span> char <span class="kw">in</span> <span class="bu">set</span>(word)}</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"문자 빈도: </span><span class="sc">{</span>freq<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>조건을 만족하는 제곱: [36, 64, 100, 144, 196, 256, 324]
+문자 빈도: {'i': 4, 'm': 1, 's': 4, 'p': 2}</code></pre>
+</div>
+</div>
+<p>명령형 반복문과 달리, 컴프리헨션은 “결과 컬렉션이 어떤 특성을 가지는지” 직접 읽힌다. 반복문은 “어떻게 순회하는지” 눈으로 따라가야 결과를 예측할 수 있지만, 컴프리헨션은 선언 자체가 결과의 명세다.</p>
+</section>
+<section id="sec-declarative-decorator" class="level3" data-number="35.4.2">
+<h3 data-number="35.4.2" class="anchored" data-anchor-id="sec-declarative-decorator"><span class="header-section-number">35.4.2</span> 데코레이터: 관심사 선언</h3>
+<p></p>
+<p>데코레이터는 함수에 “어떤 부가 기능을 적용할지” 선언한다. <code>@lru_cache</code>는 “결과를 캐싱하라”, <code>@staticmethod</code>는 “인스턴스 없이 호출 가능하게 하라”, <code>@property</code>는 “메서드를 속성처럼 접근하게 하라”고 선언한다. 구현 방법은 데코레이터 내부에 캡슐화되어 있다.</p>
+<div id="declarative-decorator-philosophy" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> functools <span class="im">import</span> lru_cache</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 선언: "이 함수의 결과를 캐싱하라"</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="at">@lru_cache</span>(maxsize<span class="op">=</span><span class="dv">128</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fibonacci(n):</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">&lt;</span> <span class="dv">2</span>:</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> n</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fibonacci(n<span class="op">-</span><span class="dv">1</span>) <span class="op">+</span> fibonacci(n<span class="op">-</span><span class="dv">2</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 캐싱 없이 동일한 기능을 구현하려면</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 캐시 딕셔너리 관리, 키 해싱, 만료 정책 등을</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 직접 구현해야 한다</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>start <span class="op">=</span> time.time()</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> fibonacci(<span class="dv">35</span>)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>elapsed <span class="op">=</span> time.time() <span class="op">-</span> start</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"fibonacci(35) = </span><span class="sc">{</span>result<span class="sc">}</span><span class="ss">, 시간: </span><span class="sc">{</span>elapsed<span class="sc">:.4f}</span><span class="ss">초"</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>fibonacci(35) = 9227465, 시간: 0.0000초</code></pre>
+</div>
+</div>
+<p>Flask, FastAPI 같은 웹 프레임워크에서 <code>@app.route("/users")</code>는 “이 함수를 /users 경로에 매핑하라”고 선언한다. URL 라우팅, HTTP 메서드 처리, 요청/응답 변환 등 복잡한 웹 서버 로직이 프레임워크에 위임된다.</p>
+</section>
+<section id="sec-declarative-type-hints" class="level3" data-number="35.4.3">
+<h3 data-number="35.4.3" class="anchored" data-anchor-id="sec-declarative-type-hints"><span class="header-section-number">35.4.3</span> 타입 힌트: 계약의 선언</h3>
+<p></p>
+<p>타입 힌트는 “이 함수가 어떤 타입을 받고 반환하는지” 선언한다. 런타임에 강제되지 않지만, 정적 분석 도구(mypy, Pyright)가 타입 일관성을 검증한다.</p>
+<div id="declarative-type-hints" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> List, Optional</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> find_maximum(numbers: List[<span class="bu">float</span>]) <span class="op">-&gt;</span> Optional[<span class="bu">float</span>]:</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""리스트에서 최댓값을 찾는다. 빈 리스트면 None 반환."""</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> numbers:</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">max</span>(numbers)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 타입 힌트는 문서화이자 계약이다</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co"># - 호출자에게: "float 리스트를 전달하라"</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># - 사용자에게: "Optional[float]을 받을 준비를 하라"</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>scores: List[<span class="bu">float</span>] <span class="op">=</span> [<span class="fl">85.5</span>, <span class="fl">90.0</span>, <span class="fl">78.5</span>]</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>result: Optional[<span class="bu">float</span>] <span class="op">=</span> find_maximum(scores)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"최댓값: </span><span class="sc">{</span>result<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>최댓값: 90.0</code></pre>
+</div>
+</div>
+<p>타입 힌트의 선언적 특성은 코드가 “무엇을 기대하는지” 명시적으로 드러낸다는 점에 있다. 구현을 읽지 않아도 함수의 계약을 파악할 수 있다.</p>
+</section>
+</section>
+<section id="sec-declarative-hybrid" class="level2" data-number="35.5">
+<h2 data-number="35.5" class="anchored" data-anchor-id="sec-declarative-hybrid"><span class="header-section-number">35.5</span> 명령형과의 협력</h2>
+<p></p>
+<p>현실의 코드는 순수하게 선언형이거나 명령형인 경우가 드물다. 대부분의 프로그램은 두 패러다임을 조합한다. SQL로 데이터를 가져온 뒤 파이썬으로 복잡한 변환을 수행하고, 정규표현식으로 패턴을 찾은 뒤 조건문으로 후처리한다. 패러다임 선택은 이분법이 아니라 스펙트럼이다.</p>
+<div id="fig-declarative-hybrid" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-declarative-hybrid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/declarative-hybrid.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-declarative-hybrid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;35.6: 하이브리드 아키텍처: 선언형(입출력) 샌드위치 사이에 명령형(로직) 속을 채운 구조
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-declarative-hybrid" class="quarto-xref">그림&nbsp;<span>35.6</span></a> 는 현실 애플리케이션의 전형적인 구조를 보여준다. <strong>1단계 데이터 추출</strong>에서 SQL이 <code>SELECT * FROM Sales WHERE year = 2024</code>로 대량 데이터를 필터링한다. 최적화는 데이터베이스 엔진에 위임되므로 개발자는 “무엇을” 원하는지만 선언한다. <strong>2단계 비즈니스 로직</strong>에서 파이썬이나 자바가 복잡한 조건 분기, 외부 API 호출, 상태 제어를 담당한다. SQL로 표현하기 어려운 <code>if complex_rule(item): ...</code> 같은 절차적 로직이 여기에 속한다. <strong>3단계 결과 표현</strong>에서 HTML/React가 처리된 데이터를 UI로 렌더링한다. <code>&lt;div class="report"&gt;{processed_data}&lt;/div&gt;</code> 형태로 구조만 선언하면 브라우저가 실제 화면 출력을 처리한다.</p>
+<p>선언형(입력) → 명령형(처리) → 선언형(출력)이라는 “샌드위치 구조”가 웹 애플리케이션, 데이터 파이프라인, API 서버 등 대부분의 현대 소프트웨어에서 반복된다.</p>
+<p>샌드위치 구조의 핵심은 <strong>각 계층이 자신에게 최적화된 도구를 사용</strong>한다는 점이다. SQL은 인덱스를 활용해 수백만 행에서 필요한 데이터만 효율적으로 추출한다. 파이썬은 조건 분기, 외부 API 호출, 복잡한 계산처럼 SQL로 표현하기 어려운 로직을 처리한다. HTML/React는 DOM 구조와 이벤트 처리를 브라우저에 위임한다. 각 계층에서 “억지로” 다른 패러다임을 쓰려 하면 코드가 복잡해지고 성능이 저하된다.</p>
+<p>실제 웹 애플리케이션을 생각해보자. 사용자가 “2024년 매출 상위 10개 상품”을 요청하면 SQL이 집계와 정렬을 처리한다. 반환된 데이터에 할인율 계산, 재고 상태 확인, 추천 알고리즘 적용 같은 비즈니스 로직이 파이썬에서 실행된다. 최종 결과는 React 컴포넌트가 테이블이나 차트로 렌더링한다. 세 계층이 각자의 강점을 발휘하는 것이다.</p>
+<div id="declarative-hybrid-sandwich" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sqlite3</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># === 1단계: 데이터 추출 (SQL - 선언형) ===</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>conn <span class="op">=</span> sqlite3.<span class="ex">connect</span>(<span class="st">":memory:"</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>cursor <span class="op">=</span> conn.cursor()</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>cursor.execute(<span class="st">"CREATE TABLE sales (product TEXT, amount INT, year INT)"</span>)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>cursor.executemany(<span class="st">"INSERT INTO sales VALUES (?, ?, ?)"</span>, [</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"노트북"</span>, <span class="dv">1200000</span>, <span class="dv">2024</span>), (<span class="st">"마우스"</span>, <span class="dv">35000</span>, <span class="dv">2024</span>),</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"키보드"</span>, <span class="dv">89000</span>, <span class="dv">2024</span>), (<span class="st">"모니터"</span>, <span class="dv">450000</span>, <span class="dv">2023</span>)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> cursor.execute(</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"SELECT product, amount FROM sales WHERE year = 2024"</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>).fetchall()</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>conn.close()</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="co"># === 2단계: 비즈니스 로직 (Python - 명령형) ===</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> apply_discount(product, amount):</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    rate <span class="op">=</span> <span class="fl">0.1</span> <span class="cf">if</span> amount <span class="op">&gt;=</span> <span class="dv">100000</span> <span class="cf">else</span> <span class="fl">0.05</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {<span class="st">"product"</span>: product, <span class="st">"original"</span>: amount, <span class="st">"discounted"</span>: <span class="bu">int</span>(amount <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> rate))}</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>processed <span class="op">=</span> [apply_discount(p, a) <span class="cf">for</span> p, a <span class="kw">in</span> rows]</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="co"># === 3단계: 결과 표현 (문자열 포맷 - 선언형) ===</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>template <span class="op">=</span> <span class="st">"</span><span class="sc">{product}</span><span class="st">: </span><span class="sc">{original:,}</span><span class="st">원 → </span><span class="sc">{discounted:,}</span><span class="st">원"</span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> item <span class="kw">in</span> processed:</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(template.<span class="bu">format</span>(<span class="op">**</span>item))</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>노트북: 1,200,000원 → 1,080,000원
+마우스: 35,000원 → 33,250원
+키보드: 89,000원 → 84,550원</code></pre>
+</div>
+</div>
+<p>SQL이 <code>WHERE year = 2024</code> 조건으로 필요한 데이터만 추출하고, 파이썬이 금액별 할인율을 계산하며, 템플릿 문자열이 최종 출력 형식을 선언한다. 각 단계가 명확히 분리되어 있으므로 할인 정책이 바뀌면 2단계만, 출력 형식이 바뀌면 3단계만 수정하면 된다.</p>
+<p>역방향 흐름도 존재한다. 사용자 입력(HTML 폼)을 받아 검증 로직(파이썬)을 거쳐 데이터베이스(SQL)에 저장하는 경우다. 입력과 출력 모두 선언형이고, 중간 처리가 명령형인 구조는 동일하다. 양방향으로 데이터가 흐르는 풀스택 애플리케이션에서 샌드위치 구조는 더욱 명확하게 드러난다.</p>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">힌트</span>경계 인식의 기술
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>두 패러다임 사이를 오갈 때 핵심은 <strong>언제 전환할지 인식</strong>하는 것이다.</p>
+<p><strong>선언형을 유지해야 할 때</strong>: 문제가 DSL의 도메인에 정확히 맞을 때(SQL의 집합 연산, 정규표현식의 패턴 매칭), 엔진 최적화가 직접 구현보다 나을 때(대용량 데이터의 인덱스 활용), 동일 패턴이 반복될 때(데이터 변환 파이프라인).</p>
+<p><strong>명령형으로 전환해야 할 때</strong>: DSL 문법을 억지로 확장해 가독성이 떨어질 때, 상태 변화를 추적해야 할 때(이전 결과에 따라 다음 동작이 달라지는 경우), 중첩 구조나 재귀가 필요할 때(HTML 파싱, 트리 탐색).</p>
+<p>정규표현식이 HTML을 “완벽하게” 파싱할 수 없는 것은 이론적 한계(정규 언어 vs 문맥 자유 언어)에서 비롯된다. <code>&lt;div&gt;&lt;p&gt;내용&lt;/p&gt;&lt;/div&gt;</code>처럼 단순한 경우는 <code>r'&lt;p&gt;(.*?)&lt;/p&gt;'</code>로 추출할 수 있지만, 중첩 태그, 속성, 주석이 섞이면 한계에 부딪힌다. 경계를 인식하면 억지 확장 대신 <code>BeautifulSoup</code> 같은 적합한 도구로 전환할 수 있다.</p>
+</div>
+</div>
+</section>
+<section id="sec-declarative-debug" class="level2" data-number="35.6">
+<h2 data-number="35.6" class="anchored" data-anchor-id="sec-declarative-debug"><span class="header-section-number">35.6</span> 디버깅: 계층 경계에서 검증하기</h2>
+<p></p>
+<p>샌드위치 구조에서 버그가 발생하면 어디서 문제가 생겼는지 찾기가 쉽지 않다. SQL이 잘못된 데이터를 반환했는가? 파이썬 로직에 오류가 있는가? 출력 형식이 문제인가? 세 가지 패러다임이 섞여 있기 때문에 각 계층을 개별적으로 디버깅해서는 전체 그림을 놓치기 쉽다.</p>
+<div id="fig-declarative-debug-sandwich" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-declarative-debug-sandwich-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/declarative-debug-sandwich.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-declarative-debug-sandwich-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;35.7: 샌드위치 구조의 디버깅: 계층 간 경계에서 데이터 검증
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-declarative-debug-sandwich" class="quarto-xref">그림&nbsp;<span>35.7</span></a> 는 샌드위치 디버깅의 핵심 전략을 보여준다. 버그 추적은 <strong>계층 내부</strong>가 아니라 <strong>계층 사이 경계</strong>에서 시작해야 한다. 체크포인트 ①에서 SQL 결과가 파이썬으로 올바르게 전달되었는지, 체크포인트 ②에서 비즈니스 로직 결과가 출력 계층으로 제대로 넘어가는지 확인한다.</p>
+<div id="declarative-debug-boundary" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># === 샌드위치 디버깅: 경계 검증 패턴 ===</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1단계 결과 시뮬레이션 (실제로는 DB에서 조회)</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>sql_result <span class="op">=</span> [</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"name"</span>: <span class="st">"김철수"</span>, <span class="st">"amount"</span>: <span class="dv">150000</span>},</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"name"</span>: <span class="st">"이영희"</span>, <span class="st">"amount"</span>: <span class="dv">85000</span>},</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"name"</span>: <span class="va">None</span>, <span class="st">"amount"</span>: <span class="dv">120000</span>},  <span class="co"># NULL 값 포함</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co"># ① 체크포인트: SQL → Python 경계</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"[검증①] 행 수: </span><span class="sc">{</span><span class="bu">len</span>(sql_result)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"[검증①] 첫 행: </span><span class="sc">{</span>sql_result[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"[검증①] NULL 포함 여부: </span><span class="sc">{</span><span class="bu">any</span>(r[<span class="st">'name'</span>] <span class="kw">is</span> <span class="va">None</span> <span class="cf">for</span> r <span class="kw">in</span> sql_result)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 2단계: 비즈니스 로직 (명령형)</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>processed <span class="op">=</span> []</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> row <span class="kw">in</span> sql_result:</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> row[<span class="st">'name'</span>] <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">continue</span>  <span class="co"># NULL 필터링</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    discount <span class="op">=</span> row[<span class="st">'amount'</span>] <span class="op">*</span> <span class="fl">0.1</span> <span class="cf">if</span> row[<span class="st">'amount'</span>] <span class="op">&gt;=</span> <span class="dv">100000</span> <span class="cf">else</span> <span class="dv">0</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    processed.append({</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>        <span class="st">'name'</span>: row[<span class="st">'name'</span>],</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">'original'</span>: row[<span class="st">'amount'</span>],</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>        <span class="st">'discount'</span>: discount</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a><span class="co"># ② 체크포인트: Python → 출력 경계</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"[검증②] 처리된 행 수: </span><span class="sc">{</span><span class="bu">len</span>(processed)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"[검증②] 샘플: </span><span class="sc">{</span>processed[<span class="dv">0</span>] <span class="cf">if</span> processed <span class="cf">else</span> <span class="st">'empty'</span><span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">all</span>(<span class="st">'discount'</span> <span class="kw">in</span> r <span class="cf">for</span> r <span class="kw">in</span> processed), <span class="st">"discount 필드 누락"</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[검증①] 행 수: 3
+[검증①] 첫 행: {'name': '김철수', 'amount': 150000}
+[검증①] NULL 포함 여부: True
+[검증②] 처리된 행 수: 2
+[검증②] 샘플: {'name': '김철수', 'original': 150000, 'discount': 15000.0}</code></pre>
+</div>
+</div>
+<p>각 체크포인트에서 확인할 항목은 다음과 같다. <strong>체크포인트 ①</strong>에서는 행 수, 컬럼 타입, NULL 값 존재 여부를 점검한다. SQL 쿼리가 예상한 결과를 반환했는지 확인하는 단계다. <strong>체크포인트 ②</strong>에서는 변환 결과 샘플, 필수 필드 존재 여부, 예외 케이스 처리 결과를 확인한다. 비즈니스 로직이 모든 경우를 올바르게 처리했는지 검증하는 단계다.</p>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">힌트</span>계층별 디버깅 도구
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>샌드위치 구조에서 각 계층은 고유한 디버깅 도구를 갖는다. <strong>SQL 계층</strong>에서는 <code>EXPLAIN ANALYZE</code>로 쿼리 실행 계획을 확인하고, 쿼리 로그로 실제 전송된 SQL을 점검한다. <strong>파이썬 계층</strong>에서는 <code>print()</code>, <code>breakpoint()</code>, IDE 디버거로 변수 값과 실행 흐름을 추적한다. <strong>출력 계층</strong>에서는 예상 결과와 비교하거나, 웹이라면 브라우저 DevTools로 렌더링 결과를 확인한다. 핵심은 각 도구를 계층 내부가 아니라 <strong>계층 경계에서 활용</strong>하는 것이다.</p>
+</div>
+</div>
+</section>
+<section id="생각해볼-점" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="생각해볼-점">💡 생각해볼 점</h2>
+<p><strong>통제의 양도는 신뢰의 문제다.</strong> 선언형 프로그래밍에서 “어떻게”를 시스템에 맡긴다는 것은 결국 그 시스템을 신뢰한다는 뜻이다. 쿼리 옵티마이저가 내 쿼리를 최적으로 실행할 것이라고, 정규표현식 엔진이 패턴을 정확히 매칭할 것이라고 믿는다. 신뢰가 무너지면 선언형의 이점도 사라진다. SQL 쿼리가 예상보다 느릴 때 <code>EXPLAIN</code>을 찍어보거나, 정규표현식이 이상하게 동작할 때 부분 패턴으로 분해해 테스트한다. 선언형을 쓰면서도 구현 계층을 들여다볼 줄 알아야 하는 이유가 여기에 있다.</p>
+<p><strong>샌드위치 구조는 우연이 아니다.</strong> 웹 애플리케이션, 데이터 파이프라인, API 서버 할 것 없이 “선언형(입력) → 명령형(로직) → 선언형(출력)” 패턴이 반복된다. SQL로 데이터를 가져오고, 파이썬으로 비즈니스 로직을 처리하고, HTML/React로 결과를 렌더링한다. 입력과 출력은 형식이 고정되어 있어 선언형이 효율적이고, 중간 로직은 상황에 따라 분기해야 하므로 명령형이 자연스럽다. 특정 패턴이 반복된다면 그 이유가 있다. 샌드위치 구조가 보편적인 이유를 이해하면 새로운 시스템을 설계할 때도 같은 원리를 적용할 수 있다.</p>
+<p><strong>경계를 인식하는 것이 디버깅의 절반이다.</strong> 샌드위치 구조에서 버그가 발생하면 “어느 계층에서 문제가 생겼는가”를 먼저 파악해야 한다. SQL이 잘못된 데이터를 반환했는가, 파이썬 로직에 오류가 있는가, 출력 형식이 문제인가. 계층 내부를 파고들기 전에 계층 사이 경계에서 데이터를 검증하는 습관이 중요하다. 체크포인트 ①에서 SQL 결과를 확인하고, 체크포인트 ②에서 변환 결과를 확인하면 문제 범위가 좁혀진다. 이 접근법은 단일 패러다임에서는 덜 중요하지만, 여러 패러다임이 섞인 현실 코드에서는 필수다.</p>
+<p><strong>AI가 코드를 생성할수록 DSL 지식이 더 중요해진다.</strong> 역설적이지만, LLM이 SQL 쿼리나 정규표현식을 대신 작성해줄수록 그 결과를 검증할 능력이 더 필요하다. AI가 생성한 <code>SELECT ... JOIN ... WHERE ...</code> 쿼리가 원하는 결과를 반환하는지, <code>r'\d{3}-\d{4}'</code> 패턴이 의도한 문자열만 매칭하는지 확인하려면 DSL 자체를 이해해야 한다. 코드 작성 도구가 발전할수록 코드 검증 역량의 가치는 오히려 높아진다.</p>
+<p> </p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "복사완료!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "복사완료!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/r2bit\.com\/gpt-coding\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./prog-fp.html" class="pagination-link" aria-label="함수형 프로그래밍">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">함수형 프로그래밍</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./prog-reactive.html" class="pagination-link" aria-label="반응형 프로그래밍">
+        <span class="nav-page-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">반응형 프로그래밍</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>챗GPT 쿼토 책은 소프트웨어 카펜트리 “Git 버전제어”를 번역한 것이 포함되어 있습니다.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/prog-declarative.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>순수하게 <a href="https://quarto.org/">쿼토(Quarto)</a>로 제작되었습니다.</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

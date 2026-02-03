@@ -1,0 +1,153 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 340">
+  <defs>
+    <style>
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 14px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 11px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-text {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #444;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 9px;
+        fill: #666;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Menlo, Monaco, monospace;
+        font-size: 9px;
+        fill: #333;
+      }
+      .box-main {
+        fill: #f5f5f5;
+        stroke: #333;
+        stroke-width: 1.5;
+      }
+      .box-skip {
+        fill: #ffffff;
+        stroke: #999;
+        stroke-width: 1;
+        stroke-dasharray: 4,2;
+      }
+      .box-rebuild {
+        fill: #e0e0e0;
+        stroke: #333;
+        stroke-width: 2;
+      }
+      .box-secondary {
+        fill: #ffffff;
+        stroke: #666;
+        stroke-width: 1;
+      }
+      .arrow {
+        fill: none;
+        stroke: #666;
+        stroke-width: 1.5;
+        marker-end: url(#arrowhead);
+      }
+      .arrow-skip {
+        fill: none;
+        stroke: #999;
+        stroke-width: 1;
+        stroke-dasharray: 4,2;
+      }
+    </style>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="700" height="340" fill="#ffffff"/>
+
+  <!-- Left side: Full build -->
+  <text x="170" y="25" class="tufte-title" text-anchor="middle">첫 번째 빌드</text>
+  <text x="170" y="42" class="tufte-small" text-anchor="middle">모든 단계 실행</text>
+
+  <rect x="40" y="55" width="100" height="35" rx="3" class="box-rebuild"/>
+  <text x="90" y="77" class="tufte-label" text-anchor="middle">data.csv</text>
+
+  <path d="M140,72 L175,72" class="arrow"/>
+
+  <rect x="180" y="55" width="100" height="35" rx="3" class="box-rebuild"/>
+  <text x="230" y="72" class="tufte-label" text-anchor="middle">clean.csv</text>
+  <text x="230" y="83" class="tufte-small" text-anchor="middle">전처리</text>
+
+  <path d="M230,90 L230,110" class="arrow"/>
+
+  <rect x="180" y="115" width="100" height="35" rx="3" class="box-rebuild"/>
+  <text x="230" y="132" class="tufte-label" text-anchor="middle">results.json</text>
+  <text x="230" y="143" class="tufte-small" text-anchor="middle">분석</text>
+
+  <path d="M230,150 L230,170" class="arrow"/>
+
+  <rect x="180" y="175" width="100" height="35" rx="3" class="box-rebuild"/>
+  <text x="230" y="192" class="tufte-label" text-anchor="middle">chart.png</text>
+  <text x="230" y="203" class="tufte-small" text-anchor="middle">시각화</text>
+
+  <path d="M230,210 L230,230" class="arrow"/>
+
+  <rect x="180" y="235" width="100" height="35" rx="3" class="box-rebuild"/>
+  <text x="230" y="252" class="tufte-label" text-anchor="middle">report.pdf</text>
+  <text x="230" y="263" class="tufte-small" text-anchor="middle">보고서</text>
+
+  <!-- Divider -->
+  <line x1="340" y1="20" x2="340" y2="320" stroke="#ccc" stroke-width="1"/>
+
+  <!-- Right side: Incremental build -->
+  <text x="520" y="25" class="tufte-title" text-anchor="middle">증분 빌드</text>
+  <text x="520" y="42" class="tufte-small" text-anchor="middle">visualize.py 수정 후</text>
+
+  <rect x="390" y="55" width="100" height="35" rx="3" class="box-skip"/>
+  <text x="440" y="77" class="tufte-label" text-anchor="middle" style="fill:#999;">data.csv</text>
+
+  <path d="M490,72 L525,72" class="arrow-skip"/>
+
+  <rect x="530" y="55" width="100" height="35" rx="3" class="box-skip"/>
+  <text x="580" y="72" class="tufte-label" text-anchor="middle" style="fill:#999;">clean.csv</text>
+  <text x="580" y="83" class="tufte-small" text-anchor="middle" style="fill:#bbb;">건너뜀</text>
+
+  <path d="M580,90 L580,110" class="arrow-skip"/>
+
+  <rect x="530" y="115" width="100" height="35" rx="3" class="box-skip"/>
+  <text x="580" y="132" class="tufte-label" text-anchor="middle" style="fill:#999;">results.json</text>
+  <text x="580" y="143" class="tufte-small" text-anchor="middle" style="fill:#bbb;">건너뜀</text>
+
+  <path d="M580,150 L580,170" class="arrow"/>
+
+  <rect x="530" y="175" width="100" height="35" rx="3" class="box-rebuild"/>
+  <text x="580" y="192" class="tufte-label" text-anchor="middle">chart.png</text>
+  <text x="580" y="203" class="tufte-small" text-anchor="middle">재빌드</text>
+
+  <path d="M580,210 L580,230" class="arrow"/>
+
+  <rect x="530" y="235" width="100" height="35" rx="3" class="box-rebuild"/>
+  <text x="580" y="252" class="tufte-label" text-anchor="middle">report.pdf</text>
+  <text x="580" y="263" class="tufte-small" text-anchor="middle">재빌드</text>
+
+  <!-- Script indicator -->
+  <rect x="400" y="175" width="80" height="35" rx="3" class="box-main"/>
+  <text x="440" y="192" class="tufte-code" text-anchor="middle">visualize.py</text>
+  <text x="440" y="203" class="tufte-small" text-anchor="middle" style="fill:#333;">수정됨</text>
+  <path d="M480,192 L525,192" class="arrow"/>
+
+  <!-- Bottom explanation -->
+  <rect x="40" y="290" width="620" height="40" rx="5" class="box-secondary"/>
+  <text x="350" y="310" class="tufte-text" text-anchor="middle">
+    Make는 파일 타임스탬프를 비교: 의존성이 타겟보다 최신이면 재빌드, 아니면 건너뜀
+  </text>
+  <text x="350" y="324" class="tufte-small" text-anchor="middle">
+    파이프라인이 복잡할수록 시간 절약 효과 ↑
+  </text>
+
+</svg>

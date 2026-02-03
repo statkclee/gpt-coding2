@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 40 800 300">
+  <defs>
+    <style>
+      /* Tufte Grayscale Style */
+      .label-title { font-family: Palatino, serif; font-size: 16px; font-weight: bold; fill: #111; }
+      .label-head { font-family: Palatino, serif; font-size: 14px; font-weight: bold; fill: #222; }
+      .label-body { font-family: Palatino, serif; font-size: 12px; fill: #333; }
+      .label-note { font-family: Palatino, serif; font-size: 11px; fill: #555; font-style: italic; }
+      .label-mono { font-family: 'SF Mono', Consolas, Menlo, monospace; font-size: 10px; fill: #444; }
+      
+      .box-data { fill: #fff; stroke: #999; stroke-width: 1; rx: 4; }
+      .box-func { fill: #f9f9f9; stroke: #333; stroke-width: 1.5; rx: 4; }
+      
+      .line-flow { stroke: #666; stroke-width: 1.5; fill: none; }
+      .line-sep { stroke: #ddd; stroke-width: 1; }
+      
+      .arrow-head { fill: #666; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L0,8 L8,4 z" class="arrow-head" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="380" fill="#fff" />
+
+  <!-- Title -->
+  <!-- <text x="400" y="30" text-anchor="middle" class="label-title">고차 함수: 데이터 처리의 3대 요소</text> -->
+
+  <!-- ========================================== -->
+  <!-- Common Input Data -->
+  <!-- ========================================== -->
+  <g transform="translate(50, 160)">
+    <text x="60" y="-10" text-anchor="middle" class="label-head">입력</text>
+    <rect x="0" y="0" width="120" height="60" class="box-data"/>
+    <text x="60" y="25" text-anchor="middle" class="label-mono">[1, 2, 3, 4, 5]</text>
+    
+    <!-- Visual Dots -->
+    <g transform="translate(25, 40)">
+      <circle cx="0" cy="0" r="5" fill="#ccc"/>
+      <circle cx="18" cy="0" r="5" fill="#ccc"/>
+      <circle cx="36" cy="0" r="5" fill="#ccc"/>
+      <circle cx="54" cy="0" r="5" fill="#ccc"/>
+      <circle cx="72" cy="0" r="5" fill="#ccc"/>
+    </g>
+  </g>
+
+  <!-- Split Arrows -->
+  <path d="M 180 190 L 210 100" class="line-flow" marker-end="url(#arrow)"/> <!-- To Map -->
+  <path d="M 180 190 L 210 190" class="line-flow" marker-end="url(#arrow)"/> <!-- To Filter -->
+  <path d="M 180 190 L 210 280" class="line-flow" marker-end="url(#arrow)"/> <!-- To Reduce -->
+
+
+  <!-- ========================================== -->
+  <!-- 1. MAP (Top) -->
+  <!-- ========================================== -->
+  <g transform="translate(220, 60)">
+    <rect x="0" y="0" width="160" height="80" class="box-func"/>
+    <text x="80" y="22" text-anchor="middle" class="label-head">Map</text>
+    <line x1="20" y1="30" x2="140" y2="30" class="line-sep"/>
+    <text x="80" y="48" text-anchor="middle" class="label-mono">func: x * 2</text>
+    <text x="80" y="65" text-anchor="middle" class="label-note">1:1 변환</text>
+  </g>
+
+  <path d="M 390 100 L 420 100" class="line-flow" marker-end="url(#arrow)"/>
+
+  <g transform="translate(430, 75)">
+    <rect x="0" y="0" width="140" height="50" class="box-data"/>
+    <text x="70" y="20" text-anchor="middle" class="label-mono">[2, 4, 6, 8, 10]</text>
+    <g transform="translate(35, 35)">
+      <circle cx="0" cy="0" r="7" fill="#fff" stroke="#333"/>
+      <circle cx="18" cy="0" r="7" fill="#fff" stroke="#333"/>
+      <circle cx="36" cy="0" r="7" fill="#fff" stroke="#333"/>
+      <circle cx="54" cy="0" r="7" fill="#fff" stroke="#333"/>
+      <circle cx="72" cy="0" r="7" fill="#fff" stroke="#333"/>
+    </g>
+  </g>
+
+
+  <!-- ========================================== -->
+  <!-- 2. FILTER (Middle) -->
+  <!-- ========================================== -->
+  <g transform="translate(220, 150)">
+    <rect x="0" y="0" width="160" height="80" class="box-func"/>
+    <text x="80" y="22" text-anchor="middle" class="label-head">Filter</text>
+    <line x1="20" y1="30" x2="140" y2="30" class="line-sep"/>
+    <text x="80" y="48" text-anchor="middle" class="label-mono">func: x % 2 == 0</text>
+    <text x="80" y="65" text-anchor="middle" class="label-note">선별 (부분집합)</text>
+  </g>
+
+  <path d="M 390 190 L 420 190" class="line-flow" marker-end="url(#arrow)"/>
+
+  <g transform="translate(430, 165)">
+    <rect x="0" y="0" width="140" height="50" class="box-data"/>
+    <text x="70" y="20" text-anchor="middle" class="label-mono">[2, 4]</text>
+    <g transform="translate(35, 35)">
+      <text x="0" y="4" text-anchor="middle" fill="#ccc" font-size="10">×</text>
+      <circle cx="18" cy="0" r="5" fill="#fff" stroke="#333"/>
+      <text x="36" y="4" text-anchor="middle" fill="#ccc" font-size="10">×</text>
+      <circle cx="54" cy="0" r="5" fill="#fff" stroke="#333"/>
+      <text x="72" y="4" text-anchor="middle" fill="#ccc" font-size="10">×</text>
+    </g>
+  </g>
+
+
+  <!-- ========================================== -->
+  <!-- 3. REDUCE (Bottom) -->
+  <!-- ========================================== -->
+  <g transform="translate(220, 240)">
+    <rect x="0" y="0" width="160" height="80" class="box-func"/>
+    <text x="80" y="22" text-anchor="middle" class="label-head">Reduce</text>
+    <line x1="20" y1="30" x2="140" y2="30" class="line-sep"/>
+    <text x="80" y="48" text-anchor="middle" class="label-mono">func: a + b</text>
+    <text x="80" y="65" text-anchor="middle" class="label-note">집계 (N→1)</text>
+  </g>
+
+  <path d="M 390 280 L 420 280" class="line-flow" marker-end="url(#arrow)"/>
+
+  <g transform="translate(430, 255)">
+    <rect x="0" y="0" width="140" height="50" class="box-data"/>
+    <text x="70" y="20" text-anchor="middle" class="label-mono">15</text>
+    <g transform="translate(70, 35)">
+      <circle cx="0" cy="0" r="10" fill="#333"/>
+      <text x="0" y="3" text-anchor="middle" fill="#fff" font-size="9" font-weight="bold">Σ</text>
+    </g>
+  </g>
+
+
+  <!-- ========================================== -->
+  <!-- LEGEND / INSIGHT -->
+  <!-- ========================================== -->
+  <g transform="translate(600, 80)">
+    <rect x="0" y="0" width="160" height="220" fill="#f8f8f8" stroke="#ccc" rx="4"/>
+    <text x="80" y="25" text-anchor="middle" class="label-head" font-size="12">핵심 개념</text>
+    <line x1="15" y1="35" x2="145" y2="35" class="line-sep"/>
+    
+    <g transform="translate(15, 60)">
+        <text x="0" y="0" class="label-body" font-weight="bold">Map</text>
+        <text x="0" y="15" class="label-note">형태 보존, 값 변형</text>
+        
+        <text x="0" y="45" class="label-body" font-weight="bold">Filter</text>
+        <text x="0" y="60" class="label-note">형태 축소, 값 보존</text>
+        
+        <text x="0" y="90" class="label-body" font-weight="bold">Reduce</text>
+        <text x="0" y="105" class="label-note">차원 축소, 단일 값</text>
+    </g>
+  </g>
+
+  <!-- Bottom Quote -->
+  <!-- <g transform="translate(50, 345)">
+      <rect x="0" y="0" width="710" height="30" fill="#fff" />
+      <text x="355" y="20" text-anchor="middle" class="label-note" font-size="12" fill="#333">
+          "반복문(Loop) 대신 의도(Intent)를 명확히 표현하는 함수형 도구들"
+      </text>
+  </g> -->
+
+</svg>

@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320">
+  <defs>
+    <style>
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 12px;
+        fill: #333;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 10px;
+        fill: #333;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #666;
+      }
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 14px;
+        font-weight: bold;
+        fill: #333;
+      }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="720" height="320" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="360" y="25" text-anchor="middle" class="tufte-title">JSON: AI 시대 데이터 교환 형식</text>
+
+  <!-- Central JSON box -->
+  <g transform="translate(280, 45)">
+    <rect x="0" y="0" width="160" height="50" fill="#e8e8e8" stroke="#333" stroke-width="2" rx="5"/>
+    <text x="80" y="22" text-anchor="middle" class="tufte-label" font-weight="bold">JSON</text>
+    <text x="80" y="38" text-anchor="middle" class="tufte-small">JavaScript Object Notation</text>
+  </g>
+
+  <!-- 4 Usage areas -->
+  <!-- API 통신 -->
+  <line x1="280" y1="70" x2="120" y2="120" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <g transform="translate(30, 120)">
+    <rect x="0" y="0" width="180" height="70" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="90" y="20" text-anchor="middle" class="tufte-label" font-weight="bold">API 통신</text>
+    <text x="90" y="38" text-anchor="middle" class="tufte-small">OpenAI, REST API</text>
+    <text x="90" y="52" text-anchor="middle" class="tufte-code">{"model": "gpt-4"}</text>
+  </g>
+
+  <!-- 설정 파일 -->
+  <line x1="440" y1="70" x2="600" y2="120" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <g transform="translate(510, 120)">
+    <rect x="0" y="0" width="180" height="70" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="90" y="20" text-anchor="middle" class="tufte-label" font-weight="bold">설정 파일</text>
+    <text x="90" y="38" text-anchor="middle" class="tufte-small">package.json, config.json</text>
+    <text x="90" y="52" text-anchor="middle" class="tufte-code">{"version": "1.0"}</text>
+  </g>
+
+  <!-- 데이터 교환 -->
+  <line x1="320" y1="95" x2="200" y2="200" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <g transform="translate(30, 200)">
+    <rect x="0" y="0" width="180" height="70" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="90" y="20" text-anchor="middle" class="tufte-label" font-weight="bold">데이터 교환</text>
+    <text x="90" y="38" text-anchor="middle" class="tufte-small">웹 서비스 간 표준 형식</text>
+    <text x="90" y="52" text-anchor="middle" class="tufte-code">{"data": [...]}</text>
+  </g>
+
+  <!-- LLM 출력 -->
+  <line x1="400" y1="95" x2="520" y2="200" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <g transform="translate(510, 200)">
+    <rect x="0" y="0" width="180" height="70" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="90" y="20" text-anchor="middle" class="tufte-label" font-weight="bold">LLM 구조화 출력</text>
+    <text x="90" y="38" text-anchor="middle" class="tufte-small">AI 응답 파싱</text>
+    <text x="90" y="52" text-anchor="middle" class="tufte-code">{"answer": "..."}</text>
+  </g>
+
+  <!-- Learning flow at bottom -->
+  <g transform="translate(120, 285)">
+    <rect x="0" y="0" width="480" height="30" fill="#e8e8e8" stroke="#999" rx="3"/>
+    <text x="60" y="18" text-anchor="middle" class="tufte-small">기초 문법</text>
+    <text x="120" y="18" text-anchor="middle" class="tufte-small">→</text>
+    <text x="180" y="18" text-anchor="middle" class="tufte-small">자료형 매핑</text>
+    <text x="240" y="18" text-anchor="middle" class="tufte-small">→</text>
+    <text x="300" y="18" text-anchor="middle" class="tufte-small">중첩 구조</text>
+    <text x="360" y="18" text-anchor="middle" class="tufte-small">→</text>
+    <text x="420" y="18" text-anchor="middle" class="tufte-small">API 처리</text>
+  </g>
+
+</svg>

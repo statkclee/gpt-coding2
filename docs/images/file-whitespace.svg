@@ -1,0 +1,160 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 40 650 280">
+  <defs>
+    <style>
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 15px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-subtitle {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 13px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 12px;
+        fill: #333;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 11px;
+        fill: #666;
+      }
+      .tufte-code {
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 12px;
+        fill: #333;
+      }
+      .tufte-code-small {
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 11px;
+        fill: #333;
+      }
+      .whitespace-box {
+        fill: #e8e8e8;
+        stroke: #999;
+        stroke-width: 1;
+      }
+      .visible-char {
+        fill: #f5f5f5;
+        stroke: #ccc;
+        stroke-width: 1;
+      }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="650" height="320" fill="#ffffff"/>
+
+  <!-- 제목 -->
+  <text x="325" y="25" text-anchor="middle" class="tufte-title">공백 문자 (Whitespace Characters)</text>
+  <line x1="50" y1="35" x2="600" y2="35" stroke="#ccc" stroke-width="1"/>
+
+  <!-- 세 가지 공백 문자 비교 -->
+  <!-- 공백 (Space) -->
+  <rect x="30" y="55" width="180" height="120" fill="#f5f5f5" stroke="#999" stroke-width="1.5" rx="4"/>
+  <text x="120" y="75" text-anchor="middle" class="tufte-subtitle">공백 (Space)</text>
+  <line x1="40" y1="85" x2="200" y2="85" stroke="#ccc" stroke-width="1"/>
+
+  <text x="50" y="105" class="tufte-code-small">이스케이프: ' '</text>
+  <text x="50" y="125" class="tufte-code-small">ASCII: 32 (0x20)</text>
+  <text x="50" y="145" class="tufte-small">단어 사이 구분</text>
+  <rect x="50" y="155" width="20" height="16" class="whitespace-box"/>
+  <text x="60" y="167" text-anchor="middle" class="tufte-code-small">·</text>
+  <text x="80" y="167" class="tufte-small">← IDE 표시</text>
+
+  <!-- 탭 (Tab) -->
+  <rect x="235" y="55" width="180" height="120" fill="#f5f5f5" stroke="#999" stroke-width="1.5" rx="4"/>
+  <text x="325" y="75" text-anchor="middle" class="tufte-subtitle">탭 (Tab)</text>
+  <line x1="245" y1="85" x2="405" y2="85" stroke="#ccc" stroke-width="1"/>
+
+  <text x="255" y="105" class="tufte-code-small">이스케이프: \t</text>
+  <text x="255" y="125" class="tufte-code-small">ASCII: 9 (0x09)</text>
+  <text x="255" y="145" class="tufte-small">열 정렬, 들여쓰기</text>
+  <rect x="255" y="155" width="60" height="16" class="whitespace-box"/>
+  <text x="285" y="167" text-anchor="middle" class="tufte-code-small">→</text>
+  <text x="325" y="167" class="tufte-small">← IDE 표시</text>
+
+  <!-- 줄바꿈 (Newline) -->
+  <rect x="440" y="55" width="180" height="120" fill="#f5f5f5" stroke="#999" stroke-width="1.5" rx="4"/>
+  <text x="530" y="75" text-anchor="middle" class="tufte-subtitle">줄바꿈 (Newline)</text>
+  <line x1="450" y1="85" x2="610" y2="85" stroke="#ccc" stroke-width="1"/>
+
+  <text x="460" y="105" class="tufte-code-small">이스케이프: \n</text>
+  <text x="460" y="125" class="tufte-code-small">ASCII: 10 (0x0A)</text>
+  <text x="460" y="145" class="tufte-small">라인 구분</text>
+  <rect x="460" y="155" width="20" height="16" class="whitespace-box"/>
+  <text x="470" y="167" text-anchor="middle" class="tufte-code-small">↵</text>
+  <text x="490" y="167" class="tufte-small">← IDE 표시</text>
+
+  <!-- 예시: 실제 문자열 -->
+  <rect x="30" y="195" width="590" height="110" fill="#f5f5f5" stroke="#999" stroke-width="1.5" rx="4"/>
+  <text x="325" y="215" text-anchor="middle" class="tufte-subtitle">예시: "Hello World!\n" 문자열 내부 구조</text>
+  <line x1="40" y1="225" x2="610" y2="225" stroke="#ccc" stroke-width="1"/>
+
+  <!-- 문자열 박스들 -->
+  <rect x="50" y="240" width="24" height="28" class="visible-char" rx="2"/>
+  <text x="62" y="259" text-anchor="middle" class="tufte-code">H</text>
+
+  <rect x="78" y="240" width="24" height="28" class="visible-char" rx="2"/>
+  <text x="90" y="259" text-anchor="middle" class="tufte-code">e</text>
+
+  <rect x="106" y="240" width="24" height="28" class="visible-char" rx="2"/>
+  <text x="118" y="259" text-anchor="middle" class="tufte-code">l</text>
+
+  <rect x="134" y="240" width="24" height="28" class="visible-char" rx="2"/>
+  <text x="146" y="259" text-anchor="middle" class="tufte-code">l</text>
+
+  <rect x="162" y="240" width="24" height="28" class="visible-char" rx="2"/>
+  <text x="174" y="259" text-anchor="middle" class="tufte-code">o</text>
+
+  <!-- 공백 (강조) -->
+  <rect x="190" y="240" width="24" height="28" class="whitespace-box" rx="2"/>
+  <text x="202" y="259" text-anchor="middle" class="tufte-code">·</text>
+
+  <rect x="218" y="240" width="24" height="28" class="visible-char" rx="2"/>
+  <text x="230" y="259" text-anchor="middle" class="tufte-code">W</text>
+
+  <rect x="246" y="240" width="24" height="28" class="visible-char" rx="2"/>
+  <text x="258" y="259" text-anchor="middle" class="tufte-code">o</text>
+
+  <rect x="274" y="240" width="24" height="28" class="visible-char" rx="2"/>
+  <text x="286" y="259" text-anchor="middle" class="tufte-code">r</text>
+
+  <rect x="302" y="240" width="24" height="28" class="visible-char" rx="2"/>
+  <text x="314" y="259" text-anchor="middle" class="tufte-code">l</text>
+
+  <rect x="330" y="240" width="24" height="28" class="visible-char" rx="2"/>
+  <text x="342" y="259" text-anchor="middle" class="tufte-code">d</text>
+
+  <rect x="358" y="240" width="24" height="28" class="visible-char" rx="2"/>
+  <text x="370" y="259" text-anchor="middle" class="tufte-code">!</text>
+
+  <!-- 줄바꿈 (강조) -->
+  <rect x="386" y="240" width="24" height="28" class="whitespace-box" rx="2"/>
+  <text x="398" y="259" text-anchor="middle" class="tufte-code">↵</text>
+
+  <!-- 인덱스 -->
+  <text x="62" y="285" text-anchor="middle" class="tufte-small">0</text>
+  <text x="90" y="285" text-anchor="middle" class="tufte-small">1</text>
+  <text x="118" y="285" text-anchor="middle" class="tufte-small">2</text>
+  <text x="146" y="285" text-anchor="middle" class="tufte-small">3</text>
+  <text x="174" y="285" text-anchor="middle" class="tufte-small">4</text>
+  <text x="202" y="285" text-anchor="middle" class="tufte-small">5</text>
+  <text x="230" y="285" text-anchor="middle" class="tufte-small">6</text>
+  <text x="258" y="285" text-anchor="middle" class="tufte-small">7</text>
+  <text x="286" y="285" text-anchor="middle" class="tufte-small">8</text>
+  <text x="314" y="285" text-anchor="middle" class="tufte-small">9</text>
+  <text x="342" y="285" text-anchor="middle" class="tufte-small">10</text>
+  <text x="370" y="285" text-anchor="middle" class="tufte-small">11</text>
+  <text x="398" y="285" text-anchor="middle" class="tufte-small">12</text>
+
+  <!-- 설명 -->
+  <text x="450" y="255" class="tufte-label">len() = 13</text>
+  <text x="450" y="275" class="tufte-small">공백과 줄바꿈도</text>
+  <text x="450" y="290" class="tufte-small">각각 1문자로 계산</text>
+
+</svg>

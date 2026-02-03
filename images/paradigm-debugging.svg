@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 16px; fill: #333; font-weight: bold; }
+      .tufte-subtitle { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 13px; fill: #333; font-weight: bold; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 11px; fill: #333; font-weight: bold; }
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 10px; fill: #333; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 9px; fill: #666; }
+      .tufte-code { font-family: 'SF Mono', Menlo, Monaco, monospace; font-size: 9px; fill: #666; }
+      .box-paradigm { fill: #f5f5f5; stroke: #999; stroke-width: 1; }
+      .box-bug { fill: #fff; stroke: #666; stroke-width: 1; }
+      .box-solution { fill: #fafafa; stroke: #999; stroke-width: 1; stroke-dasharray: 4,2; }
+      .arrow { fill: none; stroke: #999; stroke-width: 1.5; }
+    </style>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#999"/>
+    </marker>
+  </defs>
+
+  <!-- White background -->
+  <rect x="0" y="0" width="800" height="480" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="400" y="28" text-anchor="middle" class="tufte-title">멀티패러다임 코드의 디버깅: 패러다임별 버그 유형과 대처법</text>
+
+  <!-- Row 1: Imperative/Procedural -->
+  <g transform="translate(30, 50)">
+    <rect x="0" y="0" width="120" height="80" class="box-paradigm" rx="4"/>
+    <text x="60" y="20" text-anchor="middle" class="tufte-label">명령형/절차적</text>
+    <line x1="10" y1="28" x2="110" y2="28" stroke="#ddd"/>
+    <text x="60" y="45" text-anchor="middle" class="tufte-code">total = 0</text>
+    <text x="60" y="58" text-anchor="middle" class="tufte-code">for x in data:</text>
+    <text x="60" y="71" text-anchor="middle" class="tufte-code">  total += x</text>
+  </g>
+
+  <line x1="155" y1="90" x2="180" y2="90" class="arrow" marker-end="url(#arrowhead)"/>
+
+  <g transform="translate(185, 50)">
+    <rect x="0" y="0" width="180" height="80" class="box-bug" rx="4"/>
+    <text x="90" y="20" text-anchor="middle" class="tufte-label">버그 유형</text>
+    <text x="90" y="38" text-anchor="middle" class="tufte-text">• 상태 변이 추적 실패</text>
+    <text x="90" y="52" text-anchor="middle" class="tufte-text">• 변수 덮어쓰기 (같은 이름 재사용)</text>
+    <text x="90" y="66" text-anchor="middle" class="tufte-text">• 루프 경계 오류 (off-by-one)</text>
+  </g>
+
+  <line x1="370" y1="90" x2="395" y2="90" class="arrow" marker-end="url(#arrowhead)"/>
+
+  <g transform="translate(400, 50)">
+    <rect x="0" y="0" width="180" height="80" class="box-solution" rx="4"/>
+    <text x="90" y="20" text-anchor="middle" class="tufte-label">대처법</text>
+    <text x="90" y="38" text-anchor="middle" class="tufte-text">• print 디버깅으로 상태 추적</text>
+    <text x="90" y="52" text-anchor="middle" class="tufte-text">• 변수명 명확히 구분</text>
+    <text x="90" y="66" text-anchor="middle" class="tufte-text">• 단위 테스트로 경계 검증</text>
+  </g>
+
+  <!-- Row 2: OOP -->
+  <g transform="translate(30, 145)">
+    <rect x="0" y="0" width="120" height="80" class="box-paradigm" rx="4"/>
+    <text x="60" y="20" text-anchor="middle" class="tufte-label">객체지향</text>
+    <line x1="10" y1="28" x2="110" y2="28" stroke="#ddd"/>
+    <text x="60" y="45" text-anchor="middle" class="tufte-code">class Student:</text>
+    <text x="60" y="58" text-anchor="middle" class="tufte-code">  def calc(self):</text>
+    <text x="60" y="71" text-anchor="middle" class="tufte-code">    self.avg = ...</text>
+  </g>
+
+  <line x1="155" y1="185" x2="180" y2="185" class="arrow" marker-end="url(#arrowhead)"/>
+
+  <g transform="translate(185, 145)">
+    <rect x="0" y="0" width="180" height="80" class="box-bug" rx="4"/>
+    <text x="90" y="20" text-anchor="middle" class="tufte-label">버그 유형</text>
+    <text x="90" y="38" text-anchor="middle" class="tufte-text">• 숨겨진 내부 상태 변경</text>
+    <text x="90" y="52" text-anchor="middle" class="tufte-text">• 상속 계층에서 메서드 충돌</text>
+    <text x="90" y="66" text-anchor="middle" class="tufte-text">• self 참조 혼란</text>
+  </g>
+
+  <line x1="370" y1="185" x2="395" y2="185" class="arrow" marker-end="url(#arrowhead)"/>
+
+  <g transform="translate(400, 145)">
+    <rect x="0" y="0" width="180" height="80" class="box-solution" rx="4"/>
+    <text x="90" y="20" text-anchor="middle" class="tufte-label">대처법</text>
+    <text x="90" y="38" text-anchor="middle" class="tufte-text">• __repr__ 정의로 상태 출력</text>
+    <text x="90" y="52" text-anchor="middle" class="tufte-text">• MRO 확인 (Method Resolution Order)</text>
+    <text x="90" y="66" text-anchor="middle" class="tufte-text">• 작은 클래스, 단일 책임 원칙</text>
+  </g>
+
+  <!-- Row 3: Functional -->
+  <g transform="translate(30, 240)">
+    <rect x="0" y="0" width="120" height="80" class="box-paradigm" rx="4"/>
+    <text x="60" y="20" text-anchor="middle" class="tufte-label">함수형</text>
+    <line x1="10" y1="28" x2="110" y2="28" stroke="#ddd"/>
+    <text x="60" y="45" text-anchor="middle" class="tufte-code">map(lambda x:</text>
+    <text x="60" y="58" text-anchor="middle" class="tufte-code">  x + bonus,</text>
+    <text x="60" y="71" text-anchor="middle" class="tufte-code">  scores)</text>
+  </g>
+
+  <line x1="155" y1="280" x2="180" y2="280" class="arrow" marker-end="url(#arrowhead)"/>
+
+  <g transform="translate(185, 240)">
+    <rect x="0" y="0" width="180" height="80" class="box-bug" rx="4"/>
+    <text x="90" y="20" text-anchor="middle" class="tufte-label">버그 유형</text>
+    <text x="90" y="38" text-anchor="middle" class="tufte-text">• 지연 평가로 결과 미출력</text>
+    <text x="90" y="52" text-anchor="middle" class="tufte-text">• 람다 클로저 변수 캡처 오류</text>
+    <text x="90" y="66" text-anchor="middle" class="tufte-text">• 체이닝 중간 결과 확인 불가</text>
+  </g>
+
+  <line x1="370" y1="280" x2="395" y2="280" class="arrow" marker-end="url(#arrowhead)"/>
+
+  <g transform="translate(400, 240)">
+    <rect x="0" y="0" width="180" height="80" class="box-solution" rx="4"/>
+    <text x="90" y="20" text-anchor="middle" class="tufte-label">대처법</text>
+    <text x="90" y="38" text-anchor="middle" class="tufte-text">• list()로 즉시 평가 강제</text>
+    <text x="90" y="52" text-anchor="middle" class="tufte-text">• 람다 대신 명시적 함수 정의</text>
+    <text x="90" y="66" text-anchor="middle" class="tufte-text">• 파이프라인 단계별 분리</text>
+  </g>
+
+  <!-- Row 4: Reactive -->
+  <g transform="translate(30, 335)">
+    <rect x="0" y="0" width="120" height="80" class="box-paradigm" rx="4"/>
+    <text x="60" y="20" text-anchor="middle" class="tufte-label">반응형</text>
+    <line x1="10" y1="28" x2="110" y2="28" stroke="#ddd"/>
+    <text x="60" y="45" text-anchor="middle" class="tufte-code">on_change(</text>
+    <text x="60" y="58" text-anchor="middle" class="tufte-code">  callback</text>
+    <text x="60" y="71" text-anchor="middle" class="tufte-code">)</text>
+  </g>
+
+  <line x1="155" y1="375" x2="180" y2="375" class="arrow" marker-end="url(#arrowhead)"/>
+
+  <g transform="translate(185, 335)">
+    <rect x="0" y="0" width="180" height="80" class="box-bug" rx="4"/>
+    <text x="90" y="20" text-anchor="middle" class="tufte-label">버그 유형</text>
+    <text x="90" y="38" text-anchor="middle" class="tufte-text">• 콜백 실행 순서 예측 불가</text>
+    <text x="90" y="52" text-anchor="middle" class="tufte-text">• 등록 해제 누락 (메모리 누수)</text>
+    <text x="90" y="66" text-anchor="middle" class="tufte-text">• 이벤트 폭풍 (무한 루프)</text>
+  </g>
+
+  <line x1="370" y1="375" x2="395" y2="375" class="arrow" marker-end="url(#arrowhead)"/>
+
+  <g transform="translate(400, 335)">
+    <rect x="0" y="0" width="180" height="80" class="box-solution" rx="4"/>
+    <text x="90" y="20" text-anchor="middle" class="tufte-label">대처법</text>
+    <text x="90" y="38" text-anchor="middle" class="tufte-text">• 콜백에 로그 추가</text>
+    <text x="90" y="52" text-anchor="middle" class="tufte-text">• 등록/해제 쌍 명시적 관리</text>
+    <text x="90" y="66" text-anchor="middle" class="tufte-text">• 이벤트 전파 차단 조건 추가</text>
+  </g>
+
+  <!-- Right side: Mixed paradigm debugging -->
+  <g transform="translate(600, 50)">
+    <rect x="0" y="0" width="180" height="365" fill="#f5f5f5" stroke="#666" stroke-width="1.5" rx="4"/>
+    <text x="90" y="25" text-anchor="middle" class="tufte-subtitle">멀티패러다임 혼합 시</text>
+    <line x1="15" y1="35" x2="165" y2="35" stroke="#ccc"/>
+
+    <text x="90" y="58" text-anchor="middle" class="tufte-label">핵심 어려움</text>
+    <text x="90" y="78" text-anchor="middle" class="tufte-small">패러다임 경계에서 버그 발생</text>
+    <text x="90" y="93" text-anchor="middle" class="tufte-small">"어느 스타일의 문제인가?"</text>
+
+    <line x1="15" y1="108" x2="165" y2="108" stroke="#ddd"/>
+
+    <text x="90" y="128" text-anchor="middle" class="tufte-label">전략 1: 격리</text>
+    <text x="90" y="145" text-anchor="middle" class="tufte-small">패러다임별로 코드 분리</text>
+    <text x="90" y="160" text-anchor="middle" class="tufte-small">경계면에서만 데이터 교환</text>
+
+    <line x1="15" y1="175" x2="165" y2="175" stroke="#ddd"/>
+
+    <text x="90" y="195" text-anchor="middle" class="tufte-label">전략 2: 단순화</text>
+    <text x="90" y="212" text-anchor="middle" class="tufte-small">문제 구간을 한 패러다임으로</text>
+    <text x="90" y="227" text-anchor="middle" class="tufte-small">재작성하여 버그 재현</text>
+
+    <line x1="15" y1="242" x2="165" y2="242" stroke="#ddd"/>
+
+    <text x="90" y="262" text-anchor="middle" class="tufte-label">전략 3: 추적</text>
+    <text x="90" y="279" text-anchor="middle" class="tufte-small">데이터 흐름을 따라가며</text>
+    <text x="90" y="294" text-anchor="middle" class="tufte-small">패러다임 전환점 표시</text>
+
+    <line x1="15" y1="309" x2="165" y2="309" stroke="#ddd"/>
+
+    <text x="90" y="329" text-anchor="middle" class="tufte-label">전략 4: 테스트</text>
+    <text x="90" y="346" text-anchor="middle" class="tufte-small">각 패러다임 블록을</text>
+    <text x="90" y="361" text-anchor="middle" class="tufte-small">독립적으로 단위 테스트</text>
+  </g>
+
+  <!-- Bottom: Key insight -->
+  <g transform="translate(30, 430)">
+    <rect x="0" y="0" width="550" height="40" fill="#fff" stroke="#999" rx="4"/>
+    <text x="275" y="17" text-anchor="middle" class="tufte-label">핵심 통찰</text>
+    <text x="275" y="33" text-anchor="middle" class="tufte-text">버그는 패러다임 자체가 아니라, 패러다임의 규칙을 어긴 곳에서 발생한다</text>
+  </g>
+
+</svg>

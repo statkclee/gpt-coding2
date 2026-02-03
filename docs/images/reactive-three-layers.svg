@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 45 800 320">
+  <defs>
+    <style>
+      /* Tufte Grayscale Style */
+      .label-title { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 16px; font-weight: bold; fill: #111; }
+      .label-head { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 16px; font-weight: bold; fill: #222; }
+      .label-body { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 13px; fill: #333; }
+      .label-note { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 11px; fill: #555; font-style: italic; }
+      .label-mono { font-family: 'SF Mono', Consolas, Menlo, monospace; font-size: 12px; fill: #444; }
+      
+      /* Boxes */
+      .box-container { fill: #fcfcfc; stroke: #999; stroke-width: 1.5; stroke-dasharray: 4 2; rx: 8; }
+      .box-pattern { fill: #fff; stroke: #666; stroke-width: 1.5; rx: 4; }
+      .box-paradigm { fill: #fff; stroke: #333; stroke-width: 2.5; rx: 4; }
+      
+      .line-connect { stroke: #666; stroke-width: 1.5; fill: none; }
+      .arrow-head { fill: #666; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L0,8 L8,4 z" class="arrow-head" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="360" fill="#fff" />
+
+  <!-- Title -->
+  <!-- <text x="400" y="30" text-anchor="middle" class="label-title">비동기 생태계: 아키텍처, 패턴, 그리고 패러다임</text> -->
+
+  <!-- ========================================== -->
+  <!-- 1. Event-Driven Architecture (The Environment) -->
+  <!-- ========================================== -->
+  <g transform="translate(50, 60)">
+    <rect x="0" y="0" width="700" height="290" class="box-container"/>
+    <text x="350" y="30" text-anchor="middle" class="label-head" fill="#555">이벤트 기반 아키텍처 (환경/기반)</text>
+    <text x="350" y="48" text-anchor="middle" class="label-note">"비동기 이벤트가 시스템을 주도하는 넓은 개념"</text>
+    
+    <!-- Inner Concept 1: Pub-Sub Pattern -->
+    <g transform="translate(60, 80)">
+      <rect x="0" y="0" width="240" height="140" class="box-pattern"/>
+      <text x="120" y="25" text-anchor="middle" class="label-head">발행-구독 (구현 패턴)</text>
+      
+      <g transform="translate(20, 45)">
+        <text x="0" y="0" class="label-body">• 구조적 패턴</text>
+        <text x="0" y="20" class="label-body">• 결합도 분리</text>
+        <text x="0" y="40" class="label-body">• 브로커 / 버스 / 토픽</text>
+        <text x="0" y="70" class="label-mono" fill="#555">"메시지를 누구에게 보낼 것인가?"</text>
+      </g>
+    </g>
+
+    <!-- Connection Arrow -->
+    <g transform="translate(300, 150)">
+        <path d="M 10 0 L 90 0" class="line-connect" marker-end="url(#arrow)"/>
+        <text x="50" y="-10" text-anchor="middle" class="label-note" font-weight="bold">진화 &amp; 추상화</text>
+    </g>
+
+    <!-- Inner Concept 2: Reactive Programming -->
+    <g transform="translate(400, 80)">
+      <rect x="0" y="0" width="240" height="140" class="box-paradigm"/>
+      <text x="120" y="25" text-anchor="middle" class="label-head">반응형 (프로그래밍 패러다임)</text>
+      
+      <g transform="translate(20, 45)">
+        <text x="0" y="0" class="label-body">• 선언적 패러다임</text>
+        <text x="0" y="20" class="label-body">• 데이터 흐름 (스트림)</text>
+        <text x="0" y="40" class="label-body">• 변화의 전파</text>
+        <text x="0" y="70" class="label-mono" fill="#555">"데이터가 어떻게 흐르고 변하는가?"</text>
+      </g>
+    </g>
+    
+    <!-- Insight inside box -->
+    <g transform="translate(15, 235)">
+      <rect x="0" y="0" width="670" height="45" fill="#f8f8f8" rx="4"/>
+      <rect x="0" y="0" width="4" height="45" fill="#555" rx="2"/>
+      <text x="15" y="18" class="label-mono" fill="#666">공통 기반: 논블로킹 I/O, 비동기성</text>
+      <text x="15" y="36" class="label-body" fill="#333">
+          <tspan font-weight="bold">핵심:</tspan> 반응형은 이벤트 기반 환경 위에서 발행-구독 패턴을 도구로 사용하여 만든 <tspan font-weight="bold">"선언적 데이터 파이프라인"</tspan>이다.
+      </text>
+    </g>
+  </g>
+
+</svg>

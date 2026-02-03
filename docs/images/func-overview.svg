@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 40 700 240">
+  <defs>
+    <style>
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-title { font-size: 14px; font-weight: bold; }
+      .tufte-label { font-size: 12px; }
+      .tufte-small { font-size: 11px; }
+      .tufte-code { font-family: 'Consolas', 'Monaco', monospace; font-size: 11px; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="700" height="280" fill="#ffffff"/>
+
+  <!-- Title -->
+  <!-- <text x="350" y="30" text-anchor="middle" class="tufte-text tufte-title">함수의 구조</text> -->
+
+  <!-- Input (Arguments) -->
+  <g transform="translate(50, 80)">
+    <rect x="0" y="0" width="120" height="100" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="5"/>
+    <text x="60" y="25" text-anchor="middle" class="tufte-text tufte-label" font-weight="bold">입력 (인자)</text>
+    <line x1="15" y1="35" x2="105" y2="35" stroke="#ccc" stroke-width="1"/>
+    <text x="60" y="55" text-anchor="middle" class="tufte-text tufte-code">a = 3</text>
+    <text x="60" y="75" text-anchor="middle" class="tufte-text tufte-code">b = 5</text>
+  </g>
+
+  <!-- Arrow: Input to Function -->
+  <path d="M 180 130 L 250 130" fill="none" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="215" y="120" text-anchor="middle" class="tufte-text tufte-small" fill="#666">전달</text>
+
+  <!-- Function Box -->
+  <g transform="translate(260, 60)">
+    <rect x="0" y="0" width="180" height="140" fill="#e8e8e8" stroke="#333" stroke-width="2" rx="5"/>
+    <text x="90" y="25" text-anchor="middle" class="tufte-text tufte-label" font-weight="bold">함수: addtwo()</text>
+    <line x1="15" y1="35" x2="165" y2="35" stroke="#999" stroke-width="1"/>
+
+    <!-- Function body -->
+    <rect x="15" y="45" width="150" height="80" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="3"/>
+    <text x="90" y="65" text-anchor="middle" class="tufte-text tufte-small" fill="#666">처리 로직</text>
+    <text x="90" y="85" text-anchor="middle" class="tufte-text tufte-code">added = a + b</text>
+    <text x="90" y="105" text-anchor="middle" class="tufte-text tufte-code">return added</text>
+  </g>
+
+  <!-- Arrow: Function to Output -->
+  <path d="M 450 130 L 520 130" fill="none" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="485" y="120" text-anchor="middle" class="tufte-text tufte-small" fill="#666">반환</text>
+
+  <!-- Output (Return Value) -->
+  <g transform="translate(530, 80)">
+    <rect x="0" y="0" width="120" height="100" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="5"/>
+    <text x="60" y="25" text-anchor="middle" class="tufte-text tufte-label" font-weight="bold">출력 (반환값)</text>
+    <line x1="15" y1="35" x2="105" y2="35" stroke="#ccc" stroke-width="1"/>
+    <text x="60" y="65" text-anchor="middle" class="tufte-text tufte-code">8</text>
+  </g>
+
+  <!-- Bottom annotation -->
+  <g transform="translate(50, 220)">
+    <rect x="0" y="0" width="600" height="50" fill="#fafafa" stroke="#999" stroke-width="1" rx="4"/>
+    <text x="300" y="20" text-anchor="middle" class="tufte-text tufte-small" fill="#666">함수 호출 예시</text>
+    <text x="300" y="40" text-anchor="middle" class="tufte-text tufte-code">result = addtwo(3, 5)  # result에 8이 저장됨</text>
+  </g>
+
+</svg>

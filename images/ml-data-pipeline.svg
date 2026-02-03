@@ -1,0 +1,159 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 80 800 320">
+  <defs>
+    <style>
+      .tufte-title {
+        font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif;
+        font-size: 18px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-subtitle {
+        font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif;
+        font-size: 14px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-label {
+        font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif;
+        font-size: 12px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-text {
+        font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif;
+        font-size: 11px;
+        fill: #444;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Menlo, Monaco, monospace;
+        font-size: 10px;
+        fill: #666;
+      }
+      .icon-box {
+        fill: #ffffff;
+        stroke: #666;
+        stroke-width: 1.5;
+      }
+      .tensor-block {
+        fill: #f0f0f0;
+        stroke: #333;
+        stroke-width: 1;
+      }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="800" height="450" fill="#ffffff"/>
+
+  <!-- Title -->
+  <!-- <text x="400" y="40" class="tufte-title" text-anchor="middle">데이터 파이프라인: 혼돈에서 질서로</text>
+  <text x="400" y="60" class="tufte-text" text-anchor="middle" font-style="italic">인간의 맥락(Context)과 기계의 연산(Computation) 사이를 잇다</text> -->
+
+  <!-- Left Zone: Raw Data (Chaos) -->
+  <g transform="translate(10, 100)">
+    <rect x="0" y="0" width="190" height="280" fill="#fafafa" stroke="#ddd" stroke-width="1" rx="5"/>
+    <text x="95" y="30" class="tufte-subtitle" text-anchor="middle">1. 인간 세상</text>
+    <text x="95" y="48" class="tufte-text" text-anchor="middle">(비정형 원시 데이터)</text>
+    <line x1="30" y1="60" x2="160" y2="60" stroke="#ccc" stroke-width="1"/>
+
+    <g transform="translate(30, 80) rotate(-10)">
+      <rect x="0" y="0" width="40" height="50" class="icon-box"/>
+      <line x1="5" y1="10" x2="35" y2="10" stroke="#ccc"/>
+      <line x1="5" y1="20" x2="35" y2="20" stroke="#ccc"/>
+      <line x1="5" y1="30" x2="25" y2="30" stroke="#ccc"/>
+      <text x="20" y="62" class="tufte-code" text-anchor="middle">.txt</text>
+    </g>
+
+    <g transform="translate(110, 90) rotate(15)">
+      <rect x="0" y="0" width="50" height="40" class="icon-box"/>
+      <circle cx="25" cy="20" r="10" fill="#eee"/>
+      <text x="25" y="52" class="tufte-code" text-anchor="middle">.jpg</text>
+    </g>
+
+    <g transform="translate(40, 160) rotate(5)">
+      <rect x="0" y="0" width="60" height="30" class="icon-box"/>
+      <path d="M5 15 Q15 5 25 15 T45 15 T55 15" fill="none" stroke="#999"/>
+      <text x="30" y="42" class="tufte-code" text-anchor="middle">.wav</text>
+    </g>
+
+    <g transform="translate(100, 180) rotate(-5)">
+      <rect x="0" y="0" width="70" height="25" class="icon-box"/>
+      <text x="35" y="16" font-size="8px" fill="#999" text-anchor="middle">user_id: 42...</text>
+      <text x="35" y="35" class="tufte-code" text-anchor="middle">.csv</text>
+    </g>
+
+    <text x="95" y="250" class="tufte-text" text-anchor="middle" fill="#666">높은 엔트로피 / 노이즈</text>
+  </g>
+
+  <!-- Middle Zone: The Transformation Pipeline -->
+  <g transform="translate(240, 100)">
+    <line x1="-30" y1="140" x2="0" y2="140" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+    
+    <rect x="0" y="0" width="240" height="280" fill="#fff" stroke="#666" stroke-width="1.5" stroke-dasharray="2,2" rx="5"/>
+    <text x="120" y="30" class="tufte-subtitle" text-anchor="middle">2. 엔지니어링 파이프라인</text>
+    
+    <rect x="40" y="60" width="160" height="45" class="icon-box" rx="3"/>
+    <text x="120" y="78" class="tufte-label" text-anchor="middle">정제 (Cleaning)</text>
+    <text x="120" y="93" class="tufte-code" font-size="9px" text-anchor="middle" fill="#999">불필요한 정보 제거</text>
+
+    <line x1="120" y1="105" x2="120" y2="120" stroke="#999" stroke-width="1" marker-end="url(#arrow)"/>
+
+    <rect x="40" y="120" width="160" height="45" class="icon-box" rx="3"/>
+    <text x="120" y="138" class="tufte-label" text-anchor="middle">라벨링 (Labeling)</text>
+    <text x="120" y="153" class="tufte-code" font-size="9px" text-anchor="middle" fill="#999">정답(y) 부착</text>
+
+    <line x1="120" y1="165" x2="120" y2="180" stroke="#999" stroke-width="1" marker-end="url(#arrow)"/>
+
+    <rect x="40" y="180" width="160" height="45" class="icon-box" rx="3" stroke="#333" stroke-width="2"/>
+    <text x="120" y="198" class="tufte-label" text-anchor="middle">벡터화 (Vectorization)</text>
+    <text x="120" y="213" class="tufte-code" font-size="9px" text-anchor="middle" fill="#333">숫자로 변환</text>
+
+    <text x="120" y="260" class="tufte-text" text-anchor="middle" fill="#666">형식화 및 정규화</text>
+  </g>
+
+  <!-- Right Zone: Machine Data (Order) -->
+  <g transform="translate(540, 100)">
+    <line x1="-40" y1="140" x2="-5" y2="140" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <rect x="0" y="0" width="210" height="280" fill="#fafafa" stroke="#333" stroke-width="1.5" rx="5"/>
+    <text x="105" y="30" class="tufte-subtitle" text-anchor="middle">3. 기계 세상</text>
+    <text x="105" y="48" class="tufte-text" text-anchor="middle">(구조화된 수치 데이터)</text>
+    <line x1="30" y1="60" x2="180" y2="60" stroke="#ccc" stroke-width="1"/>
+
+    <!-- Tensor Representation -->
+    <g transform="translate(45, 90)">
+        <rect x="10" y="-10" width="100" height="100" fill="#eee" stroke="#999" stroke-width="1"/>
+        <rect x="5" y="-5" width="100" height="100" fill="#ddd" stroke="#999" stroke-width="1"/>
+        <rect x="0" y="0" width="100" height="100" fill="#fff" stroke="#333" stroke-width="1.5"/>
+        
+        <line x1="0" y1="25" x2="100" y2="25" stroke="#ccc"/>
+        <line x1="0" y1="50" x2="100" y2="50" stroke="#ccc"/>
+        <line x1="0" y1="75" x2="100" y2="75" stroke="#ccc"/>
+        <line x1="25" y1="0" x2="25" y2="100" stroke="#ccc"/>
+        <line x1="50" y1="0" x2="50" y2="100" stroke="#ccc"/>
+        <line x1="75" y1="0" x2="75" y2="100" stroke="#ccc"/>
+
+        <!-- X Label: Enlarged and Bold -->
+        <text x="50" y="58" font-family="'SF Mono', Menlo, Monaco, monospace" font-size="32px" font-weight="bold" text-anchor="middle" fill="#333">X</text>
+    </g>
+
+    <!-- Labels Vector: Adjusted for better y visibility -->
+    <g transform="translate(160, 90)">
+        <!-- Lightened background (medium gray) with solid stroke -->
+        <rect x="0" y="0" width="30" height="100" fill="#cccccc" stroke="#333" stroke-width="1.5"/>
+        <!-- y Label: Enlarged, Bold, and Dark for high contrast -->
+        <text x="15" y="58" font-family="'SF Mono', Menlo, Monaco, monospace" font-size="32px" font-weight="bold" text-anchor="middle" fill="#000">y</text>
+    </g>
+
+    <text x="105" y="215" class="tufte-code" text-anchor="middle">Tensor (N, C, H, W)</text>
+    <text x="105" y="250" class="tufte-text" text-anchor="middle" fill="#666">낮은 엔트로피 / 학습 준비 완료</text>
+  </g>
+
+  <!-- Bottom Insight -->
+  <!-- <line x1="100" y1="400" x2="700" y2="400" stroke="#ddd" stroke-width="1"/>
+  <text x="400" y="420" class="tufte-text" text-anchor="middle">"쓰레기가 들어가면 쓰레기가 나온다(GIGO): 모델의 성능은 데이터 파이프라인 품질을 넘을 수 없다."</text> -->
+
+</svg>

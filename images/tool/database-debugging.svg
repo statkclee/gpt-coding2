@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 35 800 280">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #111; font-weight: bold; }
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-mono { font-family: 'SF Mono', Consolas, monospace; fill: #444; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #666; font-style: italic; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #777; font-size: 10px; }
+      .layer-box { fill: #f8f8f8; stroke: #333; stroke-width: 1.5; }
+      .step-box { fill: #fff; stroke: #666; stroke-width: 1; }
+      .flow-line { fill: none; stroke: #555; stroke-width: 1.5; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="2.5" orient="auto">
+      <path d="M0,0 L0,5 L7,2.5 z" fill="#555" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="320" fill="#ffffff"/>
+
+  <!-- 제목 -->
+  <!-- <text x="400" y="28" text-anchor="middle" class="tufte-title" font-size="14">데이터베이스 디버깅: 오류가 발생하는 세 가지 층</text>
+  <line x1="50" y1="40" x2="750" y2="40" stroke="#ddd" stroke-width="1"/> -->
+
+  <!-- 왼쪽: 세 가지 오류 층 -->
+  <g transform="translate(40, 55)">
+    <!-- Layer 1: SQL 문법 -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="220" height="70" class="layer-box" rx="4"/>
+      <text x="110" y="20" text-anchor="middle" class="tufte-title" font-size="11">1. SQL 문법 오류</text>
+      <line x1="10" y1="28" x2="210" y2="28" stroke="#ddd" stroke-width="1"/>
+      <text x="110" y="45" text-anchor="middle" class="tufte-mono" font-size="9">syntax error near "SELEC"</text>
+      <text x="110" y="60" text-anchor="middle" class="tufte-small">오타, 괄호, 따옴표 누락</text>
+    </g>
+
+    <!-- Layer 2: 스키마 불일치 -->
+    <g transform="translate(0, 85)">
+      <rect x="0" y="0" width="220" height="70" class="layer-box" rx="4"/>
+      <text x="110" y="20" text-anchor="middle" class="tufte-title" font-size="11">2. 스키마 불일치</text>
+      <line x1="10" y1="28" x2="210" y2="28" stroke="#ddd" stroke-width="1"/>
+      <text x="110" y="45" text-anchor="middle" class="tufte-mono" font-size="9">no such table / column</text>
+      <text x="110" y="60" text-anchor="middle" class="tufte-small">테이블·열 이름 오류</text>
+    </g>
+
+    <!-- Layer 3: 논리 오류 -->
+    <g transform="translate(0, 170)">
+      <rect x="0" y="0" width="220" height="70" class="layer-box" rx="4"/>
+      <text x="110" y="20" text-anchor="middle" class="tufte-title" font-size="11">3. 논리 오류</text>
+      <line x1="10" y1="28" x2="210" y2="28" stroke="#ddd" stroke-width="1"/>
+      <text x="110" y="45" text-anchor="middle" class="tufte-mono" font-size="9">결과 0건 / 예상과 다른 값</text>
+      <text x="110" y="60" text-anchor="middle" class="tufte-small">WHERE 조건, JOIN 키 오류</text>
+    </g>
+  </g>
+
+  <!-- 화살표 -->
+  <path d="M 280,145 L 320,145" class="flow-line" marker-end="url(#arrow)"/>
+
+  <!-- 오른쪽: 디버깅 전략 -->
+  <g transform="translate(340, 55)">
+    <rect x="0" y="0" width="410" height="250" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="6"/>
+    <text x="205" y="22" text-anchor="middle" class="tufte-title" font-size="12">디버깅 3단계 전략</text>
+    <line x1="15" y1="32" x2="395" y2="32" stroke="#ddd" stroke-width="1"/>
+
+    <!-- 전략 1: 분리 실행 -->
+    <g transform="translate(15, 45)">
+      <rect x="0" y="0" width="380" height="55" class="step-box" rx="4"/>
+      <text x="10" y="18" text-anchor="start" class="tufte-title" font-size="11">① 분리 실행</text>
+      <text x="10" y="35" text-anchor="start" class="tufte-text" font-size="10">SQL을 DB 도구(DBeaver, DB Browser 등)에서 먼저 실행</text>
+      <text x="10" y="50" text-anchor="start" class="tufte-label" font-size="9">→ SQL 자체 문제인지, 프로그램 문제인지 즉시 구분</text>
+    </g>
+
+    <!-- 전략 2: 단순화 -->
+    <g transform="translate(15, 110)">
+      <rect x="0" y="0" width="380" height="55" class="step-box" rx="4"/>
+      <text x="10" y="18" text-anchor="start" class="tufte-title" font-size="11">② 단순화</text>
+      <text x="10" y="35" text-anchor="start" class="tufte-text" font-size="10">복잡한 쿼리를 조각으로 분해: JOIN 제거, WHERE 단순화</text>
+      <text x="10" y="50" text-anchor="start" class="tufte-label" font-size="9">→ 어느 부분에서 문제가 생기는지 범위 좁히기</text>
+    </g>
+
+    <!-- 전략 3: 데이터 확인 -->
+    <g transform="translate(15, 175)">
+      <rect x="0" y="0" width="380" height="55" class="step-box" rx="4"/>
+      <text x="10" y="18" text-anchor="start" class="tufte-title" font-size="11">③ 데이터 확인</text>
+      <text x="10" y="35" text-anchor="start" class="tufte-text" font-size="10">SELECT * FROM 테이블 LIMIT 5 로 실제 데이터 확인</text>
+      <text x="10" y="50" text-anchor="start" class="tufte-label" font-size="9">→ 예상한 데이터가 실제로 존재하는지 검증</text>
+    </g>
+  </g>
+
+</svg>

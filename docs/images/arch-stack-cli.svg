@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 90">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 13px; fill: #333; font-weight: bold; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 11px; fill: #333; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 9px; fill: #666; }
+      .box { fill: #f5f5f5; stroke: #666; stroke-width: 1; }
+      .arrow { stroke: #999; stroke-width: 1; fill: none; marker-end: url(#arrowhead); }
+    </style>
+    <marker id="arrowhead" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto">
+      <polygon points="0 0, 6 2.5, 0 5" fill="#999"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="750" height="90" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="20" y="22" class="tufte-title">CLI 도구 스택</text>
+
+  <!-- Argument Parsing Chain -->
+  <text x="20" y="55" class="tufte-small" fill="#666">인자 파싱</text>
+
+  <rect x="85" y="40" width="90" height="30" rx="3" class="box"/>
+  <text x="130" y="58" text-anchor="middle" class="tufte-label">argparse</text>
+  <text x="130" y="68" text-anchor="middle" class="tufte-small">표준 라이브러리</text>
+
+  <path d="M 175 55 L 195 55" class="arrow"/>
+
+  <rect x="200" y="40" width="70" height="30" rx="3" class="box"/>
+  <text x="235" y="58" text-anchor="middle" class="tufte-label">click</text>
+  <text x="235" y="68" text-anchor="middle" class="tufte-small">데코레이터</text>
+
+  <path d="M 270 55 L 290 55" class="arrow"/>
+
+  <rect x="295" y="40" width="70" height="30" rx="3" class="box"/>
+  <text x="330" y="58" text-anchor="middle" class="tufte-label">typer</text>
+  <text x="330" y="68" text-anchor="middle" class="tufte-small">타입 힌트</text>
+
+  <!-- Output Tools -->
+  <text x="430" y="55" class="tufte-small" fill="#666">터미널 출력</text>
+
+  <rect x="510" y="40" width="65" height="30" rx="3" class="box"/>
+  <text x="542" y="58" text-anchor="middle" class="tufte-label">rich</text>
+  <text x="542" y="68" text-anchor="middle" class="tufte-small">색상, 테이블</text>
+
+  <rect x="585" y="40" width="70" height="30" rx="3" class="box"/>
+  <text x="620" y="58" text-anchor="middle" class="tufte-label">tqdm</text>
+  <text x="620" y="68" text-anchor="middle" class="tufte-small">프로그레스바</text>
+
+  <rect x="665" y="40" width="70" height="30" rx="3" class="box"/>
+  <text x="700" y="58" text-anchor="middle" class="tufte-label">colorama</text>
+  <text x="700" y="68" text-anchor="middle" class="tufte-small">크로스 플랫폼</text>
+</svg>

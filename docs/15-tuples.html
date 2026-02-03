@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" xml:lang="ko-KR"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.16">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="이광춘(Openai)">
+
+<title>11&nbsp; 튜플 – 챗GPT 코딩(개정판)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./16-dataframe.html" rel="next">
+<link href="./14-dictionaries.html" rel="prev">
+<link href="./images/logo.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-8ee146c0b749343448e797d10b61a7f9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-55f79cb6abf2a16ff6075165a9063c3c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "일치 없음",
+    "search-matching-documents-text": "일치된 문서",
+    "search-copy-link-title": "검색 링크 복사",
+    "search-hide-matches-text": "추가 검색 결과 숨기기",
+    "search-more-match-text": "추가 검색결과",
+    "search-more-matches-text": "추가 검색결과",
+    "search-clear-button-title": "제거",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "취소",
+    "search-submit-button-title": "검색",
+    "search-label": "검색"
+  }
+}</script>
+
+<script type="text/javascript">
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-229551680-1', 'auto');
+
+ga('send', {
+  hitType: 'pageview',
+  'anonymizeIp': true,
+});
+</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-data-intro.html"><strong>2부</strong> 자료구조</a></li><li class="breadcrumb-item"><a href="./15-tuples.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">튜플</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="검색" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">챗GPT 코딩(개정판)</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/bit2r/gpt-coding/" title="소스 코드" class="quarto-navigation-tool px-1" aria-label="소스 코드"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="리더 모드 전환">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="검색"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">서문</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>1부</strong> 전통 프로그래밍</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">프로그래밍 시작하기</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-var.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">변수, 표현식, 문장</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-cont.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">조건부 실행</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-func.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">함수</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-loop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">반복문</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>2부</strong> 자료구조</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-data-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">데이터, AI 식량</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-string.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">문자열</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-file.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">파일</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-list.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">리스트</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-dictionaries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">딕셔너리</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-tuples.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">튜플</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-dataframe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">데이터프레임</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-json.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">JSON</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18-tensor.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">텐서</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-embedding.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">벡터와 임베딩</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-graph.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">그래프</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>3부</strong> 버전제어와 협업</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Git 시작하기</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-tracking.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">변경사항 추적</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-history.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">히스토리와 파일 관리</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-remote.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">GitHub와 원격 저장소</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-collab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">협업과 충돌 해결</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">오픈 사이언스</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>4부</strong> 분야별 코딩</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">특화 도구 입문</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-regex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">정규 표현식</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-network.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-web.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">웹서비스</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-database.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">데이터베이스와 SQL</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-ds.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">데이터 과학과 R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-auto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">파일 자동화</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-make.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">빌드 자동화: make</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>5부</strong> 프로그래밍 패러다임</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-paradigm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">패러다임의 이해</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-imperative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">명령형과 절차적 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-oop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">객체지향 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-fp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">함수형 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-declarative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">선언형 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-reactive.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">반응형 프로그래밍</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>6부</strong> 소프트웨어 설계와 아키텍처</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-reuse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">재사용 명령</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-stack.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">소프트웨어 스택</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">소프트웨어 아키텍처</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-pattern.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">살아남은 패턴</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>7부</strong> 기계학습 패러다임</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-paradigm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">소프트웨어 2.0</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">신경망 아키텍처</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">43</span>&nbsp; <span class="chapter-title">학습과 추론</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-to-llm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">44</span>&nbsp; <span class="chapter-title">트랜스포머에서 거대 언어모형으로</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>부록</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">용어사전</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">참고문헌</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">목차</h2>
+   
+  <ul>
+  <li><a href="#tuple-why" id="toc-tuple-why" class="nav-link active" data-scroll-target="#tuple-why"><span class="header-section-number">11.1</span> 튜플이 필요한 이유</a></li>
+  <li><a href="#tuple-basics" id="toc-tuple-basics" class="nav-link" data-scroll-target="#tuple-basics"><span class="header-section-number">11.2</span> 튜플 기초</a></li>
+  <li><a href="#tuple-assignment" id="toc-tuple-assignment" class="nav-link" data-scroll-target="#tuple-assignment"><span class="header-section-number">11.3</span> 튜플 대입</a></li>
+  <li><a href="#tuple-dict" id="toc-tuple-dict" class="nav-link" data-scroll-target="#tuple-dict"><span class="header-section-number">11.4</span> 딕셔너리와 튜플</a></li>
+  <li><a href="#tuple-dsu" id="toc-tuple-dsu" class="nav-link" data-scroll-target="#tuple-dsu"><span class="header-section-number">11.5</span> 빈도순 정렬: DSU 패턴</a></li>
+  <li><a href="#tuple-frequency" id="toc-tuple-frequency" class="nav-link" data-scroll-target="#tuple-frequency"><span class="header-section-number">11.6</span> 가장 빈도 높은 단어 찾기</a></li>
+  <li><a href="#tuple-composite-key" id="toc-tuple-composite-key" class="nav-link" data-scroll-target="#tuple-composite-key"><span class="header-section-number">11.7</span> 복합 키로 튜플 활용</a></li>
+  <li><a href="#tuple-debugging" id="toc-tuple-debugging" class="nav-link" data-scroll-target="#tuple-debugging"><span class="header-section-number">11.8</span> 디버깅</a>
+  <ul class="collapse">
+  <li><a href="#튜플-불변성-오류" id="toc-튜플-불변성-오류" class="nav-link" data-scroll-target="#튜플-불변성-오류"><span class="header-section-number">11.8.1</span> 튜플 불변성 오류</a></li>
+  <li><a href="#언패킹-오류" id="toc-언패킹-오류" class="nav-link" data-scroll-target="#언패킹-오류"><span class="header-section-number">11.8.2</span> 언패킹 오류</a></li>
+  <li><a href="#뷰-객체와-리스트-혼동" id="toc-뷰-객체와-리스트-혼동" class="nav-link" data-scroll-target="#뷰-객체와-리스트-혼동"><span class="header-section-number">11.8.3</span> 뷰 객체와 리스트 혼동</a></li>
+  <li><a href="#디버깅-전략" id="toc-디버깅-전략" class="nav-link" data-scroll-target="#디버깅-전략"><span class="header-section-number">11.8.4</span> 디버깅 전략</a></li>
+  </ul></li>
+  <li><a href="#tuple-ai" id="toc-tuple-ai" class="nav-link" data-scroll-target="#tuple-ai"><span class="header-section-number">11.9</span> AI와 함께하는 튜플 처리</a></li>
+  <li><a href="#생각해볼-점-1" id="toc-생각해볼-점-1" class="nav-link" data-scroll-target="#생각해볼-점-1">💡 생각해볼 점</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/15-tuples.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-data-intro.html"><strong>2부</strong> 자료구조</a></li><li class="breadcrumb-item"><a href="./15-tuples.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">튜플</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="py-tuple" class="quarto-section-identifier"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">튜플</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p></p>
+<p>리스트와 딕셔너리만으로 충분해 보이지만, 파이썬에는 튜플이라는 또 다른 자료구조가 있다. 튜플은 왜 존재할까? 리스트가 “변경 가능한 순서 있는 값의 모음”이라면, 튜플은 “변경 불가능한 순서 있는 값의 모음”이다. 불변성이라는 특성 때문에 튜플은 리스트가 할 수 없는 역할을 수행한다. 딕셔너리 키로 사용할 수 있고, 함수에서 여러 값을 안전하게 반환할 수 있으며, 데이터가 실수로 변경되는 것을 방지한다.</p>
+<p>앞선 장에서 리스트로 순서 있는 데이터를, 딕셔너리로 키-값 매핑을 다루는 방법을 배웠다. 튜플은 두 자료구조를 연결하는 다리 역할을 한다. 딕셔너리의 <code>items()</code> 메서드가 반환하는 키-값 쌍이 튜플이고, 여러 값을 묶어 딕셔너리 키로 사용할 때도 튜플이 필요하다. 단어 빈도를 집계한 딕셔너리를 값 기준으로 정렬하려면 튜플 없이는 불가능하다. <a href="#fig-tuple-why" class="quarto-xref">그림&nbsp;<span>11.1</span></a> 는 튜플이 필요한 이유와 세 가지 핵심 이점을 보여준다.</p>
+<div id="fig-tuple-why" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tuple-why-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/tuple-why.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tuple-why-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;11.1: 튜플이 필요한 이유와 세 가지 이점
+</figcaption>
+</figure>
+</div>
+<section id="tuple-why" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="tuple-why"><span class="header-section-number">11.1</span> 튜플이 필요한 이유</h2>
+<p>리스트와 딕셔너리가 있는데 왜 튜플이 필요할까? 핵심은 <strong>불변성(immutability)</strong>에 있다. 리스트는 생성 후에도 요소를 추가하거나 삭제하거나 변경할 수 있지만, 튜플은 한 번 생성하면 내용을 바꿀 수 없다. 불변성이 제약처럼 보이지만, 실제로는 강력한 이점을 제공한다.</p>
+<p>첫째, <strong>딕셔너리 키로 사용할 수 있다.</strong> 딕셔너리 키는 해시 가능해야 하는데, 가변 객체인 리스트는 해시할 수 없다. 좌표 <code>(x, y)</code>나 날짜 <code>(년, 월, 일)</code> 같은 복합 키가 필요할 때 튜플이 유일한 선택지다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 리스트는 딕셔너리 키로 사용 불가</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>locations <span class="op">=</span> {}</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>locations[[<span class="dv">37</span>, <span class="dv">127</span>]] <span class="op">=</span> <span class="st">'서울'</span>  <span class="co"># TypeError!</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 튜플은 딕셔너리 키로 사용 가능</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>locations <span class="op">=</span> {}</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>locations[(<span class="dv">37</span>, <span class="dv">127</span>)] <span class="op">=</span> <span class="st">'서울'</span>  <span class="co"># OK</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(locations[(<span class="dv">37</span>, <span class="dv">127</span>)])</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 서울</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>둘째, <strong>데이터 무결성을 보장한다.</strong> 함수가 여러 값을 반환할 때 튜플을 사용하면 호출자가 실수로 반환값을 수정하는 것을 방지할 수 있다. 설정값이나 상수처럼 변하면 안 되는 데이터를 튜플로 저장하면 프로그램의 안정성이 높아진다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 튜플은 수정 시도 시 오류 발생</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>point <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">20</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>point[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">15</span>  <span class="co"># TypeError: 'tuple' object does not support item assignment</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>셋째, <strong>정렬에서 복합 키로 활용된다.</strong> 튜플은 첫 번째 요소부터 차례로 비교되므로, <code>(빈도, 단어)</code> 형태로 만들면 빈도순 정렬이 자연스럽게 이루어진다. DSU(Decorate-Sort-Undecorate) 패턴의 핵심이 바로 튜플이다.</p>
+</section>
+<section id="tuple-basics" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="tuple-basics"><span class="header-section-number">11.2</span> 튜플 기초</h2>
+<p></p>
+<p>튜플의 문법은 리스트와 거의 동일하다. 대괄호 <code>[]</code> 대신 괄호 <code>()</code>를 사용한다는 점만 다르다. <a href="#fig-tuple-vs-list" class="quarto-xref">그림&nbsp;<span>11.2</span></a> 는 리스트와 튜플의 핵심 차이를 비교한다. 생성 문법, 변경 가능성, 지원 연산, 딕셔너리 키 사용 가능 여부에서 두 자료구조가 어떻게 다른지 한눈에 파악할 수 있다.</p>
+<div id="fig-tuple-vs-list" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tuple-vs-list-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/tuple-vs-list.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tuple-vs-list-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;11.2: 리스트와 튜플 비교
+</figcaption>
+</figure>
+</div>
+<p>튜플은 괄호 <code>()</code>로 생성하고 쉼표로 요소를 구분한다. 리스트와 마찬가지로 인덱스로 요소에 접근하고, 슬라이싱도 지원한다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> (<span class="st">'a'</span>, <span class="st">'b'</span>, <span class="st">'c'</span>, <span class="st">'d'</span>, <span class="st">'e'</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(t[<span class="dv">0</span>])</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; a</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(t[<span class="dv">1</span>:<span class="dv">3</span>])</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ('b', 'c')</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>요소가 하나인 튜플을 만들 때는 쉼표가 필수다. <code>('hello')</code>처럼 괄호만 사용하면 파이썬은 이를 문자열로 인식한다. 단일 요소 튜플을 만들려면 <code>('hello',)</code>처럼 쉼표를 반드시 추가해야 한다. 이런 튜플을 <strong>싱글톤(singleton)</strong>이라고 부른다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="op">=</span> (<span class="st">'hello'</span>,)  <span class="co"># 튜플</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>t2 <span class="op">=</span> (<span class="st">'hello'</span>)   <span class="co"># 문자열</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(t1))</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;class 'tuple'&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(t2))</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;class 'str'&gt;</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>문자열이나 리스트 같은 다른 시퀀스를 튜플로 변환하려면 <code>tuple()</code> 함수를 사용한다. 문자열을 전달하면 각 문자가 개별 요소가 되고, 리스트를 전달하면 동일한 요소를 가진 튜플이 생성된다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> <span class="bu">tuple</span>(<span class="st">'lupins'</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(t)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ('l', 'u', 'p', 'i', 'n', 's')</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> <span class="bu">tuple</span>([<span class="st">'a'</span>, <span class="st">'b'</span>, <span class="st">'c'</span>])</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(t)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ('a', 'b', 'c')</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="tuple-assignment" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="tuple-assignment"><span class="header-section-number">11.3</span> 튜플 대입</h2>
+<p> </p>
+<p>튜플이 불변이라는 특성은 앞 절에서 살펴보았다. 그렇다면 튜플은 단순히 “변경할 수 없는 리스트”에 불과할까? 실제로 튜플이 파이썬에서 널리 사용되는 이유는 <strong>튜플 대입(tuple assignment)</strong>이라는 강력한 기능 때문이다. <strong>튜플 언패킹(tuple unpacking)</strong>이라고도 불리는 튜플 대입을 사용하면 여러 변수에 동시에 값을 할당할 수 있어 코드가 훨씬 간결해진다. 등호 오른쪽 튜플의 각 요소가 왼쪽 변수들에 순서대로 “풀려서” 들어가기 때문에 언패킹이라는 이름이 붙었다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 일반적인 방식</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 튜플 대입</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>a, b <span class="op">=</span> <span class="dv">1</span>, <span class="dv">2</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a, b)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 2</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>두 변수의 값을 교환할 때 튜플 대입이 특히 유용하다. 임시 변수 없이 한 줄로 교환할 수 있다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>a, b <span class="op">=</span> <span class="dv">1</span>, <span class="dv">2</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>a, b <span class="op">=</span> b, a  <span class="co"># 값 교환</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a, b)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 1</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>함수가 튜플을 반환하면 여러 값을 한 번에 받을 수 있다. <code>divmod()</code> 함수가 대표적인 예다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>quotient, remainder <span class="op">=</span> <span class="bu">divmod</span>(<span class="dv">7</span>, <span class="dv">3</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"몫: </span><span class="sc">{</span>quotient<span class="sc">}</span><span class="ss">, 나머지: </span><span class="sc">{</span>remainder<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 몫: 2, 나머지: 1</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>튜플 대입은 딕셔너리를 순회할 때 진가를 발휘한다. 앞선 장에서 딕셔너리를 <code>for</code> 루프로 순회하면 키만 반환되어, 값을 얻으려면 <code>d[key]</code>처럼 별도로 접근해야 했다. <code>items()</code> 메서드는 키-값 쌍을 <code>(key, value)</code> 형태의 튜플로 반환하므로, 튜플 대입을 활용하면 키와 값을 동시에 변수에 받을 수 있다. 코드가 간결해질 뿐 아니라 “키로 값을 다시 찾는” 불필요한 단계가 사라진다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> {<span class="st">'a'</span>: <span class="dv">10</span>, <span class="st">'b'</span>: <span class="dv">20</span>, <span class="st">'c'</span>: <span class="dv">30</span>}</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> key, value <span class="kw">in</span> d.items():</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(key, value)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; a 10</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; b 20</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; c 30</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="tuple-dict" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="tuple-dict"><span class="header-section-number">11.4</span> 딕셔너리와 튜플</h2>
+<p> </p>
+<p>앞선 장에서 딕셔너리로 단어 빈도를 집계하는 방법을 배웠다. 하지만 딕셔너리 출력은 정렬되지 않아 “가장 많이 등장한 단어가 무엇인가?”라는 질문에 바로 답하기 어려웠다. 딕셔너리 자체는 정렬 기능을 제공하지 않는다. 키-값 쌍을 원하는 순서로 정렬하려면 딕셔너리를 다른 자료구조로 변환해야 하는데, 바로 여기서 튜플이 등장한다. <code>items()</code> 메서드는 딕셔너리의 모든 키-값 쌍을 <code>(키, 값)</code> 형태의 튜플로 묶어 반환한다. 반환된 결과를 리스트로 변환하면 <code>sort()</code> 메서드로 정렬할 수 있다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> {<span class="st">'b'</span>: <span class="dv">1</span>, <span class="st">'a'</span>: <span class="dv">10</span>, <span class="st">'c'</span>: <span class="dv">22</span>}</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> <span class="bu">list</span>(d.items())</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(t)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [('b', 1), ('a', 10), ('c', 22)]</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>t.sort()</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(t)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [('a', 10), ('b', 1), ('c', 22)]</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>위 예제에서 <code>sort()</code>를 호출하면 알파벳 순서로 정렬된다. 튜플끼리 비교할 때는 첫 번째 요소부터 차례로 비교하기 때문이다. <code>('a', 10)</code>과 <code>('b', 1)</code>을 비교하면 첫 요소인 <code>'a'</code>와 <code>'b'</code>를 먼저 비교하고, <code>'a' &lt; 'b'</code>이므로 <code>('a', 10)</code>이 앞에 온다. 두 번째 요소인 10과 1은 비교하지 않는다. 그렇다면 값 기준으로 정렬하려면 어떻게 해야 할까? 정렬 기준으로 삼고 싶은 값을 튜플의 첫 번째 요소에 배치하면 된다. <code>(키, 값)</code> 대신 <code>(값, 키)</code> 형태로 튜플을 재구성하는 것이다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> {<span class="st">'b'</span>: <span class="dv">1</span>, <span class="st">'a'</span>: <span class="dv">10</span>, <span class="st">'c'</span>: <span class="dv">22</span>}</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>lst <span class="op">=</span> [(v, k) <span class="cf">for</span> k, v <span class="kw">in</span> d.items()]</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>lst.sort(reverse<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(lst)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [(22, 'c'), (10, 'a'), (1, 'b')]</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>리스트 컴프리헨션 <code>[(v, k) for k, v in d.items()]</code>은 딕셔너리의 각 키-값 쌍을 순회하면서 순서를 뒤집은 <code>(값, 키)</code> 튜플을 생성한다. <code>reverse=True</code>를 지정하면 내림차순으로 정렬되어 가장 큰 값이 맨 앞에 온다. 결과를 보면 값이 22인 <code>'c'</code>가 맨 앞에, 값이 1인 <code>'b'</code>가 맨 뒤에 위치한다. 딕셔너리를 튜플 리스트로 변환하고, 정렬한 뒤, 원하는 정보를 추출하는 패턴은 실무에서 매우 자주 사용되어 별도의 이름이 붙어 있다.</p>
+</section>
+<section id="tuple-dsu" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="tuple-dsu"><span class="header-section-number">11.5</span> 빈도순 정렬: DSU 패턴</h2>
+<p></p>
+<p>앞 절에서 딕셔너리를 튜플 리스트로 변환하고 정렬하는 방법을 살펴보았다. 실무에서 이러한 패턴은 매우 자주 등장하여 별도 이름이 붙어 있다. <strong>DSU(Decorate-Sort-Undecorate)</strong> 패턴이다. “장식하고, 정렬하고, 장식을 제거한다”라는 세 단계로 구성된 DSU 패턴은 딕셔너리 뿐 아니라 복잡한 정렬 기준이 필요한 모든 상황에서 활용된다. <a href="#fig-tuple-dsu" class="quarto-xref">그림&nbsp;<span>11.3</span></a> 는 단어 빈도 딕셔너리를 값 기준으로 정렬하는 DSU 패턴의 전체 흐름을 보여준다.</p>
+<div id="fig-tuple-dsu" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tuple-dsu-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/tuple-dsu.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tuple-dsu-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;11.3: DSU 패턴 - 딕셔너리를 값 기준으로 정렬
+</figcaption>
+</figure>
+</div>
+<p>단어 빈도를 계산한 후 “가장 많이 등장한 단어는 무엇인가?”라는 질문에 답하려면 딕셔너리를 값 기준으로 정렬해야 한다. 딕셔너리 자체는 정렬 기능이 없으므로 튜플 리스트로 변환하는 과정이 필요하다. DSU 패턴은 이 작업을 세 단계로 체계화한다.</p>
+<p>첫 번째 단계인 <strong>Decorate(장식)</strong>에서는 정렬 기준이 될 값을 튜플의 첫 번째 요소로 배치한다. 단어 빈도를 정렬한다면 <code>(빈도, 단어)</code> 형태로 튜플을 구성하는 것이다. 두 번째 단계인 <strong>Sort(정렬)</strong>에서는 생성된 튜플 리스트를 정렬한다. 튜플은 첫 번째 요소부터 비교하므로 빈도순으로 자연스럽게 정렬된다. 마지막 단계인 <strong>Undecorate(장식 제거)</strong>에서는 정렬된 결과에서 필요한 부분만 추출한다. 상위 10개 단어만 출력하거나, 단어만 리스트로 뽑아내는 식이다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 단어 빈도 딕셔너리</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> {<span class="st">'the'</span>: <span class="dv">45</span>, <span class="st">'and'</span>: <span class="dv">32</span>, <span class="st">'to'</span>: <span class="dv">28</span>, <span class="st">'of'</span>: <span class="dv">26</span>, <span class="st">'a'</span>: <span class="dv">18</span>}</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Decorate: (빈도, 단어) 튜플 리스트 생성</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>decorated <span class="op">=</span> [(count, word) <span class="cf">for</span> word, count <span class="kw">in</span> counts.items()]</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(decorated)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [(45, 'the'), (32, 'and'), (28, 'to'), (26, 'of'), (18, 'a')]</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Sort: 내림차순 정렬</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>decorated.sort(reverse<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(decorated)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [(45, 'the'), (32, 'and'), (28, 'to'), (26, 'of'), (18, 'a')]</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Undecorate: 상위 3개 단어 추출</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> count, word <span class="kw">in</span> decorated[:<span class="dv">3</span>]:</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(word, count)</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; the 45</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; and 32</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; to 28</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>DSU 패턴은 원리를 이해하기에 좋지만, 파이썬에서는 <code>sorted()</code> 함수의 <code>key</code> 매개변수를 활용하면 동일한 결과를 더 간결하게 얻을 수 있다. <code>key</code> 매개변수에 함수를 전달하면, <code>sorted()</code>는 각 요소를 정렬할 때 해당 함수의 반환값을 기준으로 비교한다. 딕셔너리를 값 기준으로 정렬하려면 <code>key=counts.get</code>을 지정하면 된다. <code>counts.get</code>은 키를 받아 값을 반환하는 메서드이므로, 결국 값을 기준으로 정렬하는 셈이다. 명시적으로 튜플 리스트를 만들지 않아도 되어 코드가 훨씬 간결해진다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> {<span class="st">'the'</span>: <span class="dv">45</span>, <span class="st">'and'</span>: <span class="dv">32</span>, <span class="st">'to'</span>: <span class="dv">28</span>, <span class="st">'of'</span>: <span class="dv">26</span>, <span class="st">'a'</span>: <span class="dv">18</span>}</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 값 기준 내림차순 정렬</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> word <span class="kw">in</span> <span class="bu">sorted</span>(counts, key<span class="op">=</span>counts.get, reverse<span class="op">=</span><span class="va">True</span>):</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(word, counts[word])</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; the 45</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; and 32</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; to 28</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; of 26</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; a 18</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="tuple-frequency" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="tuple-frequency"><span class="header-section-number">11.6</span> 가장 빈도 높은 단어 찾기</h2>
+<p></p>
+<p>지금까지 배운 내용을 종합하면 실제 텍스트 분석 문제를 해결할 수 있다. “로미오와 줄리엣”에서 가장 많이 등장하는 단어 10개를 찾는 프로그램을 작성해보자. 딕셔너리로 빈도를 집계하고, DSU 패턴으로 정렬한 뒤, 상위 N개를 출력하는 전형적인 텍스트 분석 워크플로우다.</p>
+<p>프로그램은 세 단계로 구성된다. 첫째, 파일을 읽으면서 각 단어 출현 횟수를 딕셔너리에 집계한다. 이때 <code>translate()</code>로 구두점을 제거하고 <code>lower()</code>로 소문자로 통일하여 “The”와 “the”가 같은 단어로 인식되도록 한다. 둘째, 딕셔너리 키-값 쌍을 <code>(빈도, 단어)</code> 형태의 튜플 리스트로 변환하고 내림차순 정렬한다. 셋째, 슬라이싱으로 상위 10개만 추출하여 출력한다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> string</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>fhand <span class="op">=</span> <span class="bu">open</span>(<span class="st">'data/romeo-full.txt'</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> {}</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> line <span class="kw">in</span> fhand:</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    line <span class="op">=</span> line.translate(<span class="bu">str</span>.maketrans(<span class="st">''</span>, <span class="st">''</span>, string.punctuation))</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    line <span class="op">=</span> line.lower()</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    words <span class="op">=</span> line.split()</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> word <span class="kw">in</span> words:</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>        counts[word] <span class="op">=</span> counts.get(word, <span class="dv">0</span>) <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 빈도순 정렬</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>lst <span class="op">=</span> [(count, word) <span class="cf">for</span> word, count <span class="kw">in</span> counts.items()]</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>lst.sort(reverse<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 상위 10개 출력</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> count, word <span class="kw">in</span> lst[:<span class="dv">10</span>]:</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(word, count)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>실행 결과를 보면 “the”, “and”, “to”, “i” 같은 일반적인 단어가 상위를 차지한다. 영어에서 가장 흔한 단어들이 빈도 상위에 오르는 것은 당연한 결과다. 문학 작품의 특성이나 저자의 문체를 분석하려면 <strong>불용어(stop words)</strong>를 제거하는 추가 처리가 필요하다. 불용어란 “the”, “a”, “is” 같이 의미보다는 문법적 기능을 수행하는 단어로, 대부분의 텍스트에서 높은 빈도로 등장하지만 내용 분석에는 도움이 되지 않는다.</p>
+</section>
+<section id="tuple-composite-key" class="level2" data-number="11.7">
+<h2 data-number="11.7" class="anchored" data-anchor-id="tuple-composite-key"><span class="header-section-number">11.7</span> 복합 키로 튜플 활용</h2>
+<p></p>
+<p>지금까지 딕셔너리 키로 문자열이나 숫자 같은 단일 값을 사용했다. 하지만 실무에서는 여러 값을 조합해야 하나의 항목을 식별할 수 있는 경우가 많다. 지도에서 특정 위치를 찾으려면 위도와 경도 두 값이 필요하고, 달력에서 특정 날짜를 찾으려면 연, 월, 일 세 값이 필요하다. 리스트로 <code>[위도, 경도]</code>를 묶어 키로 사용하면 좋겠지만, 리스트는 가변 객체라 딕셔너리 키가 될 수 없다. 바로 여기서 튜플의 불변성이 빛을 발한다.</p>
+<p><a href="#fig-tuple-composite-key" class="quarto-xref">그림&nbsp;<span>11.4</span></a> 는 리스트가 키로 사용 불가능한 이유와 튜플로 복합 키를 구성하는 세 가지 활용 예시를 보여준다. 딕셔너리 키는 해시 가능해야 하는데, 가변 객체인 리스트는 내용이 바뀌면 해시 값도 달라지므로 키로 사용할 수 없다. 튜플은 불변이므로 해시 값이 일정하게 유지되어 안전하게 키로 사용할 수 있다.</p>
+<div id="fig-tuple-composite-key" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tuple-composite-key-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/tuple-composite-key.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tuple-composite-key-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;11.4: 튜플을 딕셔너리 키로 활용하는 복합 키
+</figcaption>
+</figure>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 좌표별 지역명 저장</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>locations <span class="op">=</span> {}</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>locations[(<span class="fl">37.5665</span>, <span class="fl">126.9780</span>)] <span class="op">=</span> <span class="st">'서울'</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>locations[(<span class="fl">35.1796</span>, <span class="fl">129.0756</span>)] <span class="op">=</span> <span class="st">'부산'</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>locations[(<span class="fl">35.8714</span>, <span class="fl">128.6014</span>)] <span class="op">=</span> <span class="st">'대구'</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(locations[(<span class="fl">37.5665</span>, <span class="fl">126.9780</span>)])</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 서울</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 날짜별 이벤트 저장</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>events <span class="op">=</span> {}</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>events[(<span class="dv">2024</span>, <span class="dv">1</span>, <span class="dv">1</span>)] <span class="op">=</span> <span class="st">'신정'</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>events[(<span class="dv">2024</span>, <span class="dv">2</span>, <span class="dv">10</span>)] <span class="op">=</span> <span class="st">'설날'</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>events[(<span class="dv">2024</span>, <span class="dv">5</span>, <span class="dv">5</span>)] <span class="op">=</span> <span class="st">'어린이날'</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> date, event <span class="kw">in</span> events.items():</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    year, month, day <span class="op">=</span> date</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>year<span class="sc">}</span><span class="ss">년 </span><span class="sc">{</span>month<span class="sc">}</span><span class="ss">월 </span><span class="sc">{</span>day<span class="sc">}</span><span class="ss">일: </span><span class="sc">{</span>event<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>첫 번째 예제는 <code>(위도, 경도)</code> 튜플을 키로, 지역명을 값으로 저장한다. 좌표만 알면 해당 위치의 지역명을 즉시 찾을 수 있다. 두 번째 예제는 <code>(년, 월, 일)</code> 튜플을 키로, 이벤트명을 값으로 저장한다. 튜플 대입을 활용하면 <code>for</code> 루프에서 날짜의 각 구성요소를 개별 변수로 분리해 사용할 수 있다. 복합 키가 필요한 상황에서 튜플은 리스트의 대안이 아니라 유일한 선택지다.</p>
+</section>
+<section id="tuple-debugging" class="level2" data-number="11.8">
+<h2 data-number="11.8" class="anchored" data-anchor-id="tuple-debugging"><span class="header-section-number">11.8</span> 디버깅</h2>
+<p> </p>
+<p>리스트, 딕셔너리, 튜플을 자유롭게 조합하면 복잡한 데이터도 효과적으로 표현할 수 있다. 하지만 자료구조가 복잡해질수록 <strong>형태 오류(shape error)</strong>에 노출되기 쉽다. 형태 오류란 자료구조의 형태가 코드가 기대하는 것과 다를 때 발생하는 오류다. 예를 들어 <code>(키, 값)</code> 튜플을 기대했는데 <code>(값, 키)</code> 순서로 들어오거나, 2개 요소 튜플을 기대했는데 3개가 들어오는 경우다. 형태 오류는 프로그램이 즉시 멈추지 않고 잘못된 결과를 낼 수 있어 발견하기 어려운 경우가 많다.</p>
+<section id="튜플-불변성-오류" class="level3" data-number="11.8.1">
+<h3 data-number="11.8.1" class="anchored" data-anchor-id="튜플-불변성-오류"><span class="header-section-number">11.8.1</span> 튜플 불변성 오류</h3>
+<p>가장 흔한 실수는 튜플을 리스트처럼 다루려는 것이다. 튜플은 불변이므로 요소를 추가하거나 변경하려 하면 오류가 발생한다. <code>append()</code>는 <code>AttributeError</code>를, 인덱스 대입은 <code>TypeError</code>를 일으킨다. 리스트에서 익숙해진 습관이 튜플에서 문제가 되는 경우다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>t.append(<span class="dv">4</span>)  <span class="co"># AttributeError: 'tuple' object has no attribute 'append'</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>t[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">10</span>    <span class="co"># TypeError: 'tuple' object does not support item assignment</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>튜플의 내용을 바꿔야 한다면 새 튜플을 생성해야 한다. 슬라이싱과 연결을 조합하면 특정 위치의 값을 “변경”한 것처럼 보이는 새 튜플을 만들 수 있다. <code>(10,) + t[1:]</code>은 첫 번째 요소만 10으로 바꾼 새 튜플 <code>(10, 2, 3)</code>을 생성한다.</p>
+</section>
+<section id="언패킹-오류" class="level3" data-number="11.8.2">
+<h3 data-number="11.8.2" class="anchored" data-anchor-id="언패킹-오류"><span class="header-section-number">11.8.2</span> 언패킹 오류</h3>
+<p></p>
+<p>튜플 대입에서 양쪽의 요소 개수가 맞지 않으면 <code>ValueError</code>가 발생한다. <code>for</code> 루프에서 딕셔너리의 <code>items()</code>를 순회할 때 특히 주의해야 한다. <code>for k, v in d</code>라고 쓰면 키만 순회하므로 언패킹이 실패한다. 반드시 <code>for k, v in d.items()</code>로 작성해야 한다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>point <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>x, y <span class="op">=</span> point  <span class="co"># ValueError: too many values to unpack (expected 2)</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> {<span class="st">'a'</span>: <span class="dv">1</span>, <span class="st">'b'</span>: <span class="dv">2</span>}</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k, v <span class="kw">in</span> d:      <span class="co"># ValueError: not enough values to unpack</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(k, v)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k, v <span class="kw">in</span> d.items():  <span class="co"># 올바른 방법</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(k, v)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">노트</span>별표(*)를 사용한 확장 언패킹
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>요소 개수가 불확실할 때는 별표(<code>*</code>)를 사용한 확장 언패킹이 유용하다. <code>first, *rest = (1, 2, 3, 4)</code>는 첫 요소를 <code>first</code>에, 나머지를 리스트로 <code>rest</code>에 할당한다. <code>first</code>는 <code>1</code>, <code>rest</code>는 <code>[2, 3, 4]</code>가 된다.</p>
+</div>
+</div>
+</section>
+<section id="뷰-객체와-리스트-혼동" class="level3" data-number="11.8.3">
+<h3 data-number="11.8.3" class="anchored" data-anchor-id="뷰-객체와-리스트-혼동"><span class="header-section-number">11.8.3</span> 뷰 객체와 리스트 혼동</h3>
+<p>딕셔너리의 <code>keys()</code>, <code>values()</code>, <code>items()</code> 메서드가 반환하는 것은 리스트가 아니라 <strong>뷰 객체(view object)</strong>다. 뷰 객체는 인덱싱이나 슬라이싱을 지원하지 않으므로, 특정 위치의 항목에 접근하거나 정렬하려면 먼저 <code>list()</code>로 변환해야 한다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> {<span class="st">'a'</span>: <span class="dv">1</span>, <span class="st">'b'</span>: <span class="dv">2</span>}</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>items <span class="op">=</span> d.items()</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># items[0]  # TypeError: 'dict_items' object is not subscriptable</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>items_list <span class="op">=</span> <span class="bu">list</span>(d.items())</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(items_list[<span class="dv">0</span>])  <span class="co"># ('a', 1)</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>뷰 객체는 원본 딕셔너리와 연결되어 있어 딕셔너리가 변경되면 뷰도 함께 변한다. 반면 <code>list()</code>로 변환한 리스트는 변환 시점의 스냅샷이므로 이후 딕셔너리 변경에 영향받지 않는다. 루프 중에 딕셔너리를 수정해야 한다면 먼저 리스트로 변환하는 것이 안전하다.</p>
+</section>
+<section id="디버깅-전략" class="level3" data-number="11.8.4">
+<h3 data-number="11.8.4" class="anchored" data-anchor-id="디버깅-전략"><span class="header-section-number">11.8.4</span> 디버깅 전략</h3>
+<p>복합 자료구조를 다룰 때는 <code>type()</code>과 <code>len()</code>으로 구조를 수시로 확인하는 습관이 중요하다. 특히 함수가 반환한 값이나 루프 변수의 형태가 불확실할 때 유용하다. <code>print(type(x), len(x) if hasattr(x, '__len__') else 'N/A')</code>처럼 타입과 길이를 함께 출력하면 문제를 빠르게 파악할 수 있다.</p>
+<p>DSU 패턴을 사용할 때는 각 단계별로 중간 결과를 확인하는 것이 좋다. Decorate 단계에서 튜플이 의도한 순서로 구성되었는지, Sort 단계에서 정렬 방향이 맞는지, Undecorate 단계에서 올바른 요소를 추출하는지 점검한다. 한꺼번에 작성하고 오류를 찾기보다 단계별로 검증하는 것이 디버깅 시간을 줄여준다.</p>
+</section>
+</section>
+<section id="tuple-ai" class="level2" data-number="11.9">
+<h2 data-number="11.9" class="anchored" data-anchor-id="tuple-ai"><span class="header-section-number">11.9</span> AI와 함께하는 튜플 처리</h2>
+<p>지금까지 튜플의 불변성, 튜플 대입, DSU 패턴을 배웠다. 이제 AI와 협업하여 튜플 관련 작업을 수행하는 방법을 살펴보자. 딕셔너리를 값 기준으로 정렬하거나, 복합 키로 데이터를 분류하거나, 다중 조건으로 정렬하는 작업은 직접 코드를 작성하면 실수하기 쉽다. AI에게 이런 작업을 요청할 때는 데이터 구조와 정렬 조건을 구체적으로 전달해야 원하는 결과를 얻을 수 있다.</p>
+<p>효과적인 프롬프트는 입력 데이터의 현재 구조, 정렬 기준, 기대하는 출력 형태를 모두 포함한다. “딕셔너리를 정렬해줘”라고 요청하면 AI가 키 기준인지 값 기준인지, 오름차순인지 내림차순인지 판단할 수 없다. 딕셔너리의 키와 값이 무엇을 의미하는지, 어떤 기준으로 어떤 방향으로 정렬할지, 결과를 어떤 형식으로 출력할지 명시하면 AI가 정확한 코드를 생성한다. 입력과 출력 예시를 함께 제공하면 의도 전달이 더욱 명확해진다.</p>
+<blockquote class="blockquote">
+<p>단어 빈도 딕셔너리를 빈도 내림차순으로 정렬하고 상위 5개를 출력해줘.</p>
+<p>입력: <code>{'apple': 3, 'banana': 7, 'cherry': 2, 'date': 5, 'elderberry': 1, 'fig': 4}</code></p>
+<p>출력 형식: <code>단어: 빈도</code> 형태로 한 줄씩</p>
+<p>기대 결과:</p>
+<pre><code>banana: 7
+date: 5
+fig: 4
+apple: 3
+cherry: 2</code></pre>
+</blockquote>
+<p>다중 조건 정렬은 튜플의 비교 특성을 활용하는 대표적인 사례다. 튜플은 첫 번째 요소부터 차례로 비교하므로, 정렬 우선순위에 따라 튜플 요소를 배치하면 복잡한 정렬도 자연스럽게 구현된다. 다만 오름차순과 내림차순이 섞이면 구현이 까다로워지므로, AI에게 요청할 때 각 기준의 정렬 방향을 명확히 전달해야 한다.</p>
+<blockquote class="blockquote">
+<p>학생 정보를 학년 오름차순, 같은 학년 내에서는 점수 내림차순으로 정렬해줘.</p>
+<p>입력: <code>[('홍길동', 2, 85), ('김철수', 1, 92), ('이영희', 2, 78), ('박민수', 1, 88)]</code></p>
+<p>각 튜플: <code>(이름, 학년, 점수)</code></p>
+</blockquote>
+<p>AI가 생성한 코드를 검증하려면 본 장에서 배운 개념이 필요하다. DSU 패턴을 사용했다면 Decorate 단계에서 정렬 키가 튜플의 첫 번째 요소에 올바르게 배치되었는지, Sort 단계에서 정렬 방향이 의도와 일치하는지, Undecorate 단계에서 필요한 정보만 추출하는지 점검한다. <code>sorted()</code>의 <code>key</code> 매개변수를 사용했다면 람다 함수나 <code>itemgetter</code>가 올바른 인덱스를 참조하는지 확인한다. 작은 테스트 데이터로 먼저 실행해보고, 결과가 예상과 일치하는지 검증하는 습관이 오류를 조기에 발견하는 가장 확실한 방법이다.</p>
+</section>
+<section id="생각해볼-점-1" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="생각해볼-점-1">💡 생각해볼 점</h2>
+<p>튜플은 “변경할 수 없는 리스트”로 시작하지만, 그 이상의 역할을 수행한다. 불변성 덕분에 딕셔너리 키로 사용할 수 있고, 함수에서 여러 값을 안전하게 반환할 수 있으며, 정렬을 위한 복합 키로 활용된다. 리스트가 “데이터는 바뀔 수 있다”고 선언하는 것이라면, 튜플은 “데이터는 바뀌지 않는다”고 약속하는 것이다.</p>
+<p>튜플 대입은 파이썬의 우아함을 보여주는 기능이다. <code>a, b = b, a</code>로 값을 교환하고, <code>for key, value in d.items()</code>로 딕셔너리를 순회하는 패턴은 코드를 간결하고 읽기 쉽게 만든다. 함수가 여러 값을 반환할 때도 튜플이 자연스럽게 사용된다.</p>
+<p>DSU 패턴은 딕셔너리를 값 기준으로 정렬하는 표준적인 방법이다. 딕셔너리 키-값 쌍을 <code>(값, 키)</code> 튜플로 변환하고, 정렬한 뒤, 필요한 정보를 추출한다. 단어 빈도 분석, 순위 계산 등 실무에서 자주 등장하는 패턴이므로 익숙해지는 것이 좋다.</p>
+<p>리스트, 딕셔너리, 튜플은 각각 고유한 역할이 있다. 순서가 있고 변경이 필요하면 리스트, 키로 값을 찾아야 하면 딕셔너리, 변경되지 않아야 하거나 복합 키가 필요하면 튜플을 선택한다. 세 자료구조를 자유롭게 조합할 수 있다면 대부분의 데이터 처리 문제를 해결할 수 있다.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "복사완료!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "복사완료!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/r2bit\.com\/gpt-coding\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./14-dictionaries.html" class="pagination-link" aria-label="딕셔너리">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">딕셔너리</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./16-dataframe.html" class="pagination-link" aria-label="데이터프레임">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">데이터프레임</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>챗GPT 쿼토 책은 소프트웨어 카펜트리 “Git 버전제어”를 번역한 것이 포함되어 있습니다.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/15-tuples.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>순수하게 <a href="https://quarto.org/">쿼토(Quarto)</a>로 제작되었습니다.</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

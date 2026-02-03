@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 20 650 130">
+  <defs>
+    <style>
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-title { font-size: 18px; font-weight: bold; }
+      .tufte-label { font-size: 12px; font-weight: bold; }
+      .tufte-small { font-size: 10px; fill: #555; }
+      .tufte-year { font-size: 11px; fill: #666; }
+      .gen-label { font-size: 11px; fill: #888; font-style: italic; }
+      .timeline { stroke: #333; stroke-width: 2; }
+      .node-local { fill: #e0e0e0; stroke: #666; stroke-width: 1.5; }
+      .node-central { fill: #d0d0d0; stroke: #555; stroke-width: 1.5; }
+      .node-dist { fill: #bbb; stroke: #444; stroke-width: 2; }
+      .connector { stroke: #999; stroke-width: 1; stroke-dasharray: 3,2; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#333"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="650" height="200" fill="#ffffff"/>
+
+  <!-- Title -->
+  <!-- <text x="325" y="25" text-anchor="middle" class="tufte-text tufte-title">버전 관리 시스템의 진화</text> -->
+
+  <!-- Generation labels -->
+  <text x="95" y="50" text-anchor="middle" class="gen-label">1세대: 로컬</text>
+  <text x="280" y="50" text-anchor="middle" class="gen-label">2세대: 중앙집중식</text>
+  <text x="530" y="50" text-anchor="middle" class="gen-label">3세대: 분산형</text>
+
+  <!-- Timeline arrow -->
+  <line x1="30" y1="100" x2="620" y2="100" class="timeline" marker-end="url(#arrow)"/>
+
+  <!-- Generation dividers -->
+  <line x1="170" y1="60" x2="170" y2="140" class="connector"/>
+  <line x1="410" y1="60" x2="410" y2="140" class="connector"/>
+
+  <!-- 1세대: 로컬 VCS -->
+  <!-- SCCS 1972 -->
+  <g transform="translate(55, 100)">
+    <circle cx="0" cy="0" r="12" class="node-local"/>
+    <text x="0" y="4" text-anchor="middle" class="tufte-small" style="font-weight:bold;">SCCS</text>
+    <text x="0" y="-22" text-anchor="middle" class="tufte-year">1972</text>
+    <text x="0" y="28" text-anchor="middle" class="tufte-small">Bell Labs</text>
+  </g>
+
+  <!-- RCS 1982 -->
+  <g transform="translate(130, 100)">
+    <circle cx="0" cy="0" r="12" class="node-local"/>
+    <text x="0" y="4" text-anchor="middle" class="tufte-small" style="font-weight:bold;">RCS</text>
+    <text x="0" y="-22" text-anchor="middle" class="tufte-year">1982</text>
+    <text x="0" y="28" text-anchor="middle" class="tufte-small">Purdue</text>
+  </g>
+
+  <!-- 2세대: 중앙집중식 -->
+  <!-- CVS 1986 -->
+  <g transform="translate(210, 100)">
+    <circle cx="0" cy="0" r="14" class="node-central"/>
+    <text x="0" y="4" text-anchor="middle" class="tufte-small" style="font-weight:bold;">CVS</text>
+    <text x="0" y="-24" text-anchor="middle" class="tufte-year">1986</text>
+    <text x="0" y="30" text-anchor="middle" class="tufte-small">네트워크</text>
+  </g>
+
+  <!-- Perforce 1995 -->
+  <g transform="translate(280, 100)">
+    <circle cx="0" cy="0" r="12" class="node-central"/>
+    <text x="0" y="-14" text-anchor="middle" class="tufte-small" style="font-size:9px; font-weight:bold;">Perforce</text>
+    <text x="0" y="-22" text-anchor="middle" class="tufte-year">1995</text>
+    <text x="0" y="28" text-anchor="middle" class="tufte-small">상용</text>
+  </g>
+
+  <!-- SVN 2000 -->
+  <g transform="translate(355, 100)">
+    <circle cx="0" cy="0" r="15" class="node-central"/>
+    <text x="0" y="4" text-anchor="middle" class="tufte-small" style="font-weight:bold;">SVN</text>
+    <text x="0" y="-25" text-anchor="middle" class="tufte-year">2000</text>
+    <text x="0" y="32" text-anchor="middle" class="tufte-small">아파치</text>
+  </g>
+
+  <!-- 3세대: 분산형 -->
+  <!-- Git 2005 -->
+  <g transform="translate(470, 100)">
+    <circle cx="0" cy="0" r="20" class="node-dist"/>
+    <text x="0" y="5" text-anchor="middle" class="tufte-label">Git</text>
+    <text x="0" y="-30" text-anchor="middle" class="tufte-year">2005</text>
+    <text x="0" y="38" text-anchor="middle" class="tufte-small">리누스 토르발스</text>
+  </g>
+
+  <!-- GitHub 2008 -->
+  <g transform="translate(560, 100)">
+    <rect x="-22" y="-14" width="44" height="28" rx="4" class="node-dist"/>
+    <text x="0" y="5" text-anchor="middle" class="tufte-small" style="font-weight:bold;">GitHub</text>
+    <text x="0" y="-24" text-anchor="middle" class="tufte-year">2008</text>
+    <text x="0" y="32" text-anchor="middle" class="tufte-small">호스팅</text>
+  </g>
+
+  <!-- Evolution arrows -->
+  <path d="M67,100 L116,100" stroke="#999" stroke-width="1" marker-end="url(#arrow)" fill="none"/>
+  <path d="M144,100 L194,100" stroke="#999" stroke-width="1" marker-end="url(#arrow)" fill="none"/>
+  <path d="M226,100 L266,100" stroke="#999" stroke-width="1" marker-end="url(#arrow)" fill="none"/>
+  <path d="M294,100 L338,100" stroke="#999" stroke-width="1" marker-end="url(#arrow)" fill="none"/>
+  <path d="M372,100 L448,100" stroke="#999" stroke-width="1" marker-end="url(#arrow)" fill="none"/>
+  <path d="M492,100 L536,100" stroke="#999" stroke-width="1" marker-end="url(#arrow)" fill="none"/>
+
+
+</svg>

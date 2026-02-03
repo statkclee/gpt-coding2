@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 30 700 190">
+  <defs>
+    <style>
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-title { font-size: 14px; font-weight: bold; }
+      .tufte-label { font-size: 11px; }
+      .tufte-small { font-size: 12px; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L8,3 z" fill="#999"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="700" height="260" fill="#ffffff"/>
+
+  <!-- Title -->
+  <!-- <text x="350" y="28" text-anchor="middle" class="tufte-text tufte-title">문장에서 시스템까지: 프로그래밍 구성 요소의 계층</text> -->
+
+  <!-- Row 1: 문장 → 함수 → 모듈 → 패키지 -->
+
+  <!-- 문장 -->
+  <rect x="50" y="55" width="80" height="50" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="3"/>
+  <text x="90" y="77" text-anchor="middle" class="tufte-text tufte-label" font-weight="bold">문장</text>
+  <text x="90" y="93" text-anchor="middle" class="tufte-text tufte-small" fill="#666">(벽돌)</text>
+
+  <!-- Arrow 1 -->
+  <path d="M 135 80 L 165 80" fill="none" stroke="#999" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 함수 -->
+  <rect x="175" y="55" width="80" height="50" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="3"/>
+  <text x="215" y="77" text-anchor="middle" class="tufte-text tufte-label" font-weight="bold">함수</text>
+  <text x="215" y="93" text-anchor="middle" class="tufte-text tufte-small" fill="#666">(벽)</text>
+
+  <!-- Arrow 2 -->
+  <path d="M 260 80 L 290 80" fill="none" stroke="#999" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 모듈 -->
+  <rect x="300" y="55" width="80" height="50" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="3"/>
+  <text x="340" y="77" text-anchor="middle" class="tufte-text tufte-label" font-weight="bold">모듈</text>
+  <text x="340" y="93" text-anchor="middle" class="tufte-text tufte-small" fill="#666">(방)</text>
+
+  <!-- Arrow 3 -->
+  <path d="M 385 80 L 415 80" fill="none" stroke="#999" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 패키지 -->
+  <rect x="425" y="55" width="80" height="50" fill="#ececec" stroke="#333" stroke-width="1.5" rx="3"/>
+  <text x="465" y="77" text-anchor="middle" class="tufte-text tufte-label" font-weight="bold">패키지</text>
+  <text x="465" y="93" text-anchor="middle" class="tufte-text tufte-small" fill="#666">(층)</text>
+
+  <!-- Row 1 label -->
+  <text x="580" y="80" text-anchor="start" class="tufte-text tufte-small" fill="#999">코드 구조</text>
+
+  <!-- Curved arrow from 패키지 to 프로그램 -->
+  <g transform="translate(10, -10)">
+    <path d="M 505 95 Q 565 140, 505 185" fill="none" stroke="#999" stroke-width="1.5"/>
+    <path d="M 505 185 L 495 185" fill="none" stroke="#999" stroke-width="1.5" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- Row 2: 프로그램 → 소프트웨어 → 시스템 -->
+
+  <g transform="translate(100, 0)">
+    <!-- 프로그램 -->
+    <rect x="300" y="150" width="100" height="50" fill="#e0e0e0" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="350" y="172" text-anchor="middle" class="tufte-text tufte-label" font-weight="bold">프로그램</text>
+    <text x="350" y="188" text-anchor="middle" class="tufte-text tufte-small" fill="#666">(건물)</text>
+
+    <!-- Arrow 5 -->
+    <path d="M 295 175 L 265 175" fill="none" stroke="#999" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <!-- 소프트웨어 -->
+    <rect x="150" y="150" width="110" height="50" fill="#d0d0d0" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="205" y="172" text-anchor="middle" class="tufte-text tufte-label" font-weight="bold">소프트웨어</text>
+    <text x="205" y="188" text-anchor="middle" class="tufte-text tufte-small" fill="#666">(건물 단지)</text>
+
+    <!-- Arrow 6 -->
+    <path d="M 145 175 L 115 175" fill="none" stroke="#999" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <!-- 시스템 -->
+    <rect x="10" y="150" width="100" height="50" fill="#c0c0c0" stroke="#333" stroke-width="2" rx="3"/>
+    <text x="60" y="172" text-anchor="middle" class="tufte-text tufte-label" font-weight="bold">시스템</text>
+    <text x="60" y="188" text-anchor="middle" class="tufte-text tufte-small" fill="#666">(도시)</text>
+  </g>
+
+
+  <!-- Row 2 label -->
+  <text x="580" y="175" text-anchor="start" class="tufte-text tufte-small" fill="#999">배포/제품</text>
+
+  <!-- Bottom annotation -->
+  <text x="300" y="130" text-anchor="middle" class="tufte-text tufte-small" fill="#666">작은 단위에서 큰 단위로, 구체에서 추상으로</text>
+</svg>

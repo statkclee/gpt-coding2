@@ -1,0 +1,177 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 30 720 310">
+  <defs>
+    <style>
+      .tufte-text {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+      }
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 14px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 12px;
+        fill: #333;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 11px;
+        fill: #333;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #666;
+      }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="720" height="340" fill="#ffffff"/>
+
+  <!-- Step 1: 결측치 확인 -->
+  <g transform="translate(30, 50)">
+    <text x="100" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">1. 결측치 확인</text>
+
+    <rect x="0" y="15" width="200" height="110" fill="#f5f5f5" stroke="#333" stroke-width="2" rx="3"/>
+
+    <!-- Original data with NaN -->
+    <text x="30" y="38" class="tufte-code">a</text>
+    <text x="70" y="38" class="tufte-code">b</text>
+    <text x="110" y="38" class="tufte-code">c</text>
+
+    <text x="30" y="55" class="tufte-code">1</text>
+    <text x="70" y="55" class="tufte-code">5</text>
+    <text x="110" y="55" class="tufte-code">x</text>
+
+    <text x="30" y="72" class="tufte-code">2</text>
+    <rect x="60" y="62" width="30" height="15" fill="#e8e8e8" stroke="#666"/>
+    <text x="75" y="72" text-anchor="middle" class="tufte-code">NaN</text>
+    <text x="110" y="72" class="tufte-code">y</text>
+
+    <rect x="20" y="79" width="30" height="15" fill="#e8e8e8" stroke="#666"/>
+    <text x="35" y="89" text-anchor="middle" class="tufte-code">NaN</text>
+    <text x="70" y="89" class="tufte-code">7</text>
+    <rect x="100" y="79" width="30" height="15" fill="#e8e8e8" stroke="#666"/>
+    <text x="115" y="89" text-anchor="middle" class="tufte-code">NaN</text>
+
+    <text x="30" y="106" class="tufte-code">4</text>
+    <text x="70" y="106" class="tufte-code">8</text>
+    <text x="110" y="106" class="tufte-code">z</text>
+
+    <text x="150" y="65" class="tufte-small">df.isna()</text>
+    <text x="150" y="80" class="tufte-small">.sum()</text>
+    <text x="150" y="95" class="tufte-small">열별 개수</text>
+  </g>
+
+  <!-- Arrow -->
+  <line x1="245" y1="105" x2="275" y2="105" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+  <!-- Decision -->
+  <g transform="translate(290, 75)">
+    <polygon points="60,0 120,30 60,60 0,30" fill="#e8e8e8" stroke="#666"/>
+    <text x="60" y="35" text-anchor="middle" class="tufte-small">처리 방법?</text>
+  </g>
+
+  <!-- Branch: dropna -->
+  <line x1="350" y1="75" x2="350" y2="50" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <g transform="translate(420, 50)">
+    <text x="100" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">2a. 제거 (dropna)</text>
+
+    <rect x="0" y="15" width="200" height="110" fill="#f5f5f5" stroke="#999" rx="3"/>
+
+    <text x="100" y="38" text-anchor="middle" class="tufte-code">df.dropna()</text>
+    <line x1="10" y1="45" x2="190" y2="45" stroke="#ccc"/>
+
+    <!-- Result -->
+    <text x="30" y="65" class="tufte-code">a</text>
+    <text x="70" y="65" class="tufte-code">b</text>
+    <text x="110" y="65" class="tufte-code">c</text>
+
+    <text x="30" y="82" class="tufte-code">1</text>
+    <text x="70" y="82" class="tufte-code">5</text>
+    <text x="110" y="82" class="tufte-code">x</text>
+
+    <text x="30" y="99" class="tufte-code">4</text>
+    <text x="70" y="99" class="tufte-code">8</text>
+    <text x="110" y="99" class="tufte-code">z</text>
+
+    <text x="160" y="82" class="tufte-small">NaN 행</text>
+    <text x="160" y="97" class="tufte-small">모두 제거</text>
+  </g>
+
+  <!-- Branch: fillna -->
+  <line x1="350" y1="135" x2="350" y2="180" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <g transform="translate(30, 195)">
+    <text x="100" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">2b. 대체 (fillna)</text>
+
+    <rect x="0" y="15" width="200" height="110" fill="#f5f5f5" stroke="#999" rx="3"/>
+
+    <text x="100" y="35" text-anchor="middle" class="tufte-code">df.fillna(0)</text>
+    <line x1="10" y1="42" x2="190" y2="42" stroke="#ccc"/>
+
+    <!-- Result -->
+    <text x="30" y="62" class="tufte-code">a</text>
+    <text x="70" y="62" class="tufte-code">b</text>
+    <text x="110" y="62" class="tufte-code">c</text>
+
+    <text x="30" y="79" class="tufte-code">1</text>
+    <text x="70" y="79" class="tufte-code">5</text>
+    <text x="110" y="79" class="tufte-code">x</text>
+
+    <text x="30" y="96" class="tufte-code">2</text>
+    <rect x="60" y="86" width="20" height="15" fill="#e8e8e8" stroke="#333"/>
+    <text x="70" y="96" text-anchor="middle" class="tufte-code">0</text>
+    <text x="110" y="96" class="tufte-code">y</text>
+
+    <rect x="20" y="103" width="20" height="15" fill="#e8e8e8" stroke="#333"/>
+    <text x="30" y="113" text-anchor="middle" class="tufte-code">0</text>
+    <text x="70" y="113" class="tufte-code">7</text>
+    <rect x="100" y="103" width="20" height="15" fill="#e8e8e8" stroke="#333"/>
+    <text x="110" y="113" text-anchor="middle" class="tufte-code">0</text>
+  </g>
+
+  <!-- fillna with mean -->
+  <g transform="translate(260, 195)">
+    <text x="100" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">평균으로 대체</text>
+
+    <rect x="0" y="15" width="200" height="110" fill="#f5f5f5" stroke="#999" rx="3"/>
+
+    <text x="100" y="32" text-anchor="middle" class="tufte-code">df['a'].fillna(</text>
+    <text x="100" y="45" text-anchor="middle" class="tufte-code">  df['a'].mean())</text>
+    <line x1="10" y1="52" x2="190" y2="52" stroke="#ccc"/>
+
+    <!-- Calculation -->
+    <text x="20" y="72" class="tufte-small">평균: (1+2+4)/3 = 2.33</text>
+
+    <text x="30" y="95" class="tufte-code">1</text>
+    <text x="60" y="95" class="tufte-code">2</text>
+    <rect x="80" y="85" width="35" height="15" fill="#e8e8e8" stroke="#333"/>
+    <text x="98" y="95" text-anchor="middle" class="tufte-code">2.33</text>
+    <text x="130" y="95" class="tufte-code">4</text>
+  </g>
+
+  <!-- fillna by group -->
+  <g transform="translate(490, 195)">
+    <text x="100" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">그룹별 평균 대체</text>
+
+    <rect x="0" y="15" width="200" height="110" fill="#f5f5f5" stroke="#999" rx="3"/>
+
+    <text x="100" y="32" text-anchor="middle" class="tufte-code">df.groupby('dept')</text>
+    <text x="100" y="47" text-anchor="middle" class="tufte-code">.transform('mean')</text>
+    <line x1="10" y1="55" x2="190" y2="55" stroke="#ccc"/>
+
+    <text x="20" y="75" class="tufte-small">같은 그룹 내 평균으로</text>
+    <text x="20" y="90" class="tufte-small">결측치 대체</text>
+
+    <text x="20" y="112" class="tufte-code">HR: 50k → 50k</text>
+    <text x="120" y="112" class="tufte-code">IT: 60k → 60k</text>
+  </g>
+
+</svg>

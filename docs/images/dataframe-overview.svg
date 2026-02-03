@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 30 720 290">
+  <defs>
+    <style>
+      .tufte-text {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+      }
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 14px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 12px;
+        fill: #333;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 11px;
+        fill: #333;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #666;
+      }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="720" height="350" fill="#ffffff"/>
+
+  <!-- Left: Python 기본 자료형 -->
+  <g transform="translate(30, 50)">
+    <text x="80" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">Python 기본 자료형</text>
+
+    <!-- List -->
+    <rect x="0" y="15" width="160" height="50" fill="#e8e8e8" stroke="#999" rx="3"/>
+    <text x="80" y="35" text-anchor="middle" class="tufte-label">리스트 (List)</text>
+    <text x="80" y="52" text-anchor="middle" class="tufte-code">[1, 2, 3, 4]</text>
+
+    <!-- Dict -->
+    <rect x="0" y="75" width="160" height="50" fill="#e8e8e8" stroke="#999" rx="3"/>
+    <text x="80" y="95" text-anchor="middle" class="tufte-label">딕셔너리 (Dict)</text>
+    <text x="80" y="112" text-anchor="middle" class="tufte-code">{'a': 1, 'b': 2}</text>
+  </g>
+
+  <!-- Arrow -->
+  <line x1="210" y1="110" x2="260" y2="110" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <text x="235" y="100" text-anchor="middle" class="tufte-small">pandas</text>
+
+  <!-- Center: Series -->
+  <g transform="translate(270, 50)">
+    <text x="80" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">pandas Series</text>
+
+    <rect x="0" y="15" width="160" height="110" fill="#f5f5f5" stroke="#333" stroke-width="2" rx="3"/>
+    <text x="80" y="35" text-anchor="middle" class="tufte-small">인덱스 + 1차원 데이터</text>
+
+    <!-- Series visualization -->
+    <text x="30" y="55" class="tufte-code">0</text>
+    <rect x="50" y="43" width="90" height="18" fill="#fff" stroke="#999"/>
+    <text x="95" y="56" text-anchor="middle" class="tufte-code">0.382</text>
+
+    <text x="30" y="75" class="tufte-code">1</text>
+    <rect x="50" y="63" width="90" height="18" fill="#fff" stroke="#999"/>
+    <text x="95" y="76" text-anchor="middle" class="tufte-code">0.949</text>
+
+    <text x="30" y="95" class="tufte-code">2</text>
+    <rect x="50" y="83" width="90" height="18" fill="#fff" stroke="#999"/>
+    <text x="95" y="96" text-anchor="middle" class="tufte-code">1.000</text>
+
+    <text x="30" y="115" class="tufte-code">3</text>
+    <rect x="50" y="103" width="90" height="18" fill="#fff" stroke="#999"/>
+    <text x="95" y="116" text-anchor="middle" class="tufte-code">11.209</text>
+  </g>
+
+  <!-- Arrow -->
+  <line x1="450" y1="110" x2="500" y2="110" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <text x="475" y="100" text-anchor="middle" class="tufte-small">여러 열</text>
+
+  <!-- Right: DataFrame -->
+  <g transform="translate(510, 50)">
+    <text x="95" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">pandas DataFrame</text>
+
+    <rect x="0" y="15" width="190" height="130" fill="#f5f5f5" stroke="#333" stroke-width="2" rx="3"/>
+    <text x="95" y="35" text-anchor="middle" class="tufte-small">인덱스 + 2차원 표 데이터</text>
+
+    <!-- Header row -->
+    <text x="25" y="55" class="tufte-code"></text>
+    <rect x="40" y="43" width="60" height="18" fill="#e8e8e8" stroke="#999"/>
+    <text x="70" y="56" text-anchor="middle" class="tufte-code">name</text>
+    <rect x="100" y="43" width="60" height="18" fill="#e8e8e8" stroke="#999"/>
+    <text x="130" y="56" text-anchor="middle" class="tufte-code">diam</text>
+
+    <!-- Data rows -->
+    <text x="25" y="75" class="tufte-code">0</text>
+    <rect x="40" y="63" width="60" height="18" fill="#fff" stroke="#999"/>
+    <text x="70" y="76" text-anchor="middle" class="tufte-code">Mercury</text>
+    <rect x="100" y="63" width="60" height="18" fill="#fff" stroke="#999"/>
+    <text x="130" y="76" text-anchor="middle" class="tufte-code">0.382</text>
+
+    <text x="25" y="95" class="tufte-code">1</text>
+    <rect x="40" y="83" width="60" height="18" fill="#fff" stroke="#999"/>
+    <text x="70" y="96" text-anchor="middle" class="tufte-code">Venus</text>
+    <rect x="100" y="83" width="60" height="18" fill="#fff" stroke="#999"/>
+    <text x="130" y="96" text-anchor="middle" class="tufte-code">0.949</text>
+
+    <text x="25" y="115" class="tufte-code">2</text>
+    <rect x="40" y="103" width="60" height="18" fill="#fff" stroke="#999"/>
+    <text x="70" y="116" text-anchor="middle" class="tufte-code">Earth</text>
+    <rect x="100" y="103" width="60" height="18" fill="#fff" stroke="#999"/>
+    <text x="130" y="116" text-anchor="middle" class="tufte-code">1.000</text>
+
+    <text x="25" y="135" class="tufte-code">3</text>
+    <rect x="40" y="123" width="60" height="18" fill="#fff" stroke="#999"/>
+    <text x="70" y="136" text-anchor="middle" class="tufte-code">Jupiter</text>
+    <rect x="100" y="123" width="60" height="18" fill="#fff" stroke="#999"/>
+    <text x="130" y="136" text-anchor="middle" class="tufte-code">11.209</text>
+  </g>
+
+  <!-- Bottom: Key attributes -->
+  <g transform="translate(30, 215)">
+    <text x="345" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">DataFrame 핵심 속성</text>
+
+    <!-- shape -->
+    <rect x="0" y="15" width="160" height="70" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="80" y="35" text-anchor="middle" class="tufte-label">shape</text>
+    <text x="80" y="52" text-anchor="middle" class="tufte-code">(4, 2)</text>
+    <text x="80" y="72" text-anchor="middle" class="tufte-small">(행 수, 열 수)</text>
+
+    <!-- dtypes -->
+    <rect x="180" y="15" width="160" height="70" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="260" y="35" text-anchor="middle" class="tufte-label">dtypes</text>
+    <text x="260" y="52" text-anchor="middle" class="tufte-code">name: object</text>
+    <text x="260" y="67" text-anchor="middle" class="tufte-code">diam: float64</text>
+
+    <!-- columns -->
+    <rect x="360" y="15" width="160" height="70" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="440" y="35" text-anchor="middle" class="tufte-label">columns</text>
+    <text x="440" y="55" text-anchor="middle" class="tufte-code">['name', 'diam']</text>
+    <text x="440" y="72" text-anchor="middle" class="tufte-small">열 이름 목록</text>
+
+    <!-- index -->
+    <rect x="540" y="15" width="150" height="70" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="615" y="35" text-anchor="middle" class="tufte-label">index</text>
+    <text x="615" y="55" text-anchor="middle" class="tufte-code">[0, 1, 2, 3]</text>
+    <text x="615" y="72" text-anchor="middle" class="tufte-small">행 레이블</text>
+  </g>
+
+</svg>

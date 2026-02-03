@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko-KR" xml:lang="ko-KR"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.16">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="이광춘(Openai)">
+
+<title>5&nbsp; 반복문 – 챗GPT 코딩(개정판)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./10-data-intro.html" rel="next">
+<link href="./04-func.html" rel="prev">
+<link href="./images/logo.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-8ee146c0b749343448e797d10b61a7f9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-55f79cb6abf2a16ff6075165a9063c3c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "일치 없음",
+    "search-matching-documents-text": "일치된 문서",
+    "search-copy-link-title": "검색 링크 복사",
+    "search-hide-matches-text": "추가 검색 결과 숨기기",
+    "search-more-match-text": "추가 검색결과",
+    "search-more-matches-text": "추가 검색결과",
+    "search-clear-button-title": "제거",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "취소",
+    "search-submit-button-title": "검색",
+    "search-label": "검색"
+  }
+}</script>
+
+<script type="text/javascript">
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-229551680-1', 'auto');
+
+ga('send', {
+  hitType: 'pageview',
+  'anonymizeIp': true,
+});
+</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-intro.html"><strong>1부</strong> 전통 프로그래밍</a></li><li class="breadcrumb-item"><a href="./05-loop.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">반복문</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="사이드바 전환" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="검색" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">챗GPT 코딩(개정판)</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/bit2r/gpt-coding/" title="소스 코드" class="quarto-navigation-tool px-1" aria-label="소스 코드"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="리더 모드 전환">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="검색"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">서문</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>1부</strong> 전통 프로그래밍</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">프로그래밍 시작하기</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-var.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">변수, 표현식, 문장</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-cont.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">조건부 실행</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-func.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">함수</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-loop.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">반복문</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>2부</strong> 자료구조</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-data-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">데이터, AI 식량</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-string.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">문자열</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-file.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">파일</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-list.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">리스트</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-dictionaries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">딕셔너리</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-tuples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">튜플</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-dataframe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">데이터프레임</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-json.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">JSON</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18-tensor.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">텐서</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-embedding.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">벡터와 임베딩</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-graph.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">그래프</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>3부</strong> 버전제어와 협업</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Git 시작하기</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-tracking.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">변경사항 추적</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-history.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">히스토리와 파일 관리</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-remote.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">GitHub와 원격 저장소</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-collab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">협업과 충돌 해결</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./git-workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">오픈 사이언스</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>4부</strong> 분야별 코딩</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">특화 도구 입문</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-regex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">정규 표현식</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-network.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">네트워크 프로그램</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-web.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">웹서비스</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-database.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">데이터베이스와 SQL</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-ds.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">데이터 과학과 R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-auto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">파일 자동화</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tool-make.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">빌드 자동화: make</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>5부</strong> 프로그래밍 패러다임</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-paradigm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">패러다임의 이해</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-imperative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">명령형과 절차적 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-oop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">객체지향 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-fp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">함수형 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-declarative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">선언형 프로그래밍</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prog-reactive.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">반응형 프로그래밍</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>6부</strong> 소프트웨어 설계와 아키텍처</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-reuse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">재사용 명령</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-stack.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">소프트웨어 스택</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">소프트웨어 아키텍처</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./arch-pattern.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">살아남은 패턴</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>7부</strong> 기계학습 패러다임</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-paradigm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">소프트웨어 2.0</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">신경망 아키텍처</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">43</span>&nbsp; <span class="chapter-title">학습과 추론</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ml-to-llm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">44</span>&nbsp; <span class="chapter-title">트랜스포머에서 거대 언어모형으로</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>부록</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="토글 섹션">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">용어사전</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">참고문헌</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">목차</h2>
+   
+  <ul>
+  <li><a href="#sec-loop-while" id="toc-sec-loop-while" class="nav-link active" data-scroll-target="#sec-loop-while"><span class="header-section-number">5.1</span> while 문</a>
+  <ul class="collapse">
+  <li><a href="#sec-loop-update" id="toc-sec-loop-update" class="nav-link" data-scroll-target="#sec-loop-update"><span class="header-section-number">5.1.1</span> 변수 갱신과 초기화</a></li>
+  <li><a href="#sec-loop-infinite" id="toc-sec-loop-infinite" class="nav-link" data-scroll-target="#sec-loop-infinite"><span class="header-section-number">5.1.2</span> 무한 루프</a></li>
+  </ul></li>
+  <li><a href="#sec-loop-control" id="toc-sec-loop-control" class="nav-link" data-scroll-target="#sec-loop-control"><span class="header-section-number">5.2</span> 루프 제어</a>
+  <ul class="collapse">
+  <li><a href="#sec-loop-break" id="toc-sec-loop-break" class="nav-link" data-scroll-target="#sec-loop-break"><span class="header-section-number">5.2.1</span> break 루프 종료</a></li>
+  <li><a href="#sec-loop-continue" id="toc-sec-loop-continue" class="nav-link" data-scroll-target="#sec-loop-continue"><span class="header-section-number">5.2.2</span> continue 반복 건너뛰기</a></li>
+  </ul></li>
+  <li><a href="#sec-loop-for" id="toc-sec-loop-for" class="nav-link" data-scroll-target="#sec-loop-for"><span class="header-section-number">5.3</span> for 문</a>
+  <ul class="collapse">
+  <li><a href="#sec-loop-range" id="toc-sec-loop-range" class="nav-link" data-scroll-target="#sec-loop-range"><span class="header-section-number">5.3.1</span> range 함수</a></li>
+  <li><a href="#sec-loop-string" id="toc-sec-loop-string" class="nav-link" data-scroll-target="#sec-loop-string"><span class="header-section-number">5.3.2</span> 문자열 순회</a></li>
+  </ul></li>
+  <li><a href="#sec-loop-patterns" id="toc-sec-loop-patterns" class="nav-link" data-scroll-target="#sec-loop-patterns"><span class="header-section-number">5.4</span> 루프 패턴</a>
+  <ul class="collapse">
+  <li><a href="#sec-loop-count" id="toc-sec-loop-count" class="nav-link" data-scroll-target="#sec-loop-count"><span class="header-section-number">5.4.1</span> 계수 패턴</a></li>
+  <li><a href="#sec-loop-sum" id="toc-sec-loop-sum" class="nav-link" data-scroll-target="#sec-loop-sum"><span class="header-section-number">5.4.2</span> 합산 패턴</a></li>
+  <li><a href="#sec-loop-minmax" id="toc-sec-loop-minmax" class="nav-link" data-scroll-target="#sec-loop-minmax"><span class="header-section-number">5.4.3</span> 최대값과 최소값 패턴</a></li>
+  </ul></li>
+  <li><a href="#sec-loop-debug" id="toc-sec-loop-debug" class="nav-link" data-scroll-target="#sec-loop-debug"><span class="header-section-number">5.5</span> 디버깅</a>
+  <ul class="collapse">
+  <li><a href="#sec-loop-debug-infinite" id="toc-sec-loop-debug-infinite" class="nav-link" data-scroll-target="#sec-loop-debug-infinite"><span class="header-section-number">5.5.1</span> 무한 루프</a></li>
+  <li><a href="#sec-loop-debug-offbyone" id="toc-sec-loop-debug-offbyone" class="nav-link" data-scroll-target="#sec-loop-debug-offbyone"><span class="header-section-number">5.5.2</span> 하나 차이(off-by-one) 오류</a></li>
+  <li><a href="#sec-loop-debug-init" id="toc-sec-loop-debug-init" class="nav-link" data-scroll-target="#sec-loop-debug-init"><span class="header-section-number">5.5.3</span> 초기화 위치 오류</a></li>
+  <li><a href="#sec-loop-debug-bisection" id="toc-sec-loop-debug-bisection" class="nav-link" data-scroll-target="#sec-loop-debug-bisection"><span class="header-section-number">5.5.4</span> 이분법 디버깅</a></li>
+  </ul></li>
+  <li><a href="#sec-loop-ai" id="toc-sec-loop-ai" class="nav-link" data-scroll-target="#sec-loop-ai"><span class="header-section-number">5.6</span> AI와 함께하는 반복문</a></li>
+  <li><a href="#생각해볼-점" id="toc-생각해볼-점" class="nav-link" data-scroll-target="#생각해볼-점">💡 생각해볼 점</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/05-loop.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-intro.html"><strong>1부</strong> 전통 프로그래밍</a></li><li class="breadcrumb-item"><a href="./05-loop.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">반복문</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-loop" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">반복문</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>프로그래밍에서 같은 작업을 여러 번 수행해야 하는 상황은 흔하다. 리스트의 모든 항목을 출력하거나, 파일의 각 줄을 처리하거나, 특정 조건이 만족될 때까지 계산을 반복해야 할 때가 있다. <strong>반복문(loop)</strong>은 코드 블록을 여러 번 실행하게 해주는 제어 구조로, 컴퓨터가 사람보다 잘하는 일—오류 없이 동일한 작업을 반복하는 일—을 활용할 수 있게 해준다. </p>
+<div id="fig-loop-overview" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-loop-overview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/loop-overview.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-loop-overview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;5.1: 반복문 개요
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-loop-overview" class="quarto-xref">그림&nbsp;<span>5.1</span></a> 는 파이썬의 두 가지 반복문과 루프 제어 키워드를 보여준다. <code>while</code> 문은 조건이 참인 동안 반복하며 반복 횟수가 미리 정해지지 않는다. <code>for</code> 문은 컬렉션의 각 요소를 순회하며 반복 횟수가 확정된다. <code>break</code>와 <code>continue</code>는 반복 흐름을 세밀하게 제어한다.</p>
+<section id="sec-loop-while" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="sec-loop-while"><span class="header-section-number">5.1</span> while 문</h2>
+<p> </p>
+<p><code>while</code> 문은 조건이 참인 동안 코드 블록을 반복 실행한다. “~하는 동안”이라는 영어 단어 while에서 알 수 있듯이, 특정 조건이 유지되는 한 같은 작업을 계속한다. 조건을 먼저 검사하고, 참이면 몸통을 실행한 뒤 다시 조건을 검사하는 과정을 거짓이 될 때까지 반복한다. 반복 횟수가 미리 정해지지 않아서 <strong>불확정 루프(indefinite loop)</strong>라고도 부른다.</p>
+<pre class="{pyodide-python}"><code>n = 5
+while n &gt; 0:
+    print(n)
+    n = n - 1
+
+print("발사!")</code></pre>
+<p><code>n</code>이 5에서 시작해서 0보다 큰 동안 값을 출력하고 1씩 감소시킨다. <code>n</code>이 0이 되면 조건 <code>n &gt; 0</code>이 거짓이 되어 루프를 빠져나가고 “발사!”를 출력한다.</p>
+<div id="fig-loop-while" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-loop-while-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/loop-while.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-loop-while-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;5.2: while 루프 실행 흐름
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-loop-while" class="quarto-xref">그림&nbsp;<span>5.2</span></a> 은 <code>while</code> 루프의 실행 흐름을 보여준다. 조건 검사 → 몸통 실행 → 조건 재검사의 순환 구조가 핵심이다. 조건이 거짓이 되면 루프를 벗어나 다음 문장으로 진행한다.</p>
+<section id="sec-loop-update" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="sec-loop-update"><span class="header-section-number">5.1.1</span> 변수 갱신과 초기화</h3>
+<p> </p>
+<p><code>while</code> 문을 사용하려면 <strong>반복 변수(iteration variable)</strong>를 적절히 관리해야 한다. 반복 변수는 루프가 몇 번 실행되었는지 추적하거나, 종료 조건을 판단하는 데 사용된다. 루프 실행 전에 <strong>초기화</strong>하고, 루프 내부에서 <strong>갱신</strong>해야 한다. 초기화 없이 갱신하려 하면 오류가 발생하고, 갱신 없이 루프를 돌리면 무한 루프에 빠진다.</p>
+<pre class="{pyodide-python}"><code>x = 0       # 초기화
+x = x + 1   # 갱신 (증가)
+print(x)    # 1</code></pre>
+<p>변수에 1을 더해서 갱신하는 것을 <strong>증가(increment)</strong>, 1을 빼서 갱신하는 것을 <strong>감소(decrement)</strong>라고 부른다. 존재하지 않는 변수를 갱신하려고 하면 오류가 발생하므로 반드시 초기화를 먼저 해야 한다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 초기화하지 않고 갱신하면 오류</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> y <span class="op">+</span> <span class="dv">1</span>  <span class="co"># NameError: name 'y' is not defined</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="sec-loop-infinite" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="sec-loop-infinite"><span class="header-section-number">5.1.2</span> 무한 루프</h3>
+<p> </p>
+<p>반복 변수가 없거나 조건이 항상 참이면 루프가 영원히 반복된다. <strong>무한 루프(infinite loop)</strong>는 프로그램이 멈추지 않고 계속 실행되는 상태로, 대부분 버그에서 비롯된다. 그러나 서버가 요청을 계속 기다리거나, 게임이 사용자 입력을 반복적으로 받아야 할 때처럼 의도적으로 사용하는 경우도 있다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 무한 루프 - 실행하면 멈추지 않음</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"끝없이 반복"</span>)</span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>카운트다운 예제는 <code>n</code>이 매번 감소해서 결국 0에 도달하므로 루프가 종료된다. 반면 조건이 <code>True</code> 상수이거나 반복 변수를 갱신하지 않으면 종료 조건을 만족할 수 없어 무한 루프에 빠진다.</p>
+<div class="callout callout-style-simple callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">경고</span>무한 루프 탈출법
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>무한 루프에 빠진 프로그램을 멈추려면 다음과 같이 각각 조치를 취한다.</p>
+<ul>
+<li><strong>터미널</strong>: <code>Ctrl+C</code> (키보드 인터럽트)</li>
+<li><strong>주피터 노트북</strong>: 커널 중단 버튼 (정사각형 아이콘)</li>
+<li><strong>IDE</strong>: 실행 중지 버튼</li>
+</ul>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-loop-control" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="sec-loop-control"><span class="header-section-number">5.2</span> 루프 제어</h2>
+<p> </p>
+<p>루프 실행 중에 특정 조건에서 즉시 빠져나가거나, 현재 반복을 건너뛰고 다음 반복으로 넘어가야 할 때가 있다. 예를 들어 리스트에서 원하는 값을 찾으면 더 이상 반복할 필요가 없고, 유효하지 않은 데이터는 처리를 건너뛰어야 한다. <code>break</code>와 <code>continue</code> 문이 루프 흐름을 세밀하게 제어한다. <code>break</code>는 루프를 완전히 탈출하고, <code>continue</code>는 현재 반복만 건너뛴다.</p>
+<section id="sec-loop-break" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="sec-loop-break"><span class="header-section-number">5.2.1</span> break 루프 종료</h3>
+<p><code>break</code> 문은 루프를 즉시 종료하고 루프 다음 문장으로 이동한다. 조건문 내부에서 <code>break</code>를 실행하면 남은 반복을 모두 건너뛰고 루프 밖으로 나온다. 무한 루프와 함께 사용하면 “특정 조건이 발생하면 멈춘다”는 논리를 명확하게 표현할 수 있다. 검색 문제에서 원하는 값을 찾으면 더 탐색할 필요가 없을 때 유용하다.</p>
+<pre class="{pyodide-python}"><code>while True:
+    line = input("&gt; ")
+    if line == "done":
+        break
+    print(line)
+
+print("종료!")</code></pre>
+<p>사용자가 “done”을 입력하기 전까지 입력값을 그대로 출력한다. <code>break</code> 문이 실행되면 <code>while</code> 루프를 벗어나 “종료!”를 출력한다. 루프 조건 자체는 항상 <code>True</code>지만, <code>break</code> 덕분에 안전하게 종료된다.</p>
+</section>
+<section id="sec-loop-continue" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="sec-loop-continue"><span class="header-section-number">5.2.2</span> continue 반복 건너뛰기</h3>
+<p><code>continue</code> 문은 현재 반복의 나머지 부분을 건너뛰고 루프 조건 검사(while) 또는 다음 요소(for)로 바로 이동한다. <code>break</code>와 달리 루프 자체는 계속 실행된다. 특정 조건에서 처리를 생략하고 다음 항목으로 넘어가고 싶을 때 유용하다. 데이터 전처리에서 빈 값이나 잘못된 형식을 건너뛸 때 자주 사용된다.</p>
+<pre class="{pyodide-python}"><code>for num in range(10):
+    if num % 2 == 0:
+        continue
+    print(num)  # 홀수만 출력</code></pre>
+<p><code>num</code>이 짝수면 <code>continue</code>가 실행되어 <code>print(num)</code>을 건너뛴다. 결과적으로 1, 3, 5, 7, 9만 출력된다.</p>
+<p>다음 예제는 주석(#으로 시작하는 줄)을 제외하고 입력을 출력한다.</p>
+<pre class="{pyodide-python}"><code>lines = ["hello", "# 주석입니다", "world", "# 또 다른 주석"]
+
+for line in lines:
+    if line.startswith("#"):
+        continue
+    print(line)</code></pre>
+<p><code>startswith("#")</code>로 주석 여부를 판단하고, 주석이면 <code>continue</code>로 건너뛴다.</p>
+</section>
+</section>
+<section id="sec-loop-for" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="sec-loop-for"><span class="header-section-number">5.3</span> for 문</h2>
+<p> </p>
+<p><code>for</code> 문은 리스트, 문자열, range 객체 같은 <strong>시퀀스(sequence)</strong>의 각 요소를 순회하며 반복한다. 시퀀스의 첫 번째 요소부터 마지막 요소까지 차례로 반복 변수에 대입하고, 각 요소마다 루프 몸통을 한 번씩 실행한다. 반복 횟수가 시퀀스 길이로 확정되어 있어서 <strong>확정 루프(definite loop)</strong>라고도 부른다. <code>while</code> 문과 달리 반복 변수를 직접 갱신할 필요가 없어서 무한 루프 위험이 없다.</p>
+<pre class="{pyodide-python}"><code>friends = ["철수", "영희", "민수"]
+
+for friend in friends:
+    print(f"안녕, {friend}!")
+
+print("인사 완료!")</code></pre>
+<p><code>friends</code> 리스트의 각 요소가 차례로 <code>friend</code> 변수에 대입되고, 루프 몸통이 실행된다. 리스트에 3개 요소가 있으므로 루프가 정확히 3번 반복된다.</p>
+<div id="fig-loop-for" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-loop-for-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/loop-for.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-loop-for-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;5.3: for 루프 실행 구조
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-loop-for" class="quarto-xref">그림&nbsp;<span>5.3</span></a> 는 <code>for</code> 루프의 동작 방식을 보여준다. 컬렉션에서 요소를 하나씩 꺼내 반복 변수에 대입하고, 루프 몸통을 실행한 뒤, 다음 요소로 넘어간다. 모든 요소를 순회하면 루프가 종료된다.</p>
+<section id="sec-loop-range" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="sec-loop-range"><span class="header-section-number">5.3.1</span> range 함수</h3>
+<p></p>
+<p>정해진 횟수만큼 반복하려면 <code>range()</code> 함수를 사용한다. <code>range()</code>는 연속된 정수 시퀀스를 생성하는 함수로, 메모리에 모든 숫자를 저장하지 않고 필요할 때마다 다음 숫자를 계산한다. 인자 개수에 따라 시작값, 끝값, 간격을 지정할 수 있다.</p>
+<pre class="{pyodide-python}"><code>for i in range(5):
+    print(i)  # 0, 1, 2, 3, 4</code></pre>
+<p><code>range(5)</code>는 0부터 4까지의 정수 시퀀스를 생성한다. <code>range(start, stop)</code>은 start부터 stop-1까지, <code>range(start, stop, step)</code>은 step 간격으로 생성한다.</p>
+<pre class="{pyodide-python}"><code>for i in range(2, 10, 2):
+    print(i)  # 2, 4, 6, 8</code></pre>
+</section>
+<section id="sec-loop-string" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="sec-loop-string"><span class="header-section-number">5.3.2</span> 문자열 순회</h3>
+<p>문자열도 시퀀스이므로 <code>for</code> 문으로 각 문자를 순회할 수 있다. 문자열은 문자들의 순서 있는 나열이기 때문에, 첫 글자부터 마지막 글자까지 차례로 접근할 수 있다. 텍스트에서 특정 문자의 개수를 세거나, 각 문자를 변환할 때 유용하다.</p>
+<pre class="{pyodide-python}"><code>word = "Python"
+for char in word:
+    print(char)</code></pre>
+</section>
+</section>
+<section id="sec-loop-patterns" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="sec-loop-patterns"><span class="header-section-number">5.4</span> 루프 패턴</h2>
+<p>루프를 사용해 데이터를 처리할 때 반복적으로 등장하는 패턴이 있다. <strong>계수(counting)</strong>, <strong>합산(summing)</strong>, <strong>최대값/최소값 찾기</strong>가 대표적이다. 패턴마다 루프 전 초기화, 루프 내 갱신, 루프 후 결과 확인이라는 공통 구조를 따른다. 패턴을 익히면 다양한 데이터 처리 문제에 체계적으로 접근할 수 있다. 파이썬은 <code>len()</code>, <code>sum()</code>, <code>max()</code>, <code>min()</code> 같은 내장 함수를 제공하지만, 패턴을 이해하면 조건부 처리나 복잡한 로직도 구현할 수 있다.</p>
+<div id="fig-loop-patterns" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-loop-patterns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/loop-patterns.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-loop-patterns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;5.4: 루프 패턴
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-loop-patterns" class="quarto-xref">그림&nbsp;<span>5.4</span></a> 는 네 가지 핵심 루프 패턴을 보여준다. 모든 패턴은 세 단계 구조를 따른다: (1) 루프 전 변수 초기화, (2) 루프 내부에서 변수 갱신, (3) 루프 후 결과 확인.</p>
+<section id="sec-loop-count" class="level3" data-number="5.4.1">
+<h3 data-number="5.4.1" class="anchored" data-anchor-id="sec-loop-count"><span class="header-section-number">5.4.1</span> 계수 패턴</h3>
+<p> </p>
+<p>시퀀스의 항목 개수를 세려면 카운터 변수를 0으로 초기화하고, 각 반복마다 1씩 증가시킨다. 계수(counting) 패턴은 “몇 개인가?”라는 질문에 답한다. 단순히 전체 개수를 셀 수도 있고, 조건을 추가해서 특정 조건을 만족하는 항목만 셀 수도 있다.</p>
+<pre class="{pyodide-python}"><code>numbers = [3, 41, 12, 9, 74, 15]
+count = 0
+
+for num in numbers:
+    count = count + 1
+
+print(f"항목 개수: {count}")  # 6</code></pre>
+<p>실제로는 <code>len()</code> 함수가 같은 기능을 제공하지만, 패턴을 이해하면 조건부 계수 같은 응용이 가능하다.</p>
+<pre class="{pyodide-python}"><code># 짝수만 세기
+numbers = [3, 41, 12, 9, 74, 15]
+even_count = 0
+
+for num in numbers:
+    if num % 2 == 0:
+        even_count += 1
+
+print(f"짝수 개수: {even_count}")  # 3</code></pre>
+</section>
+<section id="sec-loop-sum" class="level3" data-number="5.4.2">
+<h3 data-number="5.4.2" class="anchored" data-anchor-id="sec-loop-sum"><span class="header-section-number">5.4.2</span> 합산 패턴</h3>
+<p>시퀀스의 모든 값을 더하려면 합계 변수를 0으로 초기화하고, 각 반복마다 현재 값을 더한다. 합산(summing) 패턴은 “총 얼마인가?”라는 질문에 답한다. 판매액 총합, 점수 합계, 거리 누적 등 다양한 상황에서 사용된다.</p>
+<pre class="{pyodide-python}"><code>numbers = [3, 41, 12, 9, 74, 15]
+total = 0
+
+for num in numbers:
+    total = total + num
+
+print(f"합계: {total}")  # 154</code></pre>
+<p>루프를 도는 동안 <code>total</code>은 “지금까지의 합계”를 담고 있다가, 루프가 끝나면 전체 합계가 된다. 합계를 누적하는 변수를 <strong>누산기(accumulator)</strong>라고 부른다.</p>
+<pre class="{pyodide-python}"><code># 평균 계산
+numbers = [3, 41, 12, 9, 74, 15]
+total = 0
+count = 0
+
+for num in numbers:
+    total += num
+    count += 1
+
+average = total / count
+print(f"평균: {average}")  # 25.666...</code></pre>
+</section>
+<section id="sec-loop-minmax" class="level3" data-number="5.4.3">
+<h3 data-number="5.4.3" class="anchored" data-anchor-id="sec-loop-minmax"><span class="header-section-number">5.4.3</span> 최대값과 최소값 패턴</h3>
+<p> </p>
+<p>시퀀스에서 가장 큰 값이나 가장 작은 값을 찾으려면 특별한 초기화가 필요하다. 최대값(max)/최소값(min) 패턴은 “가장 큰(작은) 값은 무엇인가?”라는 질문에 답한다. 최고 점수, 최저 기온, 가장 비싼 상품 등을 찾을 때 사용된다. <code>None</code>으로 시작해서 첫 번째 값을 만나면 그 값으로 설정하고, 이후에는 비교를 통해 갱신한다.</p>
+<pre class="{pyodide-python}"><code>numbers = [3, 41, 12, 9, 74, 15]
+largest = None
+
+for num in numbers:
+    if largest is None or num &gt; largest:
+        largest = num
+
+print(f"최대값: {largest}")  # 74</code></pre>
+<p><code>largest is None</code>은 아직 아무 값도 보지 않았다는 뜻이다. 첫 번째 값 3이 <code>largest</code>에 저장되고, 이후 41, 74를 만날 때 더 큰 값으로 갱신된다.</p>
+<p>최소값 찾기는 비교 연산자만 바꾸면 된다.</p>
+<pre class="{pyodide-python}"><code>numbers = [3, 41, 12, 9, 74, 15]
+smallest = None
+
+for num in numbers:
+    if smallest is None or num &lt; smallest:
+        smallest = num
+
+print(f"최소값: {smallest}")  # 3</code></pre>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">노트</span>내장 함수 활용
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>파이썬은 계수, 합산, 최대/최소 계산을 위한 내장 함수를 제공한다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="op">=</span> [<span class="dv">3</span>, <span class="dv">41</span>, <span class="dv">12</span>, <span class="dv">9</span>, <span class="dv">74</span>, <span class="dv">15</span>]</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(numbers)   <span class="co"># 6 (개수)</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="bu">sum</span>(numbers)   <span class="co"># 154 (합계)</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="bu">max</span>(numbers)   <span class="co"># 74 (최대값)</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="bu">min</span>(numbers)   <span class="co"># 3 (최소값)</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>내장 함수가 있어도 루프 패턴을 이해하면 조건부 처리나 복잡한 로직을 구현할 수 있다.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-loop-debug" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="sec-loop-debug"><span class="header-section-number">5.5</span> 디버깅</h2>
+<p></p>
+<p>반복문은 같은 코드를 여러 번 실행하기 때문에, 작은 버그도 반복되면서 예상치 못한 결과를 만들어낸다. 루프가 예상대로 반복되는지, 반복 변수가 올바르게 갱신되는지 확인하는 것이 반복문 디버깅의 핵심이다.</p>
+<div id="fig-loop-debug" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-loop-debug-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/loop-debug.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-loop-debug-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+그림&nbsp;5.5: 반복문 디버깅: 흔한 오류와 전략
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-loop-debug" class="quarto-xref">그림&nbsp;<span>5.5</span></a> 는 반복문에서 자주 발생하는 세 가지 오류와 디버깅 전략을 보여준다. 무한 루프, 하나 차이(off-by-one) 오류, 초기화 위치 오류가 대표적이며, 작은 입력 테스트와 중간값 출력으로 대부분 해결할 수 있다.</p>
+<section id="sec-loop-debug-infinite" class="level3" data-number="5.5.1">
+<h3 data-number="5.5.1" class="anchored" data-anchor-id="sec-loop-debug-infinite"><span class="header-section-number">5.5.1</span> 무한 루프</h3>
+<p>무한 루프는 가장 흔하면서도 당황스러운 반복문 버그다. 프로그램이 멈추지 않고 계속 실행되거나, 같은 출력이 끝없이 반복된다. 원인은 단순하다. 반복 변수를 갱신하지 않거나, 종료 조건을 만족시킬 수 없는 경우다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 버그: n을 감소시키지 않음</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> n <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(n)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># n = n - 1  # 이 줄이 빠지면 무한 루프</span></span></code></pre></div><button title="클립보드 복사" class="code-copy-button"><i class="bi"></i></button></div>
+<p>카운트다운 코드에서 <code>n = n - 1</code> 한 줄이 빠지면 <code>n</code>은 영원히 5로 남아 조건 <code>n &gt; 0</code>이 항상 참이 된다. 무한 루프가 의심되면 먼저 반복 변수가 루프 내에서 갱신되는지 확인해야 한다. <code>while True:</code> 패턴을 사용할 때는 <code>break</code>문이 반드시 실행될 수 있는 경로가 있는지 검토한다.</p>
+</section>
+<section id="sec-loop-debug-offbyone" class="level3" data-number="5.5.2">
+<h3 data-number="5.5.2" class="anchored" data-anchor-id="sec-loop-debug-offbyone"><span class="header-section-number">5.5.2</span> 하나 차이(off-by-one) 오류</h3>
+<p> </p>
+<p>하나 차이 오류는 루프가 한 번 더 또는 한 번 덜 실행되는 경우다. 경계 조건에서 <code>&gt;</code> 대신 <code>&gt;=</code>를 쓰거나, <code>range()</code> 함수의 시작과 끝 값을 혼동하면 발생한다. 결과가 “거의 맞지만 하나가 빠졌거나 하나가 더 있다”면 경계 조건을 의심해야 한다.</p>
+<pre class="{pyodide-python}"><code># 0부터 4까지 출력하려면
+for i in range(5):      # 올바름: 0, 1, 2, 3, 4
+    print(i, end=" ")
+print()
+
+for i in range(1, 5):   # 잘못됨: 1, 2, 3, 4 (0 누락)
+    print(i, end=" ")</code></pre>
+<p><code>range(5)</code>는 0부터 4까지 5개의 숫자를 생성하고, <code>range(1, 5)</code>는 1부터 4까지 4개만 생성한다. 파이썬의 <code>range()</code>는 끝 값을 포함하지 않는다는 점을 기억해야 한다. 경계값에서 헷갈리면 작은 예제로 직접 확인하는 것이 확실하다.</p>
+</section>
+<section id="sec-loop-debug-init" class="level3" data-number="5.5.3">
+<h3 data-number="5.5.3" class="anchored" data-anchor-id="sec-loop-debug-init"><span class="header-section-number">5.5.3</span> 초기화 위치 오류</h3>
+<p>누산기나 카운터 변수를 루프 <strong>안</strong>에서 초기화하면, 매 반복마다 값이 초기화되어 누적이 되지 않는다. 합계를 구하려 했는데 마지막 값만 나온다면 초기화 위치를 확인해야 한다.</p>
+<pre class="{pyodide-python}"><code># 잘못된 위치: 루프 안에서 초기화
+numbers = [3, 41, 12, 9]
+for num in numbers:
+    total = 0      # 매 반복마다 0으로 리셋
+    total += num
+print(f"잘못된 합계: {total}")  # 9 (마지막 값만)
+
+# 올바른 위치: 루프 밖에서 초기화
+total = 0
+for num in numbers:
+    total += num
+print(f"올바른 합계: {total}")  # 65</code></pre>
+</section>
+<section id="sec-loop-debug-bisection" class="level3" data-number="5.5.4">
+<h3 data-number="5.5.4" class="anchored" data-anchor-id="sec-loop-debug-bisection"><span class="header-section-number">5.5.4</span> 이분법 디버깅</h3>
+<p></p>
+<p>루프가 많은 반복을 수행하는데 어디서 문제가 생기는지 모르겠다면 <strong>이분법(bisection)</strong>을 활용한다. 루프 중간에 <code>print()</code>를 넣어 변수 상태를 확인하고, 문제가 전반부인지 후반부인지 파악한 뒤 범위를 좁혀간다. 100번 반복하는 루프에서 50번째에 출력을 넣으면, 문제가 앞쪽 절반인지 뒤쪽 절반인지 바로 알 수 있다.</p>
+<pre class="{pyodide-python}"><code>numbers = [3, 41, 12, 9, 74, 15]
+total = 0
+
+for i, num in enumerate(numbers):
+    total += num
+    print(f"반복 {i}: num={num}, total={total}")  # 디버그용 출력
+
+print(f"최종 합계: {total}")</code></pre>
+<p><code>enumerate()</code>를 사용하면 인덱스와 값을 함께 확인할 수 있어 “몇 번째 반복에서 문제가 생겼는지” 파악하기 쉽다. 디버깅이 끝나면 <code>print()</code> 문을 제거하거나 주석 처리한다.</p>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">힌트</span>루프 디버깅 3단계
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>1단계: 작은 입력으로 테스트</strong>. 2~3개 항목으로 예상 결과를 손으로 계산하고 프로그램 결과와 비교한다. 작은 입력에서 문제가 발견되면 큰 입력에서도 같은 문제가 있다.</p>
+<p><strong>2단계: 중간 상태 출력</strong>. 매 반복마다 반복 변수, 누산기, 조건 변수 등을 <code>print()</code>로 출력해서 예상 값과 비교한다. 어느 시점에서 예상과 달라지는지 찾는다.</p>
+<p><strong>3단계: 경계값 확인</strong>. 빈 리스트, 단일 요소, 음수, 0 등 특수 케이스에서 루프가 올바르게 동작하는지 테스트한다. 경계값에서 발생하는 오류가 가장 찾기 어렵다.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-loop-ai" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="sec-loop-ai"><span class="header-section-number">5.6</span> AI와 함께하는 반복문</h2>
+<p></p>
+<p>AI에게 반복문 관련 코드를 요청할 때는 <strong>무엇을 반복하는지</strong>, <strong>언제 멈추는지</strong>, <strong>각 반복에서 무엇을 하는지</strong> 명확히 설명해야 한다.</p>
+<pre><code>파이썬 함수를 작성해줘:
+- 함수명: find_average
+- 입력: 숫자 리스트
+- 반환: 평균값 (리스트가 비어있으면 None)
+- 조건: sum()이나 len() 함수 사용하지 않고 for 루프로 직접 계산</code></pre>
+<p>AI가 생성한 반복문 코드를 검토할 때 확인할 사항은 다음과 같다.</p>
+<ol type="1">
+<li><strong>초기화 확인</strong>: 루프 전에 변수가 올바르게 초기화되었는지</li>
+<li><strong>갱신 확인</strong>: 루프 내에서 반복 변수나 누산기가 적절히 갱신되는지</li>
+<li><strong>종료 조건</strong>: 무한 루프 가능성이 없는지</li>
+<li><strong>경계값 처리</strong>: 빈 입력, 단일 요소 등 특수 케이스가 처리되는지</li>
+</ol>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">힌트</span>AI에게 테스트 케이스 요청하기
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre><code>위 함수에 대한 pytest 테스트 코드를 작성해줘.
+다음 케이스를 포함해야 해:
+- 일반적인 숫자 리스트
+- 단일 요소 리스트
+- 빈 리스트
+- 음수가 포함된 리스트</code></pre>
+</div>
+</div>
+</section>
+<section id="생각해볼-점" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="생각해볼-점">💡 생각해볼 점</h2>
+<p>반복문은 컴퓨터의 강점—지치지 않고 동일한 작업을 반복하는 능력—을 활용하는 핵심 도구다. <code>while</code>과 <code>for</code> 중 어느 것을 사용할지는 상황에 따라 다르다.</p>
+<p><strong>반복 횟수가 미리 정해져 있다면</strong> <code>for</code> 문이 적합하다. 리스트 순회, 정해진 횟수 반복, 파일의 각 줄 처리 등이 해당한다. <code>for</code> 문은 반복 변수 관리를 자동으로 해주므로 무한 루프 위험이 없다.</p>
+<p><strong>종료 조건이 동적으로 결정된다면</strong> <code>while</code> 문이 적합하다. 사용자 입력 대기, 수렴 조건 만족, 파일 끝 도달 등이 해당한다. 단, 반복 변수를 적절히 갱신해서 무한 루프를 방지해야 한다.</p>
+<p>루프 패턴을 익히면 다양한 데이터 처리 문제를 체계적으로 해결할 수 있다. 계수, 합산, 최대/최소 찾기는 가장 기본적인 패턴이며, 필터링, 변환, 검색 등으로 확장된다. 패턴의 공통 구조—초기화, 갱신, 결과 확인—를 이해하면 새로운 문제에도 쉽게 적용할 수 있다.</p>
+<p>앞으로 문자열, 리스트, 파일을 다루면서 반복문을 더 자주 사용하게 될 것이다. 지금 익힌 <code>for</code>와 <code>while</code>의 기본 구조가 모든 반복 처리의 토대가 된다.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "복사완료!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "복사완료!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/r2bit\.com\/gpt-coding\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./04-func.html" class="pagination-link" aria-label="함수">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">함수</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./10-data-intro.html" class="pagination-link" aria-label="데이터, AI 식량">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">데이터, AI 식량</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>챗GPT 쿼토 책은 소프트웨어 카펜트리 “Git 버전제어”를 번역한 것이 포함되어 있습니다.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/bit2r/gpt-coding/edit/main/05-loop.qmd" class="toc-action"><i class="bi bi-github"></i>편집</a></li><li><a href="https://github.com/bit2r/gpt-coding/issues/new" class="toc-action"><i class="bi empty"></i>이슈 보고</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>순수하게 <a href="https://quarto.org/">쿼토(Quarto)</a>로 제작되었습니다.</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 40 720 310">
+  <defs>
+    <style>
+      .tufte-text {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+      }
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 14px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 12px;
+        fill: #333;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 10px;
+        fill: #333;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #666;
+      }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="720" height="400" fill="#ffffff"/>
+
+  <!-- Central concept: DataFrame -->
+  <g transform="translate(280, 55)">
+    <rect x="0" y="0" width="160" height="50" fill="#f5f5f5" stroke="#333" stroke-width="2" rx="5"/>
+    <text x="80" y="23" text-anchor="middle" class="tufte-label" font-weight="bold">판다스 DataFrame</text>
+    <text x="80" y="40" text-anchor="middle" class="tufte-small">표 형식 데이터 핵심</text>
+  </g>
+
+  <!-- Left branch: 데이터 입력 -->
+  <line x1="280" y1="80" x2="120" y2="130" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+  <g transform="translate(30, 130)">
+    <rect x="0" y="0" width="180" height="80" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="90" y="20" text-anchor="middle" class="tufte-label" font-weight="bold">데이터 입력</text>
+    <line x1="10" y1="28" x2="170" y2="28" stroke="#ccc"/>
+    <text x="15" y="45" class="tufte-code">pd.DataFrame(dict)</text>
+    <text x="15" y="60" class="tufte-code">pd.read_csv(file)</text>
+    <text x="15" y="75" class="tufte-small">딕셔너리, CSV, Excel...</text>
+  </g>
+
+  <!-- Right branch: 데이터 출력 -->
+  <line x1="440" y1="80" x2="600" y2="130" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+  <g transform="translate(510, 130)">
+    <rect x="0" y="0" width="180" height="80" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="90" y="20" text-anchor="middle" class="tufte-label" font-weight="bold">데이터 탐색</text>
+    <line x1="10" y1="28" x2="170" y2="28" stroke="#ccc"/>
+    <text x="15" y="45" class="tufte-code">df.shape, df.dtypes</text>
+    <text x="15" y="60" class="tufte-code">df.info(), df.head()</text>
+    <text x="15" y="75" class="tufte-small">구조와 내용 파악</text>
+  </g>
+
+  <!-- Center flow: 핵심 조작 -->
+  <line x1="360" y1="105" x2="360" y2="145" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+  <!-- Row 2: 선택/필터링 -->
+  <g transform="translate(235, 150)">
+    <rect x="0" y="0" width="250" height="70" fill="#f5f5f5" stroke="#333" stroke-width="2" rx="3"/>
+    <text x="125" y="20" text-anchor="middle" class="tufte-label" font-weight="bold">선택과 필터링</text>
+    <line x1="10" y1="28" x2="240" y2="28" stroke="#ccc"/>
+    <text x="20" y="45" class="tufte-code">df['col']</text>
+    <text x="90" y="45" class="tufte-code">df.loc[]</text>
+    <text x="160" y="45" class="tufte-code">df.iloc[]</text>
+    <text x="125" y="62" text-anchor="middle" class="tufte-small">열 선택, 행 선택, 조건 필터링</text>
+  </g>
+
+  <line x1="360" y1="220" x2="360" y2="250" stroke="#666" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+  <!-- Row 3: Three parallel operations -->
+  <g transform="translate(30, 255)">
+    <rect x="0" y="0" width="200" height="75" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="100" y="18" text-anchor="middle" class="tufte-label" font-weight="bold">자료형 변환</text>
+    <line x1="10" y1="26" x2="190" y2="26" stroke="#ccc"/>
+    <text x="15" y="43" class="tufte-code">df.astype()</text>
+    <text x="15" y="58" class="tufte-code">pd.Categorical()</text>
+    <text x="15" y="72" class="tufte-small">dtype 변환, 범주형</text>
+  </g>
+
+  <g transform="translate(260, 255)">
+    <rect x="0" y="0" width="200" height="75" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="100" y="18" text-anchor="middle" class="tufte-label" font-weight="bold">결측치 처리</text>
+    <line x1="10" y1="26" x2="190" y2="26" stroke="#ccc"/>
+    <text x="15" y="43" class="tufte-code">df.isna(), df.dropna()</text>
+    <text x="15" y="58" class="tufte-code">df.fillna()</text>
+    <text x="15" y="72" class="tufte-small">None, NaN, NA 처리</text>
+  </g>
+
+  <g transform="translate(490, 255)">
+    <rect x="0" y="0" width="200" height="75" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="100" y="18" text-anchor="middle" class="tufte-label" font-weight="bold">집계와 요약</text>
+    <line x1="10" y1="26" x2="190" y2="26" stroke="#ccc"/>
+    <text x="15" y="43" class="tufte-code">df.describe()</text>
+    <text x="15" y="58" class="tufte-code">df.groupby().agg()</text>
+    <text x="15" y="72" class="tufte-small">통계량, 그룹별 집계</text>
+  </g>
+
+  <!-- Arrows to row 3 -->
+  <line x1="300" y1="220" x2="130" y2="250" stroke="#666" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <line x1="420" y1="220" x2="590" y2="250" stroke="#666" stroke-width="1" marker-end="url(#arrowhead)"/>
+
+  <!-- Bottom note -->
+  <!-- <g transform="translate(180, 345)">
+    <rect x="0" y="0" width="360" height="25" fill="#e8e8e8" stroke="#999" rx="3"/>
+    <text x="180" y="17" text-anchor="middle" class="tufte-small">데이터 분석 워크플로우: 읽기 → 탐색 → 선택 → 변환 → 집계</text>
+  </g> -->
+
+</svg>

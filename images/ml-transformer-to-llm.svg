@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 50 900 280">
+  <defs>
+    <style>
+      .tufte-title { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif; font-size: 22px; font-weight: bold; fill: #111; }
+      .tufte-subtitle { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif; font-size: 16px; font-weight: bold; fill: #222; }
+      .tufte-label { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif; font-size: 13px; font-weight: bold; fill: #333; }
+      .tufte-text { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif; font-size: 12px; fill: #444; }
+      .tufte-small { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif; font-size: 10px; fill: #666; }
+      
+      .box-milestone { fill: #fff; stroke: #999; stroke-width: 1.5; rx: 5; }
+      .box-highlight { fill: #f8f8f8; stroke: #333; stroke-width: 2; rx: 5; }
+      .box-revolution { fill: #f0f0f0; stroke: #111; stroke-width: 2.5; rx: 5; }
+      
+      .arrow-flow { stroke: #666; stroke-width: 2; fill: none; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#666" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="900" height="450" fill="#ffffff"/>
+
+  <!-- Title -->
+  <!-- <text x="450" y="40" class="tufte-title" text-anchor="middle">트랜스포머에서 거대 언어모형으로</text>
+  <text x="450" y="65" class="tufte-text" text-anchor="middle" font-style="italic">7년의 여정: 단순 번역기에서 범용 지능으로</text> -->
+
+  <!-- 1. 2017 Transformer -->
+  <g transform="translate(30, 120)">
+    <circle cx="20" cy="80" r="6" fill="#fff" stroke="#666" stroke-width="2"/>
+    <text x="20" y="105" class="tufte-label" text-anchor="middle">2017</text>
+
+    <rect x="0" y="0" width="180" height="140" class="box-milestone" opacity="0.9"/>
+    <text x="90" y="25" class="tufte-subtitle" text-anchor="middle">Transformer</text>
+    <line x1="20" y1="35" x2="160" y2="35" stroke="#ddd"/>
+
+    <text x="15" y="55" class="tufte-text" font-weight="bold">"Attention Is All You Need"</text>
+    <text x="15" y="75" class="tufte-small">• Google의 기계 번역 모델</text>
+    <text x="15" y="90" class="tufte-small">• 병렬 처리 구조 혁신</text>
+    <text x="15" y="105" class="tufte-small">• RNN의 한계 극복</text>
+  </g>
+
+  <!-- 2. 2018-19 GPT 1/2 -->
+  <g transform="translate(240, 120)">
+    <circle cx="20" cy="80" r="6" fill="#ccc"/>
+    <text x="20" y="105" class="tufte-label" text-anchor="middle">2018~</text>
+
+    <rect x="0" y="0" width="180" height="140" class="box-milestone"/>
+    <text x="90" y="25" class="tufte-subtitle" text-anchor="middle">GPT-1 &amp; 2</text>
+    <line x1="20" y1="35" x2="160" y2="35" stroke="#ddd"/>
+
+    <text x="15" y="55" class="tufte-text">Decoder-Only 구조</text>
+    <text x="15" y="75" class="tufte-small">• 다음 단어 예측 학습</text>
+    <text x="15" y="90" class="tufte-small">• 규모 확장 실험 (1.5B)</text>
+    <text x="15" y="105" class="tufte-small">• 생성 능력의 가능성 확인</text>
+  </g>
+
+  <!-- 3. 2020 GPT-3 Breakthrough -->
+  <g transform="translate(450, 100)">
+    <circle cx="20" cy="100" r="8" fill="#666"/>
+    <text x="20" y="125" class="tufte-label" text-anchor="middle">2020</text>
+
+    <rect x="0" y="0" width="200" height="180" class="box-highlight"/>
+    <text x="100" y="30" class="tufte-subtitle" text-anchor="middle">GPT-3 (175B)</text>
+    <line x1="20" y1="40" x2="180" y2="40" stroke="#ccc"/>
+
+    <text x="15" y="60" class="tufte-text" font-weight="bold">질적 도약 (Emergence)</text>
+    <text x="15" y="80" class="tufte-small">• Few-shot Learning 창발</text>
+    <text x="15" y="95" class="tufte-small">• 별도 학습 없이 과제 수행</text>
+    <text x="15" y="110" class="tufte-small">• 번역, 코딩, 수학 등</text>
+    <text x="15" y="125" class="tufte-small" fill="#333">"규모가 곧 성능이다"</text>
+  </g>
+
+  <!-- 4. 2022+ ChatGPT -->
+  <g transform="translate(680, 80)">
+    <circle cx="20" cy="120" r="10" fill="#111"/>
+    <text x="20" y="145" class="tufte-label" text-anchor="middle">2022+</text>
+
+    <rect x="0" y="0" width="200" height="220" class="box-revolution"/>
+    <text x="100" y="35" class="tufte-subtitle" text-anchor="middle">ChatGPT &amp; GPT-4</text>
+    <line x1="20" y1="45" x2="180" y2="45" stroke="#999"/>
+
+    <text x="15" y="70" class="tufte-text" font-weight="bold">AI 대중화 혁명</text>
+    <text x="15" y="90" class="tufte-small">• RLHF로 인간 가치 정렬</text>
+    <text x="15" y="105" class="tufte-small">• Software 3.0 패러다임</text>
+    <text x="15" y="120" class="tufte-small">• 멀티모달 (이미지/음성)</text>
+    <text x="15" y="135" class="tufte-small">• 에이전트 시스템</text>
+    <text x="15" y="155" class="tufte-code" fill="#333">"Prompt Is All You Need"</text>
+  </g>
+
+  <!-- Connecting Arrows with Labels -->
+  <path d="M 210 190 Q 225 190 240 190" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="225" y="172" class="tufte-text" text-anchor="middle" fill="#666" font-weight="bold">규모 확장</text>
+
+  <path d="M 420 190 Q 435 190 450 190" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="435" y="172" class="tufte-text" text-anchor="middle" fill="#666" font-weight="bold">창발</text>
+
+  <path d="M 650 190 Q 665 190 680 190" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="665" y="172" class="tufte-text" text-anchor="middle" fill="#666" font-weight="bold">정렬</text>
+
+  <!-- Bottom Insight -->
+  <g transform="translate(50, 330)">
+    <rect x="0" y="0" width="820" height="70" fill="#fafafa" stroke="#999" stroke-width="1.5" rx="5"/>
+    <text x="410" y="25" class="tufte-subtitle" text-anchor="middle">핵심 진화 경로</text>
+    <line x1="30" y1="35" x2="790" y2="35" stroke="#ddd"/>
+
+    <text x="410" y="52" class="tufte-text" text-anchor="middle">특정 목적 모델 (번역) → 생성 모델 (다음 단어 예측) → 지시 이행 모델 (Instruct/Chat) → 범용 에이전트</text>
+    <text x="410" y="67" class="tufte-small" text-anchor="middle" fill="#666" font-style="italic">한 가지 잘하기 → 여러 가지 하기 → 말 알아듣기 → 도구 사용하기</text>
+  </g>
+
+</svg>

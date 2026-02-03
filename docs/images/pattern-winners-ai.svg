@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 55 850 430">
+  <defs>
+    <style>
+      .tufte-title { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', serif; font-size: 16px; font-weight: bold; fill: #111; }
+      .tufte-subtitle { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', serif; font-size: 12px; fill: #666; }
+      .tufte-label { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', serif; font-size: 12px; font-weight: bold; fill: #333; }
+      .tufte-desc { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', serif; font-size: 10px; fill: #555; }
+      .tufte-code { font-family: 'SF Mono', Consolas, Menlo, monospace; font-size: 9px; fill: #666; }
+      .tufte-small { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', serif; font-size: 9px; fill: #888; }
+
+      .era-box-1 { fill: #f0f0f0; stroke: #999; stroke-width: 1; rx: 4; }
+      .era-box-2 { fill: #e8e8e8; stroke: #333; stroke-width: 1.5; rx: 4; }
+
+      .box-legacy { fill: #fff; stroke: #999; stroke-width: 1; rx: 3; }
+      .box-ai { fill: #fff; stroke: #333; stroke-width: 2; rx: 4; }
+      .box-protocol { fill: #fff; stroke: #333; stroke-width: 1.5; stroke-dasharray: 4 2; rx: 4; }
+
+      .line-connect { stroke: #666; stroke-width: 1.5; fill: none; marker-end: url(#arrow); }
+      .arrow-head { fill: #666; }
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L0,8 L8,4 z" class="arrow-head" />
+    </marker>
+  </defs>
+
+  <rect width="850" height="520" fill="#fff" />
+
+  <!-- Title -->
+  <!-- <text x="425" y="30" text-anchor="middle" class="tufte-title">패턴의 진화: Software 1.0에서 2.0으로</text>
+  <text x="425" y="50" text-anchor="middle" class="tufte-subtitle">명시적 로직(Code)에서 확률적 로직(AI)으로의 확장</text> -->
+
+  <!-- Era Backgrounds -->
+  <!-- Software 1.0 -->
+  <g transform="translate(40, 80)">
+    <rect x="0" y="0" width="200" height="380" class="era-box-1"/>
+    <text x="100" y="25" text-anchor="middle" class="tufte-label" fill="#666">Software 1.0</text>
+    <text x="100" y="40" text-anchor="middle" class="tufte-small">명시적 로직 (사람이 작성)</text>
+  </g>
+
+  <!-- Transition emphasis: 명시적 로직 → 확률적 로직 -->
+  <g transform="translate(410, 70)">
+    <rect x="0" y="0" width="30" height="405" fill="#f5f5f5" stroke="#999" stroke-width="1" stroke-dasharray="3 2"/>
+    <text x="15" y="205" text-anchor="middle" class="tufte-small" writing-mode="vertical-rl" style="font-size:11px; fill:#555; font-weight:bold;">
+      명시적 로직 → 확률적 로직 확장
+    </text>
+  </g>
+
+  <!-- Software 2.0 -->
+  <g transform="translate(460, 80)">
+    <rect x="0" y="0" width="350" height="380" class="era-box-2"/>
+    <text x="175" y="25" text-anchor="middle" class="tufte-label" fill="#333">Software 2.0</text>
+    <text x="175" y="40" text-anchor="middle" class="tufte-small">확률적 로직 (데이터/AI 기반)</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- LEFT: Legacy Patterns -->
+  <!-- ========================================== -->
+  <g transform="translate(60, 140)">
+
+    <!-- Factory -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="160" height="55" class="box-legacy"/>
+      <text x="80" y="20" text-anchor="middle" class="tufte-label">Factory</text>
+      <text x="80" y="40" text-anchor="middle" class="tufte-desc">객체 생성 로직 분리</text>
+    </g>
+
+    <!-- Strategy -->
+    <g transform="translate(0, 80)">
+      <rect x="0" y="0" width="160" height="55" class="box-legacy"/>
+      <text x="80" y="20" text-anchor="middle" class="tufte-label">Strategy</text>
+      <text x="80" y="40" text-anchor="middle" class="tufte-desc">알고리즘(로직) 교체</text>
+    </g>
+
+    <!-- Observer -->
+    <g transform="translate(0, 160)">
+      <rect x="0" y="0" width="160" height="55" class="box-legacy"/>
+      <text x="80" y="20" text-anchor="middle" class="tufte-label">Observer</text>
+      <text x="80" y="40" text-anchor="middle" class="tufte-desc">이벤트 감지 및 전파</text>
+    </g>
+
+    <!-- Repository -->
+    <g transform="translate(0, 240)">
+      <rect x="0" y="0" width="160" height="55" class="box-legacy"/>
+      <text x="80" y="20" text-anchor="middle" class="tufte-label">Repository</text>
+      <text x="80" y="40" text-anchor="middle" class="tufte-desc">정형 데이터 접근</text>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- CENTER: Evolution Connectors -->
+  <!-- ========================================== -->
+  <g transform="translate(220, 140)">
+
+    <!-- Factory -> LLM -->
+    <path d="M 0 27 L 260 27" class="line-connect"/>
+    <text x="130" y="20" text-anchor="middle" class="tufte-small">대상 확장 (Instance → Model)</text>
+
+    <!-- Strategy -> Prompt -->
+    <path d="M 0 107 L 260 107" class="line-connect"/>
+    <text x="130" y="100" text-anchor="middle" class="tufte-small">전략 확장 (Code → Prompt)</text>
+
+    <!-- Observer -> Agent -->
+    <path d="M 0 187 L 260 187" class="line-connect"/>
+    <text x="130" y="180" text-anchor="middle" class="tufte-small">주체성 확장 (Reactive → Active)</text>
+
+    <!-- Repository -> RAG -->
+    <path d="M 0 267 L 260 267" class="line-connect"/>
+    <text x="130" y="260" text-anchor="middle" class="tufte-small">데이터 확장 (Table → Vector)</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- RIGHT: AI Patterns -->
+  <!-- ========================================== -->
+  <g transform="translate(480, 140)">
+
+    <!-- LLM Factory -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="160" height="55" class="box-ai"/>
+      <text x="80" y="20" text-anchor="middle" class="tufte-label">LLM Factory</text>
+      <text x="80" y="40" text-anchor="middle" class="tufte-desc">모델 인스턴스 생성/관리</text>
+    </g>
+
+    <!-- Prompt Chain -->
+    <g transform="translate(0, 80)">
+      <rect x="0" y="0" width="160" height="55" class="box-ai"/>
+      <text x="80" y="20" text-anchor="middle" class="tufte-label">Prompt Chain</text>
+      <text x="80" y="40" text-anchor="middle" class="tufte-desc">추론 전략(CoT, ReAct)</text>
+    </g>
+
+    <!-- Agent Loop -->
+    <g transform="translate(0, 160)">
+      <rect x="0" y="0" width="160" height="55" class="box-ai"/>
+      <text x="80" y="20" text-anchor="middle" class="tufte-label">Agent Loop</text>
+      <text x="80" y="40" text-anchor="middle" class="tufte-desc">관찰-생각-행동 루프</text>
+    </g>
+
+    <!-- RAG -->
+    <g transform="translate(0, 240)">
+      <rect x="0" y="0" width="160" height="55" class="box-ai"/>
+      <text x="80" y="20" text-anchor="middle" class="tufte-label">RAG System</text>
+      <text x="80" y="40" text-anchor="middle" class="tufte-desc">비정형 지식 검색/증강</text>
+    </g>
+
+    <!-- MCP (Standard) -->
+    <g transform="translate(180, 160)">
+      <rect x="0" y="0" width="120" height="135" class="box-protocol"/>
+      <text x="60" y="25" text-anchor="middle" class="tufte-label">MCP</text>
+      <text x="60" y="40" text-anchor="middle" class="tufte-small">Model Context Protocol</text>
+      <line x1="10" y1="50" x2="110" y2="50" stroke="#ccc" stroke-width="1"/>
+      <text x="60" y="70" text-anchor="middle" class="tufte-desc">Agent와 RAG를</text>
+      <text x="60" y="85" text-anchor="middle" class="tufte-desc">연결하는 표준</text>
+      <text x="60" y="100" text-anchor="middle" class="tufte-desc">인터페이스</text>
+    </g>
+
+    <!-- Link Agent/RAG to MCP -->
+    <path d="M 160 187 L 180 187" stroke="#999" stroke-width="1"/>
+    <path d="M 160 267 L 180 267" stroke="#999" stroke-width="1"/>
+
+  </g>
+
+</svg>

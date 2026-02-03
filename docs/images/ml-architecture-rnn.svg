@@ -1,0 +1,199 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 20 720 420">
+  <defs>
+    <style>
+      .tufte-title { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 16px; fill: #333; font-weight: bold; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 12px; fill: #333; }
+      .tufte-small { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 10px; fill: #666; }
+      .tufte-math { font-family: 'Times New Roman', Times, serif; font-size: 11px; fill: #555; font-style: italic; }
+      .tufte-accent { font-family: Palatino, 'Book Antiqua', Georgia, serif; font-size: 10px; fill: #555; }
+      .cell-box { fill: #f5f5f5; stroke: #333; stroke-width: 1.5; }
+      .gate-box { fill: #eee; stroke: #666; stroke-width: 1; }
+    </style>
+    <marker id="arrow-rnn" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#666"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="720" height="450" fill="#ffffff"/>
+
+  <!-- Title -->
+  <!-- <text x="360" y="25" text-anchor="middle" class="tufte-title">RNN: 시간을 따라 정보를 전달</text> -->
+
+  <!-- ===== Section 1: Folded RNN (Left) ===== -->
+  <g transform="translate(30, 50)">
+    <text x="70" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">접힌 표현</text>
+
+    <!-- RNN Cell -->
+    <rect x="30" y="40" width="80" height="55" class="cell-box" rx="5"/>
+    <text x="70" y="72" text-anchor="middle" class="tufte-label">RNN</text>
+
+    <!-- Input arrow -->
+    <line x1="70" y1="120" x2="70" y2="100" stroke="#666" stroke-width="1.5" marker-end="url(#arrow-rnn)"/>
+    <text x="70" y="135" text-anchor="middle" class="tufte-math">xₜ</text>
+
+    <!-- Output arrow -->
+    <line x1="70" y1="35" x2="70" y2="15" stroke="#666" stroke-width="1.5" marker-end="url(#arrow-rnn)"/>
+    <text x="70" y="8" text-anchor="middle" class="tufte-math">yₜ</text>
+
+    <!-- Self-loop for hidden state -->
+    <path d="M 115 55 C 140 55, 140 80, 115 80" fill="none" stroke="#333" stroke-width="1.5" marker-end="url(#arrow-rnn)"/>
+    <text x="148" y="72" class="tufte-math">hₜ</text>
+  </g>
+
+  <!-- Arrow between representations -->
+  <text x="210" y="105" class="tufte-label">펼치면</text>
+  <line x1="200" y1="115" x2="260" y2="115" stroke="#999" stroke-width="1" stroke-dasharray="4,2" marker-end="url(#arrow-rnn)"/>
+
+  <!-- ===== Section 2: Unfolded RNN (Right) ===== -->
+  <g transform="translate(280, 45)">
+    <text x="180" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">펼친 표현 (시간에 따른 전개)</text>
+
+    <!-- Time step 0 -->
+    <g transform="translate(0, 25)">
+      <rect x="0" y="25" width="55" height="45" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="4"/>
+      <text x="27" y="52" text-anchor="middle" class="tufte-small">RNN</text>
+      <line x1="27" y1="95" x2="27" y2="75" stroke="#666" stroke-width="1.2" marker-end="url(#arrow-rnn)"/>
+      <text x="27" y="108" text-anchor="middle" class="tufte-math">x₀</text>
+      <text x="27" y="120" text-anchor="middle" class="tufte-small">"고양이"</text>
+      <line x1="27" y1="20" x2="27" y2="5" stroke="#666" stroke-width="1.2" marker-end="url(#arrow-rnn)"/>
+      <text x="27" y="-2" text-anchor="middle" class="tufte-math">y₀</text>
+    </g>
+
+    <!-- Hidden state arrow 0→1 -->
+    <line x1="60" y1="72" x2="85" y2="72" stroke="#333" stroke-width="2" marker-end="url(#arrow-rnn)"/>
+    <text x="72" y="64" text-anchor="middle" class="tufte-math">h₀</text>
+
+    <!-- Time step 1 -->
+    <g transform="translate(90, 25)">
+      <rect x="0" y="25" width="55" height="45" fill="#eee" stroke="#333" stroke-width="1.5" rx="4"/>
+      <text x="27" y="52" text-anchor="middle" class="tufte-small">RNN</text>
+      <line x1="27" y1="95" x2="27" y2="75" stroke="#666" stroke-width="1.2" marker-end="url(#arrow-rnn)"/>
+      <text x="27" y="108" text-anchor="middle" class="tufte-math">x₁</text>
+      <text x="27" y="120" text-anchor="middle" class="tufte-small">"가"</text>
+      <line x1="27" y1="20" x2="27" y2="5" stroke="#666" stroke-width="1.2" marker-end="url(#arrow-rnn)"/>
+      <text x="27" y="-2" text-anchor="middle" class="tufte-math">y₁</text>
+    </g>
+
+    <!-- Hidden state arrow 1→2 -->
+    <line x1="150" y1="72" x2="175" y2="72" stroke="#333" stroke-width="2" marker-end="url(#arrow-rnn)"/>
+    <text x="162" y="64" text-anchor="middle" class="tufte-math">h₁</text>
+
+    <!-- Time step 2 -->
+    <g transform="translate(180, 25)">
+      <rect x="0" y="25" width="55" height="45" fill="#e0e0e0" stroke="#333" stroke-width="1.5" rx="4"/>
+      <text x="27" y="52" text-anchor="middle" class="tufte-small">RNN</text>
+      <line x1="27" y1="95" x2="27" y2="75" stroke="#666" stroke-width="1.2" marker-end="url(#arrow-rnn)"/>
+      <text x="27" y="108" text-anchor="middle" class="tufte-math">x₂</text>
+      <text x="27" y="120" text-anchor="middle" class="tufte-small">"쥐를"</text>
+      <line x1="27" y1="20" x2="27" y2="5" stroke="#666" stroke-width="1.2" marker-end="url(#arrow-rnn)"/>
+      <text x="27" y="-2" text-anchor="middle" class="tufte-math">y₂</text>
+    </g>
+
+    <!-- Hidden state arrow 2→3 -->
+    <line x1="240" y1="72" x2="265" y2="72" stroke="#333" stroke-width="2" marker-end="url(#arrow-rnn)"/>
+    <text x="252" y="64" text-anchor="middle" class="tufte-math">h₂</text>
+
+    <!-- Time step 3 -->
+    <g transform="translate(270, 25)">
+      <rect x="0" y="25" width="55" height="45" fill="#d5d5d5" stroke="#333" stroke-width="1.5" rx="4"/>
+      <text x="27" y="52" text-anchor="middle" class="tufte-small">RNN</text>
+      <line x1="27" y1="95" x2="27" y2="75" stroke="#666" stroke-width="1.2" marker-end="url(#arrow-rnn)"/>
+      <text x="27" y="108" text-anchor="middle" class="tufte-math">x₃</text>
+      <text x="27" y="120" text-anchor="middle" class="tufte-small">"잡았다"</text>
+      <line x1="27" y1="20" x2="27" y2="5" stroke="#666" stroke-width="1.2" marker-end="url(#arrow-rnn)"/>
+      <text x="27" y="-2" text-anchor="middle" class="tufte-math">y₃</text>
+    </g>
+
+    <!-- Continuation dots -->
+    <text x="350" y="75" class="tufte-label">...</text>
+  </g>
+
+  <!-- ===== Section 3: Key Formula & Vanishing Gradient ===== -->
+  <!-- Key formula -->
+  <g transform="translate(30, 200)">
+    <rect x="0" y="0" width="200" height="45" fill="#f9f9f9" stroke="#ccc" stroke-width="1" rx="4"/>
+    <text x="15" y="18" class="tufte-math" font-size="11">hₜ = tanh(Wₓxₜ + Wₕhₜ₋₁ + b)</text>
+    <text x="15" y="35" class="tufte-small">현재 입력 + 이전 기억 → 새 기억</text>
+  </g>
+
+  <!-- Vanishing Gradient Problem -->
+  <g transform="translate(260, 195)">
+    <text x="0" y="15" class="tufte-label" font-weight="bold">장기 의존성 문제</text>
+    <g transform="translate(0, 12)">
+      <rect x="0" y="15" width="35" height="25" fill="#444" stroke="#333" stroke-width="1"/>
+      <rect x="45" y="15" width="35" height="25" fill="#666" stroke="#333" stroke-width="1"/>
+      <rect x="90" y="15" width="35" height="25" fill="#888" stroke="#333" stroke-width="1"/>
+      <rect x="135" y="15" width="35" height="25" fill="#aaa" stroke="#333" stroke-width="1"/>
+      <rect x="180" y="15" width="35" height="25" fill="#ccc" stroke="#333" stroke-width="1"/>
+      <rect x="225" y="15" width="35" height="25" fill="#eee" stroke="#333" stroke-width="1"/>
+
+      <text x="17" y="32" text-anchor="middle" class="tufte-small" fill="#fff">t</text>
+      <text x="62" y="32" text-anchor="middle" class="tufte-small" fill="#fff">t-1</text>
+      <text x="107" y="32" text-anchor="middle" class="tufte-small" fill="#fff">t-2</text>
+      <text x="152" y="32" text-anchor="middle" class="tufte-small">t-3</text>
+      <text x="197" y="32" text-anchor="middle" class="tufte-small">t-4</text>
+      <text x="242" y="32" text-anchor="middle" class="tufte-small">t-5</text>
+
+      <text x="130" y="55" text-anchor="middle" class="tufte-accent">← 기울기가 점점 소실</text>
+    </g>
+  </g>
+
+  <!-- ===== Section 4: LSTM ===== -->
+  <!-- Separator -->
+  <line x1="30" y1="275" x2="690" y2="275" stroke="#ccc" stroke-width="1" stroke-dasharray="5,5"/>
+
+  <!-- LSTM Title -->
+  <text x="360" y="295" text-anchor="middle" class="tufte-label" font-weight="bold" font-size="13">LSTM: 게이트로 장기 기억 보존</text>
+
+  <!-- LSTM Diagram -->
+  <g transform="translate(50, 315)">
+    <!-- Main Cell Box -->
+    <rect x="0" y="0" width="350" height="110" fill="#fafafa" stroke="#333" stroke-width="1.5" rx="8"/>
+
+    <!-- Cell State (Highway) - inside the box -->
+    <line x1="20" y1="25" x2="330" y2="25" stroke="#333" stroke-width="2.5"/>
+    <text x="175" y="18" text-anchor="middle" class="tufte-math" font-weight="bold">셀 상태 (장기 기억)</text>
+
+    <!-- Hidden State Flow -->
+    <line x1="20" y1="90" x2="330" y2="90" stroke="#666" stroke-width="1.5" stroke-dasharray="4,2"/>
+    <text x="175" y="105" text-anchor="middle" class="tufte-small">은닉 상태 (단기 기억)</text>
+
+    <!-- 1. Forget Gate -->
+    <g transform="translate(45, 40)">
+      <rect x="0" y="0" width="45" height="40" class="gate-box" rx="3"/>
+      <text x="22" y="18" text-anchor="middle" class="tufte-math" font-weight="bold">×</text>
+      <text x="22" y="32" text-anchor="middle" class="tufte-small">망각</text>
+      <line x1="22" y1="0" x2="22" y2="-15" stroke="#666" stroke-width="1.5" marker-end="url(#arrow-rnn)"/>
+    </g>
+
+    <!-- 2. Input Gate -->
+    <g transform="translate(152, 40)">
+      <rect x="0" y="0" width="45" height="40" class="gate-box" rx="3"/>
+      <text x="22" y="18" text-anchor="middle" class="tufte-math" font-weight="bold">+</text>
+      <text x="22" y="32" text-anchor="middle" class="tufte-small">입력</text>
+      <line x1="22" y1="0" x2="22" y2="-15" stroke="#666" stroke-width="1.5" marker-end="url(#arrow-rnn)"/>
+    </g>
+
+    <!-- 3. Output Gate -->
+    <g transform="translate(260, 40)">
+      <rect x="0" y="0" width="45" height="40" class="gate-box" rx="3"/>
+      <text x="22" y="18" text-anchor="middle" class="tufte-math" font-weight="bold">σ</text>
+      <text x="22" y="32" text-anchor="middle" class="tufte-small">출력</text>
+      <line x1="22" y1="-15" x2="22" y2="0" stroke="#666" stroke-width="1.5"/>
+    </g>
+  </g>
+
+  <!-- Key Insight Box (Right side) -->
+  <g transform="translate(430, 315)">
+    <rect x="0" y="0" width="250" height="110" fill="#f9f9f9" stroke="#666" stroke-width="1.5" rx="5"/>
+    <text x="125" y="22" text-anchor="middle" class="tufte-label" font-weight="bold">핵심 아이디어</text>
+
+    <text x="125" y="45" text-anchor="middle" class="tufte-small">셀 상태는 "컨베이어 벨트"처럼</text>
+    <text x="125" y="60" text-anchor="middle" class="tufte-small">정보가 전체 시퀀스를 따라</text>
+    <text x="125" y="75" text-anchor="middle" class="tufte-small" font-weight="bold">거의 변형 없이 흐를 수 있음</text>
+
+    <line x1="20" y1="85" x2="230" y2="85" stroke="#ddd" stroke-width="1"/>
+    <text x="125" y="100" text-anchor="middle" class="tufte-accent">→ 기울기 소실 문제 해결</text>
+  </g>
+
+</svg>

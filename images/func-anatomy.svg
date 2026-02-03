@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-50 0 650 190">
+  <defs>
+    <style>
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-label { font-size: 12px; }
+      .tufte-small { font-size: 11px; fill: #666; }
+      .tufte-code { font-family: 'Consolas', 'Monaco', monospace; font-size: 14px; }
+      .tufte-code-small { font-family: 'Consolas', 'Monaco', monospace; font-size: 11px; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="-50" y="0" width="650" height="220" fill="#ffffff"/>
+
+  <!-- Code box -->
+  <rect x="30" y="70" width="400" height="100" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="5"/>
+
+  <!-- Line 1: def greet(name): -->
+  <text x="50" y="105" class="tufte-code" fill="#666">def</text>
+  <text x="90" y="105" class="tufte-code">greet</text>
+  <text x="145" y="105" class="tufte-code">(</text>
+  <text x="155" y="105" class="tufte-code" fill="#555">name</text>
+  <text x="200" y="105" class="tufte-code">)</text>
+  <text x="210" y="105" class="tufte-code">:</text>
+
+  <!-- Line 2: indented body -->
+  <text x="70" y="140" class="tufte-code">print</text>
+  <text x="115" y="140" class="tufte-code">(</text>
+  <text x="125" y="140" class="tufte-code" fill="#555">"안녕, "</text>
+  <text x="195" y="140" class="tufte-code">+</text>
+  <text x="210" y="140" class="tufte-code" fill="#555">name</text>
+  <text x="255" y="140" class="tufte-code">)</text>
+
+  <!-- Annotations with arrows -->
+
+  <!-- def 키워드 -->
+  <path d="M 65 90 L 65 50" fill="none" stroke="#666" stroke-width="1" marker-end="url(#arrow)"/>
+  <text x="65" y="40" text-anchor="middle" class="tufte-text tufte-small">def 예약어</text>
+
+  <!-- 함수 이름 -->
+  <path d="M 115 90 L 115 25" fill="none" stroke="#666" stroke-width="1" marker-end="url(#arrow)"/>
+  <text x="115" y="15" text-anchor="middle" class="tufte-text tufte-small">함수 이름</text>
+
+  <!-- 매개변수 -->
+  <path d="M 175 90 L 220 35" fill="none" stroke="#666" stroke-width="1" marker-end="url(#arrow)"/>
+  <text x="250" y="30" text-anchor="middle" class="tufte-text tufte-small">매개변수</text>
+
+  <!-- 콜론 -->
+  <path d="M 220 100 L 280 60" fill="none" stroke="#666" stroke-width="1" marker-end="url(#arrow)"/>
+  <text x="320" y="55" text-anchor="middle" class="tufte-text tufte-small">콜론 (머리 부문 끝)</text>
+
+  <!-- 머리 부문 bracket -->
+  <path d="M 440 95 L 460 95" fill="none" stroke="#999" stroke-width="1.5"/>
+  <path d="M 460 85 L 460 105" fill="none" stroke="#999" stroke-width="1.5"/>
+  <text x="480" y="100" class="tufte-text tufte-small">머리 부문</text>
+  <text x="480" y="115" class="tufte-text tufte-code-small">(header)</text>
+
+  <!-- 몸통 부문 bracket -->
+  <path d="M 440 135 L 460 135" fill="none" stroke="#999" stroke-width="1.5"/>
+  <path d="M 460 125 L 460 155" fill="none" stroke="#999" stroke-width="1.5"/>
+  <text x="480" y="140" class="tufte-text tufte-small">몸통 부문</text>
+  <text x="480" y="155" class="tufte-text tufte-code-small">(body)</text>
+
+  <!-- 들여쓰기 표시 -->
+  <path d="M 50 140 L 65 140" fill="none" stroke="#999" stroke-width="1" stroke-dasharray="3,2"/>
+  <path d="M 50 125 L 50 155" fill="none" stroke="#999" stroke-width="1"/>
+  <text x="25" y="140" text-anchor="middle" class="tufte-text tufte-small" transform="rotate(-90, 25, 145)">들여쓰기</text>
+
+  <!-- 하단 설명 -->
+  <!-- <rect x="30" y="185" width="590" height="28" fill="#fafafa" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="325" y="204" text-anchor="middle" class="tufte-text tufte-small">함수 정의는 머리 부문(def 이름(매개변수):)과 몸통 부문(들여쓰기된 문장들)으로 구성된다</text> -->
+
+</svg>

@@ -1,0 +1,170 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 70 900 420">
+  <defs>
+    <style>
+      /* Typography */
+      .tufte-title { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif; font-size: 24px; font-weight: bold; fill: #111; }
+      .tufte-subtitle { font-family: "Malgun Gothic", "Apple SD Gothic Neo", Palatino, serif; font-size: 18px; font-weight: bold; fill: #222; }
+      .tufte-label { font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif; font-size: 12px; font-weight: bold; fill: #333; }
+      .tufte-text { font-family: "Malgun Gothic", "Apple SD Gothic Neo", serif; font-size: 12px; fill: #444; }
+      .tufte-small { font-family: "Malgun Gothic", "Apple SD Gothic Neo", serif; font-size: 11px; fill: #666; font-style: italic; }
+      .tufte-code { font-family: 'SF Mono', Menlo, Monaco, monospace; font-size: 11px; fill: #333; }
+
+      /* Shapes */
+      .panel { fill: #fff; stroke: #ccc; stroke-width: 1; rx: 5; }
+      .panel-highlight { fill: #fcfcfc; stroke: #333; stroke-width: 1.5; rx: 5; }
+      .code-block { fill: #f9f9f9; stroke: #eee; stroke-width: 1; rx: 3; }
+      .icon-stroke { stroke: #444; stroke-width: 1.5; fill: none; }
+      .icon-fill { fill: #444; stroke: none; }
+
+      /* Arrows */
+      .arrow { stroke: #666; stroke-width: 1.5; fill: none; marker-end: url(#arrowhead); }
+    </style>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#666" />
+    </marker>
+  </defs>
+
+  <rect width="950" height="550" fill="#fff" />
+
+  <!-- Title -->
+  <text x="450" y="40" class="tufte-title" text-anchor="middle">소프트웨어 패러다임의 진화</text>
+  <text x="450" y="65" class="tufte-text" text-anchor="middle">코딩(Coding)에서 학습(Learning), 그리고 프롬프팅(Prompting)으로</text>
+
+  <!-- Connectors -->
+  <path d="M290,250 L320,250" class="arrow" />
+  <path d="M580,250 L610,250" class="arrow" />
+
+  <!-- Column 1: Software 1.0 -->
+  <g transform="translate(30, 90)">
+    <rect x="0" y="0" width="260" height="380" class="panel" />
+    
+    <!-- Icon: Flowchart / Logic -->
+    <g transform="translate(130, 40)">
+      <rect x="-12" y="-15" width="24" height="10" class="icon-stroke" />
+      <path d="M0,-5 L0,5" class="icon-stroke" />
+      <path d="M0,5 L-12,15 L0,25 L12,15 Z" class="icon-stroke" /> <!-- Diamond -->
+      <path d="M0,25 L0,32" class="icon-stroke" />
+      <text x="0" y="55" class="tufte-subtitle" text-anchor="middle">소프트웨어 1.0</text>
+      <text x="0" y="75" class="tufte-small" text-anchor="middle">(전통적 코딩)</text>
+    </g>
+
+    <!-- Code -->
+    <g transform="translate(20, 120)">
+      <rect x="0" y="0" width="220" height="90" class="code-block" />
+      <text x="15" y="20" class="tufte-code">def analyze(text):</text>
+      <text x="25" y="35" class="tufte-code">if "좋아" in text:</text>
+      <text x="35" y="50" class="tufte-code">return 긍정</text>
+      <text x="25" y="65" class="tufte-code">else:</text>
+      <text x="35" y="80" class="tufte-code">return 부정</text>
+    </g>
+
+    <!-- Desc -->
+    <g transform="translate(20, 230)">
+      <text x="0" y="15" class="tufte-label">핵심:</text>
+      <text x="40" y="15" class="tufte-text">규칙을 인간이 명시</text>
+      
+      <text x="0" y="40" class="tufte-label">개발자 역할:</text>
+      <text x="0" y="60" class="tufte-text">• 알고리즘 설계</text>
+      <text x="0" y="80" class="tufte-text">• 로직 구현</text>
+      <text x="0" y="100" class="tufte-text">• 디버깅</text>
+      
+      <text x="0" y="135" class="tufte-small" fill="#888">"어떻게 풀 것인가(How)"</text>
+    </g>
+  </g>
+
+  <!-- Column 2: Software 2.0 -->
+  <g transform="translate(320, 90)">
+    <rect x="0" y="0" width="260" height="380" class="panel" />
+
+    <!-- Icon: Neural Network Layers -->
+    <g transform="translate(130, 40)">
+       <!-- Input Layer -->
+      <circle cx="-20" cy="-10" r="3" class="icon-stroke" />
+      <circle cx="-20" cy="10" r="3" class="icon-stroke" />
+      <!-- Hidden Layer -->
+      <circle cx="0" cy="-15" r="3" class="icon-stroke" />
+      <circle cx="0" cy="0" r="3" class="icon-stroke" />
+      <circle cx="0" cy="15" r="3" class="icon-stroke" />
+      <!-- Output Layer -->
+      <circle cx="20" cy="-10" r="3" class="icon-stroke" />
+      <circle cx="20" cy="10" r="3" class="icon-stroke" />
+      
+      <!-- Connections -->
+      <path d="M-17,-10 L-3,-15 M-17,-10 L-3,0 M-17,10 L-3,0 M-17,10 L-3,15" class="icon-stroke" stroke-width="0.5"/>
+      <path d="M3,-15 L17,-10 M3,0 L17,-10 M3,0 L17,10 M3,15 L17,10" class="icon-stroke" stroke-width="0.5"/>
+
+      <text x="0" y="55" class="tufte-subtitle" text-anchor="middle">소프트웨어 2.0</text>
+      <text x="0" y="75" class="tufte-small" text-anchor="middle">(기계 학습)</text>
+    </g>
+
+    <!-- Code -->
+    <g transform="translate(20, 120)">
+      <rect x="0" y="0" width="220" height="90" class="code-block" />
+      <text x="15" y="20" class="tufte-code">model = Network()</text>
+      <text x="15" y="35" class="tufte-code">opt = Optimizer()</text>
+      <text x="15" y="50" class="tufte-code">for x, y in data:</text>
+      <text x="25" y="65" class="tufte-code">loss = loss_fn(model(x), y)</text>
+      <text x="25" y="80" class="tufte-code">opt.step()</text>
+    </g>
+
+    <!-- Desc -->
+    <g transform="translate(20, 230)">
+      <text x="0" y="15" class="tufte-label">핵심:</text>
+      <text x="40" y="15" class="tufte-text">데이터에서 규칙 학습</text>
+      
+      <text x="0" y="40" class="tufte-label">개발자 역할:</text>
+      <text x="0" y="60" class="tufte-text">• 데이터 수집/정제</text>
+      <text x="0" y="80" class="tufte-text">• 아키텍처 설계</text>
+      <text x="0" y="100" class="tufte-text">• 하이퍼파라미터 튜닝</text>
+
+      <text x="0" y="135" class="tufte-small" fill="#888">"어떤 데이터를 쓸까(Data)"</text>
+    </g>
+  </g>
+
+  <!-- Column 3: Software 3.0 -->
+  <g transform="translate(610, 90)">
+    <rect x="0" y="0" width="260" height="380" class="panel-highlight" />
+
+    <!-- Icon: Chat/Sparkle -->
+    <g transform="translate(130, 40)">
+      <path d="M-15,-10 L15,-10 L15,10 L0,20 L-5,10 L-15,10 Z" class="icon-stroke" />
+      <path d="M-5,0 L5,0" class="icon-stroke" stroke-dasharray="2,2"/>
+      <!-- Sparkles -->
+      <path d="M18,-15 L20,-20 L22,-15 L27,-13 L22,-11 L20,-6 L18,-11 L13,-13 Z" class="icon-fill" />
+      
+      <text x="0" y="55" class="tufte-subtitle" text-anchor="middle">소프트웨어 3.0</text>
+      <text x="0" y="75" class="tufte-small" text-anchor="middle">(LLM &amp; 프롬프트)</text>
+    </g>
+
+    <!-- Code -->
+    <g transform="translate(20, 120)">
+      <rect x="0" y="0" width="220" height="90" class="code-block" />
+      <text x="15" y="20" class="tufte-code">prompt = """</text>
+      <text x="15" y="35" class="tufte-code">다음 글의 감정을 분석해줘:</text>
+      <text x="15" y="50" class="tufte-code">{text}</text>
+      <text x="15" y="65" class="tufte-code">"""</text>
+      <text x="15" y="80" class="tufte-code">res = llm(prompt)</text>
+    </g>
+
+    <!-- Desc -->
+    <g transform="translate(20, 230)">
+      <text x="0" y="15" class="tufte-label">핵심:</text>
+      <text x="40" y="15" class="tufte-text">자연어로 의도 명세</text>
+      
+      <text x="0" y="40" class="tufte-label">개발자 역할:</text>
+      <text x="0" y="60" class="tufte-text">• 프롬프트 엔지니어링</text>
+      <text x="0" y="80" class="tufte-text">• 시스템 오케스트레이션</text>
+      <text x="0" y="100" class="tufte-text">• 결과 검증/평가</text>
+
+      <text x="0" y="135" class="tufte-small" font-weight="bold">"목표가 무엇인가(Goal)"</text>
+    </g>
+  </g>
+
+  <!-- Bottom Insight -->
+  <g transform="translate(450, 500)">
+    <text x="0" y="0" class="tufte-text" text-anchor="middle">
+      <tspan font-weight="bold">인사이트:</tspan> 패러다임이 바뀔 때마다 <tspan font-style="italic">"방법(How)"</tspan>에서 <tspan font-style="italic">"목적(What)"</tspan>으로 추상화 수준이 높아진다.
+    </text>
+  </g>
+
+</svg>

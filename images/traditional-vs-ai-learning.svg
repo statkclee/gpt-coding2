@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520">
+  <defs>
+    <style>
+      .tufte-text {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+        font-size: 13px;
+      }
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+        font-size: 18px;
+        font-weight: bold;
+      }
+      .tufte-subtitle {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #666;
+        font-size: 12px;
+        font-style: italic;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #666;
+        font-size: 11px;
+      }
+      .tufte-code {
+        font-family: 'Monaco', 'Courier New', monospace;
+        fill: #333;
+        font-size: 11px;
+      }
+      .era-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #333;
+        font-size: 15px;
+        font-weight: bold;
+      }
+      .step-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        fill: #555;
+        font-size: 12px;
+      }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666"/>
+    </marker>
+    <marker id="arrow-down" markerWidth="10" markerHeight="10" refX="3" refY="9" orient="auto">
+      <polygon points="0 0, 6 0, 3 10" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="900" height="520" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="450" y="35" class="tufte-title" text-anchor="middle">프로그래밍 학습 패러다임의 전환</text>
+  <text x="450" y="55" class="tufte-subtitle" text-anchor="middle">구문 중심에서 개념 중심으로</text>
+
+  <!-- Left side: Traditional Learning -->
+  <rect x="30" y="75" width="400" height="420" fill="#f9f9f9" stroke="#999" stroke-width="1" rx="5"/>
+  <text x="230" y="105" class="era-title" text-anchor="middle">전통적 학습 (구문 중심)</text>
+  <text x="230" y="125" class="tufte-subtitle" text-anchor="middle">"어떻게 쓰는가"에 집중</text>
+
+  <!-- Traditional learning steps -->
+  <g transform="translate(50, 150)">
+    <!-- Step 1 -->
+    <rect x="0" y="0" width="360" height="55" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="3"/>
+    <text x="25" y="20" class="step-label">1단계</text>
+    <text x="180" y="20" class="tufte-text" text-anchor="middle" font-weight="bold">구문(Syntax) 암기</text>
+    <text x="180" y="40" class="tufte-small" text-anchor="middle">for, if, def, class... 키워드 학습</text>
+
+    <!-- Arrow -->
+    <line x1="180" y1="55" x2="180" y2="75" stroke="#666" stroke-width="1" marker-end="url(#arrow-down)"/>
+
+    <!-- Step 2 -->
+    <rect x="0" y="80" width="360" height="55" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="3"/>
+    <text x="25" y="100" class="step-label">2단계</text>
+    <text x="180" y="100" class="tufte-text" text-anchor="middle" font-weight="bold">예제 코드 따라하기</text>
+    <text x="180" y="120" class="tufte-small" text-anchor="middle">교재의 샘플 코드를 직접 타이핑</text>
+
+    <!-- Arrow -->
+    <line x1="180" y1="135" x2="180" y2="155" stroke="#666" stroke-width="1" marker-end="url(#arrow-down)"/>
+
+    <!-- Step 3 -->
+    <rect x="0" y="160" width="360" height="55" fill="#e8e8e8" stroke="#999" stroke-width="1" rx="3"/>
+    <text x="25" y="180" class="step-label">3단계</text>
+    <text x="180" y="180" class="tufte-text" text-anchor="middle" font-weight="bold">연습 문제 풀기</text>
+    <text x="180" y="200" class="tufte-small" text-anchor="middle">주어진 요구사항에 맞춰 코드 작성</text>
+
+    <!-- Arrow -->
+    <line x1="180" y1="215" x2="180" y2="235" stroke="#666" stroke-width="1" marker-end="url(#arrow-down)"/>
+
+    <!-- Step 4 -->
+    <rect x="0" y="240" width="360" height="55" fill="#ccc" stroke="#999" stroke-width="1" rx="3"/>
+    <text x="25" y="260" class="step-label">4단계</text>
+    <text x="180" y="260" class="tufte-text" text-anchor="middle" font-weight="bold">디버깅 (고통의 시간)</text>
+    <text x="180" y="280" class="tufte-small" text-anchor="middle">왜 안 되지? 세미콜론? 들여쓰기?</text>
+  </g>
+
+  <!-- Traditional outcome -->
+  <rect x="50" y="455" width="360" height="30" fill="#ddd" stroke="#666" stroke-width="1" rx="3"/>
+  <text x="230" y="475" class="tufte-small" text-anchor="middle" font-style="italic">결과: 구문은 알지만 "왜" 이렇게 짜는지 모름</text>
+
+  <!-- Right side: AI Era Learning -->
+  <rect x="470" y="75" width="400" height="420" fill="#f5f5f5" stroke="#333" stroke-width="2" rx="5"/>
+  <text x="670" y="105" class="era-title" text-anchor="middle">AI 시대 학습 (개념 중심)</text>
+  <text x="670" y="125" class="tufte-subtitle" text-anchor="middle">"무엇을 원하는가"에 집중</text>
+
+  <!-- AI era learning steps -->
+  <g transform="translate(490, 150)">
+    <!-- Step 1 -->
+    <rect x="0" y="0" width="360" height="55" fill="#e0e0e0" stroke="#333" stroke-width="1" rx="3"/>
+    <text x="25" y="20" class="step-label">1단계</text>
+    <text x="180" y="20" class="tufte-text" text-anchor="middle" font-weight="bold">의도 명세 (테스트 작성)</text>
+    <text x="180" y="40" class="tufte-small" text-anchor="middle">"이 함수는 두 수를 더해야 해"</text>
+
+    <!-- Arrow -->
+    <line x1="180" y1="55" x2="180" y2="75" stroke="#666" stroke-width="1" marker-end="url(#arrow-down)"/>
+
+    <!-- Step 2 -->
+    <rect x="0" y="80" width="360" height="55" fill="#d5d5d5" stroke="#333" stroke-width="1" rx="3"/>
+    <text x="25" y="100" class="step-label">2단계</text>
+    <text x="180" y="100" class="tufte-text" text-anchor="middle" font-weight="bold">AI에게 코드 요청</text>
+    <text x="180" y="120" class="tufte-small" text-anchor="middle">"이 테스트를 통과하는 코드 만들어줘"</text>
+
+    <!-- Arrow -->
+    <line x1="180" y1="135" x2="180" y2="155" stroke="#666" stroke-width="1" marker-end="url(#arrow-down)"/>
+
+    <!-- Step 3 -->
+    <rect x="0" y="160" width="360" height="55" fill="#ccc" stroke="#333" stroke-width="1" rx="3"/>
+    <text x="25" y="180" class="step-label">3단계</text>
+    <text x="180" y="180" class="tufte-text" text-anchor="middle" font-weight="bold">코드 읽기와 이해</text>
+    <text x="180" y="200" class="tufte-small" text-anchor="middle">AI가 생성한 코드의 동작 원리 파악</text>
+
+    <!-- Arrow -->
+    <line x1="180" y1="215" x2="180" y2="235" stroke="#666" stroke-width="1" marker-end="url(#arrow-down)"/>
+
+    <!-- Step 4 -->
+    <rect x="0" y="240" width="360" height="55" fill="#bbb" stroke="#333" stroke-width="1" rx="3"/>
+    <text x="25" y="260" class="step-label">4단계</text>
+    <text x="180" y="260" class="tufte-text" text-anchor="middle" font-weight="bold">검증과 개선</text>
+    <text x="180" y="280" class="tufte-small" text-anchor="middle">테스트 통과 확인, 엣지 케이스 추가</text>
+  </g>
+
+  <!-- AI era outcome -->
+  <rect x="490" y="455" width="360" height="30" fill="#999" stroke="#333" stroke-width="1" rx="3"/>
+  <text x="670" y="475" class="tufte-small" text-anchor="middle" font-style="italic" fill="#fff">결과: "왜" 이렇게 동작하는지 이해하고 검증 가능</text>
+
+  <!-- Central comparison arrow -->
+  <path d="M 435 285 L 465 285" stroke="#333" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Key differences box at bottom -->
+  <g transform="translate(30, 495)">
+    <text x="0" y="15" class="tufte-small" font-weight="bold">핵심 전환:</text>
+    <text x="80" y="15" class="tufte-small">코드 작성자 → 설계자/검토자</text>
+    <text x="270" y="15" class="tufte-small">|</text>
+    <text x="290" y="15" class="tufte-small">구문 암기 → 의도 표현</text>
+    <text x="445" y="15" class="tufte-small">|</text>
+    <text x="465" y="15" class="tufte-small">디버깅 고통 → 테스트 기반 검증</text>
+  </g>
+
+</svg>

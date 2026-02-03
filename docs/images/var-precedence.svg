@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 30 500 220">
+  <defs>
+    <style>
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-title { font-size: 16px; font-weight: bold; }
+      .tufte-label { font-size: 12px; }
+      .tufte-small { font-size: 11px; }
+      .tufte-code { font-family: 'Consolas', 'Monaco', monospace; font-size: 12px; }
+    </style>
+    <marker id="arrow-down" markerWidth="10" markerHeight="10" refX="3" refY="0" orient="0" markerUnits="strokeWidth">
+      <path d="M0,0 L6,0 L3,9 z" fill="#999"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="500" height="280" fill="#ffffff"/>
+
+  <!-- Title -->
+  <!-- <text x="250" y="28" text-anchor="middle" class="tufte-text tufte-title">연산자 우선순위 (PEMDAS)</text> -->
+
+  <!-- Priority label -->
+  <g transform="translate(0, -15)">
+    <text x="45" y="75" text-anchor="middle" class="tufte-text tufte-small" fill="#666">높음</text>
+    <path d="M 45 85 L 45 220" fill="none" stroke="#999" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arrow-down)"/>
+    <text x="45" y="245" text-anchor="middle" class="tufte-text tufte-small" fill="#666">낮음</text>
+  </g>
+
+  <!-- P - Parentheses -->
+  <rect x="80" y="55" width="400" height="38" fill="#e8e8e8" stroke="#333" stroke-width="1.5" rx="4"/>
+  <text x="100" y="80" text-anchor="start" class="tufte-text tufte-label" font-weight="bold">P</text>
+  <text x="130" y="80" text-anchor="start" class="tufte-text tufte-label">Parentheses (괄호)</text>
+  <text x="360" y="80" text-anchor="start" class="tufte-text tufte-code" fill="#666">( )</text>
+
+  <!-- E - Exponentiation -->
+  <rect x="80" y="98" width="400" height="38" fill="#f0f0f0" stroke="#333" stroke-width="1.5" rx="4"/>
+  <text x="100" y="123" text-anchor="start" class="tufte-text tufte-label" font-weight="bold">E</text>
+  <text x="130" y="123" text-anchor="start" class="tufte-text tufte-label">Exponentiation (지수)</text>
+  <text x="360" y="123" text-anchor="start" class="tufte-text tufte-code" fill="#666">**</text>
+
+  <!-- MD - Multiplication/Division -->
+  <rect x="80" y="141" width="400" height="38" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="4"/>
+  <text x="100" y="166" text-anchor="start" class="tufte-text tufte-label" font-weight="bold">MD</text>
+  <text x="140" y="166" text-anchor="start" class="tufte-text tufte-label">Multiplication/Division(곱셈/나눗셋)</text>
+  <text x="360" y="166" text-anchor="start" class="tufte-text tufte-code" fill="#666">* / // %</text>
+
+  <!-- AS - Addition/Subtraction -->
+  <rect x="80" y="184" width="400" height="38" fill="#fafafa" stroke="#333" stroke-width="1.5" rx="4"/>
+  <text x="100" y="209" text-anchor="start" class="tufte-text tufte-label" font-weight="bold">AS</text>
+  <text x="140" y="209" text-anchor="start" class="tufte-text tufte-label">Addition/Subtraction(덧셈/뺄셈)</text>
+  <text x="360" y="209" text-anchor="start" class="tufte-text tufte-code" fill="#666">+ -</text>
+
+  <!-- Example -->
+  <!-- <text x="250" y="255" text-anchor="middle" class="tufte-text tufte-small" fill="#666">예: 2 + 3 * 4 → 2 + 12 → 14 (곱셈 먼저)</text> -->
+</svg>

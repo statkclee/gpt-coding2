@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 300">
+  <defs>
+    <style>
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 16px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 13px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-desc {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 11px;
+        fill: #666;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Menlo, Monaco, monospace;
+        font-size: 10px;
+        fill: #666;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #999;
+      }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- White background -->
+  <rect x="0" y="0" width="750" height="300" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="375" y="30" class="tufte-title" text-anchor="middle">Iterator 패턴</text>
+
+  <!-- Collection -->
+  <rect x="40" y="70" width="180" height="120" fill="#f5f5f5" stroke="#666" stroke-width="1" rx="3"/>
+  <text x="130" y="95" class="tufte-label" text-anchor="middle">Collection</text>
+  <line x1="55" y1="105" x2="205" y2="105" stroke="#ccc" stroke-width="1"/>
+
+  <!-- Items in collection -->
+  <rect x="60" y="115" width="35" height="25" fill="#fff" stroke="#999" stroke-width="1" rx="2"/>
+  <text x="77" y="132" class="tufte-code" text-anchor="middle">A</text>
+
+  <rect x="100" y="115" width="35" height="25" fill="#fff" stroke="#999" stroke-width="1" rx="2"/>
+  <text x="117" y="132" class="tufte-code" text-anchor="middle">B</text>
+
+  <rect x="140" y="115" width="35" height="25" fill="#fff" stroke="#999" stroke-width="1" rx="2"/>
+  <text x="157" y="132" class="tufte-code" text-anchor="middle">C</text>
+
+  <rect x="60" y="145" width="35" height="25" fill="#fff" stroke="#999" stroke-width="1" rx="2"/>
+  <text x="77" y="162" class="tufte-code" text-anchor="middle">D</text>
+
+  <rect x="100" y="145" width="35" height="25" fill="#fff" stroke="#999" stroke-width="1" rx="2"/>
+  <text x="117" y="162" class="tufte-code" text-anchor="middle">E</text>
+
+  <text x="157" y="162" class="tufte-small">...</text>
+
+  <!-- Arrow to Iterator -->
+  <line x1="220" y1="130" x2="278" y2="130" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="249" y="120" class="tufte-small">생성</text>
+
+  <!-- Iterator -->
+  <rect x="290" y="70" width="180" height="120" fill="#f5f5f5" stroke="#333" stroke-width="2" rx="3"/>
+  <text x="380" y="95" class="tufte-label" text-anchor="middle">Iterator</text>
+  <line x1="305" y1="105" x2="455" y2="105" stroke="#ccc" stroke-width="1"/>
+  <text x="380" y="125" class="tufte-code" text-anchor="middle">_current: 0</text>
+  <line x1="305" y1="135" x2="455" y2="135" stroke="#ccc" stroke-width="1"/>
+  <text x="380" y="155" class="tufte-code" text-anchor="middle">__iter__() → self</text>
+  <text x="380" y="175" class="tufte-code" text-anchor="middle">__next__() → item</text>
+
+  <!-- Arrow to Client -->
+  <line x1="470" y1="130" x2="528" y2="130" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="499" y="120" class="tufte-small">하나씩</text>
+
+  <!-- Client / for loop -->
+  <rect x="540" y="70" width="170" height="120" fill="#fff" stroke="#666" stroke-width="1" rx="3"/>
+  <text x="625" y="95" class="tufte-label" text-anchor="middle">Client</text>
+  <line x1="555" y1="105" x2="695" y2="105" stroke="#ccc" stroke-width="1"/>
+  <text x="625" y="130" class="tufte-code" text-anchor="middle">for item in collection:</text>
+  <text x="625" y="150" class="tufte-code" text-anchor="middle">    process(item)</text>
+  <text x="625" y="175" class="tufte-small" text-anchor="middle">내부 구조 몰라도 됨</text>
+
+  <!-- Python specifics -->
+  <rect x="40" y="210" width="330" height="70" fill="#fff" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="205" y="235" class="tufte-label" text-anchor="middle">Python 이터레이터 프로토콜</text>
+  <line x1="55" y1="245" x2="355" y2="245" stroke="#ccc" stroke-width="1"/>
+  <text x="205" y="265" class="tufte-code" text-anchor="middle">__iter__(): 이터레이터 반환 (이터러블)</text>
+  <text x="205" y="280" class="tufte-code" text-anchor="middle">__next__(): 다음 값 반환 (이터레이터)</text>
+
+  <!-- Generator -->
+  <rect x="400" y="210" width="310" height="70" fill="#fff" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="555" y="235" class="tufte-label" text-anchor="middle">제너레이터 (간결한 대안)</text>
+  <line x1="415" y1="245" x2="695" y2="245" stroke="#ccc" stroke-width="1"/>
+  <text x="555" y="265" class="tufte-code" text-anchor="middle">def gen(): yield 1; yield 2; yield 3</text>
+  <text x="555" y="280" class="tufte-code" text-anchor="middle">지연 평가, 메모리 효율적</text>
+</svg>

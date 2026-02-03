@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 55 750 430">
+  <defs>
+    <style>
+      .tufte-title { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 18px; font-weight: bold; fill: #222; }
+      .tufte-label { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 13px; font-weight: bold; fill: #333; }
+      .tufte-text { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 14px; fill: #444; }
+      .tufte-small { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 12px; fill: #666; }
+      .tufte-code { font-family: 'SF Mono', Menlo, Monaco, monospace; font-size: 10px; fill: #333; font-weight: bold; }
+      .tufte-number { font-family: 'SF Mono', Menlo, Monaco, monospace; font-size: 12px; font-weight: bold; fill: #fff; }
+      
+      .box-target { fill: #ffffff; stroke: #333; stroke-width: 1.5; }
+      .box-source { fill: #e9ecef; stroke: #495057; stroke-width: 1.5; }
+      .box-final { fill: #212529; stroke: #212529; }
+      
+      .arrow-search { fill: none; stroke: #adb5bd; stroke-width: 1.5; stroke-dasharray: 4,3; marker-end: url(#arrow-gray); }
+      .arrow-build { fill: none; stroke: #212529; stroke-width: 2; marker-end: url(#arrow-black); }
+      .circle-step { fill: #212529; }
+    </style>
+    
+    <marker id="arrow-gray" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#adb5bd"/>
+    </marker>
+    <marker id="arrow-black" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#212529"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="750" height="490" fill="#ffffff"/>
+
+  <!-- <text x="375" y="40" class="tufte-title" text-anchor="middle">Makefile 실행 메커니즘</text> -->
+
+  <g transform="translate(200, 80)">
+    
+    <text x="180" y="10" class="tufte-small" text-anchor="start" style="fill:#adb5bd; font-weight:bold;">① 의존성 탐색 (Top-Down)</text>
+    <text x="-160" y="10" class="tufte-small" text-anchor="start" style="fill:#212529; font-weight:bold;">② 빌드 실행 (Bottom-Up)</text>
+
+    <rect x="0" y="30" width="150" height="40" rx="4" class="box-target"/>
+    <text x="75" y="55" class="tufte-label" text-anchor="middle">report.pdf</text>
+
+    <rect x="0" y="110" width="150" height="40" rx="4" class="box-target"/>
+    <text x="75" y="135" class="tufte-label" text-anchor="middle">chart.png</text>
+    
+    <rect x="0" y="190" width="150" height="40" rx="4" class="box-target"/>
+    <text x="75" y="215" class="tufte-label" text-anchor="middle">results.json</text>
+    
+    <rect x="0" y="270" width="150" height="40" rx="4" class="box-target"/>
+    <text x="75" y="295" class="tufte-label" text-anchor="middle">clean.csv</text>
+
+    <rect x="0" y="350" width="150" height="40" rx="4" class="box-source"/>
+    <text x="75" y="375" class="tufte-label" text-anchor="middle">raw.csv (원본)</text>
+
+    <g transform="translate(160, 0)">
+        <path d="M0,70 L0,100" class="arrow-search"/>
+        <path d="M0,150 L0,180" class="arrow-search"/>
+        <path d="M0,230 L0,260" class="arrow-search"/>
+        <path d="M0,310 L0,340" class="arrow-search"/>
+        <text x="10" y="215" class="tufte-small" style="fill:#999;">"파일이 있나? 최신인가?"</text>
+    </g>
+
+    <g transform="translate(-10, 0)">
+        <circle cx="-15" cy="370" r="10" class="circle-step"/>
+        <text x="-15" y="374" class="tufte-number" text-anchor="middle">1</text>
+        <path d="M-15,355 L-15,315" class="arrow-build"/>
+        <text x="-30" y="340" class="tufte-code" text-anchor="end">python preprocess.py</text>
+
+        <circle cx="-15" cy="290" r="10" class="circle-step"/>
+        <text x="-15" y="294" class="tufte-number" text-anchor="middle">2</text>
+        <path d="M-15,275 L-15,235" class="arrow-build"/>
+        <text x="-30" y="260" class="tufte-code" text-anchor="end">python analyze.py</text>
+
+        <circle cx="-15" cy="210" r="10" class="circle-step"/>
+        <text x="-15" y="214" class="tufte-number" text-anchor="middle">3</text>
+        <path d="M-15,195 L-15,155" class="arrow-build"/>
+        <text x="-30" y="180" class="tufte-code" text-anchor="end">python visualize.py</text>
+
+        <circle cx="-15" cy="130" r="10" class="circle-step"/>
+        <text x="-15" y="134" class="tufte-number" text-anchor="middle">4</text>
+        <path d="M-15,115 L-15,75" class="arrow-build"/>
+        <text x="-30" y="100" class="tufte-code" text-anchor="end">python report.py</text>
+
+        <rect x="-55" y="35" width="50" height="25" rx="10" class="box-final"/>
+        <text x="-30" y="52" class="tufte-number" text-anchor="middle" style="font-size:12px;">Done</text>
+    </g>
+  </g>
+
+  <g transform="translate(530, 110)">
+    <rect width="200" height="260" rx="8" fill="#f8f9fa" stroke="#dee2e6"/>
+    <text x="100" y="30" class="tufte-label" text-anchor="middle">작동 원리</text>
+    <line x1="20" y1="45" x2="180" y2="45" stroke="#dee2e6"/>
+    
+    <text x="20" y="75" class="tufte-text" style="font-weight:bold;">역순 실행 (LIFO)</text>
+    <text x="20" y="95" class="tufte-small">가장 마지막 의존성(raw)이</text>
+    <text x="20" y="110" class="tufte-small">해결되어야 빌드가 시작됩니다.</text>
+
+    <text x="20" y="150" class="tufte-text" style="font-weight:bold;">스마트 체크</text>
+    <text x="20" y="170" class="tufte-small">타임스탬프를 비교하여</text>
+    <text x="20" y="185" class="tufte-small">변경된 파일만 골라 빌드합니다.</text>
+
+    <rect x="20" y="215" width="160" height="30" rx="4" fill="#e9ecef"/>
+    <text x="100" y="234" class="tufte-small" text-anchor="middle" style="fill:#333; font-weight:bold;">효율적인 증분 빌드 수행</text>
+  </g>
+</svg>

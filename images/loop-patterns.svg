@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 30 700 200">
+  <defs>
+    <style>
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-label { font-size: 12px; font-weight: bold; }
+      .tufte-small { font-size: 11px; fill: #666; }
+      .tufte-code { font-family: 'Consolas', 'Monaco', monospace; font-size: 10px; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="700" height="230" fill="#ffffff"/>
+
+  <!-- 계수 패턴 -->
+  <g transform="translate(20, 45)">
+    <rect x="0" y="0" width="155" height="95" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="5"/>
+    <text x="77" y="18" text-anchor="middle" class="tufte-text tufte-label">계수 (Count)</text>
+    <line x1="10" y1="26" x2="145" y2="26" stroke="#ccc" stroke-width="1"/>
+    <text x="12" y="45" class="tufte-code">count = 0</text>
+    <text x="12" y="60" class="tufte-code">for x in items:</text>
+    <text x="22" y="75" class="tufte-code">count += 1</text>
+    <text x="77" y="90" text-anchor="middle" class="tufte-text tufte-small" fill="#888">몇 개인가?</text>
+  </g>
+
+  <!-- 합산 패턴 -->
+  <g transform="translate(190, 45)">
+    <rect x="0" y="0" width="155" height="95" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="5"/>
+    <text x="77" y="18" text-anchor="middle" class="tufte-text tufte-label">합산 (Sum)</text>
+    <line x1="10" y1="26" x2="145" y2="26" stroke="#ccc" stroke-width="1"/>
+    <text x="12" y="45" class="tufte-code">total = 0</text>
+    <text x="12" y="60" class="tufte-code">for x in nums:</text>
+    <text x="22" y="75" class="tufte-code">total += x</text>
+    <text x="77" y="90" text-anchor="middle" class="tufte-text tufte-small" fill="#888">전체 합계는?</text>
+  </g>
+
+  <!-- 최대값 패턴 -->
+  <g transform="translate(360, 45)">
+    <rect x="0" y="0" width="155" height="95" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="5"/>
+    <text x="77" y="18" text-anchor="middle" class="tufte-text tufte-label">최대값 (Max)</text>
+    <line x1="10" y1="26" x2="145" y2="26" stroke="#ccc" stroke-width="1"/>
+    <text x="12" y="45" class="tufte-code">largest = None</text>
+    <text x="12" y="60" class="tufte-code">for x in nums:</text>
+    <text x="22" y="75" class="tufte-code">if x &gt; largest:</text>
+    <text x="77" y="90" text-anchor="middle" class="tufte-text tufte-small" fill="#888">가장 큰 값은?</text>
+  </g>
+
+  <!-- 최소값 패턴 -->
+  <g transform="translate(530, 45)">
+    <rect x="0" y="0" width="155" height="95" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="5"/>
+    <text x="77" y="18" text-anchor="middle" class="tufte-text tufte-label">최소값 (Min)</text>
+    <line x1="10" y1="26" x2="145" y2="26" stroke="#ccc" stroke-width="1"/>
+    <text x="12" y="45" class="tufte-code">smallest = None</text>
+    <text x="12" y="60" class="tufte-code">for x in nums:</text>
+    <text x="22" y="75" class="tufte-code">if x &lt; smallest:</text>
+    <text x="77" y="90" text-anchor="middle" class="tufte-text tufte-small" fill="#888">가장 작은 값은?</text>
+  </g>
+
+  <!-- 공통 구조 설명 -->
+  <rect x="20" y="155" width="665" height="60" fill="#e8e8e8" stroke="#333" stroke-width="1.5" rx="5"/>
+  <text x="350" y="175" text-anchor="middle" class="tufte-text tufte-label">루프 패턴의 공통 구조</text>
+  <line x1="40" y1="183" x2="660" y2="183" stroke="#999" stroke-width="1"/>
+
+  <text x="130" y="202" text-anchor="middle" class="tufte-text tufte-small">1. 초기화</text>
+  <text x="350" y="202" text-anchor="middle" class="tufte-text tufte-small">2. 루프 내 갱신</text>
+  <text x="570" y="202" text-anchor="middle" class="tufte-text tufte-small">3. 결과 확인</text>
+
+</svg>

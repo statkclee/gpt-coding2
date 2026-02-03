@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 610 500">
+  <defs>
+    <style>
+      .tufte-text { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #333; }
+      .tufte-mono { font-family: 'SF Mono', Consolas, monospace; fill: #333; }
+      .tufte-label { font-family: Palatino, 'Book Antiqua', Georgia, serif; fill: #666; font-size: 12px; }
+    </style>
+    <linearGradient id="cylinderGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="10%" style="stop-color:#c4c4c4"/>
+      <stop offset="53%" style="stop-color:#686868"/>
+      <stop offset="100%" style="stop-color:#333"/>
+    </linearGradient>
+  </defs>
+
+  <!-- White background -->
+  <rect x="0" y="0" width="610" height="500" fill="#ffffff"/>
+
+  <!-- === LOCAL REPOSITORY (Top Section) === -->
+  <rect x="7" y="12" width="596" height="244" fill="#ffffff" stroke="#333" stroke-width="1"/>
+
+  <!-- Local path label -->
+  <text x="16" y="30" class="tufte-mono" font-size="13.5">~/vlad/planets</text>
+
+  <!-- .git container -->
+  <path fill="#b5b5b5" stroke="#fff" stroke-width="1" d="M598,63c0-8.284-6.716-15-15-15H198c-8.284,0-15,6.716-15,15v167c0,8.284,6.716,15,15,15h385c8.284,0,15-6.716,15-15V63z"/>
+  <text x="197" y="71" class="tufte-mono" font-size="18">.git</text>
+
+  <!-- Working Directory (File) -->
+  <g>
+    <rect x="24" y="85" width="100" height="128" fill="#dcdee0"/>
+    <rect x="24" y="85" width="100" height="128" fill="none" stroke="#666" stroke-width="2"/>
+    <line x1="37" y1="105" x2="111" y2="105" stroke="#333" stroke-width="2"/>
+    <line x1="37" y1="111" x2="111" y2="111" stroke="#333" stroke-width="2"/>
+    <line x1="37" y1="117" x2="111" y2="117" stroke="#333" stroke-width="2"/>
+    <line x1="37" y1="129" x2="111" y2="129" stroke="#999" stroke-width="2"/>
+  </g>
+
+  <!-- Arrow 1: git add -->
+  <g>
+    <rect x="150.871" y="136.768" width="45.956" height="30.604" fill="#888"/>
+    <polygon points="234.02,151.163 193.467,121.571 193.467,181.695" fill="#888"/>
+  </g>
+  <text x="164" y="154.35" class="tufte-mono" font-size="12" fill="#fff">git add</text>
+
+  <!-- Staging Area Cylinder -->
+  <g>
+    <path fill="url(#cylinderGrad)" stroke="#333" stroke-width="1" d="M253.453,178.205c0-9.264,22.404-16.777,50.047-16.777s50.045,7.514,50.045,16.777v1.029c0,0,0-2.115,0-3.117c0-1.007,0-35.745,0-35.745v0.394c0-9.27-22.402-16.78-50.045-16.78s-50.047,7.51-50.047,16.78v-0.394c0,0,0,34.519,0,35.733c0,1.205,0,3.129,0,3.129V178.205z"/>
+    <path fill="#ffffff" stroke="#333" stroke-width="1" d="M353.545,140.373c0,0,0,34.738,0,35.745c0,1.002,0.355,3.117,0.355,3.117c0,9.27-22.758,16.779-50.4,16.779s-50.4-7.51-50.4-16.779c0,0,0.354-1.924,0.354-3.129c0-1.214,0-35.733,0-35.733c0,9.274,22.404,16.785,50.047,16.785S353.545,149.647,353.545,140.373z"/>
+    <polygon fill="#ffffff" stroke="#333" stroke-width="1" points="341.719,134.965 282.411,134.965 269.235,149.459 328.542,149.459"/>
+    <line x1="282.411" y1="140.894" x2="331.165" y2="140.894" stroke="#666" stroke-width="2"/>
+  </g>
+  <text x="269.48" y="214.63" class="tufte-label">스테이징 영역</text>
+
+  <!-- Arrow 2: git commit -->
+  <g>
+    <rect x="381.251" y="136.768" width="45.956" height="30.604" fill="#888"/>
+    <polygon points="464.399,151.163 423.847,121.571 423.847,181.695" fill="#888"/>
+  </g>
+  <text x="386.76" y="154.35" class="tufte-mono" font-size="12" fill="#fff">git commit</text>
+
+  <!-- Repository Cylinders -->
+  <g>
+    <path fill="url(#cylinderGrad)" stroke="#333" stroke-width="1" d="M487.13,111.882c0-9.268,22.407-16.781,50.047-16.781c27.641,0,50.047,7.513,50.047,16.781v1.03c0,0,0-2.118,0-3.121s0-35.739,0-35.739v0.388c0-9.268-22.406-16.781-50.047-16.781c-27.64,0-50.047,7.513-50.047,16.781v-0.388c0,0,0,34.519,0,35.728s0,3.132,0,3.132V111.882z"/>
+    <path fill="#ffffff" stroke="#333" stroke-width="1" d="M587.021,151.283c0,0,0,34.738,0,35.74c0,1.002,0.354,3.121,0.354,3.121c0,9.268-22.76,16.779-50.4,16.779c-27.64,0-50.399-7.512-50.399-16.779c0,0,0.353-1.924,0.353-3.133s0-35.729,0-35.729c0,9.268,22.407,16.781,50.047,16.781C564.614,168.064,587.021,160.551,587.021,151.283z"/>
+    <path fill="#ffffff" stroke="#333" stroke-width="1" d="M587.021,112.601c0,0,0,34.736,0,35.739c0,1.002,0.354,3.121,0.354,3.121c0,9.268-22.76,16.779-50.4,16.779c-27.64,0-50.399-7.512-50.399-16.779c0,0,0.353-1.923,0.353-3.132s0-35.728,0-35.728c0,9.268,22.407,16.78,50.047,16.78C564.614,129.381,587.021,121.869,587.021,112.601z"/>
+    <path fill="#ffffff" stroke="#333" stroke-width="1" d="M587.021,73.628c0,0,0,34.737,0,35.739s0.354,3.12,0.354,3.12c0,9.269-22.76,16.781-50.4,16.781c-27.64,0-50.399-7.513-50.399-16.781c0,0,0.353-1.922,0.353-3.131s0-35.728,0-35.728c0,9.268,22.407,16.78,50.047,16.78C564.614,90.409,587.021,82.896,587.021,73.628z"/>
+    <polygon fill="#ffffff" stroke="#333" stroke-width="1" points="573.216,66.381 513.908,66.381 500.732,80.875 560.039,80.875"/>
+    <line x1="513.908" y1="72.311" x2="562.662" y2="72.311" stroke="#666" stroke-width="2"/>
+  </g>
+  <text x="511.94" y="227.63" class="tufte-label">저장소</text>
+
+  <!-- === GITHUB REPOSITORY (Bottom Section) === -->
+  <rect x="7" y="262" width="596" height="244" fill="#ffffff" stroke="#333" stroke-width="1"/>
+
+  <!-- GitHub URL label -->
+  <text x="16" y="280" class="tufte-mono" font-size="13.5">https://github.com/vlad/planets.git</text>
+
+  <!-- .git container (GitHub) -->
+  <path fill="#b5b5b5" stroke="#fff" stroke-width="1" d="M598,313c0-8.284-6.716-15-15-15H198c-8.284,0-15,6.716-15,15v167c0,8.284,6.716,15,15,15h385c8.284,0,15-6.716,15-15V313z"/>
+  <text x="197" y="321" class="tufte-mono" font-size="18">.git</text>
+
+  <!-- Empty Repository (GitHub) - just the cylinders -->
+  <g transform="translate(0, 250)">
+    <path fill="url(#cylinderGrad)" stroke="#333" stroke-width="1" d="M487.13,111.882c0-9.268,22.407-16.781,50.047-16.781c27.641,0,50.047,7.513,50.047,16.781v1.03c0,0,0-2.118,0-3.121s0-35.739,0-35.739v0.388c0-9.268-22.406-16.781-50.047-16.781c-27.64,0-50.047,7.513-50.047,16.781v-0.388c0,0,0,34.519,0,35.728s0,3.132,0,3.132V111.882z"/>
+    <path fill="#ffffff" stroke="#333" stroke-width="1" d="M587.021,151.283c0,0,0,34.738,0,35.74c0,1.002,0.354,3.121,0.354,3.121c0,9.268-22.76,16.779-50.4,16.779c-27.64,0-50.399-7.512-50.399-16.779c0,0,0.353-1.924,0.353-3.133s0-35.729,0-35.729c0,9.268,22.407,16.781,50.047,16.781C564.614,168.064,587.021,160.551,587.021,151.283z"/>
+    <path fill="#ffffff" stroke="#333" stroke-width="1" d="M587.021,112.601c0,0,0,34.736,0,35.739c0,1.002,0.354,3.121,0.354,3.121c0,9.268-22.76,16.779-50.4,16.779c-27.64,0-50.399-7.512-50.399-16.779c0,0,0.353-1.923,0.353-3.132s0-35.728,0-35.728c0,9.268,22.407,16.78,50.047,16.78C564.614,129.381,587.021,121.869,587.021,112.601z"/>
+    <path fill="#ffffff" stroke="#333" stroke-width="1" d="M587.021,73.628c0,0,0,34.737,0,35.739s0.354,3.12,0.354,3.12c0,9.269-22.76,16.781-50.4,16.781c-27.64,0-50.399-7.513-50.399-16.781c0,0,0.353-1.922,0.353-3.131s0-35.728,0-35.728c0,9.268,22.407,16.78,50.047,16.78C564.614,90.409,587.021,82.896,587.021,73.628z"/>
+    <polygon fill="#ffffff" stroke="#333" stroke-width="1" points="573.216,66.381 513.908,66.381 500.732,80.875 560.039,80.875"/>
+    <line x1="513.908" y1="72.311" x2="562.662" y2="72.311" stroke="#666" stroke-width="2"/>
+  </g>
+  <text x="511.94" y="477.63" class="tufte-label">저장소</text>
+
+  <!-- Section labels -->
+  <text x="74" y="246" class="tufte-text" font-size="11" fill="#666">로컬 저장소</text>
+  <text x="74" y="496" class="tufte-text" font-size="11" fill="#666">원격 저장소 (GitHub)</text>
+</svg>

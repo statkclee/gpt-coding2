@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 25 850 400">
+  <defs>
+    <style>
+      /* Tufte Grayscale Style */
+      .label-title { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 16px; font-weight: bold; fill: #111; }
+      .label-group { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 14px; font-weight: bold; fill: #555; }
+      .label-head { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 13px; font-weight: bold; fill: #222; }
+      .label-body { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 11px; fill: #333; }
+      .label-mono { font-family: 'SF Mono', Consolas, Menlo, monospace; font-size: 10px; fill: #444; }
+      .label-note { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; font-size: 10px; fill: #666; font-style: italic; }
+
+      .box-server { fill: #fcfcfc; stroke: #999; stroke-width: 1.5; stroke-dasharray: 6 3; rx: 8; }
+      .box-client { fill: #fcfcfc; stroke: #999; stroke-width: 1.5; stroke-dasharray: 6 3; rx: 8; }
+      
+      .box-layer { fill: #fff; stroke: #666; stroke-width: 1.5; rx: 4; }
+      .box-highlight { fill: #fff; stroke: #333; stroke-width: 2; rx: 4; }
+      .box-inner { fill: #f9f9f9; stroke: #ccc; stroke-width: 1; rx: 2; }
+
+      .line-net { stroke: #333; stroke-width: 2; fill: none; }
+      .arrow-head { fill: #333; }
+    </style>
+    <!-- Right pointing arrow marker -->
+    <marker id="arrow-right" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 z" class="arrow-head" />
+    </marker>
+    <!-- Left pointing arrow marker -->
+    <marker id="arrow-left" markerWidth="8" markerHeight="8" refX="1" refY="4" orient="auto">
+      <path d="M8,0 L0,4 L8,8 z" class="arrow-head" />
+    </marker>
+  </defs>
+
+  <rect width="850" height="450" fill="#fff" />
+
+  <!-- Title -->
+  <!-- <text x="425" y="30" text-anchor="middle" class="label-title">Streamlit 아키텍처: Python(서버) ↔ JavaScript(클라이언트)</text> -->
+
+  <!-- ========================================== -->
+  <!-- LEFT: Server Side (Python) -->
+  <!-- ========================================== -->
+  <g transform="translate(50, 60)">
+    <rect x="0" y="0" width="350" height="350" class="box-server"/>
+    <text x="135" y="-10" text-anchor="middle" class="label-group">Server Side</text>
+    <text x="255" y="-10" text-anchor="middle" class="label-mono" font-size="11" fill="#333">(Python Ecosystem)</text>
+    <text x="175" y="15" text-anchor="middle" class="label-note">"코드가 실제로 실행되는 곳"</text>
+
+    <!-- 1. Platform (Bottom) -->
+    <g transform="translate(25, 290)">
+      <rect x="0" y="0" width="300" height="45" class="box-layer" fill="#e8e8e8"/>
+      <text x="150" y="18" text-anchor="middle" class="label-head">플랫폼</text>
+      <text x="150" y="35" text-anchor="middle" class="label-mono">Linux / Docker Container</text>
+    </g>
+
+    <!-- 2. Runtime -->
+    <g transform="translate(25, 230)">
+      <rect x="0" y="0" width="300" height="50" class="box-layer" fill="#f0f0f0"/>
+      <text x="150" y="20" text-anchor="middle" class="label-head">런타임 (Python)</text>
+      <text x="150" y="38" text-anchor="middle" class="label-mono">CPython 3.11 / pip / venv</text>
+    </g>
+
+    <!-- 3. SDK (Framework + Library) -->
+    <g transform="translate(25, 120)">
+      <rect x="0" y="0" width="300" height="100" class="box-layer"/>
+      <text x="150" y="18" text-anchor="middle" class="label-head">SDK - Python 패키지</text>
+
+      <g transform="translate(15, 30)">
+        <rect x="0" y="0" width="130" height="55" class="box-inner" stroke="#666"/>
+        <text x="65" y="20" text-anchor="middle" class="label-body" font-weight="bold">Streamlit</text>
+        <text x="65" y="40" text-anchor="middle" class="label-mono" font-size="9">Framework (IoC)</text>
+      </g>
+
+      <g transform="translate(155, 30)">
+        <rect x="0" y="0" width="130" height="55" class="box-inner"/>
+        <text x="65" y="20" text-anchor="middle" class="label-body">pandas / altair</text>
+        <text x="65" y="40" text-anchor="middle" class="label-mono" font-size="9">Library (Call)</text>
+      </g>
+    </g>
+
+    <!-- 4. Application Code (Top) -->
+    <g transform="translate(25, 25)">
+      <rect x="0" y="0" width="300" height="85" class="box-highlight"/>
+      <text x="150" y="22" text-anchor="middle" class="label-head">애플리케이션 코드 (.py)</text>
+      <line x1="20" y1="32" x2="280" y2="32" stroke="#ccc" stroke-width="1"/>
+      <text x="150" y="52" text-anchor="middle" class="label-mono" font-size="11">dashboard.py</text>
+      <text x="150" y="72" text-anchor="middle" class="label-mono" fill="#555">st.title(), st.dataframe()...</text>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- CONNECTION: HTTP / WebSocket (Fixed Arrows) -->
+  <!-- ========================================== -->
+  <g transform="translate(400, 200)">
+    <!-- Corrected bi-directional line -->
+    <line x1="5" y1="0" x2="95" y2="0" class="line-net" marker-start="url(#arrow-left)" marker-end="url(#arrow-right)"/>
+    <text x="50" y="-35" text-anchor="middle" class="label-head" font-size="11">네트워크</text>
+    <text x="50" y="-18" text-anchor="middle" class="label-mono">HTTP / 웹소켓</text>
+    <text x="50" y="22" text-anchor="middle" class="label-mono" font-size="9">Delta(Protobuf)</text>
+    <text x="50" y="37" text-anchor="middle" class="label-note">이진 직렬화</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- RIGHT: Client Side (Browser) -->
+  <!-- ========================================== -->
+  <g transform="translate(500, 60)">
+    <rect x="0" y="0" width="300" height="350" class="box-client"/>
+    <text x="100" y="-10" text-anchor="middle" class="label-group">Client Side</text>
+    <text x="210" y="-10" text-anchor="middle" class="label-mono" font-size="11" fill="#333">(JavaScript Ecosystem)</text>
+    <text x="150" y="15" text-anchor="middle" class="label-note">"사용자가 보는 화면"</text>
+
+    <!-- 1. Platform (Bottom) - OS -->
+    <g transform="translate(25, 290)">
+      <rect x="0" y="0" width="250" height="45" class="box-layer" fill="#e8e8e8"/>
+      <text x="125" y="18" text-anchor="middle" class="label-head">플랫폼</text>
+      <text x="125" y="35" text-anchor="middle" class="label-mono">Windows / macOS / Linux</text>
+    </g>
+
+    <!-- 2. Runtime - Browser JS Engine -->
+    <g transform="translate(25, 230)">
+      <rect x="0" y="0" width="250" height="50" class="box-layer" fill="#f0f0f0"/>
+      <text x="125" y="20" text-anchor="middle" class="label-head">런타임 (JavaScript)</text>
+      <text x="125" y="38" text-anchor="middle" class="label-mono">Chrome V8 / Firefox...</text>
+    </g>
+
+    <!-- 3. SDK - React + Streamlit Frontend -->
+    <g transform="translate(25, 150)">
+      <rect x="0" y="0" width="250" height="70" class="box-layer"/>
+      <text x="125" y="18" text-anchor="middle" class="label-head">SDK - JavaScript 라이브러리</text>
+      <g transform="translate(15, 28)">
+        <rect x="0" y="0" width="100" height="32" class="box-inner" stroke="#666"/>
+        <text x="50" y="20" text-anchor="middle" class="label-body">React</text>
+      </g>
+      <g transform="translate(125, 28)">
+        <rect x="0" y="0" width="110" height="32" class="box-inner"/>
+        <text x="55" y="20" text-anchor="middle" class="label-body">st-components</text>
+      </g>
+    </g>
+
+    <!-- 4. Rendered UI (Top) -->
+    <g transform="translate(25, 25)">
+      <rect x="0" y="0" width="250" height="115" class="box-highlight"/>
+
+      <!-- Browser Header -->
+      <rect x="0" y="0" width="250" height="22" fill="#eee" rx="4" ry="0"/>
+      <circle cx="12" cy="11" r="3" fill="#999"/>
+      <circle cx="24" cy="11" r="3" fill="#999"/>
+      <text x="125" y="15" text-anchor="middle" class="label-mono" font-size="8">localhost:8501</text>
+
+      <text x="125" y="42" text-anchor="middle" class="label-head">렌더링된 UI (HTML/CSS)</text>
+      <g transform="translate(15, 52)">
+        <rect x="0" y="0" width="220" height="50" class="box-inner"/>
+        <text x="110" y="20" text-anchor="middle" class="label-body">Charts, Tables, Widgets</text>
+        <text x="110" y="38" text-anchor="middle" class="label-mono" font-size="9">User Event → State Sync</text>
+      </g>
+    </g>
+  </g>
+
+</svg>

@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 350">
+  <defs>
+    <style>
+      .tufte-title {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 18px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-subtitle {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 13px;
+        fill: #666;
+      }
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 14px;
+        font-weight: bold;
+        fill: #333;
+      }
+      .tufte-desc {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 11px;
+        fill: #666;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #999;
+      }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- White background -->
+  <rect x="0" y="0" width="800" height="350" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="400" y="30" class="tufte-title" text-anchor="middle">생성 패턴 개요</text>
+  <text x="400" y="50" class="tufte-subtitle" text-anchor="middle">객체 생성 과정을 추상화하여 유연성 확보</text>
+
+  <!-- Problem -->
+  <rect x="50" y="80" width="180" height="100" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="140" y="105" class="tufte-label" text-anchor="middle">문제</text>
+  <line x1="70" y1="115" x2="210" y2="115" stroke="#ccc" stroke-width="1"/>
+  <text x="140" y="135" class="tufte-desc" text-anchor="middle">클라이언트가</text>
+  <text x="140" y="150" class="tufte-desc" text-anchor="middle">구체 클래스에</text>
+  <text x="140" y="165" class="tufte-desc" text-anchor="middle">강하게 결합</text>
+
+  <!-- Arrow -->
+  <line x1="230" y1="130" x2="280" y2="130" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Solution -->
+  <rect x="300" y="80" width="200" height="100" fill="#f5f5f5" stroke="#666" stroke-width="2" rx="3"/>
+  <text x="400" y="105" class="tufte-label" text-anchor="middle">생성 패턴</text>
+  <line x1="320" y1="115" x2="480" y2="115" stroke="#ccc" stroke-width="1"/>
+  <text x="400" y="135" class="tufte-desc" text-anchor="middle">객체 생성을 캡슐화</text>
+  <text x="400" y="150" class="tufte-desc" text-anchor="middle">클라이언트와 구체 클래스</text>
+  <text x="400" y="165" class="tufte-desc" text-anchor="middle">분리</text>
+
+  <!-- Arrow -->
+  <line x1="500" y1="130" x2="550" y2="130" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Result -->
+  <rect x="570" y="80" width="180" height="100" fill="#f5f5f5" stroke="#999" stroke-width="1" rx="3"/>
+  <text x="660" y="105" class="tufte-label" text-anchor="middle">결과</text>
+  <line x1="590" y1="115" x2="730" y2="115" stroke="#ccc" stroke-width="1"/>
+  <text x="660" y="135" class="tufte-desc" text-anchor="middle">새 유형 추가 시</text>
+  <text x="660" y="150" class="tufte-desc" text-anchor="middle">기존 코드</text>
+  <text x="660" y="165" class="tufte-desc" text-anchor="middle">수정 불필요</text>
+
+  <!-- Three patterns -->
+  <rect x="100" y="210" width="180" height="110" fill="#fff" stroke="#666" stroke-width="1" rx="3"/>
+  <text x="190" y="235" class="tufte-label" text-anchor="middle">Factory Method</text>
+  <line x1="120" y1="245" x2="260" y2="245" stroke="#ccc" stroke-width="1"/>
+  <text x="190" y="265" class="tufte-desc" text-anchor="middle">어떤 클래스를 생성할지</text>
+  <text x="190" y="280" class="tufte-desc" text-anchor="middle">서브클래스에 위임</text>
+  <text x="190" y="305" class="tufte-small" text-anchor="middle">PDF? CSV? → Factory가 결정</text>
+
+  <rect x="310" y="210" width="180" height="110" fill="#fff" stroke="#666" stroke-width="1" rx="3"/>
+  <text x="400" y="235" class="tufte-label" text-anchor="middle">Singleton</text>
+  <line x1="330" y1="245" x2="470" y2="245" stroke="#ccc" stroke-width="1"/>
+  <text x="400" y="265" class="tufte-desc" text-anchor="middle">인스턴스가 단 하나만</text>
+  <text x="400" y="280" class="tufte-desc" text-anchor="middle">존재하도록 보장</text>
+  <text x="400" y="305" class="tufte-small" text-anchor="middle">설정, DB 연결, 로깅</text>
+
+  <rect x="520" y="210" width="180" height="110" fill="#fff" stroke="#666" stroke-width="1" rx="3"/>
+  <text x="610" y="235" class="tufte-label" text-anchor="middle">Builder</text>
+  <line x1="540" y1="245" x2="680" y2="245" stroke="#ccc" stroke-width="1"/>
+  <text x="610" y="265" class="tufte-desc" text-anchor="middle">복잡한 객체를</text>
+  <text x="610" y="280" class="tufte-desc" text-anchor="middle">단계별로 조립</text>
+  <text x="610" y="305" class="tufte-small" text-anchor="middle">메서드 체이닝</text>
+</svg>

@@ -1,0 +1,44 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+/.quarto/
+
+/.luarc.json
+.env
+
+# macOS
+.DS_Store
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# Backup files
+*.backup
+*.before-split
+
+data/bbc
+publishing/
+
+# Large data files
+*.zip
+*.pdf
+data/*.txt
+
+# Docker development
+r-docker/
+
+# make
+make-novice/
+
+**/*.quarto_ipynb
+
+# AI assistant files
+CLAUDE.md
+GEMINI.md
+markdown/

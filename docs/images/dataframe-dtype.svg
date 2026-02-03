@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 20 720 240">
+  <defs>
+    <style>
+      .tufte-label {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 12px;
+        fill: #333;
+      }
+      .tufte-code {
+        font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 10px;
+        fill: #333;
+      }
+      .tufte-small {
+        font-family: Palatino, 'Book Antiqua', Georgia, serif;
+        font-size: 10px;
+        fill: #666;
+      }
+    </style>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="720" height="340" fill="#ffffff"/>
+
+  <!-- Title row -->
+  <!-- <text x="360" y="25" text-anchor="middle" class="tufte-label" font-weight="bold">판다스 dtype 체계와 형변환</text> -->
+
+  <!-- Numeric types (left) -->
+  <g transform="translate(30, 45)">
+    <text x="90" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">숫자형</text>
+
+    <rect x="0" y="15" width="180" height="45" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="90" y="35" text-anchor="middle" class="tufte-code">int64</text>
+    <text x="90" y="50" text-anchor="middle" class="tufte-small">정수 (나이, 개수, ID)</text>
+
+    <rect x="0" y="70" width="180" height="45" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="90" y="90" text-anchor="middle" class="tufte-code">float64</text>
+    <text x="90" y="105" text-anchor="middle" class="tufte-small">실수 (키, 몸무게, 비율)</text>
+  </g>
+
+  <!-- String type (center) -->
+  <g transform="translate(240, 45)">
+    <text x="90" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">문자형</text>
+
+    <rect x="0" y="15" width="180" height="45" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="90" y="35" text-anchor="middle" class="tufte-code">object</text>
+    <text x="90" y="50" text-anchor="middle" class="tufte-small">문자열 (이름, 주소, 코드)</text>
+
+    <rect x="0" y="70" width="180" height="45" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="90" y="90" text-anchor="middle" class="tufte-code">string</text>
+    <text x="90" y="105" text-anchor="middle" class="tufte-small">전용 문자열 (pandas 1.0+)</text>
+  </g>
+
+  <!-- Category type (right) -->
+  <g transform="translate(450, 45)">
+    <text x="120" y="0" text-anchor="middle" class="tufte-label" font-weight="bold">범주형</text>
+
+    <rect x="0" y="15" width="240" height="45" fill="#f5f5f5" stroke="#333" stroke-width="1.5" rx="3"/>
+    <text x="120" y="35" text-anchor="middle" class="tufte-code">category</text>
+    <text x="120" y="50" text-anchor="middle" class="tufte-small">제한된 값 (성별, 부서, 등급)</text>
+
+    <rect x="0" y="70" width="240" height="45" fill="#e8e8e8" stroke="#999" rx="3"/>
+    <text x="120" y="90" text-anchor="middle" class="tufte-code">Categorical(ordered=True)</text>
+    <text x="120" y="105" text-anchor="middle" class="tufte-small">순서 있는 범주 (등급, 만족도)</text>
+  </g>
+
+  <!-- Conversion arrows from object -->
+  <line x1="240" y1="85" x2="215" y2="85" stroke="#666" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <line x1="420" y1="85" x2="445" y2="85" stroke="#666" stroke-width="1" marker-end="url(#arrowhead)"/>
+
+  <!-- DateTime and Bool (bottom row) -->
+  <g transform="translate(30, 180)">
+    <rect x="0" y="0" width="180" height="45" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="90" y="18" text-anchor="middle" class="tufte-code">datetime64</text>
+    <text x="90" y="35" text-anchor="middle" class="tufte-small">날짜/시간 (생년월일, 거래일)</text>
+  </g>
+
+  <g transform="translate(240, 180)">
+    <rect x="0" y="0" width="180" height="45" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="90" y="18" text-anchor="middle" class="tufte-code">bool</text>
+    <text x="90" y="35" text-anchor="middle" class="tufte-small">불리언 (True/False)</text>
+  </g>
+
+  <!-- Conversion methods box -->
+  <g transform="translate(450, 170)">
+    <rect x="0" y="0" width="240" height="70" fill="#e8e8e8" stroke="#666" rx="3"/>
+    <text x="120" y="18" text-anchor="middle" class="tufte-label" font-weight="bold">주요 변환 메서드</text>
+    <line x1="10" y1="26" x2="230" y2="26" stroke="#ccc"/>
+    <text x="20" y="42" class="tufte-code">df['col'].astype('int64')</text>
+    <text x="20" y="56" class="tufte-code">pd.to_datetime(df['col'])</text>
+  </g>
+
+  <!-- Bottom note: common conversion scenarios -->
+  <!-- <g transform="translate(30, 265)">
+    <rect x="0" y="0" width="660" height="55" fill="#f5f5f5" stroke="#999" rx="3"/>
+    <text x="330" y="20" text-anchor="middle" class="tufte-label" font-weight="bold">흔한 형변환 시나리오</text>
+    <text x="110" y="42" text-anchor="middle" class="tufte-small">object → int64/float64</text>
+    <text x="330" y="42" text-anchor="middle" class="tufte-small">object → datetime64</text>
+    <text x="550" y="42" text-anchor="middle" class="tufte-small">object → category</text>
+  </g> -->
+
+</svg>
